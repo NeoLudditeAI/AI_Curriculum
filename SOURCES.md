@@ -95,5 +95,22 @@ Last updated: 2026-03-20
 | W47 | Anthropic Claude Pricing Page | https://www.anthropic.com/pricing | 2026-03-21 | Unverified | Module 08 |
 | W48 | Developer AI Tool Preference Survey (Reddit/HN aggregation) | Community source | 2026-03-21 | Unverified | Module 08 |
 | W49 | Microsoft Copilot User Experience Reports (Enterprise) | Community source | 2026-03-21 | Unverified | Module 08 |
+| W50 | On-Device AI User Preference and Adoption Statistics | Research data | 2026-03-21 | Unverified | Module 10 |
+| W51 | Google AICore and ML Kit GenAI APIs Documentation | https://developer.android.com/ai | 2026-03-21 | Unverified | Module 10 |
+| W52 | Apple Intelligence and Private Cloud Compute | Apple announcements, 2025-2026 | 2026-03-21 | Unverified | Module 10 |
+| W53 | Qualcomm Snapdragon Wear Elite and X2 Plus Announcements | https://www.qualcomm.com/news | 2026-03-21 | Unverified | Module 10 |
+| W54 | AI Video Generation Market Statistics (Grand View Research) | Industry analysis | 2026-03-21 | Unverified | Module 10 |
+| W55 | OpenAI Sora 2 and Disney Partnership | OpenAI announcements | 2026-03-21 | Unverified | Module 10 |
+| W56 | Google Veo 3.1 and Flow Creative Studio | https://blog.google/technology/ai/google-flow/ | 2026-03-21 | Unverified | Module 10 |
+| W57 | Midjourney V7 and V8 Alpha Announcements | https://midjourney.com | 2026-03-21 | Unverified | Module 10 |
+| W58 | ElevenLabs v3 Capabilities | https://elevenlabs.io | 2026-03-21 | Unverified | Module 10 |
+| W59 | Microsoft Agent 365 GA Announcement | https://www.microsoft.com/en-us/microsoft-365/blog/ | 2026-03-21 | Unverified | Module 10 |
+| W60 | EU AI Act Timeline and Requirements | https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai | 2026-03-21 | Unverified | Module 10 |
+| W61 | Gartner Predictions on Agentic AI Adoption | Gartner, 2026 | 2026-03-21 | Unverified | Module 10 |
+| W62 | Open vs Closed Model Performance and Market Data | Research data aggregation | 2026-03-21 | Unverified | Module 10 |
+| W63 | Goldman Sachs AI Capex Estimate ($527B) | Goldman Sachs Research, 2026 | 2026-03-21 | Unverified | Module 10 |
+| W64 | Google I/O 2026 Expected Announcements | Public reporting | 2026-03-21 | Unverified | Module 10 |
+| W65 | Microsoft Build 2026 Expected Announcements | Public reporting | 2026-03-21 | Unverified | Module 10 |
+| W66 | WWDC 2026 Expected Announcements | Public reporting | 2026-03-21 | Unverified | Module 10 |
 
 *Sources will be added as modules are researched and written.*

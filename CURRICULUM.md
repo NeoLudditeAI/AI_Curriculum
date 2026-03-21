@@ -2,7 +2,7 @@
 
 Master index and single source of truth for module status.
 
-Last updated: 2026-03-20
+Last updated: 2026-03-21
 
 ---
 
@@ -20,7 +20,7 @@ Last updated: 2026-03-20
 | 07 | [Skills, Plugins & Automation](modules/MODULE-07-skills-plugins-automation.md) | COMPLETE | 2026-03-21 | ~3,200 | Skills architecture (Claude Skills, OpenClaw Skills, Codex Skills); plugin systems; marketplaces; scheduled tasks; event-driven triggers; Zapier, Make, Power Automate |
 | 08 | [Consumer AI Comparison](modules/MODULE-08-consumer-ai-comparison.md) | COMPLETE | 2026-03-21 | ~3,800 | Feature-by-feature comparison (Claude, ChatGPT, Gemini, Copilot); pricing analysis (free through enterprise); user sentiment; strengths/weaknesses; unique differentiators |
 | 09 | [Developer Platforms & APIs](modules/MODULE-09-developer-platforms-apis.md) | COMPLETE | 2026-03-21 | ~4,100 | API architectures (Anthropic Messages, OpenAI Responses, Gemini, Azure OpenAI); SDKs across languages; pricing economics (caching, batching, model tiering); structured outputs; function calling; fine-tuning; platform selection framework |
-| 10 | [Frontier Topics](modules/MODULE-10-frontier-topics.md) | PLANNED | — | — | On-device AI; multimodal generation; enterprise agent governance; safety and alignment; open vs. closed ecosystems; upcoming events (Google I/O 2026, WWDC 2026) |
+| 10 | [Frontier Topics](modules/MODULE-10-frontier-topics.md) | COMPLETE | 2026-03-21 | ~3,800 | On-device AI (Gemini Nano, Apple Intelligence, Qualcomm); multimodal generation (Sora 2, Veo 3.1, Flow, Midjourney, ElevenLabs); enterprise agent governance (Agent 365, EU AI Act); safety and alignment; open vs. closed ecosystems; upcoming events (Google I/O, Build, WWDC 2026) |
 
 ---
 
