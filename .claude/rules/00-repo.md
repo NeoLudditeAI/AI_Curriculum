@@ -6,3 +6,5 @@
 - All factual claims must cite a source from SOURCES.md.
 - Use GLOSSARY.md definitions for all key terms.
 - Write a process blog post (blog/YYYY-MM-DD-slug.html) after each significant work session.
+- Check AI_INBOX/ at session start; process every file (integrate or move to AI_TRASH/).
+- Never delete AI_TRASH/ contents without explicit human confirmation.

@@ -30,11 +30,14 @@
 - GLOSSARY.md is the single source of truth for term definitions
 - Cross-references between modules use relative links
 - blog/ contains process journal entries documenting each work session (HTML)
+- AI_INBOX/ is where Ryan drops files for agent review (processed → project or AI_TRASH)
+- AI_TRASH/ stages reviewed-but-unneeded files for periodic human review before deletion
 
 ## Context rules
 
 - This file <=200 lines. Detail goes in .claude/rules/ and docs.
 - Read CURRENT_CYCLE.md before starting any session.
+- Check AI_INBOX/ at session start for new files from Ryan (see .claude/rules/inbox.md).
 - Update CURRENT_CYCLE.md and CURRICULUM.md after every module change.
 - Write a process blog post after each significant work session (see .claude/rules/blog.md).
 

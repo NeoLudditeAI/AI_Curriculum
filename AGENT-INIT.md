@@ -109,7 +109,9 @@ Execute in three passes. Do not skip steps.
 │   ├── slides/
 │   └── tables/
 ├── diagrams/                       # Architecture diagrams, ecosystem maps, flowcharts
-└── blog/                           # Process journal (HTML posts documenting each work session)
+├── blog/                           # Process journal (HTML posts documenting each work session)
+├── AI_INBOX/                       # Drop zone: Ryan places files here for agent review
+└── AI_TRASH/                       # Staging: reviewed files not currently needed (human confirms deletion)
 ```
 
 ---
@@ -525,6 +527,7 @@ When something goes wrong (contradictory information, structural incoherence, st
 These apply to every agent session, regardless of task.
 
 - Read CLAUDE.md and CURRENT_CYCLE.md before starting. Treat them as binding.
+- Check AI_INBOX/ at session start for files Ryan has shared. Process every file: integrate into project or move to AI_TRASH/ with a manifest entry. Never silently ignore inbox files.
 - Check existing module content before writing new sections — avoid duplication.
 - Do not restructure the curriculum without a DECISION_LOG.md entry.
 - Never declare a module complete without running the verification checklist.

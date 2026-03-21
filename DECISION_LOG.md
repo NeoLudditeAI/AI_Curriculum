@@ -46,3 +46,20 @@
 - Separate journal.md file (rejected: would grow unbounded; per-session HTML files are self-contained and archival)
 
 **Impact:** All future sessions will produce a process blog post. The blog/ directory is added to the architecture invariants in CLAUDE.md and the always-on rules in 00-repo.md.
+
+---
+
+## 2026-03-21 — AI_INBOX / AI_TRASH collaboration system adopted
+
+**Context:** Need a lightweight mechanism for Ryan to share non-curriculum files (agent prompts, examples, configs, sample files) with the AI agent without cluttering the project structure.
+
+**Decision:** Created AI_INBOX/ (drop zone for human → agent file sharing) and AI_TRASH/ (staging area for reviewed-but-unneeded files). Agent checks AI_INBOX at session start, processes every file (integrates into project or moves to AI_TRASH with manifest entry). AI_TRASH requires human confirmation before emptying.
+
+**Rationale:** The existing project structure (modules/, reference/, .claude/) is purpose-specific. Dropping miscellaneous files into those directories would violate their invariants. A dedicated inbox creates a clear handoff point without structural pollution. The trash staging area prevents accidental data loss while keeping the inbox clean.
+
+**Alternatives considered:**
+- Drop files directly into reference/research/ (rejected: that directory is for agent-gathered research, not arbitrary human-provided materials)
+- Use git branches for file sharing (rejected: unnecessarily complex for dropping a few files)
+- Chat-only file sharing via conversation (rejected: files may be too large or numerous; filesystem is more natural)
+
+**Impact:** AI_INBOX/ and AI_TRASH/ added to architecture invariants. Session start checklist now includes inbox check. Path-scoped rules in .claude/rules/inbox.md. Agent definitions (researcher.md, writer.md) updated to check inbox. All future agents will process inbox contents.
