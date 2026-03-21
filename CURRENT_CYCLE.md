@@ -7,7 +7,11 @@ Last updated: 2026-03-20
 ## Current session goals
 
 - [x] **Pass 1: Project infrastructure** — Create all documentation, instruction files, directory structure, and master curriculum index
-- [ ] **Pass 2: Foundation modules** — Build Module 00 (Landscape Overview) and Module 01 (Models & Intelligence Tiers)
+- [x] **Pass 2: Foundation modules** — Build Module 00 (Landscape Overview) and Module 01 (Models & Intelligence Tiers)
+- [ ] **Batch 2: Core modules** — Build Modules 02, 03, 05, 06, 09 in parallel
+- [ ] **Batch 3: Dependent modules** — Build Modules 04, 07, 08 in parallel
+- [ ] **Batch 4: Capstone** — Build Module 10
+- [ ] **Batch 5: Final synthesis pass**
 
 ## Completed this session
 
@@ -18,14 +22,16 @@ Last updated: 2026-03-20
 - Created .claude/agents/ (researcher.md, writer.md, reviewer.md, synthesizer.md)
 - Created all required documentation files (CURRICULUM.md, SOURCES.md, GLOSSARY.md, DECISION_LOG.md)
 - Updated AGENT-INIT.md token budget for 1M context (Opus 4.6)
+- **Module 00 (Landscape Overview)** — COMPLETE (~4,800 words). Researched via 4 parallel agents, drafted, reviewed (NEEDS REVISION → 3 blocking issues fixed → PASS).
+- **Module 01 (Models & Intelligence Tiers)** — COMPLETE (~5,400 words). Researched via 4 parallel agents, drafted, reviewed (NEEDS REVISION → 2 blocking issues fixed → PASS).
 
 ## In progress
 
-- None (Pass 1 complete; awaiting direction on Pass 2)
+- Preparing Batch 2 launch (5 core modules in parallel)
 
 ## Open questions
 
-- Foundation material profiles (reference/profiles/) — Ryan has 5 uploaded profiles from March 18, 2026. These need to be provided and cleaned (ACD content stripped) before module writing begins.
+- None
 
 ## Blockers
 
@@ -33,6 +39,8 @@ Last updated: 2026-03-20
 
 ## Next priorities
 
-1. Obtain and clean the 5 foundation material profiles into reference/profiles/
-2. Begin Pass 2: Research and draft Module 00 and Module 01 in parallel
-3. Initialize GLOSSARY.md with terms from foundation modules
+1. Launch Batch 2: Research and draft Modules 02, 03, 05, 06, 09 in parallel using agent teams
+2. Review all Batch 2 modules
+3. Launch Batch 3 after dependencies met (Modules 04, 07, 08)
+4. Build Module 10 (capstone) after all others complete
+5. Final synthesis pass across full curriculum

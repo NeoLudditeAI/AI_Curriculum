@@ -10,8 +10,8 @@ Last updated: 2026-03-20
 
 | # | Title | Status | Last Updated | Word Count | Key Topics |
 |---|-------|--------|--------------|------------|------------|
-| 00 | [Landscape Overview](modules/MODULE-00-landscape-overview.md) | PLANNED | — | — | Major AI ecosystems (Anthropic, OpenAI, Google, Microsoft); specialized tools; coding tools; open-source/self-hosted; market structure; key battlegrounds |
-| 01 | [Models & Intelligence Tiers](modules/MODULE-01-models-and-intelligence.md) | PLANNED | — | — | Model lineups across providers; context windows; pricing; benchmarks; reasoning modes (extended thinking, CoT, Deep Think, o-series); multimodal capabilities; model selection strategy |
+| 00 | [Landscape Overview](modules/MODULE-00-landscape-overview.md) | COMPLETE | 2026-03-20 | ~4,800 | Major AI ecosystems (Anthropic, OpenAI, Google, Microsoft); specialized tools; coding tools; open-source/self-hosted; market structure; key battlegrounds |
+| 01 | [Models & Intelligence Tiers](modules/MODULE-01-models-and-intelligence.md) | COMPLETE | 2026-03-20 | ~5,400 | Model lineups across providers; context windows; pricing; benchmarks; reasoning modes (extended thinking, CoT, Deep Think, o-series); multimodal capabilities; model selection strategy |
 | 02 | [Context Engineering](modules/MODULE-02-context-engineering.md) | PLANNED | — | — | Context windows (sizes, pricing, limits); prompt caching; memory systems (Claude Memory, ChatGPT Saved Memories, Gemini Personal Intelligence); RAG patterns; context compaction; context engineering as discipline |
 | 03 | [Single-Agent Systems](modules/MODULE-03-single-agent-systems.md) | PLANNED | — | — | Claude Code, Codex, Jules, ChatGPT Agent, Cowork, computer use, browser automation; agent architecture (gather-act-verify); tool use; sandboxing; safety models |
 | 04 | [Multi-Agent Orchestration](modules/MODULE-04-multi-agent-orchestration.md) | PLANNED | — | — | Agent Teams, Agent SDK, OpenAI Agents SDK, Google ADK, Copilot Studio; delegation patterns; context isolation; summary propagation; Agent 365; permissions; monitoring |
