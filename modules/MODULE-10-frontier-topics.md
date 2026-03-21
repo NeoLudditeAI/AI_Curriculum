@@ -182,7 +182,7 @@ The economic picture is paradoxical. Closed models capture approximately 96% of 
 
 ### MCP as the Bridge
 
-The Model Context Protocol ([Module 06](MODULE-06-mcp-integration-layer.md)) is emerging as the connective tissue between open and closed ecosystems. With 10,000+ servers in the registry and 97 million+ monthly SDK downloads [14], MCP provides a universal integration layer that works regardless of which model -- open or closed -- is behind the client. Anthropic's donation of MCP to the Linux Foundation's Agentic AI Foundation [W30] was a deliberate move to cement this neutrality. For builders, this means that investments in MCP servers and tooling are hedge-compatible: they work with Claude, ChatGPT, Gemini, and open-source models alike.
+The Model Context Protocol ([Module 06](MODULE-06-mcp-integration-layer.md)) is emerging as the connective tissue between open and closed ecosystems. With 19,700+ servers in the registry and 97 million+ monthly SDK downloads [14], MCP provides a universal integration layer that works regardless of which model -- open or closed -- is behind the client. Anthropic's donation of MCP to the Linux Foundation's Agentic AI Foundation [W30] was a deliberate move to cement this neutrality. For builders, this means that investments in MCP servers and tooling are hedge-compatible: they work with Claude, ChatGPT, Gemini, and open-source models alike.
 
 ### Geopolitical Dimensions
 
@@ -254,7 +254,7 @@ The pattern is familiar from previous technology waves: infrastructure investmen
 
 5. **The open-closed performance gap has closed.** Open models match closed models on benchmarks but closed models still capture 96% of revenue and lead in agentic capabilities.
 
-6. **MCP is the ecosystem hedge.** With 10,000+ servers and 97M+ SDK monthly downloads, MCP investments work across both open and closed platforms.
+6. **MCP is the ecosystem hedge.** With 19,700+ servers and 97M+ SDK monthly downloads, MCP investments work across both open and closed platforms.
 
 7. **$527B in AI capex is committed for 2026,** but 40%+ of agentic AI projects may be canceled by 2027 due to governance and reliability gaps.
 

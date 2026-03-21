@@ -71,7 +71,7 @@ OpenClaw takes a code-first approach to skills. Each skill is a JavaScript or Ty
 
 **Authoring format:** JS/TS code implementing a defined skill interface, plus a `skill.md` file with metadata and natural-language descriptions. Skills can execute arbitrary code, make network calls, access the filesystem, and interact with the Pi Agent Runtime.
 
-**Distribution:** ClawHub hosts 5,400+ skills as of March 2026 [W40]. Skills are installed via the `claw` CLI and can declare dependencies on other skills.
+**Distribution:** ClawHub hosts 13,700+ skills as of February 2026 [W40] (count reduced from peak after malicious skill removal). Skills are installed via the `claw` CLI and can declare dependencies on other skills.
 
 **Security posture:** This is the critical weakness. The ClawHub registry has a documented 12-20% malicious skill rate, as detailed in the ClawHavoc supply chain attack analysis and Snyk's independent audit [W21][W25]. Skills can execute arbitrary code with the permissions of the host process. The ClawJacked WebSocket vulnerability demonstrated that even the skill installation process itself could be compromised [W24]. See [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) for the full security analysis.
 

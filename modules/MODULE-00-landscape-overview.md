@@ -158,7 +158,7 @@ At the engine level, **llama.cpp** (C/C++) provides the foundational inference e
 
 ### OpenClaw: The Open Agent Framework
 
-OpenClaw is an MIT-licensed agent framework with 163,000+ GitHub stars that provides a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted [3a][F5]. ClawHub, its skills registry, hosts 5,700+ skills -- but a December 2025 malware campaign exposed serious security concerns, with estimates of 12-20% malicious skills on the registry [3b]. Microsoft now recommends running OpenClaw in isolated environments [3b].
+OpenClaw is an MIT-licensed agent framework with 163,000+ GitHub stars that provides a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted [3a][F5]. ClawHub, its skills registry, hosts 13,700+ skills (as of February 2026) -- but a January-February 2026 malware campaign (ClawHavoc) exposed serious security concerns, with estimates of 12-20% malicious skills on the registry [3b]. See [Module 05](modules/MODULE-05-openclaw-and-open-agents.md) for the full security analysis. Microsoft now recommends running OpenClaw in isolated environments [3b].
 
 Two significant governance developments occurred in early 2026: OpenClaw's founder joined OpenAI on February 14, 2026, and the project is transitioning to an open-source foundation to ensure community stewardship [3a]. Separately, NVIDIA launched NemoClaw (early preview, March 16, 2026), an enterprise-hardened distribution with the OpenShell sandbox for secure execution [3c].
 

@@ -27,4 +27,13 @@ Last updated: 2026-03-20
 | **Token** | The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens. | Module 01 | Context window |
 | **Tool use** | The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called "function calling." | Module 03 | Agent, MCP, Structured outputs |
 
+| **Agent 365** | Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month). | Module 04 | Agent, Multi-agent orchestration, Copilot Studio |
+| **Batch API** | An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads. | Module 09 | Token, Prompt caching |
+| **Constitutional AI (CAI)** | Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules. | Module 10 | Extended thinking |
+| **Deep Research** | A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports. | Module 03 | Agent, Tool use |
+| **Firecracker MicroVM** | A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing. | Module 03 | Agent, Tool use |
+| **Handoff** | A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK. | Module 04 | Agent, Multi-agent orchestration, Subagent |
+| **NemoClaw** | NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026. | Module 05 | OpenClaw, ClawHub |
+| **Work IQ** | Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026. | Module 04 | Agent 365 |
+
 *New terms should be added as modules are written. Definitions should be updated if understanding evolves.*
