@@ -23,11 +23,11 @@ Last updated: 2026-03-20
 
 | # | Title | Location | Date Accessed | Status | Referenced By |
 |---|-------|----------|---------------|--------|---------------|
-| F1 | Anthropic/Claude Ecosystem Profile | reference/profiles/anthropic-claude.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 09 |
-| F2 | OpenAI/ChatGPT Ecosystem Profile | reference/profiles/openai-chatgpt.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 09 |
-| F3 | Google/Gemini Ecosystem Profile | reference/profiles/google-gemini.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 09 |
-| F4 | Microsoft/Copilot Ecosystem Profile | reference/profiles/microsoft-copilot.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 09 |
-| F5 | Specialized Tools Profile | reference/profiles/specialized-tools.md | 2026-03-18 | Verified | Module 00, Module 01, Module 03 |
+| F1 | Anthropic/Claude Ecosystem Profile | reference/profiles/anthropic-claude.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 04, Module 07, Module 08, Module 09 |
+| F2 | OpenAI/ChatGPT Ecosystem Profile | reference/profiles/openai-chatgpt.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 04, Module 07, Module 08, Module 09 |
+| F3 | Google/Gemini Ecosystem Profile | reference/profiles/google-gemini.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 04, Module 07, Module 08, Module 09 |
+| F4 | Microsoft/Copilot Ecosystem Profile | reference/profiles/microsoft-copilot.md | 2026-03-18 | Verified | Module 00, Module 01, Module 02, Module 03, Module 04, Module 07, Module 08, Module 09 |
+| F5 | Specialized Tools Profile | reference/profiles/specialized-tools.md | 2026-03-18 | Verified | Module 00, Module 01, Module 03, Module 08 |
 
 ---
 
@@ -59,17 +59,17 @@ Last updated: 2026-03-20
 | W14 | Azure OpenAI Service Documentation | https://learn.microsoft.com/en-us/azure/ai-services/openai/ | 2026-03-20 | Verified | Module 09 |
 | W15 | OpenAI API Pricing | https://openai.com/api/pricing/ | 2026-03-20 | Verified | Module 09 |
 | W16 | Anthropic Model & Pricing Reference | https://docs.anthropic.com/en/docs/about-claude/models | 2026-03-20 | Verified | Module 09 |
-| W17 | OpenAI Agents SDK (GitHub) | https://github.com/openai/openai-agents-python | 2026-03-20 | Verified | Module 09 |
-| W18 | Google Agent Development Kit | https://google.github.io/adk-docs/ | 2026-03-20 | Verified | Module 09 |
+| W17 | OpenAI Agents SDK (GitHub) | https://github.com/openai/openai-agents-python | 2026-03-20 | Verified | Module 04, Module 09 |
+| W18 | Google Agent Development Kit | https://google.github.io/adk-docs/ | 2026-03-20 | Verified | Module 04, Module 09 |
 | W19 | Microsoft Foundry Documentation | https://learn.microsoft.com/en-us/azure/ai-studio/ | 2026-03-20 | Verified | Module 09 |
 
-| W20 | OpenClaw GitHub Repository / Architecture Documentation | https://github.com/openclaw/openclaw | 2026-03-20 | Verified | Module 00, Module 05 |
-| W21 | ClawHavoc: Analyzing the Supply Chain Attack on ClawHub (Koi Security) | https://koi.security/blog/clawhavoc-analyzing-supply-chain-attack-clawhub | 2026-02-15 | Verified | Module 05 |
+| W20 | OpenClaw GitHub Repository / Architecture Documentation | https://github.com/openclaw/openclaw | 2026-03-20 | Verified | Module 00, Module 05, Module 07 |
+| W21 | ClawHavoc: Analyzing the Supply Chain Attack on ClawHub (Koi Security) | https://koi.security/blog/clawhavoc-analyzing-supply-chain-attack-clawhub | 2026-02-15 | Verified | Module 05, Module 07 |
 | W22 | Running OpenClaw Safely (Microsoft Security Blog) | https://www.microsoft.com/en-us/security/blog/2026/02/19/running-openclaw-safely-identity-isolation-runtime-risk/ | 2026-02-19 | Verified | Module 00, Module 05 |
 | W23 | NVIDIA NemoClaw Early Preview | https://www.nvidia.com/en-us/ai/nemoclaw/ | 2026-03-16 | Verified | Module 00, Module 05 |
-| W24 | ClawJacked: WebSocket Vulnerability and Ecosystem Security Advisories | https://www.bleepingcomputer.com/news/security/clawjacked-openclaw-websocket-hijacking-flaw/ | 2026-02-25 | Verified | Module 05 |
-| W25 | OpenClaw Security Audit: Malicious Skills Prevalence (Multi-vendor) | https://snyk.io/blog/openclaw-clawhub-security-malicious-skills/ | 2026-02-20 | Verified | Module 05 |
-| W40 | ClawHub Skills Registry | https://clawhub.dev | 2026-03-20 | Verified | Module 05 |
+| W24 | ClawJacked: WebSocket Vulnerability and Ecosystem Security Advisories | https://www.bleepingcomputer.com/news/security/clawjacked-openclaw-websocket-hijacking-flaw/ | 2026-02-25 | Verified | Module 05, Module 07 |
+| W25 | OpenClaw Security Audit: Malicious Skills Prevalence (Multi-vendor) | https://snyk.io/blog/openclaw-clawhub-security-malicious-skills/ | 2026-02-20 | Verified | Module 05, Module 07 |
+| W40 | ClawHub Skills Registry | https://clawhub.dev | 2026-03-20 | Verified | Module 05, Module 07 |
 | W41 | OpenClaw vs Cloud Platforms: TCO Analysis (Community) | https://www.reddit.com/r/OpenClaw/comments/cost_comparison_openclaw_vs_claude_chatgpt/ | 2026-03-10 | Unverified | Module 05 |
 | W26 | Anthropic Token Counting Documentation | https://docs.anthropic.com/en/docs/build-with-claude/token-counting | 2026-03-20 | Verified | Module 02 |
 | W27 | Lost in the Middle: How Language Models Use Long Contexts (Liu et al., 2024) | https://arxiv.org/abs/2307.03172 | 2026-03-20 | Verified | Module 02 |
@@ -85,5 +85,15 @@ Last updated: 2026-03-20
 | W37 | OpenAI Codex (Terminal-Bench 2.0 Results) | https://openai.com/codex/ | 2026-03-20 | Verified | Module 03 |
 | W38 | Project Mariner: Browser Automation Agent (Google DeepMind) | https://deepmind.google/technologies/project-mariner/ | 2026-03-20 | Verified | Module 03 |
 | W39 | Firecracker MicroVM Documentation | https://firecracker-microvm.github.io/ | 2026-03-20 | Verified | Module 03 |
+
+| W42 | Claude Plugins Marketplace Launch (Anthropic Blog) | https://www.anthropic.com/news/claude-plugins | 2026-03-21 | Unverified | Module 07 |
+| W43 | GPT Store Statistics and Growth (OpenAI Blog) | https://openai.com/index/gpt-store/ | 2026-03-21 | Unverified | Module 07 |
+| W44 | Zapier Platform and MCP Integration | https://zapier.com/platform | 2026-03-21 | Unverified | Module 07 |
+| W45 | Make Platform and Pricing | https://www.make.com/en/pricing | 2026-03-21 | Unverified | Module 07 |
+| W46 | Power Automate AI Builder Credits Transition (Microsoft Learn) | https://learn.microsoft.com/en-us/ai-builder/credit-management | 2026-03-21 | Unverified | Module 07 |
+
+| W47 | Anthropic Claude Pricing Page | https://www.anthropic.com/pricing | 2026-03-21 | Unverified | Module 08 |
+| W48 | Developer AI Tool Preference Survey (Reddit/HN aggregation) | Community source | 2026-03-21 | Unverified | Module 08 |
+| W49 | Microsoft Copilot User Experience Reports (Enterprise) | Community source | 2026-03-21 | Unverified | Module 08 |
 
 *Sources will be added as modules are researched and written.*
