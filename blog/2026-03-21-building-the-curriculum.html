@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building the AI Frontier Curriculum: A Multi-Agent Journey</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .timeline {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.75rem;
+    top: 0.5rem;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .timeline-item .batch-label {
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<h1>Building the AI Frontier Curriculum</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">A Multi-Agent Journey from Zero to 43,000 Words</h1>
+<p class="meta">
+  <time>March 21, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context)
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#vision">The Vision</a></li>
+    <li><a href="#architecture">The Architecture</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#batch1">Batch 1: Foundation</a></li>
+    <li><a href="#batch2">Batch 2: Core Modules</a></li>
+    <li><a href="#batch3">Batch 3: Dependent Modules</a></li>
+    <li><a href="#batch4">Batch 4: Capstone</a></li>
+    <li><a href="#synthesis">The Synthesis Pass</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-next">What's Next</a></li>
+  </ul>
+</nav>
+
+<h2 id="vision">The Vision</h2>
+
+<p>The goal was ambitious: build a comprehensive, continuously-updated curriculum covering the bleeding edge of LLMs, consumer AI tools, agentic systems, and the surrounding ecosystem &mdash; all as of March 2026. Not surface-level overviews, but the kind of dense, structured expertise that lets you make architectural decisions, evaluate new tools, and teach others.</p>
+
+<p>Eleven modules. Four major AI ecosystems (Anthropic, OpenAI, Google, Microsoft) plus specialized tools and the open-source world. Context engineering, single agents, multi-agent orchestration, MCP, skills and automation, consumer comparison, developer APIs, and frontier topics. Every non-obvious claim sourced. Every module reviewed.</p>
+
+<p>The catch: we wanted to build the entire thing in a single session, using Claude Code's multi-agent capabilities to maximize parallelism. This blog post documents how that went &mdash; the wins, the failures, and what we'd do differently.</p>
+
+<h2 id="architecture">The Architecture</h2>
+
+<p>Before writing a single word of curriculum content, we built a complete project infrastructure:</p>
+
+<ul style="margin: 1rem 0 1rem 1.5rem;">
+  <li><strong>AGENT-INIT.md</strong> &mdash; operational directives mapping software engineering concepts (tests, builds, deploys) to curriculum equivalents (fact verification, derivative generation, publication)</li>
+  <li><strong>Four specialized agent types</strong> defined in <code>.claude/agents/</code>: researcher (Haiku, fast web research), writer (Sonnet, module drafting), reviewer (Sonnet, fact-checking), synthesizer (Opus, cross-module analysis)</li>
+  <li><strong>Path-scoped rules</strong> in <code>.claude/rules/</code> enforcing module structure, sourcing standards, and repository conventions</li>
+  <li><strong>Five living documentation files</strong>: CURRICULUM.md (module status), CURRENT_CYCLE.md (session work order), DECISION_LOG.md (structural decisions), SOURCES.md (source registry), GLOSSARY.md (canonical definitions)</li>
+</ul>
+
+<p>The module dependency graph dictated our execution order:</p>
+
+<blockquote>
+Modules 00-01 (foundation) &rarr; Modules 02, 03, 05, 06, 09 (core, parallel) &rarr; Modules 04, 07, 08 (dependent, parallel) &rarr; Module 10 (capstone) &rarr; Synthesis pass
+</blockquote>
+
+<p>This graph was designed for maximum parallelism: the core batch has five modules with no cross-dependencies, meaning five writers could work simultaneously.</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">11</span>
+    <span class="label">Modules</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">43,079</span>
+    <span class="label">Total Words</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">38</span>
+    <span class="label">Researcher Agents</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">12+</span>
+    <span class="label">Writer Agents</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">5</span>
+    <span class="label">Reviewer Agents</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">3</span>
+    <span class="label">Reviser Agents</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">1</span>
+    <span class="label">Synthesizer Agent</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">6</span>
+    <span class="label">Git Commits</span>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Module</th><th>Words</th><th>Researchers</th><th>Review Result</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>00</td><td>Landscape Overview</td><td>3,907</td><td>4</td><td>Revised (3 blocking) &rarr; PASS</td></tr>
+    <tr><td>01</td><td>Models &amp; Intelligence Tiers</td><td>4,425</td><td>4</td><td>Revised (2 blocking) &rarr; PASS</td></tr>
+    <tr><td>02</td><td>Context Engineering</td><td>4,315</td><td>3</td><td>Batch reviewed &rarr; PASS</td></tr>
+    <tr><td>03</td><td>Single-Agent Systems</td><td>3,789</td><td>4</td><td>Batch reviewed &rarr; PASS</td></tr>
+    <tr><td>04</td><td>Multi-Agent Orchestration</td><td>3,841</td><td>3</td><td>Batch reviewed &rarr; PASS</td></tr>
+    <tr><td>05</td><td>OpenClaw &amp; Open Agents</td><td>3,572</td><td>3</td><td>Batch reviewed &rarr; PASS</td></tr>
+    <tr><td>06</td><td>MCP &amp; Integration Layer</td><td>4,291</td><td>3</td><td>Batch reviewed &rarr; PASS</td></tr>
+    <tr><td>07</td><td>Skills, Plugins &amp; Automation</td><td>3,202</td><td>3</td><td>Batch reviewed &rarr; PASS</td></tr>
+    <tr><td>08</td><td>Consumer AI Comparison</td><td>3,848</td><td>4</td><td>Revised (4 blocking) &rarr; PASS</td></tr>
+    <tr><td>09</td><td>Developer Platforms &amp; APIs</td><td>4,100</td><td>3</td><td>Batch reviewed &rarr; PASS</td></tr>
+    <tr><td>10</td><td>Frontier Topics</td><td>3,789</td><td>4</td><td>Synthesis reviewed</td></tr>
+  </tbody>
+</table>
+
+<h2 id="batch1">Batch 1: Foundation Modules (00 + 01)</h2>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <span class="batch-label">Step 1: Research (8 agents in parallel)</span>
+    <p>We launched 8 researcher agents simultaneously &mdash; 4 for Module 00 (Landscape Overview) and 4 for Module 01 (Models &amp; Intelligence Tiers). Each researcher had a specific brief: market structure, product ecosystem mapping, AI coding tools, open-source landscape for Module 00; Anthropic/OpenAI models, Google/Microsoft models, reasoning modes, multimodal capabilities for Module 01.</p>
+    <p>All 8 completed within ~90 seconds. The research outputs were rich &mdash; detailed pricing tables, benchmark scores, market share data, sourced claims with URLs. This set the pattern for all subsequent batches.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span class="batch-label">Step 2: Writing (2 agents in parallel)</span>
+    <p>Module 00 was drafted by a background agent (~4,800 words). Module 01 was drafted by a team member on the newly created <code>curriculum-writers</code> Agent Team (~5,400 words). This was our first use of Agent Teams &mdash; the shared task list and direct inter-agent messaging proved valuable for coordination.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span class="batch-label">Step 3: Review &mdash; the first surprise</span>
+    <p>The reviewer returned <strong>NEEDS REVISION</strong> for both modules. Module 00 had three blocking issues:</p>
+    <ol style="margin: 0.5rem 0 0.5rem 1.5rem;">
+      <li><strong>Market share methodology not disclosed.</strong> The module cited "68%" for ChatGPT's market share without clarifying this was <em>web traffic share</em> (Similarweb), while the OpenAI profile said "under 45%" &mdash; which was <em>mobile app share</em> (Apptopia). Both numbers were real but measured different things.</li>
+      <li><strong>Sources cited as "researcher agent output"</strong> with no primary URLs. This violated our sourcing standard &mdash; every claim needs a traceable URL.</li>
+      <li><strong>Claude Code revenue was stale.</strong> The $1B ARR figure was historically correct but understated the current ~$2.5B run rate.</li>
+    </ol>
+    <p>Module 01 had two blocking issues: same source traceability problem, plus "Deep Think 3.1" needed to be renamed to "Gemini 3 Deep Think" per Google's official naming.</p>
+  </div>
+
+  <div class="timeline-item">
+    <span class="batch-label">Step 4: Revision + Re-review</span>
+    <p>We spawned reviser agents for both modules. They made surgical fixes. The reviewer re-reviewed and returned <strong>PASS</strong> for both. Total time for the foundation: research, draft, review, revise, re-review, commit.</p>
+  </div>
+</div>
+
+<div class="lesson">
+  <strong>Lesson learned:</strong> The source traceability issue was systemic. Researcher agents returned detailed data but their output was cited as a single "researcher agent output" source. We fixed this by requiring all subsequent writers to cite primary URLs directly &mdash; no more intermediary source citations. This fix propagated cleanly through Batches 2-4.
+</div>
+
+<h2 id="batch2">Batch 2: Core Modules (02, 03, 05, 06, 09)</h2>
+
+<p>This was the most ambitious batch: five modules in parallel, each with 3-4 researchers feeding into a dedicated writer. We launched <strong>16 researchers simultaneously</strong> across all five modules.</p>
+
+<h3>The Stalled Writer Incident</h3>
+
+<p>After research completed, we spawned 5 writer teammates on the Agent Team. Four of the five went idle without producing files &mdash; all at exactly the same timestamp (03:53:23). Only Module 09's writer completed successfully.</p>
+
+<p>Investigation revealed the writers <em>had</em> actually completed their work &mdash; the files existed on disk. The idle notifications arrived before the completion messages reached the lead agent. When we sent status checks, one writer rejected our shutdown request with: <em>"The module file WAS created successfully. Verified just now."</em></p>
+
+<p>We had spawned duplicate background writers unnecessarily, but no harm was done &mdash; the duplicates discovered the files already existed and reported status without overwriting anything.</p>
+
+<div class="lesson">
+  <strong>Lesson learned:</strong> Agent Team members can complete work and go idle before their completion message reaches the lead. Check for file existence before assuming a writer failed. The <code>Glob</code> tool is the ground truth, not the message queue.
+</div>
+
+<h3>Review: All Five Pass</h3>
+
+<p>The batch reviewer checked all five modules in a single pass. Verdict: <strong>all PASS</strong>, no blocking issues. The reviewer noted several cross-module consistency items (Codex model base listed as "GPT-5.3 variant" instead of "o3 variant", MCP support table inaccuracies) which we fixed before committing. The source traceability lesson from Batch 1 paid off &mdash; no "researcher agent output" citations found.</p>
+
+<h2 id="batch3">Batch 3: Dependent Modules (04, 07, 08)</h2>
+
+<p>Ten researchers, three writers, one reviewer. Modules 04 and 07 passed review cleanly. Module 08 (Consumer AI Comparison) returned <strong>NEEDS REVISION</strong> with four blocking issues:</p>
+
+<ol style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Claude Memory contradiction</strong> &mdash; the most significant error in the entire curriculum. Module 08 listed Claude's cross-session memory as "None" in two tables and multiple prose sections. But Module 02 (written in Batch 2) documented Claude Memory as GA on all plans as of March 2026, and the Anthropic profile confirmed it. The Module 08 writer had based parts on an earlier understanding before the memory launch was integrated.</li>
+  <li><strong>Haiku 4.5 pricing error</strong> &mdash; listed at $0.80/$4 instead of $1.00/$5.00.</li>
+  <li><strong>Wrong free tier model</strong> &mdash; "GPT-4.1-mini" cited as ChatGPT's free model, but the profile says "GPT-5.2 Instant."</li>
+  <li><strong>Stale API pricing models</strong> &mdash; GPT-4.1 listed as mid-range when GPT-5.4 Mini is the current option.</li>
+</ol>
+
+<p>The reviser fixed all four issues plus three non-blocking items (marked unverified community sources, noted Preview model status, clarified reasoning effort levels).</p>
+
+<div class="lesson">
+  <strong>Lesson learned:</strong> Cross-module factual consistency is the hardest thing to get right when modules are written in parallel by different agents. Each agent has its own context window and may not have the latest information from sibling modules. The reviewer agent is essential for catching these contradictions &mdash; and the reviewer needs to read <em>all</em> completed modules, not just the one under review.
+</div>
+
+<h2 id="batch4">Batch 4: Capstone (Module 10)</h2>
+
+<p>Four researchers covered on-device AI, multimodal generation, enterprise governance, and open vs. closed ecosystems. The writer was interrupted mid-draft (idle with "interrupted" status) but recovered when prompted to continue. The final module (~3,800 words) synthesized themes across the entire curriculum and looked forward to Google I/O 2026, Microsoft Build, and WWDC.</p>
+
+<h2 id="synthesis">The Synthesis Pass</h2>
+
+<p>With all 11 modules drafted and reviewed, we deployed a synthesizer agent to audit the entire curriculum holistically. This was the most valuable single agent invocation of the entire session.</p>
+
+<h3>What the synthesizer found:</h3>
+
+<table>
+  <thead><tr><th>Issue</th><th>Modules Affected</th><th>Resolution</th></tr></thead>
+  <tbody>
+    <tr><td>ClawHub skills count: 5,700 vs 13,700+</td><td>00, 05, 07</td><td>Standardized to 13,700+ (Module 05's sourced figure)</td></tr>
+    <tr><td>MCP server count: 1,200 vs 19,700+</td><td>03, 06, 10</td><td>Standardized to 19,700+ (Module 06's registry figure)</td></tr>
+    <tr><td>Prompt caching tiers inconsistent</td><td>01, 02, 09</td><td>Flagged for future fix (Module 09 mentions only 5-min tier)</td></tr>
+    <tr><td>8 terms missing from GLOSSARY.md</td><td>Multiple</td><td>Added: Agent 365, Batch API, Constitutional AI, Deep Research, Firecracker MicroVM, Handoff, NemoClaw, Work IQ</td></tr>
+    <tr><td>Missing cross-references</td><td>00, 05, 08</td><td>Flagged for future session</td></tr>
+    <tr><td>Prompt caching overlap</td><td>01, 02, 09</td><td>Acceptable; Module 02 is canonical, others should cross-ref</td></tr>
+  </tbody>
+</table>
+
+<div class="lesson">
+  <strong>Lesson learned:</strong> Numbers that appear in multiple modules <em>will</em> drift if not validated centrally. The synthesizer pass is not optional &mdash; it caught inconsistencies that no individual module reviewer could have found. Run it after every batch, not just at the end.
+</div>
+
+<h2 id="lessons">What We Learned</h2>
+
+<h3>What Worked</h3>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Parallel research is a multiplier.</strong> Launching 8-16 researcher agents simultaneously compressed what would be hours of sequential research into minutes. The structured return format (Key findings, Data points, Contradictions, Sources) made handoff to writers seamless.</li>
+  <li><strong>The review-revise cycle catches real errors.</strong> Every module that went through individual review (Modules 00, 01, 08) had blocking issues found and fixed. Batch review caught fewer issues but still identified cross-module consistency problems.</li>
+  <li><strong>Agent Teams enable coordination.</strong> The shared task list, direct messaging, and idle notifications made it possible to coordinate 5+ writers simultaneously. The team lead pattern (orchestrator + specialized workers) maps well to curriculum development.</li>
+  <li><strong>Git commits at batch boundaries</strong> create natural checkpoints. We could have rolled back any batch without losing prior work.</li>
+  <li><strong>Living documentation files</strong> (CURRICULUM.md, CURRENT_CYCLE.md) kept state consistent across compaction boundaries and agent switches.</li>
+</ul>
+
+<h3>What to Improve</h3>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Require primary URLs from day one.</strong> The Batch 1 source traceability issue wasted a full revision cycle. Future research agents should be instructed to return <em>only</em> claims with primary URLs &mdash; no intermediary citations.</li>
+  <li><strong>Seed the glossary before writing begins.</strong> We added 8 terms in the synthesis pass that should have been defined before the writers started. Pre-seeding the glossary from the research phase would prevent definition drift.</li>
+  <li><strong>Run the synthesizer after each batch, not just at the end.</strong> The ClawHub and MCP count discrepancies would have been caught earlier if we'd synthesized after Batch 2.</li>
+  <li><strong>Writer agent reliability.</strong> The stalled-writer incident in Batch 2 was caused by message timing, not actual failures. A simple file-existence check before respawning would avoid unnecessary duplicate work.</li>
+  <li><strong>Cross-module fact propagation.</strong> When Module 02 established that Claude Memory launched in March 2026, that fact needed to propagate to Module 08's writer. Future batches should include a "facts from completed modules" brief in each writer's prompt.</li>
+</ul>
+
+<h2 id="whats-next">What's Next</h2>
+
+<p>The curriculum is complete but not frozen. It's designed as a <em>living</em> knowledge base. Key upcoming milestones:</p>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Google I/O 2026 (May 19-20):</strong> Expect Gemini updates, Project Astra reveal, Android 17 AI features. Modules 00, 01, 03, 10 will need updates.</li>
+  <li><strong>Microsoft Build 2026 (June 2-3):</strong> Copilot stack updates, Agent 365 GA details. Modules 04, 07, 08 affected.</li>
+  <li><strong>WWDC 2026 (June 8-12):</strong> iOS 27, LLM Siri, Core AI framework. Module 10 will need significant expansion.</li>
+  <li><strong>Derivative generation:</strong> HTML interactive guides, slide decks, ecosystem diagrams, comparison tables &mdash; all generated from module content.</li>
+  <li><strong>Source verification:</strong> Several UNVERIFIED sources in SOURCES.md need primary confirmation.</li>
+</ul>
+
+<hr>
+
+<p style="color: var(--muted); font-size: 0.85rem; margin-top: 2rem;">
+  This blog post is part of the AI Frontier Curriculum project's process journal. Each significant work session is documented with agent execution stats, lessons learned, and architectural decisions. The curriculum itself lives in <code>modules/MODULE-00</code> through <code>MODULE-10</code>.
+</p>
+
+<p style="color: var(--muted); font-size: 0.85rem;">
+  Built with Claude Code (Opus 4.6, 1M context) using multi-agent orchestration: researcher, writer, reviewer, reviser, and synthesizer agents coordinated via Agent Teams. Total session produced ~43,000 words of curriculum content plus this process journal.
+</p>
+
+</body>
+</html>

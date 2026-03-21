@@ -29,12 +29,14 @@
 - CURRICULUM.md is the single source of truth for module status
 - GLOSSARY.md is the single source of truth for term definitions
 - Cross-references between modules use relative links
+- blog/ contains process journal entries documenting each work session (HTML)
 
 ## Context rules
 
 - This file <=200 lines. Detail goes in .claude/rules/ and docs.
 - Read CURRENT_CYCLE.md before starting any session.
 - Update CURRENT_CYCLE.md and CURRICULUM.md after every module change.
+- Write a process blog post after each significant work session (see .claude/rules/blog.md).
 
 ## Imports
 

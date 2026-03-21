@@ -108,7 +108,8 @@ Execute in three passes. Do not skip steps.
 │   ├── html/
 │   ├── slides/
 │   └── tables/
-└── diagrams/                       # Architecture diagrams, ecosystem maps, flowcharts
+├── diagrams/                       # Architecture diagrams, ecosystem maps, flowcharts
+└── blog/                           # Process journal (HTML posts documenting each work session)
 ```
 
 ---
