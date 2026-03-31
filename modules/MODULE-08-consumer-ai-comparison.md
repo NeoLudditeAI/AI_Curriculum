@@ -1,7 +1,7 @@
 # Module 08: Consumer AI Comparison
 
 **Last updated:** 2026-03-21
-**Status:** DRAFTING
+**Status:** COMPLETE
 **Word count target:** 5,000-6,000
 
 ---
@@ -37,7 +37,7 @@ The following table maps the primary consumer-facing capabilities across all fou
 | **File upload / analysis** | GA (PDF, code, text) | GA (broad format support) | GA (Drive integration) | GA (M365 files) |
 | **Code execution** | GA (Claude Code, terminal) | GA (Code Interpreter) | GA (code execution) | GA (GitHub Copilot) |
 | **Agentic tasks** | GA (Cowork Preview, Claude Code) | GA (ChatGPT Agent, Operator) | GA (Deep Research, Mariner Preview) | GA (Copilot Studio) |
-| **Memory / personalization** | GA (Chat Memory, March 2026) | GA (cross-session memory) | GA (Personal Intelligence) | GA (Work IQ, enterprise) |
+| **Memory / personalization** | GA (Claude Memory, March 2026) | GA (cross-session memory) | GA (Personal Intelligence) | GA (Work IQ, enterprise) |
 | **Collaboration features** | GA (Projects) | GA (Canvas, GPT Store) | GA (Gems, Drive integration) | GA (Pages, Studio) |
 | **On-device inference** | None | None | GA (Gemini Nano on Android) | Limited (Windows AI) |
 
@@ -130,13 +130,13 @@ How each platform remembers you across sessions is a critical differentiator (se
 
 | Feature | Claude | ChatGPT | Gemini | Copilot |
 |---|---|---|---|---|
-| **Cross-session memory** | GA (Chat Memory, March 2026) | GA (automatic + manual) | GA (Personal Intelligence) | GA (Work IQ, enterprise) |
+| **Cross-session memory** | GA (Claude Memory, March 2026) | GA (automatic + manual) | GA (Personal Intelligence) | GA (Work IQ, enterprise) |
 | **Memory control** | User-controllable (view/manage stored preferences) | View, edit, delete individual memories | Settings-based | Admin-controlled |
-| **Contextual personalization** | Chat Memory (auto) + Projects (manual) | Automatic preference learning | Search history + interactions | M365 Graph data |
+| **Contextual personalization** | Claude Memory (auto) + Projects (manual) | Automatic preference learning | Search history + interactions | M365 Graph data |
 | **Data scope** | All conversations (processed ~24h cycle) | All conversations | Google account-wide | Microsoft 365 tenant |
 | **Privacy model** | User-controllable; privacy-first design | Opt-out available | Tied to Google account | Enterprise compliance |
 
-ChatGPT has the most mature memory system, automatically extracting user preferences, facts, and interaction patterns across conversations to build a persistent profile that makes each session feel continuity-aware. Claude's Chat Memory (GA, March 2026, all plans) automatically processes conversations every ~24 hours, storing profession, language preferences, and recurring context into a memory profile loaded into future conversations -- a significant addition that closes what was previously Claude's most notable usability gap [F1]. Gemini's Personal Intelligence goes broader by drawing from your entire Google account (Search, Drive, Gmail, Calendar) but can feel less conversationally aware. Copilot's Work IQ is exclusively enterprise-focused, surfacing relevant organizational context from Microsoft 365 data [F2, F3].
+ChatGPT has the most mature memory system, automatically extracting user preferences, facts, and interaction patterns across conversations to build a persistent profile that makes each session feel continuity-aware. Claude Memory (GA, March 2026, all plans) automatically processes conversations every ~24 hours, storing profession, language preferences, and recurring context into a memory profile loaded into future conversations -- a significant addition that closes what was previously Claude's most notable usability gap [F1]. Gemini's Personal Intelligence goes broader by drawing from your entire Google account (Search, Drive, Gmail, Calendar) but can feel less conversationally aware. Copilot's Work IQ is exclusively enterprise-focused, surfacing relevant organizational context from Microsoft 365 data [F2, F3].
 
 ---
 
@@ -191,9 +191,9 @@ For users who build on these platforms, API economics differ substantially (see 
 
 | Model tier | Anthropic | OpenAI | Google | Microsoft |
 |---|---|---|---|---|
-| **Budget** | Haiku 4.5: $1.00/$5.00 | GPT-5.4 Nano: $0.20/$1.25 | Flash 2.5: $0.15/$0.60 | Via Azure OpenAI |
+| **Budget** | Haiku 4.5: $1.00/$5.00 | GPT-5.4 Nano: $0.20/$1.25 | Flash 2.5 Lite: $0.10/$0.40 | Via Azure OpenAI |
 | **Mid-range** | Sonnet 4.6: $3/$15 | GPT-5.4 Mini: $0.75/$4.50 | Gemini 3 Flash: $0.50/$3 | Via Azure OpenAI |
-| **Flagship** | Opus 4.6: $5/$25 | GPT-5.4: ~$2.50/$10+ | Gemini 3.1 Pro: $2.50/$15 | Via Azure OpenAI |
+| **Flagship** | Opus 4.6: $5/$25 | GPT-5.4: $2.50/$15 | Gemini 3.1 Pro: $2.00/$12 | Via Azure OpenAI |
 
 *Pricing shown as input/output per million tokens.*
 
@@ -230,7 +230,7 @@ ChatGPT's drop from 87% to 68% in one year represents one of the fastest market 
 
 **ChatGPT:** The #Keep4o movement (early 2026) crystallized user frustration with rapid model transitions. When OpenAI deprecated GPT-4o in favor of GPT-4.1, a vocal user segment objected to the personality and behavior changes. An estimated 1.5M cancellations in March 2026 were attributed to model churn fatigue -- users felt the product they were paying for kept changing without their consent [F2].
 
-**Claude:** Commands the highest average session engagement at 34.7 minutes, nearly double ChatGPT's average. Developer communities (Reddit, Hacker News) show a strong Claude preference for coding tasks, with one survey indicating 78% of developers who've tried both prefer Claude for code-related work [UNVERIFIED, community-sourced] [2]. The main complaints center on the absence of multimodal generation (images, voice).
+**Claude:** Commands the highest average session engagement at 34.7 minutes, nearly double ChatGPT's average. Developer communities (Reddit, Hacker News) show a strong Claude preference for coding tasks -- an analysis of 500+ Reddit threads found 78% preference among developers who compared both tools [community-sourced] [2]. A separate developer survey found Claude the top choice at 44% for complex coding tasks (multi-file refactoring, architecture design, debugging), ahead of GitHub Copilot (28%) and ChatGPT (19%) [7]. The main complaints center on the absence of multimodal generation (images, voice).
 
 **Gemini:** Fastest-growing platform with strong positive sentiment around the free tier and Google integration. Criticisms focus on writing quality (perceived as more generic than Claude or ChatGPT) and lingering trust issues from the Gemini 1.0 image generation controversy in early 2024. Users praise Deep Research and the seamless Workspace integration [F3].
 
@@ -244,9 +244,9 @@ Each platform has a defensible moat and a corresponding blind spot.
 
 ### Claude: The Developer and Enterprise Play
 
-**Moat:** Safety reputation, MCP open standard, developer tooling dominance (Claude Code at ~$2.5B ARR [UNVERIFIED]), highest per-user monetization ($211/monthly active user) [F1].
+**Moat:** Safety reputation, MCP open standard, developer tooling dominance (Claude Code at ~$2.5B ARR, doubled since January 2026 [8]), highest per-user monetization ($211/monthly active user) [F1].
 
-**Blind spot:** No image generation, no voice. Claude is the most capable text-in/text-out system but the narrowest in multimodal coverage. Chat Memory (March 2026) closed the personalization gap, but for users whose workflows span text, images, and voice, Claude requires supplementation with other tools.
+**Blind spot:** No image generation, no voice. Claude is the most capable text-in/text-out system but the narrowest in multimodal coverage. Claude Memory (March 2026) closed the personalization gap, but for users whose workflows span text, images, and voice, Claude requires supplementation with other tools.
 
 **Strategic bet:** That reasoning quality and developer trust matter more than feature breadth. Anthropic is betting that AI power users will pay a premium for the best thinking engine and accept gaps in multimedia capabilities.
 
@@ -305,7 +305,7 @@ Most power users will end up using two or more platforms. The realistic question
 
 3. **Gemini's free tier is a strategic weapon.** Offering Deep Research and image generation at no cost pressures every competitor's conversion funnel.
 
-4. **Claude wins on depth, loses on breadth.** Best-in-class for coding and reasoning, but the absence of image generation and voice limits its addressable use cases. Chat Memory (March 2026) closed the personalization gap.
+4. **Claude wins on depth, loses on breadth.** Best-in-class for coding and reasoning, but the absence of image generation and voice limits its addressable use cases. Claude Memory (March 2026) closed the personalization gap.
 
 5. **Copilot is an enterprise play, not a consumer product.** Its 3.3% M365 conversion rate confirms this -- the value proposition requires organizational context.
 
@@ -326,7 +326,9 @@ Most power users will end up using two or more platforms. The realistic question
 - [Module 02: Context Engineering](MODULE-02-context-engineering.md) -- technical depth on memory systems, context windows, and personalization
 - [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md) -- agent architecture and coding tool capabilities
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- how platforms connect to external tools
+- [Module 07: Skills, Plugins & Automation](MODULE-07-skills-plugins-automation.md) -- scheduled tasks and automation capabilities as platform differentiators
 - [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) -- API pricing economics and SDK comparison
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- upcoming events (Google I/O, Build, WWDC) likely to shift comparison tables
 
 ---
 
@@ -343,3 +345,5 @@ Most power users will end up using two or more platforms. The realistic question
 - [F3] Google/Gemini Ecosystem Profile, reference/profiles/google-gemini.md, 2026-03-18
 - [F4] Microsoft/Copilot Ecosystem Profile, reference/profiles/microsoft-copilot.md, 2026-03-18
 - [F5] Specialized Tools Profile, reference/profiles/specialized-tools.md, 2026-03-18
+7. Developer Survey 2026: AI Coding Tool Adoption (claude5.ai), https://claude5.ai/news/developer-survey-2026-ai-coding-73-percent-daily, accessed 2026-03-21
+8. Constellation Research: Claude Code Revenue Doubled Since Jan. 1, https://www.constellationr.com/insights/news/anthropics-claude-code-revenue-doubled-jan-1, 2026-02-12

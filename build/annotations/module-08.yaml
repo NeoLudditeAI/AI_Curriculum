@@ -1,0 +1,364 @@
+# build/annotations/module-08.yaml
+# Annotations for Module 08: Consumer AI Comparison
+# Section IDs derived from deliverables/html/modules/module-08.html
+
+module: "08"
+annotations:
+  # ── Opening Hook ──────────────────────────────────────────────────────
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "The question is no longer 'which is best?' -- it is 'best for whom, at what, and at what cost?'"
+      content: "Throughout the curriculum, we have compared the big four across models (Module 01), context (Module 02), agents (Module 03), orchestration (Module 04), and integration (Module 06). You already know that Claude leads on SWE-bench, Gemini is cheapest per token, ChatGPT has the broadest multimodal coverage, and Copilot locks into M365. This module synthesizes all of it into a consumer-facing comparison -- but these platforms have converged on the same ~$20/month price point while diverging sharply in what you get for that money. The realistic question is not 'which one?' but 'which combination?'"
+
+  - after: "executive-summary"
+    component: concept-gate
+    data:
+      title: "Before diving into the comparison"
+      prerequisites:
+        - "I can name the flagship model for each of the four major platforms (Module 01)"
+        - "I understand how memory systems differ across platforms (Module 02)"
+        - "I know what MCP is and how adoption varies by platform (Module 06)"
+      continue_section: "core-capability-matrix"
+
+  # ── Core Capability Matrix ────────────────────────────────────────────
+  - after: "reading-the-matrix"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which two platforms offer the broadest multimodal coverage (image generation, voice conversation, and video understanding)?"
+      choices: ["Claude and Copilot", "ChatGPT and Gemini", "ChatGPT and Claude", "Gemini and Copilot"]
+      correct: 1
+      explanation: "ChatGPT and Gemini are the only platforms with native image generation, voice interaction, and video understanding. Claude lacks image generation and voice entirely. Copilot lacks video understanding and has only limited voice input. This multimodal gap is Claude's most visible capability weakness."
+
+  # ── Chat and Reasoning Quality ────────────────────────────────────────
+  - after: "reasoning-modes-compared"
+    component: self-explanation-prompt
+    data:
+      prompt: "Why might benchmark scores not accurately predict your day-to-day experience with these platforms? Consider what benchmarks measure vs. what users actually value."
+      expert_answer: "Benchmarks measure performance on specific, controlled evaluation tasks (graduate-level reasoning, code generation, math problems) under standardized conditions. Day-to-day experience involves subjective qualities that benchmarks do not capture: prose naturalness ('AI-sounding' vs. natural writing), instruction-following faithfulness, personality consistency, response latency, and how the platform handles ambiguous or multi-step requests. Users consistently report Claude produces more natural prose and handles nuanced instructions more faithfully, while ChatGPT handles a wider variety of tasks competently. Gemini excels at factual retrieval where Google Search integration provides grounding. These qualitative differences matter more than a 2% benchmark gap for most real-world use."
+
+  # ── Coding Agent Capabilities ─────────────────────────────────────────
+  - after: "coding-agent-capabilities"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "What architectural advantage does Claude Code have over Codex for understanding a large existing codebase?"
+      choices: ["Claude Code is cheaper to run", "Claude Code reads entire codebases with 1M-token context vs. Codex's task-scoped context", "Claude Code supports more programming languages", "Claude Code runs in the cloud while Codex runs locally"]
+      correct: 1
+      explanation: "Claude Code's advantage is architectural comprehension -- it reads entire codebases within its 1M-token context window and understands how components relate across files. Codex trades breadth for parallelism, spinning up multiple cloud sandboxes to work on tasks asynchronously but with task-scoped (not whole-codebase) context. This is the difference from Module 03's agent architecture analysis."
+
+  # ── Multimodal Capabilities ───────────────────────────────────────────
+  - after: "voice-and-audio"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "A content creator needs image generation, voice conversations, and long-form article writing in a single workflow. Which platform(s) cover all three natively?"
+      choices: ["Claude covers all three", "Gemini covers all three", "Only ChatGPT covers all three natively", "No single platform covers all three"]
+      correct: 2
+      explanation: "Only ChatGPT has image generation (GPT Image 1.5), voice conversations (Advanced Voice Mode), and strong text generation in one product. Claude lacks image generation and voice. Gemini has image generation and voice but its writing quality is generally rated below Claude and ChatGPT. For users who need all three, ChatGPT is the only single-platform solution."
+
+  # ── Pricing Analysis ──────────────────────────────────────────────────
+  # Curiosity prompt: pricing at scale
+  - after: "pricing-analysis"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "The cheapest platform for a solo user is not the cheapest for a team of five. Pricing structures diverge dramatically at scale."
+      content: "At the individual consumer tier, all four platforms converge around $20/month. But for a team of 5 on business plans: Claude Team costs $125/month (5 x $25), ChatGPT Business costs $125-150/month (5 x $25-30), Gemini Business starts at just $36/month (5 x $7.20 at the entry tier), and Copilot runs $105-150/month (5 x $21-30). Gemini's entry price is 3-4x cheaper than any competitor at the team level. At enterprise scale, Copilot E7 at $99/user/month is the most expensive but includes the full Agent 365 governance suite. The platform that is 'cheapest' depends entirely on team size, tier, and which capabilities you actually need."
+
+  - after: "pricing-analysis"
+    component: self-explanation-prompt
+    data:
+      prompt: "You are advising a team of 10 that currently pays for ChatGPT Plus ($20/user/month = $200/month total). They primarily use AI for coding and document drafting. Based on the pricing and capability data, would you recommend switching platforms? To which, and why?"
+      expert_answer: "Strong recommendation to evaluate Claude Pro ($20/user/month, same cost): Claude leads on SWE-bench (80.8% vs. 69.1% for o3), produces more natural prose, and has the highest developer preference (44% for complex coding). The team would gain superior coding assistance and writing quality at the same price. Alternatively, a split strategy: Claude Pro for the developers ($20/user x 6 = $120), Gemini Advanced ($19.99/user x 4 = $80) for the document drafters who benefit from Google Workspace integration. Total: $200/month -- same budget, better tool-task matching. The tradeoff: losing ChatGPT's image generation and voice mode, which may or may not matter depending on the team's actual workflows."
+
+  - after: "pricing-trend-capability-based-bundling"
+    component: self-explanation-prompt
+    data:
+      prompt: "The industry is shifting from model-based pricing to capability-based bundling. What does this mean for consumers, and who benefits most?"
+      expert_answer: "Model-based pricing charges per model tier (pay more for a better model). Capability-based pricing bundles multiple features at a fixed price -- Claude Max ($100-200/month) includes unlimited model access plus higher rate limits; Gemini Ultra ($249.99/month) bundles Notebook LM Plus, 30TB storage, and Google One AI Premium; ChatGPT Pro ($200/month) bundles o3-pro, voice, and research. Power users who use multiple capabilities benefit most -- they get a bundle discount compared to paying for each feature separately. Casual users who only need one feature (say, image generation) may pay more than necessary because features are packaged together. The trend raises the floor price for light users while lowering the ceiling for heavy users."
+
+  # ── User Sentiment and Market Dynamics ────────────────────────────────
+  - after: "user-satisfaction-signals"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "ChatGPT's market share dropped from 87% to 68% in one year. Which platform captured most of that shift?"
+      choices: ["Claude", "Copilot", "Gemini", "Perplexity"]
+      correct: 2
+      explanation: "Gemini captured most of ChatGPT's share loss, quadrupling from ~5% to ~18-20%. Gemini's growth was driven by aggressive distribution (Android default, Google Search integration, generous free tier) and genuine product improvements. Claude grew more slowly (~3% to ~5%), reflecting its strength in a narrower niche (developers and power users) rather than mass-market distribution."
+
+  - after: "user-satisfaction-signals"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Why does Microsoft Copilot have only a 3.3% conversion rate among M365's 400 million users?"
+      choices: ["Copilot is too expensive for most users", "Copilot's value proposition requires organizational context, making it unappealing as a standalone consumer product", "Copilot is only available in certain countries", "Most M365 users are unaware that Copilot exists"]
+      correct: 1
+      explanation: "Copilot's value proposition is built around understanding your organizational context -- your M365 tenant data, org chart, and compliance requirements. As a standalone consumer AI product, it rarely outperforms competitors at any specific task. Enterprise buyers purchase it because it is the only AI that understands their M365 environment, not because it is the best AI in isolation."
+
+  - after: "user-satisfaction-signals"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "ChatGPT model churn: the #Keep4o movement in detail"
+      content: "The #Keep4o movement in early 2026 crystallized user frustration with rapid model transitions. When OpenAI deprecated GPT-4o in favor of GPT-4.1, a vocal user segment objected to personality and behavior changes in the new model. An estimated 1.5 million cancellations in March 2026 were attributed to model churn fatigue -- users felt the product they were paying for kept changing without their consent. This highlights a fundamental tension in consumer AI: providers need to iterate models for competitive reasons, but users develop workflow dependencies on specific model behaviors. OpenAI has since introduced model version selection in settings, but the damage to trust was significant."
+
+  # ── Strategic Differentiators + Decision Framework ────────────────────
+  - after: "decision-framework-choosing-a-platform"
+    component: self-explanation-prompt
+    data:
+      prompt: "Based on everything you have learned in this curriculum, describe your own AI platform strategy: which platform(s) would you use for what, and why? Consider your specific use cases, budget, and priorities."
+      expert_answer: "One strong multi-platform strategy: Claude Pro ($20/month) as the primary tool for coding (SWE-bench leader at 80.8%), technical writing (highest engagement, most natural prose), and any task requiring deep reasoning. Gemini free tier for quick factual lookups (Google Search integration), image generation (Imagen 4), and Google Workspace integration. ChatGPT Plus ($20/month) only if you need voice mode or video understanding regularly. Total: $20-40/month covers most power-user needs. The key insight from Module 08: no single platform dominates all categories, so the realistic question is 'which combination?' not 'which one?' Your specific mix should be driven by your most frequent use cases, not by any platform's marketing claims."
+
+  # ── Key Takeaways: Section Review ─────────────────────────────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which platform has the most significant capability gap in multimodal features as of March 2026?"
+      choices: ["ChatGPT (no on-device inference)", "Gemini (no voice conversation)", "Claude (no image generation, no voice)", "Copilot (no web search)"]
+      correct: 2
+      explanation: "Claude's complete absence of image generation and voice conversation is its most visible capability gap. For users who need both text reasoning and image creation or voice interaction in a single workflow, ChatGPT or Gemini are the only viable choices. Claude Memory (March 2026) closed the personalization gap, but multimodal breadth remains the weakest dimension."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "At the business/team tier, which platform offers the lowest entry-level per-seat pricing?"
+      choices: ["Claude Team ($25/seat/month)", "ChatGPT Business ($25-30/user/month)", "Gemini Business ($7.20/user/month)", "Copilot ($21-30/user/month)"]
+      correct: 2
+      explanation: "Gemini Workspace pricing starts at $7.20/user/month for the basic business tier, reflecting Google's strategy of bundling AI into existing Workspace subscriptions rather than charging a premium. This is 3-4x cheaper than competitors at the entry level and a powerful wedge for Google Workspace-centric organizations."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which platform's strategic moat is described as 'safety reputation, MCP open standard, and developer tooling dominance'?"
+      choices: ["ChatGPT", "Gemini", "Claude", "Copilot"]
+      correct: 2
+      explanation: "Claude's moat combines its safety reputation, creation and stewardship of the MCP open standard, and developer tooling dominance (Claude Code at ~$2.5B ARR). The corresponding blind spot is the absence of image generation and voice -- Claude is the most capable text-in/text-out system but the narrowest in multimodal coverage."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Google's free tier is described as a 'strategic weapon.' What capabilities does Gemini offer at no cost that competitors charge $20/month for?"
+      choices: ["Voice conversation and video understanding", "Deep Research and image generation with Flash model access", "Full API access and code execution", "Enterprise governance and DLP"]
+      correct: 1
+      explanation: "Gemini's free tier includes Deep Research, image generation (Imagen 4), and Flash model access -- capabilities that cost $20/month or more on Claude and ChatGPT. This pressures every competitor's conversion funnel: why pay for a basic tier elsewhere when Gemini offers these features for free?"
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "How does Anthropic's prompt caching discount (Module 09) affect Claude's cost competitiveness in the API pricing comparison?"
+      choices: ["It has no effect since caching is the same across all platforms", "Anthropic offers up to 90% cache discount, making it competitive despite higher base prices", "Anthropic does not offer prompt caching", "Caching only applies to the free tier"]
+      correct: 1
+      explanation: "Anthropic offers a 90% discount on cached prompt tokens (with additional lower tiers). While Claude's base API prices are mid-range, aggressive caching can dramatically reduce effective costs for applications with repeating context -- making Claude competitive with Google's lower base prices. Module 09 covers the full caching economics across all providers."
+
+  # ── Module Assessment ─────────────────────────────────────────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "All four major consumer AI platforms charge approximately the same amount for their standard tier. What is this price point?"
+      choices: ["~$10/month", "~$20/month", "~$30/month", "~$50/month"]
+      correct: 1
+      explanation: "The market has converged on approximately $20/month for the standard consumer tier: Claude Pro at $20/month, ChatGPT Plus at $20/month, Gemini Advanced at $19.99/month, and Copilot Pro at $20/month. Differentiation happens at the extremes -- free tiers and power-user tiers ($100-250/month)."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which platform has the highest average session engagement time among consumers?"
+      choices: ["ChatGPT (largest user base)", "Gemini (fastest growing)", "Claude (34.7 minutes average)", "Copilot (M365 integration)"]
+      correct: 2
+      explanation: "Claude commands the highest average session engagement at 34.7 minutes, nearly double ChatGPT's average. This metric reflects deeper, more sustained interactions rather than quick lookups -- consistent with Claude's strength in coding, writing, and complex reasoning tasks that require extended conversation."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which benchmark does Claude Opus 4.6 lead on with the highest margin over competitors?"
+      choices: ["GPQA Diamond (graduate-level reasoning)", "SWE-bench Verified (real-world coding)", "MMLU-Pro (broad knowledge)", "MATH (mathematical reasoning)"]
+      correct: 1
+      explanation: "Claude Opus 4.6 leads SWE-bench Verified at 80.8% vs. 69.1% for the runner-up (o3-high) -- an 11.7 percentage point margin. This is the largest gap of any benchmark in the comparison table and reflects Claude's strength in real-world coding tasks. Gemini 3.1 Pro leads GPQA Diamond and MMLU-Pro, while o4-mini leads MATH."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What was the estimated number of ChatGPT cancellations attributed to the #Keep4o model churn controversy in March 2026?"
+      choices: ["~100,000", "~500,000", "~1.5 million", "~5 million"]
+      correct: 2
+      explanation: "An estimated 1.5 million cancellations in March 2026 were attributed to model churn fatigue. Users objected to personality and behavior changes when OpenAI deprecated GPT-4o in favor of GPT-4.1 -- they felt the product they were paying for kept changing without their consent."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "In a developer survey, what percentage chose Claude as their top tool for complex coding tasks?"
+      choices: ["19%", "28%", "44%", "78%"]
+      correct: 2
+      explanation: "A developer survey found Claude the top choice at 44% for complex coding tasks (multi-file refactoring, architecture design, debugging), ahead of GitHub Copilot (28%) and ChatGPT (19%). A separate Reddit/HN analysis found 78% preference among developers who specifically compared Claude and ChatGPT head-to-head."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which memory system provides the broadest data scope by drawing from your entire account ecosystem (Search, Drive, Gmail, Calendar)?"
+      choices: ["Claude Memory", "ChatGPT Saved Memories", "Gemini Personal Intelligence", "Copilot Work IQ"]
+      correct: 2
+      explanation: "Gemini's Personal Intelligence draws from your entire Google account -- Search history, Drive files, Gmail, Calendar, and other Google services. This is the broadest data scope of any memory system. Claude Memory processes conversations on a ~24-hour cycle. ChatGPT extracts preferences per conversation. Copilot Work IQ draws from the M365 tenant but is enterprise-focused. This connects to Module 02's analysis of how memory systems differ architecturally."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "How does MCP adoption depth (Module 06) factor into the platform comparison as of March 2026?"
+      choices: ["MCP is irrelevant to consumer platform comparison", "All four platforms have identical MCP support", "MCP depth varies: Claude is native, Google invests in managed servers, Microsoft focuses on enterprise, OpenAI adopted retroactively", "Only Claude and Google support MCP"]
+      correct: 2
+      explanation: "MCP adoption depth is a meaningful differentiator. Claude is MCP-native (Anthropic created the protocol). Google is investing heavily in managed MCP servers for its services. Microsoft focuses on enterprise MCP hosting and governance. OpenAI adopted MCP retroactively -- functional but not foundational. For users who value tool integration and extensibility, MCP depth matters because it determines how easily an AI platform connects to your existing tools and services (Module 06)."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Google's API pricing is 30-50% cheaper than competitors at every tier. Which model family specifically offers the lowest budget-tier pricing?"
+      choices: ["Gemini 3 Flash", "Gemini 3.1 Pro", "Flash 2.5 Lite ($0.10/$0.40 per million tokens)", "Gemini Nano"]
+      correct: 2
+      explanation: "Flash 2.5 Lite at $0.10 input / $0.40 output per million tokens is Google's cheapest API offering and the lowest budget-tier price of any major provider. For comparison, Anthropic's budget tier (Haiku 4.5) is $1.00/$5.00 and OpenAI's (GPT-5.4 Nano) is $0.20/$1.25. Google's pricing advantage is consistent across all tiers -- budget, mid-range, and flagship."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "A consulting firm needs high writing quality, Google Workspace integration, and enterprise data handling. Budget: $5,000/month for 15 people. Which platform combination fits best?"
+      choices: ["ChatGPT Enterprise for everyone", "Claude Team ($25/seat x 15 = $375) + Gemini Business ($18/seat x 15 = $270) = $645/month", "Copilot E7 ($99/seat x 15 = $1,485)", "Gemini Ultra ($250/seat x 15 = $3,750)"]
+      correct: 1
+      explanation: "Claude Team for reports and developer tooling (best writing quality, SWE-bench leader) plus Gemini Business for Google Workspace integration (native Docs/Sheets/Calendar access). Total: $645/month, well under the $5,000 budget. The tradeoff: no native image generation (supplement with Gemini's free image gen or Midjourney) and no voice mode. This combination covers the firm's stated needs (writing quality + Workspace) at the lowest cost."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "The module concludes that 'most power users will end up using two or more platforms.' What is the primary reason?"
+      choices: ["No single platform is affordable enough", "Vendor lock-in prevents using just one", "No single platform dominates all capability categories -- each has distinct strengths and blind spots", "Platforms are not compatible with each other"]
+      correct: 2
+      explanation: "Each platform has a defensible moat and a corresponding blind spot. Claude leads on coding and writing but lacks multimodal breadth. ChatGPT has the broadest features but is losing market share and trust. Gemini has the best free tier and pricing but lower writing quality. Copilot has enterprise depth but no standalone appeal. The realistic question is 'which combination?' not 'which one?'"
+
+  # ── Figure M08-1: Market Share Trajectory (Chart.js line chart) ──────
+  - after: "market-share-trajectory"
+    component: diagram
+    variant: chart
+    data:
+      id: "m08-1"
+      title: "Market Share Trajectory (Mar 2025 – Mar 2026)"
+      alt: "Line chart showing AI platform web traffic share from March 2025 to March 2026. ChatGPT declined steadily from 87% to 68%, representing one of the fastest market share declines for a dominant consumer tech product. Gemini surged from 5.4% to 18.2%, quadrupling its share through aggressive distribution and product improvements. Claude grew modestly from 3% to 5%. Copilot remained relatively flat, growing from 2% to 3%."
+      chartType: "line"
+      config:
+        labels: ["Mar 2025", "Jun 2025", "Sep 2025", "Dec 2025", "Mar 2026"]
+        datasets:
+          - label: "ChatGPT"
+            data: [87, 80, 75, 71, 68]
+            borderColor: "#0D7377"
+            borderDash: []
+          - label: "Gemini"
+            data: [5.4, 8, 12, 15, 18.2]
+            borderColor: "#1B7A3D"
+            borderDash: [5, 5]
+          - label: "Claude"
+            data: [3, 3.5, 4, 4.5, 5]
+            borderColor: "#1B4D8E"
+            borderDash: [10, 5]
+          - label: "Copilot"
+            data: [2, 2.2, 2.5, 2.8, 3]
+            borderColor: "#E65100"
+            borderDash: [2, 3]
+
+  # ── Figure M08-2: Platform Decision Framework (Recommendation Quiz) ──
+  - after: "decision-framework-choosing-a-platform"
+    component: diagram
+    variant: recommendation
+    data:
+      id: "m08-rec"
+      title: "Platform Decision Framework"
+      alt: "Interactive questionnaire that recommends an AI platform based on your primary use case, budget, agentic needs, data privacy requirements, ecosystem preference, and technical depth. Scores responses across Claude, ChatGPT, Gemini, and Copilot to produce a personalized recommendation with rationale."
+      config:
+        questions:
+          - text: "What is your primary use case?"
+            options:
+              - label: "Coding and development"
+                scores: { claude: 3, chatgpt: 1, gemini: 1, copilot: 2 }
+              - label: "Research and analysis"
+                scores: { claude: 2, chatgpt: 3, gemini: 2, copilot: 1 }
+              - label: "Creative work (images, voice, multimedia)"
+                scores: { claude: 0, chatgpt: 3, gemini: 2, copilot: 1 }
+              - label: "Enterprise workflow and productivity"
+                scores: { claude: 1, chatgpt: 1, gemini: 1, copilot: 3 }
+          - text: "What is your budget?"
+            options:
+              - label: "Free (no subscription)"
+                scores: { claude: 0, chatgpt: 1, gemini: 3, copilot: 1 }
+              - label: "~$20/month (standard tier)"
+                scores: { claude: 2, chatgpt: 2, gemini: 2, copilot: 2 }
+              - label: "$100-250/month (power user)"
+                scores: { claude: 3, chatgpt: 2, gemini: 2, copilot: 0 }
+              - label: "Enterprise (per-seat licensing)"
+                scores: { claude: 2, chatgpt: 2, gemini: 2, copilot: 3 }
+          - text: "Do you need agentic capabilities (autonomous task execution, multi-step workflows)?"
+            options:
+              - label: "Yes, coding agents are essential"
+                scores: { claude: 3, chatgpt: 1, gemini: 1, copilot: 2 }
+              - label: "Yes, general-purpose agents (web browsing, research)"
+                scores: { claude: 1, chatgpt: 3, gemini: 2, copilot: 1 }
+              - label: "Yes, enterprise agent orchestration"
+                scores: { claude: 1, chatgpt: 1, gemini: 1, copilot: 3 }
+              - label: "No, conversational AI is sufficient"
+                scores: { claude: 2, chatgpt: 2, gemini: 2, copilot: 1 }
+          - text: "How important is data privacy to your workflow?"
+            options:
+              - label: "Critical -- privacy-first design is non-negotiable"
+                scores: { claude: 3, chatgpt: 1, gemini: 0, copilot: 2 }
+              - label: "Important -- I want control over my data"
+                scores: { claude: 2, chatgpt: 2, gemini: 1, copilot: 2 }
+              - label: "Moderate -- standard terms are fine"
+                scores: { claude: 1, chatgpt: 2, gemini: 2, copilot: 1 }
+              - label: "Enterprise compliance (HIPAA, FedRAMP, SOC 2) is required"
+                scores: { claude: 1, chatgpt: 1, gemini: 1, copilot: 3 }
+          - text: "Which ecosystem are you most invested in?"
+            options:
+              - label: "Developer tools (terminal, GitHub, VS Code)"
+                scores: { claude: 3, chatgpt: 1, gemini: 1, copilot: 2 }
+              - label: "Google Workspace (Gmail, Drive, Docs)"
+                scores: { claude: 0, chatgpt: 0, gemini: 3, copilot: 0 }
+              - label: "Microsoft 365 (Teams, Outlook, SharePoint)"
+                scores: { claude: 0, chatgpt: 0, gemini: 0, copilot: 3 }
+              - label: "No strong ecosystem preference"
+                scores: { claude: 2, chatgpt: 2, gemini: 2, copilot: 1 }
+          - text: "What level of technical depth do you need?"
+            options:
+              - label: "Deep reasoning and nuanced writing"
+                scores: { claude: 3, chatgpt: 2, gemini: 1, copilot: 1 }
+              - label: "Broad multimodal capabilities (text, image, voice, video)"
+                scores: { claude: 0, chatgpt: 3, gemini: 2, copilot: 1 }
+              - label: "Best free-tier experience with solid quality"
+                scores: { claude: 0, chatgpt: 1, gemini: 3, copilot: 1 }
+              - label: "Integrated enterprise AI across my productivity suite"
+                scores: { claude: 0, chatgpt: 0, gemini: 1, copilot: 3 }
+        platforms:
+          claude:
+            name: "Claude"
+            tagline: "Best for coding, deep reasoning, and technical writing. Leads SWE-bench (80.8%), highest session engagement (34.7 min), privacy-first design. Gap: no image generation or voice."
+          chatgpt:
+            name: "ChatGPT"
+            tagline: "Best for broad multimodal needs -- image generation, voice, video, and research in one product. Largest user base (900M+ visits). Gap: market share declining, model churn concerns."
+          gemini:
+            name: "Gemini"
+            tagline: "Best free experience and cheapest API pricing (30-50% below competitors). Deep Research and image gen at no cost. Google ecosystem native. Gap: writing quality rated below Claude and ChatGPT."
+          copilot:
+            name: "Copilot"
+            tagline: "Best for Microsoft 365 organizations. Agent 365 governance, enterprise compliance, GitHub Copilot integration. Gap: only 3.3% M365 conversion -- weak as a standalone product."

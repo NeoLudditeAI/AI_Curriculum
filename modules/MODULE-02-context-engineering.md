@@ -1,7 +1,7 @@
 # Module 02: Context Engineering
 
-**Last updated:** 2026-03-20
-**Status:** DRAFTING
+**Last updated:** 2026-03-21
+**Status:** COMPLETE
 **Word count target:** 4,000-5,000
 **Prerequisites:** [Module 00: Landscape Overview](MODULE-00-landscape-overview.md), [Module 01: Models & Intelligence Tiers](MODULE-01-models-and-intelligence.md)
 
@@ -169,11 +169,21 @@ When the information a model needs exceeds what fits in a context window -- or w
 
 The RAG pipeline has three stages:
 
-1. **Indexing.** Documents are split into chunks (typically 256-1,024 tokens), each chunk is converted to a vector embedding, and embeddings are stored in a vector database (Pinecone, Weaviate, Chroma, pgvector, etc.).
+1. **Indexing.** Documents are split into chunks (typically 256-1,024 tokens), each chunk is converted to a vector embedding, and embeddings are stored in a vector database.
 
 2. **Retrieval.** When a user query arrives, it is converted to an embedding and compared against the indexed chunks using cosine similarity or similar distance metrics. The top-k most relevant chunks are retrieved (typically 3-10 chunks).
 
 3. **Generation.** Retrieved chunks are injected into the model's context alongside the user query. The model generates a response grounded in the retrieved content.
+
+### Architectural Patterns
+
+RAG systems have evolved through three generations, each addressing limitations of the prior:
+
+**Naive RAG** (retrieve → generate) follows the three-stage pipeline exactly as described above. A single retrieval pass feeds chunks directly into the prompt. Simple to implement but brittle: query-document mismatch, irrelevant retrievals, and missing context are common failure modes.
+
+**Advanced RAG** adds pre-retrieval and post-retrieval processing to improve quality. Pre-retrieval techniques include query rewriting (rephrasing the user query to better match indexed content), query expansion (generating multiple query variants), and hypothetical document embeddings (HyDE -- generating a hypothetical answer, then using its embedding to find real matches). Post-retrieval techniques include re-ranking (scoring retrieved chunks with a cross-encoder for relevance), chunk filtering (removing low-confidence results), and iterative retrieval (using initial results to generate follow-up queries). Advanced RAG is the current production standard for applications where retrieval quality directly affects user trust [4].
+
+**Modular RAG** treats the pipeline as a set of interchangeable components. Retrieval, re-ranking, routing, summarization, and generation modules can be mixed and matched depending on the query type. A routing module can decide whether a query needs retrieval at all, or whether the model can answer from its parametric knowledge. This pattern powers the most sophisticated enterprise RAG deployments, where different query types require different retrieval strategies [4].
 
 ### RAG vs. Large Context Windows
 
@@ -190,27 +200,90 @@ The 1M-token context window has changed the RAG calculus. Previously, RAG was ne
 
 > **Practical guidance:** If your knowledge base fits in 30-40% of the context window and query volume is low, skip RAG and use direct context injection with prompt caching. If the knowledge base exceeds 500K tokens, query volume is high, or the content updates frequently, invest in RAG. Many production systems use a hybrid: RAG for retrieval with a generous context window for the retrieved content plus conversation history.
 
+### Vector Database Options
+
+The vector database is the backbone of any RAG system. Choosing one involves tradeoffs between operational complexity, cost model, and feature set:
+
+| Database | Deployment Model | Hybrid Search | Pricing Model | Best For |
+|----------|-----------------|---------------|---------------|----------|
+| **Pinecone** | Fully managed (serverless) | Yes (sparse + dense) | Pay-per-query; serverless tier has free allowance | Teams wanting zero infrastructure management; scales from prototype to production without migration |
+| **Weaviate** | Self-hosted or managed cloud | Yes (BM25 + vector) | Open-source (free self-hosted); managed cloud by usage | Organizations needing on-premises deployment or hybrid search across structured and unstructured data |
+| **Chroma** | Self-hosted (local-first) | No (dense only) | Open-source (free) | Prototyping, local development, small-to-medium datasets; embeds directly in Python applications |
+| **pgvector** | PostgreSQL extension | Via PostgreSQL full-text search | Free (part of PostgreSQL) | Teams already running PostgreSQL who want to avoid adding another database to their stack |
+| **Qdrant** | Self-hosted or managed cloud | Yes (payload filtering + vector) | Open-source (free self-hosted); managed cloud by usage | Applications requiring rich metadata filtering alongside vector search; Rust-based, high performance |
+| **Milvus** | Self-hosted or managed (Zilliz Cloud) | Yes (sparse + dense) | Open-source (free self-hosted); Zilliz managed by usage | Large-scale deployments (billions of vectors); GPU-accelerated indexing and search |
+
+> **Volatility warning:** The vector database market is consolidating rapidly. New entrants (Turbopuffer, LanceDB) and major cloud provider offerings (AlloyDB AI on Google Cloud, Azure AI Search) are reshaping pricing and feature expectations quarterly.
+
 ### Chunking Strategies
 
-How documents are split into chunks significantly affects retrieval quality:
+How documents are split into chunks significantly affects retrieval quality. The choice of strategy should match document structure and query patterns:
 
-- **Fixed-size chunking** (e.g., 512 tokens per chunk): Simple but can split sentences or ideas mid-thought.
-- **Semantic chunking:** Split at paragraph or section boundaries. Better coherence but variable chunk sizes.
-- **Recursive chunking:** Try to split at paragraph boundaries; fall back to sentence boundaries; fall back to token count. The most common production approach.
-- **Parent-child chunking:** Index small chunks for precise retrieval but return the larger parent chunk (or full section) to the model. Balances retrieval precision with generation context.
+| Strategy | How It Works | Strengths | Weaknesses | Best For |
+|----------|-------------|-----------|------------|----------|
+| **Fixed-size** | Split every N tokens (e.g., 512) | Simple, predictable, fast | Splits sentences and ideas mid-thought | Homogeneous content (logs, transcripts) |
+| **Semantic** | Split at paragraph or section boundaries | Preserves meaning within chunks | Variable chunk sizes; may produce very large or very small chunks | Well-structured documents (docs, articles) |
+| **Recursive** | Try paragraph → sentence → token boundaries as fallbacks | Good balance of coherence and consistency | More complex to implement | General-purpose (most common production choice) |
+| **Document-aware** | Respects document structure (headers, lists, tables, code blocks) | Preserves structural context; tables and code stay intact | Requires document type detection; format-specific parsers | Technical documentation, code, legal contracts |
+| **Parent-child** | Index small chunks for retrieval; return larger parent chunk to model | Precise retrieval with rich generation context | Doubles storage; more complex indexing pipeline | Knowledge bases where surrounding context matters |
+
+**Chunk sizing and overlap.** Smaller chunks (256-512 tokens) yield more precise retrieval but risk losing surrounding context. Larger chunks (1,024-2,048 tokens) preserve context but dilute retrieval signal. A 10-20% token overlap between adjacent chunks is standard practice to prevent answers from being split across chunk boundaries. With 1M-token context windows, erring toward larger retrieved chunks is increasingly viable -- the generation model has room for them.
+
+A common production pattern combines recursive chunking with parent-child retrieval: split documents recursively into ~256-token child chunks for embedding, but store them with references to their ~1,024-token parent chunks. Retrieval matches against children; generation receives parents. This captures the precision of small chunks with the contextual richness of larger ones.
 
 ### Embedding Models
 
-Anthropic does not offer a native embeddings API [F1]. Google offers text, image, audio, and video embedding via the Gemini API (Preview) [F3]. OpenAI offers text-embedding-3-large and text-embedding-3-small (GA), which remain the most widely used embedding models in production [F2]. For Anthropic-centric architectures, third-party embedding providers (OpenAI, Cohere, Voyage AI) are the standard choice.
+Anthropic does not offer a native embeddings API [F1]. Google offers text, image, audio, and video embedding via the Gemini API (Preview) [F3]. OpenAI offers text-embedding-3-large and text-embedding-3-small (GA), which remain the most widely used embedding models in production [F2]. For Anthropic-centric architectures, third-party embedding providers (OpenAI, Cohere, Voyage AI) are the standard choice. See [Module 09](MODULE-09-developer-platforms-apis.md) for API-level details on embedding endpoints and pricing.
+
+### When to Use RAG: Decision Framework
+
+RAG is not always the right answer. With 1M-token context windows, prompt caching, and fine-tuning all available, practitioners have four distinct approaches to grounding model behavior in domain knowledge. The right choice depends on the nature of the knowledge, query volume, and how often the knowledge changes:
+
+| Approach | Knowledge Size | Update Frequency | Query Volume | Setup Cost | Best When |
+|----------|---------------|------------------|-------------|------------|-----------|
+| **Prompt engineering** | <10K tokens | N/A (static) | Any | Minimal | Instructions, formatting rules, behavioral constraints |
+| **Long context + caching** | <500K tokens | Low (weekly+) | Low-medium | Minimal | Reference docs, style guides, codebases; especially with prompt caching to amortize input cost |
+| **RAG** | 500K+ tokens to unlimited | Any | Medium-high | Significant | Large knowledge bases, frequently updated content, high query volume where per-query cost matters |
+| **Fine-tuning** | Encoded in weights | Very low (quarterly+) | Very high | High (training cost + evaluation) | Specialized output formats, domain terminology, behavioral patterns that must hold across all queries without prompt space |
+
+In practice, these approaches combine. A production system might fine-tune a model for domain-specific terminology, use RAG to retrieve current product information, load a style guide via prompt caching, and specify output formatting via prompt engineering -- all in the same request.
+
+### RAG Failure Modes
+
+RAG pipelines fail in characteristic ways that practitioners should design against:
+
+- **Retrieval misses.** The relevant document exists in the index but is not returned because the query embedding does not match the chunk embedding closely enough. Mitigation: query expansion, hybrid search (BM25 + vector), and re-ranking.
+- **Irrelevant retrieval.** Wrong chunks enter the context, polluting the generation with off-topic information. The model may incorporate this noise into its response. Mitigation: stricter similarity thresholds, metadata filtering, re-ranking.
+- **Chunk boundary splits.** The answer spans two chunks and neither chunk alone is sufficient. Mitigation: overlapping chunks (10-20%), parent-child retrieval, or larger chunk sizes.
+- **Hallucination over retrieved content.** The model ignores, misinterprets, or contradicts the retrieved text. This is rarer than retrieval failures but harder to detect. Mitigation: explicit grounding instructions in the system prompt, citation requirements, and post-generation verification.
+- **Stale index.** Source documents are updated but embeddings are not re-generated. The model answers based on outdated information while the user believes it is current. Mitigation: automated re-indexing pipelines, freshness metadata on chunks.
+
+### Agentic RAG
+
+Static RAG follows a fixed query → retrieve → generate loop. **Agentic RAG** gives the model agency over the retrieval process: the agent decides what to search, evaluates whether the results are sufficient, and may issue refined follow-up queries before generating a response. This is the pattern behind Deep Research features in ChatGPT and Gemini (see [Module 03](MODULE-03-single-agent-systems.md)), and it mirrors Claude Code's progressive disclosure approach described later in this module -- read only what is needed, evaluate, then read more if necessary.
+
+Agentic RAG is more expensive per query (multiple retrieval rounds) but produces substantially higher recall for complex questions that span multiple topics or require synthesis across documents.
+
+### Cost Comparison: RAG vs. Context Injection
+
+To make the RAG-vs-context-window decision concrete, consider a 200,000-token knowledge base queried 500 times per day using Claude Sonnet 4.6 ($3/MTok input):
+
+| Approach | Per-Query Cost | Daily Cost (500 queries) | Setup Cost |
+|----------|---------------|-------------------------|------------|
+| **Full context injection (no caching)** | $0.60 (200K tokens) | $300.00 | None |
+| **Context injection with prompt caching** (90% hit rate) | $0.066 | $33.00 | None |
+| **RAG** (retrieve 5 chunks × 512 tokens = 2,560 tokens + 2K query) | $0.014 + embedding cost (~$0.003) | $8.50 | Vector DB hosting ($20-100/mo); embedding pipeline |
+
+At low query volumes, cached context injection wins on simplicity. At 500+ daily queries against a large knowledge base, RAG's per-query savings compound quickly -- but only if the retrieval quality is high enough that users trust the results.
 
 ### Platform-Integrated RAG
 
 Several platforms have built RAG-like capabilities into their products, eliminating the need for custom infrastructure:
 
-- **ChatGPT Projects:** Upload files as persistent context for a project. ChatGPT performs internal retrieval against uploaded sources [F2].
+- **ChatGPT Projects:** Upload files as persistent context for a project. ChatGPT performs internal retrieval against uploaded sources. OpenAI's Responses API also includes a built-in `file_search` tool for developer-managed RAG [F2].
 - **Claude Projects:** Upload files and set custom instructions per project. Claude accesses these as background context [F1].
 - **Google NotebookLM:** Purpose-built for source-grounded research. Upload up to 600 sources per notebook (Ultra tier); all responses cite specific sources. This is the most sophisticated consumer-facing RAG product available [F3].
-- **Microsoft Copilot (M365):** Grounded in Microsoft Graph -- emails, files, meetings, chats. The Work IQ layer adds organizational intelligence on top [F4].
+- **Microsoft Copilot (M365):** Grounded in Microsoft Graph -- emails, files, meetings, chats. The Work IQ layer adds organizational intelligence on top. Azure AI Search provides the developer-facing RAG infrastructure [F4].
 
 ---
 
@@ -341,8 +414,10 @@ Applied together, these techniques can reduce API costs by 95% or more compared 
 - [Module 01: Models & Intelligence Tiers](MODULE-01-models-and-intelligence.md) -- Model-specific context window sizes, pricing, and capability details
 - [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md) -- How agents manage context in autonomous workflows
 - [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- Context isolation and summary propagation in multi-agent systems
+- [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) -- OpenClaw's file-based memory architecture compared to platform memory systems
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- MCP as a context-providing mechanism
 - [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) -- API-level implementation of caching, batching, and structured outputs
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- On-device inference as a tiered context architecture extension
 
 ---
 
@@ -353,6 +428,8 @@ Applied together, these techniques can reduce API costs by 95% or more compared 
 [2] Nelson Liu et al., "Lost in the Middle: How Language Models Use Long Contexts," *Transactions of the Association for Computational Linguistics*, 2024. https://arxiv.org/abs/2307.03172, accessed 2026-03-20.
 
 [3] Andrej Karpathy, "Context Engineering" (discussion of context as the primary lever for LLM quality), various public talks and posts, 2025-2026.
+
+[4] Yunfan Gao et al., "Retrieval-Augmented Generation for Large Language Models: A Survey," *arXiv*, 2024. https://arxiv.org/abs/2312.10997, accessed 2026-03-21. Comprehensive taxonomy of Naive, Advanced, and Modular RAG architectures.
 
 [F1] Anthropic/Claude Ecosystem Profile, reference/profiles/anthropic-claude.md, accessed 2026-03-18.
 

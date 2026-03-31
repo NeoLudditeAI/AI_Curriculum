@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 8: Assembly &amp; QA &mdash; The Final Inspection</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+  ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+  .timeline {
+    border-left: 3px solid var(--accent);
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+  .timeline-entry {
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .timeline-entry::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    left: -1.85rem;
+    top: 0.45rem;
+  }
+  .timeline-entry .round-label {
+    font-weight: bold;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+  .timeline-entry .round-desc {
+    font-size: 0.92rem;
+    color: var(--fg);
+  }
+</style>
+</head>
+<body>
+
+<h1>Round 8: Assembly &amp; QA</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">The Final Inspection</h1>
+<p class="meta">
+  <time>March 22, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context) Agent Team
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#mission">The Mission</a></li>
+    <li><a href="#team">The Team</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#found">What We Found</a></li>
+    <li><a href="#built">What We Built</a></li>
+    <li><a href="#bugs">The Bugs</a></li>
+    <li><a href="#sources">Source Verification</a></li>
+    <li><a href="#journey">The Full Journey</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-left">What Remains</a></li>
+  </ul>
+</nav>
+
+<h2 id="mission">The Mission</h2>
+
+<p>Seven rounds of production built the AI Frontier Curriculum from nothing to a fully interactive 11-module learning experience: 47,000 words of source content, 337 pedagogical annotations, 21 visual diagrams, 15 JavaScript components, a CSS design system with dark mode, and a build pipeline that transforms it all into 14 HTML pages. Round 8&rsquo;s job was different from every round before it. Nothing new to create. Everything to verify.</p>
+
+<p>The scope: run the full build, test every page in a real browser, audit accessibility against WCAG 2.2 AA, optimize performance, and produce a single-HTML export of the complete curriculum. Find the bugs that seven rounds of iterative construction inevitably left behind. Fix them. Ship it.</p>
+
+<p>Round 8 was the only round where the primary output was not new content, new components, or new infrastructure &mdash; it was confidence. Confidence that 14 HTML pages render correctly in light and dark mode, that screen readers can navigate every interactive component, that no page loads 3 megabytes of JavaScript it does not need, and that the entire curriculum can be sent as a single file.</p>
+
+<h2 id="team">The Team</h2>
+
+<p>Round 8 deployed 6 Opus 4.6 agents &mdash; the smallest team since Round 4, but with the broadest skill diversity.</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Responsibility</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Team Leader</td><td>Baseline verification, browser testing via Chrome MCP, bug triage, final verification</td></tr>
+    <tr><td>Content Editor</td><td>Capstone revisions, source verification, known-issues cleanup</td></tr>
+    <tr><td>QA Engineer</td><td>HTML validation, programmatic checks, build idempotency</td></tr>
+    <tr><td>Accessibility Engineer</td><td>WCAG 2.2 AA audit, CSS contrast fixes, ARIA corrections</td></tr>
+    <tr><td>Export Engineer</td><td>Conditional script loading, single-HTML export, 2 new verify.js checks</td></tr>
+    <tr><td>Chronicler</td><td>Documentation, process blog post</td></tr>
+  </tbody>
+</table>
+
+<p>The Team Leader operated the browser directly via Chrome MCP &mdash; loading each of the 13 pages, checking console output, toggling dark mode, and validating mobile layout at 375px width. This was the first round to use live browser automation for testing, a significant upgrade from previous rounds&rsquo; manual Chrome checks.</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">25</span>
+    <span class="label">Verify Checks Pass</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">0</span>
+    <span class="label">Console Errors</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">4</span>
+    <span class="label">A11y Issues Fixed</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">1.31 MB</span>
+    <span class="label">Export File Size</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">3.1 MB</span>
+    <span class="label">Max Savings / Page</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">6</span>
+    <span class="label">Opus Teammates</span>
+  </div>
+</div>
+
+<h2 id="found">What We Found</h2>
+
+<h3>Accessibility audit: 4 issues, all fixed</h3>
+
+<p>The Accessibility Engineer conducted a systematic WCAG 2.2 AA audit of every interactive component, color combination, and ARIA attribute across the curriculum. Four issues required fixes:</p>
+
+<ul>
+  <li><strong>Border color contrast.</strong> The light theme used <code>#D0D0DA</code> borders on card elements, which failed the 3:1 minimum contrast ratio for UI components against the background. Fixed to <code>#767688</code>. The dark theme&rsquo;s <code>#3A3A50</code> borders were similarly bumped to <code>#7A7AA2</code>. Three CSS files modified: <code>_colors.css</code>, <code>_components.css</code>, <code>_layout.css</code>.</li>
+  <li><strong>Status badge dark mode.</strong> The course map&rsquo;s module status badges (&ldquo;Complete,&rdquo; &ldquo;In Progress&rdquo;) inherited light-mode colors in dark mode. Added explicit <code>[data-theme="dark"]</code> overrides to <code>_components.css</code>.</li>
+  <li><strong>Quiz feedback fallback.</strong> Quiz correct/incorrect feedback text relied on <code>data-theme</code> for color but had no <code>prefers-color-scheme</code> fallback for users who never toggled the button. Added media query fallback in <code>_components.css</code>.</li>
+  <li><strong>Decision tree <code>aria-expanded</code>.</strong> The decision tree component used <code>aria-expanded</code> on branch option buttons, but these are not expandable widgets &mdash; they navigate to the next node. Corrected to use <code>aria-pressed</code> for toggle semantics in <code>decision-tree.js</code>.</li>
+</ul>
+
+<p>One finding required no fix: the dark mode toggle button&rsquo;s hover state was audited and already passes WCAG AA contrast ratios in both themes. All color pairs now pass 4.5:1 for text and 3:1 for UI components.</p>
+
+<h3>Duplicate h1 elements</h3>
+
+<p>Every module page had two <code>&lt;h1&gt;</code> elements: one from the Handlebars template and one from the markdown source. The template <code>&lt;h1&gt;</code> is canonical (it uses the module title from YAML front matter), so the fix was surgical: the build pipeline now strips the first <code>&lt;h1&gt;</code> from markdown-rendered HTML before injecting it into the template. This is the correct architectural fix &mdash; the template owns the page title, and the markdown content starts at <code>&lt;h2&gt;</code>.</p>
+
+<h3>Content gaps in capstone answers</h3>
+
+<p>The Content Editor reviewed all five capstone expert answer documents and found two that needed substantive revision. The Part 2 capstone (covering Agent Systems) lacked adequate coverage of Module 05 (OpenClaw) &mdash; the original answer from Round 6 had been written with a narrowed reading scope. The Part 3 capstone (Building &amp; Automating) was too brief for its scope of M07 and M09. The Content Editor added 333 words to Part 2 and 844 words to Part 3, bringing both up to the depth standard set by the other capstones.</p>
+
+<h2 id="built">What We Built</h2>
+
+<h3>Conditional script loading: up to 3.1 MB saved per page</h3>
+
+<p>Prior to Round 8, every module page loaded every JavaScript file &mdash; including Mermaid.js (2.9 MB) and Chart.js (200 KB) &mdash; regardless of whether the module contained diagrams. Module 07 (Skills, Plugins &amp; Automation) has no diagrams at all. It was loading 3.1 MB of JavaScript it never used.</p>
+
+<p>The Export Engineer implemented conditional loading at the build pipeline level. <code>build.js</code> now inspects each module&rsquo;s YAML annotations to determine which diagram variants (if any) it uses. This information is passed to the Handlebars template as boolean flags, and <code>module.hbs</code> wraps the heavy <code>&lt;script&gt;</code> tags in conditionals. Only modules with Mermaid diagrams load <code>mermaid.min.js</code>. Only modules with Chart.js visualizations load <code>chart.umd.min.js</code>.</p>
+
+<p>The savings are substantial:</p>
+
+<table>
+  <thead>
+    <tr><th>Page</th><th>Savings</th><th>Reason</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Module 07 (Skills)</td><td>~3.1 MB</td><td>No diagrams at all</td></tr>
+    <tr><td>Modules 08, 09</td><td>~2.9 MB each</td><td>Chart.js only, no Mermaid</td></tr>
+    <tr><td>Index (course map)</td><td>~3.1 MB+</td><td>No diagrams; stripped to 4 core scripts (was 18)</td></tr>
+    <tr><td>Glossary</td><td>~3.1 MB+</td><td>No diagrams; stripped to 3 core scripts (was 16)</td></tr>
+  </tbody>
+</table>
+
+<p>The index and glossary pages were particularly egregious &mdash; they had 18 and 16 script tags respectively, most of which were module-specific components that these pages never instantiate. The Export Engineer stripped both to only the scripts they actually use.</p>
+
+<h3>Single-HTML curriculum export: 1.31 MB</h3>
+
+<p>The Export Engineer created <code>build/export.js</code>, a standalone script that combines all 11 modules into a single navigable HTML document. The architecture is straightforward but the edge cases are numerous:</p>
+
+<ul>
+  <li><strong>ID collision avoidance:</strong> Each module&rsquo;s HTML content has its element IDs prefixed with the module slug (e.g., <code>context-engineering-rag-patterns</code>) to prevent collisions when 11 modules share one DOM. A <code>prefixIds()</code> function rewrites all <code>id</code> attributes, internal <code>href="#"</code> links, and <code>for</code>/<code>aria-labelledby</code>/<code>aria-describedby</code> references.</li>
+  <li><strong>Cross-module link rewriting:</strong> Links like <code>MODULE-03-single-agent-systems.html#agent-architecture</code> become <code>#single-agent-systems-agent-architecture</code> &mdash; in-page anchors rather than file references.</li>
+  <li><strong>Asset strategy:</strong> Custom CSS and JS are inlined. Vendored libraries (Mermaid, Chart.js) reference CDN URLs &mdash; an intentional tradeoff that keeps the export file small at the cost of requiring an internet connection for diagrams. This decision is logged in DECISION_LOG.md.</li>
+  <li><strong>Navigation:</strong> A 4-Part sidebar mirrors the course map structure: The Terrain, Agent Systems, Building &amp; Automating, Synthesis &amp; Horizon. Each part lists its modules with anchor links.</li>
+  <li><strong>Output:</strong> 1.31 MB, well under the 3 MB target. Contains all 11 modules, the full glossary, and the table of contents.</li>
+</ul>
+
+<h2 id="bugs">The Bugs</h2>
+
+<p>Round 8 surfaced four bugs that survived seven rounds of iterative development. All were fixed.</p>
+
+<ul>
+  <li><strong>Duplicate h1:</strong> Template + markdown both contributed an <code>&lt;h1&gt;</code>. Fixed in <code>build.js</code> by stripping the markdown h1.</li>
+  <li><strong>verify.js false positives on export:</strong> The export file inlines JavaScript, and <code>verify.js</code>&rsquo;s content scanners were matching patterns inside <code>&lt;script&gt;</code> blocks. Fixed by stripping script blocks before scanning HTML content.</li>
+  <li><strong>Export ID collisions:</strong> Without prefixing, 11 modules sharing IDs like <code>executive-summary</code> and <code>key-takeaways</code> would produce invalid HTML. Fixed with the <code>prefixIds()</code> function.</li>
+  <li><strong>Export cross-module links:</strong> Relative <code>.html</code> links between modules are meaningless in a single-file context. Fixed by rewriting them to <code>#module-slug-section-id</code> anchors.</li>
+</ul>
+
+<p>No bugs were found in the interactive components, the annotation injector, or the diagram rendering pipeline. Rounds 5 through 7 built robust infrastructure.</p>
+
+<h2 id="sources">Source Verification</h2>
+
+<p>The Content Editor tackled the 12 sources that had been marked Unverified since Round 2. Results:</p>
+
+<ul>
+  <li><strong>10 verified:</strong> URLs confirmed accessible, content matched claims in modules.</li>
+  <li><strong>1 marked Speculative (W66):</strong> A source about WWDC 2026 &mdash; the event is scheduled for June 8&ndash;12, 2026, which is still in the future. The claim is reasonable speculation, not verifiable fact, and is now labeled accordingly.</li>
+  <li><strong>1 remains Unverified (W41):</strong> A Reddit URL that returns 403. The claims it supported are corroborated by secondary sources, so no content changes were needed, but the source itself cannot be directly verified.</li>
+</ul>
+
+<p>The Content Editor also cleaned 6 stale items from CURRENT_CYCLE.md&rsquo;s &ldquo;Known remaining issues&rdquo; section &mdash; issues that had been resolved in Rounds 3 through 7 but never struck from the list.</p>
+
+<h2 id="journey">The Full Journey</h2>
+
+<p>Round 8 completes the production arc that began with Round 1&rsquo;s blank repository. Here is the full timeline:</p>
+
+<div class="timeline">
+  <div class="timeline-entry">
+    <span class="round-label">Round 1 &mdash; Content Sprint</span>
+    <span class="round-desc">11 modules drafted, reviewed, and marked complete. 43,079 words. 38 researcher agents, 12+ writers, 5 reviewers, 3 revisers, 1 synthesizer. The curriculum&rsquo;s skeleton, fleshed out in a single session.</span>
+  </div>
+  <div class="timeline-entry">
+    <span class="round-label">Round 2 &mdash; Refinement</span>
+    <span class="round-desc">Source verification and depth review. 47,169 words (+4,090). 83 sources catalogued. Key corrections: agent cost figures, ARR verification, RAG expansion. The curriculum became trustworthy.</span>
+  </div>
+  <div class="timeline-entry">
+    <span class="round-label">Round 3 &mdash; Pedagogical Design</span>
+    <span class="round-desc">81,400 words of design specifications across 9 workstream documents. 4-Part learning sequence, 9 component specifications, 130 assessment questions, 40 diagram specs, accessibility requirements. The blueprint for interactivity.</span>
+  </div>
+  <div class="timeline-entry">
+    <span class="round-label">Round 4 &mdash; Foundation Build</span>
+    <span class="round-desc">Build pipeline (unified/remark, 6 layers), CSS design system (7 files, 1,101 lines), 3 Handlebars templates, navigation system. 14 HTML files from <code>node build/build.js</code>. The pages exist.</span>
+  </div>
+  <div class="timeline-entry">
+    <span class="round-label">Round 5 &mdash; Component Build</span>
+    <span class="round-desc">11 JavaScript files (98.5K), 9 interactive components: quiz, concept-gate, self-explanation, table-enhancer, glossary-tooltip, accordion, progress-tracker, navigation, worked-example. Dark mode toggle. localStorage persistence. The pages are interactive.</span>
+  </div>
+  <div class="timeline-entry">
+    <span class="round-label">Round 6 &mdash; Annotation Authoring</span>
+    <span class="round-desc">337 YAML annotations across 11 modules. 11 opening hooks, ~240 quiz entries, ~28 curiosity prompts, ~25 self-explanation prompts, ~15 worked examples, 5 capstone expert answers. The interactivity has content.</span>
+  </div>
+  <div class="timeline-entry">
+    <span class="round-label">Round 7 &mdash; Diagrams</span>
+    <span class="round-desc">21 visual diagrams: 15 Mermaid architecture diagrams, 3 interactive decision trees, 2 Chart.js charts, 1 recommendation quiz. Client-side Mermaid.js over D2, dark mode re-rendering via MutationObserver. The curriculum has eyes.</span>
+  </div>
+  <div class="timeline-entry">
+    <span class="round-label">Round 8 &mdash; Assembly &amp; QA</span>
+    <span class="round-desc">25/25 verification checks, zero console errors, 4 accessibility fixes, conditional script loading (up to 3.1 MB savings), single-HTML export (1.31 MB). The curriculum is ready.</span>
+  </div>
+</div>
+
+<p>Across 8 rounds, approximately 50 Opus 4.6 agent-sessions contributed to this curriculum. The content was written once and never thrown away &mdash; each round built on top of the last. The markdown modules from Round 1 are still the source of truth. Round 8&rsquo;s export file contains the same prose, now wrapped in interactive pedagogy, visual diagrams, and a polished delivery format.</p>
+
+<h2 id="lessons">What We Learned</h2>
+
+<div class="lesson">
+  <strong>QA rounds benefit from specialized agents.</strong> Previous rounds used generalist teammates doing QA alongside their primary work. Round 8 dedicated agents to accessibility, export engineering, and content editing as their sole focus. The Accessibility Engineer found 4 issues that seven prior rounds missed &mdash; not because previous rounds were careless, but because focused expertise sees things that diffused attention does not.
+</div>
+
+<div class="lesson">
+  <strong>Conditional loading should have been Round 5&rsquo;s job.</strong> Loading 3.1 MB of unused JavaScript on pages without diagrams is a performance bug that existed from the moment Round 7 added vendored libraries. The fix was straightforward &mdash; build.js already knew which modules had which annotations. The lesson: performance optimization should be part of the component build, not deferred to a QA round.
+</div>
+
+<div class="lesson">
+  <strong>Single-file exports are full of edge cases.</strong> The export.js script is conceptually simple (concatenate 11 modules), but ID collisions, cross-module link rewriting, asset inlining decisions, and navigation generation each introduced their own category of bugs. The <code>prefixIds()</code> function alone has to handle <code>id</code>, <code>href</code>, <code>for</code>, <code>aria-labelledby</code>, and <code>aria-describedby</code> attributes. Export is its own engineering problem.
+</div>
+
+<div class="lesson">
+  <strong>Browser testing catches what static analysis misses.</strong> verify.js&rsquo;s 25 checks are valuable but limited to file structure, content patterns, and build output validation. The Team Leader&rsquo;s Chrome MCP browser testing caught the duplicate h1 visually and confirmed component rendering that no static check could. Automated verification and manual browser testing are complementary, not substitutes.
+</div>
+
+<div class="lesson">
+  <strong>Stale documentation accumulates silently.</strong> CURRENT_CYCLE.md&rsquo;s &ldquo;Known remaining issues&rdquo; section had 6 items that were resolved in Rounds 3 through 7 but never marked as resolved. The Content Editor&rsquo;s cleanup was necessary housekeeping. Living documents need periodic audits, not just appends.
+</div>
+
+<h2 id="whats-left">What Remains</h2>
+
+<p>Round 8 was the final planned production round. The curriculum is built. All 11 modules render as interactive HTML with quizzes, diagrams, glossary tooltips, progress tracking, and dark mode. The single-HTML export packages everything into a portable 1.31 MB file.</p>
+
+<p>Two items remain on the known-issues list:</p>
+
+<ul>
+  <li><strong>W41 (Reddit source):</strong> Returns 403, cannot be directly verified. Claims are corroborated by secondary sources.</li>
+  <li><strong>M09/M02 caching harmonization:</strong> The prompt caching discussion in Module 02 and the caching pricing table in Module 09 could be further aligned. This is a polish item, not a correctness issue.</li>
+</ul>
+
+<p>Beyond that, the curriculum is a living document. Google I/O 2026 (May 19&ndash;20), Microsoft Build (June 2&ndash;3), and WWDC 2026 (June 8&ndash;12) will each produce information that warrants module updates. The build pipeline, component infrastructure, and annotation system are all designed for this &mdash; update the markdown and YAML sources, run <code>node build/build.js</code>, and the interactive HTML regenerates from current content.</p>
+
+<p>Eight rounds. Fifty agent-sessions. Forty-seven thousand words of curriculum. Three hundred thirty-seven pedagogical annotations. Twenty-one diagrams. Twenty-five automated verification checks. Zero console errors. One file that contains all of it.</p>
+
+<hr>
+<p style="color:var(--muted); font-size:0.85rem;">
+  This post is part of the <em>AI Frontier Curriculum</em> process journal.<br>
+  Previous posts:
+  <a href="2026-03-22-round-7-diagrams.html">Round 7: Diagrams</a> &middot;
+  <a href="2026-03-22-round-6-annotation-authoring.html">Round 6: Annotation Authoring</a> &middot;
+  <a href="2026-03-21-round-5-component-build.html">Round 5: Component Build</a> &middot;
+  <a href="2026-03-21-round-4-foundation-build.html">Round 4: Foundation Build</a> &middot;
+  <a href="2026-03-21-round-3-pedagogical-design.html">Round 3: Pedagogical Design</a> &middot;
+  <a href="2026-03-21-round-2-refinement.html">Round 2: Refinement</a><br>
+  Project: 11-module living curriculum covering LLMs, agents, and the AI ecosystem as of March 2026.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 06: MCP &amp; the Integration Layer — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="06">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 2: Agent Systems</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 06: MCP &amp; the Integration Layer</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 06: MCP &amp; the Integration Layer</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">30-35 min</span>
+        <span class="module-meta__updated" aria-label="Last updated"></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prerequisites" class="toc__link" data-toc-active>Prerequisites</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#1-what-mcp-is-and-why-it-exists" class="toc__link" data-toc-active>1. What MCP Is and Why It Exists</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-problem-mcp-solves" class="toc__link" data-toc-active>The Problem MCP Solves</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#origins-and-governance" class="toc__link" data-toc-active>Origins and Governance</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#2-protocol-architecture" class="toc__link" data-toc-active>2. Protocol Architecture</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#wire-protocol-json-rpc-20" class="toc__link" data-toc-active>Wire Protocol: JSON-RPC 2.0</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#transport-layers" class="toc__link" data-toc-active>Transport Layers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#persistent-connections-and-capability-discovery" class="toc__link" data-toc-active>Persistent Connections and Capability Discovery</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#security-oauth-21-authorization" class="toc__link" data-toc-active>Security: OAuth 2.1 Authorization</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#3-core-primitives" class="toc__link" data-toc-active>3. Core Primitives</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#tools-model-controlled" class="toc__link" data-toc-active>Tools (Model-Controlled)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#resources-application-controlled" class="toc__link" data-toc-active>Resources (Application-Controlled)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#prompts-reusable-templates" class="toc__link" data-toc-active>Prompts (Reusable Templates)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#how-the-primitives-work-together" class="toc__link" data-toc-active>How the Primitives Work Together</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#4-platform-adoption" class="toc__link" data-toc-active>4. Platform Adoption</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#adoption-matrix" class="toc__link" data-toc-active>Adoption Matrix</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#anthropic-claude-mcp-native" class="toc__link" data-toc-active>Anthropic Claude: MCP-Native</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openai-chatgpt-retroactive-adoption" class="toc__link" data-toc-active>OpenAI ChatGPT: Retroactive Adoption</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-gemini-managed-mcp-servers" class="toc__link" data-toc-active>Google Gemini: Managed MCP Servers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#microsoft-copilot-enterprise-mcp" class="toc__link" data-toc-active>Microsoft Copilot: Enterprise MCP</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#5-the-mcp-registry-ecosystem" class="toc__link" data-toc-active>5. The MCP Registry Ecosystem</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-official-registry" class="toc__link" data-toc-active>The Official Registry</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#third-party-directories" class="toc__link" data-toc-active>Third-Party Directories</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#official-vs-community-servers" class="toc__link" data-toc-active>Official vs. Community Servers</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#6-building-mcp-servers" class="toc__link" data-toc-active>6. Building MCP Servers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#official-sdks" class="toc__link" data-toc-active>Official SDKs</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#anatomy-of-a-simple-mcp-server-typescript" class="toc__link" data-toc-active>Anatomy of a Simple MCP Server (TypeScript)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#development-workflow" class="toc__link" data-toc-active>Development Workflow</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#hosting-options" class="toc__link" data-toc-active>Hosting Options</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#common-pitfalls" class="toc__link" data-toc-active>Common Pitfalls</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#7-zapier-mcp-the-universal-bridge" class="toc__link" data-toc-active>7. Zapier MCP: The Universal Bridge</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#why-zapier-mcp-matters" class="toc__link" data-toc-active>Why Zapier MCP Matters</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#pricing-and-quotas" class="toc__link" data-toc-active>Pricing and Quotas</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#make-as-alternative-bridge" class="toc__link" data-toc-active>Make as Alternative Bridge</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#8-specialized-tool-mcp-adoption" class="toc__link" data-toc-active>8. Specialized Tool MCP Adoption</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#9-mcp-vs-native-integrations" class="toc__link" data-toc-active>9. MCP vs. Native Integrations</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Module:</strong> 06
+<strong>Title:</strong> MCP &#x26; the Integration Layer
+<strong>Last Updated:</strong> 2026-03-20
+<strong>Status:</strong> COMPLETE
+<strong>Word Count Target:</strong> 4,000-5,000</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The Model Context Protocol (MCP) is an open standard that defines how AI applications connect to external tools and data sources. Created by Anthropic in November 2024 and donated to the Linux Foundation's Agentic AI Foundation in December 2025, MCP has become the de facto integration protocol across the AI industry -- adopted by Anthropic, OpenAI, Google, Microsoft, and dozens of specialized tools within roughly a year of its launch [1][2]. This module covers MCP's protocol architecture, its client-server model, the growing registry ecosystem, platform-by-platform adoption status, practical guidance for building and consuming MCP servers, and the role of universal bridges like Zapier MCP in extending reach to thousands of applications.</p>
+
+<aside class="concept-gate" role="note" aria-label="Prerequisite check">
+  <h4 class="concept-gate__title">Before diving into MCP</h4>
+  <ul class="concept-gate__list">
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand the gather-act-verify loop from Module 03 and how agents use tools</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I know what function calling is and why agents need external connections</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand the M x N integration problem (many clients, many services)</label>
+    </li>
+  </ul>
+  <a class="concept-gate__continue" href="#the-problem-mcp-solves">Continue to next section →</a>
+</aside>
+
+<details class="accordion">
+  <summary class="accordion__title">Why does this module matter to you?</summary>
+  <div class="accordion__content">
+    <p>You are building a coding assistant that needs to read GitHub issues, query a Postgres database, and check a Google Calendar -- all within the same conversation. Without MCP, each connection demands bespoke code: different authentication, different data formats, different error handling. Three integrations, three custom implementations. Now imagine scaling that to thirty integrations across five AI clients. MCP collapses this 150-connector nightmare to 35 implementations. This module explains how.</p>
+  </div>
+</details>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- for the competitive context and platform ecosystem map</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term glossary-term--first-use" data-term="agent">Agent</span> Systems</a> -- for understanding how agents use tools (MCP is the plumbing that delivers those tools)</li>
+</ul>
+<hr>
+<h2 id="1-what-mcp-is-and-why-it-exists">1. What MCP Is and Why It Exists</h2>
+<h3 id="the-problem-mcp-solves">The Problem MCP Solves</h3>
+<p>Before MCP, every AI application that needed to connect to an external service required a bespoke integration. If you wanted Claude to read your GitHub issues, query your database, and check your calendar, each connection demanded its own custom code -- different authentication flows, different data formats, different error handling. Multiply this across dozens of AI clients and hundreds of services, and you get an M x N integration matrix that scales poorly.</p>
+<p>MCP collapses this to M + N. A service implements one <span class="glossary-term glossary-term--first-use" data-term="mcp-server">MCP server</span>; an AI client implements one MCP client. Any client can connect to any server. The protocol handles capability discovery, message formatting, authentication, and transport -- the same way HTTP standardized web communication or LSP (Language Server Protocol) standardized IDE-to-language-tool communication [1].</p>
+
+<figure class="diagram diagram--mermaid" id="m06-1" role="img" aria-label="MCP network architecture diagram showing the M plus N advantage. On the left, five AI client platforms are listed: Claude, ChatGPT, Gemini, Copilot, and OpenClaw. On the right, six example MCP servers are listed: GitHub, Slack, Notion, databases, file systems, and Zapier. In the center, a hexagonal MCP Protocol layer connects all clients to all servers through a shared standard. An annotation shows that this requires M plus N implementations (5 clients plus 6 servers equals 11) instead of M times N custom integrations (5 times 6 equals 30).">
+  <pre class="mermaid">graph LR
+  subgraph Clients[&quot;AI Clients (M)&quot;]
+    C1[&quot;Claude&lt;br/&gt;(Desktop, Cowork, Code)&quot;]
+    C2[&quot;ChatGPT&lt;br/&gt;(Developer Mode)&quot;]
+    C3[&quot;Gemini&lt;br/&gt;(Managed Servers)&quot;]
+    C4[&quot;Copilot&lt;br/&gt;(Studio, GA)&quot;]
+    C5[&quot;OpenClaw&lt;br/&gt;(Native)&quot;]
+  end
+
+  MCP{{&quot;MCP Protocol&lt;br/&gt;(JSON-RPC 2.0)&quot;}}
+
+  subgraph Servers[&quot;MCP Servers (N)&quot;]
+    S1[&quot;GitHub&quot;]
+    S2[&quot;Slack&quot;]
+    S3[&quot;Notion&quot;]
+    S4[&quot;Databases&quot;]
+    S5[&quot;File Systems&quot;]
+    S6[&quot;Zapier&lt;br/&gt;(7,000+ apps)&quot;]
+  end
+
+  C1 --&gt; MCP
+  C2 --&gt; MCP
+  C3 --&gt; MCP
+  C4 --&gt; MCP
+  C5 --&gt; MCP
+  MCP --&gt; S1
+  MCP --&gt; S2
+  MCP --&gt; S3
+  MCP --&gt; S4
+  MCP --&gt; S5
+  MCP --&gt; S6
+</pre>
+  <figcaption>MCP Client-Server Architecture</figcaption>
+</figure>
+
+<section class="quiz" data-variant="concept-check" data-correct="0" data-explanation="Without MCP: 8 x 12 = 96 custom integrations. With MCP: 8 clients + 12 servers = 20 implementations. This is the M + N insight that makes MCP transformative -- the same principle behind HTTP standardizing web communication and LSP standardizing IDE-to-language-tool communication." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">If 8 AI clients each need to connect to 12 services, how many integrations are needed without MCP vs. with MCP?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-the-problem-mcp-solves-quiz" value="0" />
+          <span class="quiz__choice-label">96 vs. 20</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-the-problem-mcp-solves-quiz" value="1" />
+          <span class="quiz__choice-label">96 vs. 12</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-the-problem-mcp-solves-quiz" value="2" />
+          <span class="quiz__choice-label">20 vs. 96</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-the-problem-mcp-solves-quiz" value="3" />
+          <span class="quiz__choice-label">12 vs. 20</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="origins-and-governance">Origins and Governance</h3>
+<p>Anthropic published the MCP specification in November 2024 as an open protocol. The initial reception was cautious -- another vendor-originated standard -- but adoption accelerated rapidly through 2025 as OpenAI, Google, and Microsoft each announced support. In December 2025, Anthropic donated MCP to the Linux Foundation's newly created Agentic AI Foundation, placing governance under a vendor-neutral body [2]. This move addressed the legitimate concern that a protocol owned by one AI company would be shaped to favor that company's products.</p>
+<p>As of March 2026, MCP is maintained as an open specification with contributions from multiple organizations. The protocol versioning and specification process operates through the Foundation, though Anthropic remains the largest single contributor to the reference implementations.</p>
+<hr>
+<h2 id="2-protocol-architecture">2. Protocol Architecture</h2>
+<h3 id="wire-protocol-json-rpc-20">Wire Protocol: JSON-RPC 2.0</h3>
+<p>MCP communicates using JSON-RPC 2.0, a lightweight remote procedure call protocol. Every message is a JSON object with a <code>jsonrpc</code> field set to <code>"2.0"</code>. There are three message types [1]:</p>
+<ul>
+<li><strong>Requests</strong> carry a unique <code>id</code>, a <code>method</code> name, and optional <code>params</code>. The sender expects a response.</li>
+<li><strong>Responses</strong> carry the same <code>id</code> as the request, plus either a <code>result</code> or an <code>error</code> object.</li>
+<li><strong>Notifications</strong> have a <code>method</code> and optional <code>params</code> but no <code>id</code> -- they are fire-and-forget messages that expect no response.</li>
+</ul>
+<p>The unique ID tracking on requests enables multiplexing: a client can fire multiple requests concurrently and match responses as they arrive. This is critical for agentic workloads where a model might invoke several tools in parallel.</p>
+<h3 id="transport-layers">Transport Layers</h3>
+<p>MCP defines two active transport mechanisms and one deprecated one [1]:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Transport</th><th>Use Case</th><th>How It Works</th><th>Status</th></tr></thead><tbody><tr><td><strong>STDIO</strong></td><td>Local servers</td><td>Client spawns server as a child process; communication flows over stdin/stdout</td><td>GA, recommended for local</td></tr><tr><td><strong>Streamable HTTP</strong></td><td>Remote servers</td><td>Client sends HTTP POST requests; server can respond with single JSON or upgrade to SSE stream</td><td>GA, recommended for remote</td></tr><tr><td><strong>SSE (Server-Sent Events)</strong></td><td>Remote servers (legacy)</td><td>Separate SSE endpoint for server-to-client, HTTP POST for client-to-server</td><td>Deprecated, replaced by Streamable HTTP</td></tr></tbody></table>
+<p><strong>STDIO</strong> is the simplest model. The MCP client launches the server binary as a subprocess. Messages flow over standard I/O pipes -- no networking, no ports, no TLS configuration. This is how most local MCP servers work: Claude Desktop or <span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span> spawns a process like <code>npx @modelcontextprotocol/server-filesystem /path/to/allowed/dir</code> and communicates directly over pipes. The isolation boundary is the OS process.</p>
+<p><strong>Streamable HTTP</strong> is the modern remote transport. The client sends a JSON-RPC request as an HTTP POST to the server's MCP endpoint. The server can reply with a single JSON response (for simple request/response) or upgrade to a Server-Sent Events stream for long-running operations or server-initiated notifications. This replaces the older SSE transport, which required clients to manage two separate connections (one for receiving, one for sending).</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="STDIO is the recommended transport for local servers. The MCP client spawns the server as a child process and communicates over stdin/stdout -- no networking, no ports, no TLS configuration needed. The isolation boundary is the OS process itself." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which transport would you choose for an MCP server that only your local machine needs to access?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-transport-layers-quiz" value="0" />
+          <span class="quiz__choice-label">Streamable HTTP with OAuth 2.1</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-transport-layers-quiz" value="1" />
+          <span class="quiz__choice-label">STDIO (stdin/stdout)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-transport-layers-quiz" value="2" />
+          <span class="quiz__choice-label">SSE (Server-Sent Events)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-transport-layers-quiz" value="3" />
+          <span class="quiz__choice-label">WebSocket</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="persistent-connections-and-capability-discovery">Persistent Connections and Capability Discovery</h3>
+<p>Unlike REST APIs, MCP maintains persistent, stateful connections. When a client connects, the protocol performs a capability negotiation handshake:</p>
+<ol>
+<li><strong>Initialize</strong> -- Client sends <code>initialize</code> with its supported protocol version and capabilities.</li>
+<li><strong>Server responds</strong> -- Server replies with its own protocol version, capabilities, and server info.</li>
+<li><strong>Initialized notification</strong> -- Client sends <code>notifications/initialized</code> to confirm the session is active.</li>
+</ol>
+<p>After initialization, the client can discover available tools, resources, and prompts by calling <code>tools/list</code>, <code>resources/list</code>, and <code>prompts/list</code>. If the server's capabilities change during the session (e.g., new tools become available), the server sends a notification and the client can re-fetch the relevant list [1].</p>
+<p>This auto-discovery model means a client never needs hardcoded knowledge of what a server offers. Connect to it, ask what it can do, and present those capabilities to the model.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="MCP supports dynamic capability updates. When the server's tools change mid-session, it sends a notification to the client, which can then call `tools/list` again to discover the updated capabilities. No reconnection needed." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What happens during an active MCP session when a server adds a new tool?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-persistent-connections-and-capability-discovery-quiz" value="0" />
+          <span class="quiz__choice-label">The client must disconnect and reconnect</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-persistent-connections-and-capability-discovery-quiz" value="1" />
+          <span class="quiz__choice-label">The server sends a notification and the client re-fetches the tools list</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-persistent-connections-and-capability-discovery-quiz" value="2" />
+          <span class="quiz__choice-label">The new tool is unavailable until the session ends</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-persistent-connections-and-capability-discovery-quiz" value="3" />
+          <span class="quiz__choice-label">The client polls for changes every 30 seconds</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<div class="worked-example" data-variant="full" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Tracing an MCP connection lifecycle</h4>
+  <div class="worked-example__problem">
+    <p>Walk through the complete sequence of events when Claude Desktop connects to a new MCP server for the first time.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Step 1: Initialize</h5>
+      <div class="worked-example__step-content">
+        <p>Client sends an `initialize` request with its supported protocol version and capability set (e.g., which features it supports like sampling or roots).</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Step 2: Server responds</h5>
+      <div class="worked-example__step-content">
+        <p>Server replies with its own protocol version, its capabilities (tools, resources, prompts), and server metadata (name, version).</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Step 3: Initialized notification</h5>
+      <div class="worked-example__step-content">
+        <p>Client sends `notifications/initialized` -- a fire-and-forget notification confirming the session is active. No response expected.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Step 4: Capability discovery</h5>
+      <div class="worked-example__step-content">
+        <p>Client calls `tools/list` to discover available tools, `resources/list` for resources, and `prompts/list` for prompt templates. Each returns the full metadata needed for the model to use them.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>After these four steps, the client knows everything the server can do. If the server's capabilities change mid-session (e.g., a new tool becomes available), the server sends a notification and the client re-fetches the relevant list. This auto-discovery model means a client never needs hardcoded knowledge of what a server offers.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="security-oauth-21-authorization">Security: OAuth 2.1 Authorization</h3>
+<p>For remote MCP servers, the specification recommends OAuth 2.1 for authorization [1]. The flow works as follows:</p>
+<ol>
+<li>Client discovers the server's authorization metadata via a well-known endpoint.</li>
+<li>Client obtains an access <span class="glossary-term glossary-term--first-use" data-term="token">token</span> through standard OAuth 2.1 flows (authorization code with PKCE for interactive clients, client credentials for machine-to-machine).</li>
+<li>Client includes the access <span class="glossary-term" data-term="token">token</span> in subsequent HTTP requests.</li>
+<li>Server validates the <span class="glossary-term" data-term="token">token</span> and applies scope-based permissions.</li>
+</ol>
+<p>The specification also defines <strong>Protected Resource Metadata</strong> -- a mechanism for servers to advertise their authorization requirements so clients can automatically determine how to authenticate. This is optional but recommended for any server exposed over a network.</p>
+<p>For STDIO (local) servers, transport-level security is typically unnecessary since communication stays within the local machine's process boundary. Access control relies on OS-level permissions and the filesystem sandbox.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">OAuth 2.1 token exchange: complete flow</summary>
+  <div class="accordion__content">
+    <p>For remote MCP servers, the full OAuth 2.1 authorization flow works as follows: (1) Client discovers the server's authorization metadata via a well-known endpoint (/.well-known/oauth-authorization-server). (2) Client obtains an access token through standard OAuth 2.1 flows -- authorization code with PKCE for interactive clients, client credentials for machine-to-machine. (3) Client includes the access token in subsequent HTTP requests via the Authorization header. (4) Server validates the token and applies scope-based permissions. The specification also defines Protected Resource Metadata -- a mechanism for servers to advertise their authorization requirements so clients can automatically determine how to authenticate. Most learners will use STDIO locally where this is unnecessary, but any server exposed over a network should implement OAuth 2.1.</p>
+  </div>
+</details>
+
+<details class="accordion">
+  <summary class="accordion__title">MCP reduces integration complexity from M x N to M + N. The math is simple. The implications are not.</summary>
+  <div class="accordion__content">
+    <p>When Anthropic published MCP in November 2024, the AI ecosystem had dozens of AI clients and hundreds of services, each requiring custom integrations. MCP's standardization means a new AI client gets instant access to 19,729+ servers, and a new service gets instant access to every MCP client. The network effects compound: every new server makes every existing client more useful, and vice versa. This is the same dynamic that made HTTP the universal web protocol and LSP the universal IDE protocol.</p>
+  </div>
+</details>
+<hr>
+<h2 id="3-core-primitives">3. Core Primitives</h2>
+<p>MCP defines three primitive types that servers can expose [1]:</p>
+<h3 id="tools-model-controlled">Tools (Model-Controlled)</h3>
+<p>Tools are functions the AI model can invoke. They are the most common primitive -- when people say "<span class="glossary-term" data-term="mcp-server">MCP server</span>," they usually mean a server that exposes tools. Each tool has a name, a description (used by the model to decide when to invoke it), and a JSON Schema defining its input parameters.</p>
+<p>Example: a GitHub <span class="glossary-term" data-term="mcp-server">MCP server</span> exposes tools like <code>create_issue</code>, <code>search_code</code>, <code>list_pull_requests</code>. The model reads the tool descriptions, decides which to call based on the user's request, constructs the input parameters, and interprets the result.</p>
+<p>Tools are <strong>model-controlled</strong> -- the AI model decides when and how to call them based on the conversation context. The human user sets up which MCP servers are connected, but the model autonomously selects which tools to invoke.</p>
+<h3 id="resources-application-controlled">Resources (Application-Controlled)</h3>
+<p>Resources are data sources that the client application (not the model) decides when to access. They use URI-based addressing (<code>resource://database/users/schema</code>, <code>file:///path/to/doc.md</code>) and provide structured data to the application.</p>
+<p>The key distinction from tools: the application controls resource access based on its own logic, not model decisions. A client might pre-load certain resources into context when the user opens a project, or offer a resource browser UI.</p>
+<h3 id="prompts-reusable-templates">Prompts (Reusable Templates)</h3>
+<p>Prompts are parameterized message templates that servers can expose. They provide reusable interaction patterns -- a server might offer a <code>code_review</code> prompt that takes a <code>language</code> parameter and returns a structured review template. Prompts are selected by the user (typically via a slash command or menu), not autonomously by the model.</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">In your own words, explain why Tools are 'model-controlled' while Resources are 'application-controlled.' What practical difference does this make for an MCP server designer?</p>
+  <label for="se-m06-prompts-reusable-templates" class="sr-only">Your explanation</label>
+  <textarea id="se-m06-prompts-reusable-templates" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m06-prompts-reusable-templates">Compare with Expert Answer</button>
+  <div id="se-answer-m06-prompts-reusable-templates" class="self-explain__expert" hidden>
+    <p>Tools let the AI model decide when and how to invoke them based on conversation context -- the developer sets up the server, but the model autonomously selects tools. Resources are fetched by the client application's own logic (e.g., pre-loading project files when a user opens a workspace). The practical difference: tool descriptions must be written for the model to interpret, so clarity and specificity in descriptions directly affects tool selection quality. Resource URIs must be designed for the application's retrieval logic instead. A third category, Prompts, is user-selected via slash commands or menus -- none of the autonomous selection that tools have.</p>
+  </div>
+</div>
+<h3 id="how-the-primitives-work-together">How the Primitives Work Together</h3>
+<p>In practice, most MCP servers expose primarily tools. Resources and prompts see less adoption but solve real problems. A typical agentic workflow:</p>
+<ol>
+<li>User connects Claude to a project management <span class="glossary-term" data-term="mcp-server">MCP server</span>.</li>
+<li>Claude discovers 12 tools (create task, update status, query backlog, etc.) via <code>tools/list</code>.</li>
+<li>User asks "What's blocking the release?"</li>
+<li>Claude autonomously calls <code>query_backlog</code> with a filter for blocked items, reads the results, and synthesizes an answer.</li>
+<li>User says "Move all the P1 bugs to In Progress."</li>
+<li>Claude calls <code>update_status</code> for each matching item.</li>
+</ol>
+<p>The model handles tool selection and invocation; the human handles which servers are connected and can set permission boundaries on what actions are allowed.</p>
+
+<figure class="diagram diagram--mermaid" id="m06-4" role="img" aria-label="Three-column diagram showing MCP's three primitive types and who controls each. Left column: Tools are model-controlled, meaning the AI model decides when to invoke them based on conversation context. Examples include create_issue and search_code. Middle column: Resources are application-controlled, meaning the host application decides when to access data via URI-based addressing. Examples include database schemas and file contents. Right column: Prompts are user-selected, meaning the human chooses reusable templates via slash commands or menus. Examples include code_review and summarize templates.">
+  <pre class="mermaid">graph TD
+  subgraph Tools[&quot;Tools&quot;]
+    T_Control[&quot;Model-Controlled&quot;]
+    T_Desc[&quot;AI decides when to invoke&quot;]
+    T_Ex1[&quot;create_issue&quot;]
+    T_Ex2[&quot;search_code&quot;]
+    T_Ex3[&quot;list_pull_requests&quot;]
+    T_Control --&gt; T_Desc
+    T_Desc --&gt; T_Ex1
+    T_Desc --&gt; T_Ex2
+    T_Desc --&gt; T_Ex3
+  end
+
+  subgraph Resources[&quot;Resources&quot;]
+    R_Control[&quot;Application-Controlled&quot;]
+    R_Desc[&quot;Host app exposes data&quot;]
+    R_Ex1[&quot;database://users/schema&quot;]
+    R_Ex2[&quot;file:///path/to/doc.md&quot;]
+    R_Ex3[&quot;resource://config&quot;]
+    R_Control --&gt; R_Desc
+    R_Desc --&gt; R_Ex1
+    R_Desc --&gt; R_Ex2
+    R_Desc --&gt; R_Ex3
+  end
+
+  subgraph Prompts[&quot;Prompts&quot;]
+    P_Control[&quot;User-Selected&quot;]
+    P_Desc[&quot;Human chooses templates&quot;]
+    P_Ex1[&quot;code_review&quot;]
+    P_Ex2[&quot;summarize&quot;]
+    P_Ex3[&quot;debug_error&quot;]
+    P_Control --&gt; P_Desc
+    P_Desc --&gt; P_Ex1
+    P_Desc --&gt; P_Ex2
+    P_Desc --&gt; P_Ex3
+  end
+</pre>
+  <figcaption>MCP Three Primitives: Control Models</figcaption>
+</figure>
+
+<div class="worked-example" data-variant="partial" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">MCP workflow: project management integration</h4>
+  <div class="worked-example__problem">
+    <p>Complete the missing steps in this MCP workflow where Claude connects to a project management server.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+      <span class="worked-example__dot" data-step="5" aria-label="Step 5"></span>
+      <span class="worked-example__dot" data-step="6" aria-label="Step 6"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Step 1</h5>
+      <div class="worked-example__step-content">
+        <p>User connects Claude to a project management MCP server.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Step 2 (fill in)</h5>
+      <div class="worked-example__step-content">
+        <p>______ discovers ______ tools via ______.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Step 3</h5>
+      <div class="worked-example__step-content">
+        <p>User asks 'What is blocking the release?'</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Step 4</h5>
+      <div class="worked-example__step-content">
+        <p>Claude autonomously calls `query_backlog` with a filter for blocked items, reads the results, and synthesizes an answer.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="5">
+      <h5 class="worked-example__step-label">Step 5 (fill in)</h5>
+      <div class="worked-example__step-content">
+        <p>User says 'Move all the P1 bugs to In Progress.' Claude calls ______ for each matching item.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="6">
+      <h5 class="worked-example__step-label">Step 6</h5>
+      <div class="worked-example__step-content">
+        <p>The model handles tool selection and invocation; the human handles which servers are connected and can set permission boundaries.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>Step 2: Claude discovers 12 tools via `tools/list`. Step 5: Claude calls `update_status` for each matching item. The key insight is that the model autonomously selects which tools to invoke based on the user's natural language request -- the human controls which servers are connected, not which specific tool calls are made.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<hr>
+<h2 id="4-platform-adoption">4. Platform Adoption</h2>
+<p>MCP adoption is nearly universal among major AI platforms as of March 2026, but depth of integration varies significantly.</p>
+<h3 id="adoption-matrix">Adoption Matrix</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>MCP Client</th><th>MCP Server</th><th>Status</th><th>Integration Depth</th></tr></thead><tbody><tr><td><strong>Anthropic Claude</strong></td><td>Claude Desktop, <span class="glossary-term glossary-term--first-use" data-term="cowork">Cowork</span>, <span class="glossary-term" data-term="claude-code">Claude Code</span></td><td>--</td><td>GA</td><td>Native/foundational -- MCP is the primary connectivity paradigm</td></tr><tr><td><strong>OpenAI ChatGPT</strong></td><td>ChatGPT (Developer Mode), <span class="glossary-term glossary-term--first-use" data-term="deep-research">Deep Research</span>, Agents SDK</td><td>--</td><td>Beta (ChatGPT), GA (SDK)</td><td>Functional but positioned as developer/advanced feature</td></tr><tr><td><strong>Google Gemini</strong></td><td>Gemini CLI, ADK, Antigravity IDE</td><td>Maps, Workspace, Cloud Services</td><td>GA</td><td>All-in -- managed MCP servers for Google services</td></tr><tr><td><strong>Microsoft Copilot</strong></td><td><span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span>, GitHub Copilot</td><td>Dynamics 365, Azure, Azure Functions hosting</td><td>GA</td><td>Strong enterprise adoption with governance focus</td></tr><tr><td><strong><span class="glossary-term glossary-term--first-use" data-term="openclaw">OpenClaw</span></strong></td><td>Gateway</td><td>--</td><td>GA</td><td>Supports MCP servers as tools within <span class="glossary-term" data-term="agent">agent</span> workflows</td></tr></tbody></table>
+<h3 id="anthropic-claude-mcp-native">Anthropic Claude: MCP-Native</h3>
+<p>Claude's relationship to MCP is foundational -- Anthropic created the protocol and built its entire connectivity architecture around it [F1]. Claude Desktop, <span class="glossary-term" data-term="cowork">Cowork</span>, and <span class="glossary-term" data-term="claude-code">Claude Code</span> all function as MCP clients. Configuration is via <code>claude_desktop_config.json</code> (Desktop/<span class="glossary-term" data-term="cowork">Cowork</span>) or project settings (Code). Multiple simultaneous server connections are supported.</p>
+<p>Anthropic publishes official reference MCP servers for common use cases: Filesystem (local file operations), Git, GitHub, Fetch (web content), Memory (knowledge graph persistence), PostgreSQL, Playwright (browser automation), and others [F1]. The Connectors Directory lists 50+ native integrations, most built on MCP.</p>
+<p>Claude's MCP integration is the deepest of any platform. MCP servers are accessible from chat, <span class="glossary-term" data-term="cowork">Cowork</span> agentic sessions, <span class="glossary-term" data-term="claude-code">Claude Code</span> development sessions, scheduled tasks, and artifacts. This is not a bolt-on feature -- it is how Claude connects to the world.</p>
+<h3 id="openai-chatgpt-retroactive-adoption">OpenAI ChatGPT: Retroactive Adoption</h3>
+<p>OpenAI adopted MCP after Anthropic originated it. ChatGPT supports MCP servers via Developer Mode (Settings > Connectors > Advanced), currently in Beta [F2]. The implementation supports full read and write actions -- update Jira tickets, trigger workflows, write to databases -- but OpenAI labels write capabilities as "powerful but dangerous" and emphasizes testing for prompt injection risks.</p>
+<p>The most accessible MCP integration is through <span class="glossary-term" data-term="deep-research">Deep Research</span>, which connects to MCP servers for additional data sources during its multi-source research workflow (GA since February 2026) [F2]. The Agents SDK and Responses API support MCP natively (GA), with built-in remote MCP as a tool type.</p>
+<p>MCP Apps is a notable OpenAI-specific extension: MCP tools can return interactive UI components (dashboards, forms, visualizations) that render directly in the ChatGPT interface (GA since January 2026) [F2].</p>
+<p><strong>Assessment:</strong> MCP support is functional but less deeply woven into the product than in Claude's ecosystem. It reads as an adopted standard rather than a native architecture.</p>
+<h3 id="google-gemini-managed-mcp-servers">Google Gemini: Managed MCP Servers</h3>
+<p>Google has committed to MCP aggressively, particularly on the server side [F3]. The Gemini CLI, <span class="glossary-term" data-term="agent">Agent</span> Development Kit (ADK), and Antigravity IDE all support MCP connections as clients. More significantly, Google is rolling out <strong>managed MCP servers</strong> for its own services -- enterprise-ready, globally consistent endpoints:</p>
+<ul>
+<li><strong>Google Maps MCP</strong> (GA) -- places, weather, routing</li>
+<li><strong>Google Workspace MCP</strong> (GA) -- Docs, Chat, Calendar, Drive</li>
+<li><strong>Cloud Services MCP</strong> (announced, rolling out) -- Cloud Run, Cloud Storage, AlloyDB, Cloud SQL, Spanner, Looker, Pub/Sub, Dataplex</li>
+</ul>
+<p>Google is the largest cloud provider to commit to managed, remote MCP servers [F3]. For users of any MCP client (including Claude), Google's managed servers are directly connectable -- a significant interoperability win that demonstrates the M + N benefit of standardization.</p>
+<h3 id="microsoft-copilot-enterprise-mcp">Microsoft Copilot: Enterprise MCP</h3>
+<p>Microsoft is one of the strongest enterprise MCP adopters [F4]. The implementation spans multiple products:</p>
+<p><strong>As MCP Client:</strong></p>
+<ul>
+<li><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> agents connect to external MCP servers (GA)</li>
+<li>GitHub Copilot in VS Code connects to MCP servers with auto-approve support for trusted servers (GA)</li>
+</ul>
+<p><strong>As <span class="glossary-term" data-term="mcp-server">MCP Server</span>:</strong></p>
+<ul>
+<li>Dynamics 365 ERP data exposed via MCP (Public Preview)</li>
+<li>Azure resource management exposed via MCP (GA), built into Visual Studio 2026</li>
+<li>Azure Functions can host MCP servers in .NET, Java, JavaScript, Python, TypeScript (GA)</li>
+</ul>
+<p><strong>As MCP Host:</strong></p>
+<ul>
+<li>Azure Functions provides serverless <span class="glossary-term" data-term="mcp-server">MCP server</span> hosting -- deploy your <span class="glossary-term" data-term="mcp-server">MCP server</span> to Azure and it scales automatically</li>
+</ul>
+<p>Microsoft has published security and governance guidelines for MCP, including identity-secure agentic workflows and audit trails [F4]. Notable gap: no official Microsoft 365 / Outlook / Graph <span class="glossary-term" data-term="mcp-server">MCP server</span> yet, though community servers exist.</p>
+
+<section class="quiz" data-variant="section-review" data-correct="0" data-explanation="MCP Apps is an OpenAI-specific extension where MCP tools can return interactive UI components (dashboards, forms, visualizations) that render directly in the ChatGPT interface. It has been GA since January 2026. This extends MCP beyond data exchange into interactive experiences." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is MCP Apps, and which platform introduced it?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="0" />
+          <span class="quiz__choice-label">OpenAI -- MCP tools that return interactive UI components in ChatGPT</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="1" />
+          <span class="quiz__choice-label">Anthropic -- a marketplace for MCP server bundles</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="2" />
+          <span class="quiz__choice-label">Google -- managed MCP endpoints for Google services</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft -- MCP servers hosted on Azure Functions</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Google is rolling out managed MCP servers for Google Maps (GA), Google Workspace (GA), and Cloud Services (announced, rolling out). Google is the largest cloud provider to commit to managed, remote MCP servers -- a significant interoperability win since any MCP client (including Claude) can connect to them." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform has committed to hosting managed MCP servers for its own services (Maps, Workspace, Cloud)?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Anthropic created MCP and built Claude's entire connectivity architecture around it. Claude Desktop, Cowork, and Claude Code all function as MCP clients. For other platforms, MCP was adopted after the fact -- functional but not foundational to their architecture." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform treats MCP as its foundational connectivity architecture, rather than an adopted standard?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="0" />
+          <span class="quiz__choice-label">OpenAI ChatGPT</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="1" />
+          <span class="quiz__choice-label">Google Gemini</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="2" />
+          <span class="quiz__choice-label">Anthropic Claude</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-microsoft-copilot-enterprise-mcp-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft Copilot</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="5-the-mcp-registry-ecosystem">5. The MCP Registry Ecosystem</h2>
+<h3 id="the-official-registry">The Official Registry</h3>
+<p>The MCP Registry at <code>registry.modelcontextprotocol.io</code> functions as a root authority for <span class="glossary-term" data-term="mcp-server">MCP server</span> metadata [3]. It verifies namespaces, enforces uniqueness, and stores canonical metadata. The registry is intentionally minimal -- it provides the authoritative record of what servers exist and who publishes them, but leaves discovery UX, ratings, and curation to third-party directories.</p>
+<p>As of March 2026, the registry indexes <strong>19,729+ production-ready servers</strong> [3]. This number has grown roughly 16x from the ~1,200 servers cataloged in community directories in mid-2025 [F1], reflecting explosive ecosystem growth.</p>
+<h3 id="third-party-directories">Third-Party Directories</h3>
+<p>Several community directories provide richer discovery experiences on top of the registry:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Directory</th><th>URL</th><th>Focus</th></tr></thead><tbody><tr><td><strong>mcp.so</strong></td><td>mcp.so</td><td>Largest community directory; search, categories, ratings</td></tr><tr><td><strong>Smithery</strong></td><td>smithery.ai</td><td>Curated directory with installation guides</td></tr><tr><td><strong>mcpservers.org</strong></td><td>mcpservers.org</td><td>Community-maintained catalog</td></tr><tr><td><strong>awesome-mcp-servers</strong></td><td>GitHub</td><td>Curated awesome-list format</td></tr></tbody></table>
+<h3 id="official-vs-community-servers">Official vs. Community Servers</h3>
+<p>A critical distinction for production use: <strong>official</strong> MCP servers are published and maintained by the service provider (Anthropic's reference servers, Google's managed servers, Notion's hosted server, Zapier's <span class="glossary-term" data-term="mcp-server">MCP server</span>). <strong>Community</strong> servers are built by third parties and vary in quality, maintenance, and security posture.</p>
+<p>For services where an official <span class="glossary-term" data-term="mcp-server">MCP server</span> exists, prefer it. For services without one, evaluate community servers carefully -- check maintenance activity, star count, and whether the server handles authentication securely.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Community servers vary in quality and security posture. Before using one for sensitive data, check maintenance activity (recent commits, responsive issues), community trust signals (star count, forks, users), and especially how authentication is handled. The registry provides metadata but does not vet server quality or security." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">You need to connect Claude to your company's internal HR system. No official MCP server exists. What should you evaluate before using a community server?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-official-vs-community-servers-quiz" value="0" />
+          <span class="quiz__choice-label">Only the star count on GitHub</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-official-vs-community-servers-quiz" value="1" />
+          <span class="quiz__choice-label">Only whether it supports STDIO transport</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-official-vs-community-servers-quiz" value="2" />
+          <span class="quiz__choice-label">Maintenance activity, community trust signals, and authentication handling</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-official-vs-community-servers-quiz" value="3" />
+          <span class="quiz__choice-label">Nothing -- all MCP servers in the registry are verified</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="6-building-mcp-servers">6. Building MCP Servers</h2>
+<h3 id="official-sdks">Official SDKs</h3>
+<p>MCP provides official SDKs in two languages [4]:</p>
+<ul>
+<li><strong>TypeScript</strong> -- <code>@modelcontextprotocol/sdk</code> (npm)</li>
+<li><strong>Python</strong> -- <code>mcp</code> (PyPI)</li>
+</ul>
+<p>Both SDKs handle the protocol layer (JSON-RPC serialization, transport management, capability negotiation) so developers can focus on implementing tools, resources, and prompts.</p>
+<h3 id="anatomy-of-a-simple-mcp-server-typescript">Anatomy of a Simple MCP Server (TypeScript)</h3>
+<p>A minimal <span class="glossary-term" data-term="mcp-server">MCP server</span> that exposes a single tool:</p>
+<pre><code class="language-typescript">import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+
+const server = new McpServer({
+  name: "weather",
+  version: "1.0.0",
+});
+
+server.tool(
+  "get_forecast",
+  "Get weather forecast for a city",
+  { city: { type: "string", description: "City name" } },
+  async ({ city }) => {
+    const data = await fetchWeatherAPI(city);
+    return {
+      content: [{ type: "text", text: JSON.stringify(data) }],
+    };
+  }
+);
+
+const transport = new StdioServerTransport();
+await server.connect(transport);
+</code></pre>
+<p>This server: declares itself as "weather" v1.0.0, registers one tool (<code>get_forecast</code>) with a schema and handler, and listens on STDIO. When a client connects, it discovers the <code>get_forecast</code> tool and can invoke it by passing a city name.</p>
+
+<div class="worked-example" data-variant="full" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Anatomy of the weather MCP server</h4>
+  <div class="worked-example__problem">
+    <p>Understand each component of the minimal TypeScript MCP server shown in this section.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">McpServer constructor</h5>
+      <div class="worked-example__step-content">
+        <p>Creates the server instance with metadata (name: 'weather', version: '1.0.0'). This metadata is sent to clients during the initialize handshake so they know what server they have connected to.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">server.tool() registration</h5>
+      <div class="worked-example__step-content">
+        <p>Registers a tool named 'get_forecast' with a human-readable description (used by the model for tool selection), a JSON Schema for input parameters ({ city: string }), and an async handler function.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Handler function</h5>
+      <div class="worked-example__step-content">
+        <p>The async handler receives validated input ({ city }) and returns structured content. The return format uses a content array with typed items -- here, a text item containing JSON-serialized weather data.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Transport setup</h5>
+      <div class="worked-example__step-content">
+        <p>Creates a StdioServerTransport and connects the server to it. This means the server communicates over stdin/stdout -- suitable for local use where the MCP client spawns the server as a child process.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>The entire server is under 20 lines. The SDK handles all protocol concerns (JSON-RPC, capability negotiation, message routing). The developer's job is to define what the server can do (tools) and how it does it (handlers). For remote deployment, replace StdioServerTransport with an HTTP transport and add OAuth 2.1.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="development-workflow">Development Workflow</h3>
+<ol>
+<li><strong>Define your tools.</strong> Identify what operations the server should expose. Write clear descriptions -- the model uses these to decide when to invoke each tool.</li>
+<li><strong>Choose a transport.</strong> STDIO for local development and local-only servers. Streamable HTTP for servers that will be accessed remotely.</li>
+<li><strong>Implement handlers.</strong> Each tool handler receives validated input and returns structured content (text, images, or embedded resources).</li>
+<li><strong>Test locally.</strong> Connect your server to Claude Desktop or <span class="glossary-term" data-term="claude-code">Claude Code</span> using the STDIO transport. The MCP Inspector (<code>@modelcontextprotocol/inspector</code>) provides a debugging UI.</li>
+<li><strong>Add authentication</strong> (for remote servers). Implement OAuth 2.1 if the server accesses user-specific data or performs privileged operations.</li>
+<li><strong>Publish.</strong> Register with the MCP Registry for discoverability. For internal/enterprise servers, deploy to your hosting infrastructure.</li>
+</ol>
+<h3 id="hosting-options">Hosting Options</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Option</th><th>Best For</th><th>Complexity</th></tr></thead><tbody><tr><td><strong>Local STDIO</strong></td><td>Personal tools, development</td><td>Low -- just run the binary</td></tr><tr><td><strong>Azure Functions</strong></td><td>Enterprise, serverless, auto-scaling</td><td>Medium -- Microsoft provides MCP hosting templates</td></tr><tr><td><strong>Docker container</strong></td><td>Self-hosted, consistent environments</td><td>Medium</td></tr><tr><td><strong>Cloud Run / Lambda</strong></td><td>Serverless remote servers</td><td>Medium</td></tr><tr><td><strong>Managed (Google)</strong></td><td>Google services specifically</td><td>Low -- Google hosts and maintains</td></tr></tbody></table>
+<h3 id="common-pitfalls">Common Pitfalls</h3>
+<ul>
+<li><strong>Vague tool descriptions.</strong> The model selects tools based on their descriptions. "Manage tasks" is useless; "Create a new task in the project backlog with title, priority, and assignee" is actionable.</li>
+<li><strong>Overly broad tool surface.</strong> A server that exposes 50 tools overwhelms the model's tool selection. Group related operations and keep the tool count manageable (under 15-20 per server is a good target).</li>
+<li><strong>Missing error handling.</strong> Return structured error messages the model can interpret. A raw stack trace is not useful; "Task not found: ID 12345 does not exist in project X" gives the model enough context to recover or inform the user.</li>
+<li><strong>Ignoring rate limits.</strong> If your server wraps an external API, implement rate limiting and backoff. Models can be aggressive tool callers.</li>
+<li><strong>Security surface.</strong> Any <span class="glossary-term" data-term="mcp-server">MCP server</span> that performs write operations (create records, send emails, delete data) is a potential vector for prompt injection attacks. Validate inputs, implement confirmation flows for destructive operations, and log all actions.</li>
+</ul>
+
+<div class="worked-example" data-variant="guided" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Designing tool descriptions for a project management MCP server</h4>
+  <div class="worked-example__problem">
+    <p>Design the tool name, description, and input schema for three tools: creating tasks, querying the backlog, and updating task status. Good descriptions are critical -- the model uses them to decide which tool to invoke.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Hint 1: Description specificity</h5>
+      <div class="worked-example__step-content">
+        <p>Vague descriptions like 'manage tasks' give the model no basis for selection. Be specific about what each tool does, what inputs it needs, and what it returns.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Hint 2: Avoid overly broad tools</h5>
+      <div class="worked-example__step-content">
+        <p>A single 'manage_project' tool that handles creation, querying, and updates forces the model to pack complex instructions into a single call. Separate tools with clear boundaries are easier for the model to select correctly.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Hint 3: Schema design</h5>
+      <div class="worked-example__step-content">
+        <p>Use descriptive field names and include field descriptions in the JSON Schema. The model reads these too.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>Tool 1: `create_task` -- 'Create a new task in the project backlog with a title, description, priority (P0-P3), and optional assignee email.' Schema: { title: string (required), description: string, priority: enum [P0,P1,P2,P3] (required), assignee: string (email) }. Tool 2: `query_backlog` -- 'Search the project backlog with optional filters for status, priority, and assignee. Returns matching tasks with their IDs, titles, and current status.' Schema: { status: enum, priority: enum, assignee: string, limit: number }. Tool 3: `update_status` -- 'Update the status of a specific task by ID. Valid transitions: To Do -&gt; In Progress -&gt; In Review -&gt; Done.' Schema: { task_id: string (required), new_status: enum (required) }.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+
+<details class="accordion">
+  <summary class="accordion__title">You can build a production MCP server in under 100 lines of TypeScript. The protocol does the heavy lifting.</summary>
+  <div class="accordion__content">
+    <p>The official TypeScript and Python SDKs handle all protocol-level concerns: JSON-RPC serialization, transport management, capability negotiation, and the initialize/initialized handshake. As a developer, you focus only on defining tools (name, description, schema, handler) and choosing a transport. The minimal weather server example in this section is 15 lines of actual logic. The rest is imports and transport setup. This low barrier to entry is why the MCP registry grew from ~1,200 servers in mid-2025 to 19,729+ by March 2026.</p>
+  </div>
+</details>
+<hr>
+<h2 id="7-zapier-mcp-the-universal-bridge">7. Zapier MCP: The Universal Bridge</h2>
+<h3 id="why-zapier-mcp-matters">Why Zapier MCP Matters</h3>
+<p>For the thousands of applications that will never build their own <span class="glossary-term" data-term="mcp-server">MCP server</span>, Zapier MCP provides a universal bridge. Zapier connects to 8,000+ applications. Its <span class="glossary-term" data-term="mcp-server">MCP server</span> exposes 30,000+ actions across those applications to any MCP client [F5].</p>
+<p>The architecture:</p>
+<pre><code>AI Client (Claude, ChatGPT, etc.)
+    |
+    | (MCP protocol)
+    v
+Zapier MCP Server
+    |
+    | (Zapier's internal connectors)
+    v
+8,000+ apps (Gmail, Slack, Salesforce, QuickBooks, Notion, etc.)
+</code></pre>
+<p>This means Claude can send an email via Gmail, create a Salesforce record, update a Notion database, and post to Slack -- all through a single MCP connection to Zapier, without any of those services needing their own <span class="glossary-term" data-term="mcp-server">MCP server</span>.</p>
+<h3 id="pricing-and-quotas">Pricing and Quotas</h3>
+<p>One MCP tool call to Zapier consumes <strong>2 tasks</strong> from your Zapier plan quota [F5]. This matters at scale:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Zapier Plan</th><th>Monthly Cost</th><th>Tasks/Month</th><th>MCP Calls/Month</th></tr></thead><tbody><tr><td>Free</td><td>$0</td><td>100</td><td>50</td></tr><tr><td>Professional</td><td>$19.99/mo (annual)</td><td>750</td><td>375</td></tr><tr><td>Team</td><td>$103.50/mo</td><td>2,000</td><td>1,000</td></tr><tr><td>Enterprise</td><td>Custom</td><td>Custom</td><td>Custom</td></tr></tbody></table>
+<p>For light usage (a few dozen MCP calls per day), the Professional plan suffices. For agentic workflows that make frequent tool calls, the 2x task multiplier can burn through quotas quickly. Monitor usage and consider whether a direct <span class="glossary-term" data-term="mcp-server">MCP server</span> (for high-volume integrations) is more cost-effective than routing through Zapier.</p>
+<h3 id="make-as-alternative-bridge">Make as Alternative Bridge</h3>
+<p>Make (formerly Integromat) offers a similar universal bridge capability with its own <span class="glossary-term" data-term="mcp-server">MCP server</span> (GA), available in both local and cloud-hosted versions [F5]. Make's unique advantage is <strong>bidirectional MCP support</strong> -- it acts as both an <span class="glossary-term" data-term="mcp-server">MCP server</span> (controllable by Claude) and an MCP client (can connect to other MCP servers within its workflows).</p>
+<p>Make is significantly cheaper per operation: roughly $10.59/month for 10,000 operations versus Zapier's $19.99 for 750 tasks [F5]. However, Zapier has broader app coverage (8,000 vs. 3,000) and a simpler integration experience.</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> The universal bridge space is evolving rapidly. Rube (500+ apps via unified MCP interface) and similar aggregators are emerging. The economics and capabilities of these bridges will shift significantly through 2026.</p>
+</blockquote>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Each MCP call to Zapier consumes 2 tasks from your plan quota. On the Professional plan ($19.99/month, 750 tasks), that means 375 MCP calls per month. For high-volume integrations, this 2x multiplier makes building a direct MCP server more cost-effective than routing through Zapier." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">One MCP tool call to Zapier consumes how many Zapier tasks from your plan quota?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-make-as-alternative-bridge-quiz" value="0" />
+          <span class="quiz__choice-label">1 task</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-make-as-alternative-bridge-quiz" value="1" />
+          <span class="quiz__choice-label">2 tasks</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-make-as-alternative-bridge-quiz" value="2" />
+          <span class="quiz__choice-label">3 tasks</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-make-as-alternative-bridge-quiz" value="3" />
+          <span class="quiz__choice-label">It depends on the action</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="8-specialized-tool-mcp-adoption">8. Specialized Tool MCP Adoption</h2>
+<p>Beyond the major platforms, MCP adoption among specialized tools is accelerating [F5]:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>MCP Server</th><th>Status</th><th>Key Capabilities</th></tr></thead><tbody><tr><td><strong>Otter.ai</strong></td><td>Official</td><td>GA</td><td>Search/analyze meeting transcripts across all time periods</td></tr><tr><td><strong>Notion</strong></td><td>Official (hosted)</td><td>GA</td><td>Full CRUD on pages, databases, blocks; search across workspace</td></tr><tr><td><strong>ElevenLabs</strong></td><td>Official</td><td>GA</td><td>Text-to-speech, voice cloning, transcription, sound effects; also supports inbound MCP</td></tr><tr><td><strong>Make</strong></td><td>Official (local + cloud)</td><td>GA</td><td>Scenario execution and management; also functions as MCP client</td></tr><tr><td><strong>Zapier</strong></td><td>Official</td><td>GA</td><td>30,000+ actions across 8,000+ apps</td></tr><tr><td><strong>Perplexity</strong></td><td>Community only</td><td>Unofficial</td><td>Web search via Claude; no official server</td></tr><tr><td><strong>Midjourney</strong></td><td>Community only</td><td>Unofficial</td><td>Image generation; unreliable (no official API)</td></tr><tr><td><strong>Cursor</strong></td><td>MCP client</td><td>GA</td><td>Connects to any <span class="glossary-term" data-term="mcp-server">MCP server</span> for enhanced coding context</td></tr><tr><td><strong>Windsurf</strong></td><td>MCP client</td><td>GA</td><td>Connects to any <span class="glossary-term" data-term="mcp-server">MCP server</span></td></tr></tbody></table>
+<p>Notion's implementation is notable: its hosted <span class="glossary-term" data-term="mcp-server">MCP server</span> at <code>https://mcp.notion.com/sse</code> provides full read/write access to your workspace -- pages, databases, blocks, properties, comments -- making Notion one of the most deeply MCP-integrated productivity tools [F5].</p>
+<p>ElevenLabs demonstrates bidirectional MCP: its server exposes audio capabilities to Claude, and its Conversational AI agents can connect to external MCP servers to access data sources during conversations [F5].</p>
+<hr>
+<h2 id="9-mcp-vs-native-integrations">9. MCP vs. Native Integrations</h2>
+<p>MCP is not the only way AI platforms connect to external services. Each major platform also maintains its own native integration ecosystem:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Integration Type</th><th>Strengths</th><th>Weaknesses</th></tr></thead><tbody><tr><td><strong>MCP</strong></td><td>Universal (any client, any server), open standard, community ecosystem, auto-discovery</td><td>Requires server implementation, newer/less mature, security model still evolving</td></tr><tr><td><strong>Native connectors</strong> (Claude Connectors, ChatGPT Apps, Copilot connectors)</td><td>Tighter UX integration, vendor-vetted quality, simpler setup</td><td>Vendor lock-in, limited to what the platform offers, slower to expand</td></tr><tr><td><strong>Automation platforms</strong> (Zapier, Make, Power Automate)</td><td>Massive app coverage, visual workflow design, scheduling</td><td>Added cost, latency, task quotas, another dependency</td></tr></tbody></table>
+<p>In practice, these approaches coexist. A typical advanced setup might use:</p>
+<ul>
+<li><strong>Native connectors</strong> for core, high-frequency integrations (Google Workspace, Slack)</li>
+<li><strong>MCP servers</strong> for developer tools and specialized services (GitHub, databases, custom APIs)</li>
+<li><strong>Zapier MCP</strong> as the catch-all for everything else</li>
+</ul>
+<p>The trend favors MCP as the default integration pattern, with native connectors reserved for cases where deeper platform integration (pre-configured UX, admin-managed setup, enterprise compliance) justifies the vendor-specific approach.</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">You are advising a mid-size company that uses Slack, GitHub, Salesforce, and three internal tools. Which integration approach (MCP server, native connectors, Zapier MCP bridge) would you recommend for each, and why?</p>
+  <label for="se-m06-9-mcp-vs-native-integrations" class="sr-only">Your explanation</label>
+  <textarea id="se-m06-9-mcp-vs-native-integrations" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m06-9-mcp-vs-native-integrations">Compare with Expert Answer</button>
+  <div id="se-answer-m06-9-mcp-vs-native-integrations" class="self-explain__expert" hidden>
+    <p>Slack: native connector (high-frequency, tight UX integration, official connectors exist on all platforms). GitHub: direct MCP server (official Anthropic reference server exists, developer tools benefit from full MCP capability including code search and PR management). Salesforce: Zapier MCP bridge (no official MCP server exists, Zapier has a mature Salesforce connector, moderate call volume). Internal tools: custom MCP servers over STDIO (you control the implementation, no external dependency, data stays local). The general principle: use native connectors for core high-frequency integrations, MCP servers for developer tools and services with official servers, and Zapier/Make as the bridge for everything else.</p>
+  </div>
+</div>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>MCP collapses integration complexity from M x N to M + N.</strong> Any MCP client can connect to any <span class="glossary-term" data-term="mcp-server">MCP server</span> -- services implement once, AI clients consume universally.</p>
+</li>
+<li>
+<p><strong>The protocol is JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote).</strong> Persistent connections, capability auto-discovery, and OAuth 2.1 authorization are core design decisions.</p>
+</li>
+<li>
+<p><strong>Three primitives: Tools (model-controlled), Resources (app-controlled), Prompts (user-selected).</strong> Tools dominate real-world usage.</p>
+</li>
+<li>
+<p><strong>All four major platforms support MCP</strong>, but at different depths. Claude is MCP-native (deepest). Google is investing heavily in managed servers. Microsoft focuses on enterprise hosting and governance. OpenAI's adoption is functional but not foundational.</p>
+</li>
+<li>
+<p><strong>The registry indexes 19,729+ servers</strong> as of March 2026 -- roughly 16x growth from mid-2025. Third-party directories (mcp.so, Smithery) provide richer discovery.</p>
+</li>
+<li>
+<p><strong>Building an <span class="glossary-term" data-term="mcp-server">MCP server</span> is straightforward</strong> with the official TypeScript or Python SDKs. The main challenge is designing good tool descriptions and handling security for write operations.</p>
+</li>
+<li>
+<p><strong>Zapier MCP bridges to 8,000+ apps</strong> that lack their own MCP servers, at a cost of 2 Zapier tasks per MCP call. Make offers a cheaper alternative with bidirectional MCP support.</p>
+</li>
+<li>
+<p><strong>MCP and native connectors coexist.</strong> MCP is becoming the default, but native integrations retain advantages for core platform-specific workflows.</p>
+</li>
+<li>
+<p><strong>Security is the frontier challenge.</strong> Write-capable MCP servers are prompt injection surfaces. OAuth 2.1, input validation, and action logging are non-negotiable for production deployments.</p>
+</li>
+<li>
+<p><strong>MCP's governance under the Linux Foundation</strong> (since December 2025) addresses vendor neutrality concerns and positions the protocol as a durable industry standard rather than a single-vendor initiative.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Notion's hosted MCP server at mcp.notion.com/sse provides full CRUD access to your workspace -- pages, databases, blocks, properties, and comments. This makes Notion one of the most deeply MCP-integrated productivity tools, serving as a model for how SaaS applications can expose rich functionality via MCP." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Notion's MCP server implementation is notable because it provides:</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Read-only access to page titles</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Full read/write access to pages, databases, blocks, properties, and comments</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Only search functionality</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Integration through Zapier only</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="MCP provides official SDKs in TypeScript (@modelcontextprotocol/sdk on npm) and Python (mcp on PyPI). Both handle the protocol layer -- JSON-RPC serialization, transport management, capability negotiation -- so developers can focus on implementing tools, resources, and prompts." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which two official MCP SDK languages does the MCP project maintain?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Python and Go</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">TypeScript and Python</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">JavaScript and Rust</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Java and C#</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="In a multi-agent system, each agent is an MCP client that can connect to any MCP server. Adding a new service (e.g., a Jira MCP server) requires building one server -- every agent in the system can then discover and use it. Without MCP, each agent-service pair would need its own custom integration. This extends the M + N benefit from Module 06 to the multi-agent context from Module 04." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In a multi-agent system (Module 04) where each agent needs access to different external services, how does MCP simplify the tool access architecture?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Each agent must implement its own connectors regardless of MCP</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">MCP lets all agents share a single tool through one server connection</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Each agent connects to the MCP servers it needs; the M + N scaling means adding a new service requires one server, not one integration per agent</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">MCP is not relevant to multi-agent systems</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="MCP is the protocol layer that standardizes how tools are discovered, described, and invoked. The function calling mechanism in Module 03 -- where a model selects a tool, constructs parameters, and interprets results -- operates over MCP's transport. MCP provides the plumbing (discovery via tools/list, invocation via JSON-RPC, transport via STDIO or HTTP); the model provides the reasoning about when and how to call tools." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does MCP relate to the function calling mechanism discussed in Module 03's agent architecture?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">MCP replaces function calling entirely</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">MCP is the transport and discovery layer that delivers tools for function calling</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Function calling and MCP are unrelated systems</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">MCP only works with Resources, not with function calling</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Any MCP server that performs write operations (create records, send emails, delete data) is a potential vector for prompt injection attacks. A malicious prompt could trick the model into invoking destructive tools. Mitigations include input validation, confirmation flows for destructive operations, action logging, and OAuth 2.1 scope-based permissions." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the primary security concern with MCP servers that perform write operations?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">They consume more Zapier tasks</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">They are vulnerable to prompt injection attacks</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">They require Streamable HTTP transport</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">They cannot use OAuth 2.1</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Make supports bidirectional MCP -- it acts as both an MCP server (controllable by Claude and other AI clients) and an MCP client (can connect to other MCP servers within its workflows). Zapier only acts as an MCP server. Make is also cheaper per operation, but the bidirectional capability is the unique architectural distinction." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Make's MCP implementation has a unique capability that Zapier's does not. What is it?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">More app integrations (8,000+ vs. 3,000+)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Lower per-operation cost</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Bidirectional MCP support (acts as both server and client)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Enterprise governance and DLP</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="The MCP Registry indexes 19,729+ production-ready servers as of March 2026. This represents roughly 16x growth from the ~1,200 servers cataloged in community directories in mid-2025, reflecting explosive ecosystem growth." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The MCP registry indexes approximately how many servers as of March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">~1,200</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">~5,000</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">~19,700</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">~50,000</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Anthropic donated MCP to the Linux Foundation's newly created Agentic AI Foundation in December 2025. This placed governance under a vendor-neutral body, addressing concerns that a protocol owned by one AI company would be shaped to favor that company's products." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which organization now governs the MCP specification, after Anthropic donated it in December 2025?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">The OpenAI Foundation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">The Linux Foundation's Agentic AI Foundation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">The W3C</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">The IETF</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="MCP uses JSON-RPC 2.0, a lightweight remote procedure call protocol where every message is a JSON object. It supports three message types: requests (with unique IDs, expecting responses), responses (matching request IDs), and notifications (fire-and-forget, no response expected)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What wire protocol does MCP use for communication between clients and servers?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">REST over HTTP</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">GraphQL</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">JSON-RPC 2.0</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">gRPC with Protocol Buffers</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="The practical strategy combines approaches: official MCP servers for the 3 services that have them (best quality, maintained by the service provider), and Zapier MCP as the bridge for the remaining 12 (Zapier connects to 8,000+ apps). This avoids the cost of building 12 custom servers while still leveraging MCP's universal protocol. Monitor Zapier task consumption and build direct servers for any high-volume integrations." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A startup uses 15 different SaaS tools. They want Claude to interact with all of them. Only 3 have official MCP servers. What is the most practical integration strategy?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Wait for all 15 to build MCP servers</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Build custom MCP servers for all 12 missing ones</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Use official MCP servers for the 3 that have them, Zapier MCP for the rest</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Abandon MCP and use native connectors only</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="All four major platforms support MCP as of March 2026, but depth varies significantly. Anthropic is MCP-native (created the protocol, built its architecture around it). Google is investing heavily in managed servers. Microsoft focuses on enterprise hosting. OpenAI's adoption is functional but not foundational -- MCP was retrofitted rather than built in." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which statement best describes the current state of MCP adoption across the four major platforms?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Only Anthropic supports MCP; others have announced but not shipped</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">All four support MCP, but Anthropic is MCP-native while others adopted it after the fact</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">All four support MCP at equal depth</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Google and Microsoft support MCP; OpenAI has declined to adopt it</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Tools are model-controlled -- the AI model decides when and how to invoke them based on conversation context. The user asked a natural language question; Claude autonomously selected the calendar tool. Resources are application-controlled (the app decides when to fetch), and Prompts are user-selected via slash commands or menus." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A user asks Claude to 'check my calendar for tomorrow.' Claude connects to a Google Calendar MCP server and calls the appropriate tool. Which MCP primitive is being used?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Resource (application-controlled)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Prompt (user-selected template)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Tool (model-controlled)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Notification (fire-and-forget)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Streamable HTTP is the recommended transport for remote servers. It uses standard HTTP POST requests with the option to upgrade to SSE streams for long-running operations. STDIO is for local-only servers. SSE is deprecated in favor of Streamable HTTP." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">You need to choose a transport for an MCP server that will be accessed by multiple AI clients across the internet. Which transport is recommended?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">STDIO</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Streamable HTTP</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">SSE (deprecated)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m06-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Raw TCP</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- competitive context for MCP adoption across ecosystems</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context Engineering</span></a> -- context windows and caching strategies that MCP-delivered context interacts with</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- how agents use tools; MCP is the transport layer for tool delivery</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- MCP's role in multi-<span class="glossary-term" data-term="agent">agent</span> systems where agents share tool access</li>
+<li><a href="module-05.html">Module 05: <span class="glossary-term" data-term="openclaw">OpenClaw</span> &#x26; Open <span class="glossary-term" data-term="agent">Agent</span> Ecosystem</a> -- <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s MCP integration as tools within its Gateway</li>
+<li><a href="module-07.html">Module 07: <span class="glossary-term glossary-term--first-use" data-term="skills">Skills</span>, Plugins &#x26; Automation</a> -- how MCP servers compose into higher-level <span class="glossary-term" data-term="skills">skills</span> and plugins</li>
+<li><a href="module-08.html">Module 08: Consumer AI Comparison</a> -- MCP as a differentiator in the consumer platform comparison</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- MCP alongside native APIs in the developer tooling landscape</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- MCP as the ecosystem bridge between open and closed platforms</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Source</th><th>URL</th><th>Date</th></tr></thead><tbody><tr><td>[1]</td><td>MCP Specification (modelcontextprotocol.io)</td><td><a href="https://modelcontextprotocol.io/specification">https://modelcontextprotocol.io/specification</a></td><td>2026-03-20</td></tr><tr><td>[2]</td><td>Anthropic donates MCP to Linux Foundation Agentic AI Foundation</td><td><a href="https://www.anthropic.com/news/mcp-linux-foundation">https://www.anthropic.com/news/mcp-linux-foundation</a></td><td>2026-03-20</td></tr><tr><td>[3]</td><td>MCP Registry</td><td><a href="https://registry.modelcontextprotocol.io">https://registry.modelcontextprotocol.io</a></td><td>2026-03-20</td></tr><tr><td>[4]</td><td>MCP SDKs -- TypeScript and Python</td><td><a href="https://modelcontextprotocol.io/sdks">https://modelcontextprotocol.io/sdks</a></td><td>2026-03-20</td></tr><tr><td>[F1]</td><td>Anthropic/Claude Ecosystem Profile</td><td>reference/profiles/anthropic-claude.md</td><td>2026-03-18</td></tr><tr><td>[F2]</td><td>OpenAI/ChatGPT Ecosystem Profile</td><td>reference/profiles/openai-chatgpt.md</td><td>2026-03-18</td></tr><tr><td>[F3]</td><td>Google/Gemini Ecosystem Profile</td><td>reference/profiles/google-gemini.md</td><td>2026-03-18</td></tr><tr><td>[F4]</td><td>Microsoft/Copilot Ecosystem Profile</td><td>reference/profiles/microsoft-copilot.md</td><td>2026-03-18</td></tr><tr><td>[F5]</td><td>Specialized Tools Profile</td><td>reference/profiles/specialized-tools.md</td><td>2026-03-18</td></tr></tbody></table>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-03.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 03: Single-Agent Systems</span>
+        </a>
+        <a href="module-04.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 04: Multi-Agent Orchestration</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

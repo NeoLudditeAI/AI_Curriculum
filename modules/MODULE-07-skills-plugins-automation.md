@@ -1,7 +1,7 @@
 # Module 07: Skills, Plugins & Automation
 
 **Last updated:** 2026-03-21
-**Status:** DRAFTING
+**Status:** COMPLETE
 **Word count target:** 4,000-5,000
 
 ---
@@ -49,11 +49,11 @@ OpenAI's equivalent to skills is the Custom GPT system, which bundles a system p
 
 **Discovery:** GPT Store marketplace. Enterprise customers can deploy private Custom GPTs visible only within their organization.
 
-**Distribution:** The GPT Store launched in January 2024 and as of March 2026 hosts an estimated 3M+ Custom GPTs [2]. Revenue sharing for creators was introduced in mid-2025. Enterprise accounts can restrict which GPTs are accessible to their users.
+**Distribution:** The GPT Store launched in January 2024 and as of March 2026, over 3M Custom GPTs have been created, though approximately 159,000 are publicly listed and active in the store [2]. Revenue sharing for creators was introduced in mid-2025. Enterprise accounts can restrict which GPTs are accessible to their users.
 
 **Strengths:** Rich integration with external APIs via Actions. Built-in RAG over uploaded documents. Large marketplace with network effects.
 
-**Limitations:** No filesystem access. System prompts can be extracted by users (a persistent security concern [UNVERIFIED]). Actions require an externally hosted API endpoint -- no serverless or in-line code execution within the GPT itself.
+**Limitations:** No filesystem access. System prompts can be extracted by users through prompt injection techniques -- a persistent and well-documented security concern that OWASP ranks as the #1 risk for LLM applications; OpenAI has acknowledged that prompt injection "is unlikely to ever be fully 'solved'" [6][7]. Actions require an externally hosted API endpoint -- no serverless or in-line code execution within the GPT itself.
 
 ### Codex Skills (OpenAI)
 
@@ -67,13 +67,13 @@ Separate from Custom GPTs, OpenAI's Codex agent (the cloud-based coding agent) h
 
 ### OpenClaw Skills
 
-OpenClaw takes a code-first approach to skills. Each skill is a JavaScript or TypeScript module in a monorepo structure, registered and distributed through the ClawHub registry [W20][W40].
+OpenClaw takes a code-first approach to skills. Each skill is a JavaScript or TypeScript module in a monorepo structure, registered and distributed through the ClawHub registry [9][13].
 
 **Authoring format:** JS/TS code implementing a defined skill interface, plus a `skill.md` file with metadata and natural-language descriptions. Skills can execute arbitrary code, make network calls, access the filesystem, and interact with the Pi Agent Runtime.
 
-**Distribution:** ClawHub hosts 13,700+ skills as of February 2026 [W40] (count reduced from peak after malicious skill removal). Skills are installed via the `claw` CLI and can declare dependencies on other skills.
+**Distribution:** ClawHub hosts 13,700+ skills as of February 2026 [13] (count reduced from peak after malicious skill removal). Skills are installed via the `claw` CLI and can declare dependencies on other skills.
 
-**Security posture:** This is the critical weakness. The ClawHub registry has a documented 12-20% malicious skill rate, as detailed in the ClawHavoc supply chain attack analysis and Snyk's independent audit [W21][W25]. Skills can execute arbitrary code with the permissions of the host process. The ClawJacked WebSocket vulnerability demonstrated that even the skill installation process itself could be compromised [W24]. See [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) for the full security analysis.
+**Security posture:** This is the critical weakness. The ClawHub registry has a documented 12-20% malicious skill rate, as detailed in the ClawHavoc supply chain attack analysis and Snyk's independent audit [10][12]. Skills can execute arbitrary code with the permissions of the host process. The ClawJacked WebSocket vulnerability demonstrated that even the skill installation process itself could be compromised [11]. See [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) for the full security analysis.
 
 **Strengths:** Maximum flexibility. Community-driven ecosystem. Can wrap any API or local tool. Self-hosted, no vendor lock-in.
 
@@ -115,7 +115,7 @@ Microsoft's Copilot Studio is the most enterprise-oriented skills platform, prov
 | **Discovery** | Filesystem auto-scan | GPT Store search | Project-scoped | ClawHub registry | Power Platform catalog |
 | **Distribution** | Git + Plugins marketplace | GPT Store | Git | ClawHub | Power Platform |
 | **Security model** | Sandboxed via agent | API-only, no local access | Cloud sandbox | Unrestricted execution | Enterprise RBAC + DLP |
-| **Marketplace size** | ~500 plugins (Feb 2026) [1] | ~3M+ GPTs [2] | N/A | 5,400+ skills [W40] | 1,400+ connectors [F4] |
+| **Marketplace size** | Growing catalog (Feb 2026) [1] | ~3M+ GPTs created (~159K active) [2] | N/A | 13,700+ skills [13] | 1,400+ connectors [F4] |
 | **Best for** | Developer workflows | Consumer/prosumer | CI/CD automation | Power users, self-hosted | Enterprise M365 |
 
 ---
@@ -126,11 +126,11 @@ The distinction between "skills" and "plugins" is blurring. In practice, a plugi
 
 ### Claude Plugins Marketplace
 
-Launched February 2026, the Claude Plugins marketplace bundles skills with MCP connector integrations. Early traction is modest (~500 plugins), but the focus is on quality over quantity, with an approval process that reviews security, relevance, and compatibility [1]. Plugins are installable via the Claude interface and automatically integrate with the skills auto-discovery system.
+Launched February 2026, the Claude Plugins marketplace bundles skills with MCP connector integrations [1]. Anthropic also launched the Claude Marketplace in early March 2026, an e-commerce store for enterprise customers featuring Claude-powered services from partners including Snowflake, GitLab, Harvey AI, Rogo, Replit, and Lovable Labs [8]. The focus is on quality over quantity, with an approval process that reviews security, relevance, and compatibility. Plugins are installable via the Claude interface and automatically integrate with the skills auto-discovery system.
 
 ### GPT Store
 
-The GPT Store is the largest AI agent marketplace by volume, with an estimated 3M+ Custom GPTs as of March 2026 [2]. The sheer volume creates discoverability challenges -- finding high-quality GPTs requires filtering through significant noise. OpenAI introduced creator revenue sharing in mid-2025, creating economic incentives for quality. Enterprise customers can curate private stores with approved GPTs only.
+The GPT Store is the largest AI agent marketplace by volume, with over 3M Custom GPTs created as of March 2026, though only approximately 159,000 are publicly listed and active in the store [2]. The sheer volume creates discoverability challenges -- finding high-quality GPTs requires filtering through significant noise. OpenAI introduced creator revenue sharing in mid-2025, creating economic incentives for quality, though most individual creators hit a soft ceiling of $100-500/month [2]. Enterprise customers can curate private stores with approved GPTs only.
 
 ### Google Extensions and Add-ons
 
@@ -152,21 +152,43 @@ Claude Cowork introduced native scheduled tasks via the `/schedule` command. Use
 
 **Use cases:** Daily code review summaries, weekly dependency audit reports, monthly project health assessments. Tasks persist across sessions and can be managed via the Cowork interface.
 
-**Limitations:** Currently limited to Cowork (not available in Claude.ai chat or the API). No conditional triggering -- schedules are purely time-based. No task chaining (each scheduled task is independent).
+**Practical considerations:** Scheduled tasks consume standard Cowork usage credits -- a scheduled daily summary uses the same compute as an equivalent interactive session. If a scheduled task fails (e.g., an MCP server is unreachable or a tool returns an error), Cowork logs the failure but does not automatically retry. Users must monitor task results and manually re-trigger failed runs. There is no built-in alerting for task failures, which limits reliability for mission-critical workflows [F1].
+
+**Limitations:** Currently limited to Cowork (not available in Claude.ai chat or the API). No conditional triggering -- schedules are purely time-based. No task chaining (each scheduled task is independent). No retry mechanisms.
 
 ### ChatGPT Tasks
 
 ChatGPT Tasks reached general availability in early 2026, available to Plus and Pro subscribers. Users can schedule up to 10 active tasks that ChatGPT executes autonomously at specified times [F2].
 
-**Limitations:** The 10-task cap is restrictive for power users. Tasks cannot trigger other tasks. No webhook or event-based triggers. No access to external tools beyond what ChatGPT natively supports (web browsing, code interpreter, DALL-E).
+**Practical considerations:** Tasks run in the same environment as interactive ChatGPT sessions, meaning they have access to web browsing and code interpreter but not to external APIs or custom tools. Each task execution counts against the user's usage limits. Failed tasks produce a notification but do not retry automatically [F2].
+
+**Limitations:** The 10-task cap is restrictive for power users. Tasks cannot trigger other tasks. No webhook or event-based triggers. No access to external tools beyond what ChatGPT natively supports (web browsing, code interpreter, DALL-E). No failure retry.
 
 ### Gemini Scheduled Actions
 
-Google introduced Scheduled Actions for Gemini in March 2026, matching ChatGPT's scheduled task capability. Gemini's implementation benefits from deep integration with Google services -- scheduled tasks can interact with Calendar, Gmail, Drive, and other Google Workspace tools natively [F3].
+Google introduced Scheduled Actions for Gemini in March 2026, matching ChatGPT's scheduled task capability. Gemini's implementation benefits from deep integration with Google services -- scheduled tasks can interact with Calendar, Gmail, Drive, and other Google Workspace tools natively [F3]. This gives Gemini the broadest first-party service access of any scheduled task system -- a scheduled action can query Gmail, update a spreadsheet in Sheets, and create a Calendar event in a single run, without requiring third-party automation platforms.
 
 ### Event-Driven Patterns
 
-True event-driven AI automation -- where an agent responds to a webhook, database change, or system event -- is primarily served by the automation platforms discussed below, rather than by the AI platforms themselves. The exception is Codex Skills, which can trigger on repository events (PR opened, issue created), making Codex the most event-driven of the native AI agent systems [F2].
+True event-driven AI automation -- where an agent responds to a webhook, database change, or system event rather than a time-based schedule -- remains the least mature capability across AI platforms. Most platforms delegate event-driven workflows to the automation platforms discussed below. However, three native event-driven patterns have emerged:
+
+**Codex repository event triggers.** OpenAI's Codex is the most event-driven native AI agent system. Codex Skills can trigger on specific repository events: pull request opened, pull request updated, issue created, issue labeled, and push to a monitored branch [F2]. Configuration is per-skill, with event filters that specify which events activate which skills. This makes Codex a viable CI/CD participant -- a skill can automatically review PRs, run linting, or generate release notes when triggered by repo activity.
+
+**Power Automate webhook triggers.** Microsoft's Power Automate supports HTTP webhook triggers that can invoke flows containing Copilot Studio agent actions [F4]. This enables event-to-agent routing: an external system fires a webhook, Power Automate receives it, routes to the appropriate agent, and the agent executes autonomously. The pattern works for any system that can send HTTP requests -- CRM events, monitoring alerts, form submissions.
+
+**MCP-mediated event patterns.** As MCP adoption grows (see [Module 06](MODULE-06-mcp-integration-layer.md)), a design pattern is emerging where MCP servers expose event subscription capabilities. An agent connects to an MCP server that watches for changes (new database rows, file modifications, message arrivals) and notifies the agent when events occur. This is not yet standardized in the MCP specification but is implemented in several community MCP servers.
+
+The gap across all platforms is a unified event-to-agent routing layer. Today, connecting "when X happens" to "agent Y should respond" requires either platform-specific mechanisms (Codex events, Power Automate webhooks) or third-party automation platforms (Zapier, Make). No AI platform offers a general-purpose event subscription and routing system as a first-class feature.
+
+### Scheduled Tasks Comparison
+
+| Platform | Mechanism | Trigger Types | Limits | Key Gap |
+|----------|-----------|---------------|--------|---------|
+| **Zapier** | Zap scheduling + Zapier Agents | Time-based (cron-style intervals from 1 min to monthly); webhook; app-event triggers across 8,000+ integrations [3] | Free: 100 tasks/month, 5 Zaps. Professional: 750 tasks/month. Polling interval varies by tier (1-15 min) [3] | No native AI agent reasoning within Zaps -- AI features (Central, Agents) are separate products |
+| **Make** | Scenario scheduling | Time-based (intervals from 1 min); webhook; app-event triggers across 3,000+ integrations; bidirectional MCP [4] | Free: 1,000 ops/month, 2 scenarios. Execution time limits per scenario vary by tier [4] | Smaller integration catalog than Zapier; enterprise governance less mature |
+| **Power Automate** | Cloud Flows + Desktop Flows | Time-based; webhook/HTTP; data-change triggers; Teams events; button/manual; Agent Flows (Copilot Studio integration) [F4] | $15/user/month (Premium). AI Builder credits transitioning to consumption-based (bundled credits end Nov 2026) [5] | Per-user pricing expensive at scale; RPA desktop flows require separate licensing |
+| **Claude Code (cron)** | `/schedule` command in Cowork | Time-based only (hourly, daily, weekly, monthly) [F1] | Consumes standard Cowork usage credits. No task cap documented, but each run uses full session compute [F1] | No conditional triggers, no retry on failure, no task chaining, no alerting. Cowork-only (not available in Claude.ai chat or API) |
+| **OpenClaw** | Cron-style scheduling via Pi Agent Runtime; external orchestration | Time-based (system cron); filesystem/webhook watchers via custom skills [W20] | Self-hosted: limited by infrastructure. No built-in rate limiting or quota management | No managed scheduling service -- requires manual cron/systemd setup. No built-in monitoring or failure alerting |
 
 > **Volatility warning:** Scheduled task capabilities are expanding rapidly. All four major platforms have announced or shipped scheduling features within a 6-month window (late 2025 to early 2026). Expect capabilities, limits, and pricing to change frequently.
 
@@ -197,7 +219,7 @@ Make positions itself as the cost-efficient alternative with 3,000+ app integrat
 - **Visual execution model:** Make's scenario builder shows data flow through each module, with built-in error handling, branching, and iteration. This appeals to users who want more control than Zapier's linear Zap model.
 - **Cost advantage:** Make's operation-based pricing makes it roughly 10x cheaper than Zapier for high-volume workflows. A scenario that costs $30/month on Zapier might cost $3/month on Make for the same throughput [4].
 
-**Pricing:** Free tier (1,000 ops/month, 2 scenarios). Core starts at $10.59/month (10,000 ops/month). Pro and Teams tiers available [4].
+**Pricing:** Free tier (1,000 ops/month, 2 scenarios). Core starts at $9/month (10,000 ops/month). Pro and Teams tiers available [4].
 
 **Best for:** High-volume automations, teams that need granular workflow control, cost-sensitive organizations.
 
@@ -229,7 +251,7 @@ Microsoft Power Automate is the enterprise automation incumbent, with 1,400+ con
 | **AI features** | Central, Agents, Canvas | AI scenario suggestions | AI Builder, Copilot integration |
 | **Visual builder** | Linear (Zap editor) | Graph-based (scenario) | Flow designer + desktop recorder |
 | **RPA support** | No | No | Yes (Desktop Flows) |
-| **Starting price** | $29.99/mo (Professional) | $10.59/mo (Core) | $15/user/mo (Premium) |
+| **Starting price** | $29.99/mo (Professional) | $9/mo (Core) | $15/user/mo (Premium) |
 | **Free tier** | 100 tasks/mo, 5 Zaps | 1,000 ops/mo, 2 scenarios | Limited (no premium connectors) |
 | **Cost at scale** | Expensive | ~10x cheaper than Zapier | Variable (per-user + consumption) |
 | **Governance** | Basic (team roles) | Basic (team roles) | Enterprise (RBAC, DLP, audit) |
@@ -264,26 +286,33 @@ Microsoft Power Automate is the enterprise automation incumbent, with 1,400+ con
 ## Cross-References
 
 - [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md) -- the agents that consume and execute skills
+- [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- how orchestration frameworks consume skills across agent teams
 - [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) -- ClawHub security analysis and OpenClaw skill architecture details
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- the protocol layer underlying many skills and all MCP-based automation
 - [Module 08: Consumer AI Comparison](MODULE-08-consumer-ai-comparison.md) -- scheduled tasks and automation as consumer platform differentiators
 - [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) -- API-level function calling and tool use that skills build upon
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- enterprise governance implications for skill deployment and automation
 
 ---
 
 ## Sources
 
-1. Claude Plugins Marketplace Launch (Anthropic Blog), February 2026. https://www.anthropic.com/news/claude-plugins [Accessed 2026-03-21]
-2. GPT Store Statistics and Growth (OpenAI Blog), 2026. https://openai.com/index/gpt-store/ [Accessed 2026-03-21]
-3. Zapier Platform and MCP Integration, 2026. https://zapier.com/platform [Accessed 2026-03-21]
-4. Make Platform and Pricing, 2026. https://www.make.com/en/pricing [Accessed 2026-03-21]
-5. Power Automate AI Builder Credits Transition (Microsoft Learn), 2026. https://learn.microsoft.com/en-us/ai-builder/credit-management [Accessed 2026-03-21]
+1. Anthropic Expands Claude With Enterprise Plugins and Marketplace (gHacks), February 2026. https://www.ghacks.net/2026/02/25/anthropic-expands-claude-with-enterprise-plugins-and-marketplace/ — see W42 in SOURCES.md (related)
+2. GPT Store Statistics and Growth (OpenAI Blog), 2026. https://openai.com/index/gpt-store/ — W43 in SOURCES.md
+3. Zapier Platform and MCP Integration, 2026. https://zapier.com/platform — W44 in SOURCES.md
+4. Make Platform and Pricing, 2026. https://www.make.com/en/pricing — W45 in SOURCES.md
+5. Power Automate AI Builder Credits Transition (Microsoft Learn), 2026. https://learn.microsoft.com/en-us/ai-builder/credit-management — W46 in SOURCES.md
+6. OWASP Top 10 for LLM Applications: Prompt Injection. https://owasp.org/www-community/attacks/PromptInjection — W74 in SOURCES.md
+7. OpenAI on Prompt Injection Risks (Fortune), December 2025. https://fortune.com/2025/12/23/openai-ai-browser-prompt-injections-cybersecurity-hackers/ — W75 in SOURCES.md
+8. Anthropic Launches Claude Marketplace (SiliconANGLE), March 2026. https://siliconangle.com/2026/03/06/anthropic-launches-claude-marketplace-third-party-cloud-services/ — W76 in SOURCES.md
+9. OpenClaw GitHub Repository. https://github.com/openclaw/openclaw — W20 in SOURCES.md
+10. ClawHavoc Supply Chain Attack Analysis (Koi Security). https://koi.security/blog/clawhavoc-analyzing-supply-chain-attack-clawhub — W21 in SOURCES.md
+11. ClawJacked WebSocket Vulnerability. https://www.bleepingcomputer.com/news/security/clawjacked-openclaw-websocket-hijacking-flaw/ — W24 in SOURCES.md
+12. OpenClaw/ClawHub Malicious Skills Audit (Snyk). https://snyk.io/blog/openclaw-clawhub-security-malicious-skills/ — W25 in SOURCES.md
+13. ClawHub Skills Registry. https://clawhub.dev — W40 in SOURCES.md
+
+**Foundation profiles cited as [F1]-[F4]:**
 - [F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026
 - [F2] OpenAI/ChatGPT Ecosystem Profile (reference/profiles/openai-chatgpt.md), March 18, 2026
 - [F3] Google/Gemini Ecosystem Profile (reference/profiles/google-gemini.md), March 18, 2026
 - [F4] Microsoft/Copilot Ecosystem Profile (reference/profiles/microsoft-copilot.md), March 18, 2026
-- [W20] OpenClaw GitHub Repository, https://github.com/openclaw/openclaw
-- [W21] ClawHavoc Supply Chain Attack Analysis (Koi Security), https://koi.security/blog/clawhavoc-analyzing-supply-chain-attack-clawhub
-- [W24] ClawJacked WebSocket Vulnerability, https://www.bleepingcomputer.com/news/security/clawjacked-openclaw-websocket-hijacking-flaw/
-- [W25] OpenClaw/ClawHub Malicious Skills Audit (Snyk), https://snyk.io/blog/openclaw-clawhub-security-malicious-skills/
-- [W40] ClawHub Skills Registry, https://clawhub.dev

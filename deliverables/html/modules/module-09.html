@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 09: Developer Platforms &amp; APIs — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="09">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 3: Building &amp; Automating</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 09: Developer Platforms &amp; APIs</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 09: Developer Platforms &amp; APIs</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">25-30 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-20</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#api-architectures" class="toc__link" data-toc-active>API Architectures</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#anthropic-messages-api" class="toc__link" data-toc-active>Anthropic Messages API</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openai-responses-api" class="toc__link" data-toc-active>OpenAI Responses API</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-gemini-api" class="toc__link" data-toc-active>Google Gemini API</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#azure-openai-service" class="toc__link" data-toc-active>Azure OpenAI Service</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sdk-ecosystem" class="toc__link" data-toc-active>SDK Ecosystem</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#pricing-economics" class="toc__link" data-toc-active>Pricing Economics</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cost-optimization-levers" class="toc__link" data-toc-active>Cost Optimization Levers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#provider-cost-comparison-representative-workloads" class="toc__link" data-toc-active>Provider Cost Comparison (Representative Workloads)</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#structured-outputs-and-function-calling" class="toc__link" data-toc-active>Structured Outputs and Function Calling</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#structured-outputs" class="toc__link" data-toc-active>Structured Outputs</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#function-calling" class="toc__link" data-toc-active>Function Calling</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#fine-tuning-and-customization" class="toc__link" data-toc-active>Fine-Tuning and Customization</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#additional-api-capabilities" class="toc__link" data-toc-active>Additional API Capabilities</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#speech-and-audio" class="toc__link" data-toc-active>Speech and Audio</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#image-and-video-generation" class="toc__link" data-toc-active>Image and Video Generation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#content-safety-and-moderation" class="toc__link" data-toc-active>Content Safety and Moderation</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#platform-selection-framework" class="toc__link" data-toc-active>Platform Selection Framework</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-20
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 4,000-5,000
+<strong>Prerequisites:</strong> <a href="module-00.html">Module 00: Landscape Overview</a>, <a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a></p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The four major AI providers -- Anthropic, OpenAI, Google, and Microsoft -- each expose their models through developer APIs with fundamentally different architectural philosophies. Anthropic's Messages API is explicit and content-block-oriented. OpenAI's Responses API is agentic-loop-native with automatic multi-tool orchestration. Google's Gemini API is natively multimodal with the most generous free tier. Microsoft's Azure OpenAI wraps OpenAI's models with enterprise infrastructure and governance. This module dissects the API architectures, SDK ecosystems, pricing economics, structured output capabilities, and customization options that determine which platform is optimal for a given development scenario.</p>
+
+<aside class="concept-gate" role="note" aria-label="Prerequisite check">
+  <h4 class="concept-gate__title">Before diving into developer APIs</h4>
+  <ul class="concept-gate__list">
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand function calling in AI agents and how it differs from MCP (Module 03)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I know the three model tiers (budget/mid/flagship) and their approximate pricing on Anthropic (Module 01)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand that MCP uses JSON-RPC 2.0 as its wire protocol and why that matters for integration (Module 06)</label>
+    </li>
+  </ul>
+  <a class="concept-gate__continue" href="#api-architectures">Continue to next section →</a>
+</aside>
+
+<details class="accordion">
+  <summary class="accordion__title">Why API architecture is an architectural decision, not a brand choice</summary>
+  <div class="accordion__content">
+    <p>Consider a simple task: you want your AI to search the web, analyze the results, and call an external API with structured output. On Anthropic's Messages API, you build the loop yourself -- send a request, receive a tool_use block, execute the tool, send back the result, repeat. On OpenAI's Responses API, the API itself executes built-in tools and returns the final answer with no developer loop needed. Same task, same quality of result, fundamentally different developer experience. This module explains why those architectures differ, what it costs at scale, and how to choose.</p>
+  </div>
+</details>
+<hr>
+<h2 id="api-architectures">API Architectures</h2>
+<p>The four APIs are not interchangeable wrappers around similar models. Each encodes a different opinion about how developers should interact with AI, and those opinions have material consequences for application architecture, cost, and capability.</p>
+<h3 id="anthropic-messages-api">Anthropic Messages API</h3>
+<p><strong>Base URL:</strong> <code>api.anthropic.com</code>
+<strong>Authentication:</strong> API key
+<strong>Also available via:</strong> Amazon Bedrock, Google Vertex AI, Microsoft Foundry</p>
+<p>Anthropic's Messages API is the most explicit of the four. Every response is a sequence of typed content blocks -- <code>text</code>, <code>thinking</code>, <code>tool_use</code>, <code>tool_result</code> -- that the developer parses individually. This explicitness is a design choice: when Claude reasons via <span class="glossary-term glossary-term--first-use" data-term="extended-thinking">extended thinking</span>, the thinking block is a separate, inspectable object in the response, not interleaved with the output text. When Claude decides to call a tool, the <code>tool_use</code> block contains the tool name and arguments; the developer executes the tool and sends back a <code>tool_result</code> block in the next request [F1].</p>
+<p>Key architectural characteristics:</p>
+<ul>
+<li><strong>Synchronous request/response</strong> with explicit content blocks. No built-in agentic loop -- the developer controls the tool-use cycle.</li>
+<li><strong>Server-sent events (SSE) streaming</strong> with typed events (<code>content_block_start</code>, <code>content_block_delta</code>, <code>content_block_stop</code>), enabling granular UI rendering.</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="token">Token</span> usage reported upfront</strong> in the response metadata, including input tokens, output tokens, and cache read/write tokens.</li>
+<li><strong>Fine-grained <span class="glossary-term glossary-term--first-use" data-term="prompt-caching">prompt caching</span></strong> via <code>cache_control</code> markers on message content. Cache hits cost 10% of the standard input price -- the steepest discount in the industry [F1].</li>
+<li><strong>Native web search tool</strong> (<code>web_search_20260209</code>) available as a built-in tool at $10 per 1,000 searches. Code execution tool is free when paired with web search or web fetch [F1].</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="batch-api">Batch API</span></strong> at <code>/v1/messages/batches</code> for 50% <span class="glossary-term" data-term="token">token</span> discount with async 24-hour processing [F1].</li>
+</ul>
+<p>The Messages API does not have a built-in agentic loop. If you want Claude to call multiple tools in sequence, your application must implement the loop: send a request, receive <code>tool_use</code> blocks, execute the tools, send results back, repeat until Claude returns only text. This is more work than OpenAI's Responses API but gives developers complete control over execution flow, error handling, and intermediate state.</p>
+
+<div class="worked-example" data-variant="full" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Tracing a multi-turn tool-use conversation on the Messages API</h4>
+  <div class="worked-example__problem">
+    <p>Your application needs Claude to look up today's weather for a user and respond with a natural-language summary. Walk through the full request/response cycle on the Anthropic Messages API, identifying each content block type.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Turn 1 -- User request</h5>
+      <div class="worked-example__step-content">
+        <p>You send a messages request with role: 'user' and a text content block: 'What is the weather in San Francisco today?' The tools array includes your get_weather function definition with a city parameter.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Turn 2 -- Claude returns tool_use</h5>
+      <div class="worked-example__step-content">
+        <p>Claude's response contains a content array with a single tool_use block: {type: 'tool_use', id: 'toolu_01...', name: 'get_weather', input: {city: 'San Francisco'}}. No text block yet -- Claude needs the tool result first.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Turn 3 -- Developer executes tool, sends tool_result</h5>
+      <div class="worked-example__step-content">
+        <p>Your application calls the weather API, gets the result, and sends a new message with role: 'user' containing a tool_result block: {type: 'tool_result', tool_use_id: 'toolu_01...', content: '72F, sunny, light breeze'}.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Turn 4 -- Claude returns final text</h5>
+      <div class="worked-example__step-content">
+        <p>Claude's response now contains a text content block: 'It is 72 degrees and sunny in San Francisco today with a light breeze.' The conversation is complete. Key insight: the developer controlled every step of the loop -- you chose when to execute the tool, could add error handling, logging, or intermediate processing between turns.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>The Anthropic Messages API requires exactly 4 turns (2 API calls from the developer) for a single tool-use interaction. Each turn uses explicitly typed content blocks (text, tool_use, tool_result). The developer manages the loop, which means more code but complete control over execution flow, error handling, and observability.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="openai-responses-api">OpenAI Responses API</h3>
+<p><strong>Base URL:</strong> <code>api.openai.com</code>
+<strong>Authentication:</strong> API key (project-scoped or user-scoped)
+<strong>Primary API:</strong> Responses API (replaces both Chat Completions and Assistants)</p>
+<p>OpenAI's Responses API, launched as the primary API in 2025, is designed around an agentic loop. When a model decides to use tools, the API can automatically execute built-in tools (web search, file search, code interpreter, <span class="glossary-term glossary-term--first-use" data-term="computer-use">computer use</span>) and continue the conversation without the developer making additional API calls. This is fundamentally different from Anthropic's approach: the API itself manages tool execution for built-in tools, reducing the developer's orchestration burden [F2].</p>
+<p>Key architectural characteristics:</p>
+<ul>
+<li><strong>Built-in agentic loop</strong> for built-in tools. The model calls tools, the API executes them, and the response includes the final output after all tool calls complete. For custom function calls, the developer still manages the loop.</li>
+<li><strong>Parallel function calling</strong> -- the model can invoke multiple custom functions simultaneously in a single response.</li>
+<li><strong>Remote MCP support (Beta)</strong> -- the Responses API can connect to remote MCP servers natively, treating them as tool sources [F2].</li>
+<li><strong>40-80% improved cache utilization</strong> compared to the legacy Chat Completions API, thanks to architectural optimizations in how conversation state is managed [F2].</li>
+<li><strong><span class="glossary-term" data-term="computer-use">Computer use</span></strong> is native in GPT-5.4 via the API [F2].</li>
+<li><strong>SSE streaming</strong> for real-time <span class="glossary-term" data-term="token">token</span> delivery.</li>
+</ul>
+<p>The Chat Completions API remains supported for backward compatibility, but the Assistants API -- which provided stateful, server-side conversation management -- was deprecated in August 2025 and is sunsetting in August 2026. Developers on Assistants should migrate to the Responses API [F2].</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> OpenAI's rapid API evolution (Chat Completions -> Assistants -> Responses in under two years) has created migration fatigue among developers. Evaluate the stability commitment of any API surface before deep integration.</p>
+</blockquote>
+
+<div class="worked-example" data-variant="partial" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Same task, different API: tool execution on the Responses API</h4>
+  <div class="worked-example__problem">
+    <p>The same weather lookup task, but on OpenAI's Responses API. The request includes web_search (built-in) and a custom get_calendar function. How many API calls does the developer make, and which tools does the API execute vs. the developer?</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Identify built-in vs. custom tools</h5>
+      <div class="worked-example__step-content">
+        <p>web_search is a built-in tool -- the API executes it server-side automatically. get_calendar is a custom function -- the developer must execute it.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Count developer API calls</h5>
+      <div class="worked-example__step-content">
+        <p>[Fill in: How many API calls does the developer make for this interaction?]</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Compare with Anthropic</h5>
+      <div class="worked-example__step-content">
+        <p>[Fill in: What is the key architectural difference in how each API handles the tool execution loop?]</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>For built-in tools like web_search, the developer makes 1 API call -- the API executes the search and returns the final result. For the custom get_calendar function, the developer must still execute it and make an additional call (2 total). The key difference: OpenAI automates the loop for built-in tools, reducing developer orchestration. Anthropic requires the developer to manage every tool call explicitly. Tradeoff: OpenAI is simpler but opaque; Anthropic is more work but fully transparent.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="google-gemini-api">Google Gemini API</h3>
+<p><strong>Base URL:</strong> <code>generativelanguage.googleapis.com</code> (via Google AI Studio) or Vertex AI endpoints
+<strong>Authentication:</strong> API key (AI Studio) or OAuth/Service Account (Vertex AI)</p>
+<p>The Gemini API's defining characteristic is native multimodality. Unlike Anthropic and OpenAI, where image input is bolted onto a text-first API, Gemini treats text, image, audio, and video as equally first-class input types within a single, consistent SSE structure. You can pass a video file alongside a text prompt and receive a response that reasons across both modalities [F3].</p>
+<p>Key architectural characteristics:</p>
+<ul>
+<li><strong>Native multimodal input</strong> -- text, image, audio, and video in a single request. Image, audio, and text output (audio output GA; image output on select models) [F3].</li>
+<li><strong>Consistent SSE streaming</strong> across all content types.</li>
+<li><strong>Context caching</strong> with a 90% discount on cached input tokens, but with per-hour storage fees ($1.00-$4.50 per million tokens per hour depending on model). This storage cost is unique to Google and changes the caching economics for infrequently accessed content [F3].</li>
+<li><strong>Batch processing</strong> at 50% discount with up to 24-hour latency [F3].</li>
+<li><strong>Google Search grounding</strong> -- the model can ground responses in live Google Search results, with 1,500 requests per day free and $35/1,000 prompts beyond that [F3].</li>
+<li><strong>Generous free tier</strong> -- rate-limited access to production models with no credit card required. Data from free-tier usage may be used to improve Google products [F3].</li>
+<li><strong>Code execution sandbox</strong> -- server-side Python execution for data analysis and computation [F3].</li>
+<li><strong>Live API</strong> -- real-time bidirectional audio/video streaming for conversational applications [F3].</li>
+</ul>
+<p>Google AI Studio provides a web-based prototyping environment where developers can test prompts, compare model outputs, and export code -- a convenience layer that neither Anthropic nor OpenAI matches at the same level of integration.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">Gemini Context Caching: storage cost economics</summary>
+  <div class="accordion__content">
+    <p>Google matches Anthropic's 90% cache read discount but charges per-hour storage fees ($1.00-$4.50 per million tokens per hour depending on model). This changes the break-even calculation significantly. For a 100K-token cached context accessed 100 times per hour, the storage cost is negligible (~$0.10-$0.45/hr). But for the same context accessed only once per hour, the storage fee may exceed the cache savings entirely. The break-even formula: storage fee per hour &lt; (uncached token cost - cached token cost) x tokens x calls per hour. For high-frequency, stable-context workloads, Google's caching is competitive. For variable or infrequent access patterns, the storage cost erodes the discount.</p>
+  </div>
+</details>
+<h3 id="azure-openai-service">Azure OpenAI Service</h3>
+<p><strong>Base URL:</strong> <code>&#x3C;resource-name>.openai.azure.com</code>
+<strong>Authentication:</strong> Azure Active Directory (AAD), Managed Identity, or API key</p>
+<p>Azure OpenAI is not a separate API -- it is OpenAI's API wrapped in Azure's enterprise infrastructure. The <span class="glossary-term" data-term="token">token</span>-level pricing is identical to OpenAI direct, but total cost typically runs an estimated 15-40% higher due to Azure support plans, data transfer, storage, virtual network infrastructure, and the overhead of Azure resource management [F4].</p>
+<p>Key architectural characteristics:</p>
+<ul>
+<li><strong>Azure Active Directory and Managed Identity authentication</strong> -- eliminating API key management for Azure-native applications.</li>
+<li><strong>Virtual Network (VNet) and private endpoint support</strong> -- models can be accessed without traversing the public internet.</li>
+<li><strong>Built-in content filtering</strong> beyond OpenAI's standard moderation, with configurable severity thresholds.</li>
+<li><strong>Regional data residency</strong> -- deploy models in specific Azure regions for data sovereignty compliance.</li>
+<li><strong>Provisioned Throughput Units (PTUs)</strong> -- reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads [F4].</li>
+<li><strong>Microsoft Foundry</strong> (formerly Azure AI Studio) provides access to 11,000+ models from OpenAI, Anthropic, Meta, Mistral, DeepSeek, and others, with serverless pay-as-you-go or managed compute deployment options [F4].</li>
+</ul>
+<p>Azure OpenAI makes sense when you already run on Azure, need enterprise compliance controls (HIPAA, FedRAMP, SOC 2), or require private networking. If none of those apply, the overhead is pure cost with no capability gain.</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Compare the Anthropic and OpenAI approaches to tool execution. Why might a developer prefer the explicit loop (Anthropic) over the automatic loop (OpenAI), even though it requires more code?</p>
+  <label for="se-m09-azure-openai-service" class="sr-only">Your explanation</label>
+  <textarea id="se-m09-azure-openai-service" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m09-azure-openai-service">Compare with Expert Answer</button>
+  <div id="se-answer-m09-azure-openai-service" class="self-explain__expert" hidden>
+    <p>The explicit loop gives developers complete control over error handling, intermediate state, retry logic, and tool execution environment. In production systems, this matters: you can log every tool call, implement circuit breakers, validate tool outputs before sending them back to the model, and maintain full observability of the interaction. The automatic loop is simpler but opaque -- if a built-in tool fails or returns unexpected results, you have limited ability to intervene. For prototyping and simple applications, OpenAI's approach reduces boilerplate. For production systems where failure handling and auditability are critical, Anthropic's explicit control is often preferable.</p>
+  </div>
+</div>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Azure OpenAI's token-level pricing is identical to OpenAI direct. The premium comes from Azure infrastructure costs: support plans, virtual network configuration, data transfer fees, storage, and the general overhead of Azure resource management. This premium is justified only when you need enterprise compliance (HIPAA, FedRAMP), private networking, or Azure ecosystem integration." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Why does Azure OpenAI cost an estimated 15-40% more than direct OpenAI API access despite identical per-token pricing?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="0" />
+          <span class="quiz__choice-label">Azure charges higher per-token rates</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="1" />
+          <span class="quiz__choice-label">Azure support plans, VNet, data transfer, storage, and resource management overhead</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="2" />
+          <span class="quiz__choice-label">Azure uses different models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="3" />
+          <span class="quiz__choice-label">Azure requires annual contracts</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="OpenAI's Responses API automatically executes built-in tools (web search, code interpreter, computer use) server-side and returns the final result. The developer does not need to manage the tool-execution loop for these tools. Anthropic requires the developer to manage every tool call explicitly." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which API provides a built-in agentic loop for its native tools, reducing the developer's orchestration burden?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic Messages API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI Responses API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="2" />
+          <span class="quiz__choice-label">Google Gemini API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-azure-openai-service-quiz" value="3" />
+          <span class="quiz__choice-label">Azure OpenAI Service</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<details class="accordion">
+  <summary class="accordion__title">A tale of two design philosophies</summary>
+  <div class="accordion__content">
+    <p>Anthropic makes you manage the tool-use loop yourself. OpenAI automates it. Neither approach is wrong -- they reflect fundamentally different design philosophies.</p>
+  </div>
+</details>
+<hr>
+<h2 id="sdk-ecosystem">SDK Ecosystem</h2>
+<p>SDK breadth and quality vary significantly across providers. OpenAI has the widest official coverage, Google the broadest language support, and Anthropic the most focused.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Anthropic</th><th>OpenAI</th><th>Google</th><th>Azure OpenAI</th></tr></thead><tbody><tr><td><strong>Python</strong></td><td><code>anthropic</code> (GA)</td><td><code>openai</code> (GA)</td><td><code>google-genai</code> (GA)</td><td><code>openai</code> + Azure config (GA)</td></tr><tr><td><strong>TypeScript/Node.js</strong></td><td><code>@anthropic-ai/sdk</code> (GA)</td><td><code>openai</code> (GA)</td><td><code>@google/genai</code> (GA)</td><td><code>openai</code> + Azure config (GA)</td></tr><tr><td><strong>Go</strong></td><td>Community</td><td><code>openai-go</code> (GA)</td><td><code>google-genai</code> (GA)</td><td>Via <code>openai-go</code></td></tr><tr><td><strong>Java</strong></td><td>Community</td><td><code>openai-java</code> (GA)</td><td>Via <span class="glossary-term glossary-term--first-use" data-term="firebase-genkit">Firebase Genkit</span></td><td><code>openai-java</code> (GA)</td></tr><tr><td><strong>.NET/C#</strong></td><td>Community</td><td><code>openai-dotnet</code> (GA)</td><td>Community</td><td><code>Azure.AI.OpenAI</code> (GA)</td></tr><tr><td><strong>Swift</strong></td><td>Community</td><td>Community</td><td><code>google-genai</code> (GA)</td><td>Community</td></tr><tr><td><strong>Kotlin</strong></td><td>Community</td><td>Community</td><td><code>google-genai</code> (GA)</td><td>Community</td></tr><tr><td><strong>Dart</strong></td><td>Community</td><td>Community</td><td><code>google-genai</code> (GA)</td><td>Community</td></tr><tr><td><strong><span class="glossary-term glossary-term--first-use" data-term="agent-sdk">Agent SDK</span></strong></td><td>Python, TypeScript (GA)</td><td>Python, Node.js (GA)</td><td>Python (ADK) (GA)</td><td>Via OpenAI SDK</td></tr></tbody></table>
+<p>Anthropic's SDK strategy is deliberately narrow: official support for Python and TypeScript, with an <span class="glossary-term" data-term="agent-sdk">Agent SDK</span> for building agentic applications. This reflects a philosophy of depth over breadth -- the official SDKs are well-maintained and feature-complete, but teams working in Go, Java, or .NET must rely on community packages or raw HTTP [F1].</p>
+<p>OpenAI's SDK ecosystem is the most mature, with official packages across Python, TypeScript, Go, Java, and .NET. The <code>openai</code> Python and TypeScript packages have native support for Pydantic (Python) and Zod (TypeScript) schema validation, making structured output workflows seamless [F2].</p>
+<p>Google's SDK support is the broadest, covering Python, Node.js, Go, Swift, Kotlin, and Dart -- reflecting Google's need to support Android (Kotlin), iOS (Swift), and Flutter (Dart) development. <span class="glossary-term" data-term="firebase-genkit">Firebase Genkit</span> provides a full-stack AI application framework for JavaScript/TypeScript and Go, with Python in alpha [F3].</p>
+<p>Azure OpenAI uses OpenAI's SDKs with Azure-specific configuration (endpoint URL, authentication). The .NET SDK (<code>Azure.AI.OpenAI</code>) is the exception -- it is Azure-native and tightly integrated with the Azure SDK ecosystem [F4].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="OpenAI offers openai-go (GA) and Google offers google-genai for Go (GA). Anthropic's SDK strategy is deliberately narrow -- official support for Python and TypeScript only. Go, Java, and .NET teams must use community packages or raw HTTP for Anthropic integration." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Your team builds primarily in Go and needs official SDK support. Which providers offer official Go SDKs?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-sdk-ecosystem-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic and OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-sdk-ecosystem-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI and Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-sdk-ecosystem-quiz" value="2" />
+          <span class="quiz__choice-label">Google and Azure OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-sdk-ecosystem-quiz" value="3" />
+          <span class="quiz__choice-label">All four providers</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="pricing-economics">Pricing Economics</h2>
+<p>Model pricing is covered comprehensively in <a href="module-01.html">Module 01</a>. This section focuses on the cost optimization levers that matter at production scale: caching, batching, model tiering, and the economic crossover points between providers.</p>
+<h3 id="cost-optimization-levers">Cost Optimization Levers</h3>
+<p><strong>1. Model selection (60-80% savings)</strong></p>
+<p>The single largest cost lever. Choosing Haiku 4.5 over Opus 4.6 for a classification task reduces input costs by 80% (from $5 to $1 per MTok) and output costs by 80% (from $25 to $5 per MTok). Similarly, GPT-5.4 Nano ($0.20/$1.25) versus GPT-5.4 ($2.50/$10+) saves approximately 88-92% on <span class="glossary-term" data-term="token">token</span> costs. Every API call that uses a flagship model should be justified by task complexity [F1][F2].</p>
+<p><strong>2. <span class="glossary-term" data-term="prompt-caching">Prompt caching</span></strong></p>
+<p>All three direct providers offer <span class="glossary-term" data-term="prompt-caching">prompt caching</span>, but the economics differ materially:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Provider</th><th>Cache Hit Discount</th><th>Storage Cost</th><th>Cache Duration</th><th>Mechanism</th></tr></thead><tbody><tr><td>Anthropic</td><td>90% (cache hits cost 10% of input)</td><td>None</td><td>5-minute, 1-hour, or persistent (developer-selected)</td><td>Explicit <code>cache_control</code> markers; 25% write premium on first cache write</td></tr><tr><td>Google</td><td>90% (cached reads)</td><td>$1.00-$4.50/MTok/hour</td><td>Developer-controlled TTL</td><td>Explicit caching API</td></tr><tr><td>OpenAI</td><td>50% (automatic)</td><td>None</td><td>Automatic</td><td>Automatic prefix matching</td></tr></tbody></table>
+<p>Anthropic's caching is the most aggressive discount (90%) with no storage fees and the most granular duration control -- developers choose 5-minute, 1-hour, or persistent cache lifetimes to match usage patterns (see <a href="module-02.html">Module 02</a> for detailed caching strategies). Google matches the 90% read discount but charges per-hour storage fees, which can erode savings for infrequently accessed caches. OpenAI's caching is automatic -- no developer effort -- but only offers a 50% discount [W9][F2][F3].</p>
+<p><strong>Practical implication:</strong> For applications with stable system prompts or repeated document context, Anthropic's caching delivers the best economics. For variable workloads where cache management overhead is undesirable, OpenAI's automatic caching is simplest. Google's model works best for high-frequency access patterns where the per-hour storage cost is amortized across many requests.</p>
+<p><strong>3. Batch processing (50% savings)</strong></p>
+<p>All three providers offer batch APIs with approximately 50% discount on <span class="glossary-term" data-term="token">token</span> costs, accepting up to 24-hour latency:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Provider</th><th>Batch Discount</th><th>Max Latency</th><th>Endpoint</th></tr></thead><tbody><tr><td>Anthropic</td><td>50% input + output</td><td>24 hours</td><td><code>/v1/messages/batches</code></td></tr><tr><td>OpenAI</td><td>50% input + output</td><td>24 hours</td><td><span class="glossary-term" data-term="batch-api">Batch API</span></td></tr><tr><td>Google</td><td>50% input + output</td><td>24 hours</td><td><span class="glossary-term" data-term="batch-api">Batch API</span></td></tr></tbody></table>
+<p>Batch processing is ideal for offline workloads: document classification, content moderation pipelines, bulk summarization, <span class="glossary-term glossary-term--first-use" data-term="embedding">embedding</span> generation, and evaluation runs. At scale, combining batch processing with model tiering can reduce costs by 90%+ compared to synchronous flagship model calls [F1][F2][F3].</p>
+<p><strong>4. Retrieval scope limits</strong></p>
+<p>For RAG-heavy applications, the amount of context retrieved per query directly impacts cost. Reducing retrieval from 20 chunks to 5 chunks saves 75% on input <span class="glossary-term" data-term="token">token</span> costs. This is an architectural decision that compounds with every other optimization.</p>
+
+<figure class="diagram diagram--chart" id="m09-2" role="img" aria-label="Waterfall chart showing cumulative API cost optimization for a hypothetical 1M-token-per-day workload starting at $100 baseline. Model selection reduces cost by 60-80% (largest lever), bringing the bar down to approximately $30. Prompt caching adds a further 10-90% reduction on remaining cost. Batch processing saves an additional 50% on eligible offline workloads. Retrieval scope optimization provides variable additional savings. The final optimized cost is approximately $5-15, representing a 85-95% total reduction from baseline.">
+  <canvas data-chart-type="bar" data-chart-config='{"labels":["Baseline","Model Selection","Prompt Caching","Batch Processing","Retrieval Scope","Optimized Cost"],"datasets":[{"label":"Base","data":[0,30,18,12,8,0],"backgroundColor":"transparent","borderWidth":0,"stack":"waterfall"},{"label":"Savings","data":[0,-70,-12,-6,-4,0],"backgroundColor":["transparent","#ef4444","#f97316","#eab308","#84cc16","transparent"],"borderWidth":0,"stack":"waterfall"},{"label":"Cost","data":[100,0,0,0,0,8],"backgroundColor":["#6B7280","transparent","transparent","transparent","transparent","#1B4D8E"],"borderWidth":0,"stack":"waterfall"}],"annotations":[{"label":"$100","position":"Baseline"},{"label":"-70% ($70)","position":"Model Selection"},{"label":"-40% ($12)","position":"Prompt Caching"},{"label":"-50% ($6)","position":"Batch Processing"},{"label":"-variable ($4)","position":"Retrieval Scope"},{"label":"$8 final","position":"Optimized Cost"}]}'></canvas>
+  <figcaption>API Cost Optimization Waterfall</figcaption>
+</figure>
+
+<div class="worked-example" data-variant="full" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Calculating prompt caching savings across providers</h4>
+  <div class="worked-example__problem">
+    <p>Your application sends 10,000 API calls per day, each with a 4,000-token system prompt (identical across all calls) and 2,000 tokens of variable user input. Calculate the monthly input token cost with and without prompt caching on Anthropic, Google, and OpenAI. Assume Sonnet 4.6 ($3/MTok input), Gemini 2.5 Pro ($1.25/MTok input), and GPT-5.4 ($2.50/MTok input).</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Calculate baseline monthly input cost (no caching)</h5>
+      <div class="worked-example__step-content">
+        <p>Total input tokens per call: 6,000 (4K system + 2K user). Monthly calls: 300,000. Monthly input tokens: 1.8B tokens = 1,800 MTok. Anthropic: 1,800 x $3 = $5,400. Google: 1,800 x $1.25 = $2,250. OpenAI: 1,800 x $2.50 = $4,500.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Calculate Anthropic cached cost</h5>
+      <div class="worked-example__step-content">
+        <p>Cacheable tokens: 4,000 per call (system prompt). First call: 25% write premium on 4K tokens. Subsequent calls: 90% discount on 4K tokens (pay 10%). Variable 2K tokens at full price. Monthly: cache hits cost 0.1 x $3 x 1,200 MTok = $360 for cached portion + $3 x 600 MTok = $1,800 for variable. Total: ~$2,160. Savings: $3,240 (60%).</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Calculate Google cached cost</h5>
+      <div class="worked-example__step-content">
+        <p>Same 90% read discount: $0.125/MTok for cached tokens. But add storage: ~$1.00/MTok/hour for the 4K-token cache. At 4K tokens, storage cost is negligible (~$0.004/hr). Monthly cached input: $0.125 x 1,200 = $150 + full-price variable: $1.25 x 600 = $750 + storage: ~$3. Total: ~$903. Savings: $1,347 (60%).</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Calculate OpenAI cached cost</h5>
+      <div class="worked-example__step-content">
+        <p>Automatic 50% discount on cached prefix tokens. No developer effort. Cached portion: 0.5 x $2.50 x 1,200 = $1,500 + variable: $2.50 x 600 = $1,500. Total: $3,000. Savings: $1,500 (33%).</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>Monthly input cost comparison: Anthropic $2,160 (60% savings), Google $903 (60% savings, lowest absolute), OpenAI $3,000 (33% savings, but zero effort). Anthropic and Google deliver the steepest discounts. Google is cheapest in absolute terms due to lower base pricing. OpenAI's automatic caching requires no code changes but delivers a smaller discount. For this high-frequency, stable-prompt pattern, Anthropic's explicit caching + no storage fees provides the best economics-to-effort ratio.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="provider-cost-comparison-representative-workloads">Provider Cost Comparison (Representative Workloads)</h3>
+<p>For a concrete comparison, consider three common workloads priced at each provider's best-fit model:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Workload</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead><tbody><tr><td><strong>Simple classification</strong> (100 input, 10 output tokens per call, 1M calls)</td><td>Haiku 4.5: $0.15</td><td>GPT-5.4 Nano: $0.03</td><td>Gemini 3.1 Flash-Lite: $0.04</td></tr><tr><td><strong>Code generation</strong> (2K input, 1K output, 10K calls)</td><td>Sonnet 4.6: $0.21</td><td>GPT-5.4 Mini: $0.06</td><td>Gemini 3 Flash: $0.04</td></tr><tr><td><strong>Complex reasoning</strong> (10K input, 4K output, 1K calls)</td><td>Opus 4.6: $0.15</td><td>GPT-5.4: $0.065</td><td>Gemini 2.5 Pro: $0.05</td></tr></tbody></table>
+<p>These figures use standard (non-cached, non-batched) pricing. Actual costs vary significantly with caching patterns, batch eligibility, and output length variability. At every tier, Google offers the lowest raw <span class="glossary-term" data-term="token">token</span> prices, followed by OpenAI, then Anthropic. But raw price is not the only variable -- output quality, reliability, and task-specific performance determine the true cost-per-useful-output.</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> <span class="glossary-term" data-term="token">Token</span> pricing changes frequently. GPT-5.4's exact pricing is marked as approximate (~$2.50/$10+) in OpenAI's documentation and may shift. Always verify against official pricing pages before making procurement decisions.</p>
+</blockquote>
+
+<div class="worked-example" data-variant="guided" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Optimizing a RAG application's API costs</h4>
+  <div class="worked-example__problem">
+    <p>Your RAG application retrieves 20 document chunks (500 tokens each) per query, processes them with Opus 4.6, and returns a classification result. You handle 50,000 queries per month. Current monthly cost is high. Optimize by considering model tier, retrieval scope, caching, and batch eligibility.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Hint 1 -- Model selection is the biggest lever</h5>
+      <div class="worked-example__step-content">
+        <p>Classification does not require Opus 4.6's reasoning capabilities. Which model tier is appropriate for this task?</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Hint 2 -- Do you need all 20 chunks?</h5>
+      <div class="worked-example__step-content">
+        <p>Reducing retrieval from 20 chunks to 5 chunks saves 75% on input tokens. Would 5 highly relevant chunks suffice for classification?</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Hint 3 -- Is this latency-sensitive?</h5>
+      <div class="worked-example__step-content">
+        <p>If classification results do not need to be real-time, batch processing offers a 50% discount on all tokens.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Full optimization</h5>
+      <div class="worked-example__step-content">
+        <p>Apply all three: switch to Haiku 4.5 (80% cheaper than Opus), reduce retrieval to 5 chunks (75% fewer input tokens), and batch the workload (50% discount). Combined savings: roughly 95% reduction from the original cost.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>Original: 50K queries x (10K retrieved tokens + 100 output tokens) x Opus 4.6 pricing. After optimization: (1) Switch to Haiku 4.5 -- input drops from $5/MTok to $1/MTok, output from $25/MTok to $5/MTok. (2) Reduce retrieval to 5 chunks -- input per query drops from 10K to 2.5K tokens. (3) Batch processing -- 50% discount on remaining costs. Result: ~95% cost reduction while maintaining classification accuracy that Haiku handles well.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+
+<details class="accordion">
+  <summary class="accordion__title">The $10,000-to-$1,500 optimization</summary>
+  <div class="accordion__content">
+    <p>A pipeline spending $10,000/month on API calls can often be reduced to $1,500 with four optimization techniques applied in sequence: model selection (route simple tasks to budget models), prompt caching (eliminate redundant input processing), batch processing (accept latency for offline workloads), and retrieval scope reduction (retrieve fewer, more relevant chunks). Each lever compounds with the others.</p>
+  </div>
+</details>
+<hr>
+<h2 id="structured-outputs-and-function-calling">Structured Outputs and Function Calling</h2>
+<p>Structured outputs -- the ability to constrain model responses to a specific JSON schema -- and function calling -- the ability for models to invoke developer-defined tools -- are foundational for production applications. All four APIs support both, but with meaningful differences in guarantees and developer experience.</p>
+<h3 id="structured-outputs">Structured Outputs</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead><tbody><tr><td><strong>JSON mode</strong></td><td>Via <span class="glossary-term glossary-term--first-use" data-term="tool-use">tool use</span> with schema</td><td>JSON Mode (legacy)</td><td>JSON mode</td></tr><tr><td><strong>Schema enforcement</strong></td><td>Public Beta (<code>strict: true</code> on tool schemas)</td><td>GA (<code>strict: true</code> in Structured Outputs)</td><td>GA (schema enforcement in <code>response_schema</code>)</td></tr><tr><td><strong>Schema validation</strong></td><td>Guaranteed conformance in strict mode</td><td>Guaranteed conformance in strict mode</td><td>Guaranteed conformance</td></tr><tr><td><strong>Native SDK types</strong></td><td>Manual schema definition</td><td>Pydantic (Python), Zod (TypeScript)</td><td>Manual schema definition</td></tr></tbody></table>
+<p>OpenAI's structured outputs are the most mature: <code>strict: true</code> guarantees that every response conforms to the provided JSON schema, and the Python/TypeScript SDKs integrate natively with Pydantic and Zod for type-safe schema definition. This eliminates the need for post-hoc parsing and validation [F2].</p>
+<p>Anthropic achieves structured output primarily through <span class="glossary-term" data-term="tool-use">tool use</span> -- you define a tool whose input schema matches your desired output format, and Claude "calls" the tool with conformant JSON. The <code>strict: true</code> option (Public Beta) adds guaranteed schema validation. This is functionally equivalent but conceptually different: you are using the tool-use mechanism as a structured output mechanism [F1].</p>
+<p>Google's Gemini API supports <code>response_schema</code> for direct schema enforcement on responses, similar to OpenAI's approach [F3].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="By routing structured output through the tool-use mechanism, Anthropic provides schema enforcement (via strict: true in Public Beta), reusability across calls, and consistency with existing tool-use code. The tradeoff is that it is conceptually different from OpenAI's direct response_format approach, but functionally equivalent." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Anthropic achieves structured output primarily through tool use -- you define a 'tool' whose input schema matches your desired output format. What advantage does this approach provide?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-structured-outputs-quiz" value="0" />
+          <span class="quiz__choice-label">It is faster than direct JSON mode</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-structured-outputs-quiz" value="1" />
+          <span class="quiz__choice-label">It unifies the mechanism for tool calling and structured output, providing schema enforcement, reusability, and backward compatibility</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-structured-outputs-quiz" value="2" />
+          <span class="quiz__choice-label">It avoids JSON entirely</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-structured-outputs-quiz" value="3" />
+          <span class="quiz__choice-label">It works without defining a schema</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="function-calling">Function Calling</h3>
+<p>All providers support function calling with JSON Schema definitions, but the execution models differ:</p>
+<ul>
+<li><strong>Anthropic:</strong> Single-turn <span class="glossary-term" data-term="tool-use">tool use</span>. Claude returns <code>tool_use</code> content blocks; the developer executes and returns <code>tool_result</code>. Multiple tools can be called per turn, but the developer manages the loop [F1].</li>
+<li><strong>OpenAI:</strong> Parallel function calling (GA). The model can invoke multiple functions simultaneously. Built-in tools (web search, code interpreter) are executed server-side by the API. Custom functions require developer execution [F2].</li>
+<li><strong>Google:</strong> Function calling with automatic function execution available. Similar to OpenAI, Google can execute some built-in tools (Google Search grounding, code execution) server-side [F3].</li>
+<li><strong>Azure OpenAI:</strong> Mirrors OpenAI's function calling capabilities exactly [F4].</li>
+</ul>
+<p>For complex agentic applications, OpenAI's Agents SDK, Anthropic's <span class="glossary-term" data-term="agent-sdk">Agent SDK</span>, and Google's <span class="glossary-term glossary-term--first-use" data-term="agent">Agent</span> Development Kit (ADK) provide higher-level abstractions over raw function calling -- handling tool execution loops, error recovery, and multi-<span class="glossary-term" data-term="agent">agent</span> handoffs. These are covered in <a href="module-04.html">Module 04: <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a>.</p>
+
+<div class="worked-example" data-variant="partial" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Defining parallel function calls on the OpenAI Responses API</h4>
+  <div class="worked-example__problem">
+    <p>You need an API call that invokes two functions in parallel: get_weather(city: string) and get_calendar(date: string). Write the tools array definition for these two functions using JSON Schema on the OpenAI Responses API.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Define the first function</h5>
+      <div class="worked-example__step-content">
+        <p>{type: 'function', function: {name: 'get_weather', description: 'Get current weather for a city', parameters: {type: 'object', properties: {city: {type: 'string', description: 'City name'}}, required: ['city']}}}</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Define the second function</h5>
+      <div class="worked-example__step-content">
+        <p>[Fill in: Define get_calendar following the same pattern, with a date parameter of type string]</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Combine into tools array</h5>
+      <div class="worked-example__step-content">
+        <p>[Fill in: How does the complete tools array look with both functions?]</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>tools: [{type: 'function', function: {name: 'get_weather', description: 'Get current weather for a city', parameters: {type: 'object', properties: {city: {type: 'string'}}, required: ['city']}}}, {type: 'function', function: {name: 'get_calendar', description: 'Get calendar events for a date', parameters: {type: 'object', properties: {date: {type: 'string', description: 'Date in YYYY-MM-DD format'}}, required: ['date']}}}]. When the model decides to call both functions, it returns two function_call items in a single response. The developer executes both (in parallel or sequentially) and returns both results.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<hr>
+<h2 id="fine-tuning-and-customization">Fine-Tuning and Customization</h2>
+<p>The providers diverge sharply on <span class="glossary-term glossary-term--first-use" data-term="fine-tuning">fine-tuning</span> availability. This is one of the clearest differentiators in the developer platform comparison.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>Anthropic</th><th>OpenAI</th><th>Google</th><th>Azure OpenAI</th></tr></thead><tbody><tr><td><strong><span class="glossary-term" data-term="fine-tuning">Fine-tuning</span></strong></td><td>Not publicly available</td><td>GA (GPT-4o, GPT-4o-mini; LoRA adapters; reinforcement <span class="glossary-term" data-term="fine-tuning">fine-tuning</span>)</td><td>GA (Gemini 2.5 Flash via Vertex AI SFT)</td><td>GA (GPT-4o, GPT-4o-mini)</td></tr><tr><td><strong>Embeddings API</strong></td><td>Not offered</td><td>GA (<code>text-embedding-3-large</code>, <code>text-embedding-3-small</code>)</td><td>Preview (text, image, audio, video)</td><td>GA (same as OpenAI)</td></tr><tr><td><strong>System prompts</strong></td><td>GA (rich system prompt support)</td><td>GA</td><td>GA</td><td>GA</td></tr><tr><td><strong>Custom personas</strong></td><td>Via system prompts + <span class="glossary-term glossary-term--first-use" data-term="skills">Skills</span></td><td>Custom GPTs, Codex <span class="glossary-term" data-term="skills">Skills</span></td><td>Gems</td><td><span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span> agents</td></tr><tr><td><strong>RAG support</strong></td><td>Via <span class="glossary-term glossary-term--first-use" data-term="context-window">context window</span> + MCP</td><td>Built-in file search in Responses API</td><td>Context caching + Google Search grounding</td><td>Azure AI Search integration</td></tr></tbody></table>
+<p><strong>Anthropic</strong> has no publicly available <span class="glossary-term" data-term="fine-tuning">fine-tuning</span>. Their position is that prompt engineering, system prompts, and retrieval-augmented generation cover most customization needs. For applications that genuinely require <span class="glossary-term" data-term="fine-tuning">fine-tuning</span> -- domain-specific terminology, specialized output formats, behavioral alignment -- this is a hard limitation that may rule out Anthropic's API [F1].</p>
+<p><strong>OpenAI</strong> has the most mature <span class="glossary-term" data-term="fine-tuning">fine-tuning</span> platform: supervised <span class="glossary-term" data-term="fine-tuning">fine-tuning</span> for GPT-4o and GPT-4o-mini, LoRA adapters for parameter-efficient training, and reinforcement <span class="glossary-term" data-term="fine-tuning">fine-tuning</span> for aligning models to specific evaluation criteria. Fine-tuned models are accessed via the same API at customized pricing [F2].</p>
+<p><strong>Google</strong> offers supervised <span class="glossary-term" data-term="fine-tuning">fine-tuning</span> for Gemini 2.5 Flash on Vertex AI, plus the open-source Gemma 3 family (1B-27B parameters) that can be fine-tuned locally without any API dependency [F3].</p>
+<p><strong>Embeddings</strong> follow a similar pattern. OpenAI's <code>text-embedding-3-large</code> and <code>text-embedding-3-small</code> are the industry standard for vector search applications. Google offers multimodal embeddings (text, image, audio, video) in Preview. Anthropic does not offer embeddings at all -- developers using Claude for generation typically pair it with OpenAI or open-source embeddings (e.g., from Sentence Transformers or Cohere) for retrieval [F1][F2][F3].</p>
+
+<details class="accordion">
+  <summary class="accordion__title">When fine-tuning is (and is not) necessary</summary>
+  <div class="accordion__content">
+    <p>Fine-tune when you need domain-specific terminology that prompt engineering cannot teach (e.g., medical coding systems, legal citation formats), specialized output formats that resist prompt-based formatting, or behavioral alignment that system prompts cannot reliably enforce. For most use cases, RAG plus prompt engineering covers 90%+ of customization needs at lower cost, faster iteration, and no training pipeline to maintain. Fine-tuning locks you into a model version -- when the base model updates, your fine-tune may need retraining. Consider fine-tuning only after exhausting prompt engineering, few-shot examples, and RAG.</p>
+  </div>
+</details>
+<hr>
+<h2 id="additional-api-capabilities">Additional API Capabilities</h2>
+<p>Beyond the core text generation APIs, each platform offers specialized capabilities that may drive platform selection for specific use cases.</p>
+<h3 id="speech-and-audio">Speech and Audio</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead><tbody><tr><td><strong>Speech-to-text</strong></td><td>Not offered</td><td>GA (gpt-4o-transcribe, whisper-1, diarization)</td><td>GA (via Gemini multimodal input)</td></tr><tr><td><strong>Text-to-speech</strong></td><td>Not offered</td><td>GA (gpt-4o-mini-tts, tts-1/tts-1-hd; 13 voices; prompt-controllable tone)</td><td>GA (Flash TTS, Pro TTS; 24+ languages; multi-speaker)</td></tr><tr><td><strong>Real-time voice</strong></td><td>Not offered</td><td>GA (gpt-realtime via WebSocket)</td><td>GA (Live API; bidirectional audio/video)</td></tr></tbody></table>
+<p>OpenAI and Google both offer comprehensive speech APIs. Anthropic offers none -- voice applications built on Claude require third-party speech services (e.g., ElevenLabs, which has an <span class="glossary-term glossary-term--first-use" data-term="mcp-server">MCP server</span> for direct integration) [F1][F2][F3].</p>
+<h3 id="image-and-video-generation">Image and Video Generation</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead><tbody><tr><td><strong>Image generation</strong></td><td>Not offered</td><td>GA (GPT Image 1.5)</td><td>GA (Imagen 4 via API)</td></tr><tr><td><strong>Video generation</strong></td><td>Not offered</td><td>GA (Sora 2 via API, consumer only)</td><td>Preview (Veo 3.1 via API)</td></tr><tr><td><strong>Image understanding</strong></td><td>GA (vision on all models)</td><td>GA (GPT-5.4 vision)</td><td>GA (native multimodal)</td></tr></tbody></table>
+<p>Anthropic's API is text-and-image-input only. It does not generate images, video, or audio. For applications requiring multimodal generation, OpenAI and Google are the only first-party options among the major providers [F1][F2][F3].</p>
+<h3 id="content-safety-and-moderation">Content Safety and Moderation</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Anthropic</th><th>OpenAI</th><th>Google</th><th>Azure OpenAI</th></tr></thead><tbody><tr><td><strong>Built-in safety</strong></td><td>Constitutional AI approach; lowest hallucination rates</td><td>Moderation endpoint (free)</td><td>Safety settings per request</td><td>Configurable content filtering with severity thresholds</td></tr><tr><td><strong>Moderation API</strong></td><td>Not offered as standalone</td><td>GA (free endpoint)</td><td>Via Vertex AI</td><td>Azure Content Safety service</td></tr><tr><td><strong>Configurable filters</strong></td><td>Not offered</td><td>Limited</td><td>Per-request safety settings</td><td>Category-level severity thresholds</td></tr></tbody></table>
+<p>Azure OpenAI's configurable content filtering is the most granular, allowing enterprise customers to tune safety thresholds by category (hate, violence, sexual, self-harm) at different severity levels. This is particularly relevant for healthcare, legal, and creative applications where default filters may be too restrictive [F4].</p>
+<hr>
+<h2 id="platform-selection-framework">Platform Selection Framework</h2>
+<p>Choosing a developer platform is a function of requirements, not absolute quality. Use these decision criteria:</p>
+<p><strong>Choose Anthropic when:</strong></p>
+<ul>
+<li>Writing quality and nuanced reasoning are primary requirements</li>
+<li>You need the steepest <span class="glossary-term" data-term="prompt-caching">prompt caching</span> discount (90%) for repetitive workloads</li>
+<li>MCP-native architecture is your integration strategy</li>
+<li><span class="glossary-term" data-term="fine-tuning">Fine-tuning</span> and embeddings are not required</li>
+<li>Your SDK needs are Python or TypeScript</li>
+</ul>
+<p><strong>Choose OpenAI when:</strong></p>
+<ul>
+<li>You need the broadest API surface (text, speech, image, video, embeddings, <span class="glossary-term" data-term="fine-tuning">fine-tuning</span>)</li>
+<li>Structured outputs with Pydantic/Zod integration are important</li>
+<li>You want automatic caching with zero developer effort</li>
+<li>SDK support across Go, Java, .NET matters</li>
+<li>The Agents SDK's multi-<span class="glossary-term" data-term="agent">agent</span> <span class="glossary-term glossary-term--first-use" data-term="handoff">handoff</span> pattern fits your architecture</li>
+</ul>
+<p><strong>Choose Google when:</strong></p>
+<ul>
+<li>Native multimodal input (video, audio alongside text) is required</li>
+<li>You need Google Search grounding for factual accuracy</li>
+<li>Budget-tier pricing (Flash-Lite, free tier) is critical</li>
+<li>Your application targets Android/iOS/Flutter (Swift, Kotlin, Dart SDKs)</li>
+<li>Context caching economics favor your access pattern (high-frequency, long-TTL)</li>
+</ul>
+<p><strong>Choose Azure OpenAI when:</strong></p>
+<ul>
+<li>Enterprise compliance (HIPAA, FedRAMP, SOC 2) is non-negotiable</li>
+<li>Private networking (VNet, private endpoints) is required</li>
+<li>You need model diversity from a single platform (11,000+ models via Foundry)</li>
+<li>Azure Active Directory integration is your identity strategy</li>
+<li>Provisioned throughput with guaranteed latency is needed</li>
+</ul>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="OpenAI is the only provider offering all four: speech-to-text (gpt-4o-transcribe, whisper-1), image generation (GPT Image 1.5), fine-tuning (GPT-4o, GPT-4o-mini), and structured outputs (GA with strict mode). Anthropic lacks speech, image generation, and fine-tuning. Google lacks mature fine-tuning for flagship models." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A startup needs speech-to-text, image generation, fine-tuning, and structured outputs -- all from a single provider's API. Which provider can deliver all four?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="3" />
+          <span class="quiz__choice-label">None -- you must use multiple providers</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="OpenAI's structured outputs integrate natively with Pydantic and Zod for type-safe schema definition, eliminating post-hoc parsing. Anthropic achieves structured output through tool use (functionally equivalent but conceptually different). Google uses response_schema directly." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform offers the smoothest developer experience for structured outputs with native Pydantic (Python) and Zod (TypeScript) integration?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="3" />
+          <span class="quiz__choice-label">Azure OpenAI</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="For a high-frequency, stable-prompt pattern, Anthropic's 90% discount with no storage fees and explicit cache lifetime control provides the best economics. Google matches the 90% discount but adds storage fees. OpenAI's automatic caching is simplest but only 50%." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Your application uses a stable 4,000-token system prompt with 10,000 calls per day. Which provider's caching strategy delivers the best economics for this pattern?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="0" />
+          <span class="quiz__choice-label">OpenAI (50% automatic discount)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="1" />
+          <span class="quiz__choice-label">Google (90% discount + per-hour storage fees)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="2" />
+          <span class="quiz__choice-label">Anthropic (90% discount, no storage fees, explicit cache control)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="3" />
+          <span class="quiz__choice-label">All three are equivalent</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="OpenAI's Responses API executes built-in tools server-side automatically. Anthropic requires developer-managed loops. Google offers selective server-side execution (Search grounding, code execution). Azure mirrors OpenAI's capabilities." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which API has the built-in agentic loop that automatically executes native tools like web search and code interpreter?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic Messages API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI Responses API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="2" />
+          <span class="quiz__choice-label">Google Gemini API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-platform-selection-framework-quiz" value="3" />
+          <span class="quiz__choice-label">Azure OpenAI Service</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>Anthropic's Messages API</strong> is the most explicit and developer-controlled, with the best caching economics (90% discount, no storage fees) but the narrowest capability surface (no speech, image generation, embeddings, or <span class="glossary-term" data-term="fine-tuning">fine-tuning</span>).</p>
+</li>
+<li>
+<p><strong>OpenAI's Responses API</strong> is the most capable single API, with built-in agentic loops, parallel function calling, structured outputs, <span class="glossary-term" data-term="fine-tuning">fine-tuning</span>, embeddings, speech, and image generation -- but its rapid evolution (three API paradigms in two years) creates migration risk.</p>
+</li>
+<li>
+<p><strong>Google's Gemini API</strong> is the most cost-effective at every tier and the only one with native multimodal input (video and audio alongside text), plus the most generous free tier for prototyping.</p>
+</li>
+<li>
+<p><strong>Azure OpenAI</strong> adds enterprise infrastructure to OpenAI's models at an estimated 15-40% total cost premium -- justified only when compliance, private networking, or Azure ecosystem integration is required.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="prompt-caching">Prompt caching</span></strong> varies dramatically: Anthropic (90% discount, explicit), Google (90% discount + storage fees), OpenAI (50% discount, automatic). Choose based on workload pattern.</p>
+</li>
+<li>
+<p><strong>Batch processing</strong> offers 50% savings on all three direct platforms. Any offline workload not using batch mode is overpaying.</p>
+</li>
+<li>
+<p><strong>Model selection</strong> is the single largest cost lever -- 60-90% savings by choosing the right tier. Use flagship models only when task complexity demands it.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="fine-tuning">Fine-tuning</span></strong> is only available from OpenAI (most mature), Google (Gemini 2.5 Flash SFT), and Azure. Anthropic does not offer it.</p>
+</li>
+<li>
+<p><strong>Structured outputs</strong> are production-ready on all platforms, but OpenAI's Pydantic/Zod integration and strict schema guarantee make it the smoothest developer experience.</p>
+</li>
+<li>
+<p><strong>SDK breadth</strong> favors Google (7 languages) and OpenAI (5 languages, plus community). Anthropic's official SDK support is limited to Python and TypeScript.</p>
+</li>
+</ol>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">You are reviewing AI costs for a SaaS product using the Anthropic Messages API. Current monthly bill: $12,000. Architecture: 500,000 calls/month, all using Opus 4.6, 8,000-token stable system prompt, 2,000-token average user input, 1,500-token average output, no caching, all synchronous. 60% are classification, 30% summarization, 10% complex reasoning. Design an optimization strategy and estimate the new monthly cost.</p>
+  <label for="se-m09-key-takeaways" class="sr-only">Your explanation</label>
+  <textarea id="se-m09-key-takeaways" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m09-key-takeaways">Compare with Expert Answer</button>
+  <div id="se-answer-m09-key-takeaways" class="self-explain__expert" hidden>
+    <p>Step 1 -- Model selection: Route 60% (300K calls) to Haiku 4.5 for classification, 30% (150K) to Sonnet 4.6 for summarization, keep 10% (50K) on Opus 4.6 for complex reasoning. Step 2 -- Enable prompt caching: The 8K system prompt is identical across all calls. Anthropic's 90% cache discount applies to 8K tokens per call. Step 3 -- Batch the classification calls: Classification results are not latency-sensitive, qualifying for the 50% batch discount. Step 4 -- Combined estimated cost: Haiku classification (batched + cached): ~$150/mo. Sonnet summarization (cached): ~$900/mo. Opus reasoning (cached): ~$750/mo. Total: ~$1,800/mo -- an 85% reduction from $12,000. The largest savings came from model selection (moving 60% off Opus), followed by caching (8K stable prompt), then batching (offline classification).</p>
+  </div>
+</div>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Lead (Opus, 10K msgs): input 20M tokens x $5/MTok = $100, output 5M x $25/MTok = $125. Workers (Sonnet, 60K msgs): input 120M x $3/MTok = $360, output 30M x $15/MTok = $450. Triage (Haiku, 30K msgs): input 60M x $1/MTok = $60, output 15M x $5/MTok = $75. Total: ~$1,170. With caching on repeated system prompts, this could drop to $800-$1,000. The ~$1,200-$1,800 range accounts for overhead and variable output lengths." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A multi-agent system (Module 04) assigns Opus 4.6 to a lead agent, Sonnet 4.6 to 3 worker agents, and Haiku 4.5 to a triage agent. The system processes 100,000 messages/month with an average of 2,000 input tokens and 500 output tokens per message. The lead handles 10%, workers handle 60%, and triage handles 30%. Using Anthropic's pricing, which estimate is closest to the monthly API cost?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">$200-$400</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">$500-$800</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">$1,200-$1,800</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">$3,000-$5,000</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Anthropic's explicit tool-use cycle maps directly to the gather-act-verify loop from Module 03. The model gathers context (user message + system prompt), acts (returns tool_use blocks), and the developer verifies (executes the tool, validates the result, sends tool_result back). The developer's control over this loop is why Anthropic's architecture is favored in production agent systems where verification and observability are critical." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does the explicit tool-use cycle in Anthropic's Messages API relate to the gather-act-verify loop from Module 03?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">They are unrelated concepts</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">The tool-use cycle IS the gather-act-verify loop at the API level: the model gathers context, acts via tool_use blocks, and the developer verifies tool results before continuing</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">The gather-act-verify loop only applies to multi-agent systems</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Anthropic's API skips the verify step</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Anthropic's API is text-and-image-input only. It does not offer speech-to-text, text-to-speech, image generation, video generation, or embeddings. Voice applications built on Claude require third-party speech services like ElevenLabs." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which of the following is NOT available from Anthropic's API?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Prompt caching with 90% discount</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Speech-to-text and text-to-speech</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Extended thinking with inspectable reasoning</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Batch processing at 50% discount</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Azure AI Content Safety allows configuring severity thresholds by category (hate, violence, sexual, self-harm). This granularity is relevant for healthcare, legal, and creative applications where default filters may be too restrictive. Other platforms offer less configurable safety controls." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Azure OpenAI's content filtering is described as the most granular. What specifically can enterprise customers configure?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Only on/off toggle for all content</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Category-level severity thresholds (hate, violence, sexual, self-harm)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Per-user content policies</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Regional content restrictions only</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Google covers 7 languages officially (Python, Node.js, Go, Swift, Kotlin, Dart, plus Java via Firebase Genkit), reflecting their need to support Android, iOS, and Flutter development. OpenAI covers 5 languages. Anthropic is deliberately narrow with only Python and TypeScript." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which provider offers the broadest official SDK language coverage?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic (Python, TypeScript)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI (Python, TypeScript, Go, Java, .NET)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Google (Python, Node.js, Go, Swift, Kotlin, Dart)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Azure OpenAI (via OpenAI SDK)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Anthropic has no publicly available fine-tuning. Their position is that prompt engineering, system prompts, and RAG cover most customization needs. OpenAI has the most mature fine-tuning platform (supervised, LoRA, reinforcement). Google offers SFT for Gemini 2.5 Flash via Vertex AI. Azure mirrors OpenAI's capabilities." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which provider does NOT offer fine-tuning of any kind as of March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Azure OpenAI</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Model selection delivers 60-90% savings. Choosing Haiku 4.5 over Opus 4.6 for a classification task reduces costs by 80%. Caching and batching provide additional savings but are additive to the model selection decision. Every API call using a flagship model should be justified by task complexity." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the single largest cost lever for production API workloads?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Prompt caching (90% discount)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Batch processing (50% discount)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Model selection (60-90% savings by choosing the right tier)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Retrieval scope reduction</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Google's per-hour storage fees ($1.00-$4.50/MTok/hour) erode cache savings when the cached context is accessed infrequently. If the storage fee per hour exceeds the savings from cached reads, caching costs more than not caching. High-frequency access amortizes the storage cost across many reads, making it economical." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Google's Gemini API charges per-hour storage fees for cached context. In what scenario does this make caching uneconomical?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">High-frequency access with large contexts</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Low-frequency access where storage fees exceed token savings</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Caching system prompts under 1,000 tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Using Gemini Flash-Lite models</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Anthropic's Messages API returns typed content blocks (text, tool_use, tool_result) and the developer controls the tool execution loop. OpenAI's Responses API automatically executes built-in tools server-side, reducing orchestration burden. Both support streaming, structured output, and API key authentication." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the primary architectural difference between Anthropic's Messages API and OpenAI's Responses API?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic supports streaming and OpenAI does not</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Anthropic uses content blocks with developer-managed tool loops; OpenAI's Responses API has a built-in agentic loop for native tools</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">OpenAI supports JSON output and Anthropic does not</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m09-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Anthropic requires OAuth and OpenAI uses API keys</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- Platform ecosystem context and market positioning</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- Comprehensive model lineup, pricing tables, and benchmark comparisons</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context Engineering</span></a> -- <span class="glossary-term" data-term="prompt-caching">Prompt caching</span> strategies and <span class="glossary-term" data-term="context-window">context window</span> management in depth</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- How these APIs power individual <span class="glossary-term" data-term="agent">agent</span> architectures</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- <span class="glossary-term" data-term="agent">Agent</span> SDKs (Anthropic, OpenAI, Google ADK) built on these APIs</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- <span class="glossary-term" data-term="mcp-server">MCP server</span>/client integration across all platforms</li>
+<li><a href="module-08.html">Module 08: Consumer AI Comparison</a> -- Consumer-facing pricing and feature comparison</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- Open vs. closed API economics and upcoming platform changes</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Source</th><th>Details</th></tr></thead><tbody><tr><td>[F1]</td><td>Anthropic/Claude Ecosystem Profile</td><td>reference/profiles/anthropic-claude.md, March 18, 2026</td></tr><tr><td>[F2]</td><td>OpenAI/ChatGPT Ecosystem Profile</td><td>reference/profiles/openai-chatgpt.md, March 18, 2026</td></tr><tr><td>[F3]</td><td>Google/Gemini Ecosystem Profile</td><td>reference/profiles/google-gemini.md, March 18, 2026</td></tr><tr><td>[F4]</td><td>Microsoft/Copilot Ecosystem Profile</td><td>reference/profiles/microsoft-copilot.md, March 18, 2026</td></tr><tr><td>[1]</td><td>Anthropic API Documentation</td><td><a href="https://docs.anthropic.com/en/docs">https://docs.anthropic.com/en/docs</a></td></tr><tr><td>[2]</td><td>OpenAI API Documentation</td><td><a href="https://developers.openai.com/api/docs/">https://developers.openai.com/api/docs/</a></td></tr><tr><td>[3]</td><td>OpenAI Responses API</td><td><a href="https://developers.openai.com/docs/guides/responses-vs-chat-completions">https://developers.openai.com/docs/guides/responses-vs-chat-completions</a></td></tr><tr><td>[4]</td><td>Google Gemini API Documentation</td><td><a href="https://ai.google.dev/gemini-api/docs">https://ai.google.dev/gemini-api/docs</a></td></tr><tr><td>[5]</td><td>Google Gemini API Pricing</td><td><a href="https://ai.google.dev/gemini-api/docs/pricing">https://ai.google.dev/gemini-api/docs/pricing</a></td></tr><tr><td>[6]</td><td>Azure OpenAI Service Documentation</td><td><a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/">https://learn.microsoft.com/en-us/azure/ai-services/openai/</a></td></tr><tr><td>[7]</td><td>OpenAI API Pricing</td><td><a href="https://openai.com/api/pricing/">https://openai.com/api/pricing/</a></td></tr><tr><td>[8]</td><td>Anthropic API Pricing</td><td><a href="https://docs.anthropic.com/en/docs/about-claude/models">https://docs.anthropic.com/en/docs/about-claude/models</a></td></tr><tr><td>[9]</td><td>OpenAI Agents SDK</td><td><a href="https://github.com/openai/openai-agents-python">https://github.com/openai/openai-agents-python</a></td></tr><tr><td>[10]</td><td>Google <span class="glossary-term" data-term="agent">Agent</span> Development Kit</td><td><a href="https://google.github.io/adk-docs/">https://google.github.io/adk-docs/</a></td></tr><tr><td>[11]</td><td>Microsoft Foundry Documentation</td><td><a href="https://learn.microsoft.com/en-us/azure/ai-studio/">https://learn.microsoft.com/en-us/azure/ai-studio/</a></td></tr></tbody></table>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-07.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 07: Skills, Plugins &amp; Automation</span>
+        </a>
+        <a href="module-08.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 08: Consumer AI Comparison</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/chart.umd.min.js"></script>
+  <script src="../js/chart-renderer.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 # Module 03: Single-Agent Systems
 
-**Last updated:** 2026-03-20
-**Status:** DRAFTING
+**Last updated:** 2026-03-21
+**Status:** COMPLETE
 **Word count target:** 4,500-5,500
 **Prerequisites:** [Module 00: Landscape Overview](MODULE-00-landscape-overview.md), [Module 01: Models & Intelligence Tiers](MODULE-01-models-and-intelligence.md)
 
@@ -253,7 +253,7 @@ Even with 1M-token context windows, agents working on large tasks can exhaust th
 
 ### Resource Exhaustion
 
-Uncontrolled agents can consume expensive resources. A coding agent in an infinite retry loop can generate thousands of API calls; a browser agent clicking through pagination can run for hours. The estimated cost ceiling for an uncontrolled agent session is approximately $9,000 per hour at Opus 4.6 API pricing if generating output at maximum throughput [8]. Production deployments must implement token budgets, time limits, and cost caps.
+Uncontrolled agents can consume expensive resources. A coding agent in an infinite retry loop can generate thousands of API calls; a browser agent clicking through pagination can run for hours. At Opus 4.6 output pricing ($25/MTok), a single agent generating at maximum Tier 4 rate limits (~800K output tokens per minute) would cost approximately $1,200 per hour; organizations running multiple parallel agent sessions could multiply this further [8]. Production deployments must implement token budgets, time limits, and cost caps.
 
 ### Silent Failures
 
@@ -286,6 +286,7 @@ The most dangerous failure mode is when an agent completes a task, reports succe
 - [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- How single agents combine into multi-agent systems
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- The protocol connecting agents to external tools and data
 - [Module 07: Skills, Plugins & Automation](MODULE-07-skills-plugins-automation.md) -- Reusable workflows and scheduled agent execution
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- Agent safety challenges, governance requirements, and upcoming platform changes
 
 ---
 
@@ -298,7 +299,7 @@ The most dangerous failure mode is when an agent completes a task, reports succe
 5. OpenAI. "Codex: Terminal-Bench 2.0 Results." https://openai.com/codex/ March 2026.
 6. Google. "Project Mariner: Browser Automation Agent." https://deepmind.google/technologies/project-mariner/ Accessed March 2026.
 7. Firecracker MicroVM Documentation. https://firecracker-microvm.github.io/ Accessed March 2026.
-8. Estimated based on Opus 4.6 output pricing ($25/MTok) at sustained maximum output throughput. Actual costs depend on workload characteristics.
+8. Calculated from Opus 4.6 output pricing ($25/MTok) at Tier 4 rate limits (~800K OTPM). See https://platform.claude.com/docs/en/about-claude/pricing and https://platform.claude.com/docs/en/api/rate-limits. Actual costs depend on tier, parallelism, and workload characteristics.
 
 **Foundation profiles cited as [F1]-[F5]:**
 - [F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026

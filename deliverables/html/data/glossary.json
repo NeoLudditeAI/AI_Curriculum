@@ -1,0 +1,1091 @@
+{
+  "terms": [
+    {
+      "term": "Context window",
+      "slug": "context-window",
+      "definition": "The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.",
+      "category": "Models & Intelligence",
+      "firstModule": "01",
+      "relatedTerms": [
+        "Token",
+        "Compaction"
+      ],
+      "relatedTermSlugs": [
+        "token",
+        "compaction"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Embedding",
+      "slug": "embedding",
+      "definition": "A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.",
+      "category": "Models & Intelligence",
+      "firstModule": "02",
+      "relatedTerms": [
+        "RAG",
+        "Vector database"
+      ],
+      "relatedTermSlugs": [
+        "rag-retrieval-augmented-generation",
+        "vector-database"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Extended thinking",
+      "slug": "extended-thinking",
+      "definition": "Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.",
+      "category": "Models & Intelligence",
+      "firstModule": "01",
+      "relatedTerms": [
+        "Reasoning modes",
+        "Chain-of-thought"
+      ],
+      "relatedTermSlugs": [
+        "reasoning-modes",
+        "chain-of-thought"
+      ],
+      "relatedTermExists": [
+        true,
+        false
+      ]
+    },
+    {
+      "term": "Fine-tuning",
+      "slug": "fine-tuning",
+      "definition": "The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.",
+      "category": "Models & Intelligence",
+      "firstModule": "09",
+      "relatedTerms": [
+        "Token",
+        "Batch API"
+      ],
+      "relatedTermSlugs": [
+        "token",
+        "batch-api"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Mixture-of-Experts (MoE)",
+      "slug": "mixture-of-experts-moe",
+      "definition": "A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.",
+      "category": "Models & Intelligence",
+      "firstModule": "01",
+      "relatedTerms": [
+        "Token",
+        "Context window"
+      ],
+      "relatedTermSlugs": [
+        "token",
+        "context-window"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Reasoning modes",
+      "slug": "reasoning-modes",
+      "definition": "Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.",
+      "category": "Models & Intelligence",
+      "firstModule": "01",
+      "relatedTerms": [
+        "Extended thinking",
+        "Chain-of-thought"
+      ],
+      "relatedTermSlugs": [
+        "extended-thinking",
+        "chain-of-thought"
+      ],
+      "relatedTermExists": [
+        true,
+        false
+      ]
+    },
+    {
+      "term": "Token",
+      "slug": "token",
+      "definition": "The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.",
+      "category": "Models & Intelligence",
+      "firstModule": "01",
+      "relatedTerms": [
+        "Context window"
+      ],
+      "relatedTermSlugs": [
+        "context-window"
+      ],
+      "relatedTermExists": [
+        true
+      ]
+    },
+    {
+      "term": "Claude Memory",
+      "slug": "claude-memory",
+      "definition": "Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.",
+      "category": "Context Engineering",
+      "firstModule": "02",
+      "relatedTerms": [
+        "Compaction",
+        "Context engineering"
+      ],
+      "relatedTermSlugs": [
+        "compaction",
+        "context-engineering"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Compaction",
+      "slug": "compaction",
+      "definition": "The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.",
+      "category": "Context Engineering",
+      "firstModule": "02",
+      "relatedTerms": [
+        "Context window",
+        "Claude Memory"
+      ],
+      "relatedTermSlugs": [
+        "context-window",
+        "claude-memory"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Context engineering",
+      "slug": "context-engineering",
+      "definition": "The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.",
+      "category": "Context Engineering",
+      "firstModule": "02",
+      "relatedTerms": [
+        "Context window",
+        "Prompt caching",
+        "RAG"
+      ],
+      "relatedTermSlugs": [
+        "context-window",
+        "prompt-caching",
+        "rag-retrieval-augmented-generation"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Prompt caching",
+      "slug": "prompt-caching",
+      "definition": "A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.",
+      "category": "Context Engineering",
+      "firstModule": "02",
+      "relatedTerms": [
+        "Context engineering",
+        "Token",
+        "Batch API"
+      ],
+      "relatedTermSlugs": [
+        "context-engineering",
+        "token",
+        "batch-api"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "RAG (Retrieval-Augmented Generation)",
+      "slug": "rag-retrieval-augmented-generation",
+      "definition": "A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.",
+      "category": "Context Engineering",
+      "firstModule": "02",
+      "relatedTerms": [
+        "Context engineering",
+        "Vector database",
+        "Embedding"
+      ],
+      "relatedTermSlugs": [
+        "context-engineering",
+        "vector-database",
+        "embedding"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Vector database",
+      "slug": "vector-database",
+      "definition": "A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.",
+      "category": "Context Engineering",
+      "firstModule": "02",
+      "relatedTerms": [
+        "RAG",
+        "Embedding"
+      ],
+      "relatedTermSlugs": [
+        "rag-retrieval-augmented-generation",
+        "embedding"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Agent",
+      "slug": "agent",
+      "definition": "An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Subagent",
+        "Multi-agent orchestration",
+        "Tool use"
+      ],
+      "relatedTermSlugs": [
+        "subagent",
+        "multi-agent-orchestration",
+        "tool-use"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Agent SDK",
+      "slug": "agent-sdk",
+      "definition": "A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).",
+      "category": "Agents",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent",
+        "Multi-agent orchestration"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "multi-agent-orchestration"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Claude Code",
+      "slug": "claude-code",
+      "definition": "Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "Cowork",
+        "MCP"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "cowork",
+        "mcp-model-context-protocol"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Codex (OpenAI)",
+      "slug": "codex-openai",
+      "definition": "OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "Skills"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "skills"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Computer use",
+      "slug": "computer-use",
+      "definition": "The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "Tool use",
+        "Cowork"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "tool-use",
+        "cowork"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Cowork",
+      "slug": "cowork",
+      "definition": "Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Claude Code",
+        "Agent",
+        "Computer use"
+      ],
+      "relatedTermSlugs": [
+        "claude-code",
+        "agent",
+        "computer-use"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Deep Research",
+      "slug": "deep-research",
+      "definition": "A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "Tool use"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "tool-use"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Firecracker MicroVM",
+      "slug": "firecracker-microvm",
+      "definition": "A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "gVisor"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "gvisor"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Guardrails",
+      "slug": "guardrails",
+      "definition": "Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.",
+      "category": "Agents",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent",
+        "Agent SDK",
+        "Tracing"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "agent-sdk",
+        "tracing"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "gVisor",
+      "slug": "gvisor",
+      "definition": "Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Firecracker MicroVM",
+        "Agent"
+      ],
+      "relatedTermSlugs": [
+        "firecracker-microvm",
+        "agent"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Handoff",
+      "slug": "handoff",
+      "definition": "A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.",
+      "category": "Agents",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent",
+        "Multi-agent orchestration",
+        "Subagent"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "multi-agent-orchestration",
+        "subagent"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "LATS (Language Agent Tree Search)",
+      "slug": "lats-language-agent-tree-search",
+      "definition": "An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "ReAct",
+        "Agent"
+      ],
+      "relatedTermSlugs": [
+        "react",
+        "agent"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Multi-agent orchestration",
+      "slug": "multi-agent-orchestration",
+      "definition": "Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.",
+      "category": "Agents",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent",
+        "Subagent",
+        "Agent SDK"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "subagent",
+        "agent-sdk"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Project Mariner",
+      "slug": "project-mariner",
+      "definition": "Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "Computer use"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "computer-use"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "ReAct",
+      "slug": "react",
+      "definition": "Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "LATS",
+        "Tool use"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "lats-language-agent-tree-search",
+        "tool-use"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Router pattern",
+      "slug": "router-pattern",
+      "definition": "A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.",
+      "category": "Agents",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Multi-agent orchestration",
+        "Agent"
+      ],
+      "relatedTermSlugs": [
+        "multi-agent-orchestration",
+        "agent"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Subagent",
+      "slug": "subagent",
+      "definition": "An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.",
+      "category": "Agents",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent",
+        "Multi-agent orchestration",
+        "Context isolation"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "multi-agent-orchestration",
+        "context-isolation"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "term": "Tool use",
+      "slug": "tool-use",
+      "definition": "The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"",
+      "category": "Agents",
+      "firstModule": "03",
+      "relatedTerms": [
+        "Agent",
+        "MCP",
+        "Structured outputs"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "mcp-model-context-protocol",
+        "structured-outputs"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "term": "Tracing",
+      "slug": "tracing",
+      "definition": "Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.",
+      "category": "Agents",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent SDK",
+        "Guardrails"
+      ],
+      "relatedTermSlugs": [
+        "agent-sdk",
+        "guardrails"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "MCP (Model Context Protocol)",
+      "slug": "mcp-model-context-protocol",
+      "definition": "An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.",
+      "category": "Protocols & Integration",
+      "firstModule": "06",
+      "relatedTerms": [
+        "MCP server",
+        "MCP client",
+        "Tool use"
+      ],
+      "relatedTermSlugs": [
+        "mcp-server",
+        "mcp-client",
+        "tool-use"
+      ],
+      "relatedTermExists": [
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "term": "MCP server",
+      "slug": "mcp-server",
+      "definition": "A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.",
+      "category": "Protocols & Integration",
+      "firstModule": "06",
+      "relatedTerms": [
+        "MCP",
+        "MCP client"
+      ],
+      "relatedTermSlugs": [
+        "mcp-model-context-protocol",
+        "mcp-client"
+      ],
+      "relatedTermExists": [
+        true,
+        false
+      ]
+    },
+    {
+      "term": "Agent 365",
+      "slug": "agent-365",
+      "definition": "Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).",
+      "category": "Platforms & Products",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent",
+        "Multi-agent orchestration",
+        "Copilot Studio"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "multi-agent-orchestration",
+        "copilot-studio"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "AI Builder",
+      "slug": "ai-builder",
+      "definition": "Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).",
+      "category": "Platforms & Products",
+      "firstModule": "07",
+      "relatedTerms": [
+        "Copilot Studio",
+        "Power Automate"
+      ],
+      "relatedTermSlugs": [
+        "copilot-studio",
+        "power-automate"
+      ],
+      "relatedTermExists": [
+        true,
+        false
+      ]
+    },
+    {
+      "term": "AI Chips",
+      "slug": "ai-chips",
+      "definition": "Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.",
+      "category": "Platforms & Products",
+      "firstModule": "07",
+      "relatedTerms": [
+        "Gemini Nano",
+        "Skills"
+      ],
+      "relatedTermSlugs": [
+        "gemini-nano",
+        "skills"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "AICore",
+      "slug": "aicore",
+      "definition": "Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.",
+      "category": "Platforms & Products",
+      "firstModule": "10",
+      "relatedTerms": [
+        "Gemini Nano",
+        "Private Cloud Compute"
+      ],
+      "relatedTermSlugs": [
+        "gemini-nano",
+        "private-cloud-compute-pcc"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Batch API",
+      "slug": "batch-api",
+      "definition": "An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.",
+      "category": "Platforms & Products",
+      "firstModule": "09",
+      "relatedTerms": [
+        "Token",
+        "Prompt caching"
+      ],
+      "relatedTermSlugs": [
+        "token",
+        "prompt-caching"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "C2PA",
+      "slug": "c2pa",
+      "definition": "Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.",
+      "category": "Platforms & Products",
+      "firstModule": "10",
+      "relatedTerms": [
+        "Constitutional AI"
+      ],
+      "relatedTermSlugs": [
+        "constitutional-ai-cai"
+      ],
+      "relatedTermExists": [
+        true
+      ]
+    },
+    {
+      "term": "ClawHub",
+      "slug": "clawhub",
+      "definition": "The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).",
+      "category": "Platforms & Products",
+      "firstModule": "05",
+      "relatedTerms": [
+        "OpenClaw",
+        "Skills"
+      ],
+      "relatedTermSlugs": [
+        "openclaw",
+        "skills"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Constitutional AI (CAI)",
+      "slug": "constitutional-ai-cai",
+      "definition": "Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.",
+      "category": "Platforms & Products",
+      "firstModule": "10",
+      "relatedTerms": [
+        "Extended thinking"
+      ],
+      "relatedTermSlugs": [
+        "extended-thinking"
+      ],
+      "relatedTermExists": [
+        true
+      ]
+    },
+    {
+      "term": "Copilot Studio",
+      "slug": "copilot-studio",
+      "definition": "Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.",
+      "category": "Platforms & Products",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent 365",
+        "Work IQ"
+      ],
+      "relatedTermSlugs": [
+        "agent-365",
+        "work-iq"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Firebase Genkit",
+      "slug": "firebase-genkit",
+      "definition": "Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.",
+      "category": "Platforms & Products",
+      "firstModule": "09",
+      "relatedTerms": [
+        "Agent SDK"
+      ],
+      "relatedTermSlugs": [
+        "agent-sdk"
+      ],
+      "relatedTermExists": [
+        true
+      ]
+    },
+    {
+      "term": "Gemini Nano",
+      "slug": "gemini-nano",
+      "definition": "Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.",
+      "category": "Platforms & Products",
+      "firstModule": "01",
+      "relatedTerms": [
+        "AICore",
+        "Embedding"
+      ],
+      "relatedTermSlugs": [
+        "aicore",
+        "embedding"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "GPT Store",
+      "slug": "gpt-store",
+      "definition": "OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.",
+      "category": "Platforms & Products",
+      "firstModule": "07",
+      "relatedTerms": [
+        "Skills",
+        "Codex"
+      ],
+      "relatedTermSlugs": [
+        "skills",
+        "codex-openai"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "NemoClaw",
+      "slug": "nemoclaw",
+      "definition": "NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.",
+      "category": "Platforms & Products",
+      "firstModule": "05",
+      "relatedTerms": [
+        "OpenClaw",
+        "ClawHub"
+      ],
+      "relatedTermSlugs": [
+        "openclaw",
+        "clawhub"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "OpenClaw",
+      "slug": "openclaw",
+      "definition": "An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.",
+      "category": "Platforms & Products",
+      "firstModule": "05",
+      "relatedTerms": [
+        "ClawHub",
+        "NemoClaw",
+        "Gateway (OpenClaw)"
+      ],
+      "relatedTermSlugs": [
+        "clawhub",
+        "nemoclaw",
+        "gateway-openclaw"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Gateway (OpenClaw)",
+      "slug": "gateway-openclaw",
+      "definition": "OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.",
+      "category": "Platforms & Products",
+      "firstModule": "05",
+      "relatedTerms": [
+        "OpenClaw",
+        "Pi Agent Runtime"
+      ],
+      "relatedTermSlugs": [
+        "openclaw",
+        "pi-agent-runtime"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Pi Agent Runtime",
+      "slug": "pi-agent-runtime",
+      "definition": "OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.",
+      "category": "Platforms & Products",
+      "firstModule": "05",
+      "relatedTerms": [
+        "OpenClaw",
+        "Gateway (OpenClaw)",
+        "ReAct"
+      ],
+      "relatedTermSlugs": [
+        "openclaw",
+        "gateway-openclaw",
+        "react"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Private Cloud Compute (PCC)",
+      "slug": "private-cloud-compute-pcc",
+      "definition": "Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.",
+      "category": "Platforms & Products",
+      "firstModule": "10",
+      "relatedTerms": [
+        "AICore",
+        "Gemini Nano"
+      ],
+      "relatedTermSlugs": [
+        "aicore",
+        "gemini-nano"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Provisioned Throughput Units (PTUs)",
+      "slug": "provisioned-throughput-units-ptus",
+      "definition": "Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.",
+      "category": "Platforms & Products",
+      "firstModule": "09",
+      "relatedTerms": [
+        "Batch API",
+        "Token"
+      ],
+      "relatedTermSlugs": [
+        "batch-api",
+        "token"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Skills",
+      "slug": "skills",
+      "definition": "Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).",
+      "category": "Platforms & Products",
+      "firstModule": "07",
+      "relatedTerms": [
+        "Agent",
+        "ClawHub",
+        "Plugins"
+      ],
+      "relatedTermSlugs": [
+        "agent",
+        "clawhub",
+        "plugins"
+      ],
+      "relatedTermExists": [
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "term": "Work IQ",
+      "slug": "work-iq",
+      "definition": "Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.",
+      "category": "Platforms & Products",
+      "firstModule": "04",
+      "relatedTerms": [
+        "Agent 365",
+        "Copilot Studio"
+      ],
+      "relatedTermSlugs": [
+        "agent-365",
+        "copilot-studio"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    },
+    {
+      "term": "Zapier Central",
+      "slug": "zapier-central",
+      "definition": "Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.",
+      "category": "Platforms & Products",
+      "firstModule": "07",
+      "relatedTerms": [
+        "MCP",
+        "Skills"
+      ],
+      "relatedTermSlugs": [
+        "mcp-model-context-protocol",
+        "skills"
+      ],
+      "relatedTermExists": [
+        true,
+        true
+      ]
+    }
+  ]
+}

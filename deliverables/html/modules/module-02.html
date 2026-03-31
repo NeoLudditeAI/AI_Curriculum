@@ -1,0 +1,2453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 02: Context Engineering — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="02">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 1: The Terrain</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 02: Context Engineering</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 02: Context Engineering</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">35-40 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#context-windows-sizes-pricing-and-practical-limits" class="toc__link" data-toc-active>Context Windows: Sizes, Pricing, and Practical Limits</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-1m-token-convergence" class="toc__link" data-toc-active>The 1M-Token Convergence</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#what-a-million-tokens-actually-buys" class="toc__link" data-toc-active>What a Million Tokens Actually Buys</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#performance-degradation-the-effective-window-is-smaller-than-the-advertised-window" class="toc__link" data-toc-active>Performance Degradation: The Effective Window Is Smaller Than the Advertised Window</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#token-economics" class="toc__link" data-toc-active>Token Economics</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prompt-caching-paying-less-for-repeated-context" class="toc__link" data-toc-active>Prompt Caching: Paying Less for Repeated Context</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#implementation-across-providers" class="toc__link" data-toc-active>Implementation Across Providers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cost-impact-example" class="toc__link" data-toc-active>Cost Impact Example</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#batch-api-the-other-cost-lever" class="toc__link" data-toc-active>Batch API: The Other Cost Lever</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#memory-systems-how-platforms-remember-you" class="toc__link" data-toc-active>Memory Systems: How Platforms Remember You</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#claude-memory-anthropic" class="toc__link" data-toc-active>Claude Memory (Anthropic)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#chatgpt-saved-memories-openai" class="toc__link" data-toc-active>ChatGPT Saved Memories (OpenAI)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#gemini-personal-intelligence-google" class="toc__link" data-toc-active>Gemini Personal Intelligence (Google)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#microsoft-recall" class="toc__link" data-toc-active>Microsoft Recall</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#comparison-table" class="toc__link" data-toc-active>Comparison Table</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#rag-retrieval-augmented-generation" class="toc__link" data-toc-active>RAG: Retrieval-Augmented Generation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#how-rag-works" class="toc__link" data-toc-active>How RAG Works</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#architectural-patterns" class="toc__link" data-toc-active>Architectural Patterns</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#rag-vs-large-context-windows" class="toc__link" data-toc-active>RAG vs. Large Context Windows</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#vector-database-options" class="toc__link" data-toc-active>Vector Database Options</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#chunking-strategies" class="toc__link" data-toc-active>Chunking Strategies</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#embedding-models" class="toc__link" data-toc-active>Embedding Models</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#when-to-use-rag-decision-framework" class="toc__link" data-toc-active>When to Use RAG: Decision Framework</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#rag-failure-modes" class="toc__link" data-toc-active>RAG Failure Modes</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#agentic-rag" class="toc__link" data-toc-active>Agentic RAG</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cost-comparison-rag-vs-context-injection" class="toc__link" data-toc-active>Cost Comparison: RAG vs. Context Injection</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#platform-integrated-rag" class="toc__link" data-toc-active>Platform-Integrated RAG</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#compaction-what-happens-when-context-fills-up" class="toc__link" data-toc-active>Compaction: What Happens When Context Fills Up</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#how-compaction-works" class="toc__link" data-toc-active>How Compaction Works</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#what-survives-compaction" class="toc__link" data-toc-active>What Survives Compaction</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openais-response-compaction-endpoint" class="toc__link" data-toc-active>OpenAI&#x27;s Response Compaction Endpoint</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#implications-for-practitioners" class="toc__link" data-toc-active>Implications for Practitioners</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#context-engineering-as-a-discipline" class="toc__link" data-toc-active>Context Engineering as a Discipline</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-core-principles" class="toc__link" data-toc-active>The Core Principles</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#context-engineering-in-practice-claude-code-as-case-study" class="toc__link" data-toc-active>Context Engineering in Practice: Claude Code as Case Study</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-cost-optimization-stack" class="toc__link" data-toc-active>The Cost Optimization Stack</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 4,000-5,000
+<strong>Prerequisites:</strong> <a href="module-00.html">Module 00: Landscape Overview</a>, <a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a></p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The quality of any AI system's output is bounded not by the model's raw intelligence but by what information is available in its <span class="glossary-term glossary-term--first-use" data-term="context-window">context window</span> at the moment of generation. <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context engineering</span> -- the deliberate design of what goes into that window, how long it persists, and how it is managed as conversations grow -- has emerged as the defining practical discipline for anyone building with or heavily using LLMs. This module covers context windows and their real-world limits, <span class="glossary-term glossary-term--first-use" data-term="prompt-caching">prompt caching</span> and cost optimization, the four major memory architectures shipping in March 2026, retrieval-augmented generation (RAG) patterns, <span class="glossary-term glossary-term--first-use" data-term="compaction">compaction</span> behavior across platforms, and the principles that tie these mechanisms into a coherent practice.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">A developer loads 800,000 tokens into Claude's context window and asks it to find a bug. The model misses it.</summary>
+  <div class="accordion__content">
+    <p>They load the same codebase but strategically select only the 50,000 most relevant tokens using a RAG pipeline. The model finds the bug instantly -- at 1/16th the cost. The difference is not the model. The model is the same. The difference is context engineering: the discipline of curating what enters the context window. It is the single highest-leverage skill in AI today.</p>
+  </div>
+</details>
+<hr>
+<h2 id="context-windows-sizes-pricing-and-practical-limits">Context Windows: Sizes, Pricing, and Practical Limits</h2>
+<h3 id="the-1m-token-convergence">The 1M-Token Convergence</h3>
+<p>As of March 2026, every major provider offers at least one model with a million-<span class="glossary-term glossary-term--first-use" data-term="token">token</span> <span class="glossary-term" data-term="context-window">context window</span> [F1][F2][F3]:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Provider</th><th>Model(s) at 1M Tokens</th><th>GA / Preview</th><th>Long-Context Surcharge</th></tr></thead><tbody><tr><td>Anthropic</td><td>Opus 4.6, Sonnet 4.6</td><td>GA</td><td>None (removed March 14, 2026) [F1]</td></tr><tr><td>OpenAI</td><td>GPT-5.4, GPT-5.4 Thinking, GPT-5.4 Pro</td><td>GA</td><td>None reported [F2]</td></tr><tr><td>Google</td><td>Gemini 2.5 Pro, Gemini 2.5 Flash, Gemini 3 Flash</td><td>GA</td><td>None [F3]</td></tr><tr><td>Microsoft</td><td>GPT-4.1 / 4.1 mini (via Azure)</td><td>GA</td><td>Azure markup applies [F4]</td></tr></tbody></table>
+<p>A million tokens is roughly 750,000 English words -- the equivalent of ten full-length novels or an entire medium-sized codebase. Six months ago, 1M context was a premium feature with surcharges; it is now table stakes at standard per-<span class="glossary-term" data-term="token">token</span> rates.</p>
+<p>Not every model reaches 1M. Anthropic's Haiku 4.5 caps at 200K tokens. OpenAI's GPT-5.4 Mini and Nano offer approximately 400K tokens. Google's Gemini 3.1 Flash-Lite and Deep Think 3.1 stay at 192-200K [F1][F2][F3]. The pattern is clear: flagship models get the largest windows; budget models trade context size for speed and cost.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="0" data-explanation="Anthropic removed long-context surcharges on March 14, 2026, making 1M-token context available at standard per-token rates for Opus 4.6 and Sonnet 4.6. This competitive move established that million-token context is no longer a premium feature -- it is table stakes." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which provider was the first to remove long-context surcharges on their flagship models?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-1m-token-convergence-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic (March 14, 2026)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-1m-token-convergence-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-1m-token-convergence-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-1m-token-convergence-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="what-a-million-tokens-actually-buys">What a Million Tokens Actually Buys</h3>
+<p><span class="glossary-term" data-term="token">Token</span> counts are not intuitive. Some practical benchmarks:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Content Type</th><th>Approximate Token Count</th><th>Fits in 1M Window?</th></tr></thead><tbody><tr><td>A 300-page novel (~90,000 words)</td><td>~120K tokens</td><td>Yes (8x over)</td></tr><tr><td>Complete <span class="glossary-term glossary-term--first-use" data-term="react">React</span> codebase (medium app)</td><td>~200-400K tokens</td><td>Yes</td></tr><tr><td>100-page legal contract</td><td>~40K tokens</td><td>Yes (25x over)</td></tr><tr><td>Full Wikipedia article (long)</td><td>~15-30K tokens</td><td>Yes</td></tr><tr><td>10 hours of meeting transcripts</td><td>~300-500K tokens</td><td>Yes, but tight</td></tr><tr><td>Entire company knowledge base</td><td>2-50M tokens</td><td>No -- needs RAG</td></tr></tbody></table>
+<p>Non-English text consumes 2-3x more tokens than English due to tokenizer design. Chinese, Japanese, Korean, and Arabic are particularly expensive. A document that fits comfortably in English may overflow the window when translated [1].</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Before reading about performance degradation, explain why a 1M-token window does NOT mean you should always use 1M tokens. Consider both cost and quality.</p>
+  <label for="se-m02-what-a-million-tokens-actually-buys" class="sr-only">Your explanation</label>
+  <textarea id="se-m02-what-a-million-tokens-actually-buys" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m02-what-a-million-tokens-actually-buys">Compare with Expert Answer</button>
+  <div id="se-answer-m02-what-a-million-tokens-actually-buys" class="self-explain__expert" hidden>
+    <p>Two reasons: (1) Cost scales linearly with input tokens. Sending 500K tokens of context at Opus 4.6 pricing ($5/MTok input) costs $2.50 per request before any output. At 100 requests per day, that is $250/day in input costs alone. (2) Performance degrades non-linearly. Models attend more weakly to content in the middle of large contexts (the lost-in-the-middle effect), and accuracy drops once context is 40-60% full. The effective window is smaller than the advertised window. This is why Module 01's model pricing data matters at the context level: every token has both a dollar cost and an attention cost.</p>
+  </div>
+</div>
+<h3 id="performance-degradation-the-effective-window-is-smaller-than-the-advertised-window">Performance Degradation: The Effective Window Is Smaller Than the Advertised Window</h3>
+<p>Advertising a 1M-<span class="glossary-term" data-term="token">token</span> <span class="glossary-term" data-term="context-window">context window</span> does not mean models perform equally well across that entire range. Research and practical experience reveal consistent patterns:</p>
+<p><strong>Lost-in-the-middle.</strong> Models attend more strongly to information at the beginning and end of the context, with weaker recall for content in the middle third. This effect, first documented in 2023, persists in current models though it has diminished with each generation [2].</p>
+<p><strong>Accuracy degradation curves.</strong> Most models begin showing measurable accuracy loss once the context is 40-60% full. The degradation is task-dependent: factual retrieval suffers earliest, while summarization and code understanding remain more robust at high fill rates [2].</p>
+<p><strong>Anthropic's advantage.</strong> Anthropic has published claims that Claude maintains less than 5% accuracy loss across its full 200K range (the previous standard window), and internal testing on the 1M window suggests similar robustness through at least 500K tokens. Independent benchmarks (RULER, Needle-in-a-Haystack) confirm Claude's context utilization is the strongest among major providers [F1][2].</p>
+<blockquote>
+<p><strong>Practical guidance:</strong> Treat 60-70% of the advertised window as the reliable operating range for precision-critical tasks. For summarization or broad analysis, you can push higher. For factual retrieval from a specific passage buried in a large context, keep total context leaner or use positional strategies (place critical information at the beginning or end).</p>
+</blockquote>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Most models begin showing measurable accuracy loss once context is 40-60% full. The degradation is task-dependent: factual retrieval suffers earliest, while summarization remains more robust. This is why the practical guidance recommends treating 60-70% as the reliable operating range for precision-critical work." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">At what percentage of context window capacity do most models begin showing measurable accuracy loss for precision tasks?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-performance-degradation-the-effective-window-is-smaller-than-the-advertised-window-quiz" value="0" />
+          <span class="quiz__choice-label">20-30%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-performance-degradation-the-effective-window-is-smaller-than-the-advertised-window-quiz" value="1" />
+          <span class="quiz__choice-label">40-60%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-performance-degradation-the-effective-window-is-smaller-than-the-advertised-window-quiz" value="2" />
+          <span class="quiz__choice-label">70-80%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-performance-degradation-the-effective-window-is-smaller-than-the-advertised-window-quiz" value="3" />
+          <span class="quiz__choice-label">90-95%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="token-economics">Token Economics</h3>
+<p><span class="glossary-term" data-term="context-window">Context window</span> size directly affects cost because input tokens are billed per use. Sending 500K tokens of context with every API call at Opus 4.6 pricing ($5/MTok input) costs $2.50 per request before the model generates a single output <span class="glossary-term" data-term="token">token</span>. At 100 requests per day, that is $250/day in input costs alone.</p>
+<p>This economic pressure drives three optimization strategies covered in the following sections: <span class="glossary-term" data-term="prompt-caching">prompt caching</span> (reduce the per-<span class="glossary-term" data-term="token">token</span> cost of repeated context), RAG (send only relevant context instead of everything), and <span class="glossary-term" data-term="compaction">compaction</span> (automatically condense history to stay within limits).</p>
+
+<figure class="diagram diagram--mermaid" id="m02-1" role="img" aria-label="Layered diagram showing the five conceptual layers of a context window, arranged from innermost (most persistent) to outermost (most ephemeral). Layer 1 at the center is Identity — the system prompt and custom instructions, which are permanent and always survive compaction. Layer 2 is Knowledge — RAG-injected documents, uploaded files, and reference data, persistent per-session or cached. Layer 3 is Memory — cross-session facts from Claude Memory, ChatGPT Saved Memories, or Gemini Personal Intelligence, updated asynchronously. Layer 4 is Task — the current goal, tool results, and intermediate work products, ephemeral within the current task. Layer 5 at the outermost ring is Conversation — the most recent user and assistant turns, highly ephemeral and first to be compacted. Token budgets range from 1-5K for identity to 200-500K for conversation history.">
+  <pre class="mermaid">graph TD
+  L5[&quot;Layer 5: Conversation&lt;br/&gt;Recent user + assistant turns&lt;br/&gt;Ephemeral — first to compact&lt;br/&gt;~200-500K tokens&quot;]
+  L4[&quot;Layer 4: Task&lt;br/&gt;Current goal · Tool results&lt;br/&gt;Ephemeral within task&lt;br/&gt;~50-200K tokens&quot;]
+  L3[&quot;Layer 3: Memory&lt;br/&gt;Cross-session facts&lt;br/&gt;Claude Memory · ChatGPT Saved · Gemini PI&lt;br/&gt;Updated async · ~5-20K tokens&quot;]
+  L2[&quot;Layer 2: Knowledge&lt;br/&gt;RAG chunks · Uploaded files&lt;br/&gt;Per-session or cached&lt;br/&gt;~50-300K tokens&quot;]
+  L1[&quot;Layer 1: Identity&lt;br/&gt;System prompt · Custom instructions&lt;br/&gt;Permanent — always survives compaction&lt;br/&gt;~1-5K tokens&quot;]
+
+  L5 --&gt; L4
+  L4 --&gt; L3
+  L3 --&gt; L2
+  L2 --&gt; L1
+</pre>
+  <figcaption>Context Window Layers: From Persistent to Ephemeral</figcaption>
+</figure>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="The three strategies are prompt caching (reduce per-token cost of repeated context), RAG (send only relevant context instead of everything), and compaction (automatically condense history to stay within limits). These are the core tools of context engineering economics." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What are the three optimization strategies driven by token economics?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="0" />
+          <span class="quiz__choice-label">Fine-tuning, distillation, quantization</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="1" />
+          <span class="quiz__choice-label">Prompt caching, RAG, compaction</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="2" />
+          <span class="quiz__choice-label">Model selection, batching, streaming</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="3" />
+          <span class="quiz__choice-label">Compression, deduplication, summarization</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="500,000 tokens x $5.00 per million tokens = $2.50 per request in input costs alone, before any output tokens. At 100 requests/day, that is $250/day. This economic pressure drives the three optimization strategies covered next: prompt caching, RAG, and compaction." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">At Opus 4.6 pricing ($5/MTok input), what is the input cost per request for 500K tokens of context?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="0" />
+          <span class="quiz__choice-label">$0.25</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="1" />
+          <span class="quiz__choice-label">$1.00</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="2" />
+          <span class="quiz__choice-label">$2.50</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="3" />
+          <span class="quiz__choice-label">$5.00</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Non-English text consumes 2-3x more tokens due to tokenizer design. A document that fits comfortably in English may overflow the window when translated. This is a critical consideration for multilingual applications." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Non-English text (Chinese, Japanese, Korean, Arabic) consumes how many times more tokens than English?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="0" />
+          <span class="quiz__choice-label">Same number</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="1" />
+          <span class="quiz__choice-label">1.5x</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="2" />
+          <span class="quiz__choice-label">2-3x</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="3" />
+          <span class="quiz__choice-label">5-10x</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="1M tokens is roughly 750,000 English words -- the equivalent of ten full-length novels or an entire medium-sized codebase. Non-English text consumes 2-3x more tokens due to tokenizer design." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How many English words does 1M tokens approximately represent?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="0" />
+          <span class="quiz__choice-label">~250,000</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="1" />
+          <span class="quiz__choice-label">~500,000</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="2" />
+          <span class="quiz__choice-label">~750,000</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-token-economics-quiz" value="3" />
+          <span class="quiz__choice-label">~1,000,000</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="prompt-caching-paying-less-for-repeated-context">Prompt Caching: Paying Less for Repeated Context</h2>
+<p><span class="glossary-term" data-term="prompt-caching">Prompt caching</span> allows frequently reused prompt prefixes -- system instructions, reference documents, few-shot examples -- to be cached server-side so that subsequent requests pay a fraction of the standard input price.</p>
+<h3 id="implementation-across-providers">Implementation Across Providers</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Provider</th><th>Cache Hit Discount</th><th>Cache Write Cost</th><th>Cache Durations</th><th>Min Cacheable Size</th><th>Status</th></tr></thead><tbody><tr><td>Anthropic</td><td>90% (10% of base input price)</td><td>25% premium on first write</td><td>5-minute, 1-hour, persistent</td><td>1,024 tokens (Haiku); 2,048 tokens (Sonnet/Opus)</td><td>GA [F1]</td></tr><tr><td>Google</td><td>90% (10% of base input price)</td><td>Standard input price</td><td>Configurable TTL; $1.00-$4.50/MTok/hour storage</td><td>Varies by model</td><td>GA [F3]</td></tr><tr><td>OpenAI</td><td>50% discount</td><td>No additional write cost</td><td>Automatic; typically ~5-10 minutes</td><td>Automatic (no explicit API)</td><td>GA [F2]</td></tr></tbody></table>
+<p>Anthropic's implementation is the most granular. Three cache duration tiers let developers match caching strategy to usage patterns [F1]:</p>
+<ul>
+<li><strong>5-minute cache:</strong> Default. Suitable for interactive conversations where the same system prompt is reused across rapid exchanges.</li>
+<li><strong>1-hour cache:</strong> For batch processing jobs or longer workflows where the same reference documents are consulted repeatedly.</li>
+<li><strong>Persistent cache:</strong> For system prompts and reference materials that rarely change. Survives across sessions.</li>
+</ul>
+<p>Google's context caching charges per-hour storage fees, making it better suited for high-throughput applications where the cache is heavily reused within a short window [F3].</p>
+<p>OpenAI's caching is largely automatic and opaque -- the Responses API achieves 40-80% improved cache utilization over the older Chat Completions API, but developers have less direct control over cache behavior [F2].</p>
+<h3 id="cost-impact-example">Cost Impact Example</h3>
+<p>Consider an application that sends a 50,000-<span class="glossary-term" data-term="token">token</span> system prompt with every request using Claude Sonnet 4.6:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Scenario</th><th>Input Cost per Request (50K system prompt + 2K user message)</th><th>Daily Cost (500 requests)</th></tr></thead><tbody><tr><td>No caching</td><td>$0.156</td><td>$78.00</td></tr><tr><td>With caching (90% hit rate on system prompt)</td><td>$0.021</td><td>$10.50</td></tr><tr><td>Savings</td><td></td><td><strong>$67.50/day (86%)</strong></td></tr></tbody></table>
+<p>For high-volume applications, <span class="glossary-term" data-term="prompt-caching">prompt caching</span> is not optional -- it is the single largest cost lever available.</p>
+
+<div class="worked-example" data-variant="full" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Calculating Cache ROI for a Production Application</h4>
+  <div class="worked-example__problem">
+    <p>An application sends a 50,000-token system prompt with every request using Claude Sonnet 4.6 ($3/MTok input). It handles 500 requests per day. Calculate the cost with and without caching, including the cache write premium.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+      <span class="worked-example__dot" data-step="5" aria-label="Step 5"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Calculate no-cache daily cost</h5>
+      <div class="worked-example__step-content">
+        <p>Each request: (50K system prompt + 2K user message) x $3/MTok = $0.156 per request. Daily: $0.156 x 500 = $78.00.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Calculate with caching at 90% hit rate</h5>
+      <div class="worked-example__step-content">
+        <p>Cache hits (450 requests): 50K tokens at 10% of base ($0.30/MTok) + 2K at full price = $0.0195 per request. Cache misses (50 requests): full price = $0.156. Daily: (450 x $0.0195) + (50 x $0.156) = $8.78 + $7.80 = $16.58.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Account for cache write cost</h5>
+      <div class="worked-example__step-content">
+        <p>First cache write: 25% premium on the 50K token system prompt = $0.0375 one-time. Negligible at daily scale. Cache is maintained by ongoing requests.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Add batch API for background jobs</h5>
+      <div class="worked-example__step-content">
+        <p>If 200 of the 500 daily requests are non-real-time (reports, analysis), route them through Batch API at 50% discount. This saves an additional approximately $5-8/day on those requests.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="5">
+      <h5 class="worked-example__step-label">Calculate total savings</h5>
+      <div class="worked-example__step-content">
+        <p>No caching: $78/day. With caching: approximately $16.58/day. With caching + batching for background work: approximately $10-12/day. Combined savings: 85-87%.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>Prompt caching is the single largest cost lever for applications with repeated system prompts. A 90% cache hit rate reduces the 50K-token system prompt cost from $78/day to approximately $16.58/day -- an 87% reduction. Adding batch processing for non-real-time workloads compounds further. The cache write premium (25%) is a one-time cost that is negligible at scale.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="batch-api-the-other-cost-lever">Batch API: The Other Cost Lever</h3>
+<p>All three major providers offer batch processing APIs with 50% discounts on both input and output tokens in exchange for asynchronous processing (typically within 24 hours) [F1][F2][F3]. Batch processing is ideal for evaluation pipelines, content generation at scale, and any workload where latency is not critical.</p>
+<p>Combining <span class="glossary-term" data-term="prompt-caching">prompt caching</span> with batch processing can reduce effective costs by 90-95% compared to naive real-time API usage.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Caching alone saves approximately 86% on the system prompt. Adding batch processing for non-real-time workloads (50% discount on all tokens) compounds the savings. Together they reduce costs by 90-95% compared to naive real-time usage -- often the difference between a viable product and an economically unsustainable one." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Combining prompt caching (90% hit rate) with batch processing for background jobs, approximately what total cost reduction is achievable compared to naive real-time usage?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-batch-api-the-other-cost-lever-quiz" value="0" />
+          <span class="quiz__choice-label">50%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-batch-api-the-other-cost-lever-quiz" value="1" />
+          <span class="quiz__choice-label">75%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-batch-api-the-other-cost-lever-quiz" value="2" />
+          <span class="quiz__choice-label">90-95%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-batch-api-the-other-cost-lever-quiz" value="3" />
+          <span class="quiz__choice-label">99%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="memory-systems-how-platforms-remember-you">Memory Systems: How Platforms Remember You</h2>
+<p>Memory systems extend context beyond a single conversation. Each major platform has shipped a distinct architecture for persistent personalization, and the differences are substantial.</p>
+<h3 id="claude-memory-anthropic">Claude Memory (Anthropic)</h3>
+<ul>
+<li><strong>Status:</strong> GA (all plans, March 2026) [F1]</li>
+<li><strong>Architecture:</strong> Asynchronous processing. Claude reviews conversations approximately every 24 hours and extracts relevant facts -- profession, language preferences, recurring project context, communication style. These are stored as a structured memory profile loaded into every future conversation.</li>
+<li><strong>User control:</strong> Users can view, edit, and delete individual memories. Memory can be toggled off entirely.</li>
+<li><strong>Scope:</strong> Per-user. Projects provide per-project persistent context via custom instructions and uploaded files, complementing the personal memory system.</li>
+<li><strong>Privacy model:</strong> Memory processing happens on Anthropic's servers. Enterprise plans offer additional controls.</li>
+<li><strong>Practical character:</strong> Passive and cumulative. Claude never asks "should I remember this?" -- it silently builds a profile over time. The delay (up to 24 hours) means corrections or new context may not appear in memory until the next processing cycle.</li>
+</ul>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Claude Memory processes conversations approximately every 24 hours to extract relevant facts. This asynchronous processing means corrections or new context may not appear in memory until the next processing cycle -- a practical limitation that affects workflow design. ChatGPT, by contrast, infers and saves memories in real-time." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How often does Claude Memory process conversations to extract facts?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-claude-memory-anthropic-quiz" value="0" />
+          <span class="quiz__choice-label">Real-time during conversation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-claude-memory-anthropic-quiz" value="1" />
+          <span class="quiz__choice-label">Every hour</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-claude-memory-anthropic-quiz" value="2" />
+          <span class="quiz__choice-label">Approximately every 24 hours</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-claude-memory-anthropic-quiz" value="3" />
+          <span class="quiz__choice-label">Weekly</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="chatgpt-saved-memories-openai">ChatGPT Saved Memories (OpenAI)</h3>
+<ul>
+<li><strong>Status:</strong> GA (all plans) [F2]</li>
+<li><strong>Architecture:</strong> Dual-layer system. <strong>Saved Memories</strong> are explicit facts (user-stated or model-inferred) stored persistently. <strong>Chat History Reference</strong> (GA since April 2025) allows ChatGPT to draw on all past conversations for contextual recall, not just explicitly saved items.</li>
+<li><strong>User control:</strong> Users can view and delete individual saved memories. Chat history reference and saved memories can be toggled independently. Temporary Chat mode disables all memory read/write for a single conversation.</li>
+<li><strong>Scope:</strong> Per-user globally. Projects add per-project context with custom instructions and source files.</li>
+<li><strong>Privacy model:</strong> Memories are stored server-side. Enterprise/Business plans offer admin controls over memory features.</li>
+<li><strong>Practical character:</strong> More aggressive than Claude's memory. ChatGPT actively infers and saves memories during conversation. The chat history reference layer adds a second dimension -- even things not explicitly memorized can influence future responses if they appeared in a past conversation [F2].</li>
+</ul>
+<h3 id="gemini-personal-intelligence-google">Gemini Personal Intelligence (Google)</h3>
+<ul>
+<li><strong>Status:</strong> GA [F3]</li>
+<li><strong>Architecture:</strong> Learns from past Gemini conversations to build a personal context model. Integrated with Gems (custom personas) that can be configured with specific personality and knowledge.</li>
+<li><strong>User control:</strong> Personal Intelligence can be managed through Gemini settings.</li>
+<li><strong>Scope:</strong> Per-user across Gemini surfaces (app, Chrome, Workspace).</li>
+<li><strong>Unique angle:</strong> Google's integration surface is the broadest. Personal Intelligence can draw context from Gmail, Calendar, Drive, and other Google services (with permission), giving it a richer data substrate than competitors who are limited to chat history.</li>
+<li><strong>Privacy model:</strong> Free tier data may be used for training. Paid tiers (AI Pro, AI Ultra) and Workspace plans offer data protection guarantees [F3].</li>
+<li><strong>Practical character:</strong> The most context-rich system by potential, but its effectiveness depends on how deeply the user is embedded in the Google ecosystem. For a Google Workspace power user, it can be remarkably personalized. For someone who uses Google only for Gemini chat, it behaves similarly to competitors.</li>
+</ul>
+<h3 id="microsoft-recall">Microsoft Recall</h3>
+<ul>
+<li><strong>Status:</strong> GA (Copilot+ PCs only; controversial) [F4]</li>
+<li><strong>Architecture:</strong> Fundamentally different approach. Recall captures screen snapshots every few seconds, indexes them locally using on-device AI, and makes this visual history searchable. It is not a conversation memory system -- it is a screen memory system.</li>
+<li><strong>Scope:</strong> Everything visible on screen, across all applications.</li>
+<li><strong>Privacy model:</strong> All processing is local (on-device). Data is encrypted and requires Windows Hello authentication. Recall 2.0 (shipped January 2026 with Windows 12) added a "Privacy-First" rebuild gated by specific hardware requirements.</li>
+<li><strong>Practical character:</strong> Recall is the most ambitious memory system conceptually -- total recall of everything you see on your computer -- but also the most controversial. Privacy backlash has been severe. Microsoft has explored dropping the Recall name entirely due to reputational damage. Its utility for AI-assisted work is real (search your visual history for "that chart I saw last Tuesday") but adoption remains limited by trust concerns [F4].</li>
+</ul>
+<h3 id="comparison-table">Comparison Table</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Claude Memory</th><th>ChatGPT Saved Memories</th><th>Gemini Personal Intelligence</th><th>Microsoft Recall</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>Extracted facts from conversations</td><td>Explicit + inferred facts + full chat history recall</td><td>Learned personal context + Google service data</td><td>Screen snapshot indexing</td></tr><tr><td><strong>Processing</strong></td><td>Async (~24hr cycle)</td><td>Real-time during conversation</td><td>Continuous</td><td>Continuous (every few seconds)</td></tr><tr><td><strong>Data sources</strong></td><td>Conversations only</td><td>Conversations + chat history</td><td>Conversations + Google services (Gmail, Calendar, Drive)</td><td>Entire screen content</td></tr><tr><td><strong>Granularity</strong></td><td>Structured profile</td><td>Individual memory items + fuzzy history</td><td>Personal context model</td><td>Visual snapshots (searchable)</td></tr><tr><td><strong>User control</strong></td><td>View/edit/delete/toggle</td><td>View/delete/toggle (memories and history separately)</td><td>Settings-based</td><td>On/off, app exclusions, auto-delete</td></tr><tr><td><strong>Offline</strong></td><td>No</td><td>No</td><td>No</td><td>Yes (on-device)</td></tr><tr><td><strong>Privacy concern</strong></td><td>Low-moderate</td><td>Moderate</td><td>Moderate-high (Google data access)</td><td>High (screen capture)</td></tr></tbody></table>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="False. ChatGPT uses a dual-layer system. Saved Memories are explicit facts, but Chat History Reference (GA since April 2025) allows ChatGPT to draw on all past conversations for contextual recall -- even things not explicitly memorized can influence future responses." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: ChatGPT's memory system only remembers explicitly saved items.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="Microsoft Recall captures screenshots of everything visible on screen, making it the most ambitious but also most controversial memory system. Privacy backlash has been severe -- Microsoft explored dropping the Recall name entirely. The Privacy-First rebuild (Windows 12, January 2026) added hardware requirements and encryption, but trust concerns persist." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform's memory system is the most controversial from a privacy perspective?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Memory</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="1" />
+          <span class="quiz__choice-label">ChatGPT Saved Memories</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini Personal Intelligence</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft Recall</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Recall captures screen snapshots every few seconds and indexes them locally using on-device AI. It is fundamentally different from the other memory systems -- not a conversation memory but a screen memory. All processing is local, but privacy backlash has been severe." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Microsoft Recall captures what type of data?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="0" />
+          <span class="quiz__choice-label">Conversation transcripts</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="1" />
+          <span class="quiz__choice-label">Explicit user-saved facts</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="2" />
+          <span class="quiz__choice-label">Screen snapshots every few seconds</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="3" />
+          <span class="quiz__choice-label">Email and calendar metadata</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Gemini Personal Intelligence integrates with Gmail, Calendar, Drive, and other Google services, giving it the richest data substrate of any memory system. Its effectiveness depends on how deeply the user is embedded in the Google ecosystem." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which memory system can draw context from Gmail, Calendar, and Drive in addition to chat history?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Memory</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="1" />
+          <span class="quiz__choice-label">ChatGPT Saved Memories</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini Personal Intelligence</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-comparison-table-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft Recall</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<details class="accordion">
+  <summary class="accordion__title">Claude, ChatGPT, Gemini, and Copilot all claim 'memory.' They mean four completely different things.</summary>
+  <div class="accordion__content">
+    <p>Claude extracts facts from conversations asynchronously. ChatGPT combines explicit memories with full chat history recall. Gemini draws from your entire Google ecosystem. Microsoft Recall captures screen snapshots. These are not variations on a theme -- they are fundamentally different architectures with different privacy implications, different latencies, and different failure modes. The comparison table ahead makes the differences concrete.</p>
+  </div>
+</details>
+
+<aside class="concept-gate" role="note" aria-label="Prerequisite check">
+  <h4 class="concept-gate__title">Before You Continue: Memory Architectures</h4>
+  <ul class="concept-gate__list">
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand the difference between conversation context (ephemeral) and persistent memory (cross-session)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I know that each platform has different privacy models for stored data</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I recall from Module 01 that Google's free tier data may be used for model training</label>
+    </li>
+  </ul>
+  <a class="concept-gate__continue" href="#claude-memory-anthropic">Continue to next section →</a>
+</aside>
+<hr>
+<h2 id="rag-retrieval-augmented-generation">RAG: Retrieval-Augmented Generation</h2>
+<p>When the information a model needs exceeds what fits in a <span class="glossary-term" data-term="context-window">context window</span> -- or when you want to ground responses in a specific, authoritative knowledge base -- RAG is the standard architectural pattern.</p>
+<h3 id="how-rag-works">How RAG Works</h3>
+<p>The RAG pipeline has three stages:</p>
+<ol>
+<li>
+<p><strong>Indexing.</strong> Documents are split into chunks (typically 256-1,024 tokens), each chunk is converted to a vector <span class="glossary-term glossary-term--first-use" data-term="embedding">embedding</span>, and embeddings are stored in a <span class="glossary-term glossary-term--first-use" data-term="vector-database">vector database</span>.</p>
+</li>
+<li>
+<p><strong>Retrieval.</strong> When a user query arrives, it is converted to an <span class="glossary-term" data-term="embedding">embedding</span> and compared against the indexed chunks using cosine similarity or similar distance metrics. The top-k most relevant chunks are retrieved (typically 3-10 chunks).</p>
+</li>
+<li>
+<p><strong>Generation.</strong> Retrieved chunks are injected into the model's context alongside the user query. The model generates a response grounded in the retrieved content.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Indexing creates chunk embeddings offline during setup. Retrieval converts the runtime user query to an embedding and finds the most similar chunks using cosine similarity. Generation uses the retrieved chunks as context for the model's response. The three stages happen at different times: indexing is offline, retrieval and generation are real-time." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In the RAG pipeline, which stage converts the user's runtime query into a vector embedding for comparison against indexed chunks?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-how-rag-works-quiz" value="0" />
+          <span class="quiz__choice-label">Indexing</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-how-rag-works-quiz" value="1" />
+          <span class="quiz__choice-label">Retrieval</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-how-rag-works-quiz" value="2" />
+          <span class="quiz__choice-label">Generation</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="architectural-patterns">Architectural Patterns</h3>
+<p>RAG systems have evolved through three generations, each addressing limitations of the prior:</p>
+<p><strong>Naive RAG</strong> (retrieve → generate) follows the three-stage pipeline exactly as described above. A single retrieval pass feeds chunks directly into the prompt. Simple to implement but brittle: query-document mismatch, irrelevant retrievals, and missing context are common failure modes.</p>
+<p><strong>Advanced RAG</strong> adds pre-retrieval and post-retrieval processing to improve quality. Pre-retrieval techniques include query rewriting (rephrasing the user query to better match indexed content), query expansion (generating multiple query variants), and hypothetical document embeddings (HyDE -- generating a hypothetical answer, then using its <span class="glossary-term" data-term="embedding">embedding</span> to find real matches). Post-retrieval techniques include re-ranking (scoring retrieved chunks with a cross-encoder for relevance), chunk filtering (removing low-confidence results), and iterative retrieval (using initial results to generate follow-up queries). Advanced RAG is the current production standard for applications where retrieval quality directly affects user trust [4].</p>
+<p><strong>Modular RAG</strong> treats the pipeline as a set of interchangeable components. Retrieval, re-ranking, routing, summarization, and generation modules can be mixed and matched depending on the query type. A routing module can decide whether a query needs retrieval at all, or whether the model can answer from its parametric knowledge. This pattern powers the most sophisticated enterprise RAG deployments, where different query types require different retrieval strategies [4].</p>
+
+<details class="accordion">
+  <summary class="accordion__title">Deep Dive: Advanced RAG Techniques</summary>
+  <div class="accordion__content">
+    <p>Advanced RAG adds pre-retrieval and post-retrieval processing. Pre-retrieval: query rewriting (rephrase to better match indexed content), query expansion (generate multiple query variants), and HyDE (generate a hypothetical answer, use its embedding to find real matches). Post-retrieval: re-ranking (score chunks with a cross-encoder), chunk filtering (remove low-confidence results), and iterative retrieval (use initial results to generate follow-up queries). These techniques are the current production standard where retrieval quality directly affects user trust.</p>
+  </div>
+</details>
+<h3 id="rag-vs-large-context-windows">RAG vs. Large Context Windows</h3>
+<p>The 1M-<span class="glossary-term" data-term="token">token</span> <span class="glossary-term" data-term="context-window">context window</span> has changed the RAG calculus. Previously, RAG was necessary for any knowledge base larger than 8-32K tokens. Now, many use cases that required RAG can be handled by simply loading documents into the <span class="glossary-term" data-term="context-window">context window</span>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Factor</th><th>Large Context Window</th><th>RAG</th></tr></thead><tbody><tr><td><strong>Setup complexity</strong></td><td>None -- just paste documents</td><td>Significant -- chunking, <span class="glossary-term" data-term="embedding">embedding</span>, vector DB, retrieval tuning</td></tr><tr><td><strong>Cost per query</strong></td><td>High (paying for all tokens every time)</td><td>Lower (only retrieved chunks enter context)</td></tr><tr><td><strong>Accuracy</strong></td><td>Model sees full document; no retrieval errors</td><td>Retrieval can miss relevant chunks or return irrelevant ones</td></tr><tr><td><strong>Freshness</strong></td><td>Documents must be included each time (or cached)</td><td>Index can be updated independently</td></tr><tr><td><strong>Scale</strong></td><td>Limited to <span class="glossary-term" data-term="context-window">context window</span> (750K words max)</td><td>Scales to millions of documents</td></tr><tr><td><strong>Best for</strong></td><td>Small-to-medium knowledge bases (&#x3C;500K tokens); tasks requiring cross-document reasoning</td><td>Large knowledge bases; high-volume query workloads; frequently updated content</td></tr></tbody></table>
+<blockquote>
+<p><strong>Practical guidance:</strong> If your knowledge base fits in 30-40% of the <span class="glossary-term" data-term="context-window">context window</span> and query volume is low, skip RAG and use direct context injection with <span class="glossary-term" data-term="prompt-caching">prompt caching</span>. If the knowledge base exceeds 500K tokens, query volume is high, or the content updates frequently, invest in RAG. Many production systems use a hybrid: RAG for retrieval with a generous <span class="glossary-term" data-term="context-window">context window</span> for the retrieved content plus conversation history.</p>
+</blockquote>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Your knowledge base is 300,000 tokens and receives 50 queries per day. Should you use RAG or direct context injection with caching? Explain your reasoning.</p>
+  <label for="se-m02-rag-vs-large-context-windows" class="sr-only">Your explanation</label>
+  <textarea id="se-m02-rag-vs-large-context-windows" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m02-rag-vs-large-context-windows">Compare with Expert Answer</button>
+  <div id="se-answer-m02-rag-vs-large-context-windows" class="self-explain__expert" hidden>
+    <p>At 300K tokens, the knowledge base fits within 30-40% of the 1M-token context window -- the practical guidance's recommended zone for reliable performance. With only 50 queries/day, the volume does not justify RAG infrastructure complexity. Use direct context injection with prompt caching: the 300K-token knowledge base is cached at 90% discount (Anthropic), reducing the per-query input cost from approximately $0.90 to approximately $0.12 (Sonnet 4.6). RAG setup cost (vector DB hosting, embedding pipeline, retrieval tuning) is not justified at this scale. The decision boundary is roughly 500K tokens of source material or high query volume.</p>
+  </div>
+</div>
+<h3 id="vector-database-options">Vector Database Options</h3>
+<p>The <span class="glossary-term" data-term="vector-database">vector database</span> is the backbone of any RAG system. Choosing one involves tradeoffs between operational complexity, cost model, and feature set:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Database</th><th>Deployment Model</th><th>Hybrid Search</th><th>Pricing Model</th><th>Best For</th></tr></thead><tbody><tr><td><strong>Pinecone</strong></td><td>Fully managed (serverless)</td><td>Yes (sparse + dense)</td><td>Pay-per-query; serverless tier has free allowance</td><td>Teams wanting zero infrastructure management; scales from prototype to production without migration</td></tr><tr><td><strong>Weaviate</strong></td><td>Self-hosted or managed cloud</td><td>Yes (BM25 + vector)</td><td>Open-source (free self-hosted); managed cloud by usage</td><td>Organizations needing on-premises deployment or hybrid search across structured and unstructured data</td></tr><tr><td><strong>Chroma</strong></td><td>Self-hosted (local-first)</td><td>No (dense only)</td><td>Open-source (free)</td><td>Prototyping, local development, small-to-medium datasets; embeds directly in Python applications</td></tr><tr><td><strong>pgvector</strong></td><td>PostgreSQL extension</td><td>Via PostgreSQL full-text search</td><td>Free (part of PostgreSQL)</td><td>Teams already running PostgreSQL who want to avoid adding another database to their stack</td></tr><tr><td><strong>Qdrant</strong></td><td>Self-hosted or managed cloud</td><td>Yes (payload filtering + vector)</td><td>Open-source (free self-hosted); managed cloud by usage</td><td>Applications requiring rich metadata filtering alongside vector search; Rust-based, high performance</td></tr><tr><td><strong>Milvus</strong></td><td>Self-hosted or managed (Zilliz Cloud)</td><td>Yes (sparse + dense)</td><td>Open-source (free self-hosted); Zilliz managed by usage</td><td>Large-scale deployments (billions of vectors); GPU-accelerated indexing and search</td></tr></tbody></table>
+<blockquote>
+<p><strong>Volatility warning:</strong> The <span class="glossary-term" data-term="vector-database">vector database</span> market is consolidating rapidly. New entrants (Turbopuffer, LanceDB) and major cloud provider offerings (AlloyDB AI on Google Cloud, Azure AI Search) are reshaping pricing and feature expectations quarterly.</p>
+</blockquote>
+
+<details class="accordion">
+  <summary class="accordion__title">Emerging Vector Database Landscape</summary>
+  <div class="accordion__content">
+    <p>The vector database market is consolidating rapidly. New entrants (Turbopuffer, LanceDB) and major cloud provider offerings (AlloyDB AI on Google Cloud, Azure AI Search) are reshaping pricing and feature expectations quarterly. For teams already running PostgreSQL, pgvector avoids adding another database to the stack. For production scale, Milvus and Qdrant offer the highest performance. The right choice depends on your existing infrastructure, scale requirements, and whether you need hybrid search (BM25 + vector).</p>
+  </div>
+</details>
+<h3 id="chunking-strategies">Chunking Strategies</h3>
+<p>How documents are split into chunks significantly affects retrieval quality. The choice of strategy should match document structure and query patterns:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Strategy</th><th>How It Works</th><th>Strengths</th><th>Weaknesses</th><th>Best For</th></tr></thead><tbody><tr><td><strong>Fixed-size</strong></td><td>Split every N tokens (e.g., 512)</td><td>Simple, predictable, fast</td><td>Splits sentences and ideas mid-thought</td><td>Homogeneous content (logs, transcripts)</td></tr><tr><td><strong>Semantic</strong></td><td>Split at paragraph or section boundaries</td><td>Preserves meaning within chunks</td><td>Variable chunk sizes; may produce very large or very small chunks</td><td>Well-structured documents (docs, articles)</td></tr><tr><td><strong>Recursive</strong></td><td>Try paragraph → sentence → <span class="glossary-term" data-term="token">token</span> boundaries as fallbacks</td><td>Good balance of coherence and consistency</td><td>More complex to implement</td><td>General-purpose (most common production choice)</td></tr><tr><td><strong>Document-aware</strong></td><td>Respects document structure (headers, lists, tables, code blocks)</td><td>Preserves structural context; tables and code stay intact</td><td>Requires document type detection; format-specific parsers</td><td>Technical documentation, code, legal contracts</td></tr><tr><td><strong>Parent-child</strong></td><td>Index small chunks for retrieval; return larger parent chunk to model</td><td>Precise retrieval with rich generation context</td><td>Doubles storage; more complex indexing pipeline</td><td>Knowledge bases where surrounding context matters</td></tr></tbody></table>
+<p><strong>Chunk sizing and overlap.</strong> Smaller chunks (256-512 tokens) yield more precise retrieval but risk losing surrounding context. Larger chunks (1,024-2,048 tokens) preserve context but dilute retrieval signal. A 10-20% <span class="glossary-term" data-term="token">token</span> overlap between adjacent chunks is standard practice to prevent answers from being split across chunk boundaries. With 1M-<span class="glossary-term" data-term="token">token</span> context windows, erring toward larger retrieved chunks is increasingly viable -- the generation model has room for them.</p>
+<p>A common production pattern combines recursive chunking with parent-child retrieval: split documents recursively into ~256-<span class="glossary-term" data-term="token">token</span> child chunks for <span class="glossary-term" data-term="embedding">embedding</span>, but store them with references to their ~1,024-<span class="glossary-term" data-term="token">token</span> parent chunks. Retrieval matches against children; generation receives parents. This captures the precision of small chunks with the contextual richness of larger ones.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="3" data-explanation="Document-aware chunking respects structural elements -- code blocks, tables, and headers stay intact rather than being split mid-structure. Fixed-size chunking would split a code block in the middle. Semantic chunking may produce variable-sized chunks. Recursive is a good general-purpose choice but does not specifically detect document structure elements like code blocks and tables." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A production RAG system indexes technical documentation with code blocks, tables, and headers. Which chunking strategy best preserves structural context?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-chunking-strategies-quiz" value="0" />
+          <span class="quiz__choice-label">Fixed-size</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-chunking-strategies-quiz" value="1" />
+          <span class="quiz__choice-label">Semantic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-chunking-strategies-quiz" value="2" />
+          <span class="quiz__choice-label">Recursive</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-chunking-strategies-quiz" value="3" />
+          <span class="quiz__choice-label">Document-aware</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="embedding-models">Embedding Models</h3>
+<p>Anthropic does not offer a native embeddings API [F1]. Google offers text, image, audio, and video <span class="glossary-term" data-term="embedding">embedding</span> via the Gemini API (Preview) [F3]. OpenAI offers text-<span class="glossary-term" data-term="embedding">embedding</span>-3-large and text-<span class="glossary-term" data-term="embedding">embedding</span>-3-small (GA), which remain the most widely used <span class="glossary-term" data-term="embedding">embedding</span> models in production [F2]. For Anthropic-centric architectures, third-party <span class="glossary-term" data-term="embedding">embedding</span> providers (OpenAI, Cohere, Voyage AI) are the standard choice. See <a href="module-09.html">Module 09</a> for API-level details on <span class="glossary-term" data-term="embedding">embedding</span> endpoints and pricing.</p>
+<h3 id="when-to-use-rag-decision-framework">When to Use RAG: Decision Framework</h3>
+<p>RAG is not always the right answer. With 1M-<span class="glossary-term" data-term="token">token</span> context windows, <span class="glossary-term" data-term="prompt-caching">prompt caching</span>, and <span class="glossary-term glossary-term--first-use" data-term="fine-tuning">fine-tuning</span> all available, practitioners have four distinct approaches to grounding model behavior in domain knowledge. The right choice depends on the nature of the knowledge, query volume, and how often the knowledge changes:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Approach</th><th>Knowledge Size</th><th>Update Frequency</th><th>Query Volume</th><th>Setup Cost</th><th>Best When</th></tr></thead><tbody><tr><td><strong>Prompt engineering</strong></td><td>&#x3C;10K tokens</td><td>N/A (static)</td><td>Any</td><td>Minimal</td><td>Instructions, formatting rules, behavioral constraints</td></tr><tr><td><strong>Long context + caching</strong></td><td>&#x3C;500K tokens</td><td>Low (weekly+)</td><td>Low-medium</td><td>Minimal</td><td>Reference docs, style guides, codebases; especially with <span class="glossary-term" data-term="prompt-caching">prompt caching</span> to amortize input cost</td></tr><tr><td><strong>RAG</strong></td><td>500K+ tokens to unlimited</td><td>Any</td><td>Medium-high</td><td>Significant</td><td>Large knowledge bases, frequently updated content, high query volume where per-query cost matters</td></tr><tr><td><strong><span class="glossary-term" data-term="fine-tuning">Fine-tuning</span></strong></td><td>Encoded in weights</td><td>Very low (quarterly+)</td><td>Very high</td><td>High (training cost + evaluation)</td><td>Specialized output formats, domain terminology, behavioral patterns that must hold across all queries without prompt space</td></tr></tbody></table>
+<p>In practice, these approaches combine. A production system might fine-tune a model for domain-specific terminology, use RAG to retrieve current product information, load a style guide via <span class="glossary-term" data-term="prompt-caching">prompt caching</span>, and specify output formatting via prompt engineering -- all in the same request.</p>
+
+<figure class="diagram diagram--decision-tree" id="m02-5" role="img" aria-label="Decision tree for choosing between context injection, RAG variants, and fine-tuning based on knowledge base size, update frequency, and query volume.">
+  <div class="decision-tree" data-tree-config='{"root":{"question":"How large is your knowledge base?","branches":[{"label":"< 10K tokens","terminal":{"recommendation":"Prompt Engineering","rationale":"Instructions, formatting rules, and behavioral constraints fit directly in the prompt with minimal setup cost."}},{"label":"10K - 500K tokens","question":"How often does the knowledge change?","branches":[{"label":"Rarely (monthly+)","question":"What is your query volume?","branches":[{"label":"Low-medium (< 200/day)","terminal":{"recommendation":"Long Context + Caching","rationale":"Fits within context window. Prompt caching amortizes input cost at low-medium volume. Minimal setup."}},{"label":"High (200+/day)","terminal":{"recommendation":"RAG (Naive)","rationale":"At high volume, RAG&#39;s per-query savings outweigh setup cost even for sub-500K knowledge bases."}}]},{"label":"Frequently (weekly or more)","terminal":{"recommendation":"RAG (Naive)","rationale":"Frequent updates make context injection impractical — you&#39;d need to rebuild cached prompts constantly. RAG indexes update independently."}}]},{"label":"500K+ tokens","question":"Do queries need multi-hop reasoning or cross-document synthesis?","branches":[{"label":"No — single-fact lookups","terminal":{"recommendation":"RAG (Naive)","rationale":"Simple top-k retrieval handles single-fact queries efficiently. Exceeds context window limits, ruling out direct injection."}},{"label":"Yes — complex queries","question":"Is sub-second latency required?","branches":[{"label":"Yes","terminal":{"recommendation":"RAG (Advanced) + Caching","rationale":"Pre-computed re-ranking and cached frequent queries balance quality with latency. Use query expansion and hybrid search."}},{"label":"No","terminal":{"recommendation":"RAG (Advanced / Agentic)","rationale":"Agentic RAG with iterative retrieval, re-ranking, and follow-up queries maximizes recall for complex questions."}}]}]},{"label":"Need behavior encoded in weights","question":"Is your query volume very high (1000+/day)?","branches":[{"label":"Yes","terminal":{"recommendation":"Fine-tuning","rationale":"Specialized terminology, output formats, or behavioral patterns that must hold across all queries without prompt space. Retraining cost justified at very high volume."}},{"label":"No","terminal":{"recommendation":"RAG + Few-shot Prompting","rationale":"At lower volumes, RAG with few-shot examples in the prompt achieves similar behavioral consistency without retraining cost."}}]}]}}' data-tree-id="m02-5"></div>
+  <figcaption>RAG Decision Framework</figcaption>
+</figure>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="The four RAG failure modes are: retrieval misses (relevant content not returned), irrelevant retrieval (wrong chunks pollute context), chunk boundary splits (answer spans two chunks), and hallucination over retrieved content (model ignores or contradicts retrieved text). Excessive API latency is a general concern, not a RAG-specific failure mode." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which of the following is NOT a RAG failure mode discussed in this module?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="0" />
+          <span class="quiz__choice-label">Retrieval misses</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="1" />
+          <span class="quiz__choice-label">Chunk boundary splits</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="2" />
+          <span class="quiz__choice-label">Hallucination over retrieved content</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="3" />
+          <span class="quiz__choice-label">Excessive API latency</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Agentic RAG gives the model agency over the retrieval process. Rather than a fixed query-retrieve-generate loop, the agent decides what to search, evaluates whether results are sufficient, and may issue refined follow-up queries. This powers Deep Research features in ChatGPT and Gemini, and mirrors Claude Code's progressive disclosure approach." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is 'agentic RAG'?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="0" />
+          <span class="quiz__choice-label">RAG that runs on an agent framework</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="1" />
+          <span class="quiz__choice-label">The model decides what to search, evaluates results, and may issue refined follow-up queries</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="2" />
+          <span class="quiz__choice-label">A RAG system that automatically updates its index</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="3" />
+          <span class="quiz__choice-label">RAG with a human-in-the-loop verification step</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Anthropic does NOT offer a native embeddings API. For Anthropic-centric RAG architectures, third-party embedding providers (OpenAI's text-embedding-3 models, Cohere, Voyage AI) are the standard choice. Google offers text, image, audio, and video embedding via the Gemini API." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: Anthropic offers a native embeddings API for RAG implementations.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="A 10-20% token overlap between adjacent chunks is standard practice. This prevents answers that span two chunks from being lost at the boundary. With 1M-token context windows, erring toward larger retrieved chunks is increasingly viable." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the standard token overlap between adjacent chunks to prevent answers from being split across chunk boundaries?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="0" />
+          <span class="quiz__choice-label">0% (no overlap)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="1" />
+          <span class="quiz__choice-label">5-10%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="2" />
+          <span class="quiz__choice-label">10-20%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="3" />
+          <span class="quiz__choice-label">30-50%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="The decision boundary is roughly 500K tokens of source material. Below that, direct context injection with prompt caching is simpler and often cheaper. Above that, RAG's per-query savings compound -- and the knowledge base may not fit within the reliable 60-70% operating range of a 1M-token window." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">At approximately what knowledge base size does RAG become the recommended approach over direct context injection?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="0" />
+          <span class="quiz__choice-label">50K+ tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="1" />
+          <span class="quiz__choice-label">200K+ tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="2" />
+          <span class="quiz__choice-label">500K+ tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-when-to-use-rag-decision-framework-quiz" value="3" />
+          <span class="quiz__choice-label">1M+ tokens</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="rag-failure-modes">RAG Failure Modes</h3>
+<p>RAG pipelines fail in characteristic ways that practitioners should design against:</p>
+<ul>
+<li><strong>Retrieval misses.</strong> The relevant document exists in the index but is not returned because the query <span class="glossary-term" data-term="embedding">embedding</span> does not match the chunk <span class="glossary-term" data-term="embedding">embedding</span> closely enough. Mitigation: query expansion, hybrid search (BM25 + vector), and re-ranking.</li>
+<li><strong>Irrelevant retrieval.</strong> Wrong chunks enter the context, polluting the generation with off-topic information. The model may incorporate this noise into its response. Mitigation: stricter similarity thresholds, metadata filtering, re-ranking.</li>
+<li><strong>Chunk boundary splits.</strong> The answer spans two chunks and neither chunk alone is sufficient. Mitigation: overlapping chunks (10-20%), parent-child retrieval, or larger chunk sizes.</li>
+<li><strong>Hallucination over retrieved content.</strong> The model ignores, misinterprets, or contradicts the retrieved text. This is rarer than retrieval failures but harder to detect. Mitigation: explicit grounding instructions in the system prompt, citation requirements, and post-generation verification.</li>
+<li><strong>Stale index.</strong> Source documents are updated but embeddings are not re-generated. The model answers based on outdated information while the user believes it is current. Mitigation: automated re-indexing pipelines, freshness metadata on chunks.</li>
+</ul>
+<h3 id="agentic-rag">Agentic RAG</h3>
+<p>Static RAG follows a fixed query → retrieve → generate loop. <strong>Agentic RAG</strong> gives the model agency over the retrieval process: the <span class="glossary-term glossary-term--first-use" data-term="agent">agent</span> decides what to search, evaluates whether the results are sufficient, and may issue refined follow-up queries before generating a response. This is the pattern behind <span class="glossary-term glossary-term--first-use" data-term="deep-research">Deep Research</span> features in ChatGPT and Gemini (see <a href="module-03.html">Module 03</a>), and it mirrors <span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span>'s progressive disclosure approach described later in this module -- read only what is needed, evaluate, then read more if necessary.</p>
+<p>Agentic RAG is more expensive per query (multiple retrieval rounds) but produces substantially higher recall for complex questions that span multiple topics or require synthesis across documents.</p>
+<h3 id="cost-comparison-rag-vs-context-injection">Cost Comparison: RAG vs. Context Injection</h3>
+<p>To make the RAG-vs-context-window decision concrete, consider a 200,000-<span class="glossary-term" data-term="token">token</span> knowledge base queried 500 times per day using Claude Sonnet 4.6 ($3/MTok input):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Approach</th><th>Per-Query Cost</th><th>Daily Cost (500 queries)</th><th>Setup Cost</th></tr></thead><tbody><tr><td><strong>Full context injection (no caching)</strong></td><td>$0.60 (200K tokens)</td><td>$300.00</td><td>None</td></tr><tr><td><strong>Context injection with <span class="glossary-term" data-term="prompt-caching">prompt caching</span></strong> (90% hit rate)</td><td>$0.066</td><td>$33.00</td><td>None</td></tr><tr><td><strong>RAG</strong> (retrieve 5 chunks × 512 tokens = 2,560 tokens + 2K query)</td><td>$0.014 + <span class="glossary-term" data-term="embedding">embedding</span> cost (~$0.003)</td><td>$8.50</td><td>Vector DB hosting ($20-100/mo); <span class="glossary-term" data-term="embedding">embedding</span> pipeline</td></tr></tbody></table>
+<p>At low query volumes, cached context injection wins on simplicity. At 500+ daily queries against a large knowledge base, RAG's per-query savings compound quickly -- but only if the retrieval quality is high enough that users trust the results.</p>
+<h3 id="platform-integrated-rag">Platform-Integrated RAG</h3>
+<p>Several platforms have built RAG-like capabilities into their products, eliminating the need for custom infrastructure:</p>
+<ul>
+<li><strong>ChatGPT Projects:</strong> Upload files as persistent context for a project. ChatGPT performs internal retrieval against uploaded sources. OpenAI's Responses API also includes a built-in <code>file_search</code> tool for developer-managed RAG [F2].</li>
+<li><strong>Claude Projects:</strong> Upload files and set custom instructions per project. Claude accesses these as background context [F1].</li>
+<li><strong>Google NotebookLM:</strong> Purpose-built for source-grounded research. Upload up to 600 sources per notebook (Ultra tier); all responses cite specific sources. This is the most sophisticated consumer-facing RAG product available [F3].</li>
+<li><strong>Microsoft Copilot (M365):</strong> Grounded in Microsoft Graph -- emails, files, meetings, chats. The <span class="glossary-term glossary-term--first-use" data-term="work-iq">Work IQ</span> layer adds organizational intelligence on top. Azure AI Search provides the developer-facing RAG infrastructure [F4].</li>
+</ul>
+
+<figure class="diagram diagram--mermaid" id="m02-2" role="img" aria-label="Process flow diagram showing the three-stage RAG pipeline. Stage 1 (Indexing): documents are split into chunks of 256-1024 tokens, each chunk is converted to a vector embedding, and embeddings are stored in a vector database such as Pinecone, Weaviate, Chroma, or pgvector. Stage 2 (Retrieval): a user query is embedded, compared against indexed chunks using cosine similarity, and the top-k most relevant chunks (typically 3-10) are retrieved. Stage 3 (Generation): retrieved chunks plus the original query are injected into the LLM context window, and the model generates a grounded response. An Advanced RAG extension adds pre-retrieval processing (query rewriting, query expansion, HyDE hypothetical document embeddings) before the retrieval stage, and post-retrieval processing (cross-encoder re-ranking, chunk filtering, iterative retrieval) after retrieval and before generation.">
+  <pre class="mermaid">graph LR
+  subgraph Indexing[&quot;Stage 1: Indexing&quot;]
+    I1[&quot;Documents&quot;] --&gt; I2[&quot;Split into chunks&lt;br/&gt;256-1,024 tokens&quot;]
+    I2 --&gt; I3[&quot;Generate embeddings&quot;]
+    I3 --&gt; I4[&quot;Store in Vector DB&lt;br/&gt;Pinecone · Weaviate&lt;br/&gt;Chroma · pgvector&quot;]
+  end
+
+  subgraph Retrieval[&quot;Stage 2: Retrieval&quot;]
+    R1[&quot;User Query&quot;] --&gt; R2[&quot;Embed query&quot;]
+    R2 --&gt; R3[&quot;Cosine similarity&lt;br/&gt;search&quot;]
+    R3 --&gt; R4[&quot;Top-k chunks&lt;br/&gt;typically 3-10&quot;]
+  end
+
+  subgraph Generation[&quot;Stage 3: Generation&quot;]
+    G1[&quot;Retrieved chunks&lt;br/&gt;+ original query&quot;] --&gt; G2[&quot;LLM context&lt;br/&gt;window&quot;]
+    G2 --&gt; G3[&quot;Grounded&lt;br/&gt;response&quot;]
+  end
+
+  I4 -.-&gt;|&quot;indexed&quot;| R3
+  R4 --&gt; G1
+
+  subgraph Advanced[&quot;Advanced RAG Extensions&quot;]
+    Pre[&quot;Pre-retrieval&lt;br/&gt;Query rewriting&lt;br/&gt;Query expansion&lt;br/&gt;HyDE embeddings&quot;]
+    Post[&quot;Post-retrieval&lt;br/&gt;Cross-encoder re-ranking&lt;br/&gt;Chunk filtering&lt;br/&gt;Iterative retrieval&quot;]
+  end
+
+  Pre -.-&gt;|&quot;before&quot;| R1
+  R4 -.-&gt;|&quot;then&quot;| Post
+  Post -.-&gt;|&quot;refined chunks&quot;| G1
+</pre>
+  <figcaption>RAG Pipeline Architecture: Naive and Advanced Patterns</figcaption>
+</figure>
+
+<details class="accordion">
+  <summary class="accordion__title">RAG fails silently in at least four distinct ways. Most builders discover them in production.</summary>
+  <div class="accordion__content">
+    <p>Retrieval misses, irrelevant retrieval, chunk boundary splits, and hallucination over retrieved content are the four primary failure modes. Each has specific mitigations, and knowing them before you build saves painful debugging later. The RAG Failure Modes section covers each one in detail.</p>
+  </div>
+</details>
+<hr>
+<h2 id="compaction-what-happens-when-context-fills-up">Compaction: What Happens When Context Fills Up</h2>
+<p>Every conversation eventually approaches the <span class="glossary-term" data-term="context-window">context window</span> limit. <span class="glossary-term" data-term="compaction">Compaction</span> is the process of summarizing or truncating conversation history to make room for new content while preserving the most important information.</p>
+<h3 id="how-compaction-works">How Compaction Works</h3>
+<p>When a conversation nears the context limit, the platform applies one or more strategies:</p>
+<ol>
+<li><strong>Summarization:</strong> Older conversation turns are summarized into a condensed representation. The summary replaces the full text, freeing tokens.</li>
+<li><strong>Truncation:</strong> The oldest turns are dropped entirely, keeping only the most recent exchanges.</li>
+<li><strong>Hybrid:</strong> Summarize older turns, keep recent turns verbatim, and preserve system instructions untouched.</li>
+</ol>
+<p>Most implementations use the hybrid approach. System prompts and instructions are always preserved. Recent conversation turns are kept verbatim. Older history is progressively summarized or dropped.</p>
+<h3 id="what-survives-compaction">What Survives Compaction</h3>
+<p>This matters enormously for <span class="glossary-term" data-term="agent">agent</span> systems and long-running workflows:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Content Type</th><th>Survives Compaction?</th><th>Notes</th></tr></thead><tbody><tr><td>System prompt / instructions</td><td>Always</td><td>Reloaded fresh after <span class="glossary-term" data-term="compaction">compaction</span></td></tr><tr><td>Most recent turns (last 5-10)</td><td>Usually</td><td>Kept verbatim</td></tr><tr><td>User preferences / memory</td><td>Yes (external)</td><td>Stored outside <span class="glossary-term" data-term="context-window">context window</span></td></tr><tr><td>Detailed early conversation</td><td>No</td><td>Summarized or dropped</td></tr><tr><td>Specific numbers, dates, URLs from early turns</td><td>Often lost</td><td>Summaries rarely preserve exact values</td></tr><tr><td>Research results, web search output</td><td>No</td><td>Too verbose; summarized aggressively</td></tr><tr><td>Tool call results from early turns</td><td>Partially</td><td>Key outcomes may survive; details lost</td></tr></tbody></table>
+
+<section class="quiz" data-variant="concept-check" data-correct="3" data-explanation="Compaction summaries rarely preserve exact values like specific numbers, dates, and URLs from early conversation turns. This is why the module advises: 'If a fact, decision, or intermediate result matters beyond the current exchange, persist it to an external store.' Design for compaction from the start." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">System prompts and instructions survive compaction. Specific numbers, dates, and URLs from early conversation turns typically:</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-what-survives-compaction-quiz" value="0" />
+          <span class="quiz__choice-label">Always survive</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-what-survives-compaction-quiz" value="1" />
+          <span class="quiz__choice-label">Sometimes survive in summaries</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-what-survives-compaction-quiz" value="2" />
+          <span class="quiz__choice-label">Are reliably preserved</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-what-survives-compaction-quiz" value="3" />
+          <span class="quiz__choice-label">Are often lost</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="openais-response-compaction-endpoint">OpenAI's Response Compaction Endpoint</h3>
+<p>OpenAI offers a dedicated response <span class="glossary-term" data-term="compaction">compaction</span> endpoint for long-running agentic workflows that exceed context limits. Rather than relying on automatic truncation, developers can explicitly trigger <span class="glossary-term" data-term="compaction">compaction</span> and control what information is preserved [F2]. This is particularly useful for multi-step <span class="glossary-term" data-term="agent">agent</span> pipelines where specific intermediate results must survive across many turns.</p>
+<h3 id="implications-for-practitioners">Implications for Practitioners</h3>
+<p><strong>Write important things down.</strong> If a fact, decision, or intermediate result matters beyond the current exchange, persist it to an external store -- a file, a database, a memory system. Do not rely on it surviving <span class="glossary-term" data-term="compaction">compaction</span> in a long conversation.</p>
+<p><strong>Front-load critical context.</strong> System prompts and instructions survive <span class="glossary-term" data-term="compaction">compaction</span>. Place essential context, rules, and reference data in the system prompt rather than in early user messages.</p>
+<p><strong>Design for <span class="glossary-term" data-term="compaction">compaction</span>.</strong> In <span class="glossary-term" data-term="agent">agent</span> architectures, structure workflows so that each step produces a self-contained summary of its results. When <span class="glossary-term" data-term="compaction">compaction</span> occurs, the summary is sufficient to continue work without access to the full step-by-step history.</p>
+<hr>
+<h2 id="context-engineering-as-a-discipline">Context Engineering as a Discipline</h2>
+<p>The term "<span class="glossary-term" data-term="context-engineering">context engineering</span>" has gained traction in 2025-2026 as practitioners recognized that the bottleneck in most AI systems is not model capability but context design. As Andrej Karpathy and others have argued, the quality of an LLM's output is a function of the information available in its <span class="glossary-term" data-term="context-window">context window</span> at generation time -- and curating that information is an engineering discipline, not an afterthought [3].</p>
+<h3 id="the-core-principles">The Core Principles</h3>
+<p><strong>1. Context is the product.</strong> The model is a fixed function (for a given generation). The only variable the practitioner controls is what goes into the <span class="glossary-term" data-term="context-window">context window</span>. Improving output quality means improving context quality.</p>
+<p><strong>2. Every <span class="glossary-term" data-term="token">token</span> has a cost -- in money and in attention.</strong> Tokens cost money (input pricing). They also cost model attention: adding irrelevant context dilutes the model's focus on relevant content. The best context is the minimum sufficient context for the task.</p>
+<p><strong>3. Context has layers.</strong> A well-engineered <span class="glossary-term" data-term="context-window">context window</span> has a deliberate structure:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Layer</th><th>Content</th><th>Persistence</th><th>Example</th></tr></thead><tbody><tr><td><strong>Identity</strong></td><td>System prompt, persona, rules</td><td>Permanent (survives <span class="glossary-term" data-term="compaction">compaction</span>)</td><td>"You are a curriculum writer. Follow these standards..."</td></tr><tr><td><strong>Knowledge</strong></td><td>Reference documents, RAG results</td><td>Per-session or cached</td><td>Product documentation, style guides</td></tr><tr><td><strong>Memory</strong></td><td>User preferences, past decisions</td><td>Cross-session (via memory system)</td><td>"User prefers concise responses; works in Python"</td></tr><tr><td><strong>Task</strong></td><td>Current instructions, goals</td><td>Per-task</td><td>"Write Module 02 covering <span class="glossary-term" data-term="context-engineering">context engineering</span>"</td></tr><tr><td><strong>Conversation</strong></td><td>Recent exchanges</td><td>Ephemeral (subject to <span class="glossary-term" data-term="compaction">compaction</span>)</td><td>The last 10 messages</td></tr></tbody></table>
+<p><strong>4. Design for <span class="glossary-term" data-term="compaction">compaction</span> from the start.</strong> Assume anything not in the identity or memory layers will eventually be lost. Structure information so that critical content lives in durable layers.</p>
+<p><strong>5. Use the right persistence mechanism for each type of information.</strong> Not everything belongs in the <span class="glossary-term" data-term="context-window">context window</span>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Information Type</th><th>Best Persistence Mechanism</th><th>Why</th></tr></thead><tbody><tr><td>Project rules and standards</td><td>System prompt / instruction files</td><td>Survives <span class="glossary-term" data-term="compaction">compaction</span>; loaded every session</td></tr><tr><td>User preferences</td><td>Platform memory system</td><td>Cross-session; managed automatically</td></tr><tr><td>Reference documents (&#x3C;500K tokens)</td><td>Direct context injection with caching</td><td>Full fidelity; cost-effective with caching</td></tr><tr><td>Large knowledge bases</td><td>RAG pipeline</td><td>Scales beyond context limits</td></tr><tr><td>Intermediate results in workflows</td><td>External files / database</td><td>Survives <span class="glossary-term" data-term="compaction">compaction</span>; auditable</td></tr><tr><td>Conversation history</td><td><span class="glossary-term" data-term="context-window">Context window</span> (ephemeral)</td><td>Accept that it compacts</td></tr></tbody></table>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Context has five layers: Identity, Knowledge, Memory, Task, Conversation. For a customer support chatbot, give one concrete example of content that belongs in each layer.</p>
+  <label for="se-m02-the-core-principles" class="sr-only">Your explanation</label>
+  <textarea id="se-m02-the-core-principles" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m02-the-core-principles">Compare with Expert Answer</button>
+  <div id="se-answer-m02-the-core-principles" class="self-explain__expert" hidden>
+    <p>Identity: 'You are a support agent for Acme Corp. Use these guidelines: always greet by name, never promise refunds over $500 without escalation.' Knowledge: Product documentation loaded via RAG or prompt caching (feature specs, troubleshooting guides). Memory: 'This customer prefers detailed technical explanations; has a Pro plan; had a billing issue last month.' Task: 'Resolve the customer's question about their API rate limit increase request.' Conversation: The last 10 messages exchanged with the customer, including their error logs.</p>
+  </div>
+</div>
+<h3 id="context-engineering-in-practice-claude-code-as-case-study">Context Engineering in Practice: Claude Code as Case Study</h3>
+<p><span class="glossary-term" data-term="claude-code">Claude Code</span> -- Anthropic's terminal-based agentic coding tool -- implements several <span class="glossary-term" data-term="context-engineering">context engineering</span> patterns that illustrate the discipline [F1]:</p>
+<ul>
+<li><strong>CLAUDE.md files:</strong> Persistent project instructions loaded into every session. These form the identity layer and survive <span class="glossary-term" data-term="compaction">compaction</span> because they are read from disk, not from conversation history.</li>
+<li><strong>Session Memory:</strong> Automatic cross-session context persistence. Key decisions and context from one session are available in the next.</li>
+<li><strong>Progressive disclosure:</strong> <span class="glossary-term" data-term="claude-code">Claude Code</span> reads files on demand rather than loading an entire codebase into context. It uses Glob/Grep to locate relevant sections, then reads only what is needed. This minimizes <span class="glossary-term" data-term="token">token</span> usage while maintaining the ability to access any file.</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="subagent">Subagent</span> context isolation:</strong> When <span class="glossary-term" data-term="claude-code">Claude Code</span> delegates to a <span class="glossary-term" data-term="subagent">subagent</span>, the <span class="glossary-term" data-term="subagent">subagent</span> runs in its own <span class="glossary-term" data-term="context-window">context window</span>. Only a structured summary returns to the parent. This prevents context pollution and keeps the parent's window lean.</li>
+<li><strong>Auto-<span class="glossary-term" data-term="compaction">compaction</span>:</strong> At ~95% context capacity, <span class="glossary-term" data-term="claude-code">Claude Code</span> triggers <span class="glossary-term" data-term="compaction">compaction</span>. CLAUDE.md is reloaded fresh; a summary of recent work is preserved; verbose intermediate results are discarded.</li>
+</ul>
+<p>These patterns are not specific to coding tools. Any system that manages long-running AI interactions -- customer support bots, research agents, automation pipelines -- benefits from the same architectural principles.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="CLAUDE.md files are loaded from disk into every session, forming the identity layer of context engineering. They survive compaction because they are read from disk, not from conversation history. Session Memory provides cross-session context (the memory layer). Progressive disclosure manages what enters the working set. Auto-compaction handles overflow." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which Claude Code feature implements the 'Identity layer' of context engineering -- persistent project instructions that survive compaction?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-context-engineering-in-practice-claude-code-as-case-study-quiz" value="0" />
+          <span class="quiz__choice-label">Session Memory</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-context-engineering-in-practice-claude-code-as-case-study-quiz" value="1" />
+          <span class="quiz__choice-label">CLAUDE.md files</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-context-engineering-in-practice-claude-code-as-case-study-quiz" value="2" />
+          <span class="quiz__choice-label">Progressive disclosure</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-context-engineering-in-practice-claude-code-as-case-study-quiz" value="3" />
+          <span class="quiz__choice-label">Auto-compaction</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="the-cost-optimization-stack">The Cost Optimization Stack</h3>
+<p><span class="glossary-term" data-term="context-engineering">Context engineering</span> and cost optimization are inseparable. The full optimization stack, from highest to lowest impact:</p>
+<ol>
+<li><strong>Model selection</strong> (60-80% savings): Use the cheapest model that meets quality requirements. Haiku 4.5 at $1/$5 per MTok vs. Opus 4.6 at $5/$25 is a 5x difference. GPT-5.4 Nano at $0.20/$1.25 vs. GPT-5.4 at $2.50/$10 is a 10x difference.</li>
+<li><strong><span class="glossary-term" data-term="prompt-caching">Prompt caching</span></strong> (up to 90% savings on cached content): Cache system prompts and reference documents.</li>
+<li><strong>RAG / selective retrieval</strong> (variable, often 50-80% savings): Send only relevant chunks instead of entire documents.</li>
+<li><strong>Batch processing</strong> (50% savings): Use batch APIs for non-real-time workloads.</li>
+<li><strong>Prompt optimization</strong> (20-50% savings): Remove redundant instructions, compress examples, eliminate filler.</li>
+</ol>
+<p>Applied together, these techniques can reduce API costs by 95% or more compared to naive implementations -- often the difference between a viable product and an economically unsustainable one.</p>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="Applied together -- model selection, prompt caching, RAG, batch processing, and prompt optimization -- these techniques can reduce API costs by 95% or more compared to naive implementations. This is often the difference between a viable product and an economically unsustainable one." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The full cost optimization stack applied together can reduce API costs by approximately what percentage compared to naive implementation?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="0" />
+          <span class="quiz__choice-label">50%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="1" />
+          <span class="quiz__choice-label">75%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="2" />
+          <span class="quiz__choice-label">85%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="3" />
+          <span class="quiz__choice-label">95% or more</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="The module states that context engineering and cost optimization are the same discipline. Every token in the window costs money and model attention. The minimum sufficient context is both the cheapest and the highest-quality approach. Reducing cost and improving quality are not tradeoffs -- they align." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Context engineering and cost optimization are described as what relationship in this module?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="0" />
+          <span class="quiz__choice-label">Complementary but separate disciplines</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="1" />
+          <span class="quiz__choice-label">The same discipline</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="2" />
+          <span class="quiz__choice-label">Cost optimization is a subset of context engineering</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="3" />
+          <span class="quiz__choice-label">Context engineering is a subset of cost optimization</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="The correct order is: Model selection (60-80% savings) > Prompt caching (up to 90% on cached content) > RAG/selective retrieval (50-80%) > Batch processing (50%) > Prompt optimization (20-50%). Model selection has the highest impact because the difference between Opus 4.6 ($5/$25) and GPT-5.4 Nano ($0.20/$1.25) is a 25x cost gap." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Rank the cost optimization stack from highest to lowest impact.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="0" />
+          <span class="quiz__choice-label">Prompt caching &gt; Model selection &gt; RAG &gt; Batching &gt; Prompt optimization</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="1" />
+          <span class="quiz__choice-label">Model selection &gt; Prompt caching &gt; RAG/selective retrieval &gt; Batch processing &gt; Prompt optimization</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="2" />
+          <span class="quiz__choice-label">RAG &gt; Prompt caching &gt; Model selection &gt; Prompt optimization &gt; Batching</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-the-cost-optimization-stack-quiz" value="3" />
+          <span class="quiz__choice-label">Batch processing &gt; Model selection &gt; Prompt caching &gt; RAG &gt; Prompt optimization</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>Context windows have converged at 1M tokens</strong> across Anthropic, OpenAI, and Google flagship models, at standard pricing with no surcharge. This was a premium feature six months ago.</p>
+</li>
+<li>
+<p><strong>The effective <span class="glossary-term" data-term="context-window">context window</span> is smaller than the advertised window.</strong> Performance degrades at 40-60% capacity for precision tasks. Plan for 60-70% as your reliable operating range.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="prompt-caching">Prompt caching</span> is the highest-leverage cost optimization.</strong> Anthropic and Google offer 90% savings on cache hits; OpenAI offers 50%. Three cache durations at Anthropic (5-minute, 1-hour, persistent) enable fine-grained control.</p>
+</li>
+<li>
+<p><strong>Memory systems differ fundamentally in architecture.</strong> Claude uses asynchronous fact extraction; ChatGPT combines explicit memories with full chat history recall; Gemini leverages the broader Google ecosystem; Microsoft Recall captures screen content. Choose based on your ecosystem and privacy requirements.</p>
+</li>
+<li>
+<p><strong>RAG remains essential for large knowledge bases</strong> but is increasingly optional for smaller ones that fit within context windows. The decision boundary is roughly 500K tokens of source material.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="compaction">Compaction</span> is inevitable in long conversations.</strong> Design for it: persist important information externally, front-load critical context in system prompts, and produce self-contained summaries at each workflow step.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="context-engineering">Context engineering</span> is the discipline of curating what enters the <span class="glossary-term" data-term="context-window">context window</span>.</strong> It encompasses prompt design, memory management, RAG architecture, caching strategy, and <span class="glossary-term" data-term="compaction">compaction</span> planning -- and it is the single highest-leverage skill for AI practitioners.</p>
+</li>
+<li>
+<p><strong>Cost optimization and <span class="glossary-term" data-term="context-engineering">context engineering</span> are the same discipline.</strong> Every <span class="glossary-term" data-term="token">token</span> in the window costs money and model attention. The minimum sufficient context is both the cheapest and the highest-quality approach.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Model selection is the highest-impact cost lever. The difference between Opus 4.6 ($5/$25 per MTok) and GPT-5.4 Nano ($0.20/$1.25 per MTok) is a 25x gap. Prompt caching has the second-highest impact. The full stack -- model selection, caching, RAG, batching, and prompt optimization -- compounds to 95%+ savings." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which model selection strategy has the highest single impact on cost reduction?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Prompt caching (up to 90% savings)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Model selection -- using the cheapest model that meets quality requirements (60-80% savings)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Batch processing (50% savings)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">RAG/selective retrieval (50-80% savings)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="At 2M tokens, the knowledge base exceeds any current context window (max 1M tokens), ruling out direct injection. Weekly updates and high query volume (800/day) make RAG the clear choice -- the index can be updated independently, and RAG's per-query cost savings compound at this volume. Fine-tuning would require retraining weekly, which is impractical. This is the RAG decision framework applied directly." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A developer needs to decide between four approaches to ground a model in domain knowledge. For a 2M-token knowledge base updated weekly with 800 daily queries, which approach is most appropriate?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Prompt engineering alone</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Long context injection with caching</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">RAG pipeline</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Fine-tuning</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="3" data-explanation="Model selection (60-80%), prompt caching (up to 90% on cached content), RAG (50-80%), batch processing (50%), and prompt optimization (20-50%) compound to 95% or more in savings. This is often the difference between a viable product and an economically unsustainable one. Module 09 covers the API-level implementation details." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The full cost optimization stack applied together can reduce API costs by approximately what percentage compared to naive implementation?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">50%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">75%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">85%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">95% or more</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Agentic RAG gives the model agency over retrieval: it decides what to search, evaluates whether results are sufficient, and may issue refined follow-up queries before generating a response. This powers Deep Research features in ChatGPT and Gemini. It is more expensive per query (multiple retrieval rounds) but produces substantially higher recall for complex questions." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is agentic RAG?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">RAG running inside an agent framework</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">The model has agency over the retrieval process -- deciding what to search, evaluating results, and issuing follow-up queries</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Automated RAG index maintenance</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">RAG with human approval for each retrieval</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The Identity layer contains the system prompt, persona, and rules. It is the most durable layer -- permanent content that survives compaction because it is loaded fresh each session. Claude Code implements this through CLAUDE.md files. The five layers are: Identity, Knowledge, Memory, Task, and Conversation, ordered from most to least durable." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In context engineering, what is the 'Identity' layer?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">The user's name and role</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">System prompt, persona, and rules -- permanent content that survives compaction</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">The model's version identifier</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Authentication credentials for API access</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="System prompts and instructions always survive compaction (reloaded fresh). User preferences in external memory systems survive because they are stored outside the context window. Detailed early conversation, specific numbers and URLs, web search results, and verbose tool call details are all lost or aggressively summarized during compaction." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Name two content types that reliably survive compaction.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">System prompts and recent web search results</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">System prompts/instructions and user preferences stored in external memory</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Detailed early conversation and tool call results</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Specific numbers and URLs from early turns</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="First documented in 2023 and persisting in current models (though diminished), the lost-in-the-middle effect means models attend more strongly to information at the beginning and end of the context window. For precision-critical tasks, place critical information at the beginning or end rather than burying it in the middle." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the 'lost-in-the-middle' effect?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Models lose context when conversations are too long</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Models attend more strongly to the beginning and end of context, with weaker recall for content in the middle third</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Context is lost during compaction</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Middle-tier models underperform compared to flagship and budget models</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Recursive chunking is the most common general-purpose production choice. It tries paragraph boundaries first, falls back to sentence boundaries, then token boundaries. This provides a good balance of coherence and consistent chunk sizes. Document-aware is better for structured content (code, legal), but recursive works well across content types." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What chunking strategy is the most common production choice for general-purpose RAG?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Fixed-size</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Semantic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Recursive</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Document-aware</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="RAG costs approximately $8.50/day vs. $33/day for cached context injection at this scale. However, RAG has significant setup costs (vector DB hosting, embedding pipeline, retrieval tuning). At 500 queries/day against a 200K-token knowledge base, RAG's per-query savings compound enough to justify the infrastructure investment." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A 200K-token knowledge base queried 500 times daily with Sonnet 4.6. Which approach has the lower ongoing daily cost: context injection with caching, or RAG?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Context injection with caching (~$33/day)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">RAG (~$8.50/day)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Both cost the same</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Context injection without caching</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="0" data-explanation="Claude Memory reviews conversations approximately every 24 hours and extracts relevant facts. This passive, cumulative approach means corrections or new context may not appear in memory until the next processing cycle. ChatGPT's memory is more aggressive -- it actively infers and saves memories during conversation in real-time." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which memory system processes conversations asynchronously with approximately a 24-hour delay?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Memory</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">ChatGPT Saved Memories</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini Personal Intelligence</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft Recall</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="OpenAI offers a 50% discount on cache hits -- compared to 90% for both Anthropic and Google. OpenAI's caching is also more automatic and opaque, giving developers less direct control over cache behavior. For cost-sensitive applications, Anthropic's 90% discount with three configurable duration tiers provides the most developer control." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Anthropic's prompt cache hit discount is 90%. OpenAI's prompt cache hit discount is:</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">25%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">50%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">75%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">90%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Treat 60-70% of the advertised window as the reliable operating range for precision-critical tasks. Models begin showing measurable accuracy loss at 40-60% capacity. For summarization or broad analysis you can push higher, but for factual retrieval from specific passages, keep context leaner." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the practical reliable operating range for precision tasks in a 1M-token context window?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">20-30%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">40-50%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">60-70%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m02-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">90-95%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- Market context for the platforms discussed here</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- Model-specific <span class="glossary-term" data-term="context-window">context window</span> sizes, pricing, and capability details</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- How agents manage context in autonomous workflows</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- Context isolation and summary propagation in multi-<span class="glossary-term" data-term="agent">agent</span> systems</li>
+<li><a href="module-05.html">Module 05: <span class="glossary-term glossary-term--first-use" data-term="openclaw">OpenClaw</span> &#x26; Open <span class="glossary-term" data-term="agent">Agent</span> Ecosystem</a> -- <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s file-based memory architecture compared to platform memory systems</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- MCP as a context-providing mechanism</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- API-level implementation of caching, batching, and structured outputs</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- On-device inference as a tiered context architecture extension</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+<p>[1] Anthropic, "<span class="glossary-term" data-term="token">Token</span> Counting and Multilingual Considerations," Anthropic Documentation, <a href="https://docs.anthropic.com/en/docs/build-with-claude/token-counting">https://docs.anthropic.com/en/docs/build-with-claude/<span class="glossary-term" data-term="token">token</span>-counting</a>, accessed 2026-03-20.</p>
+<p>[2] Nelson Liu et al., "Lost in the Middle: How Language Models Use Long Contexts," <em>Transactions of the Association for Computational Linguistics</em>, 2024. <a href="https://arxiv.org/abs/2307.03172">https://arxiv.org/abs/2307.03172</a>, accessed 2026-03-20.</p>
+<p>[3] Andrej Karpathy, "<span class="glossary-term" data-term="context-engineering">Context Engineering</span>" (discussion of context as the primary lever for LLM quality), various public talks and posts, 2025-2026.</p>
+<p>[4] Yunfan Gao et al., "Retrieval-Augmented Generation for Large Language Models: A Survey," <em>arXiv</em>, 2024. <a href="https://arxiv.org/abs/2312.10997">https://arxiv.org/abs/2312.10997</a>, accessed 2026-03-21. Comprehensive taxonomy of Naive, Advanced, and Modular RAG architectures.</p>
+<p>[F1] Anthropic/Claude Ecosystem Profile, reference/profiles/anthropic-claude.md, accessed 2026-03-18.</p>
+<p>[F2] OpenAI/ChatGPT Ecosystem Profile, reference/profiles/openai-chatgpt.md, accessed 2026-03-18.</p>
+<p>[F3] Google/Gemini Ecosystem Profile, reference/profiles/google-gemini.md, accessed 2026-03-18.</p>
+<p>[F4] Microsoft/Copilot Ecosystem Profile, reference/profiles/microsoft-copilot.md, accessed 2026-03-18.</p>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-01.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 01: Models &amp; Intelligence Tiers</span>
+        </a>
+        <a href="module-03.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 03: Single-Agent Systems</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

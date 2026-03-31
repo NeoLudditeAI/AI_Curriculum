@@ -1,0 +1,163 @@
+{
+  "parts": [
+    {
+      "number": 1,
+      "title": "The Terrain",
+      "modules": [
+        {
+          "id": "00",
+          "title": "Landscape Overview",
+          "status": "COMPLETE",
+          "estimatedTime": "25-30 min",
+          "prerequisites": [],
+          "sequencePosition": 1
+        },
+        {
+          "id": "01",
+          "title": "Models & Intelligence Tiers",
+          "status": "COMPLETE",
+          "estimatedTime": "30-35 min",
+          "prerequisites": [],
+          "sequencePosition": 2
+        },
+        {
+          "id": "02",
+          "title": "Context Engineering",
+          "status": "COMPLETE",
+          "estimatedTime": "35-40 min",
+          "prerequisites": [
+            "00",
+            "01"
+          ],
+          "sequencePosition": 3
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Agent Systems",
+      "modules": [
+        {
+          "id": "03",
+          "title": "Single-Agent Systems",
+          "status": "COMPLETE",
+          "estimatedTime": "25-30 min",
+          "prerequisites": [
+            "00",
+            "01"
+          ],
+          "sequencePosition": 4
+        },
+        {
+          "id": "06",
+          "title": "MCP & the Integration Layer",
+          "status": "COMPLETE",
+          "estimatedTime": "30-35 min",
+          "prerequisites": [
+            "00",
+            "01"
+          ],
+          "sequencePosition": 5
+        },
+        {
+          "id": "04",
+          "title": "Multi-Agent Orchestration",
+          "status": "COMPLETE",
+          "estimatedTime": "30-35 min",
+          "prerequisites": [
+            "03"
+          ],
+          "sequencePosition": 6
+        },
+        {
+          "id": "05",
+          "title": "OpenClaw & Open Agent Ecosystem",
+          "status": "COMPLETE",
+          "estimatedTime": "25-30 min",
+          "prerequisites": [
+            "00"
+          ],
+          "sequencePosition": 7
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Building & Automating",
+      "modules": [
+        {
+          "id": "07",
+          "title": "Skills, Plugins & Automation",
+          "status": "COMPLETE",
+          "estimatedTime": "25-30 min",
+          "prerequisites": [
+            "03",
+            "06"
+          ],
+          "sequencePosition": 8
+        },
+        {
+          "id": "09",
+          "title": "Developer Platforms & APIs",
+          "status": "COMPLETE",
+          "estimatedTime": "25-30 min",
+          "prerequisites": [
+            "01"
+          ],
+          "sequencePosition": 9
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Synthesis & Horizon",
+      "modules": [
+        {
+          "id": "08",
+          "title": "Consumer AI Comparison",
+          "status": "COMPLETE",
+          "estimatedTime": "25-30 min",
+          "prerequisites": [
+            "00",
+            "01",
+            "02",
+            "03"
+          ],
+          "sequencePosition": 10
+        },
+        {
+          "id": "10",
+          "title": "Frontier Topics",
+          "status": "COMPLETE",
+          "estimatedTime": "30-35 min",
+          "prerequisites": [
+            "00",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09"
+          ],
+          "sequencePosition": 11
+        }
+      ]
+    }
+  ],
+  "learningSequence": [
+    "00",
+    "01",
+    "02",
+    "03",
+    "06",
+    "04",
+    "05",
+    "07",
+    "09",
+    "08",
+    "10"
+  ]
+}

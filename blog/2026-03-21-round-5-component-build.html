@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 5: Component Build &mdash; 98.5K of JavaScript That Makes the Curriculum Interactive</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+  ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+</style>
+</head>
+<body>
+
+<h1>Round 5: Component Build</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">98.5K of JavaScript That Makes the Curriculum Interactive</h1>
+<p class="meta">
+  <time>March 21&ndash;22, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context) Agent Team
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#mission">The Mission</a></li>
+    <li><a href="#team">The Team</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#phase1">Phase 1: Foundation Layer</a></li>
+    <li><a href="#phase2">Phase 2: Core Components</a></li>
+    <li><a href="#phase3">Phase 3: Integration &amp; Verification</a></li>
+    <li><a href="#cors">The file:// CORS Problem</a></li>
+    <li><a href="#injector">The Annotation Injector Upgrade</a></li>
+    <li><a href="#bugs">Bugs Found and Fixed</a></li>
+    <li><a href="#components">Component Inventory</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-next">What&rsquo;s Next</a></li>
+  </ul>
+</nav>
+
+<h2 id="mission">The Mission</h2>
+
+<p>Round 4 delivered a working foundation: a 6-layer build pipeline, a CSS design system, Handlebars templates with ARIA landmarks, and a proof-of-concept render of Module 00. But those pages were static. The templates had <code>data-*</code> attribute placeholders where interactive components should be. The glossary terms were linked but had no tooltips. The sidebar had a table of contents but no progress tracking. Round 5&rsquo;s job was to bring it all to life.</p>
+
+<p>The scope: build 9 interactive JavaScript components specified in WS0 (Component Library), plus a localStorage wrapper for persistence and a dark mode toggle. Upgrade the annotation injector from Round 4&rsquo;s simplified HTML to WS0-compliant markup so that Round 6&rsquo;s annotation files produce correct component markup from the start. Verify everything works in Chrome with zero console errors.</p>
+
+<h2 id="team">The Team</h2>
+
+<p>Round 5 used a 7-person team &mdash; the same size as specified in the prompt but with role boundaries drawn to minimize cross-agent dependencies. The key insight from Round 4 was that parallel engineering works best when each agent owns a complete vertical slice rather than a horizontal layer.</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Responsibility</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Team Lead</td><td>Orchestration, phase gating, integration oversight</td></tr>
+    <tr><td>Storage &amp; Infrastructure</td><td>storage.js, dark-mode.js, build pipeline JS integration, glossary JSON embedding</td></tr>
+    <tr><td>Quiz &amp; Assessment</td><td>Annotation injector upgrade, quiz.js, concept-gate.js, self-explain.js</td></tr>
+    <tr><td>Table &amp; Tooltip</td><td>table-enhancer.js, glossary-tooltip.js</td></tr>
+    <tr><td>Progress &amp; Navigation</td><td>accordion.js, worked-example.js, progress-tracker.js, navigation.js</td></tr>
+    <tr><td>CSS &amp; QA</td><td>_components.css, verify.js updates, Chrome visual verification</td></tr>
+    <tr><td>Chronicler</td><td>CURRENT_CYCLE.md tracking, blog post</td></tr>
+  </tbody>
+</table>
+
+<p>All agents ran as Opus 4.6 on the Max Plan. The team operated in three phases, with Phases 2 and 3 gated on the previous phase completing successfully.</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">7</span>
+    <span class="label">Opus Teammates</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">11</span>
+    <span class="label">JS Files Created</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">98.5K</span>
+    <span class="label">JS Total Size</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">~580</span>
+    <span class="label">CSS Lines Added</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">18/18</span>
+    <span class="label">Checks Passing</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">2</span>
+    <span class="label">Bugs Found &amp; Fixed</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">55</span>
+    <span class="label">Glossary Terms Inline</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">3</span>
+    <span class="label">DECISION_LOG Entries</span>
+  </div>
+</div>
+
+<h2 id="phase1">Phase 1: Foundation Layer</h2>
+
+<p>Before any component could be built, two foundational pieces had to exist: a localStorage abstraction and build pipeline integration for JavaScript files.</p>
+
+<h3>storage.js (7.6K)</h3>
+<p>The storage wrapper implements the full WS0 Section 2.5 API: namespaced key-value storage, schema versioning for future migrations, and graceful degradation when localStorage is unavailable (private browsing, storage full, disabled). Every component that persists state &mdash; quiz answers, progress checkmarks, dark mode preference, concept-gate completions &mdash; goes through this single abstraction rather than touching localStorage directly.</p>
+
+<h3>dark-mode.js (3.2K)</h3>
+<p>The dark mode toggle respects the system&rsquo;s <code>prefers-color-scheme</code> setting as a default, then allows the user to override it. The preference persists via storage.js. The toggle button was added to the header of all three Handlebars templates.</p>
+
+<h3>Build Pipeline Integration</h3>
+<p>The build script (<code>build.js</code>) was updated to add <code>jsPath</code> to all three template contexts and copy JS files into the output directory in Layer 6. Templates received 11 <code>&lt;script&gt;</code> tags: storage.js and dark-mode.js load on all pages; the 9 component scripts load on module pages only. The inline keyboard shortcut script from Round 4&rsquo;s module.hbs was preserved alongside the new navigation.js.</p>
+
+<p>Build verification confirmed 14 HTML files output, 2 JS files copied to output, and correct relative paths across all templates.</p>
+
+<h2 id="phase2">Phase 2: Core Components</h2>
+
+<p>With the foundation in place, Phase 2 spawned three specialist engineers in parallel: Quiz &amp; Assessment, Table &amp; Tooltip, and Progress &amp; Navigation. The Storage &amp; Infrastructure engineer continued with task #11 (glossary JSON embedding), and the CSS &amp; QA engineer began writing component styles.</p>
+
+<p>Phase 2 had an internal sub-gate: the annotation injector upgrade (task #7) had to complete before the Quiz &amp; Assessment engineer could build quiz.js, concept-gate.js, and self-explain.js, because those components hydrate from markup that the injector produces. The injector upgrade was therefore the first task for that engineer.</p>
+
+<p>All 9 components were built in Phase 2, along with the injector upgrade, glossary data embedding, and _components.css. By the end of Phase 2, 18/18 verification checks were passing.</p>
+
+<h2 id="phase3">Phase 3: Integration &amp; Verification</h2>
+
+<p>Phase 3 was the integration sweep. The CSS &amp; QA engineer ran the full verification suite and performed Chrome visual verification of every component in M00.</p>
+
+<p>Visual verification confirmed:</p>
+<ul>
+  <li>All 9 components render correctly in the M00 proof-of-concept</li>
+  <li>Quiz feedback shows correct/incorrect icons with explanations, answers persist across page reloads</li>
+  <li>Dark mode toggle works and respects <code>prefers-color-scheme</code></li>
+  <li>Progress bar shows 27% completion, sidebar checkmarks are visible</li>
+  <li>Course map shows the resume-where-you-left-off banner with the 4-part structure and module cards</li>
+  <li>Zero console errors across all pages</li>
+</ul>
+
+<p>Two bugs were found during integration and fixed before the final gate (see <a href="#bugs">Bugs Found and Fixed</a>).</p>
+
+<h2 id="cors">The file:// CORS Problem</h2>
+
+<p>One of the key technical challenges in Round 5 was the <code>file://</code> CORS constraint. The curriculum is designed to work offline &mdash; opened directly from the filesystem, no server required. But browsers enforce CORS restrictions on <code>file://</code> URLs, which means <code>fetch()</code> calls to load JSON data files fail silently.</p>
+
+<p>This affected glossary-tooltip.js directly. The tooltip component needs the full glossary dataset (55 terms with definitions, categories, and related terms) to render tooltips on hover. The original plan was to load this from a separate <code>glossary.json</code> file. That does not work on <code>file://</code>.</p>
+
+<p>The solution: embed the glossary data as inline JSON inside a <code>&lt;script id="glossary-data" type="application/json"&gt;</code> tag in the template. The build pipeline serializes the glossary data at build time; the component reads it from the DOM at runtime. No fetch, no CORS. The same approach was used for the course map data (4 parts, 11 modules) that the progress tracker needs.</p>
+
+<p>This was logged as a DECISION_LOG entry because it trades a small increase in HTML file size for guaranteed offline functionality &mdash; the right trade-off for this project&rsquo;s delivery format.</p>
+
+<h2 id="injector">The Annotation Injector Upgrade</h2>
+
+<p>Round 4&rsquo;s annotation injector was a proof-of-concept: it could insert annotations into the right location in a module&rsquo;s HTML, but it produced simplified markup that did not match the WS0 component library specification. A quiz annotation, for example, would render as a generic <code>&lt;div&gt;</code> with the quiz text, not as the structured markup that quiz.js expects to hydrate.</p>
+
+<p>The upgrade was the critical path item for Round 5. The Quiz &amp; Assessment engineer rebuilt the injector to produce WS0-compliant HTML for 5 component types: quiz (3 variants), self-explanation prompt, concept-check gate, worked-example fader, and generic annotation. Each component type has its own markup template with the correct CSS classes, ARIA attributes, and data attributes that the corresponding JavaScript component expects.</p>
+
+<p>This matters because Round 6 will produce 11 YAML annotation files &mdash; one per module. Getting the injector right now means every annotation in Round 6 will produce correct, hydrate-ready markup from the start, rather than requiring a markup fix pass in Round 7.</p>
+
+<p>Two test annotations (a concept-gate and a worked-example) were added to M00&rsquo;s YAML file to verify the upgraded injector produces correct markup for component types beyond the 3 original proof-of-concept annotations from Round 4.</p>
+
+<h2 id="bugs">Bugs Found and Fixed</h2>
+
+<div class="lesson">
+  <strong>Session tracking selector too broad.</strong> The progress-tracker.js and storage.js session tracking used a CSS selector that matched all elements with an <code>id</code> attribute. When the glossary data was embedded as <code>&lt;script id="glossary-data"&gt;</code>, the session tracker picked it up as a &ldquo;section&rdquo; of the page, skewing progress calculations. The fix: narrow the selector to <code>h2[id], h3[id]</code> only, matching actual content sections. Both storage.js and progress-tracker.js were patched.
+</div>
+
+<div class="lesson">
+  <strong>verify.js class name mismatch.</strong> The verification script&rsquo;s check #7 looked for Round 4&rsquo;s simplified annotation class names (<code>.annotation-quiz</code>), but the WS0-compliant injector upgrade changed them to match the component library spec (<code>.quiz</code>, <code>.self-explain</code>). The check was updated to match the new class names. A minor issue, but it would have caused verify.js to report false failures if left uncorrected.
+</div>
+
+<h2 id="components">Component Inventory</h2>
+
+<p>All 9 components from the WS0 specification, plus the 2 foundation modules:</p>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Size</th><th>Key Features</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>storage.js</td><td>7.6K</td><td>Namespaced localStorage, schema versioning, graceful degradation</td></tr>
+    <tr><td>dark-mode.js</td><td>3.2K</td><td>Toggle, prefers-color-scheme fallback, persistence</td></tr>
+    <tr><td>quiz.js</td><td>7.1K</td><td>3 variants (multiple choice, true/false, multi-select), feedback with icons, localStorage persistence</td></tr>
+    <tr><td>concept-gate.js</td><td>4.2K</td><td>Advisory prerequisite checklist, collapses on completion</td></tr>
+    <tr><td>self-explain.js</td><td>6.4K</td><td>Auto-grow textarea, 50-character minimum threshold, expert answer reveal</td></tr>
+    <tr><td>table-enhancer.js</td><td>14.4K</td><td>Column filter, sort (ascending/descending/reset), responsive horizontal scroll, 620+ table rows enhanced</td></tr>
+    <tr><td>glossary-tooltip.js</td><td>11.1K</td><td>300ms hover intent, viewport-constrained positioning, inline JSON (file:// safe)</td></tr>
+    <tr><td>accordion.js</td><td>4.5K</td><td>Animated details/summary enhancement, auto-expand for hash targets</td></tr>
+    <tr><td>progress-tracker.js</td><td>14.0K</td><td>Intersection Observer, sidebar checkmarks, scroll progress bar, session resume</td></tr>
+    <tr><td>navigation.js</td><td>9.6K</td><td>Scroll indicator, sidebar toggle, keyboard shortcuts (left/right arrows, ?), help dialog</td></tr>
+    <tr><td>worked-example.js</td><td>16.4K</td><td>4-stage fader (worked &rarr; completion &rarr; guided &rarr; independent), contenteditable blanks, progressive hints</td></tr>
+  </tbody>
+</table>
+
+<p>The largest component is worked-example.js at 16.4K, implementing the 4C/ID instructional design framework&rsquo;s fading strategy. The smallest is dark-mode.js at 3.2K. Total JavaScript output: 98.5K across 11 files.</p>
+
+<h2 id="lessons">What We Learned</h2>
+
+<div class="lesson">
+  <strong>Vertical slices over horizontal layers.</strong> Round 4 organized agents by infrastructure layer (pipeline, CSS, templates). Round 5 organized by component domain (quiz/assessment, tables/tooltips, progress/navigation). The domain-based split was more effective for parallel work because each engineer could build their components end-to-end without waiting for another agent&rsquo;s layer to be ready. The only sequential dependency was Phase 1 (foundation), which every component needed.
+</div>
+
+<div class="lesson">
+  <strong>Inline data beats fetch for offline-first.</strong> The <code>file://</code> CORS constraint forced a design decision early: embed data inline or require a local server. Inline JSON in <code>&lt;script type="application/json"&gt;</code> tags is the right pattern for this project. It adds a few KB to each HTML file but guarantees the curriculum works anywhere &mdash; USB drive, downloaded folder, air-gapped network. The trade-off is clearly in favor of portability.
+</div>
+
+<div class="lesson">
+  <strong>Upgrade the injector before building components.</strong> Making the annotation injector upgrade the first task in Phase 2 was the right call. It meant every component engineer could test against real, spec-compliant markup from the start. If the injector had been upgraded last, the components would have been built against placeholder markup and then needed adjustment &mdash; or worse, the injector would have been shaped to match whatever markup the components happened to expect rather than the WS0 spec.
+</div>
+
+<div class="lesson">
+  <strong>Broad CSS selectors cause subtle bugs.</strong> The session tracking bug (matching <code>[id]</code> instead of <code>h2[id], h3[id]</code>) was a reminder that selectors should be as specific as the intent. The selector was written before the glossary data script tag existed, and it was correct at the time. But &ldquo;all elements with an id&rdquo; is almost never what you actually mean. Narrowing selectors at the point of writing, not after a bug surfaces, is the better practice.
+</div>
+
+<div class="lesson">
+  <strong>Verification checks must evolve with the code.</strong> When the annotation injector was upgraded to WS0-compliant class names, verify.js immediately started checking for the old names. The fix was trivial, but the pattern is important: every code change that affects testable output should also update the verification suite in the same work unit. Round 5 ended with 18 checks (11 from Round 4 + 7 new), and all 18 reflect the current state of the codebase.
+</div>
+
+<h2 id="whats-next">What&rsquo;s Next</h2>
+
+<p>Round 5 delivered the interactive layer. The pipeline works, the pages render with styles, the components hydrate and function, data persists across sessions, and 18 automated checks confirm it all holds together. Two rounds remain:</p>
+
+<ul>
+  <li><strong>Round 6 (Content Production):</strong> 11 YAML annotation files (one per module), 40 diagram source files (21 high priority), capstone expert answer document, curiosity hooks, spiral callbacks, opening hooks, and closing synthesis exercises. This is where the pedagogical design from Round 3&rsquo;s 81,400 words of specifications gets turned into actual content that the components consume. The injector upgrade ensures every annotation produces correct markup.</li>
+  <li><strong>Round 7 (Assembly &amp; QA):</strong> Full 11-module build with all annotations and diagrams, cross-browser testing, WCAG 2.2 AA accessibility audit, performance optimization, print stylesheet verification, and the final single-HTML curriculum export.</li>
+</ul>
+
+<p>The foundation is built. The components work. Now we fill them with content.</p>
+
+<hr>
+<p style="color:var(--muted); font-size:0.85rem;">
+  This post is part of the <em>AI Frontier Curriculum</em> process journal.
+  Previous: <a href="2026-03-21-round-4-foundation-build.html">Round 4: Foundation Build</a>.
+  Project: 11-module living curriculum covering LLMs, agents, and the AI ecosystem as of March 2026.
+</p>
+
+</body>
+</html>

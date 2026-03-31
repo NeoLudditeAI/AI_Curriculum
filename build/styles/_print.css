@@ -1,0 +1,109 @@
+/* ==========================================================================
+   Print Stylesheet
+   AI Frontier Curriculum — WS6 Section 6.11
+   ========================================================================== */
+
+@media print {
+  /* Force black on white */
+  * {
+    color: #000 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  /* Hide navigation and interactive elements */
+  .sidebar,
+  .site-header nav,
+  .module-nav,
+  .skip-link,
+  .session-break,
+  .sidebar-backdrop,
+  .quiz button,
+  .self-explain button,
+  .self-explain textarea,
+  .glossary-filter {
+    display: none !important;
+  }
+
+  /* Single column */
+  .page-layout {
+    display: block;
+  }
+
+  .module-content {
+    padding: 0;
+    max-width: none;
+  }
+
+  /* Expand all accordions */
+  details {
+    display: block !important;
+  }
+
+  details > summary {
+    display: list-item;
+    font-weight: 700;
+  }
+
+  /* Show URLs after links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555 !important;
+    word-break: break-all;
+  }
+
+  /* Don't show URL for internal fragment links */
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  /* Page breaks */
+  h2 {
+    break-before: page;
+    border-top: none;
+    padding-top: 0;
+  }
+
+  h2:first-child {
+    break-before: auto;
+  }
+
+  h3, h4 {
+    break-after: avoid;
+  }
+
+  table, figure, pre,
+  .quiz, .self-explain {
+    break-inside: avoid;
+  }
+
+  /* Table borders for print */
+  table {
+    border: 1px solid #999 !important;
+  }
+
+  th, td {
+    border: 1px solid #999 !important;
+  }
+
+  /* Remove backgrounds from status badges etc. */
+  .status-badge,
+  .callout,
+  .section-summary,
+  .part-transition,
+  blockquote {
+    border: 1px solid #999 !important;
+  }
+
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100% !important;
+  }
+}

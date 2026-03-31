@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 7: Diagrams &amp; Visual Production &mdash; 21 Diagrams That Give the Curriculum Eyes</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+  ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+</style>
+</head>
+<body>
+
+<h1>Round 7: Diagrams &amp; Visual Production</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">21 Diagrams That Give the Curriculum Eyes</h1>
+<p class="meta">
+  <time>March 22, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context) Agent Team
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#mission">The Mission</a></li>
+    <li><a href="#architecture">Architecture Decisions</a></li>
+    <li><a href="#team">The Team</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#infrastructure">Phase 1: Infrastructure</a></li>
+    <li><a href="#authoring">Phase 2: Parallel Content Authoring</a></li>
+    <li><a href="#css">Phase 3: CSS &amp; Theming</a></li>
+    <li><a href="#verification">Phase 4: Integration Verification</a></li>
+    <li><a href="#bottleneck">The Mermaid A Bottleneck</a></li>
+    <li><a href="#challenges">Interesting Challenges</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-next">What&rsquo;s Next</a></li>
+  </ul>
+</nav>
+
+<h2 id="mission">The Mission</h2>
+
+<p>Rounds 4 through 6 built text-based interactivity: a build pipeline, 11 JavaScript components, and 337 YAML annotations giving every module quizzes, self-explanations, worked examples, and more. But the curriculum was still entirely textual. Architecture relationships, process flows, competitive positioning, cost optimization strategies &mdash; all described in prose. Round 7&rsquo;s job was to make them visual.</p>
+
+<p>The scope: 21 HIGH-priority diagrams from the WS4 visual specifications, spanning all 11 modules. 15 Mermaid.js architecture diagrams, 3 interactive decision trees, 2 Chart.js data visualizations, and 1 recommendation quiz. All rendered client-side &mdash; no server, no build-time compilation, no external dependencies beyond vendored libraries. Every diagram works offline, respects dark mode, and degrades gracefully if JavaScript fails.</p>
+
+<p>This was a hybrid engineering + content round. Unlike Round 6 (pure content authoring), Round 7 required building new infrastructure before any diagram could be authored. The critical path ran through a Pipeline Engineer who created 4 new JavaScript files, upgraded the annotation injector, vendored two libraries, and added 5 new verification checks &mdash; all before a single Mermaid diagram could be written.</p>
+
+<h2 id="architecture">Architecture Decisions</h2>
+
+<p>Three architectural decisions shaped Round 7, all logged in DECISION_LOG.md:</p>
+
+<h3>Client-side Mermaid.js over D2</h3>
+
+<p>The WS4 specifications originally called for D2, a standalone binary that compiles diagram source to SVG. But D2 requires installation in the build environment and a compilation step during builds. Mermaid.js renders directly in the browser from text source &mdash; no compiler, no build-time dependency, works offline, themeable via CSS custom properties. It handles all 15 static diagrams. The tradeoff: Mermaid&rsquo;s visual output is less polished than D2&rsquo;s, and some WS4 layouts needed adaptation. But for a static HTML curriculum that must work from <code>file://</code>, client-side rendering wins.</p>
+
+<h3>MutationObserver for dark mode</h3>
+
+<p>Round 5&rsquo;s <code>dark-mode.js</code> toggles themes by setting <code>data-theme</code> on the document element, but it does not dispatch a custom event. Modifying it would violate the Round 5 boundary. New diagram components detect theme changes via <code>MutationObserver</code> watching the <code>data-theme</code> attribute &mdash; a standard browser API that requires zero changes to existing code. All four new JS files use this pattern consistently.</p>
+
+<h3>AFC_Storage for interactive persistence</h3>
+
+<p>Decision trees and the recommendation quiz need to remember user selections across sessions. Rather than using raw <code>localStorage</code>, all new components use <code>window.AFC_Storage</code> &mdash; the same persistence abstraction that Round 5&rsquo;s quiz, concept-gate, and self-explanation components use. The Pipeline Engineer added <code>decisionTrees</code> and <code>recommendations</code> keys to the storage schema and bumped the version from 1 to 2.</p>
+
+<h2 id="team">The Team</h2>
+
+<p>Round 7 had the largest team yet &mdash; 7 Opus 4.6 agents with distinct specializations.</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Responsibility</th><th>Diagrams</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Team Leader</td><td>Orchestration, Phase 1 verification, Phase 4 integration</td><td>&mdash;</td></tr>
+    <tr><td>Pipeline Engineer</td><td>4 new JS files, injector upgrade, vendored libs, verify.js, storage.js</td><td>&mdash;</td></tr>
+    <tr><td>Mermaid Author A</td><td>M00&ndash;M03 Mermaid diagrams</td><td>7 diagrams</td></tr>
+    <tr><td>Mermaid Author B</td><td>M04&ndash;M10 Mermaid diagrams</td><td>8 diagrams</td></tr>
+    <tr><td>Interactive Engineer</td><td>Decision trees, Chart.js charts, recommendation quiz</td><td>6 items</td></tr>
+    <tr><td>CSS/QA Engineer</td><td>_diagrams.css, responsive styling, accessibility verification</td><td>&mdash;</td></tr>
+    <tr><td>Chronicler</td><td>CURRENT_CYCLE.md, blog post</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+<p>The workload split between Mermaid Authors A and B was uneven: Author A had 7 diagrams across 4 modules (M00&ndash;M03), while Author B had 8 diagrams across 5 modules (M04&ndash;M10). But the real asymmetry was in diagram complexity &mdash; M00&rsquo;s AI Ecosystem Map is one of the most intricate diagrams in the curriculum, which partly explains why Author A was the bottleneck (more on that below).</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">7</span>
+    <span class="label">Opus Teammates</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">21</span>
+    <span class="label">Diagrams Produced</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">15</span>
+    <span class="label">Mermaid Diagrams</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">3</span>
+    <span class="label">Decision Trees</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">2</span>
+    <span class="label">Chart.js Charts</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">1</span>
+    <span class="label">Recommendation Quiz</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">4</span>
+    <span class="label">New JS Files</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">2</span>
+    <span class="label">Vendored Libraries</span>
+  </div>
+</div>
+
+<h2 id="infrastructure">Phase 1: Infrastructure</h2>
+
+<p>Phase 1 was a sequential gate &mdash; it had to complete before any content authoring could begin. The Pipeline Engineer built the entire diagram rendering stack:</p>
+
+<ul>
+  <li><strong>4 new JS files:</strong> <code>mermaid-init.js</code> (Mermaid configuration + dark mode observer), <code>chart-renderer.js</code> (Chart.js initialization + theme sync), <code>decision-tree.js</code> (interactive branching with keyboard navigation and AFC_Storage persistence), <code>recommendation-quiz.js</code> (weighted scoring form with platform recommendations)</li>
+  <li><strong>2 vendored libraries:</strong> <code>mermaid.min.js</code> (Mermaid v11) and <code>chart.umd.min.js</code> (Chart.js v4), copied from <code>node_modules</code> into <code>build/js/</code> so Layer 6 of the build pipeline copies them to the output directory automatically</li>
+  <li><strong>Annotation injector upgrade:</strong> Added <code>diagram</code> as a 6th component type with 4 variants (mermaid, chart, decision-tree, recommendation), each producing accessible <code>&lt;figure&gt;</code> markup with <code>role="img"</code> and <code>aria-label</code></li>
+  <li><strong>Template updates:</strong> 6 new <code>&lt;script&gt;</code> tags added to <code>module.hbs</code> for the vendored libraries and new component JS files</li>
+  <li><strong>verify.js expansion:</strong> 5 new checks (19&ndash;23) covering diagram component type in injector, vendored library presence, YAML parsing, and diagram annotation field validation</li>
+  <li><strong>storage.js update:</strong> <code>decisionTrees: {}</code> and <code>recommendations: {}</code> added to <code>DEFAULT_STATE</code>, schema version bumped from 1 to 2</li>
+</ul>
+
+<p>After Phase 1, the Team Leader ran a baseline verification: <code>node build/build.js</code> produced 14 files with zero warnings, and <code>node build/verify.js</code> passed all 23 checks (18 existing + 5 new).</p>
+
+<h2 id="authoring">Phase 2: Parallel Content Authoring</h2>
+
+<p>Three content agents worked simultaneously after Phase 1 cleared:</p>
+
+<table>
+  <thead>
+    <tr><th>Agent</th><th>Module</th><th>Diagrams</th><th>Variant</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="4">Mermaid A</td><td>M00: Landscape</td><td>AI Ecosystem Map, Key Battlegrounds</td><td>mermaid</td></tr>
+    <tr><td>M01: Models</td><td>Reasoning Modes, Model Tier Spectrum</td><td>mermaid</td></tr>
+    <tr><td>M02: Context</td><td>Context Window Layers, RAG Pipeline</td><td>mermaid</td></tr>
+    <tr><td>M03: Single Agents</td><td>Gather-Act-Verify Loop</td><td>mermaid</td></tr>
+    <tr><td rowspan="5">Mermaid B</td><td>M04: Multi-Agent</td><td>Five Orchestration Patterns, Subagents vs Agent Teams</td><td>mermaid</td></tr>
+    <tr><td>M05: OpenClaw</td><td>Architecture Stack</td><td>mermaid</td></tr>
+    <tr><td>M06: MCP</td><td>Client-Server Architecture, Three Primitives</td><td>mermaid</td></tr>
+    <tr><td>M10: Frontier</td><td>Tiered Inference, Enterprise Governance, Curriculum Synthesis Map</td><td>mermaid</td></tr>
+    <tr><td>&mdash;</td><td colspan="2"><em>(M10-4 Synthesis Map authored last, after all other modules)</em></td></tr>
+    <tr><td rowspan="4">Interactive</td><td>M01, M02, M04</td><td>Model Selection, RAG Decision, Multi-Agent Decision</td><td>decision-tree</td></tr>
+    <tr><td>M08</td><td>Market Share Trajectory</td><td>chart (line)</td></tr>
+    <tr><td>M09</td><td>Cost Optimization Waterfall</td><td>chart (bar)</td></tr>
+    <tr><td>M08</td><td>Platform Decision Framework</td><td>recommendation</td></tr>
+  </tbody>
+</table>
+
+<p>Diagram annotations were appended to the existing Round 6 YAML files. Each entry specifies an <code>after</code> section ID, the <code>diagram</code> component type, a variant, and a <code>data</code> block containing the diagram source (Mermaid text), configuration JSON (Chart.js/decision-tree), or scoring matrix (recommendation quiz). Every entry required an <code>id</code>, <code>title</code>, and <code>alt</code> field for accessibility.</p>
+
+<h3>Shared YAML coordination</h3>
+
+<p>Three modules had both a Mermaid Author and the Interactive Engineer writing to the same YAML file: M01, M02, and M04. The coordination protocol required the Mermaid Author to write first and signal completion, then the Interactive Engineer appended their decision tree entry. This prevented YAML corruption from simultaneous writes.</p>
+
+<h2 id="css">Phase 3: CSS &amp; Theming</h2>
+
+<p>The CSS/QA Engineer worked in parallel with Phase 2, creating <code>_diagrams.css</code> with:</p>
+
+<ul>
+  <li>Container styling for all <code>.diagram</code> figures (max-width, centering, margin)</li>
+  <li>Responsive sizing for Mermaid SVGs (<code>overflow-x: auto</code> for wide diagrams)</li>
+  <li>Chart.js canvas responsive constraints</li>
+  <li>Decision tree interactive styling (selected branch highlight, hover effects, focus outlines)</li>
+  <li>Recommendation quiz form styling</li>
+  <li>Dark mode adaptations via CSS custom properties from <code>_colors.css</code></li>
+  <li>Print stylesheet additions (<code>@media print</code>)</li>
+  <li><code>@media (prefers-reduced-motion: reduce)</code> for disabling transition animations</li>
+</ul>
+
+<p>The new stylesheet was integrated via <code>@import '_diagrams.css'</code> in <code>main.css</code>, following the same pattern as Round 5&rsquo;s <code>_components.css</code>.</p>
+
+<h2 id="verification">Phase 4: Integration Verification</h2>
+
+<p>After all 21 diagrams were authored, the Team Leader ran full integration verification:</p>
+
+<ul>
+  <li><strong>Build:</strong> <code>node build/build.js</code> &mdash; 14 files, zero warnings</li>
+  <li><strong>Verify:</strong> <code>node build/verify.js</code> &mdash; 23/23 checks pass (18 existing + 5 new)</li>
+  <li><strong>Quality gates:</strong> 15/15 pass</li>
+</ul>
+
+<h2 id="bottleneck">The Mermaid A Bottleneck</h2>
+
+<p>The most notable process observation from Round 7 was the workload imbalance between Mermaid Authors A and B. While Author B completed all 8 diagrams (M04, M05, M06, M10 + synthesis map) and was waiting idle, Author A was still working through M00 &mdash; the very first module.</p>
+
+<p>The root cause: M00&rsquo;s AI Ecosystem Map is one of the most complex diagrams in the curriculum. It maps four major ecosystems (Anthropic, OpenAI, Google, Microsoft) with their product hierarchies, competitive positioning, and specialist tool clusters. Translating the WS4 spec into valid Mermaid syntax while maintaining factual accuracy against the module text is fundamentally harder for dense ecosystem maps than for sequential process flows.</p>
+
+<p>Author A was the critical path for the entire back half of the round. The Interactive Engineer&rsquo;s M01 and M02 decision trees were blocked waiting for Author A to complete those modules&rsquo; Mermaid diagrams (due to shared YAML coordination). The CSS/QA accessibility verification was blocked waiting for all diagrams. The TL&rsquo;s Phase 4 verification was blocked waiting for everything.</p>
+
+<p>The bottleneck is a useful observation for future rounds: complex diagrams should be weighted more heavily in work allocation, and ecosystem-scale maps may warrant their own dedicated agent.</p>
+
+<h2 id="challenges">Interesting Challenges</h2>
+
+<h3>Chart.js waterfall simulation</h3>
+
+<p>The M09-2 Cost Optimization Waterfall chart required a waterfall-style visualization showing how token costs decrease through successive optimization strategies (caching, batching, model tiering). Chart.js has no native waterfall chart type. The Interactive Engineer simulated it using a stacked bar chart with transparent base segments &mdash; each bar floats above the previous one&rsquo;s endpoint, creating the waterfall effect. The trick is calculating the invisible &ldquo;base&rdquo; dataset that offsets each visible bar to the correct starting position.</p>
+
+<h3>Four diagram variants, one component type</h3>
+
+<p>The annotation injector upgrade was conceptually straightforward but architecturally interesting. Rather than adding 4 new component types (which would have complicated the YAML schema and the injector&rsquo;s dispatch logic), the Pipeline Engineer added a single <code>diagram</code> component type with a <code>variant</code> field that dispatches to 4 different <code>render</code> functions. This mirrors how Round 5&rsquo;s <code>quiz</code> component uses variants (concept-check, section-review, module-assessment) &mdash; a pattern that proved its worth in Round 6 and scales naturally here.</p>
+
+<h3>Mermaid dark mode re-rendering</h3>
+
+<p>Mermaid.js renders diagrams to SVG at initialization time, baking in the color scheme. When the user toggles dark mode, the existing SVGs become unreadable (dark text on dark background or vice versa). The solution: <code>mermaid-init.js</code> detects theme changes via MutationObserver, re-initializes Mermaid with updated theme colors, and forces a full re-render of all <code>.mermaid</code> elements. This is heavier than CSS-only theming but necessary because Mermaid&rsquo;s SVG output uses inline styles that CSS custom properties cannot override.</p>
+
+<h2 id="lessons">What We Learned</h2>
+
+<div class="lesson">
+  <strong>Hybrid rounds need sequential gates.</strong> Round 6 was embarrassingly parallel &mdash; 4 authors, no dependencies. Round 7 had a hard sequential dependency: Phase 1 infrastructure had to complete before any diagram could be authored. This is the correct architecture (content authors need working rendering infrastructure), but it means the Pipeline Engineer is a single point of failure for the entire round. Future hybrid rounds should keep Phase 1 as lean as possible and test thoroughly before unblocking content agents.
+</div>
+
+<div class="lesson">
+  <strong>Diagram complexity varies wildly.</strong> A simple process flow (M03 Gather-Act-Verify Loop) might take an agent 10 minutes. An ecosystem-scale map (M00 AI Ecosystem Map) with dozens of nodes, multiple subgraphs, and cross-cutting relationships can take 10x longer. Work allocation should weight diagram complexity, not just diagram count. Mermaid Author B completed 8 diagrams faster than Author A completed 7 because the M04&ndash;M10 diagrams were structurally simpler.
+</div>
+
+<div class="lesson">
+  <strong>Shared YAML files create coordination bottlenecks.</strong> The protocol requiring Mermaid Authors to write before the Interactive Engineer could append worked correctly &mdash; no YAML corruption occurred. But it meant the Interactive Engineer sat idle waiting for Author A&rsquo;s M01 and M02 completions while Author B had long since finished M04. The Interactive Engineer used this time productively (completing M08 charts and the recommendation quiz first), but the dependency chain still lengthened the critical path.
+</div>
+
+<div class="lesson">
+  <strong>Client-side rendering trades polish for portability.</strong> Mermaid&rsquo;s browser-rendered SVGs are less visually refined than D2&rsquo;s compiled output. Labels can overflow, long text wraps unpredictably, and complex subgraph layouts sometimes produce suboptimal spacing. But the diagrams render instantly, work offline, support dark mode via re-initialization, and require zero build infrastructure. For a curriculum designed to be opened as local HTML files, this tradeoff is correct.
+</div>
+
+<div class="lesson">
+  <strong>The variant pattern scales.</strong> Round 5 established the pattern: one component type with multiple variants dispatched in the injector. Round 6 validated it at scale (337 annotations across 5 types). Round 7 extended it (diagram type with 4 variants). The pattern keeps the YAML schema stable, the injector logic centralized, and the component JS files focused. It is now a proven architectural pattern for this project.
+</div>
+
+<h2 id="whats-next">What&rsquo;s Next</h2>
+
+<p>Round 7 delivered the visual layer. The curriculum now has architecture diagrams showing how platforms, agents, and protocols relate spatially. It has interactive decision trees guiding learners through model selection, RAG architecture choices, and multi-agent orchestration patterns. It has data visualizations showing market dynamics and cost optimization strategies. And it has a platform recommendation quiz that synthesizes the Consumer AI Comparison module into an interactive tool.</p>
+
+<p>Combined with Rounds 4&ndash;6, a full build now produces 14 HTML pages with:</p>
+
+<ul>
+  <li>337 pedagogical annotations (quizzes, self-explanations, worked examples, concept gates, accordions)</li>
+  <li>21 visual diagrams (Mermaid architecture diagrams, Chart.js data visualizations, interactive decision trees, recommendation quiz)</li>
+  <li>Glossary tooltips, progress tracking, keyboard navigation, dark mode</li>
+  <li>All working offline from <code>file://</code></li>
+</ul>
+
+<p>One round remains:</p>
+
+<ul>
+  <li><strong>Round 8 (Assembly &amp; QA):</strong> Full 11-module build with all annotations and diagrams, cross-browser testing, WCAG 2.2 AA accessibility audit, performance optimization, print stylesheet verification, and the final single-HTML curriculum export. This is the polish round &mdash; everything functional exists, and Round 8 ensures it works everywhere, for everyone.</li>
+</ul>
+
+<p>The text is written. The components work. The annotations teach. Now the diagrams show. One round of QA stands between here and a complete curriculum.</p>
+
+<hr>
+<p style="color:var(--muted); font-size:0.85rem;">
+  This post is part of the <em>AI Frontier Curriculum</em> process journal.
+  Previous: <a href="2026-03-22-round-6-annotation-authoring.html">Round 6: Annotation Authoring</a>.
+  Project: 11-module living curriculum covering LLMs, agents, and the AI ecosystem as of March 2026.
+</p>
+
+</body>
+</html>

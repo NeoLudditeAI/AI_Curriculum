@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 05: OpenClaw &amp; Open Agent Ecosystem — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="05">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 2: Agent Systems</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 05: OpenClaw &amp; Open Agent Ecosystem</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 05: OpenClaw &amp; Open Agent Ecosystem</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">25-30 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prerequisites" class="toc__link" data-toc-active>Prerequisites</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#openclaw-architecture" class="toc__link" data-toc-active>OpenClaw Architecture</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-gateway" class="toc__link" data-toc-active>The Gateway</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#channels" class="toc__link" data-toc-active>Channels</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#pi-agent-runtime" class="toc__link" data-toc-active>Pi Agent Runtime</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#memory-system" class="toc__link" data-toc-active>Memory System</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#heartbeat-system" class="toc__link" data-toc-active>Heartbeat System</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#deployment-options" class="toc__link" data-toc-active>Deployment Options</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#clawhub-the-skills-registry" class="toc__link" data-toc-active>ClawHub: The Skills Registry</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#how-skills-work" class="toc__link" data-toc-active>How Skills Work</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-security-crisis" class="toc__link" data-toc-active>The Security Crisis</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#the-local-first-philosophy" class="toc__link" data-toc-active>The Local-First Philosophy</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#data-sovereignty" class="toc__link" data-toc-active>Data Sovereignty</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cost-structure" class="toc__link" data-toc-active>Cost Structure</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#customization-depth" class="toc__link" data-toc-active>Customization Depth</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-tradeoff" class="toc__link" data-toc-active>The Tradeoff</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#nemoclaw-the-enterprise-bridge" class="toc__link" data-toc-active>NemoClaw: The Enterprise Bridge</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#architecture" class="toc__link" data-toc-active>Architecture</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#status-and-availability" class="toc__link" data-toc-active>Status and Availability</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#openclaw-and-the-platform-ecosystem" class="toc__link" data-toc-active>OpenClaw and the Platform Ecosystem</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#relationship-to-mcp" class="toc__link" data-toc-active>Relationship to MCP</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openclaw-vs-closed-agent-platforms" class="toc__link" data-toc-active>OpenClaw vs. Closed Agent Platforms</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#governance-transition" class="toc__link" data-toc-active>Governance Transition</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 3,500-4,500
+<strong>Prerequisites:</strong> <a href="module-00.html">Module 00: Landscape Overview</a>, <a href="module-03.html">Module 03: Single-<span class="glossary-term glossary-term--first-use" data-term="agent">Agent</span> Systems</a></p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p><span class="glossary-term glossary-term--first-use" data-term="openclaw">OpenClaw</span> is the most widely adopted open-source <span class="glossary-term" data-term="agent">agent</span> framework, with 250,000+ GitHub stars (surpassing <span class="glossary-term glossary-term--first-use" data-term="react">React</span> as GitHub's most-starred software project on March 3, 2026) and an MIT license that permits unrestricted modification and deployment. It provides a complete <span class="glossary-term" data-term="agent">agent</span> stack -- Gateway, channels, <span class="glossary-term glossary-term--first-use" data-term="pi-agent-runtime">Pi Agent Runtime</span> -- that can run locally, in Docker, or in the cloud, using any major LLM provider. But <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s rapid adoption has outpaced its security infrastructure: the <span class="glossary-term glossary-term--first-use" data-term="clawhub">ClawHub</span> <span class="glossary-term glossary-term--first-use" data-term="skills">skills</span> registry has been a vector for malware at alarming rates, and the project faces a governance inflection point as its founder departed to OpenAI in February 2026. This module examines <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s architecture, its security landscape, the emerging enterprise play via NVIDIA's <span class="glossary-term glossary-term--first-use" data-term="nemoclaw">NemoClaw</span>, and how the open <span class="glossary-term" data-term="agent">agent</span> ecosystem relates to the closed platforms covered in <a href="module-03.html">Module 03</a> and <a href="module-04.html">Module 04</a>.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">The healthcare startup's dilemma</summary>
+  <div class="accordion__content">
+    <p>A healthcare startup needs an AI agent that processes patient data. Their legal team says: 'No data can leave our servers. Period.' This eliminates Claude, ChatGPT, Gemini, and Copilot -- all cloud-managed. But their CTO finds OpenClaw: MIT-licensed, runs locally, uses any LLM (including self-hosted models via Ollama). Problem solved? Not so fast. Before they write a line of code, they need to answer: what happens when 12-20% of skills in the registry are malicious? When Microsoft says the platform is 'unsuitable for standard workstations'? When the project's founder just left for OpenAI? This module is the answer sheet.</p>
+  </div>
+</details>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- for positioning within the broader AI ecosystem</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- for <span class="glossary-term" data-term="agent">agent</span> architecture patterns that <span class="glossary-term" data-term="openclaw">OpenClaw</span> implements</li>
+</ul>
+<hr>
+<h2 id="openclaw-architecture">OpenClaw Architecture</h2>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span> is not a single application but a layered system of components that together form a general-purpose <span class="glossary-term" data-term="agent">agent</span> runtime. Understanding the architecture is essential for evaluating both its capabilities and its attack surface.</p>
+<h3 id="the-gateway">The Gateway</h3>
+<p>The Gateway is a Node.js process that listens on port 18789 and serves as the central message router for all <span class="glossary-term" data-term="openclaw">OpenClaw</span> communications [1]. It multiplexes WebSocket and HTTP connections, routing messages between the user-facing channels and the <span class="glossary-term" data-term="agent">agent</span> runtime. Every interaction -- whether from a web UI, a Slack integration, a Discord bot, or a CLI -- flows through the Gateway.</p>
+<p>This single-entry-point design has architectural consequences. On the positive side, it means all <span class="glossary-term" data-term="agent">agent</span> interactions are observable at one point: logging, rate limiting, and access controls can be applied uniformly. On the negative side, it means the Gateway is a high-value target. The ClawJacked vulnerability (discussed in the Security section below) exploited precisely this choke point [5].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="All interactions flow through one point -- enabling uniform logging, rate limiting, and access controls. But this choke point is exactly what the ClawJacked vulnerability exploited for WebSocket hijacking. Architecture decisions always have security tradeoffs." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The Gateway listens on port 18789. Why is the single-entry-point design both an advantage and a vulnerability?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-gateway-quiz" value="0" />
+          <span class="quiz__choice-label">It is only an advantage -- centralized is always better</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-gateway-quiz" value="1" />
+          <span class="quiz__choice-label">It centralizes logging and observability but creates a high-value attack target</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-gateway-quiz" value="2" />
+          <span class="quiz__choice-label">It is only a vulnerability -- distributed is always better</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-gateway-quiz" value="3" />
+          <span class="quiz__choice-label">Port 18789 is not a standard port, so it is automatically hidden</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="channels">Channels</h3>
+<p>Channels are the interface layer between users and the <span class="glossary-term" data-term="agent">agent</span>. <span class="glossary-term" data-term="openclaw">OpenClaw</span> supports multiple simultaneous channels -- web, Slack, Discord, Teams, SMS, custom -- each implemented as a plugin that translates platform-specific message formats into <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s internal protocol. This is conceptually similar to how MCP servers expose tools through a standardized protocol (see <a href="module-06.html">Module 06</a>), but at the user-interaction layer rather than the tool layer.</p>
+<p>The channel architecture means a single <span class="glossary-term" data-term="openclaw">OpenClaw</span> instance can be simultaneously accessible through multiple interfaces without duplicating the <span class="glossary-term" data-term="agent">agent</span> logic. A message from Slack and a message from the web UI are both routed through the Gateway to the same <span class="glossary-term" data-term="pi-agent-runtime">Pi Agent Runtime</span>, sharing the same memory and personality.</p>
+<h3 id="pi-agent-runtime">Pi Agent Runtime</h3>
+<p>The <span class="glossary-term" data-term="pi-agent-runtime">Pi Agent Runtime</span> is the cognitive core of <span class="glossary-term" data-term="openclaw">OpenClaw</span>, embedded via the <code>pi-coding-agent</code> SDK [1]. It manages the full <span class="glossary-term" data-term="agent">agent</span> lifecycle through the <code>AgentSession</code> abstraction and includes 30+ specialized modules covering everything from calendar management to code execution.</p>
+<p>The runtime implements a <strong><span class="glossary-term" data-term="react">ReAct</span> pattern</strong> (Reason-Act-Observe): the <span class="glossary-term" data-term="agent">agent</span> reasons about the current state, selects and executes an action, observes the result, and loops [1]. This is the same fundamental architecture used by <span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span> and other modern <span class="glossary-term" data-term="agent">agent</span> systems (see <a href="module-03.html">Module 03</a>), but <span class="glossary-term" data-term="openclaw">OpenClaw</span> adds a <strong>two-phase verification</strong> step where critical actions are confirmed before execution.</p>
+<h4>LLM Provider Flexibility</h4>
+<p>One of <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s defining characteristics is LLM provider independence. The runtime supports Anthropic (primary/recommended), OpenAI, Google, Ollama (for local models), OpenRouter, and custom API endpoints [1]. It includes auto-failover: if the primary provider is unavailable, the runtime automatically routes to a configured fallback. This is a significant architectural difference from closed platforms, where you are locked into the platform's own models.</p>
+<p>In practice, most <span class="glossary-term" data-term="openclaw">OpenClaw</span> deployments use Anthropic's Claude as the primary model. Community benchmarks consistently show Claude models producing the best results with <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s <span class="glossary-term" data-term="react">ReAct</span> prompting patterns, though the gap narrows for simpler tasks where smaller open-weight models running via Ollama can be cost-effective.</p>
+<h3 id="memory-system">Memory System</h3>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span>'s memory architecture is file-based and hierarchical, a deliberate design choice that prioritizes transparency and user control over sophistication [1]:</p>
+<ul>
+<li><strong>SOUL.md</strong> -- Defines the <span class="glossary-term" data-term="agent">agent</span>'s personality, communication style, and behavioral guidelines. This is the closest equivalent to a system prompt, but it lives in a user-editable file rather than being hidden in platform internals.</li>
+<li><strong>MEMORY.md</strong> -- Stores decisions, learned preferences, and accumulated knowledge. Updated by the <span class="glossary-term" data-term="agent">agent</span> as it interacts with the user.</li>
+<li><strong>Daily notes</strong> -- Timestamped records of interactions and tasks, providing a chronological audit trail.</li>
+</ul>
+<p>For retrieval, <span class="glossary-term" data-term="openclaw">OpenClaw</span> uses a <strong>hybrid search</strong> combining BM25 (keyword matching) and vector embeddings [1]. This dual approach handles both exact-match queries (finding a specific project name or date) and semantic queries (finding conceptually related past interactions) better than either method alone.</p>
+<p>Compared to the memory systems in closed platforms -- <span class="glossary-term glossary-term--first-use" data-term="claude-memory">Claude Memory</span>, ChatGPT Saved Memories, Gemini Personal Intelligence (covered in <a href="module-02.html">Module 02</a>) -- <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s approach is more transparent but less polished. You can read and edit every memory file directly. The tradeoff is that memory management requires more user involvement; there is no automatic summarization or curation layer.</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Compare OpenClaw's file-based memory system (SOUL.md, MEMORY.md, daily notes) to Claude Memory from Module 02. What does each approach trade off?</p>
+  <label for="se-m05-memory-system" class="sr-only">Your explanation</label>
+  <textarea id="se-m05-memory-system" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m05-memory-system">Compare with Expert Answer</button>
+  <div id="se-answer-m05-memory-system" class="self-explain__expert" hidden>
+    <p>OpenClaw: Fully transparent -- every memory file is human-readable and editable. You can see, modify, and delete any memory. But it requires manual management with no automatic curation or summarization. Claude Memory: Opaque -- processed asynchronously by Anthropic's servers with ~24-hour delay. Hands-off -- the system curates automatically. But you cannot see or control the curation logic. OpenClaw trades convenience for control and transparency. Claude trades transparency for automation. The right choice depends on whether the user (or organization) has the technical capacity and desire to manage memory manually.</p>
+  </div>
+</div>
+<h3 id="heartbeat-system">Heartbeat System</h3>
+<p>The Heartbeat is a periodic background process that fires at 30-minute intervals [1]. On each heartbeat, the <span class="glossary-term" data-term="agent">agent</span> reads a <code>HEARTBEAT.md</code> configuration file and batches pending tasks: checking email inboxes, calendar events, notifications, and any other configured data sources. This gives <span class="glossary-term" data-term="openclaw">OpenClaw</span> a form of ambient awareness -- it can proactively surface information or take actions without waiting for a user prompt.</p>
+<p>This is architecturally distinct from how closed-platform agents handle background tasks. Claude's <span class="glossary-term glossary-term--first-use" data-term="cowork">Cowork</span> and ChatGPT's scheduled tasks are server-side processes managed by the platform. <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s Heartbeat runs locally, which means it only works when the host machine is running -- but also means the data never leaves the local environment.</p>
+<h3 id="deployment-options">Deployment Options</h3>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span> offers three deployment paths [1]:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Deployment</th><th>Description</th><th>Best For</th></tr></thead><tbody><tr><td><strong>Local</strong></td><td>Direct installation on the host machine</td><td>Development, experimentation</td></tr><tr><td><strong>Docker</strong> (recommended)</td><td>Containerized deployment with network isolation</td><td>Production personal use, security-conscious deployments</td></tr><tr><td><strong>Cloud</strong></td><td>DigitalOcean 1-Click or manual cloud setup</td><td>Always-on availability, team access</td></tr></tbody></table>
+<p>The Docker deployment is recommended for production use because it provides a degree of isolation between the <span class="glossary-term" data-term="agent">agent</span> runtime and the host system -- an important consideration given the security landscape discussed below.</p>
+
+<figure class="diagram diagram--mermaid" id="m05-1" role="img" aria-label="Three-layer OpenClaw architecture diagram. Top layer shows five channel interfaces: Web, Slack, Discord, Teams, and SMS, each connecting down to the middle layer. The middle layer is the Gateway, a Node.js process on port 18789 that serves as the central message router with channel adapters. The bottom layer is the Pi Agent Runtime containing the ReAct loop, skills engine, memory system with SOUL.md and MEMORY.md files, and hybrid search using BM25 plus vector embeddings. A dashed security boundary line marks the Gateway as a high-value target, referencing the ClawJacked vulnerability.">
+  <pre class="mermaid">graph TD
+  subgraph Channels[&quot;Channels (Interface Layer)&quot;]
+    CH_Web[&quot;Web UI&quot;]
+    CH_Slack[&quot;Slack&quot;]
+    CH_Discord[&quot;Discord&quot;]
+    CH_Teams[&quot;Teams&quot;]
+    CH_SMS[&quot;SMS&quot;]
+  end
+
+  subgraph GW[&quot;Gateway (Port 18789)&quot;]
+    GW_Router[&quot;Message Router&quot;]
+    GW_Adapt[&quot;Channel Adapters&quot;]
+    GW_Router --- GW_Adapt
+  end
+
+  subgraph Runtime[&quot;Pi Agent Runtime&quot;]
+    RT_React[&quot;ReAct Loop&lt;br/&gt;(Reason-Act-Observe)&quot;]
+    RT_Skills[&quot;Skills Engine&lt;br/&gt;(30+ modules)&quot;]
+    RT_Memory[&quot;Memory System&quot;]
+    RT_Soul[&quot;SOUL.md&quot;]
+    RT_Mem[&quot;MEMORY.md&quot;]
+    RT_Search[&quot;Hybrid Search&lt;br/&gt;(BM25 + vectors)&quot;]
+    RT_React --&gt; RT_Skills
+    RT_React --&gt; RT_Memory
+    RT_Memory --&gt; RT_Soul
+    RT_Memory --&gt; RT_Mem
+    RT_Memory --&gt; RT_Search
+  end
+
+  subgraph LLM[&quot;LLM Providers&quot;]
+    LLM_A[&quot;Anthropic&lt;br/&gt;(primary)&quot;]
+    LLM_O[&quot;OpenAI&quot;]
+    LLM_G[&quot;Google&quot;]
+    LLM_Ol[&quot;Ollama&lt;br/&gt;(local)&quot;]
+  end
+
+  CH_Web --&gt; GW_Adapt
+  CH_Slack --&gt; GW_Adapt
+  CH_Discord --&gt; GW_Adapt
+  CH_Teams --&gt; GW_Adapt
+  CH_SMS --&gt; GW_Adapt
+  GW_Router --&gt; RT_React
+  RT_React --&gt; LLM_A
+  RT_React -.-&gt;|&quot;auto-failover&quot;| LLM_O
+  RT_React -.-&gt;|&quot;auto-failover&quot;| LLM_G
+  RT_React -.-&gt;|&quot;auto-failover&quot;| LLM_Ol
+</pre>
+  <figcaption>OpenClaw Architecture Stack</figcaption>
+</figure>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="SOUL.md defines personality and behavioral guidelines (closest to a system prompt). MEMORY.md stores decisions and accumulated knowledge. Daily notes provide timestamped interaction records. All are human-readable and editable -- a deliberate design choice prioritizing transparency over sophistication." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Name the three memory files in OpenClaw's hierarchy.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="0" />
+          <span class="quiz__choice-label">config.yaml, prompts.md, history.log</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="1" />
+          <span class="quiz__choice-label">SOUL.md, MEMORY.md, daily notes</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="2" />
+          <span class="quiz__choice-label">system.md, user.md, context.md</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="3" />
+          <span class="quiz__choice-label">prompt.txt, memory.db, cache.json</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="The Heartbeat fires at 30-minute intervals on the local machine, reading HEARTBEAT.md for pending tasks. Claude's scheduled tasks run server-side on Anthropic's infrastructure. The local approach means data never leaves the environment, but the host machine must remain running -- if it sleeps, heartbeats stop." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does OpenClaw's Heartbeat differ from Claude's scheduled tasks?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="0" />
+          <span class="quiz__choice-label">Heartbeat is faster</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="1" />
+          <span class="quiz__choice-label">Heartbeat runs locally on the host machine; Claude's scheduled tasks are server-side</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="2" />
+          <span class="quiz__choice-label">They are identical</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="3" />
+          <span class="quiz__choice-label">Heartbeat only works with Anthropic models</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="The Pi Agent Runtime implements the ReAct pattern (Reason-Act-Observe) -- the same fundamental architecture used by Claude Code and other modern agents (Module 03). OpenClaw adds a two-phase verification step where critical actions are confirmed before execution." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The Pi Agent Runtime implements which reasoning pattern?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="0" />
+          <span class="quiz__choice-label">Chain-of-Thought only</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="1" />
+          <span class="quiz__choice-label">ReAct -- Reason-Act-Observe</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="2" />
+          <span class="quiz__choice-label">Tree-of-Thoughts</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="3" />
+          <span class="quiz__choice-label">LATS</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Channels are the interface layer translating platform-specific message formats (Slack, Discord, Teams, web) into OpenClaw's internal protocol. This is conceptually similar to how MCP servers expose tools through a standardized protocol (Module 06), but at the user-interaction layer." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What communication protocol do channels translate platform-specific messages into?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="0" />
+          <span class="quiz__choice-label">HTTP REST</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="1" />
+          <span class="quiz__choice-label">GraphQL</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="2" />
+          <span class="quiz__choice-label">OpenClaw's internal protocol</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="3" />
+          <span class="quiz__choice-label">gRPC</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Docker provides a degree of isolation between the agent runtime and the host system. Given the ClawHub security landscape -- where 12-20% of skills are intentionally malicious -- this isolation is a critical security layer. The Docker recommendation connects directly to the sandboxing strategies covered in Module 03." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which deployment option is recommended for production use, and why?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="0" />
+          <span class="quiz__choice-label">Local -- it is the fastest</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="1" />
+          <span class="quiz__choice-label">Docker -- it provides network isolation between agent and host</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="2" />
+          <span class="quiz__choice-label">Cloud -- it is always available</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-deployment-options-quiz" value="3" />
+          <span class="quiz__choice-label">Any option -- they are equivalent in security</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="clawhub-the-skills-registry">ClawHub: The Skills Registry</h2>
+<p><span class="glossary-term" data-term="clawhub">ClawHub</span> is <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s equivalent of an app store: a public registry where developers publish <span class="glossary-term" data-term="skills">skills</span> (packaged capabilities) that extend what an <span class="glossary-term" data-term="openclaw">OpenClaw</span> <span class="glossary-term" data-term="agent">agent</span> can do [2]. As of February 28, 2026, <span class="glossary-term" data-term="clawhub">ClawHub</span> hosted 13,729 <span class="glossary-term" data-term="skills">skills</span> [2]. <span class="glossary-term" data-term="skills">Skills</span> range from simple utilities (weather lookup, unit conversion) to complex integrations (GitHub management, database queries, code execution).</p>
+<h3 id="how-skills-work">How Skills Work</h3>
+<p><span class="glossary-term" data-term="skills">Skills</span> are code packages -- typically TypeScript or Python -- that the <span class="glossary-term" data-term="pi-agent-runtime">Pi Agent Runtime</span> loads and makes available as tools the <span class="glossary-term" data-term="agent">agent</span> can invoke during its <span class="glossary-term" data-term="react">ReAct</span> loop. When a user asks the <span class="glossary-term" data-term="agent">agent</span> to do something that matches a skill's capabilities, the runtime selects and executes the appropriate skill.</p>
+<p>This is a fundamentally different model from Claude <span class="glossary-term" data-term="skills">Skills</span> (which are prompt-based templates) or MCP servers (which are standalone processes exposing tools via a protocol). <span class="glossary-term" data-term="openclaw">OpenClaw</span> <span class="glossary-term" data-term="skills">skills</span> run inside the <span class="glossary-term" data-term="agent">agent</span>'s process, which gives them speed and tight integration but also means a malicious skill has direct access to the runtime environment.</p>
+
+<aside class="concept-gate" role="note" aria-label="Prerequisite check">
+  <h4 class="concept-gate__title">Before exploring ClawHub security</h4>
+  <ul class="concept-gate__list">
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand what a skills registry does (like an app store for agent capabilities)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I know that OpenClaw skills run INSIDE the agent's process, not in isolation</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I recall Module 03's sandboxing strategies and their relative strengths (Docker &lt; gVisor &lt; Firecracker)</label>
+    </li>
+  </ul>
+  <a class="concept-gate__continue" href="#the-security-crisis">Continue to next section →</a>
+</aside>
+<h3 id="the-security-crisis">The Security Crisis</h3>
+<blockquote>
+<p><strong>Volatility warning:</strong> <span class="glossary-term" data-term="openclaw">OpenClaw</span> security is an area of active, rapid change. The statistics and mitigations described here reflect the state as of March 2026. Check primary sources for current status.</p>
+</blockquote>
+<p><span class="glossary-term" data-term="clawhub">ClawHub</span> operated with <strong>no vetting process</strong> for published <span class="glossary-term" data-term="skills">skills</span> until February 7, 2026 [2]. Any developer could publish any skill, and the only barrier was creating a <span class="glossary-term" data-term="clawhub">ClawHub</span> account. This open-publishing model, combined with <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s rapid adoption, created a target-rich environment for malware distribution.</p>
+<h4>The ClawHavoc Campaign (January-February 2026)</h4>
+<p>The most significant attack on the <span class="glossary-term" data-term="openclaw">OpenClaw</span> ecosystem was <strong>ClawHavoc</strong>, a coordinated campaign discovered in January 2026 that planted 1,184 malicious <span class="glossary-term" data-term="skills">skills</span> on <span class="glossary-term" data-term="clawhub">ClawHub</span> [2]. The campaign used two primary attack vectors:</p>
+<ol>
+<li><strong>Atomic Stealer malware</strong> -- <span class="glossary-term" data-term="skills">Skills</span> that, once installed, exfiltrated credentials, browser cookies, cryptocurrency wallets, and SSH keys from the host machine.</li>
+<li><strong>ClickFix 2.0 social engineering</strong> -- <span class="glossary-term" data-term="skills">Skills</span> that presented fake error dialogs prompting users to run shell commands that downloaded additional malware.</li>
+</ol>
+<p>The 1,184 confirmed malicious <span class="glossary-term" data-term="skills">skills</span> represented a significant fraction of the registry at the time. The campaign demonstrated that <span class="glossary-term" data-term="clawhub">ClawHub</span>'s lack of vetting was not a theoretical concern but an actively exploited attack surface.</p>
+<h4>ClawJacked: WebSocket Hijacking</h4>
+<p>Separately from ClawHavoc, security researchers identified <strong>ClawJacked</strong>, a vulnerability in <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s Gateway that allowed WebSocket hijacking [5]. Because the Gateway accepts WebSocket connections on a known port (18789), a malicious local process -- or a compromised skill -- could establish a connection and inject commands into the <span class="glossary-term" data-term="agent">agent</span>'s message stream. This effectively allowed an attacker to control the <span class="glossary-term" data-term="agent">agent</span> without the user's knowledge.</p>
+<h4>Malicious Skill Rate Estimates</h4>
+<p>Multiple independent analyses have attempted to quantify the scope of the problem, with estimates varying based on methodology [2]:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Source</th><th>Malicious Rate</th><th>Scope</th><th>Notes</th></tr></thead><tbody><tr><td>Koi Security</td><td>11.9%</td><td>Confirmed malicious <span class="glossary-term" data-term="skills">skills</span></td><td>Conservative; only counts confirmed malware</td></tr><tr><td>Bitdefender</td><td>~20%</td><td>Malicious or suspicious <span class="glossary-term" data-term="skills">skills</span></td><td>Includes <span class="glossary-term" data-term="skills">skills</span> with suspicious behavior patterns</td></tr><tr><td>Snyk</td><td>36.82%</td><td><span class="glossary-term" data-term="skills">Skills</span> with vulnerabilities</td><td>Broader scope; includes unintentional security flaws</td></tr><tr><td>Cross-platform study</td><td>46.8%</td><td><span class="glossary-term" data-term="skills">Skills</span> with any security issue</td><td>Broadest scope; includes dependency vulnerabilities</td></tr></tbody></table>
+<p>The wide variance reflects genuine methodological differences, not contradictions. A skill can be vulnerable (bad dependency) without being malicious (intentionally harmful). For practical purposes, the Koi and Bitdefender figures (~12-20%) represent the best estimate of intentionally harmful <span class="glossary-term" data-term="skills">skills</span>; the Snyk and cross-platform figures represent the broader vulnerability surface.</p>
+<p>As of March 2026, 92 documented security advisories have been filed against <span class="glossary-term" data-term="clawhub">ClawHub</span> <span class="glossary-term" data-term="skills">skills</span> [2].</p>
+<h4>Industry Response</h4>
+<p>The security community's response has been blunt:</p>
+<ul>
+<li><strong>Microsoft</strong> (February 2026): <span class="glossary-term" data-term="openclaw">OpenClaw</span> is "unsuitable for standard workstations." Organizations should use isolated virtual machines with dedicated credentials that are not used elsewhere [3].</li>
+<li><strong>1Password</strong> (February 2026): "Do not run on a company device. There isn't a safe way." [2]</li>
+</ul>
+<p>These are not fringe opinions. They reflect the assessment of organizations with deep expertise in endpoint security that the current state of <span class="glossary-term" data-term="clawhub">ClawHub</span> makes running <span class="glossary-term" data-term="openclaw">OpenClaw</span> on a primary workstation an unacceptable risk for enterprise environments.</p>
+<h4>Mitigations</h4>
+<p>Since February 7, 2026, <span class="glossary-term" data-term="clawhub">ClawHub</span> has implemented several mitigations [2]:</p>
+<ul>
+<li><strong>VirusTotal scanning</strong> -- All newly published <span class="glossary-term" data-term="skills">skills</span> are scanned against multiple antivirus engines before being listed.</li>
+<li><strong>Behavioral analysis</strong> -- Automated analysis flags <span class="glossary-term" data-term="skills">skills</span> that perform suspicious operations (network exfiltration, credential access, shell command execution).</li>
+<li><strong>Skill removal</strong> -- Confirmed malicious <span class="glossary-term" data-term="skills">skills</span> are removed from the registry. The 1,184 ClawHavoc <span class="glossary-term" data-term="skills">skills</span> were pulled.</li>
+</ul>
+<p>These mitigations are necessary but insufficient. VirusTotal catches known malware signatures but is less effective against novel payloads. Behavioral analysis produces false positives (legitimate <span class="glossary-term" data-term="skills">skills</span> that need network access) and false negatives (malware that waits before activating). The fundamental challenge -- that <span class="glossary-term" data-term="skills">skills</span> run inside the <span class="glossary-term" data-term="agent">agent</span> process with full access to the host environment in non-Docker deployments -- remains architecturally unaddressed.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="The fundamental architectural issue remains unaddressed: skills run inside the agent process with full access to the host environment. VirusTotal catches known malware signatures but not novel payloads. Behavioral analysis produces false positives and false negatives. Registry-level scanning cannot solve a runtime-level isolation problem. This connects directly to the sandboxing hierarchy from Module 03." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Are the current ClawHub mitigations (VirusTotal, behavioral analysis, skill removal) sufficient to address the fundamental security risk?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-security-crisis-quiz" value="0" />
+          <span class="quiz__choice-label">Yes -- they cover all attack vectors</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-security-crisis-quiz" value="1" />
+          <span class="quiz__choice-label">No -- skills still run inside the agent process with full host access in non-Docker deployments</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-security-crisis-quiz" value="2" />
+          <span class="quiz__choice-label">Partially -- they help but only with known threats</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">The malicious rate estimates range from 11.9% to 46.8%. Explain why these numbers are not contradictory -- what accounts for the variance?</p>
+  <label for="se-m05-the-security-crisis" class="sr-only">Your explanation</label>
+  <textarea id="se-m05-the-security-crisis" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m05-the-security-crisis">Compare with Expert Answer</button>
+  <div id="se-answer-m05-the-security-crisis" class="self-explain__expert" hidden>
+    <p>Methodological scope differs. Koi Security (11.9%) counts only confirmed malware -- skills intentionally designed to harm. Bitdefender (~20%) includes suspicious behavioral patterns beyond confirmed malware. Snyk (36.82%) includes unintentional security flaws like vulnerable dependencies. The cross-platform study (46.8%) includes all dependency vulnerabilities. A skill can be vulnerable (bad dependency) without being malicious (intentionally harmful). For practical risk assessment: ~12-20% represents intentionally malicious skills, ~37-47% represents the broader vulnerability surface.</p>
+  </div>
+</div>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Atomic Stealer exfiltrated credentials, browser cookies, cryptocurrency wallets, and SSH keys from host machines. ClickFix 2.0 presented fake error dialogs prompting users to run shell commands that downloaded additional malware. Both exploited ClawHub's lack of vetting before February 7, 2026." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The ClawHavoc campaign planted 1,184 malicious skills. What were the two primary attack vectors?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-security-crisis-quiz" value="0" />
+          <span class="quiz__choice-label">Buffer overflow and SQL injection</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-security-crisis-quiz" value="1" />
+          <span class="quiz__choice-label">Atomic Stealer malware and ClickFix 2.0 social engineering</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-security-crisis-quiz" value="2" />
+          <span class="quiz__choice-label">Phishing and ransomware</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-security-crisis-quiz" value="3" />
+          <span class="quiz__choice-label">Cross-site scripting and CSRF</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<details class="accordion">
+  <summary class="accordion__title">The gap between popularity and security</summary>
+  <div class="accordion__content">
+    <p>Between 12% and 47% of OpenClaw skills are malicious, depending on who is counting. The difference is not just noise -- it reveals fundamentally different definitions of 'malicious.' Koi Security counts confirmed malware. Bitdefender includes suspicious behavior. Snyk includes unintentional flaws. A cross-platform study includes dependency vulnerabilities. Understanding what each number actually measures is essential for rational risk assessment.</p>
+  </div>
+</details>
+<hr>
+<h2 id="the-local-first-philosophy">The Local-First Philosophy</h2>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span>'s architecture embodies a philosophy that is diametrically opposed to the cloud-managed approach of Anthropic, OpenAI, Google, and Microsoft. Understanding this philosophy is key to understanding both <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s appeal and its limitations.</p>
+<h3 id="data-sovereignty">Data Sovereignty</h3>
+<p>In a closed-platform deployment, your conversations, files, and <span class="glossary-term" data-term="agent">agent</span> actions flow through the provider's infrastructure. Even with enterprise data processing agreements, the data leaves your environment. With <span class="glossary-term" data-term="openclaw">OpenClaw</span> running locally or in a self-hosted Docker container, no data leaves your network unless you explicitly configure it to (e.g., by using a cloud LLM provider). For organizations with strict data residency requirements -- legal, healthcare, government, defense -- this is not a preference but a hard constraint.</p>
+<h3 id="cost-structure">Cost Structure</h3>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span> shifts costs from subscription fees to infrastructure and API usage [6]:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Cost Component</th><th>Closed Platforms</th><th>OpenClaw</th></tr></thead><tbody><tr><td>Base subscription</td><td>$20-30/month (consumer); $200+/month (enterprise per-seat)</td><td>Free (MIT license)</td></tr><tr><td>LLM inference</td><td>Included in subscription or per-<span class="glossary-term glossary-term--first-use" data-term="token">token</span> API</td><td>Per-<span class="glossary-term" data-term="token">token</span> API costs (Anthropic, OpenAI, etc.) or free (local Ollama)</td></tr><tr><td>Infrastructure</td><td>Provider-managed</td><td>Self-managed (local machine, Docker host, or cloud VM)</td></tr><tr><td>Maintenance</td><td>Provider-managed</td><td>Self-managed (updates, security patches, monitoring)</td></tr></tbody></table>
+<p>Community estimates suggest 70-90% cost savings over closed platforms for high-volume usage when using a mix of cloud and local models [6]. The savings are real but come with a significant time investment in setup, maintenance, and security hardening.</p>
+<h3 id="customization-depth">Customization Depth</h3>
+<p>Because <span class="glossary-term" data-term="openclaw">OpenClaw</span> is open-source and MIT-licensed, every component can be modified. You can rewrite the Gateway's routing logic, add custom channels, modify the <span class="glossary-term" data-term="pi-agent-runtime">Pi Agent Runtime</span>'s <span class="glossary-term" data-term="react">ReAct</span> loop, build proprietary <span class="glossary-term" data-term="skills">skills</span>, or fork the entire project. This level of customization is impossible with closed platforms, where you operate within the boundaries the provider defines.</p>
+<h3 id="the-tradeoff">The Tradeoff</h3>
+<p>The local-first philosophy trades convenience for control. A Claude Pro subscription gives you a working, secure, maintained <span class="glossary-term" data-term="agent">agent</span> system for $20/month. An <span class="glossary-term" data-term="openclaw">OpenClaw</span> deployment gives you unlimited customization and data sovereignty but requires you to handle security, updates, LLM provider management, and infrastructure. For individual power users and organizations with strong technical teams, this tradeoff favors <span class="glossary-term" data-term="openclaw">OpenClaw</span>. For most users, the closed platforms offer a better risk-adjusted value proposition -- especially given the current state of <span class="glossary-term" data-term="clawhub">ClawHub</span> security.</p>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="A Claude Pro subscription gives you a working, secure, maintained agent system for $20/month. OpenClaw gives unlimited customization and data sovereignty but requires you to handle security, updates, LLM provider management, and infrastructure. For most users, closed platforms offer better risk-adjusted value -- especially given ClawHub security." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the key tradeoff a $20/month Claude Pro subscription offers vs. an OpenClaw deployment?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="0" />
+          <span class="quiz__choice-label">Claude has better models; OpenClaw has worse models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="1" />
+          <span class="quiz__choice-label">Claude: working, secure, maintained system. OpenClaw: unlimited customization but self-managed everything</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="2" />
+          <span class="quiz__choice-label">Claude is faster; OpenClaw is slower</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="3" />
+          <span class="quiz__choice-label">Claude supports more languages; OpenClaw is English only</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="Community estimates suggest 70-90% cost savings over closed platforms for high-volume usage when using a mix of cloud and local models. The savings are real but come with significant time investment in setup, maintenance, and security hardening." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Community estimates suggest what range of cost savings for OpenClaw at scale?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="0" />
+          <span class="quiz__choice-label">10-30%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="1" />
+          <span class="quiz__choice-label">30-50%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="2" />
+          <span class="quiz__choice-label">50-70%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="3" />
+          <span class="quiz__choice-label">70-90%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="With OpenClaw running locally or self-hosted, no data leaves the network unless explicitly configured (e.g., using a cloud LLM provider). For organizations with legal, healthcare, government, or defense data residency requirements, this is not a preference but a hard constraint." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">For an organization with strict data residency requirements, what is the primary advantage of OpenClaw over closed platforms?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="0" />
+          <span class="quiz__choice-label">Lower cost</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="1" />
+          <span class="quiz__choice-label">Better models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="2" />
+          <span class="quiz__choice-label">Data sovereignty -- no data leaves their infrastructure</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-the-tradeoff-quiz" value="3" />
+          <span class="quiz__choice-label">More features</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="nemoclaw-the-enterprise-bridge">NemoClaw: The Enterprise Bridge</h2>
+<p>NVIDIA launched <strong><span class="glossary-term" data-term="nemoclaw">NemoClaw</span></strong> in early preview on March 16, 2026 [4], positioning it as an enterprise-hardened distribution of <span class="glossary-term" data-term="openclaw">OpenClaw</span>. <span class="glossary-term" data-term="nemoclaw">NemoClaw</span> is significant because it represents the first serious attempt to bridge the gap between <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s flexibility and enterprise security requirements.</p>
+<h3 id="architecture">Architecture</h3>
+<p><span class="glossary-term" data-term="nemoclaw">NemoClaw</span> adds two key layers on top of standard <span class="glossary-term" data-term="openclaw">OpenClaw</span> [4]:</p>
+<h4>OpenShell Sandbox</h4>
+<p>OpenShell is a sandboxed execution environment that constrains what <span class="glossary-term" data-term="skills">skills</span> and <span class="glossary-term" data-term="agent">agent</span> actions can do. It governs:</p>
+<ul>
+<li><strong>Network access</strong> -- <span class="glossary-term" data-term="skills">Skills</span> can be restricted to specific domains or denied network access entirely.</li>
+<li><strong>File access</strong> -- <span class="glossary-term" data-term="skills">Skills</span> operate within a scoped filesystem, unable to access the broader host.</li>
+<li><strong>Inference routing</strong> -- Controls which LLM providers a skill can call, preventing data exfiltration through inference requests to unauthorized endpoints.</li>
+</ul>
+<p>OpenShell addresses the fundamental architectural gap in standard <span class="glossary-term" data-term="openclaw">OpenClaw</span>: the lack of isolation between <span class="glossary-term" data-term="skills">skills</span> and the host environment. With OpenShell, a compromised skill's blast radius is limited to the sandbox.</p>
+<h4>Privacy Router</h4>
+<p>The privacy router implements policy-based routing of LLM inference requests [4]. Organizations can define rules that determine whether a given request should be handled by a local model (e.g., NVIDIA's Nemotron running on local GPUs) or routed to a cloud provider (Anthropic, OpenAI, Google). Routing decisions can be based on:</p>
+<ul>
+<li><strong>Data classification</strong> -- Sensitive data stays on local inference; general queries go to cloud models for better quality.</li>
+<li><strong>Cost optimization</strong> -- Routine queries use cheaper local models; complex reasoning tasks use cloud models.</li>
+<li><strong>Latency requirements</strong> -- Local inference for real-time interactions; cloud for batch processing.</li>
+</ul>
+<p>This is NVIDIA's play to sell GPU infrastructure: if you can run high-quality inference locally, you need NVIDIA hardware to do it. <span class="glossary-term" data-term="nemoclaw">NemoClaw</span> is both a genuine enterprise solution and a GPU demand driver.</p>
+<h3 id="status-and-availability">Status and Availability</h3>
+<p>As of March 2026, <span class="glossary-term" data-term="nemoclaw">NemoClaw</span> is in <strong>early preview</strong> -- available to selected enterprise partners, not generally available [4]. Pricing, support models, and GA timelines have not been announced. Given NVIDIA's track record with enterprise AI tooling (NeMo, TensorRT, Triton), a production release in late 2026 is plausible but not confirmed.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">NVIDIA's enterprise AI strategy</summary>
+  <div class="accordion__content">
+    <p>NemoClaw is part of NVIDIA's broader enterprise AI ecosystem: NeMo for model customization, TensorRT for inference optimization, and Triton Inference Server for production serving. NemoClaw's privacy router drives GPU hardware demand by making local inference viable for enterprise -- if you can run high-quality inference locally, you need NVIDIA hardware. NemoClaw is both a genuine enterprise solution and a GPU demand driver.</p>
+  </div>
+</details>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="In standard OpenClaw, skills run inside the agent process with full host access. OpenShell constrains network access, file access, and inference routing -- limiting a compromised skill's blast radius to the sandbox. This applies the sandboxing principles from Module 03 (Docker < gVisor < Firecracker) to the OpenClaw ecosystem." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">NemoClaw's OpenShell addresses the fundamental security gap in standard OpenClaw. What is that gap?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-status-and-availability-quiz" value="0" />
+          <span class="quiz__choice-label">Lack of encryption</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-status-and-availability-quiz" value="1" />
+          <span class="quiz__choice-label">No user authentication</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-status-and-availability-quiz" value="2" />
+          <span class="quiz__choice-label">No isolation between skills and the host environment</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-status-and-availability-quiz" value="3" />
+          <span class="quiz__choice-label">Poor documentation</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="openclaw-and-the-platform-ecosystem">OpenClaw and the Platform Ecosystem</h2>
+<h3 id="relationship-to-mcp">Relationship to MCP</h3>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span> supports MCP (Model Context Protocol) servers as tools [6]. This means an <span class="glossary-term" data-term="openclaw">OpenClaw</span> <span class="glossary-term" data-term="agent">agent</span> can consume any <span class="glossary-term glossary-term--first-use" data-term="mcp-server">MCP server</span> -- accessing databases, APIs, file systems, and other resources through the standardized MCP protocol covered in <a href="module-06.html">Module 06</a>.</p>
+<p>This is a pragmatic architectural decision. Rather than building a proprietary integration layer, <span class="glossary-term" data-term="openclaw">OpenClaw</span> leverages the growing MCP ecosystem. An <span class="glossary-term" data-term="mcp-server">MCP server</span> built for Claude Desktop also works with <span class="glossary-term" data-term="openclaw">OpenClaw</span>, and vice versa. The key difference is execution context: Claude Desktop runs MCP servers in the platform's managed environment, while <span class="glossary-term" data-term="openclaw">OpenClaw</span> runs them locally alongside the <span class="glossary-term" data-term="agent">agent</span>.</p>
+<h3 id="openclaw-vs-closed-agent-platforms">OpenClaw vs. Closed Agent Platforms</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>OpenClaw</th><th>Claude Code / Cowork</th><th>ChatGPT Agent / Operator</th><th>Copilot Studio</th></tr></thead><tbody><tr><td><strong>License</strong></td><td>MIT (open source)</td><td>Proprietary</td><td>Proprietary</td><td>Proprietary</td></tr><tr><td><strong>Deployment</strong></td><td>Local, Docker, self-hosted cloud</td><td>Cloud-managed</td><td>Cloud-managed</td><td>Cloud-managed (Azure)</td></tr><tr><td><strong>LLM flexibility</strong></td><td>Any provider; auto-failover</td><td>Claude models only</td><td>GPT models only</td><td>Azure OpenAI / selected models</td></tr><tr><td><strong>Data residency</strong></td><td>Full user control</td><td>Provider infrastructure</td><td>Provider infrastructure</td><td>Azure region-scoped</td></tr><tr><td><strong><span class="glossary-term" data-term="skills">Skills</span>/extensions</strong></td><td><span class="glossary-term" data-term="clawhub">ClawHub</span> (13,729; security concerns)</td><td>Claude <span class="glossary-term" data-term="skills">Skills</span> (curated)</td><td><span class="glossary-term glossary-term--first-use" data-term="gpt-store">GPT Store</span> (reviewed)</td><td><span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span> connectors (Microsoft-managed)</td></tr><tr><td><strong>Security model</strong></td><td>User-managed; Docker recommended</td><td>Platform-managed sandbox</td><td>Platform-managed sandbox</td><td>Enterprise-grade (Entra ID, DLP)</td></tr><tr><td><strong>Maintenance burden</strong></td><td>High (self-managed)</td><td>None</td><td>None</td><td>Low (platform-managed)</td></tr><tr><td><strong>Cost at scale</strong></td><td>Low (API + infrastructure)</td><td>Subscription + API</td><td>Subscription + API</td><td>Per-seat licensing</td></tr><tr><td><strong>Customization</strong></td><td>Unlimited (source access)</td><td>Within platform boundaries</td><td>Within platform boundaries</td><td>Low-code/no-code customization</td></tr></tbody></table>
+<h3 id="governance-transition">Governance Transition</h3>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span>'s governance is in flux. Its founder, Peter Steinberger, joined OpenAI on February 15, 2026 [9], and the project is transitioning to an independent open-source foundation [6]. This transition is consequential for several reasons:</p>
+<ul>
+<li><strong>Sustainability</strong> -- Foundation governance reduces single-point-of-failure risk from any one maintainer or company.</li>
+<li><strong>Neutrality</strong> -- With the founder at OpenAI, foundation governance ensures <span class="glossary-term" data-term="openclaw">OpenClaw</span> does not become an OpenAI-aligned project.</li>
+<li><strong>Enterprise confidence</strong> -- Foundations (Apache, Linux, CNCF) provide the governance structure enterprises require before committing to a dependency.</li>
+</ul>
+<p>The transition is underway but not complete as of March 2026. The project's long-term trajectory depends on whether the foundation attracts sufficient corporate sponsorship and maintainer commitment.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Foundation governance ensures neutrality (not aligned with any one company -- especially important with the founder at OpenAI), sustainability (not dependent on one maintainer), and enterprise confidence (the governance structure enterprises require before committing to a dependency). All three factors became more urgent after the founder's departure." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Why does the founder's departure to OpenAI make foundation governance more important, not less?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-governance-transition-quiz" value="0" />
+          <span class="quiz__choice-label">Foundations are always better than individual maintainers</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-governance-transition-quiz" value="1" />
+          <span class="quiz__choice-label">To prevent OpenClaw from becoming OpenAI-aligned, plus reducing single-point-of-failure risk</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-governance-transition-quiz" value="2" />
+          <span class="quiz__choice-label">The founder was the only developer</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-governance-transition-quiz" value="3" />
+          <span class="quiz__choice-label">Legal requirements mandate foundation governance</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong><span class="glossary-term" data-term="openclaw">OpenClaw</span> is a complete, open-source <span class="glossary-term" data-term="agent">agent</span> stack</strong> -- Gateway, channels, <span class="glossary-term" data-term="pi-agent-runtime">Pi Agent Runtime</span>, memory, heartbeat -- that runs locally or self-hosted with any LLM provider.</p>
+</li>
+<li>
+<p><strong>The <span class="glossary-term" data-term="react">ReAct</span> architecture is standard</strong> -- <span class="glossary-term" data-term="openclaw">OpenClaw</span> implements the same Reason-Act-Observe loop as closed-platform agents, with an added two-phase verification step for critical actions.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="clawhub">ClawHub</span>'s security track record is poor.</strong> With 12-20% malicious skill rates, the ClawHavoc campaign (1,184 malicious <span class="glossary-term" data-term="skills">skills</span>), and the ClawJacked WebSocket vulnerability, the registry is a significant attack surface.</p>
+</li>
+<li>
+<p><strong>Mitigations are improving but insufficient.</strong> VirusTotal scanning and behavioral analysis catch known threats but do not address the architectural issue of <span class="glossary-term" data-term="skills">skills</span> running inside the <span class="glossary-term" data-term="agent">agent</span> process.</p>
+</li>
+<li>
+<p><strong>Microsoft and 1Password recommend against running <span class="glossary-term" data-term="openclaw">OpenClaw</span> on primary workstations.</strong> Docker isolation is the minimum viable security posture.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="nemoclaw">NemoClaw</span> is NVIDIA's enterprise play</strong> -- adding OpenShell sandboxing and a privacy router, but it remains in early preview with no GA timeline.</p>
+</li>
+<li>
+<p><strong>The local-first philosophy trades convenience for control.</strong> Data sovereignty, cost savings (70-90%), and unlimited customization come at the price of self-managed security and maintenance.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="openclaw">OpenClaw</span> supports MCP servers</strong>, connecting it to the broader tool ecosystem without requiring a proprietary integration layer.</p>
+</li>
+<li>
+<p><strong>Governance is transitioning to a foundation model</strong> following the founder's departure to OpenAI -- a critical inflection point for the project's long-term neutrality and sustainability.</p>
+</li>
+<li>
+<p><strong>For most users, closed platforms offer better risk-adjusted value.</strong> <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s advantages are most compelling for organizations with strict data residency requirements, strong technical teams, and the resources to manage security in-house.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="OpenClaw self-hosted meets the data residency requirement (no data leaves the infrastructure). Docker deployment is mandatory for isolation. ClawHub skills should be avoided or heavily vetted given the 12-20% malicious rate. NemoClaw's OpenShell and Privacy Router would add enterprise hardening when GA. A closed platform cannot meet the 'no data leaves our servers' requirement regardless of agreements -- the data still transits provider infrastructure." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">For a healthcare organization with strict data residency requirements, would you recommend OpenClaw or a closed platform?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Closed platform -- it is more secure</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">OpenClaw (self-hosted) with Docker, no ClawHub skills, and NemoClaw when GA</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Neither -- AI agents are not suitable for healthcare</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Closed platform with a data processing agreement</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="The Heartbeat fires at 30-minute intervals, reading HEARTBEAT.md for pending tasks like checking email, calendar events, and notifications. Unlike Claude's server-side scheduled tasks, the Heartbeat runs locally -- it works only when the host machine is running." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The Heartbeat system fires at what interval?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">5 minutes</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">15 minutes</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">30 minutes</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">60 minutes</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="False. OpenClaw supports Anthropic (primary/recommended), OpenAI, Google, Ollama (for local models), OpenRouter, and custom API endpoints. It includes auto-failover between providers. This LLM provider flexibility is a defining characteristic and a key differentiator from closed platforms that lock you into their own models." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: OpenClaw can only use Anthropic's models.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="OpenShell provides sandboxed execution constraining skill network, file, and inference access. The Privacy Router implements policy-based routing of LLM requests between local and cloud models based on data classification, cost, and latency. Together they address the isolation and data sovereignty gaps in standard OpenClaw." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">NemoClaw adds what two key enterprise layers?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Load balancer and CDN</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">OpenShell sandbox and Privacy Router</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Authentication and authorization</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Monitoring and alerting</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="OpenClaw uses a file-based, hierarchical memory system with SOUL.md (personality), MEMORY.md (decisions and knowledge), and daily notes (timestamped records). Retrieval uses hybrid search combining BM25 and vector embeddings. This prioritizes transparency and user control over sophistication." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">OpenClaw's memory system uses what approach?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Vector database with embeddings</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">File-based hierarchy: SOUL.md, MEMORY.md, daily notes</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Cloud-managed with automatic curation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">SQLite database</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Microsoft's Security Blog (February 2026) stated OpenClaw is 'unsuitable for standard workstations' and recommended isolated virtual machines with dedicated credentials. 1Password separately advised: 'Do not run on a company device. There is not a safe way.'" role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which organization said OpenClaw is 'unsuitable for standard workstations'?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Microsoft</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">NVIDIA</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Koi Security (11.9%) and Bitdefender (~20%) provide the best estimates of intentionally malicious skills. The higher figures (Snyk 36.82%, cross-platform 46.8%) include unintentional security flaws and dependency vulnerabilities -- broader but measuring different things." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The conservative estimate of intentionally malicious ClawHub skills is approximately:</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">1-5%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">5-10%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">12-20%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">35-47%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="ClawHavoc was discovered in January 2026 and planted 1,184 malicious skills using Atomic Stealer malware and ClickFix 2.0 social engineering. It exploited ClawHub's lack of vetting and demonstrated that the open-publishing model created a target-rich environment for malware distribution." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What was the ClawHavoc campaign?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">A marketing initiative by OpenClaw</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">A coordinated malware campaign that planted 1,184 malicious skills on ClawHub</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">A security audit conducted by Microsoft</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">A skills registry redesign</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="The Gateway listens on port 18789 and serves as the central message router. This known port is both an observability advantage (all traffic flows through one point) and a security concern (the ClawJacked WebSocket hijacking vulnerability exploited this exact choke point)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What port does the Gateway listen on?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">8080</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">3000</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">18789</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">443</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The Gateway routes all communications (port 18789). Channels translate platform-specific messages (Slack, Discord, web) into OpenClaw's internal protocol. The Pi Agent Runtime is the cognitive core implementing the ReAct pattern via the AgentSession abstraction." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Name the three main components of OpenClaw's architecture.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Server, Client, Database</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Gateway, Channels, Pi Agent Runtime</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Frontend, Backend, API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m05-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Runtime, Registry, Router</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s position in the broader AI ecosystem</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- <span class="glossary-term" data-term="agent">Agent</span> architecture patterns (<span class="glossary-term" data-term="react">ReAct</span>, <span class="glossary-term glossary-term--first-use" data-term="tool-use">tool use</span>, sandboxing) that <span class="glossary-term" data-term="openclaw">OpenClaw</span> implements</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- How multi-<span class="glossary-term" data-term="agent">agent</span> patterns compare between open and closed platforms</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- MCP protocol that <span class="glossary-term" data-term="openclaw">OpenClaw</span> supports for tool integration</li>
+<li><a href="module-07.html">Module 07: <span class="glossary-term" data-term="skills">Skills</span>, Plugins &#x26; Automation</a> -- <span class="glossary-term" data-term="clawhub">ClawHub</span> <span class="glossary-term" data-term="skills">skills</span> compared to Claude <span class="glossary-term" data-term="skills">Skills</span>, <span class="glossary-term" data-term="gpt-store">GPT Store</span>, and other skill systems</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- Open vs. closed ecosystem dynamics, governance gap, geopolitical dimensions</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Source</th><th>URL</th><th>Date Accessed</th><th>Notes</th></tr></thead><tbody><tr><td>[1]</td><td><span class="glossary-term" data-term="openclaw">OpenClaw</span> GitHub Repository</td><td><a href="https://github.com/openclaw/openclaw">https://github.com/<span class="glossary-term" data-term="openclaw">openclaw</span>/<span class="glossary-term" data-term="openclaw">openclaw</span></a></td><td>2026-03-20</td><td>Architecture, Gateway, <span class="glossary-term" data-term="pi-agent-runtime">Pi Agent Runtime</span>, memory, heartbeat, deployment, LLM providers</td></tr><tr><td>[2]</td><td>ClawHavoc: Analyzing the Supply Chain Attack on <span class="glossary-term" data-term="clawhub">ClawHub</span> (Koi Security)</td><td><a href="https://www.koi.ai/blog/clawhavoc-341-malicious-clawedbot-skills-found-by-the-bot-they-were-targeting">https://www.koi.ai/blog/clawhavoc-341-malicious-clawedbot-<span class="glossary-term" data-term="skills">skills</span>-found-by-the-bot-they-were-targeting</a></td><td>2026-02-15</td><td>13,729 <span class="glossary-term" data-term="skills">skills</span>; 1,184 ClawHavoc malicious <span class="glossary-term" data-term="skills">skills</span>; Koi 11.9%, Bitdefender ~20%, Snyk 36.82%; VirusTotal mitigation</td></tr><tr><td>[3]</td><td>Running <span class="glossary-term" data-term="openclaw">OpenClaw</span> Safely (Microsoft Security Blog)</td><td><a href="https://www.microsoft.com/en-us/security/blog/2026/02/19/running-openclaw-safely-identity-isolation-runtime-risk/">https://www.microsoft.com/en-us/security/blog/2026/02/19/running-<span class="glossary-term" data-term="openclaw">openclaw</span>-safely-identity-isolation-runtime-risk/</a></td><td>2026-02-19</td><td>"Unsuitable for standard workstations"; isolated VM recommendation</td></tr><tr><td>[4]</td><td>NVIDIA <span class="glossary-term" data-term="nemoclaw">NemoClaw</span></td><td><a href="https://www.nvidia.com/en-us/ai/nemoclaw/">https://www.nvidia.com/en-us/ai/<span class="glossary-term" data-term="nemoclaw">nemoclaw</span>/</a></td><td>2026-03-16</td><td>OpenShell sandbox, privacy router, enterprise distribution</td></tr><tr><td>[5]</td><td>ClawJacked: WebSocket Vulnerability and Ecosystem Security Advisories</td><td><a href="https://www.bleepingcomputer.com/news/security/clawjacked-openclaw-websocket-hijacking-flaw/">https://www.bleepingcomputer.com/news/security/clawjacked-<span class="glossary-term" data-term="openclaw">openclaw</span>-websocket-hijacking-flaw/</a></td><td>2026-02-25</td><td>Gateway WebSocket hijacking, 92 advisories, ~300K users affected, 1Password warning</td></tr><tr><td>[6]</td><td><span class="glossary-term" data-term="openclaw">OpenClaw</span> vs Cloud Platforms: TCO Analysis (Community)</td><td><a href="https://www.reddit.com/r/OpenClaw/comments/cost_comparison_openclaw_vs_claude_chatgpt/">https://www.reddit.com/r/<span class="glossary-term" data-term="openclaw">OpenClaw</span>/comments/cost_comparison_openclaw_vs_claude_chatgpt/</a></td><td>2026-03-10</td><td>70-90% cost savings, MCP support, governance transition</td></tr><tr><td>[7]</td><td><span class="glossary-term" data-term="openclaw">OpenClaw</span> Security Audit: Malicious <span class="glossary-term" data-term="skills">Skills</span> Prevalence (Multi-vendor)</td><td><a href="https://snyk.io/blog/openclaw-clawhub-security-malicious-skills/">https://snyk.io/blog/<span class="glossary-term" data-term="openclaw">openclaw</span>-<span class="glossary-term" data-term="clawhub">clawhub</span>-security-malicious-<span class="glossary-term" data-term="skills">skills</span>/</a></td><td>2026-02-20</td><td>Cross-vendor malicious rate estimates, cross-platform 46.8% figure</td></tr><tr><td>[8]</td><td><span class="glossary-term" data-term="clawhub">ClawHub</span> <span class="glossary-term" data-term="skills">Skills</span> Registry</td><td><a href="https://clawhub.dev">https://<span class="glossary-term" data-term="clawhub">clawhub</span>.dev</a></td><td>2026-03-20</td><td><span class="glossary-term" data-term="skills">Skills</span> count, skill structure, registry interface</td></tr><tr><td>[9]</td><td><span class="glossary-term" data-term="openclaw">OpenClaw</span> creator Peter Steinberger joins OpenAI (TechCrunch)</td><td><a href="https://techcrunch.com/2026/02/15/openclaw-creator-peter-steinberger-joins-openai/">https://techcrunch.com/2026/02/15/<span class="glossary-term" data-term="openclaw">openclaw</span>-creator-peter-steinberger-joins-openai/</a></td><td>2026-03-21</td><td>Founder departure date, foundation transition</td></tr><tr><td>[10]</td><td>250,000 Stars: <span class="glossary-term" data-term="openclaw">OpenClaw</span> Surpasses <span class="glossary-term" data-term="react">React</span> (<span class="glossary-term" data-term="openclaw">OpenClaw</span> Blog)</td><td><a href="https://openclaws.io/blog/openclaw-250k-stars-milestone">https://openclaws.io/blog/<span class="glossary-term" data-term="openclaw">openclaw</span>-250k-stars-milestone</a></td><td>2026-03-21</td><td>GitHub stars milestone, 1,075 contributors</td></tr></tbody></table>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-04.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 04: Multi-Agent Orchestration</span>
+        </a>
+        <a href="module-07.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 07: Skills, Plugins &amp; Automation</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

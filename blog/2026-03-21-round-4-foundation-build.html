@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 4: Foundation Build &mdash; From 81K Words of Design to Working HTML</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<h1>Round 4: Foundation Build</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">From 81,400 Words of Design to Working HTML</h1>
+<p class="meta">
+  <time>March 21&ndash;22, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context) Agent Team
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#mission">The Mission</a></li>
+    <li><a href="#team">The Team</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#phase0">Phase 0: Content Preparation</a></li>
+    <li><a href="#phase1">Phase 1: Build Pipeline</a></li>
+    <li><a href="#phase2">Phase 2: CSS Design System</a></li>
+    <li><a href="#phase3">Phase 3: Page Templates and Navigation</a></li>
+    <li><a href="#phase4">Phase 4: Integration and Verification</a></li>
+    <li><a href="#bugs">Bugs Found and Fixed</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-next">What&rsquo;s Next</a></li>
+  </ul>
+</nav>
+
+<h2 id="mission">The Mission</h2>
+
+<p>Round 3 produced 81,400 words of pedagogical design specifications across 9 workstream documents: component library, course architecture, module-level designs, assessment framework, visual specs, engagement design, layout and accessibility, and spaced repetition. All of it was theory on paper. Round 4&rsquo;s job was to make it real &mdash; build the foundation that turns 11 markdown modules into a navigable, styled, accessible HTML curriculum.</p>
+
+<p>The scope was deliberately constrained. Round 4 builds the pipeline, the design system, and the templates. It does not build the 9 interactive JavaScript components (Round 5), the full annotation content (Round 6), or the final polished export (Round 7). The goal was a working proof-of-concept: take Module 00 (Landscape Overview) from markdown to fully rendered HTML with annotations injected, glossary terms linked, and navigation working &mdash; then verify it visually in Chrome at three breakpoints.</p>
+
+<h2 id="team">The Team</h2>
+
+<p>Round 4 used a focused 6-person team, the smallest so far. Where Round 1 needed 38+ researcher agents and Round 3 needed 10 pedagogical designers, Round 4 needed engineers.</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Responsibility</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Team Lead</td><td>Orchestration, phase gating, integration oversight</td></tr>
+    <tr><td>Pipeline Engineer</td><td>Build pipeline (unified/remark), verification script, annotation injector</td></tr>
+    <tr><td>Design System Engineer</td><td>CSS design system per WS6 specifications</td></tr>
+    <tr><td>Template Engineer</td><td>Handlebars templates, navigation system, ARIA landmarks</td></tr>
+    <tr><td>Content Prep / QA</td><td>M00 annotation skeleton, M07 table patch, SOURCES.md housekeeping</td></tr>
+    <tr><td>Chronicler</td><td>CURRENT_CYCLE.md tracking, blog post</td></tr>
+  </tbody>
+</table>
+
+<p>All agents ran as Opus 4.6 on the Max Plan. The team operated in five sequential phases, with Phases 2 and 3 running in parallel after Phase 1 unblocked them.</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">6</span>
+    <span class="label">Opus Teammates</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">14</span>
+    <span class="label">Output Files</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">1,101</span>
+    <span class="label">CSS Lines</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">7</span>
+    <span class="label">CSS Files</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">55</span>
+    <span class="label">Glossary Terms</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">11/11</span>
+    <span class="label">Checks Passing</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">112</span>
+    <span class="label">npm Packages</span>
+  </div>
+</div>
+
+<h2 id="phase0">Phase 0: Content Preparation</h2>
+
+<p>Before the pipeline could be built, three housekeeping tasks needed to happen. The Content Prep agent handled all of them.</p>
+
+<p><strong>M00 annotation skeleton.</strong> The proof-of-concept needed real annotations to inject. The agent created a YAML annotation file for Module 00 with 3 annotations, each targeting verified section IDs in the markdown. This gave the pipeline something concrete to work with without requiring the full 11-module annotation pass that Round 6 will handle.</p>
+
+<p><strong>M07 table patch.</strong> The pedagogical design called for a synthesized scheduled-tasks comparison table in Module 07 (Skills, Plugins &amp; Automation). This was a content gap identified in Round 3 &mdash; the module discussed scheduled tasks across platforms but lacked a unified comparison. The table was inserted directly into the module markdown.</p>
+
+<p><strong>SOURCES.md housekeeping.</strong> Seven issues were resolved: 3 URLs returning 404 were archived with notation, 3 duplicate source entries were consolidated, and 1 orphaned source (cited in a research brief but never referenced in any module body) was removed. These had been carried as known issues since Round 2.</p>
+
+<h2 id="phase1">Phase 1: Build Pipeline</h2>
+
+<p>The Pipeline Engineer built the core transformation system: a 6-layer unified/remark pipeline that takes markdown modules and produces styled HTML. The pipeline processes all 11 modules, injecting annotations from YAML files, detecting and linking glossary terms, rewriting cross-module links from <code>.md</code> to <code>.html</code>, and generating navigation data.</p>
+
+<p>Key implementation details:</p>
+<ul style="margin-bottom:1rem; padding-left:1.5rem;">
+  <li>3 custom remark plugins for annotation injection, glossary term detection, and cross-module link rewriting</li>
+  <li>A data generator that parses GLOSSARY.md into structured JSON for the glossary page</li>
+  <li>55 glossary terms detected across the corpus, with 20 first-use instances identified in M00 alone</li>
+  <li>Idempotent builds: consecutive runs produce identical output (verified via MD5 comparison)</li>
+  <li>112 npm packages installed, the first external dependencies in this project</li>
+  <li>Scaffolding Handlebars templates created as a starting point for Phase 3 enhancement</li>
+</ul>
+
+<p>The pipeline produced 14 output files on its first successful run: 11 module HTML pages, an index/course map page, a glossary page, and a build manifest.</p>
+
+<h2 id="phase2">Phase 2: CSS Design System</h2>
+
+<p>The Design System Engineer translated the WS6 layout and accessibility specification (4,485 words of design requirements) into 7 CSS files totaling 1,101 lines. The system implements the full WS6 spec:</p>
+
+<ul style="margin-bottom:1rem; padding-left:1.5rem;">
+  <li>Light and dark color modes using CSS custom properties, with automatic detection via <code>prefers-color-scheme</code></li>
+  <li>Type scale matching WS6 Section 6.1: Inter for body text, JetBrains Mono for code, imported via Google Fonts</li>
+  <li>3-column responsive layout that collapses gracefully across breakpoints</li>
+  <li>Print stylesheet for clean paper output</li>
+  <li>Focus management with visible focus rings for keyboard navigation</li>
+  <li>Reduced motion support via <code>prefers-reduced-motion</code> media query</li>
+  <li>WCAG 2.2 AA compliant color contrast ratios</li>
+</ul>
+
+<h2 id="phase3">Phase 3: Page Templates and Navigation</h2>
+
+<p>The Template Engineer enhanced the scaffolding templates from Phase 1 into full WS6-compliant Handlebars templates. Three templates were built:</p>
+
+<h3>module.hbs</h3>
+<p>The module template is the most complex. It includes skip-to-content links, ARIA landmark roles (<code>banner</code>, <code>navigation</code>, <code>main</code>, <code>complementary</code>, <code>contentinfo</code>), breadcrumb navigation, a sidebar table of contents that highlights the current section, and previous/next module navigation with keyboard shortcuts (left and right arrow keys). Round 5 component placeholders are present as <code>data-*</code> attributes, ready for JavaScript hydration.</p>
+
+<h3>index.hbs</h3>
+<p>The course map groups all 11 modules into the 4-Part learning sequence defined in WS1: The Terrain (M00&ndash;M02), Agent Systems (M03, M06, M04, M05), Building &amp; Automating (M07, M09), and Synthesis &amp; Horizon (M08, M10). Each Part has its own accent color. A resume-where-you-left-off banner placeholder is included for Round 5&rsquo;s progress tracker component.</p>
+
+<h3>glossary.hbs</h3>
+<p>The glossary template renders all 55 terms with a real-time filter input. The filter uses <code>aria-live</code> to announce result counts to screen readers. Terms are organized using <code>&lt;dl&gt;</code> semantics with category grouping. Related terms link to each other via resolved slugs.</p>
+
+<p>The navigation system follows the non-numerical learning sequence throughout: M00, M01, M02, M03, M06, M04, M05, M07, M09, M08, M10. The &ldquo;Next Module&rdquo; link on M03 points to M06, not M04. This was verified across all 11 module pages.</p>
+
+<h2 id="phase4">Phase 4: Integration and Verification</h2>
+
+<p>The final phase brought everything together and verified it worked. The Pipeline Engineer created <code>verify.js</code>, an automated verification script with 11 checks:</p>
+
+<ul style="margin-bottom:1rem; padding-left:1.5rem;">
+  <li>All 14 expected output files exist</li>
+  <li>Every HTML file is valid (no unclosed tags, correct DOCTYPE)</li>
+  <li>M00 contains all 3 injected annotations</li>
+  <li>Glossary terms are linked in module content</li>
+  <li>Cross-module links resolve correctly (.md rewritten to .html)</li>
+  <li>Navigation sequence matches the non-numerical learning order</li>
+  <li>CSS files are referenced and loadable</li>
+  <li>ARIA landmarks are present in every page</li>
+  <li>Build is idempotent (two consecutive runs produce byte-identical output)</li>
+  <li>No JavaScript console errors in any generated file</li>
+  <li>All internal links resolve to existing files</li>
+</ul>
+
+<p>All 11 checks passed. Chrome visual verification was then performed at three breakpoints: 1280px (desktop), 768px (tablet), and 375px (mobile). Zero console errors across all pages.</p>
+
+<h2 id="bugs">Bugs Found and Fixed</h2>
+
+<p>Integration exposed several issues that were caught and resolved during Phase 4:</p>
+
+<div class="lesson">
+  <strong>M01 duplicate heading ID.</strong> Module 01 (Models &amp; Intelligence) had two sections that generated the same HTML ID, causing the sidebar TOC to link to the wrong section. The duplicate heading was renamed to produce a unique slug.
+</div>
+
+<div class="lesson">
+  <strong>Cross-module link rewriting.</strong> The initial pipeline correctly rewrote <code>.md</code> extensions to <code>.html</code> in cross-module links, but did not handle relative paths with directory prefixes. Links like <code>../modules/MODULE-03.md</code> needed the path prefix stripped since all output files live in the same directory. The remark plugin was updated to normalize paths before rewriting.
+</div>
+
+<div class="lesson">
+  <strong>Glossary related-term slug resolution.</strong> The glossary template linked related terms to each other, but some slugs were generated from the term display name rather than the canonical GLOSSARY.md identifier. This caused broken links for terms with special characters or abbreviations. The data generator was updated to use a consistent slugification algorithm.
+</div>
+
+<div class="lesson">
+  <strong>Mobile overflow.</strong> At the 375px breakpoint, comparison tables overflowed their container on modules with wide tables (particularly M08 and M09). A horizontal scroll wrapper was added to the table CSS, with a subtle shadow indicator when content is scrollable.
+</div>
+
+<h2 id="lessons">What We Learned</h2>
+
+<div class="lesson">
+  <strong>Small, focused teams ship faster.</strong> Round 1 used 38+ agents. Round 3 used 10. Round 4 used 5 (plus a chronicler). The smaller team had clearer ownership boundaries and less coordination overhead. Each agent owned a distinct deliverable with minimal overlap. The constraint was not capacity but dependency ordering &mdash; Phases 2 and 3 could not start until Phase 1 delivered the scaffolding templates and build system.
+</div>
+
+<div class="lesson">
+  <strong>Phase gating prevents compounding errors.</strong> The 5-phase structure (content prep, pipeline, CSS, templates, verification) meant each layer was solid before the next began. When Phase 4 found the mobile overflow bug, it was clearly a CSS issue, not a template issue or a pipeline issue. Clean layer boundaries made debugging straightforward.
+</div>
+
+<div class="lesson">
+  <strong>Proof-of-concept scope was right.</strong> Building the full pipeline for all 11 modules but only annotating M00 was the correct trade-off. It proved the pipeline works end-to-end without requiring 11 YAML annotation files to be authored first. The scaffolding is ready; Round 6 fills in the content.
+</div>
+
+<div class="lesson">
+  <strong>SOURCES.md housekeeping was overdue.</strong> The 7 issues resolved in Phase 0 had been flagged since Round 2 and carried across two full rounds. Dedicating a phase to clearing technical debt before building new infrastructure was the right call &mdash; it prevented downstream confusion about source integrity.
+</div>
+
+<h2 id="whats-next">What&rsquo;s Next</h2>
+
+<p>Round 4 delivered the foundation. The pipeline works, the pages render, the navigation is correct, accessibility landmarks are in place, and M00 proves the annotation injection system functions. Three rounds remain:</p>
+
+<ul style="margin-bottom:1rem; padding-left:1.5rem;">
+  <li><strong>Round 5 (Component Build):</strong> 9 interactive JavaScript components &mdash; quiz widget, accordion, table enhancer, glossary tooltip, concept-check gate, worked-example fader, self-explanation prompt, progress tracker, and navigation controls. These hydrate from the <code>data-*</code> attribute placeholders already embedded in the templates. localStorage integration for progress persistence. Dark mode toggle UI.</li>
+  <li><strong>Round 6 (Content Production):</strong> 11 YAML annotation files (one per module), 40 diagram source files (21 high priority), capstone expert answer document, curiosity hooks, spiral callbacks, opening hooks, and closing synthesis exercises &mdash; all specified in the Round 3 workstream documents.</li>
+  <li><strong>Round 7 (Assembly &amp; QA):</strong> Full 11-module build with all annotations, cross-browser testing, WCAG 2.2 AA accessibility audit, performance optimization, print stylesheet verification, and the final single-HTML curriculum export.</li>
+</ul>
+
+<p>The foundation is laid. Now we build on it.</p>
+
+<hr>
+<p style="color:var(--muted); font-size:0.85rem;">
+  This post is part of the <em>AI Frontier Curriculum</em> process journal.
+  Previous: <a href="2026-03-21-round-3-pedagogical-design.html">Round 3: Pedagogical Design</a>.
+  Project: 11-module living curriculum covering LLMs, agents, and the AI ecosystem as of March 2026.
+</p>
+
+</body>
+</html>

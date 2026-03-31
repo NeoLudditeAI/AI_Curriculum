@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 03: Single-Agent Systems — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="03">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 2: Agent Systems</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 03: Single-Agent Systems</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 03: Single-Agent Systems</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">25-30 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#how-agents-work-the-core-architecture" class="toc__link" data-toc-active>How Agents Work: The Core Architecture</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-gather-act-verify-loop" class="toc__link" data-toc-active>The Gather-Act-Verify Loop</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#planning-strategies" class="toc__link" data-toc-active>Planning Strategies</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#tool-use-function-calling-and-mcp" class="toc__link" data-toc-active>Tool Use: Function Calling and MCP</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#the-agents-platform-by-platform" class="toc__link" data-toc-active>The Agents: Platform by Platform</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#claude-code-anthropic-ga" class="toc__link" data-toc-active>Claude Code (Anthropic) -- GA</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cowork-anthropic-research-preview" class="toc__link" data-toc-active>Cowork (Anthropic) -- Research Preview</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#claude-in-chrome-anthropic-beta" class="toc__link" data-toc-active>Claude in Chrome (Anthropic) -- Beta</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#chatgpt-agent-openai-ga" class="toc__link" data-toc-active>ChatGPT Agent (OpenAI) -- GA</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#codex-openai-ga" class="toc__link" data-toc-active>Codex (OpenAI) -- GA</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#scheduled-tasks-openai-ga" class="toc__link" data-toc-active>Scheduled Tasks (OpenAI) -- GA</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#jules-google-ga" class="toc__link" data-toc-active>Jules (Google) -- GA</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#chrome-auto-browse-google-preview" class="toc__link" data-toc-active>Chrome Auto Browse (Google) -- Preview</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#project-mariner-google-preview" class="toc__link" data-toc-active>Project Mariner (Google) -- Preview</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#project-astra-google-research-prototype" class="toc__link" data-toc-active>Project Astra (Google) -- Research Prototype</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#github-copilot-agent-mode-microsoft-ga" class="toc__link" data-toc-active>GitHub Copilot Agent Mode (Microsoft) -- GA</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#copilot-studio-agents-microsoft-ga" class="toc__link" data-toc-active>Copilot Studio Agents (Microsoft) -- GA</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#comparison-single-agent-systems-at-a-glance" class="toc__link" data-toc-active>Comparison: Single-Agent Systems at a Glance</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sandboxing-and-isolation" class="toc__link" data-toc-active>Sandboxing and Isolation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#isolation-strategies" class="toc__link" data-toc-active>Isolation Strategies</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#platform-specific-approaches" class="toc__link" data-toc-active>Platform-Specific Approaches</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#safety-models" class="toc__link" data-toc-active>Safety Models</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#human-in-the-loop-hitl" class="toc__link" data-toc-active>Human-in-the-Loop (HITL)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#role-based-access-control-rbac" class="toc__link" data-toc-active>Role-Based Access Control (RBAC)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#default-deny" class="toc__link" data-toc-active>Default-Deny</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#multi-layer-guardrails" class="toc__link" data-toc-active>Multi-Layer Guardrails</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#failure-modes-and-practical-limits" class="toc__link" data-toc-active>Failure Modes and Practical Limits</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#hallucination-cascades" class="toc__link" data-toc-active>Hallucination Cascades</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#context-exhaustion" class="toc__link" data-toc-active>Context Exhaustion</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#resource-exhaustion" class="toc__link" data-toc-active>Resource Exhaustion</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#silent-failures" class="toc__link" data-toc-active>Silent Failures</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 4,500-5,500
+<strong>Prerequisites:</strong> <a href="module-00.html">Module 00: Landscape Overview</a>, <a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a></p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Single-<span class="glossary-term glossary-term--first-use" data-term="agent">agent</span> systems -- AI agents that autonomously plan, execute multi-step tasks, use tools, and verify their own work -- are the most consequential development in the AI industry since the transformer itself. As of March 2026, every major platform ships at least one production-grade <span class="glossary-term" data-term="agent">agent</span>: Anthropic's <span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span> and <span class="glossary-term glossary-term--first-use" data-term="cowork">Cowork</span>, OpenAI's Codex and ChatGPT <span class="glossary-term" data-term="agent">Agent</span>, Google's Jules and <span class="glossary-term glossary-term--first-use" data-term="project-mariner">Project Mariner</span>, and Microsoft's GitHub Copilot <span class="glossary-term" data-term="agent">Agent</span> Mode. This module dissects how these agents work architecturally, what they can actually do today, how they stay safe, and where their limits lie.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">The Friday afternoon refactor</summary>
+  <div class="accordion__content">
+    <p>On a Friday at 4pm, a developer points Claude Code at a 300-file codebase and says: 'Refactor the authentication system to use JWT tokens instead of session cookies.' The agent reads the codebase, identifies 47 files that need changes, edits them in coordinated sequence, runs the test suite, fixes the 3 tests it broke, and pushes a clean PR -- in 22 minutes. The developer reviews the diff over coffee. This is the reality of single-agent systems in March 2026. But here is the question this module answers: how does it actually work? What happens when the agent hallucinates a file path? What stops it from deleting your database? And why does verification -- not generation -- determine whether agents succeed or fail?</p>
+  </div>
+</details>
+<hr>
+<h2 id="how-agents-work-the-core-architecture">How Agents Work: The Core Architecture</h2>
+<p>Every production single-<span class="glossary-term" data-term="agent">agent</span> system, regardless of platform, follows the same fundamental loop: <strong>gather context, take action, verify results, repeat</strong>. The academic literature calls this the <span class="glossary-term glossary-term--first-use" data-term="react">ReAct</span> (Reasoning + Acting) pattern [1], but the implementations vary significantly in sophistication.</p>
+<h3 id="the-gather-act-verify-loop">The Gather-Act-Verify Loop</h3>
+<p>The canonical <span class="glossary-term" data-term="agent">agent</span> cycle works as follows:</p>
+<ol>
+<li><strong>Gather.</strong> The <span class="glossary-term" data-term="agent">agent</span> reads relevant context -- a codebase, a web page, a file system, a database -- to understand the current state.</li>
+<li><strong>Plan.</strong> The <span class="glossary-term" data-term="agent">agent</span> reasons about what actions will move toward the goal. In <span class="glossary-term glossary-term--first-use" data-term="extended-thinking">extended thinking</span> models, this step is explicit and visible; in others, it is implicit in the model's output.</li>
+<li><strong>Act.</strong> The <span class="glossary-term" data-term="agent">agent</span> invokes a tool: edits a file, runs a command, clicks a button, calls an API.</li>
+<li><strong>Verify.</strong> The <span class="glossary-term" data-term="agent">agent</span> checks whether the action succeeded -- re-reading the file, running tests, inspecting the output.</li>
+<li><strong>Loop.</strong> If the goal is not yet met, the <span class="glossary-term" data-term="agent">agent</span> returns to step 1 with updated context.</li>
+</ol>
+<p>This is not a theoretical framework; it is the literal execution model. <span class="glossary-term" data-term="claude-code">Claude Code</span>'s three-phase agentic loop (Gather Context, Take Action, Verify Work) maps directly to it [F1]. OpenAI's Codex runs a similar loop within its cloud sandbox [F2]. Google's Jules executes asynchronous gather-act-verify cycles against GitHub repositories [F3].</p>
+<p>The critical insight is that <strong>verification is not optional</strong>. Agents without a verification step -- those that simply generate and apply changes -- produce substantially worse outcomes. The verification step catches hallucinated file paths, broken imports, failed tests, and logical errors that the generation step missed. This is why production agents are called "agentic loops" rather than "code generators."</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Verification catches hallucinated file paths, broken imports, failed tests, and logical errors. Without it, the agent is a 'code generator' not an 'agentic loop.' This is why the module states verification is architecturally non-negotiable." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In the gather-act-verify loop, what happens if the verification step is removed?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-the-gather-act-verify-loop-quiz" value="0" />
+          <span class="quiz__choice-label">The agent works faster with no quality loss</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-the-gather-act-verify-loop-quiz" value="1" />
+          <span class="quiz__choice-label">The agent produces results but cannot detect its own errors</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-the-gather-act-verify-loop-quiz" value="2" />
+          <span class="quiz__choice-label">The agent cannot execute tools</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-the-gather-act-verify-loop-quiz" value="3" />
+          <span class="quiz__choice-label">Nothing -- verification is optional</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="planning-strategies">Planning Strategies</h3>
+<p>Not all agents plan the same way. Three dominant strategies exist in production systems:</p>
+<p><strong><span class="glossary-term" data-term="react">ReAct</span> (basic).</strong> The <span class="glossary-term" data-term="agent">agent</span> interleaves reasoning and action at each step: think about what to do next, do it, observe the result. This is the default for most agents and works well for tasks with clear sequential steps [1].</p>
+<p><strong>Tree-of-Thoughts (branching).</strong> The <span class="glossary-term" data-term="agent">agent</span> considers multiple possible approaches before committing to one. This is useful for ambiguous tasks where the optimal path is unclear. Antigravity's Manager Surface, which can spawn multiple agents exploring different approaches, is a practical implementation of this pattern [F3].</p>
+<p><strong>LATS (Language <span class="glossary-term" data-term="agent">Agent</span> Tree Search).</strong> Combines tree search with Monte Carlo evaluation -- the <span class="glossary-term" data-term="agent">agent</span> explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Research shows LATS improves task completion by 22.1 percentage points over basic <span class="glossary-term" data-term="react">ReAct</span> on HumanEval [2]. This approach is computationally expensive and not yet standard in consumer agents, but it informs the design of systems like OpenAI's o-series reasoning.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">LATS: Language Agent Tree Search in depth</summary>
+  <div class="accordion__content">
+    <p>LATS combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches based on accumulated reward signals. Research shows LATS improves task completion by 22.1 percentage points over basic ReAct on HumanEval. The computational cost is significant -- each branch requires a full model call -- which is why LATS is not yet standard in consumer agents. However, its principles inform the design of systems like OpenAI's o-series reasoning models, which internalize the tree search within the model's extended thinking process (see Module 01 for reasoning mode details).</p>
+  </div>
+</details>
+<h3 id="tool-use-function-calling-and-mcp">Tool Use: Function Calling and MCP</h3>
+<p>An <span class="glossary-term" data-term="agent">agent</span> without tools is just a chatbot that talks to itself. <span class="glossary-term glossary-term--first-use" data-term="tool-use">Tool use</span> is what separates an <span class="glossary-term" data-term="agent">agent</span> from a language model.</p>
+<p><strong>Function calling</strong> is the simplest form of <span class="glossary-term" data-term="tool-use">tool use</span>: the model generates a structured JSON request (function name + arguments), the runtime executes it, and the result is fed back into the model's context. Every major API supports this -- Anthropic's <span class="glossary-term" data-term="tool-use">tool use</span>, OpenAI's function calling, Google's function calling -- and it works well for simple, well-defined tools [F1, F2, F3].</p>
+<p><strong>MCP (Model Context Protocol)</strong> is the production-scale evolution. Rather than defining tools inline with each API call, MCP externalizes tool definitions into standalone servers that any MCP-compatible client can discover and invoke. As of March 2026, the MCP ecosystem includes 19,700+ servers covering everything from file systems and databases to Slack, GitHub, Salesforce, and Zapier's bridge to 8,000+ apps [F1, F5]. See <a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> for protocol details.</p>
+<p>The practical difference: function calling is for building a single <span class="glossary-term" data-term="agent">agent</span> with a handful of known tools; MCP is for building agents that connect to arbitrary external services at runtime. <span class="glossary-term" data-term="claude-code">Claude Code</span>, Claude Desktop, Codex, Gemini CLI, Cursor, and Windsurf all support MCP client connections [F1, F2, F3, F5].</p>
+
+<figure class="diagram diagram--mermaid" id="m03-1" role="img" aria-label="Circular flow diagram showing the five-step agent architecture used by all production single-agent systems. Step 1, Gather: the agent reads relevant context such as codebases, web pages, file systems, or databases to understand current state. Platform implementations include Claude Code's Read tool, Codex sandbox filesystem access, and Jules GitHub repository access. Step 2, Plan: the agent reasons about what actions to take next, using extended thinking in Claude models or implicit reasoning in others. Step 3, Act: the agent invokes tools — editing files, running commands, clicking buttons, or calling APIs — through function calling or MCP connections. Step 4, Verify: the agent checks whether the action succeeded by re-reading files, running tests, or inspecting output. Claude Code's 84% reduction in permission prompts comes from verified autonomous operation within sandbox boundaries. Step 5, Loop Decision: if the goal is met, the agent completes; otherwise it returns to Gather with updated context. This is the literal execution model, not a theoretical framework.">
+  <pre class="mermaid">graph TD
+  G[&quot;1. GATHER&lt;br/&gt;Read context: codebase,&lt;br/&gt;web pages, files, databases&quot;]
+  P[&quot;2. PLAN&lt;br/&gt;Reason about next actions&lt;br/&gt;Extended thinking / implicit&quot;]
+  A[&quot;3. ACT&lt;br/&gt;Invoke tools: edit files,&lt;br/&gt;run commands, call APIs&quot;]
+  V[&quot;4. VERIFY&lt;br/&gt;Check results: re-read files,&lt;br/&gt;run tests, inspect output&quot;]
+  L{&quot;5. LOOP&lt;br/&gt;Goal met?&quot;}
+
+  G --&gt; P
+  P --&gt; A
+  A --&gt; V
+  V --&gt; L
+  L --&gt;|&quot;No — continue&quot;| G
+  L --&gt;|&quot;Yes — complete&quot;| Done[&quot;Task Complete&quot;]
+
+  subgraph Platforms[&quot;Platform Implementations&quot;]
+    direction LR
+    CC[&quot;Claude Code&lt;br/&gt;Read/Edit/Bash tools&lt;br/&gt;MCP connections&lt;br/&gt;1M context&quot;]
+    CX[&quot;Codex&lt;br/&gt;Sandbox filesystem&lt;br/&gt;Air-gapped (no internet)&lt;br/&gt;Parallel worktrees&quot;]
+    JU[&quot;Jules&lt;br/&gt;GitHub repo access&lt;br/&gt;Async execution&lt;br/&gt;PR generation&quot;]
+    CA[&quot;ChatGPT Agent&lt;br/&gt;Web browsing&lt;br/&gt;Click/scroll/type&lt;br/&gt;HITL on sensitive ops&quot;]
+  end
+</pre>
+  <figcaption>The Gather-Act-Verify Agent Loop</figcaption>
+</figure>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Function calling is for a single agent with a handful of known tools. MCP is for agents that connect to arbitrary external services at runtime. The MCP ecosystem includes 19,700+ servers. This concept was introduced in Module 00 and receives full treatment in Module 06." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the key difference between function calling and MCP for agent tool use?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-tool-use-function-calling-and-mcp-quiz" value="0" />
+          <span class="quiz__choice-label">MCP is faster than function calling</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-tool-use-function-calling-and-mcp-quiz" value="1" />
+          <span class="quiz__choice-label">Function calling supports more tools than MCP</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-tool-use-function-calling-and-mcp-quiz" value="2" />
+          <span class="quiz__choice-label">MCP externalizes tool definitions into standalone servers discoverable by any MCP-compatible client</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-tool-use-function-calling-and-mcp-quiz" value="3" />
+          <span class="quiz__choice-label">There is no practical difference</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<details class="accordion">
+  <summary class="accordion__title">The one pattern that separates agents from chatbots</summary>
+  <div class="accordion__content">
+    <p>The difference between a chatbot and an agent is a single architectural pattern. Once you see it, you cannot unsee it.</p>
+  </div>
+</details>
+<hr>
+<h2 id="the-agents-platform-by-platform">The Agents: Platform by Platform</h2>
+<h3 id="claude-code-anthropic-ga">Claude Code (Anthropic) -- GA</h3>
+<p><span class="glossary-term" data-term="claude-code">Claude Code</span> is a terminal-based agentic coding assistant that reads entire codebases, edits files, runs commands, and verifies its own work autonomously. It is included with Claude Pro ($20/mo), Max ($100-$200/mo), Team ($25/seat/mo), and Enterprise plans [F1].</p>
+<p><strong>Architecture.</strong> <span class="glossary-term" data-term="claude-code">Claude Code</span> uses a three-phase agentic loop (Gather Context, Take Action, Verify Work) powered by Opus 4.6 with a 1M-<span class="glossary-term glossary-term--first-use" data-term="token">token</span> <span class="glossary-term glossary-term--first-use" data-term="context-window">context window</span>. It accesses codebases through LSP (Language Server Protocol) for semantic understanding -- not just string matching -- and connects to external services via MCP [F1].</p>
+<p><strong>Key capabilities (all GA):</strong></p>
+<ul>
+<li>Read and navigate entire codebases with semantic understanding</li>
+<li>Multi-file edits with coordinated changes across modules</li>
+<li>Execute terminal commands (build, test, lint, deploy)</li>
+<li>Push-to-talk voice mode via <code>/voice</code> command (March 2026)</li>
+<li>Session Memory for automatic cross-session context persistence</li>
+<li>CLAUDE.md files for persistent project instructions</li>
+<li><span class="glossary-term glossary-term--first-use" data-term="skills">Skills</span> via SKILL.md files for reusable workflows</li>
+<li><span class="glossary-term" data-term="agent">Agent</span> Teams for <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">multi-agent orchestration</span> (Experimental)</li>
+<li><span class="glossary-term" data-term="claude-code">Claude Code</span> Security for vulnerability scanning and patch suggestions</li>
+</ul>
+<p><strong>Sandboxing.</strong> <span class="glossary-term" data-term="claude-code">Claude Code</span> runs with OS-level filesystem and network isolation. The sandbox restricts which directories the <span class="glossary-term" data-term="agent">agent</span> can access and which network calls it can make. Anthropic reports an 84% reduction in permission prompts after implementing the sandbox, meaning the <span class="glossary-term" data-term="agent">agent</span> can operate more autonomously within its permitted boundaries without constantly asking for human approval [3].</p>
+<p><strong>Benchmarks.</strong> Opus 4.6 achieves 80.8% on SWE-bench Verified, the highest score of any model on this standard software engineering benchmark as of March 2026 [4]. Sonnet 4.6 scores 72.5% on OSWorld, a benchmark measuring autonomous <span class="glossary-term glossary-term--first-use" data-term="computer-use">computer use</span> across real desktop environments [F1].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="The 84% reduction means the agent can operate more autonomously within its permitted boundaries. The sandbox is tight enough for security but loose enough for productivity -- a calibration that reflects Anthropic's approach to the autonomy-safety tradeoff." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Claude Code's sandboxing achieved what metric improvement in permission prompts?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-claude-code-anthropic-ga-quiz" value="0" />
+          <span class="quiz__choice-label">50% reduction</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-claude-code-anthropic-ga-quiz" value="1" />
+          <span class="quiz__choice-label">74% reduction</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-claude-code-anthropic-ga-quiz" value="2" />
+          <span class="quiz__choice-label">84% reduction</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-claude-code-anthropic-ga-quiz" value="3" />
+          <span class="quiz__choice-label">95% reduction</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="cowork-anthropic-research-preview">Cowork (Anthropic) -- Research Preview</h3>
+<p><span class="glossary-term" data-term="cowork">Cowork</span> is Claude's desktop automation <span class="glossary-term" data-term="agent">agent</span> -- it operates your computer to complete multi-step knowledge work. Unlike <span class="glossary-term" data-term="claude-code">Claude Code</span>, which is confined to the terminal, <span class="glossary-term" data-term="cowork">Cowork</span> can interact with any application through screenshot-based <span class="glossary-term" data-term="computer-use">computer use</span> [F1].</p>
+<p><strong>Architecture.</strong> <span class="glossary-term" data-term="cowork">Cowork</span> runs in an isolated VM on the local machine, using the same agentic loop as <span class="glossary-term" data-term="claude-code">Claude Code</span> but with <span class="glossary-term" data-term="computer-use">computer use</span> (screenshot capture, mouse clicks, keyboard input) as its primary tool interface. It supports sub-<span class="glossary-term" data-term="agent">agent</span> coordination for parallel workstreams [F1].</p>
+<p><strong>Key capabilities:</strong></p>
+<ul>
+<li>Direct local file read/write without manual upload/download (GA)</li>
+<li>Multi-step task execution with planning and progress updates (GA)</li>
+<li>MCP connector access to 50+ external services (GA)</li>
+<li>Paired with Claude in Chrome for browser-based tasks (GA)</li>
+<li>Scheduled Tasks for automated recurring workflows (GA)</li>
+<li><span class="glossary-term" data-term="skills">Skills</span> and Plugins for extensibility (GA)</li>
+</ul>
+<p><strong>Limitations.</strong> <span class="glossary-term" data-term="cowork">Cowork</span> is a Research Preview: stability is not guaranteed, only one active session runs at a time, and the computer must remain awake -- if it sleeps, scheduled tasks miss their triggers [F1]. There is no cloud-based scheduling option.</p>
+<h3 id="claude-in-chrome-anthropic-beta">Claude in Chrome (Anthropic) -- Beta</h3>
+<p>Claude in Chrome is a browser automation <span class="glossary-term" data-term="agent">agent</span> that navigates, clicks, fills forms, records workflows, manages multiple tabs, and executes pre-approved plans hands-free. It is available on all paid plans, though Pro subscribers are limited to Haiku 4.5 while Max/Team/Enterprise users can choose their model [F1].</p>
+<p>The workflow recording feature is notable: a user demonstrates a multi-step browser task once, and Claude learns to repeat it. Combined with Scheduled Tasks, this enables recurring browser automation -- for example, checking a competitor's pricing page daily and summarizing changes.</p>
+<h3 id="chatgpt-agent-openai-ga">ChatGPT Agent (OpenAI) -- GA</h3>
+<p>ChatGPT <span class="glossary-term" data-term="agent">Agent</span> (formerly Operator) is OpenAI's autonomous web browsing <span class="glossary-term" data-term="agent">agent</span>. It reached GA in July 2025 and is activated via "<span class="glossary-term" data-term="agent">agent</span> mode" in the ChatGPT composer [F2].</p>
+<p><strong>Capabilities.</strong> The <span class="glossary-term" data-term="agent">agent</span> navigates real websites autonomously: clicking, scrolling, typing, managing logins, and completing multi-step web tasks. It provides on-screen narration of its actions and pauses for human confirmation on sensitive operations (payments, passwords) [F2].</p>
+<p><strong>Usage limits.</strong> Pro subscribers get 400 <span class="glossary-term" data-term="agent">agent</span> messages per month; Plus and Business subscribers get 40 per month with credit-based flex billing for overages [F2].</p>
+<p><strong>Limitations.</strong> ChatGPT <span class="glossary-term" data-term="agent">Agent</span> is not available in the European Economic Area or Switzerland due to regulatory constraints. It handles web browsing only -- no desktop automation, no local file access [F2].</p>
+<h3 id="codex-openai-ga">Codex (OpenAI) -- GA</h3>
+<p>Codex is OpenAI's cloud-based software engineering <span class="glossary-term" data-term="agent">agent</span>, powered by codex-1 (an o3 variant fine-tuned via reinforcement learning on real-world coding tasks) [F2].</p>
+<p><strong>Architecture.</strong> Each Codex task runs in an isolated cloud sandbox with filesystem access but no internet connectivity. This air-gapped design prevents the <span class="glossary-term" data-term="agent">agent</span> from exfiltrating code or fetching unauthorized dependencies, but it also means the <span class="glossary-term" data-term="agent">agent</span> cannot install packages that are not already present in the sandbox [F2].</p>
+<p><strong>Key capabilities:</strong></p>
+<ul>
+<li>Write features, fix bugs, answer codebase questions, propose PRs</li>
+<li>Run multiple agents in parallel on the same codebase via worktree isolation</li>
+<li>Desktop apps for macOS (GA) and Windows (GA, March 4, 2026)</li>
+<li><span class="glossary-term" data-term="skills">Skills</span>: bundle instructions, resources, and scripts for repeatable non-code tasks</li>
+<li>Automations: cloud-based event-driven triggers for continuous background operation</li>
+</ul>
+<p><strong>Benchmarks.</strong> GPT-5.3-Codex scores 77.3% on Terminal-Bench 2.0 [5]. For comparison, Claude Opus 4.6 leads SWE-bench Verified at 80.8% [4].</p>
+<h3 id="scheduled-tasks-openai-ga">Scheduled Tasks (OpenAI) -- GA</h3>
+<p>OpenAI's Scheduled Tasks (GA January 2026) allow ChatGPT to run prompts at set intervals -- daily, weekly, or custom schedules. ChatGPT proactively delivers results via push notification [F2].</p>
+<p><strong>Limits.</strong> Maximum 10 active scheduled tasks. Available only on iOS, Android, and macOS -- no web or Windows support. Available to Plus and Pro subscribers only [F2].</p>
+<h3 id="jules-google-ga">Jules (Google) -- GA</h3>
+<p>Jules is Google's asynchronous coding <span class="glossary-term" data-term="agent">agent</span>, powered by Gemini 3 Flash. It operates through GitHub integration, processing tasks in the cloud and delivering results as pull requests [F3].</p>
+<p><strong>Key capabilities:</strong></p>
+<ul>
+<li>Bug fixes, test writing, code optimization, multi-file changes</li>
+<li>Audio changelogs -- Jules narrates what it changed and why</li>
+<li>Concurrent task execution</li>
+<li>Proactive detection of performance optimization opportunities</li>
+<li>Jules Tools CLI and Jules API for programmatic access</li>
+<li>Included in AI Pro (5x limits) and Ultra (20x limits); free tier available</li>
+</ul>
+<p>Jules differs from <span class="glossary-term" data-term="claude-code">Claude Code</span> and Codex in its GitHub-native design: tasks are submitted as issues or requests, and results arrive as PRs. There is no interactive terminal session. This makes Jules better suited for batch-style development work than real-time pair programming.</p>
+<h3 id="chrome-auto-browse-google-preview">Chrome Auto Browse (Google) -- Preview</h3>
+<p>Chrome Auto Browse is Google's browser automation <span class="glossary-term" data-term="agent">agent</span>, built into Chrome and powered by Gemini. It navigates websites, fills forms, compares prices, and completes purchases autonomously [F3].</p>
+<p><strong>Availability.</strong> Preview, US only. Pro subscribers get 20 tasks per day; Ultra subscribers get 200 per day [F3].</p>
+<h3 id="project-mariner-google-preview">Project Mariner (Google) -- Preview</h3>
+<p><span class="glossary-term" data-term="project-mariner">Project Mariner</span> is a desktop-focused browser automation <span class="glossary-term" data-term="agent">agent</span> targeting complex professional workflows in Chrome and Google Workspace. It scored 83.5% on WebVoyager (a benchmark for web navigation tasks), supports up to 10 parallel browser streams, and features a "Teach &#x26; Repeat" function where users demonstrate a workflow once and Mariner learns to replicate it [6].</p>
+<h3 id="project-astra-google-research-prototype">Project Astra (Google) -- Research Prototype</h3>
+<p>Project Astra is Google's universal AI <span class="glossary-term" data-term="agent">agent</span> research prototype. It processes real-time multimodal input (live video, audio, text), conducts natural conversation, and calls Google services (Search, Maps, Lens). A demo with AR glasses is expected at Google I/O 2026 (May 19-20) [F3]. Astra is not a production system and has no public access, but it represents Google's long-term <span class="glossary-term" data-term="agent">agent</span> vision.</p>
+<h3 id="github-copilot-agent-mode-microsoft-ga">GitHub Copilot Agent Mode (Microsoft) -- GA</h3>
+<p>GitHub Copilot's <span class="glossary-term" data-term="agent">Agent</span> Mode provides terminal command execution and file system access within development contexts. It is available across all GitHub Copilot tiers, from Free (limited) to Enterprise [F4].</p>
+<h3 id="copilot-studio-agents-microsoft-ga">Copilot Studio Agents (Microsoft) -- GA</h3>
+<p><span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span> allows building custom autonomous agents for enterprise workflows -- sales development, expense management, SharePoint administration -- with 1,400+ connectors. Computer-using agents capable of UI automation reached GA in February 2026 [F4]. Microsoft's <span class="glossary-term" data-term="agent">agent</span> governance layer, <span class="glossary-term glossary-term--first-use" data-term="agent-365">Agent 365</span> ($15/user/month), provides the registry, identity management, compliance policies, and action auditing that enterprise deployments require [F4]. See <a href="module-04.html">Module 04: <span class="glossary-term" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> for orchestration patterns.</p>
+<hr>
+<h2 id="comparison-single-agent-systems-at-a-glance">Comparison: Single-Agent Systems at a Glance</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Agent</th><th>Provider</th><th>Status</th><th>Primary Domain</th><th>Execution Environment</th><th>Internet Access</th><th>Scheduling</th><th>MCP Support</th></tr></thead><tbody><tr><td><span class="glossary-term" data-term="claude-code">Claude Code</span></td><td>Anthropic</td><td>GA</td><td>Coding (terminal)</td><td>Local machine</td><td>Yes</td><td>Via <span class="glossary-term" data-term="cowork">Cowork</span></td><td>Yes (client)</td></tr><tr><td><span class="glossary-term" data-term="cowork">Cowork</span></td><td>Anthropic</td><td>Research Preview</td><td>Desktop automation</td><td>Local VM</td><td>Yes</td><td>Yes (local)</td><td>Yes (client)</td></tr><tr><td>Claude in Chrome</td><td>Anthropic</td><td>Beta</td><td>Browser automation</td><td>Chrome browser</td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><td>ChatGPT <span class="glossary-term" data-term="agent">Agent</span></td><td>OpenAI</td><td>GA</td><td>Web browsing</td><td>Cloud</td><td>Yes</td><td>No</td><td>No</td></tr><tr><td>Codex</td><td>OpenAI</td><td>GA</td><td>Coding (cloud)</td><td>Cloud sandbox</td><td>No (air-gapped)</td><td>Yes (Automations)</td><td>No</td></tr><tr><td>Jules</td><td>Google</td><td>GA</td><td>Coding (async)</td><td>Cloud</td><td>Limited</td><td>No</td><td>No</td></tr><tr><td>Chrome Auto Browse</td><td>Google</td><td>Preview</td><td>Browser automation</td><td>Chrome browser</td><td>Yes</td><td>No</td><td>No</td></tr><tr><td><span class="glossary-term" data-term="project-mariner">Project Mariner</span></td><td>Google</td><td>Preview</td><td>Browser automation</td><td>Chrome + Workspace</td><td>Yes</td><td>No</td><td>No</td></tr><tr><td>GitHub Copilot <span class="glossary-term" data-term="agent">Agent</span></td><td>Microsoft</td><td>GA</td><td>Coding (IDE)</td><td>Local/cloud</td><td>Yes</td><td>No</td><td>Yes (client)</td></tr><tr><td><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> Agents</td><td>Microsoft</td><td>GA</td><td>Enterprise workflows</td><td>Cloud</td><td>Yes</td><td>Yes</td><td>Yes (client + server)</td></tr></tbody></table>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="ChatGPT Agent does not support MCP. It handles web browsing only -- no desktop automation, no local file access, and no MCP integration. MCP support divides agents into two groups: those with rich external connectivity (Claude Code, Cowork, Copilot Studio) and those with limited integration surfaces (Codex, Jules, ChatGPT Agent)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: ChatGPT Agent supports MCP.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Jules is powered by Gemini 3 Flash and operates through GitHub integration. Tasks are submitted as issues, results arrive as PRs. There is no interactive terminal session, making Jules better suited for batch-style development than real-time pair programming." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which Google agent takes a GitHub-native, asynchronous, batch-oriented approach?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="0" />
+          <span class="quiz__choice-label">Chrome Auto Browse</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="1" />
+          <span class="quiz__choice-label">Project Mariner</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="2" />
+          <span class="quiz__choice-label">Jules</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="3" />
+          <span class="quiz__choice-label">Project Astra</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Each Codex task runs in an isolated cloud sandbox with filesystem access but no internet connectivity. This air-gapped design prevents code exfiltration or unauthorized dependency fetching, but means all dependencies must be pre-provisioned in the sandbox image." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Codex's cloud sandbox has a distinctive security feature. What is it?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="0" />
+          <span class="quiz__choice-label">It uses gVisor for kernel isolation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="1" />
+          <span class="quiz__choice-label">It is air-gapped -- no internet access</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="2" />
+          <span class="quiz__choice-label">It requires biometric authentication</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="3" />
+          <span class="quiz__choice-label">It encrypts all files at rest</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Cowork is Anthropic's desktop automation agent running in an isolated VM. It combines local file read/write, computer use (screenshot-based), MCP connector access to 50+ services, and Scheduled Tasks -- but it remains a Research Preview with stability limitations." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which is the only desktop automation agent combining local file access, computer use, MCP connectors, and scheduling?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Code</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="1" />
+          <span class="quiz__choice-label">Cowork</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="2" />
+          <span class="quiz__choice-label">ChatGPT Agent</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-comparison-single-agent-systems-at-a-glance-quiz" value="3" />
+          <span class="quiz__choice-label">Copilot Studio Agents</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="sandboxing-and-isolation">Sandboxing and Isolation</h2>
+<p>An <span class="glossary-term" data-term="agent">agent</span> that can execute arbitrary code is an <span class="glossary-term" data-term="agent">agent</span> that can cause arbitrary damage. Sandboxing is the engineering discipline that bounds this risk.</p>
+<h3 id="isolation-strategies">Isolation Strategies</h3>
+<p>Three isolation architectures are deployed in production, each with different security and performance tradeoffs:</p>
+<p><strong>Docker containers.</strong> Standard containerization with namespace isolation. Used by many development agents. Docker provides process and filesystem isolation but shares the host kernel, making it insufficient for untrusted code execution. A container escape gives the attacker full host access [7].</p>
+<p><strong><span class="glossary-term glossary-term--first-use" data-term="gvisor">gVisor</span> (Google).</strong> An application-level kernel that intercepts system calls and re-implements them in a user-space sandbox. Provides defense-in-depth beyond Docker: even if the application is compromised, it interacts with <span class="glossary-term" data-term="gvisor">gVisor</span>'s synthetic kernel rather than the real one. Used in Google Cloud's container infrastructure [7].</p>
+<p><strong>Firecracker MicroVMs (AWS/Anthropic).</strong> Lightweight virtual machines that boot in approximately 125ms with less than 5 MiB of memory overhead. Each <span class="glossary-term" data-term="agent">agent</span> task gets its own MicroVM with a dedicated kernel, providing full hardware-level isolation equivalent to running on a separate physical machine. This is the strongest isolation model and is used by Codex's cloud sandbox and increasingly by Anthropic's infrastructure [7].</p>
+<h3 id="platform-specific-approaches">Platform-Specific Approaches</h3>
+<p><strong><span class="glossary-term" data-term="claude-code">Claude Code</span></strong> uses OS-level filesystem and network isolation, restricting the <span class="glossary-term" data-term="agent">agent</span> to designated directories and approved network endpoints. The 84% reduction in permission prompts indicates that the sandbox boundaries are well-calibrated -- tight enough for security, loose enough for productivity [3].</p>
+<p><strong>Codex</strong> runs each task in an air-gapped cloud sandbox with no internet access. This is the most restrictive approach: the <span class="glossary-term" data-term="agent">agent</span> cannot install new packages, fetch external resources, or communicate with any external service. The tradeoff is that all dependencies must be pre-provisioned in the sandbox image [F2].</p>
+<p><strong><span class="glossary-term" data-term="cowork">Cowork</span></strong> runs in an isolated VM on the local machine. The VM provides process isolation from the host system, but <span class="glossary-term" data-term="cowork">Cowork</span> has full access to whatever the VM can see -- local files, connected MCP servers, browser sessions [F1].</p>
+<p><strong>Jules</strong> operates in cloud infrastructure with access only to the target GitHub repository. The <span class="glossary-term" data-term="agent">agent</span> cannot access local files or arbitrary web resources [F3].</p>
+
+<div class="worked-example" data-variant="partial" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Choosing a sandboxing strategy</h4>
+  <div class="worked-example__problem">
+    <p>Your team is building a coding agent that will execute user-submitted code. The code may install packages from npm. You need to balance security with the agent's ability to function.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Identify the threat model</h5>
+      <div class="worked-example__step-content">
+        <p>Untrusted code execution with network access needs. Users submit arbitrary code that may install npm packages, requiring both filesystem and network access.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Why is Docker alone insufficient?</h5>
+      <div class="worked-example__step-content">
+        <p>[YOUR ANSWER] Think about what happens if the containerized process escapes the namespace isolation.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Evaluate gVisor vs. Firecracker for this use case</h5>
+      <div class="worked-example__step-content">
+        <p>gVisor provides an application-level kernel intercepting system calls -- defense-in-depth beyond Docker. Firecracker provides full hardware-level isolation with dedicated kernels per task, booting in ~125ms with &lt;5 MiB overhead.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Select the isolation strategy and justify</h5>
+      <div class="worked-example__step-content">
+        <p>[YOUR ANSWER] Consider which strategy provides the strongest guarantee for untrusted code that needs network access.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>Docker is insufficient because container escapes give the attacker full host access -- the shared kernel is the vulnerability. For untrusted code with network access, Firecracker MicroVMs provide the strongest guarantee: each task gets its own kernel with hardware-level isolation, meaning even a successful exploit is contained to that VM. The ~125ms boot time and &lt;5 MiB overhead make per-task VM creation practical. gVisor is a viable middle ground for trusted-but-sandboxed code, but for truly untrusted user submissions, Firecracker's isolation model is the appropriate choice.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<hr>
+<h2 id="safety-models">Safety Models</h2>
+<p><span class="glossary-term" data-term="agent">Agent</span> safety is not a single mechanism but a layered defense system. Production agents combine multiple strategies:</p>
+<h3 id="human-in-the-loop-hitl">Human-in-the-Loop (HITL)</h3>
+<p>Every production <span class="glossary-term" data-term="agent">agent</span> defaults to asking for human approval before taking consequential actions. The definition of "consequential" varies:</p>
+<ul>
+<li><strong><span class="glossary-term" data-term="claude-code">Claude Code</span>:</strong> Prompts before file writes, command execution, or network calls outside the sandbox. Configurable: users can pre-approve categories of actions to reduce friction.</li>
+<li><strong>ChatGPT <span class="glossary-term" data-term="agent">Agent</span>:</strong> Pauses for confirmation on payments, password entry, and other sensitive web interactions [F2].</li>
+<li><strong><span class="glossary-term" data-term="cowork">Cowork</span>:</strong> Presents plans for approval before execution; users can approve the plan and allow hands-off execution within the approved scope [F1].</li>
+<li><strong><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>:</strong> Enterprise admins configure which actions require human approval via RBAC policies [F4].</li>
+</ul>
+<h3 id="role-based-access-control-rbac">Role-Based Access Control (RBAC)</h3>
+<p>Enterprise agents require granular permission models. Microsoft's <span class="glossary-term" data-term="agent-365">Agent 365</span> is the most mature implementation: <span class="glossary-term" data-term="agent">agent</span> registry tracks all deployed agents, identity management controls which agents can access which resources, compliance policies enforce data handling rules, and action auditing creates an immutable log of everything every <span class="glossary-term" data-term="agent">agent</span> did [F4].</p>
+<p>Anthropic's Enterprise plan provides SCIM provisioning, audit logs, and a Compliance API [F1]. OpenAI's Enterprise tier offers admin model access controls and a Compliance API [F2].</p>
+<h3 id="default-deny">Default-Deny</h3>
+<p>Well-designed <span class="glossary-term" data-term="agent">agent</span> systems start from a position of zero access and require explicit grants for each capability. <span class="glossary-term" data-term="claude-code">Claude Code</span>'s sandbox exemplifies this: the <span class="glossary-term" data-term="agent">agent</span> cannot access files outside its designated directory or make network calls to unapproved endpoints without the user explicitly expanding permissions.</p>
+<h3 id="multi-layer-guardrails">Multi-Layer Guardrails</h3>
+<p>OpenAI's Agents SDK includes a built-in <span class="glossary-term glossary-term--first-use" data-term="guardrails">guardrails</span> framework for input/output validation -- checking that <span class="glossary-term" data-term="agent">agent</span> inputs are well-formed and outputs do not contain prohibited content before they are acted upon [F2]. This adds a validation layer between the model's reasoning and the tool execution, catching potential issues before they become actions.</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Design a layered safety model for a coding agent that will be used by a 50-person engineering team. The agent needs to edit production code, run tests, and push to GitHub. What layers would you implement, and in what order do they activate?</p>
+  <label for="se-m03-multi-layer-guardrails" class="sr-only">Your explanation</label>
+  <textarea id="se-m03-multi-layer-guardrails" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m03-multi-layer-guardrails">Compare with Expert Answer</button>
+  <div id="se-answer-m03-multi-layer-guardrails" class="self-explain__expert" hidden>
+    <p>Layer 1 (Default-deny): Agent starts with zero access; only designated repositories and approved CLI commands are available. Layer 2 (RBAC): Junior developers' agents cannot push to main branch or modify infrastructure code; senior developers' agents have broader scope. Layer 3 (HITL): All production deployments require human approval; test runs are pre-approved. Layer 4 (Guardrails): Input validation rejects prompts requesting credential access or destructive operations; output validation scans generated code for known vulnerability patterns. Layer 5 (Sandboxing): OS-level filesystem and network isolation constraining the agent to designated directories. Each layer activates independently -- sandboxing is always on, RBAC checks fire on every action, HITL triggers on configured sensitive operations, and guardrails validate every input/output pair.</p>
+  </div>
+</div>
+
+<details class="accordion">
+  <summary class="accordion__title">Why safety is an engineering concern</summary>
+  <div class="accordion__content">
+    <p>An unmonitored Opus 4.6 agent at maximum throughput costs $1,200 per hour. This is why safety is an engineering concern, not just an ethics discussion.</p>
+  </div>
+</details>
+<hr>
+<h2 id="failure-modes-and-practical-limits">Failure Modes and Practical Limits</h2>
+<p>Agents fail. Understanding how they fail is as important as understanding how they work.</p>
+<h3 id="hallucination-cascades">Hallucination Cascades</h3>
+<p>When an <span class="glossary-term" data-term="agent">agent</span> hallucinates a fact (a file path, an API endpoint, a function signature) and then acts on that hallucination, the error compounds. The <span class="glossary-term" data-term="agent">agent</span> edits a file that does not exist, the edit fails, the <span class="glossary-term" data-term="agent">agent</span> attempts to recover by creating the file, and now the codebase contains a spurious file with hallucinated content. Verification steps catch some of these cascades, but not all -- particularly when the verification itself relies on the same hallucinated assumptions.</p>
+<h3 id="context-exhaustion">Context Exhaustion</h3>
+<p>Even with 1M-<span class="glossary-term" data-term="token">token</span> context windows, agents working on large tasks can exhaust their context. When this happens, the <span class="glossary-term" data-term="agent">agent</span> loses access to earlier reasoning, tool outputs, and observations. The result is repetitive actions, forgotten constraints, and degraded performance. <span class="glossary-term" data-term="claude-code">Claude Code</span>'s auto-<span class="glossary-term glossary-term--first-use" data-term="compaction">compaction</span> mitigates this by summarizing earlier context, but compacted summaries inevitably lose detail. See <a href="module-02.html">Module 02: <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context Engineering</span></a> for <span class="glossary-term" data-term="compaction">compaction</span> mechanics.</p>
+<h3 id="resource-exhaustion">Resource Exhaustion</h3>
+<p>Uncontrolled agents can consume expensive resources. A coding <span class="glossary-term" data-term="agent">agent</span> in an infinite retry loop can generate thousands of API calls; a browser <span class="glossary-term" data-term="agent">agent</span> clicking through pagination can run for hours. At Opus 4.6 output pricing ($25/MTok), a single <span class="glossary-term" data-term="agent">agent</span> generating at maximum Tier 4 rate limits (~800K output tokens per minute) would cost approximately $1,200 per hour; organizations running multiple parallel <span class="glossary-term" data-term="agent">agent</span> sessions could multiply this further [8]. Production deployments must implement <span class="glossary-term" data-term="token">token</span> budgets, time limits, and cost caps.</p>
+<h3 id="silent-failures">Silent Failures</h3>
+<p>The most dangerous failure mode is when an <span class="glossary-term" data-term="agent">agent</span> completes a task, reports success, but has produced subtly incorrect results -- a test that passes because it tests the wrong thing, a refactor that introduces a logic error the test suite does not cover, a browser automation that fills the wrong form field. Silent failures are why human review of <span class="glossary-term" data-term="agent">agent</span> output remains essential, even for high-performing agents.</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> <span class="glossary-term" data-term="agent">Agent</span> capabilities are evolving rapidly. Benchmark scores, feature availability, and pricing change frequently. All data reflects the state as of March 20, 2026.</p>
+</blockquote>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Token budgets, time limits, and cost caps are the three standard safeguards against resource exhaustion. A coding agent in an infinite retry loop or a browser agent clicking through pagination indefinitely can consume thousands of dollars without these controls." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What production safeguards should be implemented against resource exhaustion?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="0" />
+          <span class="quiz__choice-label">Only use the cheapest model</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="1" />
+          <span class="quiz__choice-label">Disable all tools</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="2" />
+          <span class="quiz__choice-label">Token budgets, time limits, and cost caps</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="3" />
+          <span class="quiz__choice-label">Run agents only during business hours</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Claude Code's auto-compaction mitigates context exhaustion by summarizing earlier context when the window fills. However, compacted summaries inevitably lose detail, which can lead to repetitive actions and forgotten constraints. See Module 02 for full compaction mechanics." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What mitigates context exhaustion in Claude Code?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="0" />
+          <span class="quiz__choice-label">Increasing the model size</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="1" />
+          <span class="quiz__choice-label">Auto-compaction -- summarizing earlier context</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="2" />
+          <span class="quiz__choice-label">Reducing the number of tools available</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="3" />
+          <span class="quiz__choice-label">Switching to a different model</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="Silent failures are the most dangerous because the agent completes the task, reports success, but has produced subtly incorrect results. A test that passes because it tests the wrong thing, or a refactor that introduces a logic error the test suite does not cover. This is why human review of agent output remains essential." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which failure mode is described as 'the most dangerous'?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="0" />
+          <span class="quiz__choice-label">Hallucination cascades</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="1" />
+          <span class="quiz__choice-label">Context exhaustion</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="2" />
+          <span class="quiz__choice-label">Resource exhaustion</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="3" />
+          <span class="quiz__choice-label">Silent failures</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="At $25/MTok output pricing and ~800K output tokens per minute at Tier 4 rate limits, that is approximately $1,200 per hour. Organizations running multiple parallel agent sessions multiply this further. This is why production deployments must implement token budgets, time limits, and cost caps." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">At Opus 4.6 output pricing, an uncontrolled agent at maximum Tier 4 rate limits would cost approximately how much per hour?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="0" />
+          <span class="quiz__choice-label">$120/hour</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="1" />
+          <span class="quiz__choice-label">$600/hour</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="2" />
+          <span class="quiz__choice-label">$1,200/hour</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="3" />
+          <span class="quiz__choice-label">$5,000/hour</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="This is a hallucination cascade: the agent hallucinates a fact (the file path), acts on it (the edit fails), attempts recovery (creates the file), and now the codebase contains spurious content. The initial hallucination compounds into increasingly divergent state." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">An agent edits a file that does not exist, then creates it with hallucinated content. Which failure mode is this?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="0" />
+          <span class="quiz__choice-label">Context exhaustion</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="1" />
+          <span class="quiz__choice-label">Hallucination cascade</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="2" />
+          <span class="quiz__choice-label">Resource exhaustion</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-silent-failures-quiz" value="3" />
+          <span class="quiz__choice-label">Silent failure</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li><strong>All production agents use the same core loop:</strong> gather context, plan, act, verify, repeat. The verification step is what separates agents from code generators.</li>
+<li><strong><span class="glossary-term" data-term="claude-code">Claude Code</span> leads coding benchmarks</strong> (80.8% SWE-bench Verified with Opus 4.6), while Codex (77.3% Terminal-Bench 2.0) and Jules compete strongly in different evaluation frameworks.</li>
+<li><strong>Sandboxing strategies exist on a spectrum</strong> from Docker (weakest) through <span class="glossary-term" data-term="gvisor">gVisor</span> (moderate) to Firecracker MicroVMs (strongest, ~125ms boot, &#x3C;5 MiB overhead). Codex uses air-gapped sandboxes; <span class="glossary-term" data-term="claude-code">Claude Code</span> uses OS-level isolation.</li>
+<li><strong><span class="glossary-term" data-term="cowork">Cowork</span> is the only desktop automation <span class="glossary-term" data-term="agent">agent</span></strong> that combines local file access, <span class="glossary-term" data-term="computer-use">computer use</span>, MCP connectors, scheduled tasks, and plugin extensibility -- but it remains a Research Preview with stability limitations.</li>
+<li><strong>ChatGPT <span class="glossary-term" data-term="agent">Agent</span> is the most mature web browsing <span class="glossary-term" data-term="agent">agent</span></strong> but cannot access local files, has no MCP support, and is unavailable in the EEA.</li>
+<li><strong>Jules takes a different architectural approach</strong> -- GitHub-native, asynchronous, batch-oriented -- making it complementary to interactive agents like <span class="glossary-term" data-term="claude-code">Claude Code</span>.</li>
+<li><strong>MCP is the dividing line</strong> between agents with rich external connectivity (<span class="glossary-term" data-term="claude-code">Claude Code</span>, <span class="glossary-term" data-term="cowork">Cowork</span>, <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>) and those with limited integration surfaces (Codex, Jules, ChatGPT <span class="glossary-term" data-term="agent">Agent</span>).</li>
+<li><strong>Safety is layered, not singular:</strong> HITL, RBAC, default-deny permissions, <span class="glossary-term" data-term="guardrails">guardrails</span> frameworks, and sandboxing all operate simultaneously in production systems.</li>
+<li><strong><span class="glossary-term" data-term="agent">Agent</span> failure modes</strong> -- hallucination cascades, context exhaustion, resource exhaustion, silent failures -- are architectural challenges, not just model quality issues.</li>
+<li><strong>Enterprise governance is nascent.</strong> Microsoft's <span class="glossary-term" data-term="agent-365">Agent 365</span> ($15/user/month) is the most complete <span class="glossary-term" data-term="agent">agent</span> governance product; other platforms rely on API-level controls.</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="3" data-explanation="Claude Code supports MCP client connections, along with Cowork, Claude in Chrome, and Copilot Studio. Codex, Jules, and ChatGPT Agent lack MCP support. This dividing line determines which agents have rich external connectivity versus limited integration surfaces. MCP is covered in depth in Module 06." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">MCP support divides agents into two groups. Which agent has MCP support?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Codex</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Jules</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">ChatGPT Agent</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Claude Code</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="False. Jules is GitHub-native and asynchronous. Tasks are submitted as issues or requests, and results arrive as pull requests. There is no interactive terminal session, making Jules architecturally distinct from Claude Code and better suited for batch-style development work." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: Jules requires an interactive terminal session.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="3" data-explanation="This is a silent failure -- the agent completes the task and reports success, but the result is subtly incorrect. The test passes not because the code is correct, but because the test validates the wrong behavior. This is the most dangerous failure mode because it escapes detection." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">An agent's test passes, but it tests the wrong thing. Which failure mode is this?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Hallucination cascade</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Context exhaustion</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Resource exhaustion</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Silent failure</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Well-designed agent systems start from a position of zero access and require explicit grants for each capability. Claude Code's sandbox exemplifies this: the agent cannot access files outside its designated directory or make unapproved network calls without the user explicitly expanding permissions." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the default safety posture for well-designed agent systems?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Default-allow with logging</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Default-deny -- zero access, explicit grants required</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Human approval for everything</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Sandbox-only with no network</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="ChatGPT Agent is not available in the European Economic Area or Switzerland due to regulatory constraints. This is a significant geographic limitation for organizations with EU operations." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">ChatGPT Agent is unavailable in which region?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Asia-Pacific</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">European Economic Area and Switzerland</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">South America</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">United Kingdom</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Docker provides namespace isolation but shares the host kernel (weakest). gVisor adds an application-level kernel intercepting system calls (moderate). Firecracker MicroVMs provide full hardware-level isolation with dedicated kernels per task, booting in ~125ms with <5 MiB overhead (strongest)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Rank the three isolation strategies from weakest to strongest.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">gVisor &lt; Docker &lt; Firecracker MicroVMs</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Firecracker MicroVMs &lt; gVisor &lt; Docker</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Docker &lt; gVisor &lt; Firecracker MicroVMs</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Docker &lt; Firecracker MicroVMs &lt; gVisor</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The air-gapped design means no internet connectivity -- the agent cannot install new packages, fetch external resources, or communicate with any external service. All dependencies must be pre-provisioned in the sandbox image. This is the most restrictive approach but provides the strongest security guarantee." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Codex's sandbox is air-gapped. What practical limitation does this create?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">It cannot access the file system</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">It cannot install packages not pre-provisioned in the sandbox image</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">It cannot run tests</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">It cannot generate code</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Opus 4.6 achieves 80.8% on SWE-bench Verified, the highest score of any model on this standard software engineering benchmark as of March 2026. Codex scores 77.3% on a different benchmark (Terminal-Bench 2.0). This connects to the model selection framework from Module 01." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which coding agent leads SWE-bench Verified as of March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Codex with codex-1</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Jules with Gemini 3 Flash</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Claude Code with Opus 4.6 at 80.8%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">GitHub Copilot Agent Mode</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="An agent without tools is just a chatbot that talks to itself. Tool use -- invoking functions, editing files, running commands, calling APIs -- is what separates an agent from a language model. This is the foundational architectural distinction." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What distinguishes an agent from a chatbot?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Agents use larger models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Agents have longer context windows</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Tool use -- the ability to take actions, not just generate text</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Agents are always more expensive</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The canonical agent cycle is: Gather context, Plan (reason about actions), Act (invoke tools), Verify (check results), Loop (return to step 1 if goal not met). This is not a theoretical framework -- it is the literal execution model used by Claude Code, Codex, Jules, and other production agents." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Name the five steps in the canonical agent loop.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Read, Write, Test, Deploy, Monitor</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Gather, Plan, Act, Verify, Loop</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Input, Process, Output, Validate, Store</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m03-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Observe, Orient, Decide, Act, Assess</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- Platform ecosystem context</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- Model capabilities and benchmarks underlying each <span class="glossary-term" data-term="agent">agent</span></li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term" data-term="context-engineering">Context Engineering</span></a> -- Context windows, <span class="glossary-term" data-term="compaction">compaction</span>, and memory systems that agents rely on</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- How single agents combine into multi-<span class="glossary-term" data-term="agent">agent</span> systems</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- The protocol connecting agents to external tools and data</li>
+<li><a href="module-07.html">Module 07: <span class="glossary-term" data-term="skills">Skills</span>, Plugins &#x26; Automation</a> -- Reusable workflows and scheduled <span class="glossary-term" data-term="agent">agent</span> execution</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- <span class="glossary-term" data-term="agent">Agent</span> safety challenges, governance requirements, and upcoming platform changes</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+<ol>
+<li>Yao, S. et al. "<span class="glossary-term" data-term="react">ReAct</span>: Synergizing Reasoning and Acting in Language Models." ICLR 2023. <a href="https://arxiv.org/abs/2210.03629">https://arxiv.org/abs/2210.03629</a></li>
+<li>Zhou, A. et al. "Language <span class="glossary-term" data-term="agent">Agent</span> Tree Search Unifies Reasoning, Acting, and Planning in Language Models." NeurIPS 2023. <a href="https://arxiv.org/abs/2310.04406">https://arxiv.org/abs/2310.04406</a></li>
+<li>Anthropic. "<span class="glossary-term" data-term="claude-code">Claude Code</span>: Sandboxing and Permissions." <a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/security">https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/security</a> March 2026.</li>
+<li>SWE-bench Verified Leaderboard. <a href="https://www.swebench.com/">https://www.swebench.com/</a> Accessed March 2026.</li>
+<li>OpenAI. "Codex: Terminal-Bench 2.0 Results." <a href="https://openai.com/codex/">https://openai.com/codex/</a> March 2026.</li>
+<li>Google. "<span class="glossary-term" data-term="project-mariner">Project Mariner</span>: Browser Automation <span class="glossary-term" data-term="agent">Agent</span>." <a href="https://deepmind.google/technologies/project-mariner/">https://deepmind.google/technologies/project-mariner/</a> Accessed March 2026.</li>
+<li><span class="glossary-term glossary-term--first-use" data-term="firecracker-microvm">Firecracker MicroVM</span> Documentation. <a href="https://firecracker-microvm.github.io/">https://firecracker-microvm.github.io/</a> Accessed March 2026.</li>
+<li>Calculated from Opus 4.6 output pricing ($25/MTok) at Tier 4 rate limits (~800K OTPM). See <a href="https://platform.claude.com/docs/en/about-claude/pricing">https://platform.claude.com/docs/en/about-claude/pricing</a> and <a href="https://platform.claude.com/docs/en/api/rate-limits">https://platform.claude.com/docs/en/api/rate-limits</a>. Actual costs depend on tier, parallelism, and workload characteristics.</li>
+</ol>
+<p><strong>Foundation profiles cited as [F1]-[F5]:</strong></p>
+<ul>
+<li>[F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026</li>
+<li>[F2] OpenAI/ChatGPT Ecosystem Profile (reference/profiles/openai-chatgpt.md), March 18, 2026</li>
+<li>[F3] Google/Gemini Ecosystem Profile (reference/profiles/google-gemini.md), March 18, 2026</li>
+<li>[F4] Microsoft/Copilot Ecosystem Profile (reference/profiles/microsoft-copilot.md), March 18, 2026</li>
+<li>[F5] Specialized Tools Profile (reference/profiles/specialized-tools.md), March 18, 2026</li>
+</ul>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-02.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 02: Context Engineering</span>
+        </a>
+        <a href="module-06.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 06: MCP &amp; the Integration Layer</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

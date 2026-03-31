@@ -1,7 +1,7 @@
 # Module 10: Frontier Topics
 
 **Last updated:** 2026-03-21
-**Status:** DRAFTING
+**Status:** COMPLETE
 **Word count target:** 4,500-5,500
 
 ---
@@ -22,7 +22,7 @@ All prior modules (00-09) are recommended. This module synthesizes themes and vo
 
 > **Volatility warning:** On-device AI capabilities are shipping with OS updates on quarterly or faster cadences. Specific feature availability depends on hardware generation, OS version, and regional rollout.
 
-The models covered in [Module 01](MODULE-01-models-and-intelligence.md) run in data centers, but a parallel track is pushing inference onto phones, laptops, and wearables. The motivation is straightforward: latency under 20ms (vs. 200-500ms for cloud round-trips), offline availability, and privacy guarantees that no server-side architecture can match [1]. User research backs this up -- 91% of surveyed users prefer on-device processing for privacy-sensitive tasks, and 78% report refusing cloud AI features they would otherwise use [1].
+The models covered in [Module 01](MODULE-01-models-and-intelligence.md) run in data centers, but a parallel track is pushing inference onto phones, laptops, and wearables. The motivation is straightforward: latency under 20ms (vs. 200-500ms for cloud round-trips), offline availability, and privacy guarantees that no server-side architecture can match. User surveys consistently show strong preference for on-device processing -- a 2026 Malwarebytes survey found 90% of respondents do not trust AI with their data, and multiple studies report that users frequently decline cloud AI features they would otherwise use when on-device alternatives are unavailable [1].
 
 ### Google: Gemini Nano and AICore
 
@@ -34,11 +34,11 @@ The strategic significance is that Google controls the OS, the chipset (Tensor),
 
 Apple's on-device model is a ~3 billion parameter transformer optimized for Apple Silicon, running natively on iPhone 15 Pro and later, all M-series Macs, and recent iPads [3]. For tasks exceeding on-device capacity, Apple routes to Private Cloud Compute (PCC) -- custom Apple Silicon servers where data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data [3].
 
-The gap in Apple's strategy is conversational AI. Siri's current implementation remains intent-based, not LLM-powered. The widely reported "Campo" project aims to ship a true LLM-powered Siri with iOS 27 in September 2026 [3]. A notable January 2026 partnership with Google will integrate Gemini into Apple's foundation models for specific tasks, acknowledging that Apple's in-house models lag behind in general-purpose reasoning [3].
+The gap in Apple's strategy is conversational AI. Siri's current implementation remains intent-based, not LLM-powered. The widely reported "LLM Siri" initiative aims to ship a true LLM-powered Siri, expected to debut at WWDC 2026 [3]. A notable January 2026 partnership with Google will integrate Gemini into Apple's foundation models for specific tasks, with Apple reportedly paying ~$1B/year for access to a custom 1.2T parameter Gemini model — an acknowledgment that Apple's in-house models lag behind in general-purpose reasoning [3].
 
 ### Qualcomm: The Hardware Enabler
 
-Qualcomm's role is less visible to consumers but structurally important. The Snapdragon Wear Elite platform, announced at MWC 2026, runs 2 billion parameter models at 10 tokens per second on a wearable form factor [4]. The Snapdragon X2 Plus, shown at CES 2026, delivers 80 TOPS of NPU performance for laptops [4]. These chips define the ceiling for what on-device models can do -- and that ceiling is rising fast enough that models in the Gemini Nano and Apple Intelligence class will have significantly more headroom by late 2026.
+Qualcomm's role is less visible to consumers but structurally important. The Snapdragon Wear Elite platform, announced at MWC 2026, supports models up to 2 billion parameters on a wearable form factor — the first wearable chip with a dedicated Hexagon NPU [4]. The Snapdragon X2 Plus, shown at CES 2026, delivers 80 TOPS of NPU performance for laptops [4]. These chips define the ceiling for what on-device models can do -- and that ceiling is rising fast enough that models in the Gemini Nano and Apple Intelligence class will have significantly more headroom by late 2026.
 
 ### On-Device vs. Cloud: The Emerging Split
 
@@ -48,9 +48,9 @@ The practical implication, building on the context engineering principles in [Mo
 |----------|----------------|------------|--------------|---------|-----------------|
 | Google | Gemini Nano | Not disclosed | Tensor G3+ (Pixel 8+) | <20ms | ML Kit GenAI APIs |
 | Apple | Apple Foundation Model | ~3B | A17 Pro+, M-series | <20ms | On-device only (no public API) |
-| Qualcomm | OEM-dependent | Up to 2B | Snapdragon Wear Elite, X2 Plus | ~100ms (10 tok/s) | Qualcomm AI Engine SDK |
+| Qualcomm | OEM-dependent | Up to 2B | Snapdragon Wear Elite, X2 Plus | Varies by model | Qualcomm AI Engine SDK |
 
-On-device adoption runs approximately 3x higher than equivalent cloud features when users are given the choice [1], suggesting that privacy and latency are not niche concerns but primary drivers of AI product adoption.
+Early data suggests on-device AI features see significantly higher adoption than equivalent cloud features when users are given the choice [1], suggesting that privacy and latency are not niche concerns but primary drivers of AI product adoption.
 
 ---
 
@@ -58,19 +58,19 @@ On-device adoption runs approximately 3x higher than equivalent cloud features w
 
 > **Volatility warning:** Multimodal generation capabilities, pricing, and content policies are changing monthly. Licensing deals (e.g., Disney-Sora) are creating new categories that did not exist six months ago.
 
-[Module 01](MODULE-01-models-and-intelligence.md) covered multimodal *understanding* -- models that can see images, hear audio, and process video. This section covers the other direction: models that *generate* rich media. The market has grown from $1.6 billion in 2024 to an estimated $3.43 billion in 2026, a 37% year-over-year growth rate [5].
+[Module 01](MODULE-01-models-and-intelligence.md) covered multimodal *understanding* -- models that can see images, hear audio, and process video. This section covers the other direction: models that *generate* rich media. The AI video generator market alone is estimated at $850M-$1.8B in 2026 (depending on scope definition), with the broader AI video market reaching approximately $3.4B [5]. Growth rates exceed 35% year-over-year across all segments.
 
 ### Video Generation
 
-**OpenAI Sora 2** reached general availability and generates videos up to 25 seconds in length. The headline development is commercial licensing: a $1 billion partnership with Disney grants access to 200+ licensed characters, though talent likenesses remain excluded [6]. This is the first major instance of AI video generation operating within traditional IP frameworks rather than around them, and it sets a template that other studios are likely to follow.
+**OpenAI Sora 2** reached general availability and generates videos up to 25 seconds in length. The headline development is commercial licensing: Disney made a $1 billion equity investment in OpenAI alongside a three-year licensing agreement granting Sora access to 200+ animated, masked, and creature characters from Disney, Marvel, Pixar, and Star Wars — though talent likenesses remain excluded [6]. This is the first major instance of AI video generation operating within traditional IP frameworks rather than around them, and it sets a template that other studios are likely to follow.
 
-**Google Veo 3.1** (GA since February 23, 2026) generates video at 720p, 1080p, and 4K resolution in clips up to 8 seconds [7]. Its unique differentiator is native 3D spatial audio generation -- no other video model produces synchronized audio natively. Veo sits within the broader Google Flow creative studio (launched February 25, 2026), which merges the previously separate Whisk, ImageFX, and Veo tools into the first unified image-to-video-to-audio pipeline [7].
+**Google Veo 3.1** (GA since January 13, 2026) generates video at 720p, 1080p, and 4K resolution in clips up to 8 seconds [7]. Its unique differentiator is native 3D spatial audio generation — producing three distinct audio layers (dialogue with lip-sync, contextual effects, ambient background) — a capability no other video model matches as of March 2026. Veo sits within the broader Google Flow creative studio (launched February 2026), which merges the previously separate Whisk, ImageFX, and Veo tools into the first unified image-to-video-to-audio pipeline [7].
 
 The quality threshold has been crossed: studies show 95%+ of viewers cannot reliably distinguish AI-generated video from traditionally produced footage in controlled settings [5]. This has obvious implications for content creation, advertising, and media -- but also for trust and verification, a theme that intersects with the safety discussion below.
 
 ### Image Generation
 
-**Midjourney V7** shipped with 35% better prompt understanding and 40% fewer anatomical errors compared to V6 [8]. The V8 Alpha, released March 17, 2026, is 4-5x faster at generation while maintaining V7 quality levels [8]. Midjourney remains the quality leader for still image generation, though Google's ImageFX (within Flow) and OpenAI's DALL-E 3 are competitive for many use cases.
+**Midjourney V7** shipped with significantly improved prompt fidelity and fewer anatomical errors compared to V6 [8]. The V8 Alpha, released March 17, 2026, is 4-5x faster at generation with dramatically improved text rendering, and complex multi-element compositions that were partially ignored in V7 now render with noticeably higher fidelity [8]. Midjourney remains the quality leader for still image generation, though Google's ImageFX (within Flow) and OpenAI's GPT Image 1.5 are competitive for many use cases.
 
 ### Audio and Voice
 
@@ -80,7 +80,7 @@ The quality threshold has been crossed: studies show 95%+ of viewers cannot reli
 
 | Capability | Leading Platform | Status (Mar 2026) | Key Differentiator |
 |-----------|-----------------|-------------------|-------------------|
-| Video (long-form) | Sora 2 (OpenAI) | GA | 25-sec max, Disney licensing |
+| Video (long-form) | Sora 2 (OpenAI) | GA | 25-sec max, Disney $1B investment + licensing |
 | Video (quality/audio) | Veo 3.1 (Google) | GA | 4K, native 3D spatial audio |
 | Video (unified pipeline) | Flow (Google) | GA | Image + video + audio in one tool |
 | Image | Midjourney V7/V8a | GA / Alpha | Best prompt fidelity and anatomy |
@@ -122,6 +122,22 @@ For the agentic systems discussed throughout this curriculum, the most impactful
 
 Outside of Microsoft, governance tooling is fragmented. Anthropic provides usage dashboards and audit logs via the API but no dedicated governance product. OpenAI's enterprise tier includes admin controls and SSO but lacks the agent-specific monitoring that Agent 365 offers. Google's Vertex AI platform has model monitoring but limited agent-level governance. The open-source ecosystem ([Module 05](MODULE-05-openclaw-and-open-agents.md)) has essentially no governance tooling -- a significant barrier to enterprise OpenClaw adoption.
 
+### Enterprise Governance Comparison
+
+| Capability | Microsoft (Agent 365) | Anthropic | OpenAI | Google | OpenClaw |
+|-----------|----------------------|-----------|--------|--------|----------|
+| **Agent registry** | Centralized catalog (GA May 2026) [10] | None | None | None | None |
+| **Real-time monitoring** | Defender integration [10] | API usage dashboards | Admin dashboard | Vertex AI monitoring | None |
+| **Identity management** | Entra ID (full IAM) [10] | API keys only | Project-scoped keys, SSO | IAM / service accounts | OS-level permissions |
+| **Compliance / audit** | Purview (DLP, retention, barriers) [10] | Audit logs (API) | Enterprise audit logs | Cloud Audit Logs | None |
+| **Data governance** | Information barriers, DLP policies [10] | None | None | Vertex AI data governance | None |
+| **Content filtering** | Azure AI Content Safety | Constitutional AI guardrails [F1] | Moderation API, guardrails [F2] | Safety filters [F3] | None (user-managed) |
+| **Human oversight controls** | Plan approval gates [F4] | Agent SDK hooks [F1] | Guardrails primitive [F2] | Vertex AI threat detection [F3] | None |
+| **EU AI Act readiness** | Readiness tooling included [10] | Not announced | Not announced | Not announced | N/A |
+| **Pricing** | $15/user/month (standalone) [10] | Included in API pricing | Enterprise tier | Vertex AI pricing | Free (no governance) |
+
+The table makes concrete what the prose above describes: Microsoft is the only platform with a purpose-built, comprehensive governance product. Other platforms offer individual capabilities (content filtering, audit logs) but lack the integrated registry-identity-compliance-monitoring stack that enterprise deployments require.
+
 Gartner projects that 40% of enterprise applications will incorporate agentic AI capabilities by end of 2026 [12]. At the same time, they predict that 40%+ of agentic AI projects will be canceled by 2027, largely due to governance, reliability, and integration failures [12]. The governance gap is a primary reason the technology's adoption curve may be slower than the hype suggests.
 
 ---
@@ -146,7 +162,7 @@ The transition from chatbots to agents (the central arc from [Module 03](MODULE-
 
 - **Action irreversibility:** A chatbot can generate incorrect text; an agent can delete files, send emails, or execute transactions. The sandboxing patterns discussed in [Module 03](MODULE-03-single-agent-systems.md) are a first line of defense but not sufficient for high-stakes actions.
 - **Delegation chains:** In multi-agent systems ([Module 04](MODULE-04-multi-agent-orchestration.md)), the parent agent's safety constraints must propagate to subagents. Context isolation helps contain scope but also reduces the subagent's ability to recognize when it is being asked to do something the parent should not have authorized.
-- **Tool supply chain:** MCP servers ([Module 06](MODULE-06-mcp-integration-layer.md)) and ClawHub skills ([Module 05](MODULE-05-openclaw-and-open-agents.md)) introduce third-party code into agent execution paths. The 12-20% malicious skill rate on ClawHub [W25] demonstrates that tool ecosystems are already active attack surfaces.
+- **Tool supply chain:** MCP servers ([Module 06](MODULE-06-mcp-integration-layer.md)) and ClawHub skills ([Module 05](MODULE-05-openclaw-and-open-agents.md)) introduce third-party code into agent execution paths. The 12-20% malicious skill rate on ClawHub [20] demonstrates that tool ecosystems are already active attack surfaces.
 
 ### The Verification Problem
 
@@ -182,21 +198,21 @@ The economic picture is paradoxical. Closed models capture approximately 96% of 
 
 ### MCP as the Bridge
 
-The Model Context Protocol ([Module 06](MODULE-06-mcp-integration-layer.md)) is emerging as the connective tissue between open and closed ecosystems. With 19,700+ servers in the registry and 97 million+ monthly SDK downloads [14], MCP provides a universal integration layer that works regardless of which model -- open or closed -- is behind the client. Anthropic's donation of MCP to the Linux Foundation's Agentic AI Foundation [W30] was a deliberate move to cement this neutrality. For builders, this means that investments in MCP servers and tooling are hedge-compatible: they work with Claude, ChatGPT, Gemini, and open-source models alike.
+The Model Context Protocol ([Module 06](MODULE-06-mcp-integration-layer.md)) is emerging as the connective tissue between open and closed ecosystems. With 19,700+ servers in the registry and 97 million+ monthly SDK downloads [14], MCP provides a universal integration layer that works regardless of which model -- open or closed -- is behind the client. Anthropic's donation of MCP to the Linux Foundation's Agentic AI Foundation [21] was a deliberate move to cement this neutrality. For builders, this means that investments in MCP servers and tooling are hedge-compatible: they work with Claude, ChatGPT, Gemini, and open-source models alike.
 
 ### Geopolitical Dimensions
 
-The open-vs-closed question is acquiring geopolitical weight. An estimated 35% of countries are expected to be locked into regional AI platform dependencies by 2027 [15]. China's open-source strategy (particularly through Alibaba's Qwen family and DeepSeek) is both a competitive weapon and a soft-power tool, providing AI capabilities to regions and organizations that cannot or will not depend on US-based closed platforms. The EU AI Act's transparency requirements also tilt toward open models, which can more easily demonstrate compliance through inspectable weights and training procedures.
+The open-vs-closed question is acquiring geopolitical weight. An estimated 35% of countries are expected to be locked into regional AI platform dependencies by 2027 [16]. China's open-source strategy (particularly through Alibaba's Qwen family and DeepSeek) is both a competitive weapon and a soft-power tool, providing AI capabilities to regions and organizations that cannot or will not depend on US-based closed platforms. The EU AI Act's transparency requirements also tilt toward open models, which can more easily demonstrate compliance through inspectable weights and training procedures.
 
 ---
 
 ## What to Watch: Upcoming Events
 
-Three events in the next 90 days are likely to reshape significant parts of this curriculum.
+Three events in the next 90 days are likely to reshape significant parts of this curriculum. The predictions below are based on pre-event reporting, developer previews, analyst expectations, and credible leaks as of March 2026. Actual announcements may differ significantly -- treat these as informed speculation, not confirmed information.
 
 ### Google I/O 2026 (May 19-20)
 
-Expected announcements [16]:
+Expected announcements (based on public reporting and Google previews) [17]:
 - **Next-generation Gemini models** -- likely Gemini 3.5 or a new architecture, potentially extending the context window beyond 2M tokens
 - **Android 17** -- deeper on-device AI integration, expanded AICore capabilities
 - **Project Astra AR glasses** -- consumer hardware with real-time multimodal AI, bridging the on-device and cloud split
@@ -206,7 +222,7 @@ Curriculum impact: Likely updates to [Module 01](MODULE-01-models-and-intelligen
 
 ### Microsoft Build 2026 (June 2-3, San Francisco)
 
-Expected announcements [17]:
+Expected announcements (based on public reporting and Microsoft previews) [18]:
 - **Copilot stack evolution** -- deeper Copilot Studio integration with Agent 365 governance
 - **Azure OpenAI updates** -- new model deployments, potentially GPT-5 Azure availability
 - **Enterprise governance tooling** -- expanded Agent 365 capabilities post-GA
@@ -215,7 +231,7 @@ Curriculum impact: Likely updates to [Module 04](MODULE-04-multi-agent-orchestra
 
 ### WWDC 2026 (June 8-12)
 
-Expected announcements [18]:
+Expected announcements (based on public reporting and Apple previews) [19]:
 - **iOS 27** -- LLM-powered Siri ("Campo"), the most significant Siri overhaul since its launch
 - **Core AI framework** -- replacing Core ML as the primary on-device AI framework, signaling Apple's intent to make AI a first-class development platform
 - **Apple Intelligence expansion** -- broader device support, new on-device capabilities, potentially expanded PCC services
@@ -244,9 +260,9 @@ The pattern is familiar from previous technology waves: infrastructure investmen
 
 ## Key Takeaways
 
-1. **On-device AI is a privacy and latency play, not a performance play.** Cloud models will remain more capable, but on-device adoption runs 3x higher when users have the choice, driven by privacy preferences.
+1. **On-device AI is a privacy and latency play, not a performance play.** Cloud models will remain more capable, but on-device features see significantly higher adoption when users have the choice, driven by privacy preferences.
 
-2. **Multimodal generation has crossed the quality threshold.** AI-generated video is indistinguishable from traditional footage in controlled tests. The market has doubled in two years to $3.43B.
+2. **Multimodal generation has crossed the quality threshold.** AI-generated video is indistinguishable from traditional footage in controlled tests. The broader AI video market has reached approximately $3.4B.
 
 3. **Enterprise governance is the bottleneck for agent adoption.** Microsoft's Agent 365 (GA May 2026) is the first comprehensive solution; other platforms lag significantly.
 
@@ -283,21 +299,30 @@ The pattern is familiar from previous technology waves: infrastructure investmen
 
 ## Sources
 
-1. On-device AI user preference and adoption statistics. Research data, 2026. [UNVERIFIED]
-2. Google AICore and ML Kit GenAI APIs documentation. https://developer.android.com/ai [Accessed 2026-03-21]
-3. Apple Intelligence and Private Cloud Compute. Based on Apple announcements and reporting, 2025-2026. [UNVERIFIED]
-4. Qualcomm Snapdragon Wear Elite (MWC 2026) and X2 Plus (CES 2026) announcements. https://www.qualcomm.com/news [Accessed 2026-03-21]
-5. AI video generation market statistics. Grand View Research / industry analysis, 2026. [UNVERIFIED]
-6. OpenAI Sora 2 and Disney partnership. OpenAI announcements, 2026. [UNVERIFIED]
-7. Google Veo 3.1 and Flow creative studio. Google Blog, February 2026. https://blog.google/technology/ai/google-flow/ [Accessed 2026-03-21]
-8. Midjourney V7 and V8 Alpha. Midjourney announcements, March 2026. https://midjourney.com [Accessed 2026-03-21]
-9. ElevenLabs v3 capabilities. https://elevenlabs.io [Accessed 2026-03-21]
-10. Microsoft Agent 365 GA announcement. Microsoft Blog, 2026. https://www.microsoft.com/en-us/microsoft-365/blog/ [Accessed 2026-03-21]
-11. EU AI Act timeline and requirements. European Commission. https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai [Accessed 2026-03-21]
-12. Gartner predictions on agentic AI adoption and project cancellation rates. Gartner, 2026. [UNVERIFIED]
-13. Open vs. closed model performance, cost, and market share data. Research data aggregation, 2026. [UNVERIFIED]
-14. MCP registry and SDK download statistics. https://registry.modelcontextprotocol.io and https://modelcontextprotocol.io [Accessed 2026-03-21]
-15. Goldman Sachs AI capex estimate ($527B) and geopolitical platform lock-in projection. Goldman Sachs Research, 2026. [UNVERIFIED]
-16. Google I/O 2026 expected announcements. Based on public reporting and Google previews. [UNVERIFIED]
-17. Microsoft Build 2026 expected announcements. Based on public reporting and Microsoft previews. [UNVERIFIED]
-18. WWDC 2026 expected announcements. Based on public reporting and Apple previews. [UNVERIFIED]
+1. On-device AI user preference and adoption statistics. Malwarebytes pulse survey (Jan-Feb 2026, 1,235 respondents): 90% do not trust AI with their data. Specific on-device adoption multipliers from secondary aggregation. [PARTIALLY VERIFIED] — W50 in SOURCES.md
+2. Google AICore and ML Kit GenAI APIs documentation. https://developer.android.com/ai — W51 in SOURCES.md
+3. Apple Intelligence and Private Cloud Compute. Apple ML Research tech reports; Apple-Google Gemini partnership (January 12, 2026). — W52 in SOURCES.md
+4. Qualcomm Snapdragon Wear Elite (MWC 2026) and X2 Plus (CES 2026) announcements. — W53 in SOURCES.md
+5. AI video generation market statistics. Grand View Research AI Video Generator Market Report. Market size varies by scope: $850M-$1.8B for video generators specifically; ~$3.4B for broader AI video market. — W54 in SOURCES.md
+6. OpenAI Sora 2 and Disney partnership. Disney $1B equity investment confirmed. — W55 in SOURCES.md
+7. Google Veo 3.1 and Flow creative studio. GA January 13, 2026. — W56 in SOURCES.md
+8. Midjourney V7 and V8 Alpha (March 17, 2026). 4-5x speed improvement confirmed. — W57 in SOURCES.md
+9. ElevenLabs v3 capabilities. 70+ languages, emotional voice synthesis confirmed. — W58 in SOURCES.md
+10. Microsoft Agent 365 GA announcement. May 1, 2026, $15/user/month confirmed. — W59 in SOURCES.md
+11. EU AI Act timeline and requirements. Fully applicable August 2, 2026 for high-risk AI systems. — W60 in SOURCES.md
+12. Gartner predictions on agentic AI. (a) 40% of enterprise apps will feature AI agents by 2026. (b) 40%+ of agentic AI projects canceled by 2027. — W61 in SOURCES.md
+13. Open vs. closed model performance, cost, and market share data. 17.5pp gap to near-zero, 87% cost savings, 96%/80% revenue/usage split all confirmed. — W62 in SOURCES.md
+14. MCP registry and SDK download statistics. — W73 in SOURCES.md
+15. Goldman Sachs AI capex estimate ($527B). — W63 in SOURCES.md
+16. Gartner prediction: 35% of countries locked into regional AI platforms by 2027. — W63b in SOURCES.md
+17. Google I/O 2026 confirmed: May 19-20, Mountain View. — W64 in SOURCES.md
+18. Microsoft Build 2026 confirmed: June 2-3, San Francisco. — W65 in SOURCES.md
+19. WWDC 2026 expected: June 8-12. Not officially announced by Apple as of March 21, 2026; dates based on 9to5Mac, MacRumors, Macworld reporting. — W66 in SOURCES.md
+20. OpenClaw/ClawHub Malicious Skills Audit (Snyk). 12-20% malicious skill rate. — W25 in SOURCES.md
+21. Anthropic donates MCP to Linux Foundation Agentic AI Foundation. — W30 in SOURCES.md
+
+**Foundation profiles cited as [F1]-[F4]:**
+- [F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026
+- [F2] OpenAI/ChatGPT Ecosystem Profile (reference/profiles/openai-chatgpt.md), March 18, 2026
+- [F3] Google/Gemini Ecosystem Profile (reference/profiles/google-gemini.md), March 18, 2026
+- [F4] Microsoft/Copilot Ecosystem Profile (reference/profiles/microsoft-copilot.md), March 18, 2026

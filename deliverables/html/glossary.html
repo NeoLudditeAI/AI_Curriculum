@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="page-glossary">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Course Map</a></li>
+        <li class="breadcrumbs__item"><span aria-current="page" class="breadcrumbs__current">Glossary</span></li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <h1 class="site-header__title">Glossary</h1>
+    <div class="glossary-filter">
+      <label for="glossary-filter" class="glossary-filter__label">Filter terms</label>
+      <input type="text" id="glossary-filter" class="glossary-filter__input" placeholder="Type to search terms..." aria-describedby="filter-status">
+      <div id="filter-status" class="glossary-filter__status" aria-live="polite">55 terms</div>
+    </div>
+  </header>
+
+  <main id="main-content" role="main" class="glossary-page">
+    <section class="glossary-category" id="category-Models &amp; Intelligence">
+      <h2 class="glossary-category__title">Models &amp; Intelligence</h2>
+      <dl class="glossary-list">
+        <div class="glossary-entry" id="term-context-window">
+          <dt class="glossary-entry__term">Context window</dt>
+          <dd class="glossary-entry__definition">
+            <p>The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-token">Token</a>, <a href="#term-compaction">Compaction</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-embedding">
+          <dt class="glossary-entry__term">Embedding</dt>
+          <dd class="glossary-entry__definition">
+            <p>A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-rag-retrieval-augmented-generation">RAG</a>, <a href="#term-vector-database">Vector database</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-extended-thinking">
+          <dt class="glossary-entry__term">Extended thinking</dt>
+          <dd class="glossary-entry__definition">
+            <p>Anthropic&#x27;s reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a &quot;thinking&quot; block in the output.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-reasoning-modes">Reasoning modes</a>, <span>Chain-of-thought</span></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-fine-tuning">
+          <dt class="glossary-entry__term">Fine-tuning</dt>
+          <dd class="glossary-entry__definition">
+            <p>The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-token">Token</a>, <a href="#term-batch-api">Batch API</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-mixture-of-experts-moe">
+          <dt class="glossary-entry__term">Mixture-of-Experts (MoE)</dt>
+          <dd class="glossary-entry__definition">
+            <p>A model architecture where multiple specialized sub-networks (&quot;experts&quot;) are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-token">Token</a>, <a href="#term-context-window">Context window</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-reasoning-modes">
+          <dt class="glossary-entry__term">Reasoning modes</dt>
+          <dd class="glossary-entry__definition">
+            <p>Model configurations that trade speed for depth of analysis. Includes Anthropic&#x27;s extended thinking, OpenAI&#x27;s o-series reasoning, and Google&#x27;s Deep Think.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-extended-thinking">Extended thinking</a>, <span>Chain-of-thought</span></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-token">
+          <dt class="glossary-entry__term">Token</dt>
+          <dd class="glossary-entry__definition">
+            <p>The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-context-window">Context window</a></p>
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section class="glossary-category" id="category-Context Engineering">
+      <h2 class="glossary-category__title">Context Engineering</h2>
+      <dl class="glossary-list">
+        <div class="glossary-entry" id="term-claude-memory">
+          <dt class="glossary-entry__term">Claude Memory</dt>
+          <dd class="glossary-entry__definition">
+            <p>Anthropic&#x27;s cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as &quot;Chat Memory&quot; in some Anthropic documentation.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-compaction">Compaction</a>, <a href="#term-context-engineering">Context engineering</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-compaction">
+          <dt class="glossary-entry__term">Compaction</dt>
+          <dd class="glossary-entry__definition">
+            <p>The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-context-window">Context window</a>, <a href="#term-claude-memory">Claude Memory</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-context-engineering">
+          <dt class="glossary-entry__term">Context engineering</dt>
+          <dd class="glossary-entry__definition">
+            <p>The emerging discipline of deliberately designing and managing what information is available in an AI system&#x27;s context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-context-window">Context window</a>, <a href="#term-prompt-caching">Prompt caching</a>, <a href="#term-rag-retrieval-augmented-generation">RAG</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-prompt-caching">
+          <dt class="glossary-entry__term">Prompt caching</dt>
+          <dd class="glossary-entry__definition">
+            <p>A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-context-engineering">Context engineering</a>, <a href="#term-token">Token</a>, <a href="#term-batch-api">Batch API</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-rag-retrieval-augmented-generation">
+          <dt class="glossary-entry__term">RAG (Retrieval-Augmented Generation)</dt>
+          <dd class="glossary-entry__definition">
+            <p>A pattern where relevant documents are retrieved from an external knowledge base and injected into the model&#x27;s context to ground its responses in specific data.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-context-engineering">Context engineering</a>, <a href="#term-vector-database">Vector database</a>, <a href="#term-embedding">Embedding</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-vector-database">
+          <dt class="glossary-entry__term">Vector database</dt>
+          <dd class="glossary-entry__definition">
+            <p>A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-rag-retrieval-augmented-generation">RAG</a>, <a href="#term-embedding">Embedding</a></p>
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section class="glossary-category" id="category-Agents">
+      <h2 class="glossary-category__title">Agents</h2>
+      <dl class="glossary-list">
+        <div class="glossary-entry" id="term-agent">
+          <dt class="glossary-entry__term">Agent</dt>
+          <dd class="glossary-entry__definition">
+            <p>An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-subagent">Subagent</a>, <a href="#term-multi-agent-orchestration">Multi-agent orchestration</a>, <a href="#term-tool-use">Tool use</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-agent-sdk">
+          <dt class="glossary-entry__term">Agent SDK</dt>
+          <dd class="glossary-entry__definition">
+            <p>A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-multi-agent-orchestration">Multi-agent orchestration</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-claude-code">
+          <dt class="glossary-entry__term">Claude Code</dt>
+          <dd class="glossary-entry__definition">
+            <p>Anthropic&#x27;s terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-cowork">Cowork</a>, <a href="#term-mcp-model-context-protocol">MCP</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-codex-openai">
+          <dt class="glossary-entry__term">Codex (OpenAI)</dt>
+          <dd class="glossary-entry__definition">
+            <p>OpenAI&#x27;s cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-skills">Skills</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-computer-use">
+          <dt class="glossary-entry__term">Computer use</dt>
+          <dd class="glossary-entry__definition">
+            <p>The ability of an AI model to interact with a computer&#x27;s GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-tool-use">Tool use</a>, <a href="#term-cowork">Cowork</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-cowork">
+          <dt class="glossary-entry__term">Cowork</dt>
+          <dd class="glossary-entry__definition">
+            <p>Anthropic&#x27;s desktop automation agent (Research Preview). Operates the user&#x27;s computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-claude-code">Claude Code</a>, <a href="#term-agent">Agent</a>, <a href="#term-computer-use">Computer use</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-deep-research">
+          <dt class="glossary-entry__term">Deep Research</dt>
+          <dd class="glossary-entry__definition">
+            <p>A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-tool-use">Tool use</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-firecracker-microvm">
+          <dt class="glossary-entry__term">Firecracker MicroVM</dt>
+          <dd class="glossary-entry__definition">
+            <p>A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with &lt;5 MiB overhead, providing hardware-level isolation for agent sandboxing.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-gvisor">gVisor</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-guardrails">
+          <dt class="glossary-entry__term">Guardrails</dt>
+          <dd class="glossary-entry__definition">
+            <p>Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI&#x27;s Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic&#x27;s Agent SDK.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-agent-sdk">Agent SDK</a>, <a href="#term-tracing">Tracing</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-gvisor">
+          <dt class="glossary-entry__term">gVisor</dt>
+          <dd class="glossary-entry__definition">
+            <p>Google&#x27;s application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud&#x27;s container infrastructure.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-firecracker-microvm">Firecracker MicroVM</a>, <a href="#term-agent">Agent</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-handoff">
+          <dt class="glossary-entry__term">Handoff</dt>
+          <dd class="glossary-entry__definition">
+            <p>A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI&#x27;s Agents SDK.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-multi-agent-orchestration">Multi-agent orchestration</a>, <a href="#term-subagent">Subagent</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-lats-language-agent-tree-search">
+          <dt class="glossary-entry__term">LATS (Language Agent Tree Search)</dt>
+          <dd class="glossary-entry__definition">
+            <p>An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-react">ReAct</a>, <a href="#term-agent">Agent</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-multi-agent-orchestration">
+          <dt class="glossary-entry__term">Multi-agent orchestration</dt>
+          <dd class="glossary-entry__definition">
+            <p>Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-subagent">Subagent</a>, <a href="#term-agent-sdk">Agent SDK</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-project-mariner">
+          <dt class="glossary-entry__term">Project Mariner</dt>
+          <dd class="glossary-entry__definition">
+            <p>Google&#x27;s desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and &quot;Teach &amp; Repeat&quot; workflow learning.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-computer-use">Computer use</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-react">
+          <dt class="glossary-entry__term">ReAct</dt>
+          <dd class="glossary-entry__definition">
+            <p>Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-lats-language-agent-tree-search">LATS</a>, <a href="#term-tool-use">Tool use</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-router-pattern">
+          <dt class="glossary-entry__term">Router pattern</dt>
+          <dd class="glossary-entry__definition">
+            <p>A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio&#x27;s generative orchestration.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-multi-agent-orchestration">Multi-agent orchestration</a>, <a href="#term-agent">Agent</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-subagent">
+          <dt class="glossary-entry__term">Subagent</dt>
+          <dd class="glossary-entry__definition">
+            <p>An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-multi-agent-orchestration">Multi-agent orchestration</a>, <span>Context isolation</span></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-tool-use">
+          <dt class="glossary-entry__term">Tool use</dt>
+          <dd class="glossary-entry__definition">
+            <p>The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called &quot;function calling.&quot;</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-mcp-model-context-protocol">MCP</a>, <span>Structured outputs</span></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-tracing">
+          <dt class="glossary-entry__term">Tracing</dt>
+          <dd class="glossary-entry__definition">
+            <p>Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI&#x27;s Agents SDK; available via hooks in Anthropic&#x27;s Agent SDK and dashboards in Google&#x27;s Vertex AI.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent-sdk">Agent SDK</a>, <a href="#term-guardrails">Guardrails</a></p>
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section class="glossary-category" id="category-Protocols &amp; Integration">
+      <h2 class="glossary-category__title">Protocols &amp; Integration</h2>
+      <dl class="glossary-list">
+        <div class="glossary-entry" id="term-mcp-model-context-protocol">
+          <dt class="glossary-entry__term">MCP (Model Context Protocol)</dt>
+          <dd class="glossary-entry__definition">
+            <p>An open protocol (originated by Anthropic, now under Linux Foundation&#x27;s Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-mcp-server">MCP server</a>, <span>MCP client</span>, <a href="#term-tool-use">Tool use</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-mcp-server">
+          <dt class="glossary-entry__term">MCP server</dt>
+          <dd class="glossary-entry__definition">
+            <p>A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-mcp-model-context-protocol">MCP</a>, <span>MCP client</span></p>
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section class="glossary-category" id="category-Platforms &amp; Products">
+      <h2 class="glossary-category__title">Platforms &amp; Products</h2>
+      <dl class="glossary-list">
+        <div class="glossary-entry" id="term-agent-365">
+          <dt class="glossary-entry__term">Agent 365</dt>
+          <dd class="glossary-entry__definition">
+            <p>Microsoft&#x27;s enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-multi-agent-orchestration">Multi-agent orchestration</a>, <a href="#term-copilot-studio">Copilot Studio</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-ai-builder">
+          <dt class="glossary-entry__term">AI Builder</dt>
+          <dd class="glossary-entry__definition">
+            <p>Microsoft&#x27;s AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).</p>
+            <p class="glossary-entry__related">Related: <a href="#term-copilot-studio">Copilot Studio</a>, <span>Power Automate</span></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-ai-chips">
+          <dt class="glossary-entry__term">AI Chips</dt>
+          <dd class="glossary-entry__definition">
+            <p>Google&#x27;s pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-gemini-nano">Gemini Nano</a>, <a href="#term-skills">Skills</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-aicore">
+          <dt class="glossary-entry__term">AICore</dt>
+          <dd class="glossary-entry__definition">
+            <p>Google&#x27;s Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-gemini-nano">Gemini Nano</a>, <a href="#term-private-cloud-compute-pcc">Private Cloud Compute</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-batch-api">
+          <dt class="glossary-entry__term">Batch API</dt>
+          <dd class="glossary-entry__definition">
+            <p>An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-token">Token</a>, <a href="#term-prompt-caching">Prompt caching</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-c2pa">
+          <dt class="glossary-entry__term">C2PA</dt>
+          <dd class="glossary-entry__definition">
+            <p>Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-constitutional-ai-cai">Constitutional AI</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-clawhub">
+          <dt class="glossary-entry__term">ClawHub</dt>
+          <dd class="glossary-entry__definition">
+            <p>The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).</p>
+            <p class="glossary-entry__related">Related: <a href="#term-openclaw">OpenClaw</a>, <a href="#term-skills">Skills</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-constitutional-ai-cai">
+          <dt class="glossary-entry__term">Constitutional AI (CAI)</dt>
+          <dd class="glossary-entry__definition">
+            <p>Anthropic&#x27;s approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-extended-thinking">Extended thinking</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-copilot-studio">
+          <dt class="glossary-entry__term">Copilot Studio</dt>
+          <dd class="glossary-entry__definition">
+            <p>Microsoft&#x27;s low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent-365">Agent 365</a>, <a href="#term-work-iq">Work IQ</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-firebase-genkit">
+          <dt class="glossary-entry__term">Firebase Genkit</dt>
+          <dd class="glossary-entry__definition">
+            <p>Google&#x27;s full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent-sdk">Agent SDK</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-gemini-nano">
+          <dt class="glossary-entry__term">Gemini Nano</dt>
+          <dd class="glossary-entry__definition">
+            <p>Google&#x27;s on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-aicore">AICore</a>, <a href="#term-embedding">Embedding</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-gpt-store">
+          <dt class="glossary-entry__term">GPT Store</dt>
+          <dd class="glossary-entry__definition">
+            <p>OpenAI&#x27;s marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-skills">Skills</a>, <a href="#term-codex-openai">Codex</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-nemoclaw">
+          <dt class="glossary-entry__term">NemoClaw</dt>
+          <dd class="glossary-entry__definition">
+            <p>NVIDIA&#x27;s enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-openclaw">OpenClaw</a>, <a href="#term-clawhub">ClawHub</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-openclaw">
+          <dt class="glossary-entry__term">OpenClaw</dt>
+          <dd class="glossary-entry__definition">
+            <p>An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-clawhub">ClawHub</a>, <a href="#term-nemoclaw">NemoClaw</a>, <a href="#term-gateway-openclaw">Gateway (OpenClaw)</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-gateway-openclaw">
+          <dt class="glossary-entry__term">Gateway (OpenClaw)</dt>
+          <dd class="glossary-entry__definition">
+            <p>OpenClaw&#x27;s central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-openclaw">OpenClaw</a>, <a href="#term-pi-agent-runtime">Pi Agent Runtime</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-pi-agent-runtime">
+          <dt class="glossary-entry__term">Pi Agent Runtime</dt>
+          <dd class="glossary-entry__definition">
+            <p>OpenClaw&#x27;s cognitive core, embedded via the &#x60;pi-coding-agent&#x60; SDK. Manages the full agent lifecycle through the &#x60;AgentSession&#x60; abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-openclaw">OpenClaw</a>, <a href="#term-gateway-openclaw">Gateway (OpenClaw)</a>, <a href="#term-react">ReAct</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-private-cloud-compute-pcc">
+          <dt class="glossary-entry__term">Private Cloud Compute (PCC)</dt>
+          <dd class="glossary-entry__definition">
+            <p>Apple&#x27;s privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-aicore">AICore</a>, <a href="#term-gemini-nano">Gemini Nano</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-provisioned-throughput-units-ptus">
+          <dt class="glossary-entry__term">Provisioned Throughput Units (PTUs)</dt>
+          <dd class="glossary-entry__definition">
+            <p>Azure OpenAI&#x27;s reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-batch-api">Batch API</a>, <a href="#term-token">Token</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-skills">
+          <dt class="glossary-entry__term">Skills</dt>
+          <dd class="glossary-entry__definition">
+            <p>Reusable, packaged capabilities that extend an agent&#x27;s functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent">Agent</a>, <a href="#term-clawhub">ClawHub</a>, <span>Plugins</span></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-work-iq">
+          <dt class="glossary-entry__term">Work IQ</dt>
+          <dd class="glossary-entry__definition">
+            <p>Microsoft&#x27;s organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-agent-365">Agent 365</a>, <a href="#term-copilot-studio">Copilot Studio</a></p>
+          </dd>
+        </div>
+        <div class="glossary-entry" id="term-zapier-central">
+          <dt class="glossary-entry__term">Zapier Central</dt>
+          <dd class="glossary-entry__definition">
+            <p>Zapier&#x27;s AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier&#x27;s broader AI evolution alongside Zapier Agents and Canvas.</p>
+            <p class="glossary-entry__related">Related: <a href="#term-mcp-model-context-protocol">MCP</a>, <a href="#term-skills">Skills</a></p>
+          </dd>
+        </div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <nav aria-label="Site navigation">
+      <a href="index.html">Course Map</a>
+    </nav>
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var input = document.getElementById('glossary-filter');
+    var terms = document.querySelectorAll('.glossary-entry');
+    var status = document.getElementById('filter-status');
+    var total = terms.length;
+
+    input.addEventListener('input', function() {
+      var query = this.value.toLowerCase();
+      var visible = 0;
+      terms.forEach(function(entry) {
+        var text = entry.textContent.toLowerCase();
+        var match = !query || text.includes(query);
+        entry.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      document.querySelectorAll('.glossary-category').forEach(function(cat) {
+        var visibleTerms = cat.querySelectorAll('.glossary-entry:not([style*="display: none"])');
+        cat.style.display = visibleTerms.length ? '' : 'none';
+      });
+      status.textContent = query ? 'Showing ' + visible + ' of ' + total + ' terms' : total + ' terms';
+    });
+  });
+  </script>
+  <script src="js/storage.js"></script>
+  <script src="js/dark-mode.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

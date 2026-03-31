@@ -1,0 +1,546 @@
+# build/annotations/module-04.yaml
+# Annotations for Module 04: Multi-Agent Orchestration
+# Section IDs extracted from deliverables/html/modules/module-04.html
+# Quiz answers verified against modules/MODULE-04-multi-agent-orchestration.md
+
+module: "04"
+annotations:
+
+  # --- Opening Hook (accordion, first annotation) ---
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "56 agents, four roles, one curriculum"
+      content: "Building this curriculum took 56+ AI agents across four specialized roles. 38 researchers ran in parallel, each investigating a different topic. 12 writers drafted modules simultaneously. 5 reviewers fact-checked in parallel. 1 synthesizer audited everything for cross-module consistency. Total cost: less than what 3 senior Opus calls would have cost -- because the researchers used Haiku at $1/MTok input while only the synthesizer needed Opus at $5/MTok. That 5x price difference, multiplied across 38 parallel agents, is why multi-agent orchestration is not just an architectural pattern -- it is an economic strategy. This module shows you how it works."
+
+  # --- Concept Check: Why Multi-Agent ---
+  - after: "why-multi-agent-the-case-for-decomposition"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "A project requires researching three independent topics simultaneously. Which multi-agent advantage most directly applies?"
+      choices:
+        - "Context saturation"
+        - "Parallelism"
+        - "Specialization"
+        - "Isolation"
+      correct: 1
+      explanation: "A single agent is inherently sequential: it gathers, acts, verifies, repeats. Independent subtasks benefit from parallel agents that complete work simultaneously. Parallelism is the advantage when tasks are independent and time matters. This builds on the sequential gather-act-verify loop from Module 03."
+
+  # --- Curiosity Prompt: Orchestration Patterns ---
+  - after: "orchestration-patterns"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Five patterns, and most implementations use the wrong one"
+      content: "Five distinct patterns for coordinating multiple agents exist. Most implementations use the wrong one. The pattern you choose determines cost, latency, information flow, and failure propagation. Choosing hierarchical delegation when you need peer-to-peer communication means every piece of lateral information must route through a bottleneck. Choosing competitive exploration when a simple pipeline would suffice multiplies your API costs by N."
+
+  # --- Self-Explanation: Orchestration Pattern Analogies ---
+  - after: "router-dynamic-dispatch"
+    component: self-explanation-prompt
+    data:
+      prompt: "Match each orchestration pattern to a real-world analogy. For example: Hierarchical = a manager assigning tasks to a team. Now do the same for Handoff, Peer-to-Peer, Competitive, and Router."
+      expert_answer: "Handoff = relay race -- the baton passes from one runner to the next, each running their leg with full context of the race so far. Peer-to-Peer = team brainstorm -- everyone contributes and communicates laterally without routing through a central authority. Competitive = A/B test -- multiple approaches are tried independently, and the best result is selected. Router = reception desk -- classifies incoming requests and directs each to the right specialist without doing substantive work itself."
+
+  # --- Section Review: Orchestration Patterns ---
+  - after: "router-dynamic-dispatch"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which orchestration pattern transfers the full conversation state from one agent to another?"
+      choices:
+        - "Hierarchical Delegation"
+        - "Handoff (Sequential Delegation)"
+        - "Peer-to-Peer (Team)"
+        - "Competitive (Parallel Exploration)"
+      correct: 1
+      explanation: "In Handoff, the new agent inherits the entire context rather than receiving a scoped brief. Unlike parent-child delegation where only a summary returns, handoff transfers the full conversation history. OpenAI's Agents SDK implements this as a first-class primitive."
+
+  - after: "router-dynamic-dispatch"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which orchestration pattern is the most expensive per-task because it runs N parallel attempts?"
+      choices:
+        - "Hierarchical Delegation"
+        - "Handoff"
+        - "Competitive (Parallel Exploration)"
+        - "Router (Dynamic Dispatch)"
+      correct: 2
+      explanation: "Competitive exploration trades compute cost for solution quality -- N agents tackle the same problem independently, and the orchestrator selects the best result. This is N times the cost of a single attempt. It is worth it for ambiguous problems where exploring multiple approaches in parallel is cheaper than backtracking from a poor choice."
+
+  - after: "router-dynamic-dispatch"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Agent Teams uses which orchestration pattern?"
+      choices:
+        - "Hierarchical Delegation"
+        - "Handoff"
+        - "Peer-to-Peer (Team)"
+        - "Router"
+      correct: 2
+      explanation: "Agent Teams enables direct inter-teammate messaging -- teammates can send messages to each other, not just to the lead. This peer-to-peer communication pattern is the key difference from Agent SDK subagents, which communicate only with their parent."
+
+  - after: "router-dynamic-dispatch"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which pattern does Copilot Studio's generative orchestration implement?"
+      choices:
+        - "Hierarchical Delegation"
+        - "Handoff"
+        - "Competitive"
+        - "Router -- the LLM itself is the router"
+      correct: 3
+      explanation: "Copilot Studio uses generative orchestration where the LLM dynamically plans which tools, connectors, and sub-agents to invoke. The LLM acts as the dispatcher, examining each request and routing to the appropriate specialist -- a router pattern where the router is the model itself."
+
+  # --- Concept Check: Agent SDK vs. Agent Teams ---
+  - after: "anthropic-agent-sdk-and-agent-teams"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "What is the key architectural difference between Agent SDK subagents and Agent Teams?"
+      choices:
+        - "They use different models"
+        - "They have different tools"
+        - "Subagents communicate only with parent; teammates communicate with each other"
+        - "There is no meaningful difference"
+      correct: 2
+      explanation: "This is not a minor distinction. Agent SDK subagents communicate only parent-to-child (hierarchical). Agent Teams teammates can message each other directly (peer-to-peer), enabling lateral information sharing and self-organization -- fundamentally different collaboration dynamics."
+
+  # --- Curiosity Prompt: Framework Comparison ---
+  - after: "framework-comparison"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Your framework choice constrains your patterns"
+      content: "The framework you choose constrains which orchestration patterns are even possible. Anthropic's Agent SDK supports only hierarchical delegation. OpenAI's Agents SDK is built around sequential handoffs. Google's ADK is the most flexible but least opinionated. Copilot Studio implements router patterns via generative orchestration. Choosing a framework is not just a technical decision -- it is an architectural commitment that determines your system's communication topology."
+
+  # --- Worked Example: Framework Selection (partial/completion) ---
+  - after: "framework-comparison"
+    component: worked-example
+    variant: partial
+    data:
+      title: "Choosing an orchestration framework"
+      problem: "A startup needs to build a customer support system with: (1) a routing agent that classifies incoming requests, (2) a billing specialist agent, (3) a technical support agent, (4) an escalation agent for complex cases. The startup uses OpenAI's GPT models but wants the option to switch providers later."
+      steps:
+        - label: "Identify the constraint"
+          content: "[YOUR ANSWER] The requirement for provider flexibility eliminates which frameworks?"
+        - label: "Map the workflow to an orchestration pattern"
+          content: "The routing agent classifies requests and directs them to specialists. This is a routing pattern. When a specialist cannot resolve the issue, it escalates -- this is a handoff to the escalation agent."
+        - label: "Select the framework"
+          content: "[YOUR ANSWER] Which remaining framework best supports routing + handoff as first-class primitives?"
+        - label: "Design the handoff chain"
+          content: "Router agent classifies request -> hands off to billing, tech, or escalation specialist. Specialists resolve or hand off to escalation agent with full conversation context."
+      solution: "Provider flexibility eliminates Anthropic's Agent SDK (Claude-only). The routing-to-specialist pattern maps to router + handoff orchestration. OpenAI's Agents SDK is the best fit: handoffs are a first-class primitive, it is provider-agnostic (supports any Chat Completions-compatible endpoint), and it is open-source (MIT). The triage agent uses handoffs to delegate to billing, tech, or escalation specialists. Each specialist inherits the full conversation context via handoff, ensuring no information loss at delegation boundaries. This applies the model selection framework from Module 01: the router can use a cheap model (GPT-5.4 Nano) since it only classifies, while specialists use a mid-tier model (GPT-5.4) for quality responses."
+
+  # --- Concept Check: Delegation Patterns ---
+  - after: "specialist-router"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "A data processing workflow has three stages: extract, transform, load. Each stage depends on the output of the previous. Which delegation pattern is appropriate?"
+      choices:
+        - "Fan-out / Fan-in (Parallel Research)"
+        - "Pipeline (Sequential Handoff)"
+        - "Specialist Router"
+      correct: 1
+      explanation: "Sequential dependency with context accumulation maps to the pipeline (sequential handoff) pattern. Each agent completes its stage and passes the full context to the next. Fan-out/fan-in is for independent parallel subtasks; a specialist router is for classifying diverse inputs."
+
+  # --- Concept Check: Model Selection for Routers ---
+  - after: "role-to-tier-mapping"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "In a multi-agent system, which agent role should use the cheapest possible model?"
+      choices:
+        - "Researcher/Gatherer"
+        - "Writer/Generator"
+        - "Synthesizer/Decision-maker"
+        - "Router/Dispatcher"
+      correct: 3
+      explanation: "Routers perform simple classification where speed matters most. GPT-5.4 Nano at $0.20/MTok or Gemini Flash-Lite at $0.10/MTok suffice. The synthesizer/decision-maker should use the flagship because its errors cascade through the entire system. This applies the model tiering from Module 01 to multi-agent architecture."
+
+  # --- Self-Explanation: Progressive Escalation ---
+  - after: "cost-optimization-patterns"
+    component: self-explanation-prompt
+    data:
+      prompt: "The case study describes 'progressive escalation' -- starting with cheaper models and escalating selectively. What metric would you use to decide when escalation is needed?"
+      expert_answer: "Quality failure rate. In Round 1, the team measured editorial issues per module: unverified sources, citation inconsistency, depth gaps. When cheaper models produced too many quality failures that required expensive downstream fixing, Round 2 escalated all agents to Opus 4.6. The decision criterion: is it cheaper to prevent the error upstream (flagship model) or fix it downstream (reviewer + reviser)? This is an economic calculation, not a quality preference."
+
+  # --- Section Review: Model Selection ---
+  - after: "cost-optimization-patterns"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Why is the orchestrator's model selection the most important in a multi-agent system?"
+      choices:
+        - "Orchestrators process the most tokens"
+        - "Orchestrator errors cascade through the entire system"
+        - "Orchestrators need the fastest model"
+        - "Only the orchestrator interacts with users"
+      correct: 1
+      explanation: "The orchestrator makes task decomposition decisions, assigns work to subagents, and synthesizes final outputs. An orchestrator that misdecomposes a task or misassigns a subtask propagates that error through every downstream agent. The orchestrator's mistakes are the most expensive to fix."
+
+  - after: "cost-optimization-patterns"
+    component: quiz
+    variant: section-review
+    data:
+      question: "How does prompt caching reduce costs in fan-out patterns?"
+      choices:
+        - "It reduces the number of agents needed"
+        - "Multiple agents sharing the same system prompt get cached, amortizing input cost across N agents"
+        - "It eliminates output token costs"
+        - "It only works with Anthropic models"
+      correct: 1
+      explanation: "When multiple agents share the same system prompt, reference documents, or context prefix, prompt caching reduces input costs by up to 90% (Anthropic) or 50-75% (Google, OpenAI). In fan-out patterns where N agents receive similar briefs, caching amortizes the prompt cost across all N agents. This connects to caching mechanics from Module 02 and pricing details in Module 09."
+
+  - after: "cost-optimization-patterns"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which optimization gives a flat 50% discount for non-urgent work?"
+      choices:
+        - "Prompt caching"
+        - "Progressive escalation"
+        - "Batch processing"
+        - "Model tiering"
+      correct: 2
+      explanation: "All major providers offer 50% token discounts for asynchronous batch processing. Review agents, synthesis passes, and quality audits rarely need real-time responses -- batching these cuts costs in half with no quality tradeoff."
+
+  - after: "cost-optimization-patterns"
+    component: quiz
+    variant: section-review
+    data:
+      question: "OpenAI's Agents SDK supports which level of provider flexibility?"
+      choices:
+        - "OpenAI models only"
+        - "OpenAI and Azure models only"
+        - "Provider-agnostic -- any Chat Completions-compatible endpoint"
+        - "All providers via built-in adapters"
+      correct: 2
+      explanation: "The OpenAI Agents SDK supports any Chat Completions-compatible endpoint. You can plug in open-source models or other providers, making it possible to mix Claude for complex reasoning and GPT for other steps in the same pipeline. Anthropic's Agent SDK is locked to Claude models."
+
+  # --- Concept Check: Summary Propagation ---
+  - after: "context-isolation-and-summary-propagation"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "A subagent returns 'I fixed the bug.' Why is this summary insufficient?"
+      choices:
+        - "It is too short"
+        - "It lacks concrete details (file paths, lines changed, tests affected)"
+        - "It does not include the model used"
+        - "It should include token count"
+      correct: 1
+      explanation: "Concrete details survive compaction and context boundaries better than abstractions. 'Fixed a null pointer exception in auth.py:142 -- added guard clause, updated 3 tests' is actionable. 'I fixed the bug' forces the parent to re-investigate. The recommended summary budget is 5-15% of the subagent's working context."
+
+  # --- Concept Check: Enterprise Governance ---
+  - after: "enterprise-agent-governance"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "As of March 2026, how many cross-platform agent governance standards exist?"
+      choices:
+        - "One (Agent 365)"
+        - "Two (Agent 365 + an open standard)"
+        - "Several"
+        - "None"
+      correct: 3
+      explanation: "Agent 365 governs only the Microsoft ecosystem. No cross-platform agent governance standard exists as of March 2026. Organizations using multiple AI platforms -- which Module 00 documents as the norm -- must build governance bridges themselves or accept inconsistent policies across platforms."
+
+  # --- Module Assessment (after Key Takeaways) ---
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Name the four problems multi-agent orchestration solves."
+      choices:
+        - "Speed, cost, accuracy, reliability"
+        - "Context saturation, parallelism, specialization, isolation"
+        - "Research, writing, review, synthesis"
+        - "Latency, throughput, quality, governance"
+      correct: 1
+      explanation: "Multi-agent orchestration addresses context saturation (task exceeds one window), parallelism (independent subtasks), specialization (different tools/models per subtask), and isolation (containing failures). These are the criteria for deciding single-agent vs. multi-agent."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which orchestration pattern transfers full conversation state between agents?"
+      choices:
+        - "Hierarchical Delegation"
+        - "Handoff"
+        - "Peer-to-Peer"
+        - "Router"
+      correct: 1
+      explanation: "Handoff transfers the full conversation history to the receiving agent, which picks up seamlessly. Unlike hierarchical delegation (where only a summary returns), handoff preserves all context. OpenAI's Agents SDK implements this as a first-class primitive."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Anthropic Agent Teams is at what maturity level?"
+      choices:
+        - "GA"
+        - "Beta"
+        - "Experimental"
+        - "Research Preview"
+      correct: 2
+      explanation: "Agent Teams is experimental, gated behind the CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS flag. The API surface, communication model, and task management features may change substantially before GA. The Agent SDK, by contrast, has been GA since September 2025."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Name the five core primitives of OpenAI's Agents SDK."
+      choices:
+        - "Models, Prompts, Tools, Memory, Outputs"
+        - "Agents, Tools, Handoffs, Guardrails, Tracing"
+        - "Agents, Functions, Routing, Logging, Safety"
+        - "Workers, Tasks, Messages, Events, State"
+      correct: 1
+      explanation: "The five primitives are Agents (entities with system prompt/tools), Tools (callable functions), Handoffs (agent-to-agent delegation), Guardrails (input/output validators), and Tracing (built-in observability). Guardrails as a first-class primitive is a key differentiator from other frameworks."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which multi-agent framework is provider-agnostic?"
+      choices:
+        - "Anthropic Agent SDK"
+        - "OpenAI Agents SDK"
+        - "Copilot Studio"
+        - "None of them"
+      correct: 1
+      explanation: "OpenAI's Agents SDK supports any Chat Completions-compatible endpoint. You can mix Claude, GPT, and open-source models in the same pipeline. Anthropic's SDK is locked to Claude. Google's ADK is Google-optimized. Copilot Studio is tied to the Microsoft ecosystem."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Google ADK is open-source under which license?"
+      choices:
+        - "MIT"
+        - "Apache 2.0"
+        - "GPL 3.0"
+        - "BSD 3-Clause"
+      correct: 1
+      explanation: "Google's ADK uses the Apache 2.0 license. OpenAI's Agents SDK uses MIT. Both are permissive open-source licenses. Anthropic's Agent SDK and Copilot Studio are proprietary."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Agent 365 prices at how much per user per month?"
+      choices:
+        - "$5/user/month"
+        - "$10/user/month"
+        - "$15/user/month"
+        - "$25/user/month"
+      correct: 2
+      explanation: "Agent 365 is $15/user/month standalone, or included in the M365 E7 Frontier Suite ($99/user/month). It GAs on May 1, 2026 as the first enterprise-grade agent governance platform -- no competitor has an equivalent product."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the recommended summary budget for a subagent return?"
+      choices:
+        - "1-3% of the subagent's working context"
+        - "5-15% of the subagent's working context"
+        - "25-50% of the subagent's working context"
+        - "There is no recommended budget"
+      correct: 1
+      explanation: "A summary that is too terse loses information; one that is too verbose defeats the purpose of context isolation. 5-15% of the subagent's working context is the recommended budget. Structured return formats (findings, decisions, file paths, open questions) help hit this target consistently."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "In progressive escalation, when should you switch from a cheap model to a flagship?"
+      choices:
+        - "Always use flagships from the start"
+        - "When the cheap model's quality failure rate makes downstream fixing more expensive than upstream prevention"
+        - "After a fixed number of iterations"
+        - "Only when the user requests it"
+      correct: 1
+      explanation: "The decision criterion is economic: is it cheaper to prevent the error upstream (flagship model) or fix it downstream (reviewer + reviser)? Start cheap, measure quality failures, and escalate selectively. Most tasks succeed on the first attempt with a cheaper model."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "A researcher agent needs to run 20 parallel web searches. Which model tier should it use?"
+      choices:
+        - "Flagship (Opus, GPT-5.4)"
+        - "Balanced (Sonnet, GPT-5.4 Mini)"
+        - "Fast/cheap (Haiku 4.5, GPT-5.4 Nano)"
+        - "It does not matter"
+      correct: 2
+      explanation: "Research and fact-gathering agents perform high-volume, relatively simple work. Fast, cheap models -- Haiku 4.5 at $1/$5 per MTok, GPT-5.4 Nano at $0.20/$1.25 -- handle this at 10-50x lower cost than flagships. 20 parallel Haiku agents cost roughly the same as a single Opus call. This applies the model tiering from Module 01."
+
+  # --- Diagram: M04-1 Five Orchestration Patterns ---
+  - after: "orchestration-patterns"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m04-1"
+      title: "Five Orchestration Patterns"
+      alt: "Five multi-agent orchestration patterns compared side by side. Hierarchical delegation shows a parent agent spawning child agents that return summaries upward. Handoff shows agents passing full conversation context sequentially. Peer-to-peer shows agents communicating directly with each other via a shared task board. Competitive shows parallel agents tackling the same problem with a selector choosing the best result. Router shows a lightweight dispatcher directing requests to specialist agents."
+      source: |
+        graph TD
+          subgraph Hierarchical["Hierarchical Delegation"]
+            H_Parent["Lead Agent"] -->|"task brief"| H_Child1["Subagent A"]
+            H_Parent -->|"task brief"| H_Child2["Subagent B"]
+            H_Child1 -->|"summary"| H_Parent
+            H_Child2 -->|"summary"| H_Parent
+          end
+
+          subgraph Handoff["Handoff (Sequential)"]
+            HO_A["Agent A"] -->|"full context"| HO_B["Agent B"]
+            HO_B -->|"full context"| HO_C["Agent C"]
+          end
+
+          subgraph PeerToPeer["Peer-to-Peer (Team)"]
+            P_Lead["Lead"] <-->|"message"| P_T1["Teammate 1"]
+            P_Lead <-->|"message"| P_T2["Teammate 2"]
+            P_T1 <-->|"message"| P_T2
+            P_Board[("Shared Task Board")]
+            P_Lead -.->|"post/claim"| P_Board
+            P_T1 -.->|"post/claim"| P_Board
+            P_T2 -.->|"post/claim"| P_Board
+          end
+
+          subgraph Competitive["Competitive (Parallel)"]
+            C_Orch["Orchestrator"] -->|"same task"| C_A1["Agent 1"]
+            C_Orch -->|"same task"| C_A2["Agent 2"]
+            C_Orch -->|"same task"| C_A3["Agent 3"]
+            C_A1 -->|"result"| C_Select{"Selector"}
+            C_A2 -->|"result"| C_Select
+            C_A3 -->|"result"| C_Select
+            C_Select -->|"best result"| C_Out["Output"]
+          end
+
+          subgraph Router["Router (Dynamic Dispatch)"]
+            R_In["Request"] --> R_Router{"Router"}
+            R_Router -->|"billing"| R_S1["Billing Agent"]
+            R_Router -->|"technical"| R_S2["Tech Agent"]
+            R_Router -->|"general"| R_S3["General Agent"]
+          end
+
+  # --- Diagram: M04-2 Subagents vs. Agent Teams Topology ---
+  - after: "anthropic-agent-sdk-and-agent-teams"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m04-2"
+      title: "Subagents vs. Agent Teams Topology"
+      alt: "Comparison of two Anthropic multi-agent topologies. Left side shows the Agent SDK subagent model: a parent agent at top connects to child subagents below via task briefs downward and structured summaries upward, with no lateral communication between children. Right side shows the Agent Teams model: a lead agent and teammates communicate any-to-any via direct messages, with a shared task board accessible to all. Key tradeoff annotation: subagents offer isolation and lower cost, while Agent Teams enable lateral coordination at higher cost."
+      source: |
+        graph TD
+          subgraph SDK["Agent SDK: Subagents"]
+            SDK_Parent["Parent Agent<br/>(orchestrator)"]
+            SDK_C1["Subagent 1<br/>(own context)"]
+            SDK_C2["Subagent 2<br/>(own context)"]
+            SDK_C3["Subagent 3<br/>(own context)"]
+            SDK_Parent -->|"task brief"| SDK_C1
+            SDK_Parent -->|"task brief"| SDK_C2
+            SDK_Parent -->|"task brief"| SDK_C3
+            SDK_C1 -->|"structured summary"| SDK_Parent
+            SDK_C2 -->|"structured summary"| SDK_Parent
+            SDK_C3 -->|"structured summary"| SDK_Parent
+            SDK_Note["Parent-child only<br/>No lateral communication<br/>GA (Sep 2025)"]
+          end
+
+          subgraph Teams["Agent Teams: Peer-to-Peer"]
+            T_Lead["Lead Agent"]
+            T_M1["Teammate 1<br/>(own context)"]
+            T_M2["Teammate 2<br/>(own context)"]
+            T_M3["Teammate 3<br/>(own context)"]
+            T_Lead <-->|"direct message"| T_M1
+            T_Lead <-->|"direct message"| T_M2
+            T_Lead <-->|"direct message"| T_M3
+            T_M1 <-->|"direct message"| T_M2
+            T_M1 <-->|"direct message"| T_M3
+            T_M2 <-->|"direct message"| T_M3
+            T_Tasks[("Shared Task Board")]
+            T_Lead -.-> T_Tasks
+            T_M1 -.-> T_Tasks
+            T_M2 -.-> T_Tasks
+            T_M3 -.-> T_Tasks
+            T_Note["Any-to-any messaging<br/>Self-organizing<br/>Experimental"]
+          end
+
+  # ── Figure M04-5: Multi-Agent Decision Tree (Interactive) ────────────
+  - after: "decision-framework"
+    component: diagram
+    variant: decision-tree
+    data:
+      id: "m04-5"
+      title: "Multi-Agent Decision Tree"
+      alt: "Interactive decision tree that guides you through deciding whether to use multiple agents and which orchestration pattern to apply. Starts with whether the task fits in one context window, then branches through parallelism needs, specialization requirements, communication patterns, and cost sensitivity to recommend single-agent, fan-out, pipeline, peer-to-peer teams, competitive exploration, or router patterns."
+      config:
+        root:
+          question: "Does the task fit in one context window?"
+          branches:
+            - label: "Yes"
+              question: "Do you need parallelism for independent subtasks?"
+              branches:
+                - label: "Yes"
+                  question: "Do subtasks need different tools or models?"
+                  branches:
+                    - label: "Yes"
+                      question: "Do agents need to communicate laterally?"
+                      branches:
+                        - label: "Yes"
+                          terminal:
+                            model: "Peer-to-Peer (Agent Teams)"
+                            price: "Higher cost: persistent sessions"
+                            rationale: "Lateral info sharing, self-organizing. Use Anthropic Agent Teams or build custom messaging."
+                        - label: "No"
+                          terminal:
+                            model: "Fan-Out / Fan-In (Hierarchical)"
+                            price: "Moderate: N parallel subagents"
+                            rationale: "Parent decomposes, spawns specialized subagents, synthesizes results. Agent SDK or ADK."
+                    - label: "No"
+                      terminal:
+                        model: "Fan-Out / Fan-In (Same tools)"
+                        price: "N x cheap model cost"
+                        rationale: "Parallel agents on same task type. Use fast models (Haiku, Flash-Lite) for 10-50x savings."
+                - label: "No"
+                  question: "Is this a sequential pipeline (each stage depends on the previous)?"
+                  branches:
+                    - label: "Yes"
+                      terminal:
+                        model: "Pipeline (Sequential Handoff)"
+                        price: "Linear: sum of stage costs"
+                        rationale: "Full context transfers between stages. OpenAI handoffs are first-class for this pattern."
+                    - label: "No"
+                      terminal:
+                        model: "Single Agent"
+                        price: "1 context window"
+                        rationale: "Task fits in one window, no parallelism needed, no pipeline. One agent with the right model tier."
+            - label: "No"
+              question: "Is the problem ambiguous with multiple valid approaches?"
+              branches:
+                - label: "Yes"
+                  terminal:
+                    model: "Competitive (Parallel Exploration)"
+                    price: "Expensive: N x full cost"
+                    rationale: "N agents try independently, selector picks best. Worth it when backtracking costs more than parallel attempts."
+                - label: "No"
+                  question: "Are incoming requests diverse, needing different specialist handlers?"
+                  branches:
+                    - label: "Yes"
+                      terminal:
+                        model: "Router (Dynamic Dispatch)"
+                        price: "Router: cheap model + specialist cost"
+                        rationale: "Lightweight dispatcher routes to specialists. Copilot Studio does this natively; OpenAI SDK via triage agent."
+                    - label: "No"
+                      terminal:
+                        model: "Multi-Agent with Context Splitting"
+                        price: "Varies by decomposition"
+                        rationale: "Task exceeds one window. Decompose into subtasks that each fit, use hierarchical delegation with structured summaries."

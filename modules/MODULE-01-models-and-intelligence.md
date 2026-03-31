@@ -1,7 +1,7 @@
 # Module 01: Models & Intelligence Tiers
 
-**Last updated:** 2026-03-20
-**Status:** DRAFTING
+**Last updated:** 2026-03-21
+**Status:** COMPLETE
 **Word count target:** 5,000-6,000
 **Prerequisites:** [Module 00: Landscape Overview](MODULE-00-landscape-overview.md)
 
@@ -43,7 +43,7 @@ Anthropic maintains a three-tier model lineup -- Opus (flagship), Sonnet (balanc
 
 **Legacy models** still available but not recommended for new work: Sonnet 4.5 ($3/$15, 200K context), Opus 4.5 ($5/$25, 200K context), and Opus 4.1 ($15/$75, 200K context -- deprecated pricing tier) [F1].
 
-### Cost Optimization
+### Anthropic Cost Optimization
 
 Anthropic offers two major cost reduction mechanisms:
 
@@ -393,7 +393,9 @@ Google's **Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok** is the absolute cheap
 - [Module 00: Landscape Overview](MODULE-00-landscape-overview.md) -- Platform ecosystem context and market structure
 - [Module 02: Context Engineering](MODULE-02-context-engineering.md) -- Deep dive into context windows, caching, and memory systems
 - [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md) -- How these models power agentic applications
+- [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- Model selection for agent teams and orchestration cost tradeoffs
 - [Module 08: Consumer AI Comparison](MODULE-08-consumer-ai-comparison.md) -- Feature-by-feature platform comparison including pricing tiers
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- On-device models, multimodal generation, and where models are headed
 - [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) -- API architectures, SDKs, and developer economics
 
 ---

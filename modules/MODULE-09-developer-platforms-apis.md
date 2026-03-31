@@ -1,7 +1,7 @@
 # Module 09: Developer Platforms & APIs
 
 **Last updated:** 2026-03-20
-**Status:** DRAFTING
+**Status:** COMPLETE
 **Word count target:** 4,000-5,000
 **Prerequisites:** [Module 00: Landscape Overview](MODULE-00-landscape-overview.md), [Module 01: Models & Intelligence Tiers](MODULE-01-models-and-intelligence.md)
 
@@ -82,7 +82,7 @@ Google AI Studio provides a web-based prototyping environment where developers c
 **Base URL:** `<resource-name>.openai.azure.com`
 **Authentication:** Azure Active Directory (AAD), Managed Identity, or API key
 
-Azure OpenAI is not a separate API -- it is OpenAI's API wrapped in Azure's enterprise infrastructure. The token-level pricing is identical to OpenAI direct, but total cost typically runs 15-40% higher due to Azure support plans, data transfer, storage, virtual network infrastructure, and the overhead of Azure resource management [F4].
+Azure OpenAI is not a separate API -- it is OpenAI's API wrapped in Azure's enterprise infrastructure. The token-level pricing is identical to OpenAI direct, but total cost typically runs an estimated 15-40% higher due to Azure support plans, data transfer, storage, virtual network infrastructure, and the overhead of Azure resource management [F4].
 
 Key architectural characteristics:
 
@@ -139,11 +139,11 @@ All three direct providers offer prompt caching, but the economics differ materi
 
 | Provider | Cache Hit Discount | Storage Cost | Cache Duration | Mechanism |
 |----------|-------------------|-------------|---------------|-----------|
-| Anthropic | 90% (cache hits cost 10% of input) | None | ~5 minutes (auto-eviction) | Explicit `cache_control` markers |
+| Anthropic | 90% (cache hits cost 10% of input) | None | 5-minute, 1-hour, or persistent (developer-selected) | Explicit `cache_control` markers; 25% write premium on first cache write |
 | Google | 90% (cached reads) | $1.00-$4.50/MTok/hour | Developer-controlled TTL | Explicit caching API |
 | OpenAI | 50% (automatic) | None | Automatic | Automatic prefix matching |
 
-Anthropic's caching is the most aggressive discount (90%) with no storage fees, but requires explicit cache breakpoints and has a short TTL. Google matches the 90% read discount but charges per-hour storage fees, which can erode savings for infrequently accessed caches. OpenAI's caching is automatic -- no developer effort -- but only offers a 50% discount [F1][F2][F3].
+Anthropic's caching is the most aggressive discount (90%) with no storage fees and the most granular duration control -- developers choose 5-minute, 1-hour, or persistent cache lifetimes to match usage patterns (see [Module 02](MODULE-02-context-engineering.md) for detailed caching strategies). Google matches the 90% read discount but charges per-hour storage fees, which can erode savings for infrequently accessed caches. OpenAI's caching is automatic -- no developer effort -- but only offers a 50% discount [W9][F2][F3].
 
 **Practical implication:** For applications with stable system prompts or repeated document context, Anthropic's caching delivers the best economics. For variable workloads where cache management overhead is undesirable, OpenAI's automatic caching is simplest. Google's model works best for high-frequency access patterns where the per-hour storage cost is amortized across many requests.
 
@@ -311,7 +311,7 @@ Choosing a developer platform is a function of requirements, not absolute qualit
 
 3. **Google's Gemini API** is the most cost-effective at every tier and the only one with native multimodal input (video and audio alongside text), plus the most generous free tier for prototyping.
 
-4. **Azure OpenAI** adds enterprise infrastructure to OpenAI's models at a 15-40% premium -- justified only when compliance, private networking, or Azure ecosystem integration is required.
+4. **Azure OpenAI** adds enterprise infrastructure to OpenAI's models at an estimated 15-40% total cost premium -- justified only when compliance, private networking, or Azure ecosystem integration is required.
 
 5. **Prompt caching** varies dramatically: Anthropic (90% discount, explicit), Google (90% discount + storage fees), OpenAI (50% discount, automatic). Choose based on workload pattern.
 
@@ -336,6 +336,7 @@ Choosing a developer platform is a function of requirements, not absolute qualit
 - [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- Agent SDKs (Anthropic, OpenAI, Google ADK) built on these APIs
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- MCP server/client integration across all platforms
 - [Module 08: Consumer AI Comparison](MODULE-08-consumer-ai-comparison.md) -- Consumer-facing pricing and feature comparison
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- Open vs. closed API economics and upcoming platform changes
 
 ---
 

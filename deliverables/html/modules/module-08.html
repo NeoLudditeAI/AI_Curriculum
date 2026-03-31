@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 08: Consumer AI Comparison — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="08">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 4: Synthesis &amp; Horizon</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 08: Consumer AI Comparison</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 08: Consumer AI Comparison</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">25-30 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prerequisites" class="toc__link" data-toc-active>Prerequisites</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#core-capability-matrix" class="toc__link" data-toc-active>Core Capability Matrix</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#reading-the-matrix" class="toc__link" data-toc-active>Reading the matrix</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#chat-and-reasoning-quality" class="toc__link" data-toc-active>Chat and Reasoning Quality</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#reasoning-modes-compared" class="toc__link" data-toc-active>Reasoning Modes Compared</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#coding-agent-capabilities" class="toc__link" data-toc-active>Coding Agent Capabilities</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#multimodal-capabilities" class="toc__link" data-toc-active>Multimodal Capabilities</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#image-generation" class="toc__link" data-toc-active>Image Generation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#voice-and-audio" class="toc__link" data-toc-active>Voice and Audio</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#memory-and-personalization" class="toc__link" data-toc-active>Memory and Personalization</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#collaboration-and-productivity-features" class="toc__link" data-toc-active>Collaboration and Productivity Features</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#pricing-analysis" class="toc__link" data-toc-active>Pricing Analysis</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#consumer-tiers" class="toc__link" data-toc-active>Consumer Tiers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#business-and-enterprise-tiers" class="toc__link" data-toc-active>Business and Enterprise Tiers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#api-pricing-developer-reference" class="toc__link" data-toc-active>API Pricing (Developer Reference)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#pricing-trend-capability-based-bundling" class="toc__link" data-toc-active>Pricing Trend: Capability-Based Bundling</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#user-sentiment-and-market-dynamics" class="toc__link" data-toc-active>User Sentiment and Market Dynamics</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#market-share-trajectory" class="toc__link" data-toc-active>Market Share Trajectory</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#user-satisfaction-signals" class="toc__link" data-toc-active>User Satisfaction Signals</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#strategic-differentiators" class="toc__link" data-toc-active>Strategic Differentiators</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#claude-the-developer-and-enterprise-play" class="toc__link" data-toc-active>Claude: The Developer and Enterprise Play</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#chatgpt-the-scale-and-breadth-play" class="toc__link" data-toc-active>ChatGPT: The Scale and Breadth Play</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#gemini-the-distribution-and-integration-play" class="toc__link" data-toc-active>Gemini: The Distribution and Integration Play</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#copilot-the-enterprise-lock-in-play" class="toc__link" data-toc-active>Copilot: The Enterprise Lock-In Play</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#decision-framework-choosing-a-platform" class="toc__link" data-toc-active>Decision Framework: Choosing a Platform</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 5,000-6,000</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The four dominant consumer AI platforms -- Claude, ChatGPT, Gemini, and Copilot -- have converged on a ~$20/month consumer price point while diverging sharply in capability profiles and strategic positioning. ChatGPT retains the largest user base (~900M monthly visits) but is bleeding market share (87% to 68% in one year) as Gemini surges on the strength of Google's distribution and a generous free tier [1]. Claude commands the highest per-session engagement (34.7 minutes) and developer loyalty, while Copilot leverages Microsoft 365's 400M-user installed base for enterprise lock-in. This module provides a systematic, feature-by-feature comparison across all four platforms as of March 2026, covering capabilities, pricing, user sentiment, and strategic differentiators.</p>
+
+<aside class="concept-gate" role="note" aria-label="Prerequisite check">
+  <h4 class="concept-gate__title">Before diving into the comparison</h4>
+  <ul class="concept-gate__list">
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I can name the flagship model for each of the four major platforms (Module 01)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand how memory systems differ across platforms (Module 02)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I know what MCP is and how adoption varies by platform (Module 06)</label>
+    </li>
+  </ul>
+  <a class="concept-gate__continue" href="#core-capability-matrix">Continue to next section →</a>
+</aside>
+
+<details class="accordion">
+  <summary class="accordion__title">The question is no longer 'which is best?' -- it is 'best for whom, at what, and at what cost?'</summary>
+  <div class="accordion__content">
+    <p>Throughout the curriculum, we have compared the big four across models (Module 01), context (Module 02), agents (Module 03), orchestration (Module 04), and integration (Module 06). You already know that Claude leads on SWE-bench, Gemini is cheapest per token, ChatGPT has the broadest multimodal coverage, and Copilot locks into M365. This module synthesizes all of it into a consumer-facing comparison -- but these platforms have converged on the same ~$20/month price point while diverging sharply in what you get for that money. The realistic question is not 'which one?' but 'which combination?'</p>
+  </div>
+</details>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- market structure and platform positioning</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- model lineups and reasoning capabilities</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context Engineering</span></a> -- memory systems and context windows</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term glossary-term--first-use" data-term="agent">Agent</span> Systems</a> -- <span class="glossary-term" data-term="agent">agent</span> capabilities referenced in comparisons</li>
+</ul>
+<hr>
+<h2 id="core-capability-matrix">Core Capability Matrix</h2>
+<p>The following table maps the primary consumer-facing capabilities across all four platforms. Status indicators: <strong>GA</strong> (generally available), <strong>Beta</strong> (limited availability), <strong>Preview</strong> (early access), <strong>None</strong> (not offered).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Chat / conversation</strong></td><td>GA</td><td>GA</td><td>GA</td><td>GA</td></tr><tr><td><strong>Extended reasoning</strong></td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="extended-thinking">Extended Thinking</span>)</td><td>GA (o3, o4-mini)</td><td>GA (Deep Think)</td><td>GA (via OpenAI models)</td></tr><tr><td><strong>Web search</strong></td><td>GA</td><td>GA</td><td>GA (Google Search)</td><td>GA (Bing)</td></tr><tr><td><strong>Image understanding</strong></td><td>GA</td><td>GA</td><td>GA</td><td>GA</td></tr><tr><td><strong>Image generation</strong></td><td>None</td><td>GA (GPT Image 1.5)</td><td>GA (Imagen 4, Nano Banana)</td><td>GA (DALL-E 3)</td></tr><tr><td><strong>Voice conversation</strong></td><td>None</td><td>GA (Advanced Voice Mode)</td><td>GA (Gemini Live, 24+ languages)</td><td>Limited</td></tr><tr><td><strong>Video understanding</strong></td><td>None</td><td>GA</td><td>GA (YouTube, uploads)</td><td>None</td></tr><tr><td><strong>File upload / analysis</strong></td><td>GA (PDF, code, text)</td><td>GA (broad format support)</td><td>GA (Drive integration)</td><td>GA (M365 files)</td></tr><tr><td><strong>Code execution</strong></td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span>, terminal)</td><td>GA (Code Interpreter)</td><td>GA (code execution)</td><td>GA (GitHub Copilot)</td></tr><tr><td><strong>Agentic tasks</strong></td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="cowork">Cowork</span> Preview, <span class="glossary-term" data-term="claude-code">Claude Code</span>)</td><td>GA (ChatGPT <span class="glossary-term" data-term="agent">Agent</span>, Operator)</td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="deep-research">Deep Research</span>, Mariner Preview)</td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span>)</td></tr><tr><td><strong>Memory / personalization</strong></td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="claude-memory">Claude Memory</span>, March 2026)</td><td>GA (cross-session memory)</td><td>GA (Personal Intelligence)</td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="work-iq">Work IQ</span>, enterprise)</td></tr><tr><td><strong>Collaboration features</strong></td><td>GA (Projects)</td><td>GA (Canvas, <span class="glossary-term glossary-term--first-use" data-term="gpt-store">GPT Store</span>)</td><td>GA (Gems, Drive integration)</td><td>GA (Pages, Studio)</td></tr><tr><td><strong>On-device inference</strong></td><td>None</td><td>None</td><td>GA (<span class="glossary-term glossary-term--first-use" data-term="gemini-nano">Gemini Nano</span> on Android)</td><td>Limited (Windows AI)</td></tr></tbody></table>
+<h3 id="reading-the-matrix">Reading the matrix</h3>
+<p>Three patterns emerge immediately. First, <strong>ChatGPT and Gemini offer the broadest multimodal coverage</strong>, with native image generation, voice interaction, and video understanding that Claude and Copilot lack. Second, <strong>Claude's strength concentrates in reasoning quality and developer tooling</strong> rather than multimodal breadth. Third, <strong>Copilot is the only platform architecturally tied to an existing productivity suite</strong>, which both limits its standalone utility and creates its enterprise moat.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="ChatGPT and Gemini are the only platforms with native image generation, voice interaction, and video understanding. Claude lacks image generation and voice entirely. Copilot lacks video understanding and has only limited voice input. This multimodal gap is Claude's most visible capability weakness." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which two platforms offer the broadest multimodal coverage (image generation, voice conversation, and video understanding)?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-reading-the-matrix-quiz" value="0" />
+          <span class="quiz__choice-label">Claude and Copilot</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-reading-the-matrix-quiz" value="1" />
+          <span class="quiz__choice-label">ChatGPT and Gemini</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-reading-the-matrix-quiz" value="2" />
+          <span class="quiz__choice-label">ChatGPT and Claude</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-reading-the-matrix-quiz" value="3" />
+          <span class="quiz__choice-label">Gemini and Copilot</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="chat-and-reasoning-quality">Chat and Reasoning Quality</h2>
+<p>Benchmarks only tell part of the story, but they establish a baseline. As of March 2026:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Benchmark</th><th>Best performer</th><th>Score</th><th>Runner-up</th><th>Score</th></tr></thead><tbody><tr><td><strong>GPQA Diamond</strong> (graduate-level reasoning)</td><td>Gemini 3.1 Pro (Preview)</td><td>94.3%</td><td>Claude Opus 4.6</td><td>89.0%</td></tr><tr><td><strong>SWE-bench Verified</strong> (real-world coding)</td><td>Claude Opus 4.6</td><td>80.8%</td><td>o3-high</td><td>69.1%</td></tr><tr><td><strong>MMLU-Pro</strong> (broad knowledge)</td><td>Gemini 3.1 Pro (Preview)</td><td>91.2%</td><td>Claude Opus 4.6</td><td>88.5%</td></tr><tr><td><strong>HumanEval</strong> (code generation)</td><td>Claude Opus 4.6</td><td>96.4%</td><td>GPT-4.1</td><td>95.3%</td></tr><tr><td><strong>MATH</strong> (mathematical reasoning)</td><td>o4-mini (high effort)</td><td>96.7%</td><td>Gemini 3.1 Pro (Preview)</td><td>95.8%</td></tr></tbody></table>
+<p>These numbers obscure real-world usage patterns. Users consistently report that Claude produces more natural, less "AI-sounding" prose and handles nuanced instructions more faithfully [2]. ChatGPT's strength is generalist breadth -- it handles a wider variety of tasks competently, if not always best-in-class. Gemini excels at factual retrieval tasks where its deep Google Search integration provides grounding that other models must approximate via RAG. Copilot's quality depends on which underlying OpenAI model it routes to, and users frequently report inconsistency [3].</p>
+<h3 id="reasoning-modes-compared">Reasoning Modes Compared</h3>
+<p>All four platforms now offer enhanced reasoning, but the implementations differ meaningfully (see <a href="module-01.html">Module 01</a> for technical detail):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Reasoning model(s)</strong></td><td>Opus 4.6, Sonnet 4.6 (<span class="glossary-term" data-term="extended-thinking">extended thinking</span>)</td><td>o3, o4-mini (dedicated reasoning models)</td><td>Gemini 3.1 Pro Deep Think</td><td>Via OpenAI models</td></tr><tr><td><strong>User visibility</strong></td><td>Thinking block visible</td><td>Summary of reasoning</td><td>Expandable reasoning trace</td><td>Minimal</td></tr><tr><td><strong>Budget control</strong></td><td><span class="glossary-term glossary-term--first-use" data-term="token">Token</span> budget configurable via API</td><td>Low/medium/high effort settings</td><td>Automatic</td><td>None</td></tr><tr><td><strong>Latency</strong></td><td>10-60s for complex tasks</td><td>15-90s for o3-high</td><td>10-45s</td><td>Varies</td></tr><tr><td><strong>Consumer availability</strong></td><td>Pro and above</td><td>Plus and above</td><td>Pro and above</td><td>Pro</td></tr></tbody></table>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Why might benchmark scores not accurately predict your day-to-day experience with these platforms? Consider what benchmarks measure vs. what users actually value.</p>
+  <label for="se-m08-reasoning-modes-compared" class="sr-only">Your explanation</label>
+  <textarea id="se-m08-reasoning-modes-compared" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m08-reasoning-modes-compared">Compare with Expert Answer</button>
+  <div id="se-answer-m08-reasoning-modes-compared" class="self-explain__expert" hidden>
+    <p>Benchmarks measure performance on specific, controlled evaluation tasks (graduate-level reasoning, code generation, math problems) under standardized conditions. Day-to-day experience involves subjective qualities that benchmarks do not capture: prose naturalness ('AI-sounding' vs. natural writing), instruction-following faithfulness, personality consistency, response latency, and how the platform handles ambiguous or multi-step requests. Users consistently report Claude produces more natural prose and handles nuanced instructions more faithfully, while ChatGPT handles a wider variety of tasks competently. Gemini excels at factual retrieval where Google Search integration provides grounding. These qualitative differences matter more than a 2% benchmark gap for most real-world use.</p>
+  </div>
+</div>
+<hr>
+<h2 id="coding-agent-capabilities">Coding Agent Capabilities</h2>
+<p>AI-assisted coding has become a primary battleground. Each platform approaches it differently:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Claude Code</th><th>Codex (OpenAI)</th><th>Antigravity (Google)</th><th>GitHub Copilot</th></tr></thead><tbody><tr><td><strong>Interface</strong></td><td>Terminal (CLI)</td><td>Cloud sandbox</td><td>Multi-<span class="glossary-term" data-term="agent">agent</span> IDE</td><td>IDE extension</td></tr><tr><td><strong>Architecture</strong></td><td>Single <span class="glossary-term" data-term="agent">agent</span>, local</td><td>Cloud-parallel tasks</td><td>Multi-<span class="glossary-term" data-term="agent">agent</span> system</td><td>Inline + chat</td></tr><tr><td><strong>Codebase understanding</strong></td><td>Full repo context (1M tokens)</td><td>Task-scoped</td><td>Project-wide</td><td>File-level + repo indexing</td></tr><tr><td><strong>Autonomous operation</strong></td><td>Yes (with permissions)</td><td>Yes (async, cloud)</td><td>Yes (orchestrated agents)</td><td>Limited (<span class="glossary-term" data-term="agent">agent</span> mode in preview)</td></tr><tr><td><strong>SWE-bench score</strong></td><td>80.8% (Opus 4.6)</td><td>69.1% (o3-high)</td><td>Not published</td><td>Not published</td></tr><tr><td><strong>Pricing</strong></td><td>Included in Max ($100-200/mo)</td><td>Included in Pro ($200/mo)</td><td>Included in Ultra ($249.99/mo)</td><td>$10-39/mo standalone</td></tr><tr><td><strong>Enterprise adoption</strong></td><td>~54% of enterprise coding agents [F1]</td><td>Growing (async advantage)</td><td>New entrant</td><td>56% of GitHub users [F5]</td></tr></tbody></table>
+<p><span class="glossary-term" data-term="claude-code">Claude Code</span>'s advantage is architectural comprehension -- it reads entire codebases and understands how components relate. Codex trades this for parallelism, spinning up multiple cloud sandboxes to work on tasks asynchronously. Antigravity (the Windsurf acquisition rebrand) brings a multi-<span class="glossary-term" data-term="agent">agent</span> approach inside a full IDE. GitHub Copilot has the largest adoption by raw numbers, driven by its integration with the dominant code hosting platform [4].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Claude Code's advantage is architectural comprehension -- it reads entire codebases within its 1M-token context window and understands how components relate across files. Codex trades breadth for parallelism, spinning up multiple cloud sandboxes to work on tasks asynchronously but with task-scoped (not whole-codebase) context. This is the difference from Module 03's agent architecture analysis." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What architectural advantage does Claude Code have over Codex for understanding a large existing codebase?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-coding-agent-capabilities-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Code is cheaper to run</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-coding-agent-capabilities-quiz" value="1" />
+          <span class="quiz__choice-label">Claude Code reads entire codebases with 1M-token context vs. Codex's task-scoped context</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-coding-agent-capabilities-quiz" value="2" />
+          <span class="quiz__choice-label">Claude Code supports more programming languages</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-coding-agent-capabilities-quiz" value="3" />
+          <span class="quiz__choice-label">Claude Code runs in the cloud while Codex runs locally</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="multimodal-capabilities">Multimodal Capabilities</h2>
+<p>This is where the platforms diverge most dramatically.</p>
+<h3 id="image-generation">Image Generation</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Engine</strong></td><td>None</td><td>GPT Image 1.5</td><td>Imagen 4 / Nano Banana</td><td>DALL-E 3</td></tr><tr><td><strong>In-conversation generation</strong></td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr><tr><td><strong>Text rendering in images</strong></td><td>N/A</td><td>Strong</td><td>Strong</td><td>Moderate</td></tr><tr><td><strong>Style control</strong></td><td>N/A</td><td>Detailed prompt adherence</td><td>Good, plus style presets</td><td>Basic</td></tr><tr><td><strong>Edit existing images</strong></td><td>No</td><td>Yes (inpainting)</td><td>Yes</td><td>Limited</td></tr><tr><td><strong>Free tier access</strong></td><td>N/A</td><td>Limited</td><td>Yes (Imagen 4)</td><td>Yes (limited)</td></tr></tbody></table>
+<p>Claude's complete absence of image generation is its most visible capability gap. For users who need both text reasoning and image creation in a single workflow, ChatGPT or Gemini are the only viable choices.</p>
+<h3 id="voice-and-audio">Voice and Audio</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Voice conversation</strong></td><td>None</td><td>Advanced Voice Mode (GA)</td><td>Gemini Live (GA)</td><td>Basic voice input</td></tr><tr><td><strong>Languages</strong></td><td>N/A</td><td>50+</td><td>24+</td><td>Limited</td></tr><tr><td><strong>Emotional expression</strong></td><td>N/A</td><td>Adjustable tone/personality</td><td>Natural conversational</td><td>None</td></tr><tr><td><strong>Real-time interruption</strong></td><td>N/A</td><td>Yes</td><td>Yes</td><td>No</td></tr><tr><td><strong>Background listening</strong></td><td>N/A</td><td>No</td><td>Yes (Android)</td><td>No</td></tr></tbody></table>
+<p>ChatGPT's Advanced Voice Mode is the most mature voice implementation, with natural interruption handling and emotional range. Gemini Live competes strongly with deeper integration into Android's ecosystem, including background listening capabilities that ChatGPT cannot match on mobile [F3].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Only ChatGPT has image generation (GPT Image 1.5), voice conversations (Advanced Voice Mode), and strong text generation in one product. Claude lacks image generation and voice. Gemini has image generation and voice but its writing quality is generally rated below Claude and ChatGPT. For users who need all three, ChatGPT is the only single-platform solution." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A content creator needs image generation, voice conversations, and long-form article writing in a single workflow. Which platform(s) cover all three natively?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-voice-and-audio-quiz" value="0" />
+          <span class="quiz__choice-label">Claude covers all three</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-voice-and-audio-quiz" value="1" />
+          <span class="quiz__choice-label">Gemini covers all three</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-voice-and-audio-quiz" value="2" />
+          <span class="quiz__choice-label">Only ChatGPT covers all three natively</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-voice-and-audio-quiz" value="3" />
+          <span class="quiz__choice-label">No single platform covers all three</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="memory-and-personalization">Memory and Personalization</h2>
+<p>How each platform remembers you across sessions is a critical differentiator (see <a href="module-02.html">Module 02</a> for technical architecture):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Cross-session memory</strong></td><td>GA (<span class="glossary-term" data-term="claude-memory">Claude Memory</span>, March 2026)</td><td>GA (automatic + manual)</td><td>GA (Personal Intelligence)</td><td>GA (<span class="glossary-term" data-term="work-iq">Work IQ</span>, enterprise)</td></tr><tr><td><strong>Memory control</strong></td><td>User-controllable (view/manage stored preferences)</td><td>View, edit, delete individual memories</td><td>Settings-based</td><td>Admin-controlled</td></tr><tr><td><strong>Contextual personalization</strong></td><td><span class="glossary-term" data-term="claude-memory">Claude Memory</span> (auto) + Projects (manual)</td><td>Automatic preference learning</td><td>Search history + interactions</td><td>M365 Graph data</td></tr><tr><td><strong>Data scope</strong></td><td>All conversations (processed ~24h cycle)</td><td>All conversations</td><td>Google account-wide</td><td>Microsoft 365 tenant</td></tr><tr><td><strong>Privacy model</strong></td><td>User-controllable; privacy-first design</td><td>Opt-out available</td><td>Tied to Google account</td><td>Enterprise compliance</td></tr></tbody></table>
+<p>ChatGPT has the most mature memory system, automatically extracting user preferences, facts, and interaction patterns across conversations to build a persistent profile that makes each session feel continuity-aware. <span class="glossary-term" data-term="claude-memory">Claude Memory</span> (GA, March 2026, all plans) automatically processes conversations every ~24 hours, storing profession, language preferences, and recurring context into a memory profile loaded into future conversations -- a significant addition that closes what was previously Claude's most notable usability gap [F1]. Gemini's Personal Intelligence goes broader by drawing from your entire Google account (Search, Drive, Gmail, Calendar) but can feel less conversationally aware. Copilot's <span class="glossary-term" data-term="work-iq">Work IQ</span> is exclusively enterprise-focused, surfacing relevant organizational context from Microsoft 365 data [F2, F3].</p>
+<hr>
+<h2 id="collaboration-and-productivity-features">Collaboration and Productivity Features</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Shared workspaces</strong></td><td>Projects (team plans)</td><td>Team workspaces</td><td>Shared Gems</td><td>Microsoft Teams integration</td></tr><tr><td><strong>Document co-editing</strong></td><td>Limited</td><td>Canvas (GA)</td><td>Google Docs integration</td><td>M365 co-authoring</td></tr><tr><td><strong>Custom AI personas</strong></td><td>Projects with instructions</td><td>GPTs (<span class="glossary-term" data-term="gpt-store">GPT Store</span>)</td><td>Gems</td><td><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> agents</td></tr><tr><td><strong>Marketplace</strong></td><td>None</td><td><span class="glossary-term" data-term="gpt-store">GPT Store</span></td><td>Gem Gallery</td><td><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> templates</td></tr><tr><td><strong><span class="glossary-term" data-term="deep-research">Deep research</span></strong></td><td>Research mode (Beta)</td><td><span class="glossary-term" data-term="deep-research">Deep Research</span> (GA)</td><td><span class="glossary-term" data-term="deep-research">Deep Research</span> (free tier!)</td><td>Think Deeper</td></tr><tr><td><strong>Artifacts / outputs</strong></td><td>Artifacts (code, docs, diagrams)</td><td>Canvas outputs</td><td>Side panel outputs</td><td>Draft outputs in M365 apps</td></tr></tbody></table>
+<p>Gemini's decision to offer <span class="glossary-term" data-term="deep-research">Deep Research</span> on the free tier is a notable competitive move -- this is a capability that costs $20/month or more on other platforms [F3]. ChatGPT's Canvas provides the most polished co-editing experience for long-form content. Claude's Artifacts system excels at generating interactive code demos and visualizations that can be immediately previewed [F1].</p>
+<hr>
+<h2 id="pricing-analysis">Pricing Analysis</h2>
+<h3 id="consumer-tiers">Consumer Tiers</h3>
+<blockquote>
+<p><strong>Volatility warning:</strong> AI pricing changes frequently. The figures below reflect March 2026 state. Verify against provider pricing pages before making purchasing decisions.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tier</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Free</strong></td><td>Basic chat (Haiku 4.5)</td><td>GPT-5.2 Instant, limited</td><td>Flash + <span class="glossary-term" data-term="deep-research">Deep Research</span> + image gen</td><td>Basic chat, Bing integration</td></tr><tr><td><strong>Standard consumer</strong></td><td>Pro: $20/mo</td><td>Plus: $20/mo</td><td>Advanced: $19.99/mo</td><td>Pro: $20/mo</td></tr><tr><td><strong>Power user</strong></td><td>Max: $100/mo (5x Pro usage)</td><td>--</td><td>--</td><td>--</td></tr><tr><td><strong>Heavy user</strong></td><td>Max: $200/mo (20x Pro usage)</td><td>Pro: $200/mo</td><td>Ultra: $249.99/mo</td><td>--</td></tr></tbody></table>
+<p>The market has converged on ~$20/month for the standard consumer tier. Differentiation happens at the extremes:</p>
+<p><strong>Free tier:</strong> Gemini is the clear winner, offering its Flash model, <span class="glossary-term" data-term="deep-research">Deep Research</span>, and image generation at no cost. ChatGPT's free tier provides GPT-5.2 Instant but restricts advanced features. Claude's free tier is the most limited, offering only Haiku 4.5 with conservative rate limits. Copilot's free tier is tightly coupled to Bing search [5].</p>
+<p><strong>Power/heavy tier:</strong> Claude's Max tier ($100-200/month) offers a graduated approach -- pay $100 for 5x usage or $200 for 20x. ChatGPT Pro ($200/month) and Gemini Ultra ($249.99/month) are single high tiers. This space is in flux; providers are testing willingness to pay for heavy usage rather than API access.</p>
+<h3 id="business-and-enterprise-tiers">Business and Enterprise Tiers</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tier</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Copilot</th></tr></thead><tbody><tr><td><strong>Team / Business</strong></td><td>Team: $25/seat/mo</td><td>Business: $25-30/user/mo</td><td>Business: $7.20-18/user/mo</td><td>M365 Copilot: $21-30/user/mo</td></tr><tr><td><strong>Enterprise</strong></td><td>Enterprise: custom</td><td>Enterprise: custom</td><td>Enterprise: custom</td><td>E7: $99/user/mo</td></tr><tr><td><strong>Minimum seats</strong></td><td>5 (Team)</td><td>2 (Business)</td><td>1 (Business)</td><td>1 (Pro), 25+ (Enterprise)</td></tr><tr><td><strong>Key enterprise features</strong></td><td>SSO, SCIM, audit logs</td><td>Data not used for training, DLP</td><td>Workspace integration, DLP</td><td>Full M365 compliance suite</td></tr></tbody></table>
+<p>Gemini Workspace pricing stands out as significantly cheaper at the entry level ($7.20/user/month for the basic tier), reflecting Google's strategy of bundling AI into existing Workspace subscriptions rather than charging a premium. Copilot's E7 tier at $99/user/month is the most expensive per-seat offering but includes the full <span class="glossary-term glossary-term--first-use" data-term="agent-365">Agent 365</span> governance and automation suite [F3, F4].</p>
+<h3 id="api-pricing-developer-reference">API Pricing (Developer Reference)</h3>
+<p>For users who build on these platforms, API economics differ substantially (see <a href="module-09.html">Module 09</a> for complete analysis):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model tier</th><th>Anthropic</th><th>OpenAI</th><th>Google</th><th>Microsoft</th></tr></thead><tbody><tr><td><strong>Budget</strong></td><td>Haiku 4.5: $1.00/$5.00</td><td>GPT-5.4 Nano: $0.20/$1.25</td><td>Flash 2.5 Lite: $0.10/$0.40</td><td>Via Azure OpenAI</td></tr><tr><td><strong>Mid-range</strong></td><td>Sonnet 4.6: $3/$15</td><td>GPT-5.4 Mini: $0.75/$4.50</td><td>Gemini 3 Flash: $0.50/$3</td><td>Via Azure OpenAI</td></tr><tr><td><strong>Flagship</strong></td><td>Opus 4.6: $5/$25</td><td>GPT-5.4: $2.50/$15</td><td>Gemini 3.1 Pro: $2.00/$12</td><td>Via Azure OpenAI</td></tr></tbody></table>
+<p><em>Pricing shown as input/output per million tokens.</em></p>
+<p>Google is 30-50% cheaper than competitors at every tier. Anthropic's pricing is mid-range for its flagship but Haiku 4.5 is competitive as a budget option. OpenAI's GPT-5.4 flagship is competitively priced at the top tier, while its dedicated reasoning models (o3, o4-mini) carry premium pricing for use cases where reasoning depth justifies the cost [6].</p>
+<h3 id="pricing-trend-capability-based-bundling">Pricing Trend: Capability-Based Bundling</h3>
+<p>The industry is shifting from model-based pricing (pay per model tier) toward capability-based pricing (pay for what you can do). Evidence includes:</p>
+<ul>
+<li>Claude Max bundles unlimited model access with higher rate limits and priority routing</li>
+<li>Gemini Ultra bundles Notebook LM Plus, 30TB storage, and Google One AI Premium</li>
+<li>ChatGPT Pro bundles o3-pro access, voice, and research capabilities</li>
+<li>Copilot E7 bundles <span class="glossary-term" data-term="agent">agent</span> governance, automation, and M365-wide AI features</li>
+</ul>
+<p>This shift benefits power users who use multiple capabilities but raises the floor price for casual users who only need one feature [5, 6].</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">The industry is shifting from model-based pricing to capability-based bundling. What does this mean for consumers, and who benefits most?</p>
+  <label for="se-m08-pricing-trend-capability-based-bundling" class="sr-only">Your explanation</label>
+  <textarea id="se-m08-pricing-trend-capability-based-bundling" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m08-pricing-trend-capability-based-bundling">Compare with Expert Answer</button>
+  <div id="se-answer-m08-pricing-trend-capability-based-bundling" class="self-explain__expert" hidden>
+    <p>Model-based pricing charges per model tier (pay more for a better model). Capability-based pricing bundles multiple features at a fixed price -- Claude Max ($100-200/month) includes unlimited model access plus higher rate limits; Gemini Ultra ($249.99/month) bundles Notebook LM Plus, 30TB storage, and Google One AI Premium; ChatGPT Pro ($200/month) bundles o3-pro, voice, and research. Power users who use multiple capabilities benefit most -- they get a bundle discount compared to paying for each feature separately. Casual users who only need one feature (say, image generation) may pay more than necessary because features are packaged together. The trend raises the floor price for light users while lowering the ceiling for heavy users.</p>
+  </div>
+</div>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">You are advising a team of 10 that currently pays for ChatGPT Plus ($20/user/month = $200/month total). They primarily use AI for coding and document drafting. Based on the pricing and capability data, would you recommend switching platforms? To which, and why?</p>
+  <label for="se-m08-pricing-analysis" class="sr-only">Your explanation</label>
+  <textarea id="se-m08-pricing-analysis" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m08-pricing-analysis">Compare with Expert Answer</button>
+  <div id="se-answer-m08-pricing-analysis" class="self-explain__expert" hidden>
+    <p>Strong recommendation to evaluate Claude Pro ($20/user/month, same cost): Claude leads on SWE-bench (80.8% vs. 69.1% for o3), produces more natural prose, and has the highest developer preference (44% for complex coding). The team would gain superior coding assistance and writing quality at the same price. Alternatively, a split strategy: Claude Pro for the developers ($20/user x 6 = $120), Gemini Advanced ($19.99/user x 4 = $80) for the document drafters who benefit from Google Workspace integration. Total: $200/month -- same budget, better tool-task matching. The tradeoff: losing ChatGPT's image generation and voice mode, which may or may not matter depending on the team's actual workflows.</p>
+  </div>
+</div>
+
+<details class="accordion">
+  <summary class="accordion__title">The cheapest platform for a solo user is not the cheapest for a team of five. Pricing structures diverge dramatically at scale.</summary>
+  <div class="accordion__content">
+    <p>At the individual consumer tier, all four platforms converge around $20/month. But for a team of 5 on business plans: Claude Team costs $125/month (5 x $25), ChatGPT Business costs $125-150/month (5 x $25-30), Gemini Business starts at just $36/month (5 x $7.20 at the entry tier), and Copilot runs $105-150/month (5 x $21-30). Gemini's entry price is 3-4x cheaper than any competitor at the team level. At enterprise scale, Copilot E7 at $99/user/month is the most expensive but includes the full Agent 365 governance suite. The platform that is 'cheapest' depends entirely on team size, tier, and which capabilities you actually need.</p>
+  </div>
+</details>
+<hr>
+<h2 id="user-sentiment-and-market-dynamics">User Sentiment and Market Dynamics</h2>
+<h3 id="market-share-trajectory">Market Share Trajectory</h3>
+<p>The most significant market story of 2025-2026 is ChatGPT's share decline:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Period</th><th>ChatGPT</th><th>Gemini</th><th>Claude</th><th>Copilot</th><th>Others</th></tr></thead><tbody><tr><td><strong>March 2025</strong></td><td>~87%</td><td>~5%</td><td>~3%</td><td>~2%</td><td>~3%</td></tr><tr><td><strong>March 2026</strong></td><td>~68%</td><td>~18-20%</td><td>~5%</td><td>~3%</td><td>~4%</td></tr><tr><td><strong>Trend</strong></td><td>Declining</td><td>Surging</td><td>Slow growth</td><td>Flat</td><td>Growing</td></tr></tbody></table>
+<p>ChatGPT's drop from 87% to 68% in one year represents one of the fastest market share declines for a dominant consumer tech product [1]. Gemini captured most of that shift, quadrupling its share through aggressive distribution (Android default, Search integration, generous free tier) and genuine product improvements.</p>
+
+<figure class="diagram diagram--chart" id="m08-1" role="img" aria-label="Line chart showing AI platform web traffic share from March 2025 to March 2026. ChatGPT declined steadily from 87% to 68%, representing one of the fastest market share declines for a dominant consumer tech product. Gemini surged from 5.4% to 18.2%, quadrupling its share through aggressive distribution and product improvements. Claude grew modestly from 3% to 5%. Copilot remained relatively flat, growing from 2% to 3%.">
+  <canvas data-chart-type="line" data-chart-config='{"labels":["Mar 2025","Jun 2025","Sep 2025","Dec 2025","Mar 2026"],"datasets":[{"label":"ChatGPT","data":[87,80,75,71,68],"borderColor":"#0D7377","borderDash":[]},{"label":"Gemini","data":[5.4,8,12,15,18.2],"borderColor":"#1B7A3D","borderDash":[5,5]},{"label":"Claude","data":[3,3.5,4,4.5,5],"borderColor":"#1B4D8E","borderDash":[10,5]},{"label":"Copilot","data":[2,2.2,2.5,2.8,3],"borderColor":"#E65100","borderDash":[2,3]}]}'></canvas>
+  <figcaption>Market Share Trajectory (Mar 2025 – Mar 2026)</figcaption>
+</figure>
+<h3 id="user-satisfaction-signals">User Satisfaction Signals</h3>
+<p><strong>ChatGPT:</strong> The #Keep4o movement (early 2026) crystallized user frustration with rapid model transitions. When OpenAI deprecated GPT-4o in favor of GPT-4.1, a vocal user segment objected to the personality and behavior changes. An estimated 1.5M cancellations in March 2026 were attributed to model churn fatigue -- users felt the product they were paying for kept changing without their consent [F2].</p>
+<p><strong>Claude:</strong> Commands the highest average session engagement at 34.7 minutes, nearly double ChatGPT's average. Developer communities (Reddit, Hacker News) show a strong Claude preference for coding tasks -- an analysis of 500+ Reddit threads found 78% preference among developers who compared both tools [community-sourced] [2]. A separate developer survey found Claude the top choice at 44% for complex coding tasks (multi-file refactoring, architecture design, debugging), ahead of GitHub Copilot (28%) and ChatGPT (19%) [7]. The main complaints center on the absence of multimodal generation (images, voice).</p>
+<p><strong>Gemini:</strong> Fastest-growing platform with strong positive sentiment around the free tier and Google integration. Criticisms focus on writing quality (perceived as more generic than Claude or ChatGPT) and lingering trust issues from the Gemini 1.0 image generation controversy in early 2024. Users praise <span class="glossary-term" data-term="deep-research">Deep Research</span> and the seamless Workspace integration [F3].</p>
+<p><strong>Copilot:</strong> Mixed enterprise reception. Despite Microsoft's massive distribution advantage (400M M365 users), only ~3.3% of M365 users pay for Copilot. Enterprise buyers report the product is "good enough" but rarely the best tool for any specific task. The tight coupling to M365 is simultaneously its greatest strength (for organizations already in that ecosystem) and its greatest limitation (for users outside it) [F4].</p>
+
+<details class="accordion">
+  <summary class="accordion__title">ChatGPT model churn: the #Keep4o movement in detail</summary>
+  <div class="accordion__content">
+    <p>The #Keep4o movement in early 2026 crystallized user frustration with rapid model transitions. When OpenAI deprecated GPT-4o in favor of GPT-4.1, a vocal user segment objected to personality and behavior changes in the new model. An estimated 1.5 million cancellations in March 2026 were attributed to model churn fatigue -- users felt the product they were paying for kept changing without their consent. This highlights a fundamental tension in consumer AI: providers need to iterate models for competitive reasons, but users develop workflow dependencies on specific model behaviors. OpenAI has since introduced model version selection in settings, but the damage to trust was significant.</p>
+  </div>
+</details>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Copilot's value proposition is built around understanding your organizational context -- your M365 tenant data, org chart, and compliance requirements. As a standalone consumer AI product, it rarely outperforms competitors at any specific task. Enterprise buyers purchase it because it is the only AI that understands their M365 environment, not because it is the best AI in isolation." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Why does Microsoft Copilot have only a 3.3% conversion rate among M365's 400 million users?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="0" />
+          <span class="quiz__choice-label">Copilot is too expensive for most users</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="1" />
+          <span class="quiz__choice-label">Copilot's value proposition requires organizational context, making it unappealing as a standalone consumer product</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="2" />
+          <span class="quiz__choice-label">Copilot is only available in certain countries</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="3" />
+          <span class="quiz__choice-label">Most M365 users are unaware that Copilot exists</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Gemini captured most of ChatGPT's share loss, quadrupling from ~5% to ~18-20%. Gemini's growth was driven by aggressive distribution (Android default, Google Search integration, generous free tier) and genuine product improvements. Claude grew more slowly (~3% to ~5%), reflecting its strength in a narrower niche (developers and power users) rather than mass-market distribution." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">ChatGPT's market share dropped from 87% to 68% in one year. Which platform captured most of that shift?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="0" />
+          <span class="quiz__choice-label">Claude</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="1" />
+          <span class="quiz__choice-label">Copilot</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-user-satisfaction-signals-quiz" value="3" />
+          <span class="quiz__choice-label">Perplexity</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="strategic-differentiators">Strategic Differentiators</h2>
+<p>Each platform has a defensible moat and a corresponding blind spot.</p>
+<h3 id="claude-the-developer-and-enterprise-play">Claude: The Developer and Enterprise Play</h3>
+<p><strong>Moat:</strong> Safety reputation, MCP open standard, developer tooling dominance (<span class="glossary-term" data-term="claude-code">Claude Code</span> at ~$2.5B ARR, doubled since January 2026 [8]), highest per-user monetization ($211/monthly active user) [F1].</p>
+<p><strong>Blind spot:</strong> No image generation, no voice. Claude is the most capable text-in/text-out system but the narrowest in multimodal coverage. <span class="glossary-term" data-term="claude-memory">Claude Memory</span> (March 2026) closed the personalization gap, but for users whose workflows span text, images, and voice, Claude requires supplementation with other tools.</p>
+<p><strong>Strategic bet:</strong> That reasoning quality and developer trust matter more than feature breadth. Anthropic is betting that AI power users will pay a premium for the best thinking engine and accept gaps in multimedia capabilities.</p>
+<h3 id="chatgpt-the-scale-and-breadth-play">ChatGPT: The Scale and Breadth Play</h3>
+<p><strong>Moat:</strong> 900M+ monthly users, broadest model portfolio (GPT-5.4, o3, o4-mini, GPT Image 1.5, Advanced Voice), Apple Intelligence integration for iOS distribution, <span class="glossary-term" data-term="gpt-store">GPT Store</span> ecosystem [F2].</p>
+<p><strong>Blind spot:</strong> Market share erosion, model churn alienating loyal users, no on-device inference, increasingly perceived as the "default" rather than the "best" at any single task.</p>
+<p><strong>Strategic bet:</strong> That distribution and breadth win in consumer markets. OpenAI is pursuing a "be everywhere, do everything" strategy -- the AI equivalent of Google's approach to productivity software.</p>
+<h3 id="gemini-the-distribution-and-integration-play">Gemini: The Distribution and Integration Play</h3>
+<p><strong>Moat:</strong> Google Search integration (billions of daily queries), Android default (3B+ devices), Workspace bundling, on-device inference (<span class="glossary-term" data-term="gemini-nano">Gemini Nano</span>), most generous free tier, 30-50% cheaper API pricing [F3].</p>
+<p><strong>Blind spot:</strong> Writing quality consistently rated below Claude and ChatGPT for nuanced tasks. Product trust damaged by early missteps. No equivalent to <span class="glossary-term" data-term="claude-code">Claude Code</span> or ChatGPT's deep voice interaction.</p>
+<p><strong>Strategic bet:</strong> That integration density beats standalone quality. Google is <span class="glossary-term glossary-term--first-use" data-term="embedding">embedding</span> Gemini into every surface it controls -- Search, Android, Chrome, Workspace, YouTube, Maps -- making it the AI you use by default even if you'd choose something else standalone.</p>
+<h3 id="copilot-the-enterprise-lock-in-play">Copilot: The Enterprise Lock-In Play</h3>
+<p><strong>Moat:</strong> M365 integration (400M users), enterprise compliance and governance (<span class="glossary-term" data-term="agent-365">Agent 365</span>), GitHub Copilot's developer footprint (56% of GitHub users), Azure cloud infrastructure [F4].</p>
+<p><strong>Blind spot:</strong> No compelling standalone consumer product. Dependent on OpenAI models (licensing risk). Only 3.3% M365 conversion rate. Users outside the Microsoft ecosystem have little reason to choose Copilot.</p>
+<p><strong>Strategic bet:</strong> That enterprise buyers purchase ecosystems, not point products. Microsoft is betting that CIOs will pay for Copilot because it's the only AI that understands their M365 tenant data, their org chart, and their compliance requirements -- not because it's the best AI in isolation.</p>
+<hr>
+<h2 id="decision-framework-choosing-a-platform">Decision Framework: Choosing a Platform</h2>
+<p>Rather than declaring a "winner," here is a framework for matching platform to use case:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>If you need...</th><th>Best choice</th><th>Why</th></tr></thead><tbody><tr><td>Best coding assistant</td><td>Claude (Code)</td><td>Highest SWE-bench, full codebase context, terminal-native</td></tr><tr><td>Broadest multimodal</td><td>ChatGPT</td><td>Image gen + voice + video in one product</td></tr><tr><td>Best free experience</td><td>Gemini</td><td><span class="glossary-term" data-term="deep-research">Deep Research</span> + image gen + Flash model at no cost</td></tr><tr><td>M365 integration</td><td>Copilot</td><td>Only option with deep M365 Graph access</td></tr><tr><td>Best writing quality</td><td>Claude</td><td>Highest engagement, most natural prose, developer preference</td></tr><tr><td>On-device AI</td><td>Gemini</td><td><span class="glossary-term" data-term="gemini-nano">Gemini Nano</span> on Android; no viable competitor yet</td></tr><tr><td>Cheapest API</td><td>Gemini</td><td>30-50% cheaper than competitors at every tier</td></tr><tr><td>Enterprise governance</td><td>Copilot</td><td><span class="glossary-term" data-term="agent-365">Agent 365</span>, full compliance suite</td></tr><tr><td>Cross-session personalization</td><td>ChatGPT</td><td>Most mature and granular memory system</td></tr><tr><td>Search-grounded answers</td><td>Gemini</td><td>Direct Google Search integration</td></tr></tbody></table>
+<p>Most power users will end up using two or more platforms. The realistic question is not "which one?" but "which combination?"</p>
+
+<figure class="diagram diagram--recommendation" id="m08-rec" role="img" aria-label="Interactive questionnaire that recommends an AI platform based on your primary use case, budget, agentic needs, data privacy requirements, ecosystem preference, and technical depth. Scores responses across Claude, ChatGPT, Gemini, and Copilot to produce a personalized recommendation with rationale.">
+  <div class="recommendation-quiz" data-quiz-config='{"questions":[{"text":"What is your primary use case?","options":[{"label":"Coding and development","scores":{"claude":3,"chatgpt":1,"gemini":1,"copilot":2}},{"label":"Research and analysis","scores":{"claude":2,"chatgpt":3,"gemini":2,"copilot":1}},{"label":"Creative work (images, voice, multimedia)","scores":{"claude":0,"chatgpt":3,"gemini":2,"copilot":1}},{"label":"Enterprise workflow and productivity","scores":{"claude":1,"chatgpt":1,"gemini":1,"copilot":3}}]},{"text":"What is your budget?","options":[{"label":"Free (no subscription)","scores":{"claude":0,"chatgpt":1,"gemini":3,"copilot":1}},{"label":"~$20/month (standard tier)","scores":{"claude":2,"chatgpt":2,"gemini":2,"copilot":2}},{"label":"$100-250/month (power user)","scores":{"claude":3,"chatgpt":2,"gemini":2,"copilot":0}},{"label":"Enterprise (per-seat licensing)","scores":{"claude":2,"chatgpt":2,"gemini":2,"copilot":3}}]},{"text":"Do you need agentic capabilities (autonomous task execution, multi-step workflows)?","options":[{"label":"Yes, coding agents are essential","scores":{"claude":3,"chatgpt":1,"gemini":1,"copilot":2}},{"label":"Yes, general-purpose agents (web browsing, research)","scores":{"claude":1,"chatgpt":3,"gemini":2,"copilot":1}},{"label":"Yes, enterprise agent orchestration","scores":{"claude":1,"chatgpt":1,"gemini":1,"copilot":3}},{"label":"No, conversational AI is sufficient","scores":{"claude":2,"chatgpt":2,"gemini":2,"copilot":1}}]},{"text":"How important is data privacy to your workflow?","options":[{"label":"Critical -- privacy-first design is non-negotiable","scores":{"claude":3,"chatgpt":1,"gemini":0,"copilot":2}},{"label":"Important -- I want control over my data","scores":{"claude":2,"chatgpt":2,"gemini":1,"copilot":2}},{"label":"Moderate -- standard terms are fine","scores":{"claude":1,"chatgpt":2,"gemini":2,"copilot":1}},{"label":"Enterprise compliance (HIPAA, FedRAMP, SOC 2) is required","scores":{"claude":1,"chatgpt":1,"gemini":1,"copilot":3}}]},{"text":"Which ecosystem are you most invested in?","options":[{"label":"Developer tools (terminal, GitHub, VS Code)","scores":{"claude":3,"chatgpt":1,"gemini":1,"copilot":2}},{"label":"Google Workspace (Gmail, Drive, Docs)","scores":{"claude":0,"chatgpt":0,"gemini":3,"copilot":0}},{"label":"Microsoft 365 (Teams, Outlook, SharePoint)","scores":{"claude":0,"chatgpt":0,"gemini":0,"copilot":3}},{"label":"No strong ecosystem preference","scores":{"claude":2,"chatgpt":2,"gemini":2,"copilot":1}}]},{"text":"What level of technical depth do you need?","options":[{"label":"Deep reasoning and nuanced writing","scores":{"claude":3,"chatgpt":2,"gemini":1,"copilot":1}},{"label":"Broad multimodal capabilities (text, image, voice, video)","scores":{"claude":0,"chatgpt":3,"gemini":2,"copilot":1}},{"label":"Best free-tier experience with solid quality","scores":{"claude":0,"chatgpt":1,"gemini":3,"copilot":1}},{"label":"Integrated enterprise AI across my productivity suite","scores":{"claude":0,"chatgpt":0,"gemini":1,"copilot":3}}]}],"platforms":{"claude":{"name":"Claude","tagline":"Best for coding, deep reasoning, and technical writing. Leads SWE-bench (80.8%), highest session engagement (34.7 min), privacy-first design. Gap: no image generation or voice."},"chatgpt":{"name":"ChatGPT","tagline":"Best for broad multimodal needs -- image generation, voice, video, and research in one product. Largest user base (900M+ visits). Gap: market share declining, model churn concerns."},"gemini":{"name":"Gemini","tagline":"Best free experience and cheapest API pricing (30-50% below competitors). Deep Research and image gen at no cost. Google ecosystem native. Gap: writing quality rated below Claude and ChatGPT."},"copilot":{"name":"Copilot","tagline":"Best for Microsoft 365 organizations. Agent 365 governance, enterprise compliance, GitHub Copilot integration. Gap: only 3.3% M365 conversion -- weak as a standalone product."}}}' data-quiz-id="m08-rec"></div>
+  <figcaption>Platform Decision Framework</figcaption>
+</figure>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Based on everything you have learned in this curriculum, describe your own AI platform strategy: which platform(s) would you use for what, and why? Consider your specific use cases, budget, and priorities.</p>
+  <label for="se-m08-decision-framework-choosing-a-platform" class="sr-only">Your explanation</label>
+  <textarea id="se-m08-decision-framework-choosing-a-platform" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m08-decision-framework-choosing-a-platform">Compare with Expert Answer</button>
+  <div id="se-answer-m08-decision-framework-choosing-a-platform" class="self-explain__expert" hidden>
+    <p>One strong multi-platform strategy: Claude Pro ($20/month) as the primary tool for coding (SWE-bench leader at 80.8%), technical writing (highest engagement, most natural prose), and any task requiring deep reasoning. Gemini free tier for quick factual lookups (Google Search integration), image generation (Imagen 4), and Google Workspace integration. ChatGPT Plus ($20/month) only if you need voice mode or video understanding regularly. Total: $20-40/month covers most power-user needs. The key insight from Module 08: no single platform dominates all categories, so the realistic question is 'which combination?' not 'which one?' Your specific mix should be driven by your most frequent use cases, not by any platform's marketing claims.</p>
+  </div>
+</div>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>Price convergence, capability divergence.</strong> All four platforms charge ~$20/month for their standard consumer tier, but the capabilities you get for that $20 vary enormously.</p>
+</li>
+<li>
+<p><strong>ChatGPT's dominance is eroding.</strong> A drop from 87% to 68% market share in one year signals that the "default AI assistant" position is genuinely contestable.</p>
+</li>
+<li>
+<p><strong>Gemini's free tier is a strategic weapon.</strong> Offering <span class="glossary-term" data-term="deep-research">Deep Research</span> and image generation at no cost pressures every competitor's conversion funnel.</p>
+</li>
+<li>
+<p><strong>Claude wins on depth, loses on breadth.</strong> Best-in-class for coding and reasoning, but the absence of image generation and voice limits its addressable use cases. <span class="glossary-term" data-term="claude-memory">Claude Memory</span> (March 2026) closed the personalization gap.</p>
+</li>
+<li>
+<p><strong>Copilot is an enterprise play, not a consumer product.</strong> Its 3.3% M365 conversion rate confirms this -- the value proposition requires organizational context.</p>
+</li>
+<li>
+<p><strong>Memory is a key battleground.</strong> All four platforms now offer cross-session memory, but implementations vary widely -- from ChatGPT's granular manual control to Claude's privacy-first auto-processing to Gemini's account-wide intelligence.</p>
+</li>
+<li>
+<p><strong>The API pricing race favors Google.</strong> For developers building on these platforms, Gemini's 30-50% cost advantage at every tier is a powerful economic argument.</p>
+</li>
+<li>
+<p><strong>Capability-based pricing is replacing model-based pricing.</strong> The $100-250/month "power user" tiers bundle capabilities rather than just model access, signaling where the industry is heading.</p>
+</li>
+<li>
+<p><strong>No single platform dominates all categories.</strong> Power users should expect a multi-platform strategy as the norm, not the exception.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Each platform has a defensible moat and a corresponding blind spot. Claude leads on coding and writing but lacks multimodal breadth. ChatGPT has the broadest features but is losing market share and trust. Gemini has the best free tier and pricing but lower writing quality. Copilot has enterprise depth but no standalone appeal. The realistic question is 'which combination?' not 'which one?'" role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The module concludes that 'most power users will end up using two or more platforms.' What is the primary reason?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">No single platform is affordable enough</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Vendor lock-in prevents using just one</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">No single platform dominates all capability categories -- each has distinct strengths and blind spots</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Platforms are not compatible with each other</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Claude Team for reports and developer tooling (best writing quality, SWE-bench leader) plus Gemini Business for Google Workspace integration (native Docs/Sheets/Calendar access). Total: $645/month, well under the $5,000 budget. The tradeoff: no native image generation (supplement with Gemini's free image gen or Midjourney) and no voice mode. This combination covers the firm's stated needs (writing quality + Workspace) at the lowest cost." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A consulting firm needs high writing quality, Google Workspace integration, and enterprise data handling. Budget: $5,000/month for 15 people. Which platform combination fits best?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">ChatGPT Enterprise for everyone</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Claude Team ($25/seat x 15 = $375) + Gemini Business ($18/seat x 15 = $270) = $645/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Copilot E7 ($99/seat x 15 = $1,485)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Gemini Ultra ($250/seat x 15 = $3,750)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Flash 2.5 Lite at $0.10 input / $0.40 output per million tokens is Google's cheapest API offering and the lowest budget-tier price of any major provider. For comparison, Anthropic's budget tier (Haiku 4.5) is $1.00/$5.00 and OpenAI's (GPT-5.4 Nano) is $0.20/$1.25. Google's pricing advantage is consistent across all tiers -- budget, mid-range, and flagship." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Google's API pricing is 30-50% cheaper than competitors at every tier. Which model family specifically offers the lowest budget-tier pricing?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Gemini 3 Flash</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Gemini 3.1 Pro</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Flash 2.5 Lite ($0.10/$0.40 per million tokens)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Gemini Nano</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="MCP adoption depth is a meaningful differentiator. Claude is MCP-native (Anthropic created the protocol). Google is investing heavily in managed MCP servers for its services. Microsoft focuses on enterprise MCP hosting and governance. OpenAI adopted MCP retroactively -- functional but not foundational. For users who value tool integration and extensibility, MCP depth matters because it determines how easily an AI platform connects to your existing tools and services (Module 06)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does MCP adoption depth (Module 06) factor into the platform comparison as of March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">MCP is irrelevant to consumer platform comparison</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">All four platforms have identical MCP support</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">MCP depth varies: Claude is native, Google invests in managed servers, Microsoft focuses on enterprise, OpenAI adopted retroactively</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Only Claude and Google support MCP</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Gemini's Personal Intelligence draws from your entire Google account -- Search history, Drive files, Gmail, Calendar, and other Google services. This is the broadest data scope of any memory system. Claude Memory processes conversations on a ~24-hour cycle. ChatGPT extracts preferences per conversation. Copilot Work IQ draws from the M365 tenant but is enterprise-focused. This connects to Module 02's analysis of how memory systems differ architecturally." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which memory system provides the broadest data scope by drawing from your entire account ecosystem (Search, Drive, Gmail, Calendar)?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Memory</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">ChatGPT Saved Memories</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini Personal Intelligence</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Copilot Work IQ</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="A developer survey found Claude the top choice at 44% for complex coding tasks (multi-file refactoring, architecture design, debugging), ahead of GitHub Copilot (28%) and ChatGPT (19%). A separate Reddit/HN analysis found 78% preference among developers who specifically compared Claude and ChatGPT head-to-head." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In a developer survey, what percentage chose Claude as their top tool for complex coding tasks?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">19%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">28%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">44%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">78%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="An estimated 1.5 million cancellations in March 2026 were attributed to model churn fatigue. Users objected to personality and behavior changes when OpenAI deprecated GPT-4o in favor of GPT-4.1 -- they felt the product they were paying for kept changing without their consent." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What was the estimated number of ChatGPT cancellations attributed to the #Keep4o model churn controversy in March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">~100,000</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">~500,000</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">~1.5 million</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">~5 million</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Claude Opus 4.6 leads SWE-bench Verified at 80.8% vs. 69.1% for the runner-up (o3-high) -- an 11.7 percentage point margin. This is the largest gap of any benchmark in the comparison table and reflects Claude's strength in real-world coding tasks. Gemini 3.1 Pro leads GPQA Diamond and MMLU-Pro, while o4-mini leads MATH." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which benchmark does Claude Opus 4.6 lead on with the highest margin over competitors?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">GPQA Diamond (graduate-level reasoning)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">SWE-bench Verified (real-world coding)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">MMLU-Pro (broad knowledge)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">MATH (mathematical reasoning)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Claude commands the highest average session engagement at 34.7 minutes, nearly double ChatGPT's average. This metric reflects deeper, more sustained interactions rather than quick lookups -- consistent with Claude's strength in coding, writing, and complex reasoning tasks that require extended conversation." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform has the highest average session engagement time among consumers?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">ChatGPT (largest user base)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Gemini (fastest growing)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Claude (34.7 minutes average)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Copilot (M365 integration)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The market has converged on approximately $20/month for the standard consumer tier: Claude Pro at $20/month, ChatGPT Plus at $20/month, Gemini Advanced at $19.99/month, and Copilot Pro at $20/month. Differentiation happens at the extremes -- free tiers and power-user tiers ($100-250/month)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">All four major consumer AI platforms charge approximately the same amount for their standard tier. What is this price point?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">~$10/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">~$20/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">~$30/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">~$50/month</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Anthropic offers a 90% discount on cached prompt tokens (with additional lower tiers). While Claude's base API prices are mid-range, aggressive caching can dramatically reduce effective costs for applications with repeating context -- making Claude competitive with Google's lower base prices. Module 09 covers the full caching economics across all providers." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does Anthropic's prompt caching discount (Module 09) affect Claude's cost competitiveness in the API pricing comparison?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">It has no effect since caching is the same across all platforms</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Anthropic offers up to 90% cache discount, making it competitive despite higher base prices</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Anthropic does not offer prompt caching</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Caching only applies to the free tier</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Gemini's free tier includes Deep Research, image generation (Imagen 4), and Flash model access -- capabilities that cost $20/month or more on Claude and ChatGPT. This pressures every competitor's conversion funnel: why pay for a basic tier elsewhere when Gemini offers these features for free?" role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Google's free tier is described as a 'strategic weapon.' What capabilities does Gemini offer at no cost that competitors charge $20/month for?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Voice conversation and video understanding</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Deep Research and image generation with Flash model access</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Full API access and code execution</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Enterprise governance and DLP</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Claude's moat combines its safety reputation, creation and stewardship of the MCP open standard, and developer tooling dominance (Claude Code at ~$2.5B ARR). The corresponding blind spot is the absence of image generation and voice -- Claude is the most capable text-in/text-out system but the narrowest in multimodal coverage." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform's strategic moat is described as 'safety reputation, MCP open standard, and developer tooling dominance'?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">ChatGPT</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Gemini</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Claude</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Copilot</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Gemini Workspace pricing starts at $7.20/user/month for the basic business tier, reflecting Google's strategy of bundling AI into existing Workspace subscriptions rather than charging a premium. This is 3-4x cheaper than competitors at the entry level and a powerful wedge for Google Workspace-centric organizations." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">At the business/team tier, which platform offers the lowest entry-level per-seat pricing?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Team ($25/seat/month)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">ChatGPT Business ($25-30/user/month)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini Business ($7.20/user/month)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Copilot ($21-30/user/month)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Claude's complete absence of image generation and voice conversation is its most visible capability gap. For users who need both text reasoning and image creation or voice interaction in a single workflow, ChatGPT or Gemini are the only viable choices. Claude Memory (March 2026) closed the personalization gap, but multimodal breadth remains the weakest dimension." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform has the most significant capability gap in multimodal features as of March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">ChatGPT (no on-device inference)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Gemini (no voice conversation)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Claude (no image generation, no voice)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m08-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Copilot (no web search)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- market structure and platform ecosystem context</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- detailed model lineups, benchmarks, and reasoning mode architecture</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term" data-term="context-engineering">Context Engineering</span></a> -- technical depth on memory systems, context windows, and personalization</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- <span class="glossary-term" data-term="agent">agent</span> architecture and coding tool capabilities</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- how platforms connect to external tools</li>
+<li><a href="module-07.html">Module 07: <span class="glossary-term glossary-term--first-use" data-term="skills">Skills</span>, Plugins &#x26; Automation</a> -- scheduled tasks and automation capabilities as platform differentiators</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- API pricing economics and SDK comparison</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- upcoming events (Google I/O, Build, WWDC) likely to shift comparison tables</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+<ol>
+<li>AI Chatbot Market Share 2026 (Vertu/Similarweb), <a href="https://vertu.com/lifestyle/ai-chatbot-market-share-2026-chatgpt-drops-to-68-as-google-gemini-surges-to-18-2/">https://vertu.com/lifestyle/ai-chatbot-market-share-2026-chatgpt-drops-to-68-as-google-gemini-surges-to-18-2/</a>, accessed 2026-03-20</li>
+<li>Developer AI Tool Preference Survey (Reddit/HN aggregation), community source, 2026-03-20</li>
+<li>Microsoft Copilot User Experience Reports (Enterprise), community source, 2026-03-20</li>
+<li>AI Coding Assistant Statistics (Panto.ai), <a href="https://www.getpanto.ai/blog/ai-coding-assistant-statistics">https://www.getpanto.ai/blog/ai-coding-assistant-statistics</a>, accessed 2026-03-20</li>
+<li>Anthropic Claude Pricing, <a href="https://www.anthropic.com/pricing">https://www.anthropic.com/pricing</a>, accessed 2026-03-21</li>
+<li>Provider API Pricing Pages (Anthropic, OpenAI, Google), <a href="https://docs.anthropic.com/en/docs/about-claude/models">https://docs.anthropic.com/en/docs/about-claude/models</a>, <a href="https://openai.com/api/pricing/">https://openai.com/api/pricing/</a>, <a href="https://ai.google.dev/gemini-api/docs/pricing">https://ai.google.dev/gemini-api/docs/pricing</a>, accessed 2026-03-21</li>
+</ol>
+<ul>
+<li>[F1] Anthropic/Claude Ecosystem Profile, reference/profiles/anthropic-claude.md, 2026-03-18</li>
+<li>[F2] OpenAI/ChatGPT Ecosystem Profile, reference/profiles/openai-chatgpt.md, 2026-03-18</li>
+<li>[F3] Google/Gemini Ecosystem Profile, reference/profiles/google-gemini.md, 2026-03-18</li>
+<li>[F4] Microsoft/Copilot Ecosystem Profile, reference/profiles/microsoft-copilot.md, 2026-03-18</li>
+<li>[F5] Specialized Tools Profile, reference/profiles/specialized-tools.md, 2026-03-18</li>
+</ul>
+<ol start="7">
+<li>Developer Survey 2026: AI Coding Tool Adoption (claude5.ai), <a href="https://claude5.ai/news/developer-survey-2026-ai-coding-73-percent-daily">https://claude5.ai/news/developer-survey-2026-ai-coding-73-percent-daily</a>, accessed 2026-03-21</li>
+<li>Constellation Research: <span class="glossary-term" data-term="claude-code">Claude Code</span> Revenue Doubled Since Jan. 1, <a href="https://www.constellationr.com/insights/news/anthropics-claude-code-revenue-doubled-jan-1">https://www.constellationr.com/insights/news/anthropics-claude-code-revenue-doubled-jan-1</a>, 2026-02-12</li>
+</ol>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-09.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 09: Developer Platforms &amp; APIs</span>
+        </a>
+        <a href="module-10.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 10: Frontier Topics</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/chart.umd.min.js"></script>
+  <script src="../js/chart-renderer.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

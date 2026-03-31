@@ -13,6 +13,6 @@ Staging area for files that have been reviewed from AI_INBOX but are not current
 
 | File | Source | Date Trashed | Reason | Disposition |
 |------|--------|-------------|--------|-------------|
-| *(empty — no files trashed yet)* | | | | |
+| DEEP-RESEARCH-PEDAGOGY-PROMPT.md | AI_INBOX | 2026-03-21 | Deep research pedagogy prompt — reviewed during Round 3; design decisions captured in PEDAGOGICAL-DESIGN.md workstreams. Original prompt no longer needed. | Pending review |
 
 *Update this table whenever a file is added to or removed from AI_TRASH.*

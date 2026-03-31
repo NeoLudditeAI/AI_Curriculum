@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary — {{site.title}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="{{site.cssPath}}">
+</head>
+<body class="page-glossary">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="index.html" class="breadcrumbs__link">Course Map</a></li>
+        <li class="breadcrumbs__item"><span aria-current="page" class="breadcrumbs__current">Glossary</span></li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <h1 class="site-header__title">Glossary</h1>
+    <div class="glossary-filter">
+      <label for="glossary-filter" class="glossary-filter__label">Filter terms</label>
+      <input type="text" id="glossary-filter" class="glossary-filter__input" placeholder="Type to search terms..." aria-describedby="filter-status">
+      <div id="filter-status" class="glossary-filter__status" aria-live="polite">{{glossary.terms.length}} terms</div>
+    </div>
+  </header>
+
+  <main id="main-content" role="main" class="glossary-page">
+    {{#each glossaryByCategory}}
+    <section class="glossary-category" id="category-{{@key}}">
+      <h2 class="glossary-category__title">{{@key}}</h2>
+      <dl class="glossary-list">
+        {{#each this}}
+        <div class="glossary-entry" id="term-{{slug}}">
+          <dt class="glossary-entry__term">{{term}}</dt>
+          <dd class="glossary-entry__definition">
+            <p>{{definition}}</p>
+            {{#if firstIntroduced}}
+            <p class="glossary-entry__module">First introduced: <a href="modules/module-{{firstIntroduced}}.html">Module {{firstIntroduced}}</a></p>
+            {{/if}}
+            {{#if relatedTerms.length}}
+            <p class="glossary-entry__related">Related: {{#each relatedTerms}}{{#if (lookup ../relatedTermExists @index)}}<a href="#term-{{lookup ../relatedTermSlugs @index}}">{{this}}</a>{{else}}<span>{{this}}</span>{{/if}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+            {{/if}}
+          </dd>
+        </div>
+        {{/each}}
+      </dl>
+    </section>
+    {{/each}}
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <nav aria-label="Site navigation">
+      <a href="index.html">Course Map</a>
+    </nav>
+    <p class="site-footer__title">{{site.title}}</p>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var input = document.getElementById('glossary-filter');
+    var terms = document.querySelectorAll('.glossary-entry');
+    var status = document.getElementById('filter-status');
+    var total = terms.length;
+
+    input.addEventListener('input', function() {
+      var query = this.value.toLowerCase();
+      var visible = 0;
+      terms.forEach(function(entry) {
+        var text = entry.textContent.toLowerCase();
+        var match = !query || text.includes(query);
+        entry.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      document.querySelectorAll('.glossary-category').forEach(function(cat) {
+        var visibleTerms = cat.querySelectorAll('.glossary-entry:not([style*="display: none"])');
+        cat.style.display = visibleTerms.length ? '' : 'none';
+      });
+      status.textContent = query ? 'Showing ' + visible + ' of ' + total + ' terms' : total + ' terms';
+    });
+  });
+  </script>
+  <script src="{{site.jsPath}}/storage.js"></script>
+  <script src="{{site.jsPath}}/dark-mode.js"></script>
+  <script src="{{site.jsPath}}/navigation.js"></script>
+</body>
+</html>

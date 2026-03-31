@@ -1,0 +1,386 @@
+# build/annotations/module-03.yaml
+# Annotations for Module 03: Single-Agent Systems
+# Section IDs extracted from deliverables/html/modules/module-03.html
+# Quiz answers verified against modules/MODULE-03-single-agent-systems.md
+
+module: "03"
+annotations:
+
+  # --- Opening Hook (accordion, first annotation) ---
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "The Friday afternoon refactor"
+      content: "On a Friday at 4pm, a developer points Claude Code at a 300-file codebase and says: 'Refactor the authentication system to use JWT tokens instead of session cookies.' The agent reads the codebase, identifies 47 files that need changes, edits them in coordinated sequence, runs the test suite, fixes the 3 tests it broke, and pushes a clean PR -- in 22 minutes. The developer reviews the diff over coffee. This is the reality of single-agent systems in March 2026. But here is the question this module answers: how does it actually work? What happens when the agent hallucinates a file path? What stops it from deleting your database? And why does verification -- not generation -- determine whether agents succeed or fail?"
+
+  # --- Curiosity Prompt: Agent Architecture ---
+  - after: "how-agents-work-the-core-architecture"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "The one pattern that separates agents from chatbots"
+      content: "The difference between a chatbot and an agent is a single architectural pattern. Once you see it, you cannot unsee it."
+
+  # --- Concept Check: Gather-Act-Verify Loop ---
+  - after: "the-gather-act-verify-loop"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "In the gather-act-verify loop, what happens if the verification step is removed?"
+      choices:
+        - "The agent works faster with no quality loss"
+        - "The agent produces results but cannot detect its own errors"
+        - "The agent cannot execute tools"
+        - "Nothing -- verification is optional"
+      correct: 1
+      explanation: "Verification catches hallucinated file paths, broken imports, failed tests, and logical errors. Without it, the agent is a 'code generator' not an 'agentic loop.' This is why the module states verification is architecturally non-negotiable."
+
+  # --- Accordion: LATS advanced detail ---
+  - after: "planning-strategies"
+    component: accordion
+    variant: advanced-detail
+    data:
+      title: "LATS: Language Agent Tree Search in depth"
+      content: "LATS combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches based on accumulated reward signals. Research shows LATS improves task completion by 22.1 percentage points over basic ReAct on HumanEval. The computational cost is significant -- each branch requires a full model call -- which is why LATS is not yet standard in consumer agents. However, its principles inform the design of systems like OpenAI's o-series reasoning models, which internalize the tree search within the model's extended thinking process (see Module 01 for reasoning mode details)."
+
+  # --- Concept Check: Function Calling vs. MCP ---
+  - after: "tool-use-function-calling-and-mcp"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "What is the key difference between function calling and MCP for agent tool use?"
+      choices:
+        - "MCP is faster than function calling"
+        - "Function calling supports more tools than MCP"
+        - "MCP externalizes tool definitions into standalone servers discoverable by any MCP-compatible client"
+        - "There is no practical difference"
+      correct: 2
+      explanation: "Function calling is for a single agent with a handful of known tools. MCP is for agents that connect to arbitrary external services at runtime. The MCP ecosystem includes 19,700+ servers. This concept was introduced in Module 00 and receives full treatment in Module 06."
+
+  # --- Concept Check: Claude Code sandboxing metric ---
+  - after: "claude-code-anthropic-ga"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Claude Code's sandboxing achieved what metric improvement in permission prompts?"
+      choices:
+        - "50% reduction"
+        - "74% reduction"
+        - "84% reduction"
+        - "95% reduction"
+      correct: 2
+      explanation: "The 84% reduction means the agent can operate more autonomously within its permitted boundaries. The sandbox is tight enough for security but loose enough for productivity -- a calibration that reflects Anthropic's approach to the autonomy-safety tradeoff."
+
+  # --- Section Review: The Agents Platform by Platform ---
+  - after: "comparison-single-agent-systems-at-a-glance"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which is the only desktop automation agent combining local file access, computer use, MCP connectors, and scheduling?"
+      choices:
+        - "Claude Code"
+        - "Cowork"
+        - "ChatGPT Agent"
+        - "Copilot Studio Agents"
+      correct: 1
+      explanation: "Cowork is Anthropic's desktop automation agent running in an isolated VM. It combines local file read/write, computer use (screenshot-based), MCP connector access to 50+ services, and Scheduled Tasks -- but it remains a Research Preview with stability limitations."
+
+  - after: "comparison-single-agent-systems-at-a-glance"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Codex's cloud sandbox has a distinctive security feature. What is it?"
+      choices:
+        - "It uses gVisor for kernel isolation"
+        - "It is air-gapped -- no internet access"
+        - "It requires biometric authentication"
+        - "It encrypts all files at rest"
+      correct: 1
+      explanation: "Each Codex task runs in an isolated cloud sandbox with filesystem access but no internet connectivity. This air-gapped design prevents code exfiltration or unauthorized dependency fetching, but means all dependencies must be pre-provisioned in the sandbox image."
+
+  - after: "comparison-single-agent-systems-at-a-glance"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which Google agent takes a GitHub-native, asynchronous, batch-oriented approach?"
+      choices:
+        - "Chrome Auto Browse"
+        - "Project Mariner"
+        - "Jules"
+        - "Project Astra"
+      correct: 2
+      explanation: "Jules is powered by Gemini 3 Flash and operates through GitHub integration. Tasks are submitted as issues, results arrive as PRs. There is no interactive terminal session, making Jules better suited for batch-style development than real-time pair programming."
+
+  - after: "comparison-single-agent-systems-at-a-glance"
+    component: quiz
+    variant: section-review
+    data:
+      question: "True or False: ChatGPT Agent supports MCP."
+      choices:
+        - "True"
+        - "False"
+      correct: 1
+      explanation: "ChatGPT Agent does not support MCP. It handles web browsing only -- no desktop automation, no local file access, and no MCP integration. MCP support divides agents into two groups: those with rich external connectivity (Claude Code, Cowork, Copilot Studio) and those with limited integration surfaces (Codex, Jules, ChatGPT Agent)."
+
+  # --- Worked Example: Sandboxing Strategy (partial/completion) ---
+  - after: "platform-specific-approaches"
+    component: worked-example
+    variant: partial
+    data:
+      title: "Choosing a sandboxing strategy"
+      problem: "Your team is building a coding agent that will execute user-submitted code. The code may install packages from npm. You need to balance security with the agent's ability to function."
+      steps:
+        - label: "Identify the threat model"
+          content: "Untrusted code execution with network access needs. Users submit arbitrary code that may install npm packages, requiring both filesystem and network access."
+        - label: "Why is Docker alone insufficient?"
+          content: "[YOUR ANSWER] Think about what happens if the containerized process escapes the namespace isolation."
+        - label: "Evaluate gVisor vs. Firecracker for this use case"
+          content: "gVisor provides an application-level kernel intercepting system calls -- defense-in-depth beyond Docker. Firecracker provides full hardware-level isolation with dedicated kernels per task, booting in ~125ms with <5 MiB overhead."
+        - label: "Select the isolation strategy and justify"
+          content: "[YOUR ANSWER] Consider which strategy provides the strongest guarantee for untrusted code that needs network access."
+      solution: "Docker is insufficient because container escapes give the attacker full host access -- the shared kernel is the vulnerability. For untrusted code with network access, Firecracker MicroVMs provide the strongest guarantee: each task gets its own kernel with hardware-level isolation, meaning even a successful exploit is contained to that VM. The ~125ms boot time and <5 MiB overhead make per-task VM creation practical. gVisor is a viable middle ground for trusted-but-sandboxed code, but for truly untrusted user submissions, Firecracker's isolation model is the appropriate choice."
+
+  # --- Curiosity Prompt: Safety Models ---
+  - after: "safety-models"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Why safety is an engineering concern"
+      content: "An unmonitored Opus 4.6 agent at maximum throughput costs $1,200 per hour. This is why safety is an engineering concern, not just an ethics discussion."
+
+  # --- Self-Explanation: Layered Safety Model ---
+  - after: "multi-layer-guardrails"
+    component: self-explanation-prompt
+    data:
+      prompt: "Design a layered safety model for a coding agent that will be used by a 50-person engineering team. The agent needs to edit production code, run tests, and push to GitHub. What layers would you implement, and in what order do they activate?"
+      expert_answer: "Layer 1 (Default-deny): Agent starts with zero access; only designated repositories and approved CLI commands are available. Layer 2 (RBAC): Junior developers' agents cannot push to main branch or modify infrastructure code; senior developers' agents have broader scope. Layer 3 (HITL): All production deployments require human approval; test runs are pre-approved. Layer 4 (Guardrails): Input validation rejects prompts requesting credential access or destructive operations; output validation scans generated code for known vulnerability patterns. Layer 5 (Sandboxing): OS-level filesystem and network isolation constraining the agent to designated directories. Each layer activates independently -- sandboxing is always on, RBAC checks fire on every action, HITL triggers on configured sensitive operations, and guardrails validate every input/output pair."
+
+  # --- Concept Checks: Failure Modes ---
+  - after: "silent-failures"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "An agent edits a file that does not exist, then creates it with hallucinated content. Which failure mode is this?"
+      choices:
+        - "Context exhaustion"
+        - "Hallucination cascade"
+        - "Resource exhaustion"
+        - "Silent failure"
+      correct: 1
+      explanation: "This is a hallucination cascade: the agent hallucinates a fact (the file path), acts on it (the edit fails), attempts recovery (creates the file), and now the codebase contains spurious content. The initial hallucination compounds into increasingly divergent state."
+
+  - after: "silent-failures"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "At Opus 4.6 output pricing, an uncontrolled agent at maximum Tier 4 rate limits would cost approximately how much per hour?"
+      choices:
+        - "$120/hour"
+        - "$600/hour"
+        - "$1,200/hour"
+        - "$5,000/hour"
+      correct: 2
+      explanation: "At $25/MTok output pricing and ~800K output tokens per minute at Tier 4 rate limits, that is approximately $1,200 per hour. Organizations running multiple parallel agent sessions multiply this further. This is why production deployments must implement token budgets, time limits, and cost caps."
+
+  # --- Section Review: Failure Modes ---
+  - after: "silent-failures"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which failure mode is described as 'the most dangerous'?"
+      choices:
+        - "Hallucination cascades"
+        - "Context exhaustion"
+        - "Resource exhaustion"
+        - "Silent failures"
+      correct: 3
+      explanation: "Silent failures are the most dangerous because the agent completes the task, reports success, but has produced subtly incorrect results. A test that passes because it tests the wrong thing, or a refactor that introduces a logic error the test suite does not cover. This is why human review of agent output remains essential."
+
+  - after: "silent-failures"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What mitigates context exhaustion in Claude Code?"
+      choices:
+        - "Increasing the model size"
+        - "Auto-compaction -- summarizing earlier context"
+        - "Reducing the number of tools available"
+        - "Switching to a different model"
+      correct: 1
+      explanation: "Claude Code's auto-compaction mitigates context exhaustion by summarizing earlier context when the window fills. However, compacted summaries inevitably lose detail, which can lead to repetitive actions and forgotten constraints. See Module 02 for full compaction mechanics."
+
+  - after: "silent-failures"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What production safeguards should be implemented against resource exhaustion?"
+      choices:
+        - "Only use the cheapest model"
+        - "Disable all tools"
+        - "Token budgets, time limits, and cost caps"
+        - "Run agents only during business hours"
+      correct: 2
+      explanation: "Token budgets, time limits, and cost caps are the three standard safeguards against resource exhaustion. A coding agent in an infinite retry loop or a browser agent clicking through pagination indefinitely can consume thousands of dollars without these controls."
+
+  # --- Module Assessment (after Key Takeaways) ---
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Name the five steps in the canonical agent loop."
+      choices:
+        - "Read, Write, Test, Deploy, Monitor"
+        - "Gather, Plan, Act, Verify, Loop"
+        - "Input, Process, Output, Validate, Store"
+        - "Observe, Orient, Decide, Act, Assess"
+      correct: 1
+      explanation: "The canonical agent cycle is: Gather context, Plan (reason about actions), Act (invoke tools), Verify (check results), Loop (return to step 1 if goal not met). This is not a theoretical framework -- it is the literal execution model used by Claude Code, Codex, Jules, and other production agents."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What distinguishes an agent from a chatbot?"
+      choices:
+        - "Agents use larger models"
+        - "Agents have longer context windows"
+        - "Tool use -- the ability to take actions, not just generate text"
+        - "Agents are always more expensive"
+      correct: 2
+      explanation: "An agent without tools is just a chatbot that talks to itself. Tool use -- invoking functions, editing files, running commands, calling APIs -- is what separates an agent from a language model. This is the foundational architectural distinction."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which coding agent leads SWE-bench Verified as of March 2026?"
+      choices:
+        - "Codex with codex-1"
+        - "Jules with Gemini 3 Flash"
+        - "Claude Code with Opus 4.6 at 80.8%"
+        - "GitHub Copilot Agent Mode"
+      correct: 2
+      explanation: "Opus 4.6 achieves 80.8% on SWE-bench Verified, the highest score of any model on this standard software engineering benchmark as of March 2026. Codex scores 77.3% on a different benchmark (Terminal-Bench 2.0). This connects to the model selection framework from Module 01."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Codex's sandbox is air-gapped. What practical limitation does this create?"
+      choices:
+        - "It cannot access the file system"
+        - "It cannot install packages not pre-provisioned in the sandbox image"
+        - "It cannot run tests"
+        - "It cannot generate code"
+      correct: 1
+      explanation: "The air-gapped design means no internet connectivity -- the agent cannot install new packages, fetch external resources, or communicate with any external service. All dependencies must be pre-provisioned in the sandbox image. This is the most restrictive approach but provides the strongest security guarantee."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Rank the three isolation strategies from weakest to strongest."
+      choices:
+        - "gVisor < Docker < Firecracker MicroVMs"
+        - "Firecracker MicroVMs < gVisor < Docker"
+        - "Docker < gVisor < Firecracker MicroVMs"
+        - "Docker < Firecracker MicroVMs < gVisor"
+      correct: 2
+      explanation: "Docker provides namespace isolation but shares the host kernel (weakest). gVisor adds an application-level kernel intercepting system calls (moderate). Firecracker MicroVMs provide full hardware-level isolation with dedicated kernels per task, booting in ~125ms with <5 MiB overhead (strongest)."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "ChatGPT Agent is unavailable in which region?"
+      choices:
+        - "Asia-Pacific"
+        - "European Economic Area and Switzerland"
+        - "South America"
+        - "United Kingdom"
+      correct: 1
+      explanation: "ChatGPT Agent is not available in the European Economic Area or Switzerland due to regulatory constraints. This is a significant geographic limitation for organizations with EU operations."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the default safety posture for well-designed agent systems?"
+      choices:
+        - "Default-allow with logging"
+        - "Default-deny -- zero access, explicit grants required"
+        - "Human approval for everything"
+        - "Sandbox-only with no network"
+      correct: 1
+      explanation: "Well-designed agent systems start from a position of zero access and require explicit grants for each capability. Claude Code's sandbox exemplifies this: the agent cannot access files outside its designated directory or make unapproved network calls without the user explicitly expanding permissions."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "An agent's test passes, but it tests the wrong thing. Which failure mode is this?"
+      choices:
+        - "Hallucination cascade"
+        - "Context exhaustion"
+        - "Resource exhaustion"
+        - "Silent failure"
+      correct: 3
+      explanation: "This is a silent failure -- the agent completes the task and reports success, but the result is subtly incorrect. The test passes not because the code is correct, but because the test validates the wrong behavior. This is the most dangerous failure mode because it escapes detection."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "True or False: Jules requires an interactive terminal session."
+      choices:
+        - "True"
+        - "False"
+      correct: 1
+      explanation: "False. Jules is GitHub-native and asynchronous. Tasks are submitted as issues or requests, and results arrive as pull requests. There is no interactive terminal session, making Jules architecturally distinct from Claude Code and better suited for batch-style development work."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "MCP support divides agents into two groups. Which agent has MCP support?"
+      choices:
+        - "Codex"
+        - "Jules"
+        - "ChatGPT Agent"
+        - "Claude Code"
+      correct: 3
+      explanation: "Claude Code supports MCP client connections, along with Cowork, Claude in Chrome, and Copilot Studio. Codex, Jules, and ChatGPT Agent lack MCP support. This dividing line determines which agents have rich external connectivity versus limited integration surfaces. MCP is covered in depth in Module 06."
+
+  # === ROUND 7 DIAGRAMS ===
+
+  # Figure M03-1: Gather-Act-Verify Loop
+  - after: "how-agents-work-the-core-architecture"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m03-1"
+      title: "The Gather-Act-Verify Agent Loop"
+      alt: "Circular flow diagram showing the five-step agent architecture used by all production single-agent systems. Step 1, Gather: the agent reads relevant context such as codebases, web pages, file systems, or databases to understand current state. Platform implementations include Claude Code's Read tool, Codex sandbox filesystem access, and Jules GitHub repository access. Step 2, Plan: the agent reasons about what actions to take next, using extended thinking in Claude models or implicit reasoning in others. Step 3, Act: the agent invokes tools — editing files, running commands, clicking buttons, or calling APIs — through function calling or MCP connections. Step 4, Verify: the agent checks whether the action succeeded by re-reading files, running tests, or inspecting output. Claude Code's 84% reduction in permission prompts comes from verified autonomous operation within sandbox boundaries. Step 5, Loop Decision: if the goal is met, the agent completes; otherwise it returns to Gather with updated context. This is the literal execution model, not a theoretical framework."
+      source: |
+        graph TD
+          G["1. GATHER<br/>Read context: codebase,<br/>web pages, files, databases"]
+          P["2. PLAN<br/>Reason about next actions<br/>Extended thinking / implicit"]
+          A["3. ACT<br/>Invoke tools: edit files,<br/>run commands, call APIs"]
+          V["4. VERIFY<br/>Check results: re-read files,<br/>run tests, inspect output"]
+          L{"5. LOOP<br/>Goal met?"}
+
+          G --> P
+          P --> A
+          A --> V
+          V --> L
+          L -->|"No — continue"| G
+          L -->|"Yes — complete"| Done["Task Complete"]
+
+          subgraph Platforms["Platform Implementations"]
+            direction LR
+            CC["Claude Code<br/>Read/Edit/Bash tools<br/>MCP connections<br/>1M context"]
+            CX["Codex<br/>Sandbox filesystem<br/>Air-gapped (no internet)<br/>Parallel worktrees"]
+            JU["Jules<br/>GitHub repo access<br/>Async execution<br/>PR generation"]
+            CA["ChatGPT Agent<br/>Web browsing<br/>Click/scroll/type<br/>HITL on sensitive ops"]
+          end

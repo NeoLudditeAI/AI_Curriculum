@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Color System
+   AI Frontier Curriculum
+   All text/background pairs meet WCAG 2.2 AA (4.5:1 normal, 3:1 large)
+   UI component borders meet 3:1 against adjacent backgrounds
+   ========================================================================== */
+
+:root {
+  /* Semantic colors — Light mode */
+  --color-text: #1A1A2E;
+  --color-text-secondary: #4A4A5A;
+  --color-bg: #FAFAFA;
+  --color-bg-secondary: #F0F0F5;
+  --color-accent: #1B4D8E;
+  --color-teal: #0D7377;
+  --color-success: #1B7A3D;
+  --color-error: #B71C1C;
+  --color-warning: #E65100;
+  --color-border: #767688;
+
+  /* Part grouping colors */
+  --color-part1-bg: #E8F4FD;
+  --color-part1-border: #90CAF9;
+  --color-part2-bg: #FFF3E0;
+  --color-part2-border: #FFB74D;
+  --color-part3-bg: #E8F5E9;
+  --color-part3-border: #81C784;
+  --color-part4-bg: #F3E5F5;
+  --color-part4-border: #CE93D8;
+}
+
+/* Dark mode — explicit toggle */
+[data-theme="dark"] {
+  --color-text: #E0E0E0;
+  --color-text-secondary: #A0A0B0;
+  --color-bg: #1A1A2E;
+  --color-bg-secondary: #252540;
+  --color-accent: #64B5F6;
+  --color-teal: #4DB6AC;
+  --color-success: #66BB6A;
+  --color-error: #EF5350;
+  --color-warning: #FFA726;
+  --color-border: #7A7AA2;
+
+  --color-part1-bg: #1A2E3E;
+  --color-part1-border: #3A6A8E;
+  --color-part2-bg: #2E2518;
+  --color-part2-border: #8E6A30;
+  --color-part3-bg: #1A2E1E;
+  --color-part3-border: #3A7A44;
+  --color-part4-bg: #2A1E30;
+  --color-part4-border: #7A4A8E;
+}
+
+/* Dark mode — OS preference (when no explicit toggle) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-text: #E0E0E0;
+    --color-text-secondary: #A0A0B0;
+    --color-bg: #1A1A2E;
+    --color-bg-secondary: #252540;
+    --color-accent: #64B5F6;
+    --color-teal: #4DB6AC;
+    --color-success: #66BB6A;
+    --color-error: #EF5350;
+    --color-warning: #FFA726;
+    --color-border: #7A7AA2;
+
+    --color-part1-bg: #1A2E3E;
+    --color-part1-border: #3A6A8E;
+    --color-part2-bg: #2E2518;
+    --color-part2-border: #8E6A30;
+    --color-part3-bg: #1A2E1E;
+    --color-part3-border: #3A7A44;
+    --color-part4-bg: #2A1E30;
+    --color-part4-border: #7A4A8E;
+  }
+}

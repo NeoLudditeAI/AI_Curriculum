@@ -1,0 +1,205 @@
+# build/annotations/module-07.yaml
+# Annotations for Module 07: Skills, Plugins & Automation
+# Section IDs derived from deliverables/html/modules/module-07.html
+
+module: "07"
+annotations:
+  # ── Opening Hook ──────────────────────────────────────────────────────
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Two developers, two 'skills,' two very different outcomes"
+      content: "Developer A writes a 30-line markdown file, commits it to Git, and her Claude agent picks it up automatically. Developer B writes a JavaScript module, publishes it to the OpenClaw ClawHub registry, and discovers three months later that 15% of the skills in that registry contain malicious code. Both are using 'skills.' The architectures could not be more different. This module maps the spectrum -- from Claude's zero-infrastructure markdown to OpenClaw's powerful-but-dangerous code execution -- and the automation layer that makes agents work without human initiation."
+
+  # Curiosity prompt: skills meaning
+  - after: "skills-architecture-across-platforms"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Five platforms implement 'skills.' None of them mean the same thing by the word."
+      content: "Claude Skills are markdown files with YAML frontmatter -- purely instructional, no code execution. OpenAI has two separate systems: Custom GPTs (system prompt + docs + API Actions) and Codex Skills (instructions + shell scripts). OpenClaw Skills are full JavaScript/TypeScript modules with arbitrary code execution. Copilot Studio uses a visual builder with code-behind support. The word 'skill' appears on every platform's marketing page, but the security model, authoring format, distribution channel, and capability boundaries are fundamentally different in each case."
+
+  # ── Skills Architecture Across Platforms ──────────────────────────────
+  - after: "claude-skills"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Why can't a Claude Skill execute code directly?"
+      choices: ["Security design -- skills are purely instructional, shaping behavior through natural language", "Anthropic has not implemented code execution yet", "Claude Code does not support external scripts", "Skills only work when the agent is offline"]
+      correct: 0
+      explanation: "Claude Skills are deliberately designed as markdown files that shape agent behavior through natural language instructions. All code execution flows through the agent's native capabilities or MCP tools (Module 06). This is a deliberate design choice prioritizing auditability and safety -- you can read a skill file and know exactly what it instructs the agent to do."
+
+  - after: "custom-gpts-openai"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "GPT Store discovery and revenue sharing details"
+      content: "Over 3 million Custom GPTs have been created, but only approximately 159,000 are publicly listed and active in the GPT Store. This 95% gap reflects abandoned, private, and low-quality entries. Revenue sharing for creators was introduced in mid-2025, though most individual creators hit a soft ceiling of $100-500/month. Enterprise customers can deploy private Custom GPTs visible only within their organization, creating a parallel ecosystem invisible to the public store metrics."
+
+  - after: "openclaw-skills"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "What makes ClawHub's security posture fundamentally different from the Claude Plugins marketplace?"
+      choices: ["ClawHub has more skills available", "ClawHub skills execute arbitrary code with no gatekeeping; Claude Plugins go through an approval process with no code execution", "ClawHub is cloud-hosted while Claude Plugins are local", "ClawHub requires authentication while Claude Plugins do not"]
+      correct: 1
+      explanation: "The core distinction is execution model plus gatekeeping. OpenClaw skills can execute arbitrary code with the permissions of the host process, and ClawHub has no mandatory security review -- leading to a documented 12-20% malicious skill rate (see Module 05 for the ClawHavoc analysis). Claude Skills cannot execute code at all, and the Plugins marketplace has an approval process. This is the security-as-dividing-line theme of this module."
+
+  - after: "copilot-studio"
+    component: self-explanation-prompt
+    data:
+      prompt: "Before looking at the comparison table, rank the five skills platforms from most secure to least secure and explain your reasoning."
+      expert_answer: "From most to least secure: (1) Copilot Studio -- enterprise RBAC, DLP policies, Agent 365 monitoring, and integration with Azure AD. (2) Claude Skills -- no code execution at all, purely instructional markdown, sandboxed via agent. (3) Custom GPTs -- API-only external access (no local filesystem), but system prompts can be extracted via prompt injection (OWASP #1 risk for LLMs). (4) Codex Skills -- script execution but within a cloud sandbox with limited blast radius. (5) OpenClaw Skills -- unrestricted code execution with host process permissions, no code signing, no mandatory review, 12-20% malicious rate on ClawHub. The ranking reflects a tradeoff: more security generally means less flexibility and power."
+
+  # ── Skills Architecture Comparison ────────────────────────────────────
+  - after: "skills-architecture-comparison"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "An enterprise with strict compliance requirements needs to extend their AI agents with custom capabilities. Which platform's skills system provides the strongest governance controls?"
+      choices: ["Claude Skills", "Custom GPTs", "OpenClaw Skills", "Copilot Studio"]
+      correct: 3
+      explanation: "Copilot Studio integrates with Azure AD for identity, DLP policies for data protection, and Agent 365 for monitoring and compliance. It provides full audit trails and role-based access control. For regulated industries, governance capabilities are as important as technical flexibility. Claude Skills are safe (no code execution) but lack enterprise governance tooling. OpenClaw has no governance at all."
+
+  # ── Plugin Systems and Marketplaces ───────────────────────────────────
+  - after: "plugin-systems-and-marketplaces"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Marketplace size context and growth rates"
+      content: "The marketplace landscape as of March 2026: GPT Store leads by volume (~3M created, ~159K active), but discoverability is a known problem. Claude Plugins marketplace launched February 2026 with a quality-over-quantity approach and an approval process. The Claude Marketplace (March 2026) is a separate e-commerce store for enterprise services from partners like Snowflake, GitLab, and Harvey AI. Power Platform has 1,400+ connectors that now serve double duty as Copilot Studio agent capabilities. Google has no dedicated AI marketplace, routing instead through the existing Workspace Marketplace. ClawHub has 13,700+ skills but significant security concerns."
+
+  # ── Scheduled Tasks and Event-Driven Automation ───────────────────────
+  - after: "event-driven-patterns"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which platform's coding agent can trigger skills in response to repository events like pull request creation?"
+      choices: ["Claude Code", "GitHub Copilot", "OpenAI Codex", "Google Jules"]
+      correct: 2
+      explanation: "OpenAI's Codex is the most event-driven native AI agent system. Codex Skills can trigger on specific repository events: pull request opened, pull request updated, issue created, issue labeled, and push to a monitored branch. This makes Codex a viable CI/CD participant. Other platforms delegate event-driven workflows to automation platforms like Zapier or Power Automate."
+
+  - after: "event-driven-patterns"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "What is the current gap across all major AI platforms for event-driven automation?"
+      choices: ["No platform supports time-based scheduling", "No unified event-to-agent routing layer exists as a first-class feature", "Events can only trigger one agent at a time", "Event-driven patterns require MCP exclusively"]
+      correct: 1
+      explanation: "No AI platform offers a general-purpose event subscription and routing system as a first-class feature. Today, connecting 'when X happens' to 'agent Y should respond' requires either platform-specific mechanisms (Codex repo events, Power Automate webhooks) or third-party automation platforms (Zapier, Make). This fragmentation is the most significant gap in the current automation landscape."
+
+  - after: "scheduled-tasks-comparison"
+    component: accordion
+    variant: advanced-detail
+    data:
+      title: "MCP-mediated event pattern: an emerging design"
+      content: "A design pattern is emerging where MCP servers expose event subscription capabilities. An agent connects to an MCP server that watches for changes -- new database rows, file modifications, message arrivals -- and notifies the agent when events occur. This is not yet standardized in the MCP specification, but several community MCP servers implement it. If this pattern gains traction and becomes part of the official spec, it could provide a protocol-level solution to the event-to-agent routing gap. Watch the MCP specification repository for proposals around server-initiated notifications and event subscriptions."
+
+  # ── Automation Platforms ──────────────────────────────────────────────
+  - after: "automation-platform-comparison"
+    component: self-explanation-prompt
+    data:
+      prompt: "A startup with 20 employees uses Slack, GitHub, Google Workspace, HubSpot, and Stripe. They need to automate daily reporting and event-driven notifications. Budget is constrained. Which automation platform would you recommend and why?"
+      expert_answer: "Make is the strongest recommendation for this profile. Reasoning: (1) Cost -- Make's operation-based pricing is roughly 10x cheaper than Zapier for high-volume workflows. The Core plan at $9/month provides 10,000 operations vs. Zapier's $29.99 for 750 tasks. (2) Bidirectional MCP -- Make can both receive commands from AI agents and connect to other MCP servers, enabling richer automation chains. (3) Integration coverage -- Make supports 3,000+ apps, which covers Slack, GitHub, Google Workspace, HubSpot, and Stripe. (4) Visual builder -- Make's graph-based scenario builder provides more architectural control for complex multi-step workflows. Zapier would be the fallback if any required integration is missing from Make's catalog (Zapier covers 8,000+ apps). Power Automate is overkill for a 20-person startup not in the Microsoft ecosystem."
+
+  # ── Key Takeaways: Section Review ─────────────────────────────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Rank these skills platforms from safest to riskiest for deploying in a production environment: Claude Skills, OpenClaw Skills, Copilot Studio, Custom GPTs."
+      choices: ["Copilot Studio > Claude Skills > Custom GPTs > OpenClaw Skills", "Claude Skills > Copilot Studio > Custom GPTs > OpenClaw Skills", "OpenClaw Skills > Custom GPTs > Claude Skills > Copilot Studio", "Custom GPTs > OpenClaw Skills > Copilot Studio > Claude Skills"]
+      correct: 0
+      explanation: "Copilot Studio leads with enterprise RBAC, DLP, and Agent 365 governance. Claude Skills are next -- no code execution means minimal attack surface. Custom GPTs allow external API calls but no local access (though system prompt extraction is a known risk). OpenClaw Skills are riskiest -- unrestricted code execution with no mandatory review and a 12-20% malicious rate on ClawHub."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which automation platform is approximately 10x cheaper than Zapier for high-volume workflows?"
+      choices: ["Power Automate", "Make", "OpenClaw cron", "Claude Cowork"]
+      correct: 1
+      explanation: "Make's operation-based pricing makes it roughly 10x cheaper than Zapier for the same throughput. A workflow costing $30/month on Zapier might cost $3/month on Make. Make's Core plan provides 10,000 operations/month for $9 vs. Zapier Professional's 750 tasks for $29.99."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which is the only AI coding agent that natively supports event-driven triggers from repository activity?"
+      choices: ["Claude Code", "GitHub Copilot", "OpenAI Codex", "Google Antigravity"]
+      correct: 2
+      explanation: "Codex is the most event-driven native AI agent. Its Skills can trigger on PR opened, PR updated, issue created, issue labeled, and push events. Other coding agents (Claude Code, GitHub Copilot, Antigravity) do not have native repository event triggers -- they rely on external automation platforms for event-driven workflows."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Claude Cowork's scheduled tasks have several limitations. Which of these is NOT a current limitation?"
+      choices: ["No conditional triggering (purely time-based)", "No retry mechanism for failed tasks", "Cannot access MCP servers during scheduled runs", "No task chaining (each scheduled task is independent)"]
+      correct: 2
+      explanation: "Scheduled tasks in Cowork execute with full access to the user's configured tools and MCP servers -- this is not a limitation. The actual limitations are: purely time-based triggers (no conditional/event triggers), no automatic retry for failed tasks, no task chaining, and no built-in alerting for failures."
+
+  # ── Module Assessment ─────────────────────────────────────────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the authoring format for Claude Skills?"
+      choices: ["JavaScript modules with a skill interface", "Visual drag-and-drop builder", "Markdown files with YAML frontmatter", "Python scripts with decorators"]
+      correct: 2
+      explanation: "Claude Skills are markdown files with YAML frontmatter that declares the skill's name, description, and trigger conditions. The body contains natural-language instructions the agent follows. No code execution -- skills are purely instructional, shaping behavior through prompt engineering rather than programmatic interfaces."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "How many Custom GPTs have been created vs. how many are publicly active in the GPT Store?"
+      choices: ["~500K created, ~50K active", "~3M created, ~159K active", "~1M created, ~500K active", "~10M created, ~1M active"]
+      correct: 1
+      explanation: "Over 3 million Custom GPTs have been created, but only approximately 159,000 are publicly listed and active in the GPT Store. The 95% gap reflects abandoned, private, and low-quality entries. This creates a discoverability challenge -- finding high-quality GPTs requires filtering through significant noise."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "ChatGPT Tasks has a notable limitation for power users. What is it?"
+      choices: ["Tasks cannot access the internet", "Maximum of 10 active tasks", "Tasks can only run on weekdays", "Tasks require a Team subscription"]
+      correct: 1
+      explanation: "ChatGPT Tasks caps users at 10 active scheduled tasks. For power users wanting to automate many workflows, this is restrictive. Additional limitations: tasks cannot trigger other tasks, no webhook or event-based triggers, no access to external tools beyond web browsing and code interpreter, and no failure retry."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "How does MCP (Module 06) relate to Claude Skills in practice?"
+      choices: ["MCP replaces the need for skills entirely", "Claude Skills define the intent (what to do); MCP servers provide the capability (how to connect to external services)", "Skills and MCP are separate systems that cannot interact", "MCP is required for every skill to function"]
+      correct: 1
+      explanation: "Claude Skills compose with MCP servers: the skill defines the agent's behavior through natural language instructions, while MCP servers provide the external tool access. A skill might instruct the agent to 'review open pull requests and summarize blockers,' and the GitHub MCP server provides the tools to actually read PRs. The skill is the intent layer; MCP is the capability layer."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Compare the security model of OpenClaw Skills (Module 05) with the enterprise governance of Copilot Studio. What does each prioritize?"
+      choices: ["OpenClaw prioritizes governance; Copilot Studio prioritizes flexibility", "Both prioritize security equally but use different approaches", "OpenClaw prioritizes maximum flexibility and community-driven development; Copilot Studio prioritizes enterprise control, compliance, and audit trails", "OpenClaw prioritizes cloud hosting; Copilot Studio prioritizes local execution"]
+      correct: 2
+      explanation: "OpenClaw's code-first approach (JavaScript/TypeScript modules, arbitrary execution, community registry) maximizes power and flexibility at the cost of security -- the 12-20% malicious rate on ClawHub is the direct consequence. Copilot Studio's visual builder with Azure AD integration, DLP policies, and Agent 365 monitoring prioritizes enterprise control and compliance at the cost of flexibility and developer autonomy. This tradeoff between power and safety is a recurring theme across the agent ecosystem (Module 03, Module 05)."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which automation platform supports bidirectional MCP -- acting as both an MCP server and an MCP client within its workflows?"
+      choices: ["Zapier", "Make", "Power Automate", "Claude Cowork"]
+      correct: 1
+      explanation: "Make supports bidirectional MCP: it acts as an MCP server (controllable by AI agents) and as an MCP client (can connect to other MCP servers within its scenario workflows). Zapier only acts as an MCP server. This bidirectional capability means Make scenarios can both receive AI agent commands and invoke external MCP tools, creating richer automation chains."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Gemini Scheduled Actions has a unique advantage over Claude Cowork and ChatGPT Tasks for scheduled automation. What is it?"
+      choices: ["More tasks allowed per month", "Deep native integration with Google Workspace services (Calendar, Gmail, Drive, Sheets)", "Supports event-driven triggers", "Lower pricing"]
+      correct: 1
+      explanation: "Gemini Scheduled Actions benefits from deep integration with Google services -- a scheduled action can query Gmail, update a Sheet, and create a Calendar event in a single run without requiring third-party automation platforms. This gives Gemini the broadest first-party service access of any scheduled task system, though it is limited to Google's own ecosystem."

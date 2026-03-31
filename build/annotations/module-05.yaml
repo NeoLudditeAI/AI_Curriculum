@@ -1,0 +1,417 @@
+# build/annotations/module-05.yaml
+# Annotations for Module 05: OpenClaw & Open Agent Ecosystem
+# Section IDs extracted from deliverables/html/modules/module-05.html
+# Quiz answers verified against modules/MODULE-05-openclaw-and-open-agents.md
+
+module: "05"
+annotations:
+
+  # --- Opening Hook (accordion, first annotation) ---
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "The healthcare startup's dilemma"
+      content: "A healthcare startup needs an AI agent that processes patient data. Their legal team says: 'No data can leave our servers. Period.' This eliminates Claude, ChatGPT, Gemini, and Copilot -- all cloud-managed. But their CTO finds OpenClaw: MIT-licensed, runs locally, uses any LLM (including self-hosted models via Ollama). Problem solved? Not so fast. Before they write a line of code, they need to answer: what happens when 12-20% of skills in the registry are malicious? When Microsoft says the platform is 'unsuitable for standard workstations'? When the project's founder just left for OpenAI? This module is the answer sheet."
+
+  # --- Concept Check: Gateway architecture ---
+  - after: "the-gateway"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "The Gateway listens on port 18789. Why is the single-entry-point design both an advantage and a vulnerability?"
+      choices:
+        - "It is only an advantage -- centralized is always better"
+        - "It centralizes logging and observability but creates a high-value attack target"
+        - "It is only a vulnerability -- distributed is always better"
+        - "Port 18789 is not a standard port, so it is automatically hidden"
+      correct: 1
+      explanation: "All interactions flow through one point -- enabling uniform logging, rate limiting, and access controls. But this choke point is exactly what the ClawJacked vulnerability exploited for WebSocket hijacking. Architecture decisions always have security tradeoffs."
+
+  # --- Self-Explanation: Memory System comparison ---
+  - after: "memory-system"
+    component: self-explanation-prompt
+    data:
+      prompt: "Compare OpenClaw's file-based memory system (SOUL.md, MEMORY.md, daily notes) to Claude Memory from Module 02. What does each approach trade off?"
+      expert_answer: "OpenClaw: Fully transparent -- every memory file is human-readable and editable. You can see, modify, and delete any memory. But it requires manual management with no automatic curation or summarization. Claude Memory: Opaque -- processed asynchronously by Anthropic's servers with ~24-hour delay. Hands-off -- the system curates automatically. But you cannot see or control the curation logic. OpenClaw trades convenience for control and transparency. Claude trades transparency for automation. The right choice depends on whether the user (or organization) has the technical capacity and desire to manage memory manually."
+
+  # --- Concept Check: Deployment options ---
+  - after: "deployment-options"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which deployment option is recommended for production use, and why?"
+      choices:
+        - "Local -- it is the fastest"
+        - "Docker -- it provides network isolation between agent and host"
+        - "Cloud -- it is always available"
+        - "Any option -- they are equivalent in security"
+      correct: 1
+      explanation: "Docker provides a degree of isolation between the agent runtime and the host system. Given the ClawHub security landscape -- where 12-20% of skills are intentionally malicious -- this isolation is a critical security layer. The Docker recommendation connects directly to the sandboxing strategies covered in Module 03."
+
+  # --- Section Review: OpenClaw Architecture ---
+  - after: "deployment-options"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What communication protocol do channels translate platform-specific messages into?"
+      choices:
+        - "HTTP REST"
+        - "GraphQL"
+        - "OpenClaw's internal protocol"
+        - "gRPC"
+      correct: 2
+      explanation: "Channels are the interface layer translating platform-specific message formats (Slack, Discord, Teams, web) into OpenClaw's internal protocol. This is conceptually similar to how MCP servers expose tools through a standardized protocol (Module 06), but at the user-interaction layer."
+
+  - after: "deployment-options"
+    component: quiz
+    variant: section-review
+    data:
+      question: "The Pi Agent Runtime implements which reasoning pattern?"
+      choices:
+        - "Chain-of-Thought only"
+        - "ReAct -- Reason-Act-Observe"
+        - "Tree-of-Thoughts"
+        - "LATS"
+      correct: 1
+      explanation: "The Pi Agent Runtime implements the ReAct pattern (Reason-Act-Observe) -- the same fundamental architecture used by Claude Code and other modern agents (Module 03). OpenClaw adds a two-phase verification step where critical actions are confirmed before execution."
+
+  - after: "deployment-options"
+    component: quiz
+    variant: section-review
+    data:
+      question: "How does OpenClaw's Heartbeat differ from Claude's scheduled tasks?"
+      choices:
+        - "Heartbeat is faster"
+        - "Heartbeat runs locally on the host machine; Claude's scheduled tasks are server-side"
+        - "They are identical"
+        - "Heartbeat only works with Anthropic models"
+      correct: 1
+      explanation: "The Heartbeat fires at 30-minute intervals on the local machine, reading HEARTBEAT.md for pending tasks. Claude's scheduled tasks run server-side on Anthropic's infrastructure. The local approach means data never leaves the environment, but the host machine must remain running -- if it sleeps, heartbeats stop."
+
+  - after: "deployment-options"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Name the three memory files in OpenClaw's hierarchy."
+      choices:
+        - "config.yaml, prompts.md, history.log"
+        - "SOUL.md, MEMORY.md, daily notes"
+        - "system.md, user.md, context.md"
+        - "prompt.txt, memory.db, cache.json"
+      correct: 1
+      explanation: "SOUL.md defines personality and behavioral guidelines (closest to a system prompt). MEMORY.md stores decisions and accumulated knowledge. Daily notes provide timestamped interaction records. All are human-readable and editable -- a deliberate design choice prioritizing transparency over sophistication."
+
+  # --- Concept Gate: Before Security Crisis ---
+  - after: "how-skills-work"
+    component: concept-gate
+    data:
+      title: "Before exploring ClawHub security"
+      prerequisites:
+        - "I understand what a skills registry does (like an app store for agent capabilities)"
+        - "I know that OpenClaw skills run INSIDE the agent's process, not in isolation"
+        - "I recall Module 03's sandboxing strategies and their relative strengths (Docker < gVisor < Firecracker)"
+      continue_section: "the-security-crisis"
+
+  # --- Curiosity Prompt: Security ---
+  - after: "the-security-crisis"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "The gap between popularity and security"
+      content: "Between 12% and 47% of OpenClaw skills are malicious, depending on who is counting. The difference is not just noise -- it reveals fundamentally different definitions of 'malicious.' Koi Security counts confirmed malware. Bitdefender includes suspicious behavior. Snyk includes unintentional flaws. A cross-platform study includes dependency vulnerabilities. Understanding what each number actually measures is essential for rational risk assessment."
+
+  # --- Concept Check: ClawHavoc attack vectors ---
+  - after: "the-security-crisis"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "The ClawHavoc campaign planted 1,184 malicious skills. What were the two primary attack vectors?"
+      choices:
+        - "Buffer overflow and SQL injection"
+        - "Atomic Stealer malware and ClickFix 2.0 social engineering"
+        - "Phishing and ransomware"
+        - "Cross-site scripting and CSRF"
+      correct: 1
+      explanation: "Atomic Stealer exfiltrated credentials, browser cookies, cryptocurrency wallets, and SSH keys from host machines. ClickFix 2.0 presented fake error dialogs prompting users to run shell commands that downloaded additional malware. Both exploited ClawHub's lack of vetting before February 7, 2026."
+
+  # --- Self-Explanation: Malicious rate variance ---
+  - after: "the-security-crisis"
+    component: self-explanation-prompt
+    data:
+      prompt: "The malicious rate estimates range from 11.9% to 46.8%. Explain why these numbers are not contradictory -- what accounts for the variance?"
+      expert_answer: "Methodological scope differs. Koi Security (11.9%) counts only confirmed malware -- skills intentionally designed to harm. Bitdefender (~20%) includes suspicious behavioral patterns beyond confirmed malware. Snyk (36.82%) includes unintentional security flaws like vulnerable dependencies. The cross-platform study (46.8%) includes all dependency vulnerabilities. A skill can be vulnerable (bad dependency) without being malicious (intentionally harmful). For practical risk assessment: ~12-20% represents intentionally malicious skills, ~37-47% represents the broader vulnerability surface."
+
+  # --- Concept Check: Mitigation sufficiency ---
+  - after: "the-security-crisis"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Are the current ClawHub mitigations (VirusTotal, behavioral analysis, skill removal) sufficient to address the fundamental security risk?"
+      choices:
+        - "Yes -- they cover all attack vectors"
+        - "No -- skills still run inside the agent process with full host access in non-Docker deployments"
+        - "Partially -- they help but only with known threats"
+      correct: 1
+      explanation: "The fundamental architectural issue remains unaddressed: skills run inside the agent process with full access to the host environment. VirusTotal catches known malware signatures but not novel payloads. Behavioral analysis produces false positives and false negatives. Registry-level scanning cannot solve a runtime-level isolation problem. This connects directly to the sandboxing hierarchy from Module 03."
+
+  # --- Section Review: Local-First Philosophy ---
+  - after: "the-tradeoff"
+    component: quiz
+    variant: section-review
+    data:
+      question: "For an organization with strict data residency requirements, what is the primary advantage of OpenClaw over closed platforms?"
+      choices:
+        - "Lower cost"
+        - "Better models"
+        - "Data sovereignty -- no data leaves their infrastructure"
+        - "More features"
+      correct: 2
+      explanation: "With OpenClaw running locally or self-hosted, no data leaves the network unless explicitly configured (e.g., using a cloud LLM provider). For organizations with legal, healthcare, government, or defense data residency requirements, this is not a preference but a hard constraint."
+
+  - after: "the-tradeoff"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Community estimates suggest what range of cost savings for OpenClaw at scale?"
+      choices:
+        - "10-30%"
+        - "30-50%"
+        - "50-70%"
+        - "70-90%"
+      correct: 3
+      explanation: "Community estimates suggest 70-90% cost savings over closed platforms for high-volume usage when using a mix of cloud and local models. The savings are real but come with significant time investment in setup, maintenance, and security hardening."
+
+  - after: "the-tradeoff"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What is the key tradeoff a $20/month Claude Pro subscription offers vs. an OpenClaw deployment?"
+      choices:
+        - "Claude has better models; OpenClaw has worse models"
+        - "Claude: working, secure, maintained system. OpenClaw: unlimited customization but self-managed everything"
+        - "Claude is faster; OpenClaw is slower"
+        - "Claude supports more languages; OpenClaw is English only"
+      correct: 1
+      explanation: "A Claude Pro subscription gives you a working, secure, maintained agent system for $20/month. OpenClaw gives unlimited customization and data sovereignty but requires you to handle security, updates, LLM provider management, and infrastructure. For most users, closed platforms offer better risk-adjusted value -- especially given ClawHub security."
+
+  # --- Concept Check: NemoClaw's key addition ---
+  - after: "status-and-availability"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "NemoClaw's OpenShell addresses the fundamental security gap in standard OpenClaw. What is that gap?"
+      choices:
+        - "Lack of encryption"
+        - "No user authentication"
+        - "No isolation between skills and the host environment"
+        - "Poor documentation"
+      correct: 2
+      explanation: "In standard OpenClaw, skills run inside the agent process with full host access. OpenShell constrains network access, file access, and inference routing -- limiting a compromised skill's blast radius to the sandbox. This applies the sandboxing principles from Module 03 (Docker < gVisor < Firecracker) to the OpenClaw ecosystem."
+
+  # --- Accordion: NVIDIA enterprise strategy ---
+  - after: "status-and-availability"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "NVIDIA's enterprise AI strategy"
+      content: "NemoClaw is part of NVIDIA's broader enterprise AI ecosystem: NeMo for model customization, TensorRT for inference optimization, and Triton Inference Server for production serving. NemoClaw's privacy router drives GPU hardware demand by making local inference viable for enterprise -- if you can run high-quality inference locally, you need NVIDIA hardware. NemoClaw is both a genuine enterprise solution and a GPU demand driver."
+
+  # --- Concept Check: Governance transition ---
+  - after: "governance-transition"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Why does the founder's departure to OpenAI make foundation governance more important, not less?"
+      choices:
+        - "Foundations are always better than individual maintainers"
+        - "To prevent OpenClaw from becoming OpenAI-aligned, plus reducing single-point-of-failure risk"
+        - "The founder was the only developer"
+        - "Legal requirements mandate foundation governance"
+      correct: 1
+      explanation: "Foundation governance ensures neutrality (not aligned with any one company -- especially important with the founder at OpenAI), sustainability (not dependent on one maintainer), and enterprise confidence (the governance structure enterprises require before committing to a dependency). All three factors became more urgent after the founder's departure."
+
+  # --- Module Assessment (after Key Takeaways) ---
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Name the three main components of OpenClaw's architecture."
+      choices:
+        - "Server, Client, Database"
+        - "Gateway, Channels, Pi Agent Runtime"
+        - "Frontend, Backend, API"
+        - "Runtime, Registry, Router"
+      correct: 1
+      explanation: "The Gateway routes all communications (port 18789). Channels translate platform-specific messages (Slack, Discord, web) into OpenClaw's internal protocol. The Pi Agent Runtime is the cognitive core implementing the ReAct pattern via the AgentSession abstraction."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What port does the Gateway listen on?"
+      choices:
+        - "8080"
+        - "3000"
+        - "18789"
+        - "443"
+      correct: 2
+      explanation: "The Gateway listens on port 18789 and serves as the central message router. This known port is both an observability advantage (all traffic flows through one point) and a security concern (the ClawJacked WebSocket hijacking vulnerability exploited this exact choke point)."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What was the ClawHavoc campaign?"
+      choices:
+        - "A marketing initiative by OpenClaw"
+        - "A coordinated malware campaign that planted 1,184 malicious skills on ClawHub"
+        - "A security audit conducted by Microsoft"
+        - "A skills registry redesign"
+      correct: 1
+      explanation: "ClawHavoc was discovered in January 2026 and planted 1,184 malicious skills using Atomic Stealer malware and ClickFix 2.0 social engineering. It exploited ClawHub's lack of vetting and demonstrated that the open-publishing model created a target-rich environment for malware distribution."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "The conservative estimate of intentionally malicious ClawHub skills is approximately:"
+      choices:
+        - "1-5%"
+        - "5-10%"
+        - "12-20%"
+        - "35-47%"
+      correct: 2
+      explanation: "Koi Security (11.9%) and Bitdefender (~20%) provide the best estimates of intentionally malicious skills. The higher figures (Snyk 36.82%, cross-platform 46.8%) include unintentional security flaws and dependency vulnerabilities -- broader but measuring different things."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which organization said OpenClaw is 'unsuitable for standard workstations'?"
+      choices:
+        - "Google"
+        - "Anthropic"
+        - "Microsoft"
+        - "NVIDIA"
+      correct: 2
+      explanation: "Microsoft's Security Blog (February 2026) stated OpenClaw is 'unsuitable for standard workstations' and recommended isolated virtual machines with dedicated credentials. 1Password separately advised: 'Do not run on a company device. There is not a safe way.'"
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "OpenClaw's memory system uses what approach?"
+      choices:
+        - "Vector database with embeddings"
+        - "File-based hierarchy: SOUL.md, MEMORY.md, daily notes"
+        - "Cloud-managed with automatic curation"
+        - "SQLite database"
+      correct: 1
+      explanation: "OpenClaw uses a file-based, hierarchical memory system with SOUL.md (personality), MEMORY.md (decisions and knowledge), and daily notes (timestamped records). Retrieval uses hybrid search combining BM25 and vector embeddings. This prioritizes transparency and user control over sophistication."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "NemoClaw adds what two key enterprise layers?"
+      choices:
+        - "Load balancer and CDN"
+        - "OpenShell sandbox and Privacy Router"
+        - "Authentication and authorization"
+        - "Monitoring and alerting"
+      correct: 1
+      explanation: "OpenShell provides sandboxed execution constraining skill network, file, and inference access. The Privacy Router implements policy-based routing of LLM requests between local and cloud models based on data classification, cost, and latency. Together they address the isolation and data sovereignty gaps in standard OpenClaw."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "True or False: OpenClaw can only use Anthropic's models."
+      choices:
+        - "True"
+        - "False"
+      correct: 1
+      explanation: "False. OpenClaw supports Anthropic (primary/recommended), OpenAI, Google, Ollama (for local models), OpenRouter, and custom API endpoints. It includes auto-failover between providers. This LLM provider flexibility is a defining characteristic and a key differentiator from closed platforms that lock you into their own models."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "The Heartbeat system fires at what interval?"
+      choices:
+        - "5 minutes"
+        - "15 minutes"
+        - "30 minutes"
+        - "60 minutes"
+      correct: 2
+      explanation: "The Heartbeat fires at 30-minute intervals, reading HEARTBEAT.md for pending tasks like checking email, calendar events, and notifications. Unlike Claude's server-side scheduled tasks, the Heartbeat runs locally -- it works only when the host machine is running."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "For a healthcare organization with strict data residency requirements, would you recommend OpenClaw or a closed platform?"
+      choices:
+        - "Closed platform -- it is more secure"
+        - "OpenClaw (self-hosted) with Docker, no ClawHub skills, and NemoClaw when GA"
+        - "Neither -- AI agents are not suitable for healthcare"
+        - "Closed platform with a data processing agreement"
+      correct: 1
+      explanation: "OpenClaw self-hosted meets the data residency requirement (no data leaves the infrastructure). Docker deployment is mandatory for isolation. ClawHub skills should be avoided or heavily vetted given the 12-20% malicious rate. NemoClaw's OpenShell and Privacy Router would add enterprise hardening when GA. A closed platform cannot meet the 'no data leaves our servers' requirement regardless of agreements -- the data still transits provider infrastructure."
+
+  # --- Diagram: M05-1 OpenClaw Architecture Stack ---
+  - after: "openclaw-architecture"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m05-1"
+      title: "OpenClaw Architecture Stack"
+      alt: "Three-layer OpenClaw architecture diagram. Top layer shows five channel interfaces: Web, Slack, Discord, Teams, and SMS, each connecting down to the middle layer. The middle layer is the Gateway, a Node.js process on port 18789 that serves as the central message router with channel adapters. The bottom layer is the Pi Agent Runtime containing the ReAct loop, skills engine, memory system with SOUL.md and MEMORY.md files, and hybrid search using BM25 plus vector embeddings. A dashed security boundary line marks the Gateway as a high-value target, referencing the ClawJacked vulnerability."
+      source: |
+        graph TD
+          subgraph Channels["Channels (Interface Layer)"]
+            CH_Web["Web UI"]
+            CH_Slack["Slack"]
+            CH_Discord["Discord"]
+            CH_Teams["Teams"]
+            CH_SMS["SMS"]
+          end
+
+          subgraph GW["Gateway (Port 18789)"]
+            GW_Router["Message Router"]
+            GW_Adapt["Channel Adapters"]
+            GW_Router --- GW_Adapt
+          end
+
+          subgraph Runtime["Pi Agent Runtime"]
+            RT_React["ReAct Loop<br/>(Reason-Act-Observe)"]
+            RT_Skills["Skills Engine<br/>(30+ modules)"]
+            RT_Memory["Memory System"]
+            RT_Soul["SOUL.md"]
+            RT_Mem["MEMORY.md"]
+            RT_Search["Hybrid Search<br/>(BM25 + vectors)"]
+            RT_React --> RT_Skills
+            RT_React --> RT_Memory
+            RT_Memory --> RT_Soul
+            RT_Memory --> RT_Mem
+            RT_Memory --> RT_Search
+          end
+
+          subgraph LLM["LLM Providers"]
+            LLM_A["Anthropic<br/>(primary)"]
+            LLM_O["OpenAI"]
+            LLM_G["Google"]
+            LLM_Ol["Ollama<br/>(local)"]
+          end
+
+          CH_Web --> GW_Adapt
+          CH_Slack --> GW_Adapt
+          CH_Discord --> GW_Adapt
+          CH_Teams --> GW_Adapt
+          CH_SMS --> GW_Adapt
+          GW_Router --> RT_React
+          RT_React --> LLM_A
+          RT_React -.->|"auto-failover"| LLM_O
+          RT_React -.->|"auto-failover"| LLM_G
+          RT_React -.->|"auto-failover"| LLM_Ol

@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 07: Skills, Plugins &amp; Automation — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="07">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 3: Building &amp; Automating</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 07: Skills, Plugins &amp; Automation</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 07: Skills, Plugins &amp; Automation</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">25-30 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prerequisites" class="toc__link" data-toc-active>Prerequisites</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#skills-architecture-across-platforms" class="toc__link" data-toc-active>Skills Architecture Across Platforms</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#claude-skills" class="toc__link" data-toc-active>Claude Skills</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#custom-gpts-openai" class="toc__link" data-toc-active>Custom GPTs (OpenAI)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#codex-skills-openai" class="toc__link" data-toc-active>Codex Skills (OpenAI)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openclaw-skills" class="toc__link" data-toc-active>OpenClaw Skills</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-no-dedicated-skills-system" class="toc__link" data-toc-active>Google: No Dedicated Skills System</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#copilot-studio" class="toc__link" data-toc-active>Copilot Studio</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#skills-architecture-comparison" class="toc__link" data-toc-active>Skills Architecture Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#plugin-systems-and-marketplaces" class="toc__link" data-toc-active>Plugin Systems and Marketplaces</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#claude-plugins-marketplace" class="toc__link" data-toc-active>Claude Plugins Marketplace</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#gpt-store" class="toc__link" data-toc-active>GPT Store</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-extensions-and-add-ons" class="toc__link" data-toc-active>Google Extensions and Add-ons</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#power-platform-marketplace" class="toc__link" data-toc-active>Power Platform Marketplace</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#scheduled-tasks-and-event-driven-automation" class="toc__link" data-toc-active>Scheduled Tasks and Event-Driven Automation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#claude-cowork-scheduled-tasks" class="toc__link" data-toc-active>Claude Cowork Scheduled Tasks</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#chatgpt-tasks" class="toc__link" data-toc-active>ChatGPT Tasks</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#gemini-scheduled-actions" class="toc__link" data-toc-active>Gemini Scheduled Actions</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#event-driven-patterns" class="toc__link" data-toc-active>Event-Driven Patterns</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#scheduled-tasks-comparison" class="toc__link" data-toc-active>Scheduled Tasks Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#automation-platforms-zapier-make-and-power-automate" class="toc__link" data-toc-active>Automation Platforms: Zapier, Make, and Power Automate</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#zapier" class="toc__link" data-toc-active>Zapier</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#make-formerly-integromat" class="toc__link" data-toc-active>Make (formerly Integromat)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#power-automate" class="toc__link" data-toc-active>Power Automate</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#automation-platform-comparison" class="toc__link" data-toc-active>Automation Platform Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 4,000-5,000</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Every major AI platform has converged on the concept of "<span class="glossary-term glossary-term--first-use" data-term="skills">skills</span>" -- reusable, packaged instructions that extend what an <span class="glossary-term glossary-term--first-use" data-term="agent">agent</span> can do -- but their implementations diverge wildly, from filesystem-based markdown files (Claude) to code monorepos with a community registry (<span class="glossary-term glossary-term--first-use" data-term="openclaw">OpenClaw</span>) to visual builders with enterprise governance (<span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span>). Meanwhile, the automation layer connecting AI to the broader software ecosystem has become a three-way race between Zapier (breadth), Make (cost efficiency), and Power Automate (enterprise depth). This module maps the <span class="glossary-term" data-term="skills">skills</span> architectures across platforms, compares plugin ecosystems and marketplaces, examines scheduled and event-driven automation patterns, and provides a framework for choosing the right automation stack.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">Two developers, two 'skills,' two very different outcomes</summary>
+  <div class="accordion__content">
+    <p>Developer A writes a 30-line markdown file, commits it to Git, and her Claude agent picks it up automatically. Developer B writes a JavaScript module, publishes it to the OpenClaw ClawHub registry, and discovers three months later that 15% of the skills in that registry contain malicious code. Both are using 'skills.' The architectures could not be more different. This module maps the spectrum -- from Claude's zero-infrastructure markdown to OpenClaw's powerful-but-dangerous code execution -- and the automation layer that makes agents work without human initiation.</p>
+  </div>
+</details>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- for understanding the agents that consume <span class="glossary-term" data-term="skills">skills</span></li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- for the protocol layer that <span class="glossary-term" data-term="skills">skills</span> often build upon</li>
+</ul>
+<hr>
+<h2 id="skills-architecture-across-platforms">Skills Architecture Across Platforms</h2>
+<p>A <strong>skill</strong> is a reusable capability definition that tells an <span class="glossary-term" data-term="agent">agent</span> <em>what</em> it can do and <em>how</em> to do it. The term is used across platforms, but the underlying mechanics -- authoring format, discovery mechanism, distribution model, and security posture -- vary significantly.</p>
+<h3 id="claude-skills">Claude Skills</h3>
+<p>Claude's <span class="glossary-term" data-term="skills">skills</span> system is the most minimalist of the major platforms. A skill is a markdown file named <code>SKILL.md</code> with YAML frontmatter that declares the skill's name, description, and trigger conditions. The body contains natural-language instructions the <span class="glossary-term" data-term="agent">agent</span> follows when the skill is activated [F1].</p>
+<p><strong>Authoring format:</strong> Markdown + YAML frontmatter. No code execution, no API bindings -- <span class="glossary-term" data-term="skills">skills</span> are purely instructional. They shape the <span class="glossary-term" data-term="agent">agent</span>'s behavior through prompt engineering, not through programmatic interfaces.</p>
+<p><strong>Discovery:</strong> Filesystem-based auto-discovery. <span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span> scans the working directory and parent directories for <code>SKILL.md</code> files and loads them into context automatically. This means <span class="glossary-term" data-term="skills">skills</span> are colocated with the projects they serve [F1].</p>
+<p><strong>Scopes:</strong></p>
+<ul>
+<li><strong>Personal <span class="glossary-term" data-term="skills">skills</span></strong> -- stored in <code>~/.claude/skills/</code>, available across all projects for a single user</li>
+<li><strong>Project <span class="glossary-term" data-term="skills">skills</span></strong> -- stored in the project directory, shared via version control with the team</li>
+<li><strong>Distributed <span class="glossary-term" data-term="skills">skills</span></strong> -- published to the Claude Plugins marketplace (launched February 2026), bundled as skill packs with optional MCP connector integrations [1]</li>
+</ul>
+<p><strong>Strengths:</strong> Zero infrastructure overhead. Version-controllable. Easy to read and audit. Composable with MCP servers for external tool access.</p>
+<p><strong>Limitations:</strong> No code execution within the skill itself -- all logic must flow through the <span class="glossary-term" data-term="agent">agent</span>'s native capabilities or MCP tools. No parameterized inputs beyond what the <span class="glossary-term" data-term="agent">agent</span> infers from context. No programmatic testing framework.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="0" data-explanation="Claude Skills are deliberately designed as markdown files that shape agent behavior through natural language instructions. All code execution flows through the agent's native capabilities or MCP tools (Module 06). This is a deliberate design choice prioritizing auditability and safety -- you can read a skill file and know exactly what it instructs the agent to do." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Why can't a Claude Skill execute code directly?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-claude-skills-quiz" value="0" />
+          <span class="quiz__choice-label">Security design -- skills are purely instructional, shaping behavior through natural language</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-claude-skills-quiz" value="1" />
+          <span class="quiz__choice-label">Anthropic has not implemented code execution yet</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-claude-skills-quiz" value="2" />
+          <span class="quiz__choice-label">Claude Code does not support external scripts</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-claude-skills-quiz" value="3" />
+          <span class="quiz__choice-label">Skills only work when the agent is offline</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="custom-gpts-openai">Custom GPTs (OpenAI)</h3>
+<p>OpenAI's equivalent to <span class="glossary-term" data-term="skills">skills</span> is the Custom GPT system, which bundles a system prompt, optional uploaded documents (for RAG), and API Actions (function calling endpoints) into a shareable <span class="glossary-term" data-term="agent">agent</span> configuration [F2].</p>
+<p><strong>Authoring format:</strong> Web-based builder (GPT Builder) or API. System prompt defines behavior; uploaded files provide knowledge; Actions define external API integrations via OpenAPI specifications.</p>
+<p><strong>Discovery:</strong> <span class="glossary-term glossary-term--first-use" data-term="gpt-store">GPT Store</span> marketplace. Enterprise customers can deploy private Custom GPTs visible only within their organization.</p>
+<p><strong>Distribution:</strong> The <span class="glossary-term" data-term="gpt-store">GPT Store</span> launched in January 2024 and as of March 2026, over 3M Custom GPTs have been created, though approximately 159,000 are publicly listed and active in the store [2]. Revenue sharing for creators was introduced in mid-2025. Enterprise accounts can restrict which GPTs are accessible to their users.</p>
+<p><strong>Strengths:</strong> Rich integration with external APIs via Actions. Built-in RAG over uploaded documents. Large marketplace with network effects.</p>
+<p><strong>Limitations:</strong> No filesystem access. System prompts can be extracted by users through prompt injection techniques -- a persistent and well-documented security concern that OWASP ranks as the #1 risk for LLM applications; OpenAI has acknowledged that prompt injection "is unlikely to ever be fully 'solved'" [6][7]. Actions require an externally hosted API endpoint -- no serverless or in-line code execution within the GPT itself.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">GPT Store discovery and revenue sharing details</summary>
+  <div class="accordion__content">
+    <p>Over 3 million Custom GPTs have been created, but only approximately 159,000 are publicly listed and active in the GPT Store. This 95% gap reflects abandoned, private, and low-quality entries. Revenue sharing for creators was introduced in mid-2025, though most individual creators hit a soft ceiling of $100-500/month. Enterprise customers can deploy private Custom GPTs visible only within their organization, creating a parallel ecosystem invisible to the public store metrics.</p>
+  </div>
+</details>
+<h3 id="codex-skills-openai">Codex Skills (OpenAI)</h3>
+<p>Separate from Custom GPTs, OpenAI's Codex <span class="glossary-term" data-term="agent">agent</span> (the cloud-based coding <span class="glossary-term" data-term="agent">agent</span>) has its own <span class="glossary-term" data-term="skills">skills</span> system. Codex <span class="glossary-term" data-term="skills">Skills</span> are instruction bundles paired with executable scripts that the <span class="glossary-term" data-term="agent">agent</span> can invoke during autonomous coding sessions [F2].</p>
+<p><strong>Authoring format:</strong> Instruction files + shell scripts. <span class="glossary-term" data-term="skills">Skills</span> can define setup steps, linting rules, testing commands, and deployment procedures.</p>
+<p><strong>Key feature -- Skill chaining:</strong> Codex supports composing multiple <span class="glossary-term" data-term="skills">skills</span> sequentially, enabling multi-stage workflows (e.g., "lint, test, build, deploy") from a single invocation.</p>
+<p><strong>Cloud automations:</strong> Codex <span class="glossary-term" data-term="skills">skills</span> can be triggered by repository events (pull request opened, issue labeled), making them automation primitives for CI/CD-adjacent workflows [F2].</p>
+<h3 id="openclaw-skills">OpenClaw Skills</h3>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span> takes a code-first approach to <span class="glossary-term" data-term="skills">skills</span>. Each skill is a JavaScript or TypeScript module in a monorepo structure, registered and distributed through the <span class="glossary-term glossary-term--first-use" data-term="clawhub">ClawHub</span> registry [9][13].</p>
+<p><strong>Authoring format:</strong> JS/TS code implementing a defined skill interface, plus a <code>skill.md</code> file with metadata and natural-language descriptions. <span class="glossary-term" data-term="skills">Skills</span> can execute arbitrary code, make network calls, access the filesystem, and interact with the <span class="glossary-term glossary-term--first-use" data-term="pi-agent-runtime">Pi Agent Runtime</span>.</p>
+<p><strong>Distribution:</strong> <span class="glossary-term" data-term="clawhub">ClawHub</span> hosts 13,700+ <span class="glossary-term" data-term="skills">skills</span> as of February 2026 [13] (count reduced from peak after malicious skill removal). <span class="glossary-term" data-term="skills">Skills</span> are installed via the <code>claw</code> CLI and can declare dependencies on other <span class="glossary-term" data-term="skills">skills</span>.</p>
+<p><strong>Security posture:</strong> This is the critical weakness. The <span class="glossary-term" data-term="clawhub">ClawHub</span> registry has a documented 12-20% malicious skill rate, as detailed in the ClawHavoc supply chain attack analysis and Snyk's independent audit [10][12]. <span class="glossary-term" data-term="skills">Skills</span> can execute arbitrary code with the permissions of the host process. The ClawJacked WebSocket vulnerability demonstrated that even the skill installation process itself could be compromised [11]. See <a href="module-05.html">Module 05: <span class="glossary-term" data-term="openclaw">OpenClaw</span> &#x26; Open <span class="glossary-term" data-term="agent">Agent</span> Ecosystem</a> for the full security analysis.</p>
+<p><strong>Strengths:</strong> Maximum flexibility. Community-driven ecosystem. Can wrap any API or local tool. Self-hosted, no vendor lock-in.</p>
+<p><strong>Limitations:</strong> Security is a serious, unresolved problem. No code signing. Manual review burden. The quality distribution is extremely wide -- top <span class="glossary-term" data-term="skills">skills</span> are production-grade; many are abandoned or malicious.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="The core distinction is execution model plus gatekeeping. OpenClaw skills can execute arbitrary code with the permissions of the host process, and ClawHub has no mandatory security review -- leading to a documented 12-20% malicious skill rate (see Module 05 for the ClawHavoc analysis). Claude Skills cannot execute code at all, and the Plugins marketplace has an approval process. This is the security-as-dividing-line theme of this module." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What makes ClawHub's security posture fundamentally different from the Claude Plugins marketplace?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-openclaw-skills-quiz" value="0" />
+          <span class="quiz__choice-label">ClawHub has more skills available</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-openclaw-skills-quiz" value="1" />
+          <span class="quiz__choice-label">ClawHub skills execute arbitrary code with no gatekeeping; Claude Plugins go through an approval process with no code execution</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-openclaw-skills-quiz" value="2" />
+          <span class="quiz__choice-label">ClawHub is cloud-hosted while Claude Plugins are local</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-openclaw-skills-quiz" value="3" />
+          <span class="quiz__choice-label">ClawHub requires authentication while Claude Plugins do not</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="google-no-dedicated-skills-system">Google: No Dedicated Skills System</h3>
+<p>Google has not shipped a unified <span class="glossary-term" data-term="skills">skills</span> framework comparable to Claude <span class="glossary-term" data-term="skills">Skills</span> or <span class="glossary-term" data-term="openclaw">OpenClaw</span> <span class="glossary-term" data-term="skills">Skills</span>. Instead, Google offers:</p>
+<ul>
+<li><strong>AI Studio custom apps:</strong> Generate purpose-built applications from natural-language descriptions, but these are standalone apps, not composable <span class="glossary-term" data-term="agent">agent</span> capabilities [F3].</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="ai-chips">AI Chips</span>:</strong> Pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive). These function like <span class="glossary-term" data-term="skills">skills</span> but are first-party only -- no third-party authoring [F3].</li>
+<li><strong>Gemini Extensions:</strong> Google Workspace add-ons that extend Gemini's capabilities within Docs, Sheets, and other Workspace apps [F3].</li>
+</ul>
+<p>The lack of a third-party <span class="glossary-term" data-term="skills">skills</span> SDK means Google's <span class="glossary-term" data-term="agent">agent</span> extensibility relies on MCP adoption (see <a href="module-06.html">Module 06</a>) and the broader Android/Workspace integration surfaces rather than a dedicated skill registry.</p>
+<h3 id="copilot-studio">Copilot Studio</h3>
+<p>Microsoft's <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> is the most enterprise-oriented <span class="glossary-term" data-term="skills">skills</span> platform, providing a visual builder for creating and managing <span class="glossary-term" data-term="agent">agent</span> capabilities within the Microsoft 365 ecosystem [F4].</p>
+<p><strong>Authoring format:</strong> Visual drag-and-drop builder with code-behind support. <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> supports three extension mechanisms:</p>
+<ul>
+<li><strong>Tool Groups:</strong> Curated sets of tools that define an <span class="glossary-term" data-term="agent">agent</span>'s capabilities</li>
+<li><strong>MCP connections:</strong> Direct integration with MCP servers for external data and actions</li>
+<li><strong>Plugins:</strong> Power Platform connectors exposed as <span class="glossary-term" data-term="agent">agent</span> capabilities</li>
+</ul>
+<p><strong>Generative orchestration:</strong> <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> uses the underlying LLM to dynamically select which tools and plugins to invoke, rather than relying on hard-coded decision trees. This is a significant architectural distinction from traditional workflow builders [F4].</p>
+<p><strong>Governance:</strong> Full audit trail, role-based access control, DLP policies, and integration with <span class="glossary-term glossary-term--first-use" data-term="agent-365">Agent 365</span> for monitoring and compliance. Enterprise customers can control which <span class="glossary-term" data-term="skills">skills</span> are available to which agents and which users [F4].</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Before looking at the comparison table, rank the five skills platforms from most secure to least secure and explain your reasoning.</p>
+  <label for="se-m07-copilot-studio" class="sr-only">Your explanation</label>
+  <textarea id="se-m07-copilot-studio" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m07-copilot-studio">Compare with Expert Answer</button>
+  <div id="se-answer-m07-copilot-studio" class="self-explain__expert" hidden>
+    <p>From most to least secure: (1) Copilot Studio -- enterprise RBAC, DLP policies, Agent 365 monitoring, and integration with Azure AD. (2) Claude Skills -- no code execution at all, purely instructional markdown, sandboxed via agent. (3) Custom GPTs -- API-only external access (no local filesystem), but system prompts can be extracted via prompt injection (OWASP #1 risk for LLMs). (4) Codex Skills -- script execution but within a cloud sandbox with limited blast radius. (5) OpenClaw Skills -- unrestricted code execution with host process permissions, no code signing, no mandatory review, 12-20% malicious rate on ClawHub. The ranking reflects a tradeoff: more security generally means less flexibility and power.</p>
+  </div>
+</div>
+
+<details class="accordion">
+  <summary class="accordion__title">Five platforms implement 'skills.' None of them mean the same thing by the word.</summary>
+  <div class="accordion__content">
+    <p>Claude Skills are markdown files with YAML frontmatter -- purely instructional, no code execution. OpenAI has two separate systems: Custom GPTs (system prompt + docs + API Actions) and Codex Skills (instructions + shell scripts). OpenClaw Skills are full JavaScript/TypeScript modules with arbitrary code execution. Copilot Studio uses a visual builder with code-behind support. The word 'skill' appears on every platform's marketing page, but the security model, authoring format, distribution channel, and capability boundaries are fundamentally different in each case.</p>
+  </div>
+</details>
+<hr>
+<h2 id="skills-architecture-comparison">Skills Architecture Comparison</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Claude Skills</th><th>Custom GPTs</th><th>Codex Skills</th><th>OpenClaw Skills</th><th>Copilot Studio</th></tr></thead><tbody><tr><td><strong>Format</strong></td><td>Markdown + YAML</td><td>System prompt + docs + Actions</td><td>Instructions + scripts</td><td>JS/TS code + skill.md</td><td>Visual builder + code</td></tr><tr><td><strong>Language</strong></td><td>Natural language</td><td>Natural language + OpenAPI</td><td>Shell/scripts</td><td>JavaScript/TypeScript</td><td>Low-code + Power Fx</td></tr><tr><td><strong>Code execution</strong></td><td>No (<span class="glossary-term" data-term="agent">agent</span>-mediated)</td><td>No (external API only)</td><td>Yes (scripts)</td><td>Yes (arbitrary)</td><td>Yes (Power Automate)</td></tr><tr><td><strong>Discovery</strong></td><td>Filesystem auto-scan</td><td><span class="glossary-term" data-term="gpt-store">GPT Store</span> search</td><td>Project-scoped</td><td><span class="glossary-term" data-term="clawhub">ClawHub</span> registry</td><td>Power Platform catalog</td></tr><tr><td><strong>Distribution</strong></td><td>Git + Plugins marketplace</td><td><span class="glossary-term" data-term="gpt-store">GPT Store</span></td><td>Git</td><td><span class="glossary-term" data-term="clawhub">ClawHub</span></td><td>Power Platform</td></tr><tr><td><strong>Security model</strong></td><td>Sandboxed via <span class="glossary-term" data-term="agent">agent</span></td><td>API-only, no local access</td><td>Cloud sandbox</td><td>Unrestricted execution</td><td>Enterprise RBAC + DLP</td></tr><tr><td><strong>Marketplace size</strong></td><td>Growing catalog (Feb 2026) [1]</td><td>~3M+ GPTs created (~159K active) [2]</td><td>N/A</td><td>13,700+ <span class="glossary-term" data-term="skills">skills</span> [13]</td><td>1,400+ connectors [F4]</td></tr><tr><td><strong>Best for</strong></td><td>Developer workflows</td><td>Consumer/prosumer</td><td>CI/CD automation</td><td>Power users, self-hosted</td><td>Enterprise M365</td></tr></tbody></table>
+
+<section class="quiz" data-variant="concept-check" data-correct="3" data-explanation="Copilot Studio integrates with Azure AD for identity, DLP policies for data protection, and Agent 365 for monitoring and compliance. It provides full audit trails and role-based access control. For regulated industries, governance capabilities are as important as technical flexibility. Claude Skills are safe (no code execution) but lack enterprise governance tooling. OpenClaw has no governance at all." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">An enterprise with strict compliance requirements needs to extend their AI agents with custom capabilities. Which platform's skills system provides the strongest governance controls?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-skills-architecture-comparison-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Skills</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-skills-architecture-comparison-quiz" value="1" />
+          <span class="quiz__choice-label">Custom GPTs</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-skills-architecture-comparison-quiz" value="2" />
+          <span class="quiz__choice-label">OpenClaw Skills</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-skills-architecture-comparison-quiz" value="3" />
+          <span class="quiz__choice-label">Copilot Studio</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="plugin-systems-and-marketplaces">Plugin Systems and Marketplaces</h2>
+<p>The distinction between "<span class="glossary-term" data-term="skills">skills</span>" and "plugins" is blurring. In practice, a plugin is a skill bundled with distribution metadata and, optionally, a connector to external services. The marketplace models differ substantially.</p>
+<h3 id="claude-plugins-marketplace">Claude Plugins Marketplace</h3>
+<p>Launched February 2026, the Claude Plugins marketplace bundles <span class="glossary-term" data-term="skills">skills</span> with MCP connector integrations [1]. Anthropic also launched the Claude Marketplace in early March 2026, an e-commerce store for enterprise customers featuring Claude-powered services from partners including Snowflake, GitLab, Harvey AI, Rogo, Replit, and Lovable Labs [8]. The focus is on quality over quantity, with an approval process that reviews security, relevance, and compatibility. Plugins are installable via the Claude interface and automatically integrate with the <span class="glossary-term" data-term="skills">skills</span> auto-discovery system.</p>
+<h3 id="gpt-store">GPT Store</h3>
+<p>The <span class="glossary-term" data-term="gpt-store">GPT Store</span> is the largest AI <span class="glossary-term" data-term="agent">agent</span> marketplace by volume, with over 3M Custom GPTs created as of March 2026, though only approximately 159,000 are publicly listed and active in the store [2]. The sheer volume creates discoverability challenges -- finding high-quality GPTs requires filtering through significant noise. OpenAI introduced creator revenue sharing in mid-2025, creating economic incentives for quality, though most individual creators hit a soft ceiling of $100-500/month [2]. Enterprise customers can curate private stores with approved GPTs only.</p>
+<h3 id="google-extensions-and-add-ons">Google Extensions and Add-ons</h3>
+<p>Google's marketplace strategy routes through the existing Workspace Marketplace and the Chrome Web Store rather than a dedicated AI marketplace. Gemini extensions for Workspace are available as add-ons, and AI Studio-generated apps can be shared via URLs, but there is no centralized AI-specific marketplace comparable to the <span class="glossary-term" data-term="gpt-store">GPT Store</span> [F3].</p>
+<h3 id="power-platform-marketplace">Power Platform Marketplace</h3>
+<p>Microsoft's approach leverages the existing Power Platform connector ecosystem (1,400+ connectors), which now serves as the foundation for <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> plugins [F4]. This gives Microsoft a massive head start in enterprise integrations -- connectors for SAP, Salesforce, ServiceNow, and virtually every major enterprise system already exist. The trade-off is complexity: building and certifying Power Platform connectors requires more infrastructure than writing a Claude SKILL.md file.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">Marketplace size context and growth rates</summary>
+  <div class="accordion__content">
+    <p>The marketplace landscape as of March 2026: GPT Store leads by volume (~3M created, ~159K active), but discoverability is a known problem. Claude Plugins marketplace launched February 2026 with a quality-over-quantity approach and an approval process. The Claude Marketplace (March 2026) is a separate e-commerce store for enterprise services from partners like Snowflake, GitLab, and Harvey AI. Power Platform has 1,400+ connectors that now serve double duty as Copilot Studio agent capabilities. Google has no dedicated AI marketplace, routing instead through the existing Workspace Marketplace. ClawHub has 13,700+ skills but significant security concerns.</p>
+  </div>
+</details>
+<hr>
+<h2 id="scheduled-tasks-and-event-driven-automation">Scheduled Tasks and Event-Driven Automation</h2>
+<p>AI agents increasingly operate on schedules or in response to events, without human initiation. This represents a shift from "AI as tool" to "AI as autonomous worker."</p>
+<h3 id="claude-cowork-scheduled-tasks">Claude Cowork Scheduled Tasks</h3>
+<p>Claude <span class="glossary-term glossary-term--first-use" data-term="cowork">Cowork</span> introduced native scheduled tasks via the <code>/schedule</code> command. Users can set tasks to run hourly, daily, weekly, or monthly. Scheduled tasks execute in the <span class="glossary-term" data-term="cowork">Cowork</span> environment with full access to the user's configured tools and MCP servers [F1].</p>
+<p><strong>Use cases:</strong> Daily code review summaries, weekly dependency audit reports, monthly project health assessments. Tasks persist across sessions and can be managed via the <span class="glossary-term" data-term="cowork">Cowork</span> interface.</p>
+<p><strong>Practical considerations:</strong> Scheduled tasks consume standard <span class="glossary-term" data-term="cowork">Cowork</span> usage credits -- a scheduled daily summary uses the same compute as an equivalent interactive session. If a scheduled task fails (e.g., an <span class="glossary-term glossary-term--first-use" data-term="mcp-server">MCP server</span> is unreachable or a tool returns an error), <span class="glossary-term" data-term="cowork">Cowork</span> logs the failure but does not automatically retry. Users must monitor task results and manually re-trigger failed runs. There is no built-in alerting for task failures, which limits reliability for mission-critical workflows [F1].</p>
+<p><strong>Limitations:</strong> Currently limited to <span class="glossary-term" data-term="cowork">Cowork</span> (not available in Claude.ai chat or the API). No conditional triggering -- schedules are purely time-based. No task chaining (each scheduled task is independent). No retry mechanisms.</p>
+<h3 id="chatgpt-tasks">ChatGPT Tasks</h3>
+<p>ChatGPT Tasks reached general availability in early 2026, available to Plus and Pro subscribers. Users can schedule up to 10 active tasks that ChatGPT executes autonomously at specified times [F2].</p>
+<p><strong>Practical considerations:</strong> Tasks run in the same environment as interactive ChatGPT sessions, meaning they have access to web browsing and code interpreter but not to external APIs or custom tools. Each task execution counts against the user's usage limits. Failed tasks produce a notification but do not retry automatically [F2].</p>
+<p><strong>Limitations:</strong> The 10-task cap is restrictive for power users. Tasks cannot trigger other tasks. No webhook or event-based triggers. No access to external tools beyond what ChatGPT natively supports (web browsing, code interpreter, DALL-E). No failure retry.</p>
+<h3 id="gemini-scheduled-actions">Gemini Scheduled Actions</h3>
+<p>Google introduced Scheduled Actions for Gemini in March 2026, matching ChatGPT's scheduled task capability. Gemini's implementation benefits from deep integration with Google services -- scheduled tasks can interact with Calendar, Gmail, Drive, and other Google Workspace tools natively [F3]. This gives Gemini the broadest first-party service access of any scheduled task system -- a scheduled action can query Gmail, update a spreadsheet in Sheets, and create a Calendar event in a single run, without requiring third-party automation platforms.</p>
+<h3 id="event-driven-patterns">Event-Driven Patterns</h3>
+<p>True event-driven AI automation -- where an <span class="glossary-term" data-term="agent">agent</span> responds to a webhook, database change, or system event rather than a time-based schedule -- remains the least mature capability across AI platforms. Most platforms delegate event-driven workflows to the automation platforms discussed below. However, three native event-driven patterns have emerged:</p>
+<p><strong>Codex repository event triggers.</strong> OpenAI's Codex is the most event-driven native AI <span class="glossary-term" data-term="agent">agent</span> system. Codex <span class="glossary-term" data-term="skills">Skills</span> can trigger on specific repository events: pull request opened, pull request updated, issue created, issue labeled, and push to a monitored branch [F2]. Configuration is per-skill, with event filters that specify which events activate which <span class="glossary-term" data-term="skills">skills</span>. This makes Codex a viable CI/CD participant -- a skill can automatically review PRs, run linting, or generate release notes when triggered by repo activity.</p>
+<p><strong>Power Automate webhook triggers.</strong> Microsoft's Power Automate supports HTTP webhook triggers that can invoke flows containing <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> <span class="glossary-term" data-term="agent">agent</span> actions [F4]. This enables event-to-<span class="glossary-term" data-term="agent">agent</span> routing: an external system fires a webhook, Power Automate receives it, routes to the appropriate <span class="glossary-term" data-term="agent">agent</span>, and the <span class="glossary-term" data-term="agent">agent</span> executes autonomously. The pattern works for any system that can send HTTP requests -- CRM events, monitoring alerts, form submissions.</p>
+<p><strong>MCP-mediated event patterns.</strong> As MCP adoption grows (see <a href="module-06.html">Module 06</a>), a design pattern is emerging where MCP servers expose event subscription capabilities. An <span class="glossary-term" data-term="agent">agent</span> connects to an <span class="glossary-term" data-term="mcp-server">MCP server</span> that watches for changes (new database rows, file modifications, message arrivals) and notifies the <span class="glossary-term" data-term="agent">agent</span> when events occur. This is not yet standardized in the MCP specification but is implemented in several community MCP servers.</p>
+<p>The gap across all platforms is a unified event-to-<span class="glossary-term" data-term="agent">agent</span> routing layer. Today, connecting "when X happens" to "<span class="glossary-term" data-term="agent">agent</span> Y should respond" requires either platform-specific mechanisms (Codex events, Power Automate webhooks) or third-party automation platforms (Zapier, Make). No AI platform offers a general-purpose event subscription and routing system as a first-class feature.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="No AI platform offers a general-purpose event subscription and routing system as a first-class feature. Today, connecting 'when X happens' to 'agent Y should respond' requires either platform-specific mechanisms (Codex repo events, Power Automate webhooks) or third-party automation platforms (Zapier, Make). This fragmentation is the most significant gap in the current automation landscape." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the current gap across all major AI platforms for event-driven automation?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="0" />
+          <span class="quiz__choice-label">No platform supports time-based scheduling</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="1" />
+          <span class="quiz__choice-label">No unified event-to-agent routing layer exists as a first-class feature</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="2" />
+          <span class="quiz__choice-label">Events can only trigger one agent at a time</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="3" />
+          <span class="quiz__choice-label">Event-driven patterns require MCP exclusively</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="OpenAI's Codex is the most event-driven native AI agent system. Codex Skills can trigger on specific repository events: pull request opened, pull request updated, issue created, issue labeled, and push to a monitored branch. This makes Codex a viable CI/CD participant. Other platforms delegate event-driven workflows to automation platforms like Zapier or Power Automate." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform's coding agent can trigger skills in response to repository events like pull request creation?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Code</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="1" />
+          <span class="quiz__choice-label">GitHub Copilot</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="2" />
+          <span class="quiz__choice-label">OpenAI Codex</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-event-driven-patterns-quiz" value="3" />
+          <span class="quiz__choice-label">Google Jules</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="scheduled-tasks-comparison">Scheduled Tasks Comparison</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>Mechanism</th><th>Trigger Types</th><th>Limits</th><th>Key Gap</th></tr></thead><tbody><tr><td><strong>Zapier</strong></td><td>Zap scheduling + Zapier Agents</td><td>Time-based (cron-style intervals from 1 min to monthly); webhook; app-event triggers across 8,000+ integrations [3]</td><td>Free: 100 tasks/month, 5 Zaps. Professional: 750 tasks/month. Polling interval varies by tier (1-15 min) [3]</td><td>No native AI <span class="glossary-term" data-term="agent">agent</span> reasoning within Zaps -- AI features (Central, Agents) are separate products</td></tr><tr><td><strong>Make</strong></td><td>Scenario scheduling</td><td>Time-based (intervals from 1 min); webhook; app-event triggers across 3,000+ integrations; bidirectional MCP [4]</td><td>Free: 1,000 ops/month, 2 scenarios. Execution time limits per scenario vary by tier [4]</td><td>Smaller integration catalog than Zapier; enterprise governance less mature</td></tr><tr><td><strong>Power Automate</strong></td><td>Cloud Flows + Desktop Flows</td><td>Time-based; webhook/HTTP; data-change triggers; Teams events; button/manual; <span class="glossary-term" data-term="agent">Agent</span> Flows (<span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> integration) [F4]</td><td>$15/user/month (Premium). <span class="glossary-term glossary-term--first-use" data-term="ai-builder">AI Builder</span> credits transitioning to consumption-based (bundled credits end Nov 2026) [5]</td><td>Per-user pricing expensive at scale; RPA desktop flows require separate licensing</td></tr><tr><td><strong><span class="glossary-term" data-term="claude-code">Claude Code</span> (cron)</strong></td><td><code>/schedule</code> command in <span class="glossary-term" data-term="cowork">Cowork</span></td><td>Time-based only (hourly, daily, weekly, monthly) [F1]</td><td>Consumes standard <span class="glossary-term" data-term="cowork">Cowork</span> usage credits. No task cap documented, but each run uses full session compute [F1]</td><td>No conditional triggers, no retry on failure, no task chaining, no alerting. <span class="glossary-term" data-term="cowork">Cowork</span>-only (not available in Claude.ai chat or API)</td></tr><tr><td><strong><span class="glossary-term" data-term="openclaw">OpenClaw</span></strong></td><td>Cron-style scheduling via <span class="glossary-term" data-term="pi-agent-runtime">Pi Agent Runtime</span>; external orchestration</td><td>Time-based (system cron); filesystem/webhook watchers via custom <span class="glossary-term" data-term="skills">skills</span> [W20]</td><td>Self-hosted: limited by infrastructure. No built-in rate limiting or quota management</td><td>No managed scheduling service -- requires manual cron/systemd setup. No built-in monitoring or failure alerting</td></tr></tbody></table>
+<blockquote>
+<p><strong>Volatility warning:</strong> Scheduled task capabilities are expanding rapidly. All four major platforms have announced or shipped scheduling features within a 6-month window (late 2025 to early 2026). Expect capabilities, limits, and pricing to change frequently.</p>
+</blockquote>
+
+<details class="accordion">
+  <summary class="accordion__title">MCP-mediated event pattern: an emerging design</summary>
+  <div class="accordion__content">
+    <p>A design pattern is emerging where MCP servers expose event subscription capabilities. An agent connects to an MCP server that watches for changes -- new database rows, file modifications, message arrivals -- and notifies the agent when events occur. This is not yet standardized in the MCP specification, but several community MCP servers implement it. If this pattern gains traction and becomes part of the official spec, it could provide a protocol-level solution to the event-to-agent routing gap. Watch the MCP specification repository for proposals around server-initiated notifications and event subscriptions.</p>
+  </div>
+</details>
+<hr>
+<h2 id="automation-platforms-zapier-make-and-power-automate">Automation Platforms: Zapier, Make, and Power Automate</h2>
+<p>For workflows that span multiple services -- "when X happens in system A, tell the AI to do Y, then update system B" -- dedicated automation platforms remain essential. These platforms serve as the connective tissue between AI agents and the broader software ecosystem.</p>
+<h3 id="zapier">Zapier</h3>
+<p>Zapier is the breadth leader with 8,000+ app integrations [3]. Its AI evolution has been aggressive:</p>
+<ul>
+<li><strong>Zapier <span class="glossary-term" data-term="mcp-server">MCP Server</span>:</strong> GA as of early 2026, exposing Zapier's entire integration catalog as MCP tools. Any AI <span class="glossary-term" data-term="agent">agent</span> that speaks MCP can trigger Zapier automations [3]. See <a href="module-06.html">Module 06</a> for MCP integration details.</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="zapier-central">Zapier Central</span>:</strong> An AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically.</li>
+<li><strong>Zapier Agents:</strong> Autonomous AI agents that can monitor conditions and take actions across connected services.</li>
+<li><strong>Zapier Canvas:</strong> Visual workflow designer for complex multi-step automations.</li>
+</ul>
+<p><strong>Pricing:</strong> Free tier (100 tasks/month, 5 Zaps). Professional starts at $29.99/month (750 tasks/month, unlimited Zaps). Team and Enterprise tiers available [3].</p>
+<p><strong>Best for:</strong> Maximum integration breadth, organizations with diverse SaaS stacks, teams that need AI-triggered automations across many services.</p>
+<h3 id="make-formerly-integromat">Make (formerly Integromat)</h3>
+<p>Make positions itself as the cost-efficient alternative with 3,000+ app integrations and a visual scenario builder that exposes more architectural control than Zapier [4].</p>
+<ul>
+<li><strong>Bidirectional MCP:</strong> Make supports both consuming MCP servers (calling external tools) and exposing Make scenarios as MCP tools (allowing AI agents to trigger Make workflows) [4].</li>
+<li><strong>Visual execution model:</strong> Make's scenario builder shows data flow through each module, with built-in error handling, branching, and iteration. This appeals to users who want more control than Zapier's linear Zap model.</li>
+<li><strong>Cost advantage:</strong> Make's operation-based pricing makes it roughly 10x cheaper than Zapier for high-volume workflows. A scenario that costs $30/month on Zapier might cost $3/month on Make for the same throughput [4].</li>
+</ul>
+<p><strong>Pricing:</strong> Free tier (1,000 ops/month, 2 scenarios). Core starts at $9/month (10,000 ops/month). Pro and Teams tiers available [4].</p>
+<p><strong>Best for:</strong> High-volume automations, teams that need granular workflow control, cost-sensitive organizations.</p>
+<h3 id="power-automate">Power Automate</h3>
+<p>Microsoft Power Automate is the enterprise automation incumbent, with 1,400+ connectors and deep integration with the Microsoft 365 ecosystem [F4].</p>
+<p><strong>Flow types:</strong></p>
+<ul>
+<li><strong>Cloud Flows:</strong> Event-driven automations triggered by data changes, schedules, or button clicks</li>
+<li><strong>Desktop Flows:</strong> RPA (Robotic Process Automation) for automating legacy desktop applications</li>
+<li><strong>Teams Flows:</strong> Automations triggered by and acting within Microsoft Teams</li>
+<li><strong><span class="glossary-term" data-term="agent">Agent</span> Flows:</strong> New flow type (2026) that integrates with <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> agents, enabling agents to trigger and manage Power Automate workflows [F4]</li>
+</ul>
+<p><strong><span class="glossary-term" data-term="ai-builder">AI Builder</span>:</strong> Power Automate includes <span class="glossary-term" data-term="ai-builder">AI Builder</span> for adding AI capabilities (document processing, sentiment analysis, entity extraction) directly into flows. Note: <span class="glossary-term" data-term="ai-builder">AI Builder</span> credits are transitioning from bundled to consumption-based pricing, with bundled credits ending November 2026 [5].</p>
+<p><strong>Pricing:</strong> $15/user/month for Power Automate Premium. Process mining and hosted RPA carry additional costs. Enterprise agreements often bundle Power Automate with Microsoft 365 E5 [F4].</p>
+<p><strong>Best for:</strong> Microsoft-centric enterprises, organizations needing RPA alongside AI automation, scenarios requiring enterprise governance and compliance controls.</p>
+<hr>
+<h2 id="automation-platform-comparison">Automation Platform Comparison</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Zapier</th><th>Make</th><th>Power Automate</th></tr></thead><tbody><tr><td><strong>Integrations</strong></td><td>8,000+ apps</td><td>3,000+ apps</td><td>1,400+ connectors</td></tr><tr><td><strong>MCP support</strong></td><td><span class="glossary-term" data-term="mcp-server">MCP server</span> (GA)</td><td>Bidirectional MCP</td><td>Via <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span></td></tr><tr><td><strong>AI features</strong></td><td>Central, Agents, Canvas</td><td>AI scenario suggestions</td><td><span class="glossary-term" data-term="ai-builder">AI Builder</span>, Copilot integration</td></tr><tr><td><strong>Visual builder</strong></td><td>Linear (Zap editor)</td><td>Graph-based (scenario)</td><td>Flow designer + desktop recorder</td></tr><tr><td><strong>RPA support</strong></td><td>No</td><td>No</td><td>Yes (Desktop Flows)</td></tr><tr><td><strong>Starting price</strong></td><td>$29.99/mo (Professional)</td><td>$9/mo (Core)</td><td>$15/user/mo (Premium)</td></tr><tr><td><strong>Free tier</strong></td><td>100 tasks/mo, 5 Zaps</td><td>1,000 ops/mo, 2 scenarios</td><td>Limited (no premium connectors)</td></tr><tr><td><strong>Cost at scale</strong></td><td>Expensive</td><td>~10x cheaper than Zapier</td><td>Variable (per-user + consumption)</td></tr><tr><td><strong>Governance</strong></td><td>Basic (team roles)</td><td>Basic (team roles)</td><td>Enterprise (RBAC, DLP, audit)</td></tr><tr><td><strong>Best ecosystem</strong></td><td>Multi-SaaS</td><td>Multi-SaaS (budget)</td><td>Microsoft 365</td></tr></tbody></table>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">A startup with 20 employees uses Slack, GitHub, Google Workspace, HubSpot, and Stripe. They need to automate daily reporting and event-driven notifications. Budget is constrained. Which automation platform would you recommend and why?</p>
+  <label for="se-m07-automation-platform-comparison" class="sr-only">Your explanation</label>
+  <textarea id="se-m07-automation-platform-comparison" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m07-automation-platform-comparison">Compare with Expert Answer</button>
+  <div id="se-answer-m07-automation-platform-comparison" class="self-explain__expert" hidden>
+    <p>Make is the strongest recommendation for this profile. Reasoning: (1) Cost -- Make's operation-based pricing is roughly 10x cheaper than Zapier for high-volume workflows. The Core plan at $9/month provides 10,000 operations vs. Zapier's $29.99 for 750 tasks. (2) Bidirectional MCP -- Make can both receive commands from AI agents and connect to other MCP servers, enabling richer automation chains. (3) Integration coverage -- Make supports 3,000+ apps, which covers Slack, GitHub, Google Workspace, HubSpot, and Stripe. (4) Visual builder -- Make's graph-based scenario builder provides more architectural control for complex multi-step workflows. Zapier would be the fallback if any required integration is missing from Make's catalog (Zapier covers 8,000+ apps). Power Automate is overkill for a 20-person startup not in the Microsoft ecosystem.</p>
+  </div>
+</div>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong><span class="glossary-term" data-term="skills">Skills</span> are the new plugins.</strong> Every major platform has converged on some form of reusable, packaged <span class="glossary-term" data-term="agent">agent</span> capability -- but implementations range from simple markdown files (Claude) to full code modules (<span class="glossary-term" data-term="openclaw">OpenClaw</span>) to visual builders (<span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>).</p>
+</li>
+<li>
+<p><strong>Security is the dividing line.</strong> Claude <span class="glossary-term" data-term="skills">Skills</span> are safe by design (no code execution). <span class="glossary-term" data-term="openclaw">OpenClaw</span> <span class="glossary-term" data-term="skills">Skills</span> are powerful but dangerous (12-20% malicious rate on <span class="glossary-term" data-term="clawhub">ClawHub</span>). <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> provides enterprise governance. The security model should drive platform choice for any production deployment.</p>
+</li>
+<li>
+<p><strong>Claude's <span class="glossary-term" data-term="skills">skills</span> approach is the most developer-friendly.</strong> Filesystem-based, version-controllable, zero-infrastructure markdown files that compose with MCP servers. The trade-off is limited power compared to code-based alternatives.</p>
+</li>
+<li>
+<p><strong>OpenAI has marketplace dominance but fragmented <span class="glossary-term" data-term="skills">skills</span>.</strong> Custom GPTs and Codex <span class="glossary-term" data-term="skills">Skills</span> are separate systems with different authoring models, distribution channels, and capabilities. The <span class="glossary-term" data-term="gpt-store">GPT Store</span>'s 3M+ entries create discoverability problems.</p>
+</li>
+<li>
+<p><strong>Google is betting on platform integration over a <span class="glossary-term" data-term="skills">skills</span> ecosystem.</strong> No dedicated <span class="glossary-term" data-term="skills">skills</span> framework -- instead, <span class="glossary-term" data-term="ai-chips">AI Chips</span>, Extensions, and deep Google service integration. This works well inside Google's ecosystem but limits third-party extensibility.</p>
+</li>
+<li>
+<p><strong>Microsoft has the strongest enterprise story.</strong> <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> + Power Platform + <span class="glossary-term" data-term="agent-365">Agent 365</span> provides governance, compliance, and integration breadth that no other platform matches for large organizations.</p>
+</li>
+<li>
+<p><strong>Scheduled tasks are table stakes.</strong> All four platforms now offer time-based task scheduling. Event-driven automation still requires third-party platforms (Zapier, Make, Power Automate) or Codex's repo-event triggers.</p>
+</li>
+<li>
+<p><strong>Zapier MCP is the universal bridge.</strong> For any AI <span class="glossary-term" data-term="agent">agent</span> that supports MCP, Zapier's 8,000+ integrations are accessible as tools -- making it the de facto integration multiplier across the ecosystem.</p>
+</li>
+<li>
+<p><strong>Make is the cost play.</strong> For high-volume automations, Make is roughly 10x cheaper than Zapier with comparable capabilities and better visual workflow design.</p>
+</li>
+<li>
+<p><strong>The automation stack is converging.</strong> The line between "AI skill," "plugin," "automation," and "integration" is dissolving. By late 2026, expect these categories to merge further as MCP adoption matures and platforms add native event-driven capabilities.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Gemini Scheduled Actions benefits from deep integration with Google services -- a scheduled action can query Gmail, update a Sheet, and create a Calendar event in a single run without requiring third-party automation platforms. This gives Gemini the broadest first-party service access of any scheduled task system, though it is limited to Google's own ecosystem." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Gemini Scheduled Actions has a unique advantage over Claude Cowork and ChatGPT Tasks for scheduled automation. What is it?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">More tasks allowed per month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Deep native integration with Google Workspace services (Calendar, Gmail, Drive, Sheets)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Supports event-driven triggers</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Lower pricing</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Make supports bidirectional MCP: it acts as an MCP server (controllable by AI agents) and as an MCP client (can connect to other MCP servers within its scenario workflows). Zapier only acts as an MCP server. This bidirectional capability means Make scenarios can both receive AI agent commands and invoke external MCP tools, creating richer automation chains." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which automation platform supports bidirectional MCP -- acting as both an MCP server and an MCP client within its workflows?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Zapier</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Make</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Power Automate</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Claude Cowork</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="OpenClaw's code-first approach (JavaScript/TypeScript modules, arbitrary execution, community registry) maximizes power and flexibility at the cost of security -- the 12-20% malicious rate on ClawHub is the direct consequence. Copilot Studio's visual builder with Azure AD integration, DLP policies, and Agent 365 monitoring prioritizes enterprise control and compliance at the cost of flexibility and developer autonomy. This tradeoff between power and safety is a recurring theme across the agent ecosystem (Module 03, Module 05)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Compare the security model of OpenClaw Skills (Module 05) with the enterprise governance of Copilot Studio. What does each prioritize?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">OpenClaw prioritizes governance; Copilot Studio prioritizes flexibility</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Both prioritize security equally but use different approaches</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">OpenClaw prioritizes maximum flexibility and community-driven development; Copilot Studio prioritizes enterprise control, compliance, and audit trails</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">OpenClaw prioritizes cloud hosting; Copilot Studio prioritizes local execution</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Claude Skills compose with MCP servers: the skill defines the agent's behavior through natural language instructions, while MCP servers provide the external tool access. A skill might instruct the agent to 'review open pull requests and summarize blockers,' and the GitHub MCP server provides the tools to actually read PRs. The skill is the intent layer; MCP is the capability layer." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does MCP (Module 06) relate to Claude Skills in practice?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">MCP replaces the need for skills entirely</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Claude Skills define the intent (what to do); MCP servers provide the capability (how to connect to external services)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Skills and MCP are separate systems that cannot interact</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">MCP is required for every skill to function</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="ChatGPT Tasks caps users at 10 active scheduled tasks. For power users wanting to automate many workflows, this is restrictive. Additional limitations: tasks cannot trigger other tasks, no webhook or event-based triggers, no access to external tools beyond web browsing and code interpreter, and no failure retry." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">ChatGPT Tasks has a notable limitation for power users. What is it?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Tasks cannot access the internet</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Maximum of 10 active tasks</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Tasks can only run on weekdays</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Tasks require a Team subscription</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Over 3 million Custom GPTs have been created, but only approximately 159,000 are publicly listed and active in the GPT Store. The 95% gap reflects abandoned, private, and low-quality entries. This creates a discoverability challenge -- finding high-quality GPTs requires filtering through significant noise." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How many Custom GPTs have been created vs. how many are publicly active in the GPT Store?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">~500K created, ~50K active</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">~3M created, ~159K active</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">~1M created, ~500K active</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">~10M created, ~1M active</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Claude Skills are markdown files with YAML frontmatter that declares the skill's name, description, and trigger conditions. The body contains natural-language instructions the agent follows. No code execution -- skills are purely instructional, shaping behavior through prompt engineering rather than programmatic interfaces." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the authoring format for Claude Skills?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">JavaScript modules with a skill interface</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Visual drag-and-drop builder</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Markdown files with YAML frontmatter</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Python scripts with decorators</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Scheduled tasks in Cowork execute with full access to the user's configured tools and MCP servers -- this is not a limitation. The actual limitations are: purely time-based triggers (no conditional/event triggers), no automatic retry for failed tasks, no task chaining, and no built-in alerting for failures." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Claude Cowork's scheduled tasks have several limitations. Which of these is NOT a current limitation?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">No conditional triggering (purely time-based)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">No retry mechanism for failed tasks</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Cannot access MCP servers during scheduled runs</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">No task chaining (each scheduled task is independent)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Codex is the most event-driven native AI agent. Its Skills can trigger on PR opened, PR updated, issue created, issue labeled, and push events. Other coding agents (Claude Code, GitHub Copilot, Antigravity) do not have native repository event triggers -- they rely on external automation platforms for event-driven workflows." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which is the only AI coding agent that natively supports event-driven triggers from repository activity?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Code</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">GitHub Copilot</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">OpenAI Codex</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Google Antigravity</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Make's operation-based pricing makes it roughly 10x cheaper than Zapier for the same throughput. A workflow costing $30/month on Zapier might cost $3/month on Make. Make's Core plan provides 10,000 operations/month for $9 vs. Zapier Professional's 750 tasks for $29.99." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which automation platform is approximately 10x cheaper than Zapier for high-volume workflows?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Power Automate</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Make</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">OpenClaw cron</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Claude Cowork</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="0" data-explanation="Copilot Studio leads with enterprise RBAC, DLP, and Agent 365 governance. Claude Skills are next -- no code execution means minimal attack surface. Custom GPTs allow external API calls but no local access (though system prompt extraction is a known risk). OpenClaw Skills are riskiest -- unrestricted code execution with no mandatory review and a 12-20% malicious rate on ClawHub." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Rank these skills platforms from safest to riskiest for deploying in a production environment: Claude Skills, OpenClaw Skills, Copilot Studio, Custom GPTs.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Copilot Studio &gt; Claude Skills &gt; Custom GPTs &gt; OpenClaw Skills</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Claude Skills &gt; Copilot Studio &gt; Custom GPTs &gt; OpenClaw Skills</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">OpenClaw Skills &gt; Custom GPTs &gt; Claude Skills &gt; Copilot Studio</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m07-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Custom GPTs &gt; OpenClaw Skills &gt; Copilot Studio &gt; Claude Skills</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- the agents that consume and execute <span class="glossary-term" data-term="skills">skills</span></li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- how orchestration frameworks consume <span class="glossary-term" data-term="skills">skills</span> across <span class="glossary-term" data-term="agent">agent</span> teams</li>
+<li><a href="module-05.html">Module 05: <span class="glossary-term" data-term="openclaw">OpenClaw</span> &#x26; Open <span class="glossary-term" data-term="agent">Agent</span> Ecosystem</a> -- <span class="glossary-term" data-term="clawhub">ClawHub</span> security analysis and <span class="glossary-term" data-term="openclaw">OpenClaw</span> skill architecture details</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- the protocol layer underlying many <span class="glossary-term" data-term="skills">skills</span> and all MCP-based automation</li>
+<li><a href="module-08.html">Module 08: Consumer AI Comparison</a> -- scheduled tasks and automation as consumer platform differentiators</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- API-level function calling and <span class="glossary-term glossary-term--first-use" data-term="tool-use">tool use</span> that <span class="glossary-term" data-term="skills">skills</span> build upon</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- enterprise governance implications for skill deployment and automation</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+<ol>
+<li>Anthropic Expands Claude With Enterprise Plugins and Marketplace (gHacks), February 2026. <a href="https://www.ghacks.net/2026/02/25/anthropic-expands-claude-with-enterprise-plugins-and-marketplace/">https://www.ghacks.net/2026/02/25/anthropic-expands-claude-with-enterprise-plugins-and-marketplace/</a> — see W42 in SOURCES.md (related)</li>
+<li><span class="glossary-term" data-term="gpt-store">GPT Store</span> Statistics and Growth (OpenAI Blog), 2026. <a href="https://openai.com/index/gpt-store/">https://openai.com/index/gpt-store/</a> — W43 in SOURCES.md</li>
+<li>Zapier Platform and MCP Integration, 2026. <a href="https://zapier.com/platform">https://zapier.com/platform</a> — W44 in SOURCES.md</li>
+<li>Make Platform and Pricing, 2026. <a href="https://www.make.com/en/pricing">https://www.make.com/en/pricing</a> — W45 in SOURCES.md</li>
+<li>Power Automate <span class="glossary-term" data-term="ai-builder">AI Builder</span> Credits Transition (Microsoft Learn), 2026. <a href="https://learn.microsoft.com/en-us/ai-builder/credit-management">https://learn.microsoft.com/en-us/ai-builder/credit-management</a> — W46 in SOURCES.md</li>
+<li>OWASP Top 10 for LLM Applications: Prompt Injection. <a href="https://owasp.org/www-community/attacks/PromptInjection">https://owasp.org/www-community/attacks/PromptInjection</a> — W74 in SOURCES.md</li>
+<li>OpenAI on Prompt Injection Risks (Fortune), December 2025. <a href="https://fortune.com/2025/12/23/openai-ai-browser-prompt-injections-cybersecurity-hackers/">https://fortune.com/2025/12/23/openai-ai-browser-prompt-injections-cybersecurity-hackers/</a> — W75 in SOURCES.md</li>
+<li>Anthropic Launches Claude Marketplace (SiliconANGLE), March 2026. <a href="https://siliconangle.com/2026/03/06/anthropic-launches-claude-marketplace-third-party-cloud-services/">https://siliconangle.com/2026/03/06/anthropic-launches-claude-marketplace-third-party-cloud-services/</a> — W76 in SOURCES.md</li>
+<li><span class="glossary-term" data-term="openclaw">OpenClaw</span> GitHub Repository. <a href="https://github.com/openclaw/openclaw">https://github.com/<span class="glossary-term" data-term="openclaw">openclaw</span>/<span class="glossary-term" data-term="openclaw">openclaw</span></a> — W20 in SOURCES.md</li>
+<li>ClawHavoc Supply Chain Attack Analysis (Koi Security). <a href="https://koi.security/blog/clawhavoc-analyzing-supply-chain-attack-clawhub">https://koi.security/blog/clawhavoc-analyzing-supply-chain-attack-<span class="glossary-term" data-term="clawhub">clawhub</span></a> — W21 in SOURCES.md</li>
+<li>ClawJacked WebSocket Vulnerability. <a href="https://www.bleepingcomputer.com/news/security/clawjacked-openclaw-websocket-hijacking-flaw/">https://www.bleepingcomputer.com/news/security/clawjacked-<span class="glossary-term" data-term="openclaw">openclaw</span>-websocket-hijacking-flaw/</a> — W24 in SOURCES.md</li>
+<li><span class="glossary-term" data-term="openclaw">OpenClaw</span>/<span class="glossary-term" data-term="clawhub">ClawHub</span> Malicious <span class="glossary-term" data-term="skills">Skills</span> Audit (Snyk). <a href="https://snyk.io/blog/openclaw-clawhub-security-malicious-skills/">https://snyk.io/blog/<span class="glossary-term" data-term="openclaw">openclaw</span>-<span class="glossary-term" data-term="clawhub">clawhub</span>-security-malicious-<span class="glossary-term" data-term="skills">skills</span>/</a> — W25 in SOURCES.md</li>
+<li><span class="glossary-term" data-term="clawhub">ClawHub</span> <span class="glossary-term" data-term="skills">Skills</span> Registry. <a href="https://clawhub.dev">https://<span class="glossary-term" data-term="clawhub">clawhub</span>.dev</a> — W40 in SOURCES.md</li>
+</ol>
+<p><strong>Foundation profiles cited as [F1]-[F4]:</strong></p>
+<ul>
+<li>[F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026</li>
+<li>[F2] OpenAI/ChatGPT Ecosystem Profile (reference/profiles/openai-chatgpt.md), March 18, 2026</li>
+<li>[F3] Google/Gemini Ecosystem Profile (reference/profiles/google-gemini.md), March 18, 2026</li>
+<li>[F4] Microsoft/Copilot Ecosystem Profile (reference/profiles/microsoft-copilot.md), March 18, 2026</li>
+</ul>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-05.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 05: OpenClaw &amp; Open Agent Ecosystem</span>
+        </a>
+        <a href="module-09.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 09: Developer Platforms &amp; APIs</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

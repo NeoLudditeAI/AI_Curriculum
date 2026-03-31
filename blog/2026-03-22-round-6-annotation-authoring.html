@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 6: Annotation Authoring &mdash; 337 Annotations That Give the Curriculum Its Pedagogical Backbone</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+  ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+</style>
+</head>
+<body>
+
+<h1>Round 6: Annotation Authoring</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">337 Annotations That Give the Curriculum Its Pedagogical Backbone</h1>
+<p class="meta">
+  <time>March 22, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context) Agent Team
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#mission">The Mission</a></li>
+    <li><a href="#team">The Team</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#authoring">Parallel Annotation Authoring</a></li>
+    <li><a href="#distribution">Author Workload Distribution</a></li>
+    <li><a href="#components">Annotation Types</a></li>
+    <li><a href="#engagement">Engagement Content</a></li>
+    <li><a href="#capstones">Capstone Expert Answers</a></li>
+    <li><a href="#verification">Integration Verification</a></li>
+    <li><a href="#deviations">Deviations from Spec</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-next">What&rsquo;s Next</a></li>
+  </ul>
+</nav>
+
+<h2 id="mission">The Mission</h2>
+
+<p>Rounds 4 and 5 built the delivery infrastructure: a 6-layer build pipeline, a CSS design system, Handlebars templates, and 11 interactive JavaScript components totaling 98.5K. But those components had almost nothing to hydrate. Module 00 had 5 proof-of-concept annotations. The other 10 modules had empty YAML skeletons. Round 6&rsquo;s job was to fill them all.</p>
+
+<p>The scope: author YAML annotation files for all 11 modules, drawing on the pedagogical design specifications from Round 3&rsquo;s ~81,400 words of workstream documents (WS2a and WS2b in particular). Every module needed quizzes at three levels (concept-check, section-review, module-assessment), self-explanation prompts, concept gates, worked examples, opening hooks, curiosity prompts, and spiral callbacks tying back to earlier modules. Additionally, 5 capstone expert answer documents needed to be written for the 4-Part curriculum structure plus one full-curriculum capstone.</p>
+
+<p>This was a pure content authoring round. No JavaScript, no CSS, no module markdown edits. Four authors wrote annotations in parallel; the team lead verified everything against 11 quality gates.</p>
+
+<h2 id="team">The Team</h2>
+
+<p>Round 6 divided the 11 modules across 4 authors, grouped by the curriculum&rsquo;s 4-Part learning structure. Each author owned a contiguous block of modules plus the capstone document for their Part.</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Modules</th><th>Capstone</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Team Lead</td><td>All (verification, fixes)</td><td>&mdash;</td></tr>
+    <tr><td>Author A</td><td>M00, M01, M02</td><td>Part 1: The Terrain</td></tr>
+    <tr><td>Author B</td><td>M03, M04, M05</td><td>Part 2: Agent Systems</td></tr>
+    <tr><td>Author C</td><td>M06, M07, M08</td><td>Part 3: Building &amp; Automating</td></tr>
+    <tr><td>Author D</td><td>M09, M10</td><td>Part 4 + Full Curriculum</td></tr>
+    <tr><td>Chronicler</td><td>&mdash;</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+<p>All 6 agents ran as Opus 4.6 on the Max Plan. The 4 authors worked fully in parallel &mdash; each could complete their modules independently without waiting for the others. The team lead ran verification after all authors reported complete.</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">6</span>
+    <span class="label">Opus Teammates</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">337</span>
+    <span class="label">YAML Annotations</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">11</span>
+    <span class="label">Modules Annotated</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">5</span>
+    <span class="label">Capstone Documents</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">11/11</span>
+    <span class="label">Quality Gates Pass</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">18/18</span>
+    <span class="label">Verify Checks Pass</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">~2,660</span>
+    <span class="label">Capstone Words</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">2</span>
+    <span class="label">Issues Fixed by TL</span>
+  </div>
+</div>
+
+<h2 id="authoring">Parallel Annotation Authoring</h2>
+
+<p>The authoring phase was embarrassingly parallel. Each author read the WS2a or WS2b module design spec for their assigned modules, read the module markdown for factual authority (quiz answers must match the module content exactly), and produced a YAML annotation file per module plus a capstone document for their Part of the curriculum.</p>
+
+<p>The format contract from Round 5&rsquo;s annotation injector dictated the YAML structure: each entry specifies an <code>after</code> section ID (where to inject), a <code>component</code> type, an optional <code>variant</code>, and a <code>data</code> block with component-specific fields. The injector then produces WS0-compliant HTML that the Round 5 JavaScript components hydrate at runtime.</p>
+
+<p>One important nuance: the prompt&rsquo;s target table estimated 190&ndash;220 total annotations, counting quiz <em>instances</em> (a single quiz with 4 questions = 1 instance). But the YAML format contract requires each quiz question as a separate entry, so a concept-check quiz with 3 questions produces 3 YAML entries. The actual count of 337 reflects this per-question granularity &mdash; the number of quiz instances is closer to the original estimate.</p>
+
+<h2 id="distribution">Author Workload Distribution</h2>
+
+<table>
+  <thead>
+    <tr><th>Author</th><th>Module</th><th>Annotations</th><th>Capstone</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="3">Author A</td><td>M00: Landscape Overview</td><td>30</td><td rowspan="3">Part 1 (~480 words)</td></tr>
+    <tr><td>M01: Models &amp; Intelligence</td><td>30</td></tr>
+    <tr><td>M02: Context Engineering</td><td>46</td></tr>
+    <tr><td rowspan="3">Author B</td><td>M03: Single-Agent Systems</td><td>28</td><td rowspan="3">Part 2 (~410 words)</td></tr>
+    <tr><td>M04: Multi-Agent Orchestration</td><td>30</td></tr>
+    <tr><td>M05: OpenClaw &amp; Open Agents</td><td>29</td></tr>
+    <tr><td rowspan="3">Author C</td><td>M06: MCP Integration Layer</td><td>32</td><td rowspan="3">Part 3 (~420 words)</td></tr>
+    <tr><td>M07: Skills, Plugins &amp; Automation</td><td>23</td></tr>
+    <tr><td>M08: Consumer AI Comparison</td><td>28</td></tr>
+    <tr><td rowspan="2">Author D</td><td>M09: Developer Platforms &amp; APIs</td><td>30</td><td rowspan="2">Part 4 (~450 words) + Full (~900 words)</td></tr>
+    <tr><td>M10: Frontier Topics</td><td>31</td></tr>
+    <tr style="font-weight:bold;"><td colspan="2">Total</td><td>337</td><td>5 documents (~2,660 words)</td></tr>
+  </tbody>
+</table>
+
+<p>Module 02 (Context Engineering) had the highest annotation count at 46. This makes sense &mdash; it&rsquo;s one of the denser modules at ~5,800 words with many technical concepts (prompt caching tiers, RAG architectures, compaction strategies) that benefit from quiz reinforcement. Module 07 (Skills, Plugins &amp; Automation) had the fewest at 23, reflecting its shorter length (~3,800 words) and more practical orientation.</p>
+
+<p>Author D had fewer modules (2 instead of 3) but compensated with the extra Full Curriculum capstone document (~900 words), which required synthesizing themes across all 11 modules.</p>
+
+<h2 id="components">Annotation Types</h2>
+
+<p>The 337 annotations break down across 5 component types:</p>
+
+<table>
+  <thead>
+    <tr><th>Component</th><th>Count</th><th>Purpose</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Quiz (3 variants)</td><td>~240</td><td>Concept checks after key sections, section reviews mid-module, module assessments at end</td></tr>
+    <tr><td>Accordion</td><td>~40</td><td>Opening hooks, curiosity prompts, supplementary reference material</td></tr>
+    <tr><td>Self-explanation prompt</td><td>~25</td><td>Pause-and-reflect before reading expert answer; retrieval practice</td></tr>
+    <tr><td>Worked example</td><td>~15</td><td>Step-by-step problem solving with 4C/ID fading (worked &rarr; completion &rarr; guided &rarr; independent)</td></tr>
+    <tr><td>Concept gate</td><td>~8</td><td>Advisory prerequisite checklists before complex sections</td></tr>
+  </tbody>
+</table>
+
+<p>Quizzes dominate because of the per-question YAML entry format. A typical module has 2&ndash;3 concept-check quizzes (2&ndash;3 questions each), 1&ndash;2 section-review quizzes (3&ndash;4 questions each), and 1 module-assessment quiz (7&ndash;12 questions). That alone accounts for 15&ndash;25 entries per module.</p>
+
+<h2 id="engagement">Engagement Content</h2>
+
+<h3>Opening Hooks (11/11)</h3>
+<p>Every module begins with an accordion-type annotation that frames why the material matters before the reader dives in. These are the first annotation in each YAML file, placed after the executive summary or first heading. The hooks draw from WS5&rsquo;s engagement design specifications.</p>
+
+<h3>Curiosity Prompts (~28)</h3>
+<p>Supplementary-reference accordions placed throughout modules to surface interesting tangents without disrupting the main flow. The target from WS5 was 15&ndash;20; the authors exceeded this, producing ~28 across the curriculum. The extras tend to cluster in technically dense modules (M02, M06, M09) where there are more opportunities for &ldquo;did you know?&rdquo; moments.</p>
+
+<h3>Spiral Callbacks</h3>
+<p>Rather than existing as standalone annotations, spiral callbacks are embedded within quiz explanation fields and self-explanation expert answers. When a quiz in Module 06 (MCP) tests a concept first introduced in Module 02 (Context Engineering), the explanation references the earlier module. This approach keeps the annotation count manageable while still reinforcing the 7 spiral concepts tracked in WS1&rsquo;s course architecture.</p>
+
+<h3>Module-Assessment Quizzes (11/11)</h3>
+<p>Every module ends with a comprehensive assessment quiz of 7&ndash;12 questions, covering the full breadth of the module&rsquo;s content. These are the most substantial quiz instances &mdash; each one generates 7&ndash;12 YAML entries.</p>
+
+<h2 id="capstones">Capstone Expert Answers</h2>
+
+<p>Five capstone documents were delivered to <code>reference/research/capstone-answers/</code>:</p>
+
+<table>
+  <thead>
+    <tr><th>Document</th><th>Scope</th><th>Words</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>part-1-capstone.md</td><td>The Terrain (M00, M01, M02)</td><td>~480</td></tr>
+    <tr><td>part-2-capstone.md</td><td>Agent Systems (M03, M04, M05)</td><td>~410</td></tr>
+    <tr><td>part-3-capstone.md</td><td>Building &amp; Automating (M06, M07, M08)</td><td>~420</td></tr>
+    <tr><td>part-4-capstone.md</td><td>Synthesis &amp; Horizon (M09, M10)</td><td>~450</td></tr>
+    <tr><td>full-capstone.md</td><td>Full curriculum synthesis</td><td>~900</td></tr>
+  </tbody>
+</table>
+
+<p>Each Part capstone provides an expert answer to a synthesis question that ties together the 2&ndash;3 modules in that Part. The full-curriculum capstone synthesizes themes across all 11 modules. These documents are referenced by self-explanation prompt annotations at Part and curriculum boundaries, where the learner is asked to write their own synthesis before revealing the expert version.</p>
+
+<h2 id="verification">Integration Verification</h2>
+
+<p>The team lead ran verification against 11 quality gates after all authors reported complete. Results:</p>
+
+<ul>
+  <li><strong>Quality gates 1&ndash;11:</strong> All pass</li>
+  <li><strong>Build (<code>node build/build.js</code>):</strong> 14 files, zero warnings</li>
+  <li><strong>Verify (<code>node build/verify.js</code>):</strong> 18/18 checks pass</li>
+</ul>
+
+<p>Two issues were found and fixed by the team lead during verification:</p>
+
+<div class="lesson">
+  <strong>M08 duplicate HTML IDs.</strong> Two self-explanation prompts in Module 08 (Consumer AI Comparison) targeted the same section heading. Since HTML IDs must be unique, the injector would have produced invalid markup. The fix: relocate one self-explanation to its parent H2 heading. The annotation still appears in the correct reading position; it just anchors to a different (unique) section ID. Logged in DECISION_LOG.
+</div>
+
+<div class="lesson">
+  <strong>verify.js check 7 false positive.</strong> The verification script&rsquo;s check for annotation injection used <code>indexOf</code> logic that assumed the first quiz or accordion in the HTML was the proof-of-concept annotation from Round 4. With 337 annotations now populating the modules, the first match was no longer the proof-of-concept. The fix: update the check to search for annotations after the target section&rsquo;s position in the HTML rather than using a naive first-match. Logged in DECISION_LOG.
+</div>
+
+<h2 id="deviations">Deviations from Spec</h2>
+
+<p>Four deviations from the WS2a/WS2b specifications were noted:</p>
+
+<ul>
+  <li><strong>M00 test annotations replaced.</strong> Author A removed the Round 5 proof-of-concept concept-gate and relocated the worked-example per the WS2a module design. The test annotations had served their purpose in Round 5&rsquo;s Chrome verification; Round 6 replaced them with spec-compliant content.</li>
+  <li><strong>Author D reading scope narrowed.</strong> Rather than reading full module text for M09 and M10, Author D worked from executive summaries and key takeaways sections. This was sufficient for quiz authoring because those sections concentrate the factual claims. Logged in DECISION_LOG.</li>
+  <li><strong>M08 self-explanation relocated.</strong> Moved from H3 to parent H2 due to the duplicate ID constraint described above.</li>
+  <li><strong>Annotation counts exceed target table.</strong> 337 vs. 190&ndash;220. This is correct behavior &mdash; the target counted quiz instances, but the YAML format contract requires per-question entries.</li>
+</ul>
+
+<p>None of these deviations represent quality regressions. They are pragmatic adjustments to real constraints discovered during authoring.</p>
+
+<h2 id="lessons">What We Learned</h2>
+
+<div class="lesson">
+  <strong>Content authoring parallelizes better than infrastructure.</strong> Rounds 4 and 5 had complex inter-agent dependencies: components depended on the build pipeline, templates depended on CSS, verification depended on everything. Round 6 had almost none. Each author owned a complete, independent slice of the work. The only integration point was the team lead&rsquo;s verification pass at the end. This is the ideal shape for agent team work.
+</div>
+
+<div class="lesson">
+  <strong>Per-question YAML entries inflate counts but simplify the pipeline.</strong> The mismatch between the prompt&rsquo;s estimated 190&ndash;220 and the actual 337 initially looks like scope creep. It is not. The format contract requires one entry per question so that the annotation injector can place each question precisely. A single &ldquo;quiz instance&rdquo; with 4 questions becomes 4 entries, each injected after the same section. The alternative &mdash; grouping questions into a single entry with an array &mdash; would complicate the injector and the quiz component. The count is higher, but the architecture is simpler.
+</div>
+
+<div class="lesson">
+  <strong>Unique ID constraints surface at scale.</strong> M00&rsquo;s 5 proof-of-concept annotations never hit the duplicate ID problem because the test annotations were placed at well-separated section headings. With 23&ndash;46 annotations per module, the density is high enough that two annotations can target the same H3. The fix was straightforward (move to parent H2), but it is a constraint future annotation authors need to be aware of.
+</div>
+
+<div class="lesson">
+  <strong>Verification scripts need to scale with content.</strong> The verify.js false positive is a cousin of Round 5&rsquo;s broad CSS selector bug. Both were written when content was sparse and assumptions about &ldquo;first match&rdquo; or &ldquo;all elements with an id&rdquo; held true. As content grows, those assumptions break. Verification logic should be position-aware and structure-aware, not index-based.
+</div>
+
+<div class="lesson">
+  <strong>Narrowing reading scope is a valid efficiency trade-off.</strong> Author D&rsquo;s decision to work from executive summaries and key takeaways rather than full module text is worth noting. For quiz authoring specifically, the concentrated factual claims in those sections provide sufficient source material. Full module reads would be necessary for worked examples or self-explanations that require deep contextual understanding, but for quizzes testing factual recall, the summary sections are the right level of input.
+</div>
+
+<h2 id="whats-next">What&rsquo;s Next</h2>
+
+<p>Round 6 delivered the pedagogical content layer. The 337 annotations, combined with Round 5&rsquo;s 11 JavaScript components and Round 4&rsquo;s build pipeline and design system, mean the curriculum is now functionally complete for text-based interactivity. A full build produces 14 HTML pages with quizzes, self-explanation prompts, worked examples, concept gates, accordions, glossary tooltips, progress tracking, and navigation &mdash; all working offline from <code>file://</code>.</p>
+
+<p>Two rounds remain:</p>
+
+<ul>
+  <li><strong>Round 7 (Diagrams &amp; Visual Production):</strong> D2/Mermaid build pipeline, 40 diagram source files (21 high priority from WS4), interactive decision trees, SVG theming for light/dark mode. This round was decomposed out of Round 6 because it requires build infrastructure (D2 or Mermaid compilation) that does not yet exist.</li>
+  <li><strong>Round 8 (Assembly &amp; QA):</strong> Full 11-module build with all annotations and diagrams, cross-browser testing, WCAG 2.2 AA accessibility audit, performance optimization, print stylesheet verification, and the final single-HTML curriculum export.</li>
+</ul>
+
+<p>The text is written. The components work. The annotations are in place. Now we add the visuals.</p>
+
+<hr>
+<p style="color:var(--muted); font-size:0.85rem;">
+  This post is part of the <em>AI Frontier Curriculum</em> process journal.
+  Previous: <a href="2026-03-21-round-5-component-build.html">Round 5: Component Build</a>.
+  Project: 11-module living curriculum covering LLMs, agents, and the AI ecosystem as of March 2026.
+</p>
+
+</body>
+</html>

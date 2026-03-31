@@ -3,7 +3,7 @@
 **Module:** 06
 **Title:** MCP & the Integration Layer
 **Last Updated:** 2026-03-20
-**Status:** DRAFTING
+**Status:** COMPLETE
 **Word Count Target:** 4,000-5,000
 
 ---
@@ -401,12 +401,14 @@ The trend favors MCP as the default integration pattern, with native connectors 
 ## Cross-References
 
 - [Module 00: Landscape Overview](MODULE-00-landscape-overview.md) -- competitive context for MCP adoption across ecosystems
+- [Module 02: Context Engineering](MODULE-02-context-engineering.md) -- context windows and caching strategies that MCP-delivered context interacts with
 - [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md) -- how agents use tools; MCP is the transport layer for tool delivery
 - [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- MCP's role in multi-agent systems where agents share tool access
 - [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) -- OpenClaw's MCP integration as tools within its Gateway
 - [Module 07: Skills, Plugins & Automation](MODULE-07-skills-plugins-automation.md) -- how MCP servers compose into higher-level skills and plugins
 - [Module 08: Consumer AI Comparison](MODULE-08-consumer-ai-comparison.md) -- MCP as a differentiator in the consumer platform comparison
 - [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) -- MCP alongside native APIs in the developer tooling landscape
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- MCP as the ecosystem bridge between open and closed platforms
 
 ---
 

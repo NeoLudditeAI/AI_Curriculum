@@ -1,7 +1,7 @@
 # Module 00: Landscape Overview
 
-**Last updated:** 2026-03-20
-**Status:** IN REVIEW
+**Last updated:** 2026-03-21
+**Status:** COMPLETE
 **Word count target:** 4,000-5,000
 
 ---
@@ -24,9 +24,9 @@ The AI industry has consolidated around four vertically integrated platform ecos
 
 ### Anthropic / Claude
 
-Anthropic is the youngest of the four but has established itself as the quality and safety leader, particularly in enterprise and developer markets. Founded in 2021 by former OpenAI researchers, the company closed a $30B Series G in February 2026 (led by GIC and Coatue), reaching a $380B valuation [F1]. Annualized revenue stands at roughly $14B, with approximately 80% derived from enterprise customers [F1].
+Anthropic is the youngest of the four but has established itself as the quality and safety leader, particularly in enterprise and developer markets. Founded in 2021 by former OpenAI researchers, the company closed a $30B Series G in February 2026 (led by GIC and Coatue), reaching a $380B valuation [F1]. Annualized revenue has surged to approximately $19B as of March 2026, with approximately 80% derived from enterprise customers [F1][12].
 
-Anthropic's product strategy is converging on autonomous agency. Claude Cowork (Research Preview) operates directly on the user's desktop, browsing the web, reading and writing local files, and executing multi-step tasks. Claude Code, the terminal-based agentic coding tool, reached $1B ARR within six months of launch and has accelerated to an estimated ~$2.5B ARR by March 2026 [UNVERIFIED], commanding an estimated 54% of the enterprise coding agent market [1a]. The Claude Agent SDK (Python/TypeScript) and experimental Agent Teams feature extend this into multi-agent orchestration. MCP (Model Context Protocol), which Anthropic originated, is now the de facto standard for connecting AI systems to external tools and data sources.
+Anthropic's product strategy is converging on autonomous agency. Claude Cowork (Research Preview) operates directly on the user's desktop, browsing the web, reading and writing local files, and executing multi-step tasks. Claude Code, the terminal-based agentic coding tool, reached $1B ARR within six months of launch and has accelerated to over $2.5B ARR by March 2026 [12][13], commanding an estimated 54% of the enterprise coding agent market [1]. The Claude Agent SDK (Python/TypeScript) and experimental Agent Teams feature extend this into multi-agent orchestration. MCP (Model Context Protocol), which Anthropic originated, is now the de facto standard for connecting AI systems to external tools and data sources.
 
 **Strategic center of gravity:** Enterprise autonomy -- Claude as a trusted digital worker that acts, not just answers.
 
@@ -36,13 +36,13 @@ OpenAI remains the largest player by every financial metric. Its February 2026 f
 
 OpenAI's product breadth is unmatched: ChatGPT spans chat, vision, voice, agents, and creative generation. GPT-5.4, launched March 5, 2026, pushed the context window to 1M tokens, with Mini and Nano variants following on March 17 [F2]. The product portfolio includes ChatGPT Agent (autonomous web browsing, formerly Operator), Codex (cloud-based coding agent with desktop apps), Sora 2 (video generation with Disney character licensing), and Deep Research with MCP integration [F2].
 
-However, OpenAI's shipping velocity has created friction. Rapid model churn from GPT-5 through GPT-5.4 within roughly 12 months has caused upgrade fatigue, with reports of 1.5 million subscription cancellations in March 2026 alone [F2]. Consumer web traffic share (per Similarweb) has declined from 87.2% to 68% even as absolute user counts grew [1a]. Mobile app market share tells a different story -- ChatGPT holds under 45% on mobile (per Apptopia), meaning the market is considerably less concentrated outside desktop web [F2].
+However, OpenAI's shipping velocity has created friction. Rapid model churn from GPT-5 through GPT-5.4 within roughly 12 months has caused upgrade fatigue, with reports of 1.5 million subscription cancellations in March 2026 alone [F2]. Consumer web traffic share (per Similarweb) has declined from 87.2% to 68% even as absolute user counts grew [1]. Mobile app market share tells a different story -- ChatGPT holds under 45% on mobile (per Apptopia), meaning the market is considerably less concentrated outside desktop web [F2].
 
 **Strategic center of gravity:** Consumer scale and creative breadth -- be the default AI for everyone, for everything.
 
 ### Google / Gemini
 
-Google is the only provider with models running at every layer of the computing stack: cloud (Gemini 3.1 Pro, currently in Preview), browser (Gemini in Chrome), on-device (Gemini Nano on Android/Pixel), and embedded inside the world's most-used productivity suite (Workspace) [F3]. Alphabet's market cap exceeds $3.71 trillion, and the company plans $175-185B in AI-related capital expenditure for 2026 [1e]. The Gemini API handles 85 billion monthly requests [1e].
+Google is the only provider with models running at every layer of the computing stack: cloud (Gemini 3.1 Pro, currently in Preview), browser (Gemini in Chrome), on-device (Gemini Nano on Android/Pixel), and embedded inside the world's most-used productivity suite (Workspace) [F3]. Alphabet's market cap exceeds $3.71 trillion, and the company plans $175-185B in AI-related capital expenditure for 2026 [5]. The Gemini API handles 85 billion monthly requests [5].
 
 Google's product sprawl is both its strength and its challenge. The portfolio includes the Gemini App (consumer chat), Flow (unified creative studio merging Whisk, ImageFX, and video generation), Antigravity (agentic IDE built on the $2.4B Windsurf acquisition), Jules (coding agent), NotebookLM, Chrome Auto Browse, and a deep enterprise stack through Vertex AI [F3]. The Agent Development Kit (ADK) is Google's answer to Anthropic's Agent SDK and OpenAI's Agents SDK.
 
@@ -65,7 +65,7 @@ Microsoft's AI ecosystem is uniquely layered. At the model level, Azure OpenAI S
 | Dimension | Anthropic/Claude | OpenAI/ChatGPT | Google/Gemini | Microsoft/Copilot |
 |-----------|-----------------|-----------------|---------------|-------------------|
 | **Valuation / Market Cap** | $380B | $730B | $3.71T (Alphabet) | ~$3T |
-| **Annualized AI Revenue** | ~$14B | ~$25B | Not broken out | $13B+ run rate |
+| **Annualized AI Revenue** | ~$19B | ~$25B | Not broken out | $13B+ run rate |
 | **Consumer Users** | ~2% web share | 900M+ WAU, 68% web share | 18.2% web share (fastest growing) | Embedded in M365 base |
 | **Enterprise Position** | ~40% enterprise LLM spend | 9M+ business users | #3 cloud (Vertex AI) | Dominant enterprise suite |
 | **Flagship Model** | Claude Opus 4.6 | GPT-5.4 | Gemini 3.1 Pro (Preview) | Azure OpenAI (GPT-5.4) |
@@ -103,19 +103,19 @@ Beyond the four platforms, a constellation of focused tools occupies niches that
 
 ## AI Coding Tools
 
-AI-assisted coding has become one of the most commercially significant AI application categories, with the market reaching an estimated $12.8B in 2026 [2a]. Seventy-three percent of engineering teams now use AI coding tools daily, up from 41% in 2025 [2b].
+AI-assisted coding has become one of the most commercially significant AI application categories, with the market reaching an estimated $12.8B in 2026 [6]. Seventy-three percent of engineering teams now use AI coding tools daily, up from 41% in 2025 [7].
 
 ### Architectural Approaches
 
 The coding tools landscape has fragmented into four distinct architectural types:
 
-**IDE-integrated assistants** add AI capabilities to existing editors. GitHub Copilot is the market leader here with 20 million+ users (4.7 million paid), offering code completion, chat, and agent capabilities across VS Code, JetBrains, and other editors [2a][F4].
+**IDE-integrated assistants** add AI capabilities to existing editors. GitHub Copilot is the market leader here with 20 million+ users (4.7 million paid), offering code completion, chat, and agent capabilities across VS Code, JetBrains, and other editors [6][F4].
 
-**IDE forks** take an existing editor (typically VS Code) and rebuild it around AI. **Cursor** leads this category with 360,000+ paying users and a reputation for the best AI-native editing experience [2a]. **Windsurf** was acquired by Google for $2.4B in July 2025 and relaunched as **Antigravity**, though the transition has been rocky -- the Antigravity IDE remains in Preview with reported stability issues [2a][F3].
+**IDE forks** take an existing editor (typically VS Code) and rebuild it around AI. **Cursor** leads this category with 360,000+ paying users and a reputation for the best AI-native editing experience [6]. **Windsurf** was acquired by Google for $2.4B in July 2025 and relaunched as **Antigravity**, though the transition has been rocky -- the Antigravity IDE remains in Preview with reported stability issues [6][F3].
 
-**Terminal agents** operate entirely in the command line, executing multi-step coding tasks autonomously. **Claude Code** defines this category, leveraging Claude's 1M-token context window to reason about entire codebases. Its trajectory from $1B ARR within six months to an estimated ~$2.5B ARR by March 2026 [UNVERIFIED] demonstrates the commercial demand for autonomous coding agents [1a][F1].
+**Terminal agents** operate entirely in the command line, executing multi-step coding tasks autonomously. **Claude Code** defines this category, leveraging Claude's 1M-token context window to reason about entire codebases. Its trajectory from $1B ARR within six months to over $2.5B ARR by March 2026 [12][13] demonstrates the commercial demand for autonomous coding agents [1][F1].
 
-**Cloud agents** run coding tasks asynchronously in cloud sandboxes. OpenAI's **Codex** (1.6 million+ weekly users, with macOS and Windows desktop apps) and Google's **Jules** both operate this way, accepting tasks and returning completed code without requiring the developer to watch in real time [2a][F2][F3].
+**Cloud agents** run coding tasks asynchronously in cloud sandboxes. OpenAI's **Codex** (1.6 million+ weekly users, with macOS and Windows desktop apps) and Google's **Jules** both operate this way, accepting tasks and returning completed code without requiring the developer to watch in real time [6][F2][F3].
 
 ### Coding Tools Comparison
 
@@ -124,7 +124,7 @@ The coding tools landscape has fragmented into four distinct architectural types
 | **GitHub Copilot** | IDE-integrated | 20M+ users, 4.7M paid | Budget-conscious teams, broad IDE support | $10/mo (Individual) |
 | **Cursor** | IDE fork (VS Code) | 360K+ paying | Best AI-native IDE experience | $20/mo (Pro) |
 | **Antigravity** | IDE fork (Windsurf) | In Preview | Google ecosystem integration | TBD (Preview) |
-| **Claude Code** | Terminal agent | ~$2.5B ARR [UNVERIFIED] | Complex architecture, large codebases | Usage-based (via API) |
+| **Claude Code** | Terminal agent | >$2.5B ARR [12] | Complex architecture, large codebases | Usage-based (via API) |
 | **Codex** | Cloud agent | 1.6M+ weekly | Async workflows, batch tasks | Included in ChatGPT Pro ($200/mo) |
 | **Jules** | Cloud agent | Preview | Google ecosystem, async tasks | Preview (pricing TBD) |
 
@@ -138,29 +138,29 @@ The open-source AI ecosystem has matured from a curiosity into a production-read
 
 The term "open-weight" distinguishes models that release trained weights (allowing local inference and fine-tuning) from models that also release training data and methodology (truly open-source). The major families:
 
-**Llama 3.3** (Meta, 70B parameters) remains the most widely deployed open-weight model, balancing capability with reasonable hardware requirements [3].
+**Llama 3.3** (Meta, 70B parameters) remains the most widely deployed open-weight model, balancing capability with reasonable hardware requirements [8].
 
 **Gemma 3** (Google, 270M-27B parameters, Apache 2.0 license) is notable for running the full range from mobile to single-GPU deployment, supporting 140+ languages and multimodal input at the 4B+ parameter sizes [F3].
 
-**Mistral 3** spans 3B to 675B parameters (the latter a Mixture-of-Experts architecture). Mistral occupies a distinctive position as a European AI lab with strong multilingual capabilities [3].
+**Mistral 3** spans 3B to 675B parameters (the latter a Mixture-of-Experts architecture). Mistral occupies a distinctive position as a European AI lab with strong multilingual capabilities [8].
 
-**Qwen 3.5** (Alibaba) pushes context windows to 800K tokens in the open-weight space, though adoption outside China remains limited [3].
+**Qwen 3.5** (Alibaba) pushes context windows to 800K tokens in the open-weight space, though adoption outside China remains limited [8].
 
-**DeepSeek-R1** (671B parameters, Mixture-of-Experts, MIT license) is notable for both its reasoning capabilities and its pricing transparency at $2.19 per million tokens -- substantially cheaper than comparable closed models [3].
+**DeepSeek-R1** (671B parameters, Mixture-of-Experts, MIT license) is notable for both its reasoning capabilities and its pricing transparency at $2.19 per million tokens -- substantially cheaper than comparable closed models [8].
 
 ### Local Inference Infrastructure
 
 Running models locally requires an inference stack. The ecosystem has settled around several tools:
 
-**Ollama** (95,000+ GitHub stars) is the dominant CLI-first tool for running open-weight models locally. It abstracts away model management, quantization, and hardware optimization behind simple commands [3]. **LM Studio** provides a GUI alternative for users who prefer a visual interface.
+**Ollama** (95,000+ GitHub stars) is the dominant CLI-first tool for running open-weight models locally. It abstracts away model management, quantization, and hardware optimization behind simple commands [8]. **LM Studio** provides a GUI alternative for users who prefer a visual interface.
 
-At the engine level, **llama.cpp** (C/C++) provides the foundational inference engine that Ollama and many other tools build upon. For production serving, **vLLM** (~12,500 tokens/second on H100) and **SGLang** (~16,200 tokens/second on H100, currently the fastest) handle high-throughput deployments [3].
+At the engine level, **llama.cpp** (C/C++) provides the foundational inference engine that Ollama and many other tools build upon. For production serving, **vLLM** (~12,500 tokens/second on H100) and **SGLang** (~16,200 tokens/second on H100, currently the fastest) handle high-throughput deployments [8].
 
 ### OpenClaw: The Open Agent Framework
 
-OpenClaw is an MIT-licensed agent framework with 163,000+ GitHub stars that provides a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted [3a][F5]. ClawHub, its skills registry, hosts 13,700+ skills (as of February 2026) -- but a January-February 2026 malware campaign (ClawHavoc) exposed serious security concerns, with estimates of 12-20% malicious skills on the registry [3b]. See [Module 05](modules/MODULE-05-openclaw-and-open-agents.md) for the full security analysis. Microsoft now recommends running OpenClaw in isolated environments [3b].
+OpenClaw is an MIT-licensed agent framework with 250,000+ GitHub stars that provides a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted [9][F5]. ClawHub, its skills registry, hosts 13,700+ skills (as of February 2026) -- but a January-February 2026 malware campaign (ClawHavoc) exposed serious security concerns, with estimates of 12-20% malicious skills on the registry [10]. See [Module 05](modules/MODULE-05-openclaw-and-open-agents.md) for the full security analysis. Microsoft now recommends running OpenClaw in isolated environments [10].
 
-Two significant governance developments occurred in early 2026: OpenClaw's founder joined OpenAI on February 14, 2026, and the project is transitioning to an open-source foundation to ensure community stewardship [3a]. Separately, NVIDIA launched NemoClaw (early preview, March 16, 2026), an enterprise-hardened distribution with the OpenShell sandbox for secure execution [3c].
+Two significant governance developments occurred in early 2026: OpenClaw's founder joined OpenAI on February 14, 2026, and the project is transitioning to an open-source foundation to ensure community stewardship [9]. Separately, NVIDIA launched NemoClaw (early preview, March 16, 2026), an enterprise-hardened distribution with the OpenShell sandbox for secure execution [11].
 
 For a deep dive into OpenClaw architecture and the open agent ecosystem, see [Module 05](MODULE-05-openclaw-and-open-agents.md).
 
@@ -186,17 +186,17 @@ The AI industry in 2026 is defined by extraordinary capital concentration:
 
 | Metric | Value | Source |
 |--------|-------|--------|
-| Total AI market size (2026) | $375-390B | [1c] |
-| Projected market size (2033) | $2.5-3.5T | [1c] |
-| Combined infrastructure capex (Microsoft, Meta, Alphabet, Amazon) | ~$610B in 2026 | [1d] |
+| Total AI market size (2026) | $375-390B | [3] |
+| Projected market size (2033) | $2.5-3.5T | [3] |
+| Combined infrastructure capex (Microsoft, Meta, Alphabet, Amazon) | ~$610B in 2026 | [4] |
 | OpenAI valuation | $730B | [F2] |
 | Anthropic valuation | $380B | [F1] |
-| Google AI-related capex planned | $175-185B | [1e] |
-| AI coding tools market | $12.8B | [2a] |
+| Google AI-related capex planned | $175-185B | [5] |
+| AI coding tools market | $12.8B | [6] |
 
 ### Consumer Market Dynamics
 
-The consumer AI market is an oligopoly trending toward duopoly -- at least on the web. By web traffic share (Similarweb data), ChatGPT and Gemini together command 86.2% [1a]. ChatGPT's web share has fallen from 87.2% to 68%, while Gemini has surged from 5.4% to 18.2% [1a]. However, mobile app market share (Apptopia data) paints a less concentrated picture: ChatGPT holds under 45% on mobile, with competitors capturing a larger share of the growing mobile AI user base [F2]. Claude holds roughly 2% of the consumer web market but captures approximately 40% of enterprise LLM spend -- a deliberate strategic choice to prioritize enterprise reliability and safety over consumer viral growth [1a][F1].
+The consumer AI market is an oligopoly trending toward duopoly -- at least on the web. By web traffic share (Similarweb data), ChatGPT and Gemini together command 86.2% [1]. ChatGPT's web share has fallen from 87.2% to 68%, while Gemini has surged from 5.4% to 18.2% [1]. However, mobile app market share (Apptopia data) paints a less concentrated picture: ChatGPT holds under 45% on mobile, with competitors capturing a larger share of the growing mobile AI user base [F2]. Claude holds roughly 2% of the consumer web market but captures approximately 40% of enterprise LLM spend -- a deliberate strategic choice to prioritize enterprise reliability and safety over consumer viral growth [1][F1].
 
 Consumer pricing has converged. Claude Pro, ChatGPT Plus, and Copilot Pro all price at $19.99-$20/month. Google matches with Gemini Pro at similar price points. The premium tier shows more variation: OpenAI's ChatGPT Pro costs $200/month; Anthropic, Google, and Microsoft have no direct equivalent at that price point (though Microsoft's E7 Frontier Suite at $99/user/month targets enterprise buyers).
 
@@ -212,7 +212,7 @@ Enterprise pricing is more differentiated:
 | Agent 365 | $15/user/month add-on | Agent governance, registry, monitoring (GA May 1, 2026) |
 | Microsoft E7 Frontier Suite | $99/user/month | Full Copilot + Agent 365 + frontier model access |
 
-The enterprise market is where Anthropic punches above its consumer weight. Claude Code's 54% share of enterprise coding agent spend [1a] and Claude's estimated 40% of enterprise LLM spend [1a] demonstrate that enterprises are making different choices than consumers -- prioritizing reliability, safety posture, and code quality over brand recognition and feature breadth.
+The enterprise market is where Anthropic punches above its consumer weight. Claude Code's 54% share of enterprise coding agent spend [1] and Claude's estimated 40% of enterprise LLM spend [1] demonstrate that enterprises are making different choices than consumers -- prioritizing reliability, safety posture, and code quality over brand recognition and feature breadth.
 
 ---
 
@@ -226,7 +226,7 @@ Every major platform has shipped or announced an autonomous agent product: Claud
 
 ### 2. The Integration Standard
 
-MCP (Model Context Protocol) has emerged as the leading standard for connecting AI systems to external tools, with adoption across all four major platforms plus dozens of specialized tools [F1][F3][F4][F5]. But MCP's dominance is not assured -- platform-native integrations (OpenAI's Apps/Connectors directory, Microsoft's 1,400+ Copilot Studio connectors) compete as alternatives, and the tension between open protocol and proprietary lock-in remains unresolved. See [Module 06](MODULE-06-mcp-integration-layer.md).
+MCP (Model Context Protocol) has emerged as the leading standard for connecting AI systems to external tools, with adoption across all four major platforms plus dozens of specialized tools [F1, F3, F4, F5]. But MCP's dominance is not assured -- platform-native integrations (OpenAI's Apps/Connectors directory, Microsoft's 1,400+ Copilot Studio connectors) compete as alternatives, and the tension between open protocol and proprietary lock-in remains unresolved. See [Module 06](MODULE-06-mcp-integration-layer.md).
 
 ### 3. Coding Agent Dominance
 
@@ -234,7 +234,7 @@ The $12.8B coding tools market is the highest-revenue AI application category ou
 
 ### 4. Open vs. Closed Ecosystems
 
-Open-weight models have closed the performance gap on many tasks, and the local inference stack (Ollama, vLLM, SGLang) is production-ready. OpenClaw's 163K GitHub stars demonstrate demand for open agent infrastructure. But security concerns (ClawHub's malicious skill problem), governance uncertainty (OpenClaw's founder joining OpenAI), and the sheer engineering velocity of closed platforms create real obstacles. The outcome will likely be coexistence: open for cost-sensitive, privacy-critical, and customization-heavy use cases; closed for frontier capabilities and managed simplicity. See [Module 05](MODULE-05-openclaw-and-open-agents.md).
+Open-weight models have closed the performance gap on many tasks, and the local inference stack (Ollama, vLLM, SGLang) is production-ready. OpenClaw's 250K+ GitHub stars demonstrate demand for open agent infrastructure. But security concerns (ClawHub's malicious skill problem), governance uncertainty (OpenClaw's founder joining OpenAI), and the sheer engineering velocity of closed platforms create real obstacles. The outcome will likely be coexistence: open for cost-sensitive, privacy-critical, and customization-heavy use cases; closed for frontier capabilities and managed simplicity. See [Module 05](MODULE-05-openclaw-and-open-agents.md).
 
 ### 5. Enterprise Governance
 
@@ -274,28 +274,32 @@ As agents gain autonomy, enterprises need controls: who can deploy agents, what 
 - [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- Agent SDKs, Agent Teams, enterprise governance
 - [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) -- OpenClaw architecture, ClawHub, NemoClaw, open vs. closed
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- MCP protocol deep dive, adoption, building servers
+- [Module 07: Skills, Plugins & Automation](MODULE-07-skills-plugins-automation.md) -- Skills architecture, plugin ecosystems, automation platforms
 - [Module 08: Consumer AI Comparison](MODULE-08-consumer-ai-comparison.md) -- Feature-by-feature comparison of the big four
 - [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) -- API architectures, pricing economics, SDKs
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- On-device AI, multimodal generation, enterprise governance, open vs. closed
 
 ---
 
 ## Sources
 
-| # | Title | Date | Notes |
-|---|-------|------|-------|
-| [F1] | Anthropic/Claude Ecosystem Profile | 2026-03-18 | Foundation profile; reference/profiles/anthropic-claude.md |
-| [F2] | OpenAI/ChatGPT Ecosystem Profile | 2026-03-18 | Foundation profile; reference/profiles/openai-chatgpt.md |
-| [F3] | Google/Gemini Ecosystem Profile | 2026-03-18 | Foundation profile; reference/profiles/google-gemini.md |
-| [F4] | Microsoft/Copilot Ecosystem Profile | 2026-03-18 | Foundation profile; reference/profiles/microsoft-copilot.md |
-| [F5] | Specialized Tools Ecosystem Profile | 2026-03-18 | Foundation profile; reference/profiles/specialized-tools.md |
-| [1a] | AI Chatbot Market Share 2026 (Vertu/Similarweb) | 2026-03-20 | Web traffic share data; ChatGPT, Gemini, Claude consumer share |
-| [1b] | ChatGPT Market Share Decline (Fortune) | 2026-03-20 | ChatGPT app share slip, competitor gains |
-| [1c] | AI Market Size Analysis (Grand View Research) | 2026-03-20 | $375-390B market size, $2.5-3.5T 2033 projection |
-| [1d] | Big Tech Cloud & AI Infrastructure (Computer Weekly) | 2026-03-20 | Combined infrastructure capex ~$610B |
-| [1e] | Alphabet Q4 2025 Earnings / CEO Letter | 2026-03-20 | Google $175-185B capex, 85B monthly API requests |
-| [2a] | AI Coding Assistant Statistics (Panto.ai) | 2026-03-20 | $12.8B market size, tool adoption stats, user counts |
-| [2b] | Developer Survey 2026: 73% Daily AI Usage (Claude5.ai) | 2026-03-20 | 73% daily usage stat, up from 41% in 2025 |
-| [3] | Open-Source & Self-Hosted AI Research (R00-D) | 2026-03-20 | Open-weight model data (Llama, Mistral, Qwen, DeepSeek, Ollama, vLLM, SGLang) |
-| [3a] | OpenClaw GitHub Repository | 2026-03-20 | OpenClaw architecture, star count, governance |
-| [3b] | Running OpenClaw Safely (Microsoft Security Blog) | 2026-02-19 | OpenClaw security concerns, isolation recommendations |
-| [3c] | NVIDIA NemoClaw | 2026-03-16 | Enterprise-hardened OpenClaw distribution, OpenShell sandbox |
+1. AI Chatbot Market Share 2026 (Vertu/Similarweb). Web traffic share data. — 1a in SOURCES.md
+2. ChatGPT Market Share Decline (Fortune). — 1b in SOURCES.md
+3. AI Market Size Analysis (Grand View Research). $375-390B market, $2.5-3.5T projection. — 1c in SOURCES.md
+4. Big Tech Cloud & AI Infrastructure (Computer Weekly). Combined capex ~$610B. — 1d in SOURCES.md
+5. Alphabet Q4 2025 Earnings / CEO Letter. Google $175-185B capex, 85B monthly API requests. — 1e in SOURCES.md
+6. AI Coding Assistant Statistics (Panto.ai). $12.8B market, tool adoption, user counts. — 2a in SOURCES.md
+7. Developer Survey 2026: 73% Daily AI Usage (Claude5.ai). — 2b in SOURCES.md
+8. Open-Source & Self-Hosted AI Research (R00-D). Open-weight model data. — 3 in SOURCES.md
+9. OpenClaw GitHub Repository. Architecture, star count, governance. — 3a/W20 in SOURCES.md
+10. Running OpenClaw Safely (Microsoft Security Blog). Security concerns, isolation. — 3b/W22 in SOURCES.md
+11. NVIDIA NemoClaw. Enterprise-hardened OpenClaw distribution. — 3c/W23 in SOURCES.md
+12. Anthropic ARR Surges to $19 Billion (Yahoo Finance / Investing.com). — W67 in SOURCES.md
+13. 2026 Agentic Coding Trends: Claude Code $2.5B ARR (heyuan110.com). — W68 in SOURCES.md
+
+**Foundation profiles cited as [F1]-[F5]:**
+- [F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026
+- [F2] OpenAI/ChatGPT Ecosystem Profile (reference/profiles/openai-chatgpt.md), March 18, 2026
+- [F3] Google/Gemini Ecosystem Profile (reference/profiles/google-gemini.md), March 18, 2026
+- [F4] Microsoft/Copilot Ecosystem Profile (reference/profiles/microsoft-copilot.md), March 18, 2026
+- [F5] Specialized Tools Profile (reference/profiles/specialized-tools.md), March 18, 2026

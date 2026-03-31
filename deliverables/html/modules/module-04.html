@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 04: Multi-Agent Orchestration — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="04">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 2: Agent Systems</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 04: Multi-Agent Orchestration</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 04: Multi-Agent Orchestration</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">30-35 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prerequisites" class="toc__link" data-toc-active>Prerequisites</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#why-multi-agent-the-case-for-decomposition" class="toc__link" data-toc-active>Why Multi-Agent? The Case for Decomposition</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#orchestration-patterns" class="toc__link" data-toc-active>Orchestration Patterns</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#hierarchical-delegation-parent-child" class="toc__link" data-toc-active>Hierarchical Delegation (Parent-Child)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#handoff-sequential-delegation" class="toc__link" data-toc-active>Handoff (Sequential Delegation)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#peer-to-peer-team" class="toc__link" data-toc-active>Peer-to-Peer (Team)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#competitive-parallel-exploration" class="toc__link" data-toc-active>Competitive (Parallel Exploration)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#router-dynamic-dispatch" class="toc__link" data-toc-active>Router (Dynamic Dispatch)</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#platform-frameworks" class="toc__link" data-toc-active>Platform Frameworks</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#anthropic-agent-sdk-and-agent-teams" class="toc__link" data-toc-active>Anthropic: Agent SDK and Agent Teams</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openai-agents-sdk-ga" class="toc__link" data-toc-active>OpenAI: Agents SDK (GA)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-agent-development-kit-adk" class="toc__link" data-toc-active>Google: Agent Development Kit (ADK)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#microsoft-copilot-studio-and-agent-365" class="toc__link" data-toc-active>Microsoft: Copilot Studio and Agent 365</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#framework-comparison" class="toc__link" data-toc-active>Framework Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#delegation-patterns-in-practice" class="toc__link" data-toc-active>Delegation Patterns in Practice</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#fan-out-fan-in-parallel-research" class="toc__link" data-toc-active>Fan-Out / Fan-In (Parallel Research)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#pipeline-sequential-handoff" class="toc__link" data-toc-active>Pipeline (Sequential Handoff)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#specialist-router" class="toc__link" data-toc-active>Specialist Router</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#strategic-model-selection-in-multi-agent-systems" class="toc__link" data-toc-active>Strategic Model Selection in Multi-Agent Systems</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#role-based-model-allocation" class="toc__link" data-toc-active>Role-Based Model Allocation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#role-to-tier-mapping" class="toc__link" data-toc-active>Role-to-Tier Mapping</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cross-provider-model-selection" class="toc__link" data-toc-active>Cross-Provider Model Selection</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#decision-framework" class="toc__link" data-toc-active>Decision Framework</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#case-study-this-curriculums-round-1-execution" class="toc__link" data-toc-active>Case Study: This Curriculum&#x27;s Round 1 Execution</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cost-optimization-patterns" class="toc__link" data-toc-active>Cost Optimization Patterns</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#context-isolation-and-summary-propagation" class="toc__link" data-toc-active>Context Isolation and Summary Propagation</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#enterprise-agent-governance" class="toc__link" data-toc-active>Enterprise Agent Governance</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-governance-problem" class="toc__link" data-toc-active>The Governance Problem</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#agent-365s-approach" class="toc__link" data-toc-active>Agent 365&#x27;s Approach</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cross-platform-governance-gap" class="toc__link" data-toc-active>Cross-Platform Governance Gap</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 4,000-5,000
+<strong>Prerequisites:</strong> <a href="module-00.html">Module 00: Landscape Overview</a>, <a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a>, <a href="module-03.html">Module 03: Single-<span class="glossary-term glossary-term--first-use" data-term="agent">Agent</span> Systems</a></p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Single agents hit a ceiling when tasks require parallel exploration, competing hypotheses, or cross-domain expertise that cannot fit in one <span class="glossary-term glossary-term--first-use" data-term="context-window">context window</span>. <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">Multi-agent orchestration</span> addresses this by decomposing work across specialized agents that communicate, delegate, and synthesize results. As of March 2026, every major platform offers a framework for building multi-<span class="glossary-term" data-term="agent">agent</span> systems -- Anthropic's <span class="glossary-term glossary-term--first-use" data-term="agent-sdk">Agent SDK</span> and <span class="glossary-term" data-term="agent">Agent</span> Teams, OpenAI's Agents SDK, Google's <span class="glossary-term" data-term="agent">Agent</span> Development Kit (ADK), and Microsoft's <span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span> -- but the architectures, abstraction levels, and maturity vary dramatically. This module dissects how each framework works, compares the orchestration patterns they support, and examines the emerging enterprise governance layer that Microsoft is building with <span class="glossary-term glossary-term--first-use" data-term="agent-365">Agent 365</span>.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">56 agents, four roles, one curriculum</summary>
+  <div class="accordion__content">
+    <p>Building this curriculum took 56+ AI agents across four specialized roles. 38 researchers ran in parallel, each investigating a different topic. 12 writers drafted modules simultaneously. 5 reviewers fact-checked in parallel. 1 synthesizer audited everything for cross-module consistency. Total cost: less than what 3 senior Opus calls would have cost -- because the researchers used Haiku at $1/MTok input while only the synthesizer needed Opus at $5/MTok. That 5x price difference, multiplied across 38 parallel agents, is why multi-agent orchestration is not just an architectural pattern -- it is an economic strategy. This module shows you how it works.</p>
+  </div>
+</details>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- for ecosystem context and platform positioning</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- for understanding which models power <span class="glossary-term" data-term="agent">agent</span> orchestration</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- for the gather-act-verify loop, <span class="glossary-term glossary-term--first-use" data-term="tool-use">tool use</span>, and safety models that underpin every <span class="glossary-term" data-term="agent">agent</span> in a multi-<span class="glossary-term" data-term="agent">agent</span> system</li>
+</ul>
+<hr>
+<h2 id="why-multi-agent-the-case-for-decomposition">Why Multi-Agent? The Case for Decomposition</h2>
+<p>A single <span class="glossary-term" data-term="agent">agent</span> with a 200K-<span class="glossary-term glossary-term--first-use" data-term="token">token</span> <span class="glossary-term" data-term="context-window">context window</span> can accomplish remarkable things (see <a href="module-03.html">Module 03</a>). But several classes of problem exceed what one <span class="glossary-term" data-term="agent">agent</span> can handle efficiently:</p>
+<p><strong>Context saturation.</strong> When a task requires reading and reasoning over more information than fits in one <span class="glossary-term" data-term="context-window">context window</span> -- or when the volume of intermediate reasoning degrades output quality well before the window fills (the "lost in the middle" effect documented in <a href="module-02.html">Module 02</a>) -- splitting the work across agents with focused, smaller contexts yields better results.</p>
+<p><strong>Parallelism.</strong> A single <span class="glossary-term" data-term="agent">agent</span> is inherently sequential: it gathers, acts, verifies, repeats. When a project has independent subtasks (research three topics simultaneously, run tests while writing documentation, explore multiple solution approaches), parallel agents complete the work faster.</p>
+<p><strong>Specialization.</strong> Different subtasks may require different system prompts, tool sets, or even different models. A coding <span class="glossary-term" data-term="agent">agent</span> needs file editing tools and a strong reasoning model; a research <span class="glossary-term" data-term="agent">agent</span> needs web search and a fast, cheap model. Multi-<span class="glossary-term" data-term="agent">agent</span> systems let each <span class="glossary-term" data-term="agent">agent</span> be optimally configured for its task.</p>
+<p><strong>Isolation.</strong> <span class="glossary-term glossary-term--first-use" data-term="subagent">Subagent</span> failures, hallucinations, or security boundary violations are contained within the <span class="glossary-term" data-term="subagent">subagent</span>'s context. The parent <span class="glossary-term" data-term="agent">agent</span> receives a summary, not the full trace, which limits blast radius and simplifies error handling.</p>
+<p>The tradeoff is cost and complexity. Every additional <span class="glossary-term" data-term="agent">agent</span> means additional API calls, <span class="glossary-term" data-term="context-window">context window</span> allocations, and coordination overhead. The decision framework is straightforward: use a single <span class="glossary-term" data-term="agent">agent</span> when the task fits in one <span class="glossary-term" data-term="context-window">context window</span> with one tool set, and use multiple agents when parallelism, specialization, or isolation justifies the overhead.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="A single agent is inherently sequential: it gathers, acts, verifies, repeats. Independent subtasks benefit from parallel agents that complete work simultaneously. Parallelism is the advantage when tasks are independent and time matters. This builds on the sequential gather-act-verify loop from Module 03." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A project requires researching three independent topics simultaneously. Which multi-agent advantage most directly applies?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-why-multi-agent-the-case-for-decomposition-quiz" value="0" />
+          <span class="quiz__choice-label">Context saturation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-why-multi-agent-the-case-for-decomposition-quiz" value="1" />
+          <span class="quiz__choice-label">Parallelism</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-why-multi-agent-the-case-for-decomposition-quiz" value="2" />
+          <span class="quiz__choice-label">Specialization</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-why-multi-agent-the-case-for-decomposition-quiz" value="3" />
+          <span class="quiz__choice-label">Isolation</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="orchestration-patterns">Orchestration Patterns</h2>
+<p>Before examining specific frameworks, it is worth naming the recurring patterns that all of them implement in some combination.</p>
+<h3 id="hierarchical-delegation-parent-child">Hierarchical Delegation (Parent-Child)</h3>
+<p>The most common pattern. A lead <span class="glossary-term" data-term="agent">agent</span> receives a task, decomposes it, spawns subagents for each subtask, collects their results, and synthesizes a final output. Communication flows vertically: parent to child and back. Children do not communicate with each other.</p>
+<p><strong>Strengths:</strong> Simple to reason about, clear authority, predictable cost (parent controls spawning).
+<strong>Weaknesses:</strong> Bottleneck at the parent, no lateral information sharing between children.
+<strong>Example:</strong> <span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span>'s <span class="glossary-term" data-term="subagent">subagent</span> model -- a main session spawns focused subagents that return structured summaries [F1].</p>
+<h3 id="handoff-sequential-delegation">Handoff (Sequential Delegation)</h3>
+<p>An <span class="glossary-term" data-term="agent">agent</span> transfers its full conversation state to another <span class="glossary-term" data-term="agent">agent</span>, which picks up where the first left off. Unlike parent-child delegation, the new <span class="glossary-term" data-term="agent">agent</span> inherits the entire context rather than receiving a scoped brief.</p>
+<p><strong>Strengths:</strong> No information loss at <span class="glossary-term glossary-term--first-use" data-term="handoff">handoff</span> boundaries, natural for pipeline-style workflows.
+<strong>Weaknesses:</strong> Context grows monotonically (each <span class="glossary-term" data-term="agent">agent</span> adds but does not prune), limited parallelism.
+<strong>Example:</strong> OpenAI Agents SDK handoffs -- one <span class="glossary-term" data-term="agent">agent</span> transfers the full conversation to a specialist <span class="glossary-term" data-term="agent">agent</span> [1].</p>
+<h3 id="peer-to-peer-team">Peer-to-Peer (Team)</h3>
+<p>Multiple agents operate as equals, communicating directly with each other through messaging rather than through a central coordinator. A lead <span class="glossary-term" data-term="agent">agent</span> may exist for task assignment, but teammates can message each other and self-organize.</p>
+<p><strong>Strengths:</strong> Enables lateral information sharing, supports emergent collaboration patterns, avoids single-point bottleneck.
+<strong>Weaknesses:</strong> Harder to predict cost and behavior, coordination overhead scales with team size.
+<strong>Example:</strong> Anthropic <span class="glossary-term" data-term="agent">Agent</span> Teams -- teammates work in their own context windows with direct inter-<span class="glossary-term" data-term="agent">agent</span> messaging [F1].</p>
+<h3 id="competitive-parallel-exploration">Competitive (Parallel Exploration)</h3>
+<p>Multiple agents tackle the same problem independently, and the orchestrator selects the best result. This trades compute cost for solution quality -- useful when the problem has multiple valid approaches and it is cheaper to explore them in parallel than to backtrack from a poor choice.</p>
+<p><strong>Strengths:</strong> Finds better solutions for ambiguous problems, naturally parallelizable.
+<strong>Weaknesses:</strong> Expensive (N times the cost of a single attempt), requires a reliable selection mechanism.
+<strong>Example:</strong> <span class="glossary-term" data-term="agent">Agent</span> Teams debugging with competing hypotheses -- multiple teammates explore different root causes simultaneously [F1].</p>
+<h3 id="router-dynamic-dispatch">Router (Dynamic Dispatch)</h3>
+<p>A lightweight <span class="glossary-term" data-term="agent">agent</span> (or even a classifier) examines each incoming request and routes it to the appropriate specialist <span class="glossary-term" data-term="agent">agent</span>. The router does not do substantive work itself -- it is a dispatcher.</p>
+<p><strong>Strengths:</strong> Low per-request overhead, clean separation of concerns, easy to add new specialists.
+<strong>Weaknesses:</strong> Router errors cascade (wrong specialist = wrong answer), routing logic itself can be complex.
+<strong>Example:</strong> <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>'s generative orchestration -- the LLM decides which specialist <span class="glossary-term" data-term="agent">agent</span> or connector to invoke [F4].</p>
+
+<figure class="diagram diagram--mermaid" id="m04-1" role="img" aria-label="Five multi-agent orchestration patterns compared side by side. Hierarchical delegation shows a parent agent spawning child agents that return summaries upward. Handoff shows agents passing full conversation context sequentially. Peer-to-peer shows agents communicating directly with each other via a shared task board. Competitive shows parallel agents tackling the same problem with a selector choosing the best result. Router shows a lightweight dispatcher directing requests to specialist agents.">
+  <pre class="mermaid">graph TD
+  subgraph Hierarchical[&quot;Hierarchical Delegation&quot;]
+    H_Parent[&quot;Lead Agent&quot;] --&gt;|&quot;task brief&quot;| H_Child1[&quot;Subagent A&quot;]
+    H_Parent --&gt;|&quot;task brief&quot;| H_Child2[&quot;Subagent B&quot;]
+    H_Child1 --&gt;|&quot;summary&quot;| H_Parent
+    H_Child2 --&gt;|&quot;summary&quot;| H_Parent
+  end
+
+  subgraph Handoff[&quot;Handoff (Sequential)&quot;]
+    HO_A[&quot;Agent A&quot;] --&gt;|&quot;full context&quot;| HO_B[&quot;Agent B&quot;]
+    HO_B --&gt;|&quot;full context&quot;| HO_C[&quot;Agent C&quot;]
+  end
+
+  subgraph PeerToPeer[&quot;Peer-to-Peer (Team)&quot;]
+    P_Lead[&quot;Lead&quot;] &lt;--&gt;|&quot;message&quot;| P_T1[&quot;Teammate 1&quot;]
+    P_Lead &lt;--&gt;|&quot;message&quot;| P_T2[&quot;Teammate 2&quot;]
+    P_T1 &lt;--&gt;|&quot;message&quot;| P_T2
+    P_Board[(&quot;Shared Task Board&quot;)]
+    P_Lead -.-&gt;|&quot;post/claim&quot;| P_Board
+    P_T1 -.-&gt;|&quot;post/claim&quot;| P_Board
+    P_T2 -.-&gt;|&quot;post/claim&quot;| P_Board
+  end
+
+  subgraph Competitive[&quot;Competitive (Parallel)&quot;]
+    C_Orch[&quot;Orchestrator&quot;] --&gt;|&quot;same task&quot;| C_A1[&quot;Agent 1&quot;]
+    C_Orch --&gt;|&quot;same task&quot;| C_A2[&quot;Agent 2&quot;]
+    C_Orch --&gt;|&quot;same task&quot;| C_A3[&quot;Agent 3&quot;]
+    C_A1 --&gt;|&quot;result&quot;| C_Select{&quot;Selector&quot;}
+    C_A2 --&gt;|&quot;result&quot;| C_Select
+    C_A3 --&gt;|&quot;result&quot;| C_Select
+    C_Select --&gt;|&quot;best result&quot;| C_Out[&quot;Output&quot;]
+  end
+
+  subgraph Router[&quot;Router (Dynamic Dispatch)&quot;]
+    R_In[&quot;Request&quot;] --&gt; R_Router{&quot;Router&quot;}
+    R_Router --&gt;|&quot;billing&quot;| R_S1[&quot;Billing Agent&quot;]
+    R_Router --&gt;|&quot;technical&quot;| R_S2[&quot;Tech Agent&quot;]
+    R_Router --&gt;|&quot;general&quot;| R_S3[&quot;General Agent&quot;]
+  end
+</pre>
+  <figcaption>Five Orchestration Patterns</figcaption>
+</figure>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="Copilot Studio uses generative orchestration where the LLM dynamically plans which tools, connectors, and sub-agents to invoke. The LLM acts as the dispatcher, examining each request and routing to the appropriate specialist -- a router pattern where the router is the model itself." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which pattern does Copilot Studio's generative orchestration implement?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="0" />
+          <span class="quiz__choice-label">Hierarchical Delegation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="1" />
+          <span class="quiz__choice-label">Handoff</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="2" />
+          <span class="quiz__choice-label">Competitive</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="3" />
+          <span class="quiz__choice-label">Router -- the LLM itself is the router</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Agent Teams enables direct inter-teammate messaging -- teammates can send messages to each other, not just to the lead. This peer-to-peer communication pattern is the key difference from Agent SDK subagents, which communicate only with their parent." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Agent Teams uses which orchestration pattern?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="0" />
+          <span class="quiz__choice-label">Hierarchical Delegation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="1" />
+          <span class="quiz__choice-label">Handoff</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="2" />
+          <span class="quiz__choice-label">Peer-to-Peer (Team)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="3" />
+          <span class="quiz__choice-label">Router</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Competitive exploration trades compute cost for solution quality -- N agents tackle the same problem independently, and the orchestrator selects the best result. This is N times the cost of a single attempt. It is worth it for ambiguous problems where exploring multiple approaches in parallel is cheaper than backtracking from a poor choice." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which orchestration pattern is the most expensive per-task because it runs N parallel attempts?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="0" />
+          <span class="quiz__choice-label">Hierarchical Delegation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="1" />
+          <span class="quiz__choice-label">Handoff</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="2" />
+          <span class="quiz__choice-label">Competitive (Parallel Exploration)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="3" />
+          <span class="quiz__choice-label">Router (Dynamic Dispatch)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="In Handoff, the new agent inherits the entire context rather than receiving a scoped brief. Unlike parent-child delegation where only a summary returns, handoff transfers the full conversation history. OpenAI's Agents SDK implements this as a first-class primitive." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which orchestration pattern transfers the full conversation state from one agent to another?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="0" />
+          <span class="quiz__choice-label">Hierarchical Delegation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="1" />
+          <span class="quiz__choice-label">Handoff (Sequential Delegation)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="2" />
+          <span class="quiz__choice-label">Peer-to-Peer (Team)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-router-dynamic-dispatch-quiz" value="3" />
+          <span class="quiz__choice-label">Competitive (Parallel Exploration)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Match each orchestration pattern to a real-world analogy. For example: Hierarchical = a manager assigning tasks to a team. Now do the same for Handoff, Peer-to-Peer, Competitive, and Router.</p>
+  <label for="se-m04-router-dynamic-dispatch" class="sr-only">Your explanation</label>
+  <textarea id="se-m04-router-dynamic-dispatch" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m04-router-dynamic-dispatch">Compare with Expert Answer</button>
+  <div id="se-answer-m04-router-dynamic-dispatch" class="self-explain__expert" hidden>
+    <p>Handoff = relay race -- the baton passes from one runner to the next, each running their leg with full context of the race so far. Peer-to-Peer = team brainstorm -- everyone contributes and communicates laterally without routing through a central authority. Competitive = A/B test -- multiple approaches are tried independently, and the best result is selected. Router = reception desk -- classifies incoming requests and directs each to the right specialist without doing substantive work itself.</p>
+  </div>
+</div>
+
+<details class="accordion">
+  <summary class="accordion__title">Five patterns, and most implementations use the wrong one</summary>
+  <div class="accordion__content">
+    <p>Five distinct patterns for coordinating multiple agents exist. Most implementations use the wrong one. The pattern you choose determines cost, latency, information flow, and failure propagation. Choosing hierarchical delegation when you need peer-to-peer communication means every piece of lateral information must route through a bottleneck. Choosing competitive exploration when a simple pipeline would suffice multiplies your API costs by N.</p>
+  </div>
+</details>
+<hr>
+<h2 id="platform-frameworks">Platform Frameworks</h2>
+<h3 id="anthropic-agent-sdk-and-agent-teams">Anthropic: Agent SDK and Agent Teams</h3>
+<p>Anthropic offers two distinct multi-<span class="glossary-term" data-term="agent">agent</span> approaches that map to different orchestration patterns.</p>
+<h4>Agent SDK (GA, September 2025)</h4>
+<p>The <span class="glossary-term" data-term="agent-sdk">Agent SDK</span> (Python and TypeScript) exposes the same three-phase agentic loop that powers <span class="glossary-term" data-term="claude-code">Claude Code</span> -- Gather Context, Take Action, Verify Work -- as a programmable framework [F1]. Key characteristics:</p>
+<ul>
+<li><strong>Built-in tools:</strong> Read, Write, Edit, Bash, Glob, Grep, WebSearch -- the same tools <span class="glossary-term" data-term="claude-code">Claude Code</span> uses internally.</li>
+<li><strong><span class="glossary-term" data-term="subagent">Subagent</span> spawning:</strong> A parent <span class="glossary-term" data-term="agent">agent</span> creates child agents programmatically. Each <span class="glossary-term" data-term="subagent">subagent</span> runs in its own <span class="glossary-term" data-term="context-window">context window</span>. Only a structured summary returns to the parent.</li>
+<li><strong>Session management:</strong> Persistent sessions with session IDs, enabling long-running multi-turn <span class="glossary-term" data-term="agent">agent</span> interactions.</li>
+<li><strong>Hooks:</strong> Lifecycle callbacks that fire before/after tool calls, allowing logging, permission checks, or custom routing logic.</li>
+<li><strong>MCP integration:</strong> Agents can connect to MCP servers for external tool and data access (see <a href="module-06.html">Module 06</a>).</li>
+<li><strong>Model selection:</strong> Each <span class="glossary-term" data-term="agent">agent</span> (or <span class="glossary-term" data-term="subagent">subagent</span>) can use a different Claude model, enabling cost optimization -- Haiku for research, Opus for synthesis [F1].</li>
+</ul>
+<p>The SDK's <span class="glossary-term" data-term="subagent">subagent</span> model is strictly hierarchical: parent spawns child, child returns result, parent continues. Subagents cannot communicate with each other or with any <span class="glossary-term" data-term="agent">agent</span> other than their parent.</p>
+<h4>Agent Teams (Experimental)</h4>
+<p><span class="glossary-term" data-term="agent">Agent</span> Teams is a higher-level orchestration layer built on top of <span class="glossary-term" data-term="claude-code">Claude Code</span>, currently gated behind an experimental flag (<code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS</code>) [F1].</p>
+<ul>
+<li><strong>Architecture:</strong> One lead session plus N teammate sessions, each in its own <span class="glossary-term" data-term="context-window">context window</span>.</li>
+<li><strong>Communication:</strong> Direct inter-teammate messaging -- teammates can send messages to each other, not just to the lead. This is the key difference from subagents.</li>
+<li><strong>Shared task list:</strong> All teammates share a visible task board with status tracking, enabling coordination without constant messaging.</li>
+<li><strong>Plan approval gates:</strong> The lead can require approval before teammates execute plans, providing a human-in-the-loop checkpoint.</li>
+<li><strong>Self-organizing:</strong> Teammates can claim tasks from the shared list without explicit assignment from the lead.</li>
+</ul>
+<p><strong>Subagents vs. <span class="glossary-term" data-term="agent">Agent</span> Teams:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Subagents (Agent SDK)</th><th>Agent Teams</th></tr></thead><tbody><tr><td>Communication</td><td>Parent-child only</td><td>Any-to-any (peer-to-peer)</td></tr><tr><td>Coordination</td><td>Synchronous (parent waits)</td><td>Asynchronous (teammates work independently)</td></tr><tr><td>Context isolation</td><td>Full (summary returns)</td><td>Full (own context windows)</td></tr><tr><td>Cost model</td><td>Lower (focused, short-lived)</td><td>Higher (persistent sessions, more tokens)</td></tr><tr><td>Status</td><td>GA</td><td>Experimental</td></tr><tr><td>Best for</td><td>Quick focused tasks, deterministic workflows</td><td>Parallel exploration, complex multi-faceted projects</td></tr></tbody></table>
+<blockquote>
+<p><strong>Volatility warning:</strong> <span class="glossary-term" data-term="agent">Agent</span> Teams is experimental and disabled by default. The API surface, communication model, and task management features may change substantially before GA.</p>
+</blockquote>
+
+<figure class="diagram diagram--mermaid" id="m04-2" role="img" aria-label="Comparison of two Anthropic multi-agent topologies. Left side shows the Agent SDK subagent model: a parent agent at top connects to child subagents below via task briefs downward and structured summaries upward, with no lateral communication between children. Right side shows the Agent Teams model: a lead agent and teammates communicate any-to-any via direct messages, with a shared task board accessible to all. Key tradeoff annotation: subagents offer isolation and lower cost, while Agent Teams enable lateral coordination at higher cost.">
+  <pre class="mermaid">graph TD
+  subgraph SDK[&quot;Agent SDK: Subagents&quot;]
+    SDK_Parent[&quot;Parent Agent&lt;br/&gt;(orchestrator)&quot;]
+    SDK_C1[&quot;Subagent 1&lt;br/&gt;(own context)&quot;]
+    SDK_C2[&quot;Subagent 2&lt;br/&gt;(own context)&quot;]
+    SDK_C3[&quot;Subagent 3&lt;br/&gt;(own context)&quot;]
+    SDK_Parent --&gt;|&quot;task brief&quot;| SDK_C1
+    SDK_Parent --&gt;|&quot;task brief&quot;| SDK_C2
+    SDK_Parent --&gt;|&quot;task brief&quot;| SDK_C3
+    SDK_C1 --&gt;|&quot;structured summary&quot;| SDK_Parent
+    SDK_C2 --&gt;|&quot;structured summary&quot;| SDK_Parent
+    SDK_C3 --&gt;|&quot;structured summary&quot;| SDK_Parent
+    SDK_Note[&quot;Parent-child only&lt;br/&gt;No lateral communication&lt;br/&gt;GA (Sep 2025)&quot;]
+  end
+
+  subgraph Teams[&quot;Agent Teams: Peer-to-Peer&quot;]
+    T_Lead[&quot;Lead Agent&quot;]
+    T_M1[&quot;Teammate 1&lt;br/&gt;(own context)&quot;]
+    T_M2[&quot;Teammate 2&lt;br/&gt;(own context)&quot;]
+    T_M3[&quot;Teammate 3&lt;br/&gt;(own context)&quot;]
+    T_Lead &lt;--&gt;|&quot;direct message&quot;| T_M1
+    T_Lead &lt;--&gt;|&quot;direct message&quot;| T_M2
+    T_Lead &lt;--&gt;|&quot;direct message&quot;| T_M3
+    T_M1 &lt;--&gt;|&quot;direct message&quot;| T_M2
+    T_M1 &lt;--&gt;|&quot;direct message&quot;| T_M3
+    T_M2 &lt;--&gt;|&quot;direct message&quot;| T_M3
+    T_Tasks[(&quot;Shared Task Board&quot;)]
+    T_Lead -.-&gt; T_Tasks
+    T_M1 -.-&gt; T_Tasks
+    T_M2 -.-&gt; T_Tasks
+    T_M3 -.-&gt; T_Tasks
+    T_Note[&quot;Any-to-any messaging&lt;br/&gt;Self-organizing&lt;br/&gt;Experimental&quot;]
+  end
+</pre>
+  <figcaption>Subagents vs. Agent Teams Topology</figcaption>
+</figure>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="This is not a minor distinction. Agent SDK subagents communicate only parent-to-child (hierarchical). Agent Teams teammates can message each other directly (peer-to-peer), enabling lateral information sharing and self-organization -- fundamentally different collaboration dynamics." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the key architectural difference between Agent SDK subagents and Agent Teams?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-anthropic-agent-sdk-and-agent-teams-quiz" value="0" />
+          <span class="quiz__choice-label">They use different models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-anthropic-agent-sdk-and-agent-teams-quiz" value="1" />
+          <span class="quiz__choice-label">They have different tools</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-anthropic-agent-sdk-and-agent-teams-quiz" value="2" />
+          <span class="quiz__choice-label">Subagents communicate only with parent; teammates communicate with each other</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-anthropic-agent-sdk-and-agent-teams-quiz" value="3" />
+          <span class="quiz__choice-label">There is no meaningful difference</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="openai-agents-sdk-ga">OpenAI: Agents SDK (GA)</h3>
+<p>OpenAI's Agents SDK (Python GA, Node.js GA) is the production successor to the experimental Swarm framework [F2]. It takes a fundamentally different architectural approach from Anthropic's SDK.</p>
+<p>The SDK is built around five primitives [1]:</p>
+<ol>
+<li><strong>Agents:</strong> Individual AI entities with a system prompt, tool set, and model configuration.</li>
+<li><strong>Tools:</strong> Functions the <span class="glossary-term" data-term="agent">agent</span> can call, defined via Python functions with type annotations.</li>
+<li><strong>Handoffs:</strong> First-class <span class="glossary-term" data-term="agent">agent</span>-to-<span class="glossary-term" data-term="agent">agent</span> delegation. When an <span class="glossary-term" data-term="agent">agent</span> hands off to another <span class="glossary-term" data-term="agent">agent</span>, the entire conversation history transfers. The receiving <span class="glossary-term" data-term="agent">agent</span> picks up seamlessly.</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="guardrails">Guardrails</span>:</strong> Input and output validators that run on every <span class="glossary-term" data-term="agent">agent</span> interaction. <span class="glossary-term" data-term="guardrails">Guardrails</span> can block, modify, or flag content before it reaches the <span class="glossary-term" data-term="agent">agent</span> or after the <span class="glossary-term" data-term="agent">agent</span> responds.</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="tracing">Tracing</span>:</strong> Built-in observability. Every <span class="glossary-term" data-term="agent">agent</span> call, tool invocation, and <span class="glossary-term" data-term="handoff">handoff</span> is logged with timing and <span class="glossary-term" data-term="token">token</span> usage, creating a full execution trace.</li>
+</ol>
+<p>Key differentiators:</p>
+<ul>
+<li><strong>Provider-agnostic:</strong> While optimized for OpenAI's models, the SDK supports any Chat Completions-compatible endpoint, meaning you can plug in open-source models or other providers [1].</li>
+<li><strong><span class="glossary-term" data-term="handoff">Handoff</span>-centric:</strong> Handoffs are the primary orchestration mechanism, not <span class="glossary-term" data-term="subagent">subagent</span> spawning. This makes the SDK naturally suited for sequential pipeline workflows and routing patterns.</li>
+<li><strong>Open source:</strong> The SDK is fully open source (MIT license), unlike Anthropic's <span class="glossary-term" data-term="agent-sdk">Agent SDK</span> which is proprietary [1].</li>
+<li><strong><span class="glossary-term" data-term="guardrails">Guardrails</span> as first-class citizens:</strong> <span class="glossary-term" data-term="guardrails">Guardrails</span> are not an afterthought -- they are one of the five core primitives, reflecting OpenAI's emphasis on safety in multi-<span class="glossary-term" data-term="agent">agent</span> systems.</li>
+</ul>
+<p>The Agents SDK does not natively support peer-to-peer communication between agents. Orchestration is either hierarchical (a coordinator <span class="glossary-term" data-term="agent">agent</span> dispatches to specialists) or sequential (<span class="glossary-term" data-term="agent">agent</span> A hands off to <span class="glossary-term" data-term="agent">agent</span> B hands off to <span class="glossary-term" data-term="agent">agent</span> C). For parallel execution, the developer must implement it at the application layer.</p>
+<h3 id="google-agent-development-kit-adk">Google: Agent Development Kit (ADK)</h3>
+<p>Google's ADK is an open-source framework (Apache 2.0) available in Python, TypeScript, Go, and Java for building multi-<span class="glossary-term" data-term="agent">agent</span> systems, tightly integrated with the Vertex AI <span class="glossary-term" data-term="agent">Agent</span> Engine for deployment and monitoring [F3] [2].</p>
+<ul>
+<li><strong>Multi-<span class="glossary-term" data-term="agent">agent</span> patterns:</strong> ADK supports hierarchical delegation, sequential pipelines, and parallel fan-out natively.</li>
+<li><strong>Vertex AI <span class="glossary-term" data-term="agent">Agent</span> Engine:</strong> Managed infrastructure for deploying, monitoring, and scaling <span class="glossary-term" data-term="agent">agent</span> systems in production. Includes threat detection (Preview) and a visual trace dashboard [F3].</li>
+<li><strong>MCP native:</strong> ADK agents can consume MCP servers as plug-and-play data sources, making Google's growing catalog of managed MCP servers (Workspace, Maps, Cloud services) directly accessible [F3].</li>
+<li><strong>Antigravity integration:</strong> The Antigravity IDE's Manager Surface can spawn and observe multiple ADK agents simultaneously, providing a GUI for <span class="glossary-term" data-term="multi-agent-orchestration">multi-agent orchestration</span> during development [F3].</li>
+</ul>
+<p>ADK's positioning differs from both Anthropic and OpenAI: it is less opinionated about orchestration patterns and more focused on providing infrastructure for deployment and monitoring. The framework does not prescribe handoffs or <span class="glossary-term" data-term="agent">agent</span> teams -- it provides building blocks that developers compose into their own patterns.</p>
+<h3 id="microsoft-copilot-studio-and-agent-365">Microsoft: Copilot Studio and Agent 365</h3>
+<p>Microsoft's multi-<span class="glossary-term" data-term="agent">agent</span> story is split between a builder platform (<span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>) and a governance layer (<span class="glossary-term" data-term="agent-365">Agent 365</span>).</p>
+<h4>Copilot Studio (GA)</h4>
+<p><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> is a low-code/no-code platform for building custom AI agents, targeting business analysts and citizen developers rather than software engineers [F4].</p>
+<ul>
+<li><strong><span class="glossary-term" data-term="agent">Agent</span> types:</strong> Declarative agents (rules-based, deterministic flows) and autonomous agents (LLM-driven, adaptive behavior).</li>
+<li><strong>Generative orchestration:</strong> The LLM dynamically plans which tools, connectors, and sub-agents to invoke -- a <span class="glossary-term glossary-term--first-use" data-term="router-pattern">router pattern</span> where the LLM itself is the router [F4].</li>
+<li><strong>1,400+ connectors:</strong> Pre-built integrations to Dataverse, SharePoint, SQL, Salesforce, ServiceNow, SAP, and more. This is Microsoft's deepest moat: no other platform comes close to this connector breadth [F4].</li>
+<li><strong><span class="glossary-term" data-term="multi-agent-orchestration">Multi-agent orchestration</span>:</strong> Route tasks between specialized agents, including partner-built agents. Multi-<span class="glossary-term" data-term="agent">agent</span> Private Preview expected in 2026 [F4].</li>
+<li><strong>Computer-using agents:</strong> UI automation capabilities for interacting with legacy applications that lack APIs (GA February 2026) [F4].</li>
+<li><strong>MCP client support:</strong> GA -- <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> agents can connect to external MCP servers as data and tool sources [F4].</li>
+<li><strong>Deployment targets:</strong> Teams, websites, Power Apps, standalone apps, or embedded in Microsoft 365 Copilot.</li>
+</ul>
+<p><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>'s <span class="glossary-term" data-term="multi-agent-orchestration">multi-agent orchestration</span> is currently the least mature of the four platforms in terms of developer-facing primitives. The emphasis is on enterprise workflow automation rather than flexible <span class="glossary-term" data-term="agent">agent</span> composition.</p>
+<h4>Agent 365 (GA May 1, 2026)</h4>
+<p><span class="glossary-term" data-term="agent-365">Agent 365</span> is the first enterprise-grade <span class="glossary-term" data-term="agent">agent</span> governance platform -- and as of March 2026, it has no direct competitor [F4].</p>
+<ul>
+<li><strong>Price:</strong> $15/user/month (standalone) or included in the M365 E7 Frontier Suite ($99/user/month) [F4].</li>
+<li><strong><span class="glossary-term" data-term="agent">Agent</span> Registry:</strong> A centralized catalog of all agents operating in the organization. Tens of millions of agents already registered during preview [F4].</li>
+<li><strong>Identity management:</strong> Agents receive identities through Entra ID, just like human users. This enables standard enterprise IAM policies (conditional access, MFA, least privilege) to apply to agents [F4].</li>
+<li><strong>Compliance:</strong> Purview policies apply to <span class="glossary-term" data-term="agent">agent</span> actions -- data loss prevention, information barriers, retention policies [F4].</li>
+<li><strong>Security monitoring:</strong> Defender monitors <span class="glossary-term" data-term="agent">agent</span> behavior in real time, flagging anomalous actions, excessive permissions, or potential data exfiltration [F4].</li>
+<li><strong>Action auditing:</strong> Every <span class="glossary-term" data-term="agent">agent</span> action is logged and auditable, creating a compliance trail.</li>
+</ul>
+<p><span class="glossary-term" data-term="agent-365">Agent 365</span> reflects Microsoft's bet that enterprise multi-<span class="glossary-term" data-term="agent">agent</span> adoption will create a governance problem before it creates a technical one. When an organization has thousands of agents built by hundreds of citizen developers via <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>, someone needs to answer: which agents exist, what can they access, what are they doing, and are they complying with policy?</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> <span class="glossary-term" data-term="agent-365">Agent 365</span> GAs on May 1, 2026. Pre-GA details (pricing, features, scale numbers) are based on preview program information and Microsoft's public announcements as of March 2026 [F4].</p>
+</blockquote>
+<hr>
+<h2 id="framework-comparison">Framework Comparison</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Anthropic Agent SDK</th><th>Anthropic Agent Teams</th><th>OpenAI Agents SDK</th><th>Google ADK</th><th>Copilot Studio</th></tr></thead><tbody><tr><td><strong>Status</strong></td><td>GA (Sep 2025)</td><td>Experimental</td><td>GA</td><td>GA</td><td>GA (multi-<span class="glossary-term" data-term="agent">agent</span>: Private Preview)</td></tr><tr><td><strong>Languages</strong></td><td>Python, TypeScript</td><td>N/A (<span class="glossary-term" data-term="claude-code">Claude Code</span>)</td><td>Python, Node.js</td><td>Python, TypeScript, Go, Java</td><td>Low-code/no-code</td></tr><tr><td><strong>Open source</strong></td><td>No</td><td>No</td><td>Yes (MIT)</td><td>Yes (Apache 2.0)</td><td>No</td></tr><tr><td><strong>Primary pattern</strong></td><td>Hierarchical (parent-child)</td><td>Peer-to-peer (team)</td><td><span class="glossary-term" data-term="handoff">Handoff</span> (sequential)</td><td>Flexible (all patterns)</td><td>Router (generative orchestration)</td></tr><tr><td><strong><span class="glossary-term" data-term="agent">Agent</span>-to-<span class="glossary-term" data-term="agent">agent</span> communication</strong></td><td>Parent-child only</td><td>Any-to-any</td><td>Sequential <span class="glossary-term" data-term="handoff">handoff</span></td><td>Developer-defined</td><td>LLM-routed</td></tr><tr><td><strong>Built-in tools</strong></td><td>Read, Write, Edit, Bash, Glob, Grep, WebSearch</td><td>Same (<span class="glossary-term" data-term="claude-code">Claude Code</span> tools)</td><td>Developer-defined</td><td>Developer-defined</td><td>1,400+ connectors</td></tr><tr><td><strong>MCP support</strong></td><td>Yes</td><td>Yes</td><td>Via tools</td><td>Yes (native)</td><td>Yes (GA)</td></tr><tr><td><strong><span class="glossary-term" data-term="guardrails">Guardrails</span></strong></td><td>Hooks (lifecycle callbacks)</td><td>Plan approval gates</td><td>First-class primitive</td><td>Vertex AI Threat Detection</td><td>Enterprise policies (<span class="glossary-term" data-term="agent-365">Agent 365</span>)</td></tr><tr><td><strong>Observability</strong></td><td>Custom via hooks</td><td>Shared task list</td><td>Built-in <span class="glossary-term" data-term="tracing">tracing</span></td><td>Vertex AI dashboard</td><td><span class="glossary-term" data-term="agent-365">Agent 365</span> auditing</td></tr><tr><td><strong>Target audience</strong></td><td>Developers</td><td>Developers (<span class="glossary-term" data-term="claude-code">Claude Code</span> users)</td><td>Developers</td><td>Developers</td><td>Business analysts, citizen developers</td></tr><tr><td><strong>Provider lock-in</strong></td><td>Anthropic only</td><td>Anthropic only</td><td>Provider-agnostic</td><td>Google-optimized</td><td>Microsoft ecosystem</td></tr></tbody></table>
+
+<div class="worked-example" data-variant="partial" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Choosing an orchestration framework</h4>
+  <div class="worked-example__problem">
+    <p>A startup needs to build a customer support system with: (1) a routing agent that classifies incoming requests, (2) a billing specialist agent, (3) a technical support agent, (4) an escalation agent for complex cases. The startup uses OpenAI's GPT models but wants the option to switch providers later.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Identify the constraint</h5>
+      <div class="worked-example__step-content">
+        <p>[YOUR ANSWER] The requirement for provider flexibility eliminates which frameworks?</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Map the workflow to an orchestration pattern</h5>
+      <div class="worked-example__step-content">
+        <p>The routing agent classifies requests and directs them to specialists. This is a routing pattern. When a specialist cannot resolve the issue, it escalates -- this is a handoff to the escalation agent.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Select the framework</h5>
+      <div class="worked-example__step-content">
+        <p>[YOUR ANSWER] Which remaining framework best supports routing + handoff as first-class primitives?</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Design the handoff chain</h5>
+      <div class="worked-example__step-content">
+        <p>Router agent classifies request -&gt; hands off to billing, tech, or escalation specialist. Specialists resolve or hand off to escalation agent with full conversation context.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>Provider flexibility eliminates Anthropic's Agent SDK (Claude-only). The routing-to-specialist pattern maps to router + handoff orchestration. OpenAI's Agents SDK is the best fit: handoffs are a first-class primitive, it is provider-agnostic (supports any Chat Completions-compatible endpoint), and it is open-source (MIT). The triage agent uses handoffs to delegate to billing, tech, or escalation specialists. Each specialist inherits the full conversation context via handoff, ensuring no information loss at delegation boundaries. This applies the model selection framework from Module 01: the router can use a cheap model (GPT-5.4 Nano) since it only classifies, while specialists use a mid-tier model (GPT-5.4) for quality responses.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+
+<details class="accordion">
+  <summary class="accordion__title">Your framework choice constrains your patterns</summary>
+  <div class="accordion__content">
+    <p>The framework you choose constrains which orchestration patterns are even possible. Anthropic's Agent SDK supports only hierarchical delegation. OpenAI's Agents SDK is built around sequential handoffs. Google's ADK is the most flexible but least opinionated. Copilot Studio implements router patterns via generative orchestration. Choosing a framework is not just a technical decision -- it is an architectural commitment that determines your system's communication topology.</p>
+  </div>
+</details>
+<hr>
+<h2 id="delegation-patterns-in-practice">Delegation Patterns in Practice</h2>
+<p>Understanding <span class="glossary-term" data-term="multi-agent-orchestration">multi-agent orchestration</span> at the framework level is necessary but not sufficient. The real skill is knowing when and how to decompose work across agents. Three patterns dominate production usage.</p>
+<h3 id="fan-out-fan-in-parallel-research">Fan-Out / Fan-In (Parallel Research)</h3>
+<p>The parent <span class="glossary-term" data-term="agent">agent</span> identifies N independent subtasks, spawns N subagents simultaneously, waits for all results, then synthesizes a unified output.</p>
+<p><strong>When to use:</strong> Research tasks where subtopics are independent (e.g., "investigate pricing for Anthropic, OpenAI, Google, and Microsoft" -- four parallel researchers). New feature development where frontend, backend, and tests can proceed in parallel.</p>
+<p><strong>Implementation:</strong> In <span class="glossary-term" data-term="agent-sdk">Agent SDK</span>, spawn N subagents with scoped briefs and collect summaries. In <span class="glossary-term" data-term="agent">Agent</span> Teams, post N tasks to the shared board and let teammates self-assign. In OpenAI Agents SDK, requires application-level parallelism (the SDK itself is sequential).</p>
+<h3 id="pipeline-sequential-handoff">Pipeline (Sequential Handoff)</h3>
+<p><span class="glossary-term" data-term="agent">Agent</span> A completes its work and passes the full context to <span class="glossary-term" data-term="agent">Agent</span> B, which passes to <span class="glossary-term" data-term="agent">Agent</span> C, and so on. Each <span class="glossary-term" data-term="agent">agent</span> adds its contribution without losing what came before.</p>
+<p><strong>When to use:</strong> Workflows with natural stages -- research, then draft, then review, then publish. Data processing pipelines where each stage transforms the output of the previous stage.</p>
+<p><strong>Implementation:</strong> OpenAI's <span class="glossary-term" data-term="handoff">handoff</span> primitive makes this first-class. In Anthropic's SDK, this requires the parent to pass each <span class="glossary-term" data-term="subagent">subagent</span>'s output as input to the next <span class="glossary-term" data-term="subagent">subagent</span>. ADK supports this as a composition pattern.</p>
+<h3 id="specialist-router">Specialist Router</h3>
+<p>A lightweight dispatcher examines each request and routes it to the appropriate expert <span class="glossary-term" data-term="agent">agent</span>. The router does minimal work itself.</p>
+<p><strong>When to use:</strong> Customer support (route billing questions to billing <span class="glossary-term" data-term="agent">agent</span>, technical questions to tech <span class="glossary-term" data-term="agent">agent</span>). Any system with a diverse input space and specialized handlers.</p>
+<p><strong>Implementation:</strong> <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>'s generative orchestration does this automatically. In OpenAI Agents SDK, define a triage <span class="glossary-term" data-term="agent">agent</span> with handoffs to specialists. In <span class="glossary-term" data-term="agent-sdk">Agent SDK</span>, the parent <span class="glossary-term" data-term="agent">agent</span> acts as router, spawning the appropriate <span class="glossary-term" data-term="subagent">subagent</span> per request.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Sequential dependency with context accumulation maps to the pipeline (sequential handoff) pattern. Each agent completes its stage and passes the full context to the next. Fan-out/fan-in is for independent parallel subtasks; a specialist router is for classifying diverse inputs." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A data processing workflow has three stages: extract, transform, load. Each stage depends on the output of the previous. Which delegation pattern is appropriate?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-specialist-router-quiz" value="0" />
+          <span class="quiz__choice-label">Fan-out / Fan-in (Parallel Research)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-specialist-router-quiz" value="1" />
+          <span class="quiz__choice-label">Pipeline (Sequential Handoff)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-specialist-router-quiz" value="2" />
+          <span class="quiz__choice-label">Specialist Router</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="strategic-model-selection-in-multi-agent-systems">Strategic Model Selection in Multi-Agent Systems</h2>
+<p>One of the most consequential -- and most overlooked -- decisions in multi-<span class="glossary-term" data-term="agent">agent</span> design is which model powers each <span class="glossary-term" data-term="agent">agent</span>. Not every <span class="glossary-term" data-term="agent">agent</span> needs the flagship model. The principle is simple: match model capability to task requirements, and allocate your budget where quality matters most.</p>
+<h3 id="role-based-model-allocation">Role-Based Model Allocation</h3>
+<p>Different <span class="glossary-term" data-term="agent">agent</span> roles have fundamentally different compute profiles:</p>
+<p><strong>Research and fact-gathering agents</strong> perform high-volume, relatively simple work: web searches, document retrieval, data extraction. These tasks require breadth (many parallel queries) more than depth (complex reasoning). Fast, cheap models -- Haiku 4.5 ($1/$5 per MTok), GPT-4o Mini ($0.15/$0.60), Gemini 2.5 Flash-Lite ($0.10/$0.40) -- handle this work well at 10-50x lower cost than flagships [F1] [F2] [F3]. A research task that spawns 20 parallel agents at Haiku pricing costs roughly the same as a single Opus call.</p>
+<p><strong>Writing and drafting agents</strong> require stronger instruction following, coherent long-form output, and nuanced tone control. Mid-tier models -- Sonnet 4.6 ($3/$15 per MTok), GPT-5.4 Mini ($0.75/$4.50), Gemini 3 Flash ($0.50/$3.00) -- provide the best quality-to-cost ratio for this work [F1] [F2] [F3]. They produce output that is good enough for a first draft, which a reviewer can then refine.</p>
+<p><strong>Review, synthesis, and orchestration agents</strong> do the highest-stakes work: identifying errors, resolving contradictions across sources, making architectural decisions, and planning task decomposition. Flagships -- Opus 4.6 ($5/$25 per MTok), GPT-5.4 (~$2.50/$10+), Gemini 3.1 Pro ($2-4/$12-18) -- justify their premium here because errors at this level cascade through the entire system [F1] [F2] [F3]. The orchestrator's mistakes are the most expensive to fix.</p>
+<p>Two additional roles are often overlooked: <strong>router/dispatcher agents</strong> that classify and route requests need only the cheapest models (GPT-5.4 Nano at $0.20/$1.25, Gemini 2.5 Flash-Lite at $0.10/$0.40) since they perform simple classification where speed matters most. Similarly, <strong>guardrail/safety-check agents</strong> that validate outputs against rules are binary classifiers -- fast models suffice.</p>
+<h3 id="role-to-tier-mapping">Role-to-Tier Mapping</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Agent Role</th><th>Recommended Tier</th><th>Rationale</th></tr></thead><tbody><tr><td>Router/Dispatcher</td><td>Cheapest (Nano, Flash-Lite)</td><td>Simple classification; speed matters most</td></tr><tr><td>Researcher/Gatherer</td><td>Fast (Haiku, GPT-5.4 Mini, Gemini Flash)</td><td>Read and extract; quality threshold lower than synthesis</td></tr><tr><td>Writer/Generator</td><td>Balanced (Sonnet, GPT-5.4, Gemini 3 Flash)</td><td>Quality matters but flagship unnecessary for drafting</td></tr><tr><td>Synthesizer/Decision-maker</td><td>Flagship (Opus, GPT-5.4 Thinking)</td><td>Reasoning quality drives output quality</td></tr><tr><td>Reviewer/Validator</td><td>Balanced to Flagship</td><td>Depends on stakes; code review needs stronger model than format checking</td></tr><tr><td><span class="glossary-term" data-term="guardrails">Guardrails</span>/Safety check</td><td>Fast</td><td>Binary classification; cheap model sufficient</td></tr></tbody></table>
+
+<section class="quiz" data-variant="concept-check" data-correct="3" data-explanation="Routers perform simple classification where speed matters most. GPT-5.4 Nano at $0.20/MTok or Gemini Flash-Lite at $0.10/MTok suffice. The synthesizer/decision-maker should use the flagship because its errors cascade through the entire system. This applies the model tiering from Module 01 to multi-agent architecture." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In a multi-agent system, which agent role should use the cheapest possible model?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-role-to-tier-mapping-quiz" value="0" />
+          <span class="quiz__choice-label">Researcher/Gatherer</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-role-to-tier-mapping-quiz" value="1" />
+          <span class="quiz__choice-label">Writer/Generator</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-role-to-tier-mapping-quiz" value="2" />
+          <span class="quiz__choice-label">Synthesizer/Decision-maker</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-role-to-tier-mapping-quiz" value="3" />
+          <span class="quiz__choice-label">Router/Dispatcher</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="cross-provider-model-selection">Cross-Provider Model Selection</h3>
+<p>Framework choice affects model flexibility. OpenAI's Agents SDK is provider-agnostic -- it supports any Chat Completions-compatible endpoint, meaning you can mix Claude for complex reasoning steps and GPT-5.4 for vision-heavy steps in the same pipeline [1]. Google's ADK similarly allows mixing model providers. Anthropic's <span class="glossary-term" data-term="agent-sdk">Agent SDK</span> is locked to Claude models [F1]. This is a practical architectural consideration: if your multi-<span class="glossary-term" data-term="agent">agent</span> system needs capabilities that span provider strengths (e.g., Claude's <span class="glossary-term glossary-term--first-use" data-term="extended-thinking">extended thinking</span> visibility with GPT's native <span class="glossary-term glossary-term--first-use" data-term="computer-use">computer use</span>), the framework you choose determines whether you can combine them in one pipeline or must build a bridge.</p>
+<h3 id="decision-framework">Decision Framework</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Factor</th><th>Use Flagship (Opus, GPT-5.4, Gemini Pro)</th><th>Use Mid-Tier (Sonnet, GPT-5.4 Mini, Gemini Flash)</th><th>Use Fast (Haiku, GPT-4o Mini, Flash-Lite)</th></tr></thead><tbody><tr><td><strong>Task complexity</strong></td><td>Multi-step reasoning, architectural decisions</td><td>Structured generation, moderate analysis</td><td>Simple retrieval, extraction, classification</td></tr><tr><td><strong>Quality requirements</strong></td><td>Errors cascade or are costly to fix</td><td>Good enough for iteration</td><td>Acceptable with post-processing</td></tr><tr><td><strong>Volume per run</strong></td><td>Low (1-5 calls)</td><td>Medium (5-20 calls)</td><td>High (20-100+ calls)</td></tr><tr><td><strong>Cost sensitivity</strong></td><td>Low -- quality dominates</td><td>Moderate -- balanced</td><td>High -- budget-constrained</td></tr></tbody></table>
+
+<figure class="diagram diagram--decision-tree" id="m04-5" role="img" aria-label="Interactive decision tree that guides you through deciding whether to use multiple agents and which orchestration pattern to apply. Starts with whether the task fits in one context window, then branches through parallelism needs, specialization requirements, communication patterns, and cost sensitivity to recommend single-agent, fan-out, pipeline, peer-to-peer teams, competitive exploration, or router patterns.">
+  <div class="decision-tree" data-tree-config='{"root":{"question":"Does the task fit in one context window?","branches":[{"label":"Yes","question":"Do you need parallelism for independent subtasks?","branches":[{"label":"Yes","question":"Do subtasks need different tools or models?","branches":[{"label":"Yes","question":"Do agents need to communicate laterally?","branches":[{"label":"Yes","terminal":{"model":"Peer-to-Peer (Agent Teams)","price":"Higher cost: persistent sessions","rationale":"Lateral info sharing, self-organizing. Use Anthropic Agent Teams or build custom messaging."}},{"label":"No","terminal":{"model":"Fan-Out / Fan-In (Hierarchical)","price":"Moderate: N parallel subagents","rationale":"Parent decomposes, spawns specialized subagents, synthesizes results. Agent SDK or ADK."}}]},{"label":"No","terminal":{"model":"Fan-Out / Fan-In (Same tools)","price":"N x cheap model cost","rationale":"Parallel agents on same task type. Use fast models (Haiku, Flash-Lite) for 10-50x savings."}}]},{"label":"No","question":"Is this a sequential pipeline (each stage depends on the previous)?","branches":[{"label":"Yes","terminal":{"model":"Pipeline (Sequential Handoff)","price":"Linear: sum of stage costs","rationale":"Full context transfers between stages. OpenAI handoffs are first-class for this pattern."}},{"label":"No","terminal":{"model":"Single Agent","price":"1 context window","rationale":"Task fits in one window, no parallelism needed, no pipeline. One agent with the right model tier."}}]}]},{"label":"No","question":"Is the problem ambiguous with multiple valid approaches?","branches":[{"label":"Yes","terminal":{"model":"Competitive (Parallel Exploration)","price":"Expensive: N x full cost","rationale":"N agents try independently, selector picks best. Worth it when backtracking costs more than parallel attempts."}},{"label":"No","question":"Are incoming requests diverse, needing different specialist handlers?","branches":[{"label":"Yes","terminal":{"model":"Router (Dynamic Dispatch)","price":"Router: cheap model + specialist cost","rationale":"Lightweight dispatcher routes to specialists. Copilot Studio does this natively; OpenAI SDK via triage agent."}},{"label":"No","terminal":{"model":"Multi-Agent with Context Splitting","price":"Varies by decomposition","rationale":"Task exceeds one window. Decompose into subtasks that each fit, use hierarchical delegation with structured summaries."}}]}]}]}}' data-tree-id="m04-5"></div>
+  <figcaption>Multi-Agent Decision Tree</figcaption>
+</figure>
+<h3 id="case-study-this-curriculums-round-1-execution">Case Study: This Curriculum's Round 1 Execution</h3>
+<p>This curriculum provides a concrete example. During Round 1 production, the lead <span class="glossary-term" data-term="agent">agent</span> orchestrated 56+ <span class="glossary-term" data-term="subagent">subagent</span> deployments across four roles:</p>
+<ul>
+<li><strong>38 researcher agents</strong> (Haiku/fast tier) -- parallel web research across all 11 modules. High volume, simple retrieval tasks. At Haiku pricing, the entire research phase cost roughly what 2-3 Opus calls would have cost.</li>
+<li><strong>12+ writer agents</strong> (Sonnet/inherit tier) -- parallel module drafting. Quality mattered more than speed, but flagships were unnecessary for first drafts.</li>
+<li><strong>5 reviewer agents</strong> (Sonnet/inherit tier) -- quality checks against the verification checklist.</li>
+<li><strong>1 synthesizer <span class="glossary-term" data-term="agent">agent</span></strong> (Opus-level) -- cross-module consistency audit requiring holistic reasoning across 43,000+ words.</li>
+</ul>
+<p>The Round 2 decision shifted all agents to Opus 4.6 because the quality gaps identified in Round 1 review were editorial (unverified sources, citation inconsistency, depth gaps) -- problems that a more capable model could prevent upstream rather than fix downstream. This illustrates the <strong>progressive escalation</strong> pattern: start with cheaper models, measure quality, and escalate selectively based on observed gaps.</p>
+<h3 id="cost-optimization-patterns">Cost Optimization Patterns</h3>
+<p>Three patterns reduce multi-<span class="glossary-term" data-term="agent">agent</span> costs without sacrificing output quality:</p>
+<p><strong>Progressive escalation.</strong> Start every <span class="glossary-term" data-term="agent">agent</span> at the cheapest viable tier. If a <span class="glossary-term" data-term="subagent">subagent</span>'s output fails quality checks, re-run with a more capable model. Most tasks succeed on the first attempt with a cheaper model; you only pay flagship prices for the tasks that genuinely need it.</p>
+<p><strong><span class="glossary-term glossary-term--first-use" data-term="prompt-caching">Prompt caching</span> across agents.</strong> When multiple agents share the same system prompt, reference documents, or context prefix, <span class="glossary-term" data-term="prompt-caching">prompt caching</span> reduces input costs by up to 90% (Anthropic) or 50-75% (Google, OpenAI). In fan-out patterns where N agents receive similar briefs, caching amortizes the prompt cost across all N agents (see <a href="module-02.html">Module 02: <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context Engineering</span></a> and <a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> for caching mechanics).</p>
+<p><strong>Batch processing for non-urgent work.</strong> All major providers offer 50% <span class="glossary-term" data-term="token">token</span> discounts for asynchronous batch processing. Review agents, synthesis passes, and quality audits rarely need real-time responses -- batching these cuts costs in half with no quality tradeoff [F1] [F2] [F3].</p>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="The OpenAI Agents SDK supports any Chat Completions-compatible endpoint. You can plug in open-source models or other providers, making it possible to mix Claude for complex reasoning and GPT for other steps in the same pipeline. Anthropic's Agent SDK is locked to Claude models." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">OpenAI's Agents SDK supports which level of provider flexibility?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="0" />
+          <span class="quiz__choice-label">OpenAI models only</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI and Azure models only</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="2" />
+          <span class="quiz__choice-label">Provider-agnostic -- any Chat Completions-compatible endpoint</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="3" />
+          <span class="quiz__choice-label">All providers via built-in adapters</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="All major providers offer 50% token discounts for asynchronous batch processing. Review agents, synthesis passes, and quality audits rarely need real-time responses -- batching these cuts costs in half with no quality tradeoff." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which optimization gives a flat 50% discount for non-urgent work?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="0" />
+          <span class="quiz__choice-label">Prompt caching</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="1" />
+          <span class="quiz__choice-label">Progressive escalation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="2" />
+          <span class="quiz__choice-label">Batch processing</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="3" />
+          <span class="quiz__choice-label">Model tiering</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="When multiple agents share the same system prompt, reference documents, or context prefix, prompt caching reduces input costs by up to 90% (Anthropic) or 50-75% (Google, OpenAI). In fan-out patterns where N agents receive similar briefs, caching amortizes the prompt cost across all N agents. This connects to caching mechanics from Module 02 and pricing details in Module 09." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does prompt caching reduce costs in fan-out patterns?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="0" />
+          <span class="quiz__choice-label">It reduces the number of agents needed</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="1" />
+          <span class="quiz__choice-label">Multiple agents sharing the same system prompt get cached, amortizing input cost across N agents</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="2" />
+          <span class="quiz__choice-label">It eliminates output token costs</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="3" />
+          <span class="quiz__choice-label">It only works with Anthropic models</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="The orchestrator makes task decomposition decisions, assigns work to subagents, and synthesizes final outputs. An orchestrator that misdecomposes a task or misassigns a subtask propagates that error through every downstream agent. The orchestrator's mistakes are the most expensive to fix." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Why is the orchestrator's model selection the most important in a multi-agent system?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="0" />
+          <span class="quiz__choice-label">Orchestrators process the most tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="1" />
+          <span class="quiz__choice-label">Orchestrator errors cascade through the entire system</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="2" />
+          <span class="quiz__choice-label">Orchestrators need the fastest model</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-cost-optimization-patterns-quiz" value="3" />
+          <span class="quiz__choice-label">Only the orchestrator interacts with users</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">The case study describes 'progressive escalation' -- starting with cheaper models and escalating selectively. What metric would you use to decide when escalation is needed?</p>
+  <label for="se-m04-cost-optimization-patterns" class="sr-only">Your explanation</label>
+  <textarea id="se-m04-cost-optimization-patterns" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m04-cost-optimization-patterns">Compare with Expert Answer</button>
+  <div id="se-answer-m04-cost-optimization-patterns" class="self-explain__expert" hidden>
+    <p>Quality failure rate. In Round 1, the team measured editorial issues per module: unverified sources, citation inconsistency, depth gaps. When cheaper models produced too many quality failures that required expensive downstream fixing, Round 2 escalated all agents to Opus 4.6. The decision criterion: is it cheaper to prevent the error upstream (flagship model) or fix it downstream (reviewer + reviser)? This is an economic calculation, not a quality preference.</p>
+  </div>
+</div>
+<hr>
+<h2 id="context-isolation-and-summary-propagation">Context Isolation and Summary Propagation</h2>
+<p>The central engineering challenge of multi-<span class="glossary-term" data-term="agent">agent</span> systems is managing information flow between agents. Each <span class="glossary-term" data-term="agent">agent</span> operates in its own <span class="glossary-term" data-term="context-window">context window</span>, which means:</p>
+<ol>
+<li><strong>What a <span class="glossary-term" data-term="subagent">subagent</span> learns does not automatically transfer to its parent.</strong> Only the returned summary propagates. If the summary omits a critical detail, it is lost.</li>
+<li><strong>What the parent knows is not automatically available to subagents.</strong> The parent must explicitly include relevant context in the <span class="glossary-term" data-term="subagent">subagent</span>'s brief.</li>
+<li><strong>Peer agents in a team know only what they are told.</strong> Direct messaging enables lateral sharing, but agents must choose to share.</li>
+</ol>
+<p>This creates a <strong>summary propagation problem</strong>: the quality of multi-<span class="glossary-term" data-term="agent">agent</span> output depends heavily on the quality of inter-<span class="glossary-term" data-term="agent">agent</span> summaries. A <span class="glossary-term" data-term="subagent">subagent</span> that returns "I fixed the bug" is less useful than one that returns "Fixed a null pointer exception in <code>auth.py:142</code> caused by missing session <span class="glossary-term" data-term="token">token</span> validation; added a guard clause and updated 3 tests."</p>
+<p>Best practices for summary design:</p>
+<ul>
+<li><strong>Structured return formats:</strong> Define exactly what each <span class="glossary-term" data-term="subagent">subagent</span> must return (findings, decisions, file paths, open questions) rather than relying on free-form summaries.</li>
+<li><strong>Include what changed:</strong> File paths modified, lines added/removed, tests affected. Concrete details survive <span class="glossary-term glossary-term--first-use" data-term="compaction">compaction</span> and context boundaries better than abstractions.</li>
+<li><strong>Flag uncertainty explicitly:</strong> Subagents should mark unresolved questions so the parent can decide whether to investigate further or accept the uncertainty.</li>
+<li><strong>Budget summaries appropriately:</strong> A summary that is too terse loses information; one that is too verbose defeats the purpose of context isolation. Target 5-15% of the <span class="glossary-term" data-term="subagent">subagent</span>'s working context as a reasonable summary budget.</li>
+</ul>
+<p>For more on how context limits affect multi-<span class="glossary-term" data-term="agent">agent</span> design, see <a href="module-02.html">Module 02: <span class="glossary-term" data-term="context-engineering">Context Engineering</span></a>.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Concrete details survive compaction and context boundaries better than abstractions. 'Fixed a null pointer exception in auth.py:142 -- added guard clause, updated 3 tests' is actionable. 'I fixed the bug' forces the parent to re-investigate. The recommended summary budget is 5-15% of the subagent's working context." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A subagent returns 'I fixed the bug.' Why is this summary insufficient?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-context-isolation-and-summary-propagation-quiz" value="0" />
+          <span class="quiz__choice-label">It is too short</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-context-isolation-and-summary-propagation-quiz" value="1" />
+          <span class="quiz__choice-label">It lacks concrete details (file paths, lines changed, tests affected)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-context-isolation-and-summary-propagation-quiz" value="2" />
+          <span class="quiz__choice-label">It does not include the model used</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-context-isolation-and-summary-propagation-quiz" value="3" />
+          <span class="quiz__choice-label">It should include token count</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="enterprise-agent-governance">Enterprise Agent Governance</h2>
+<p>As organizations scale from a handful of hand-built agents to thousands created by citizen developers, governance becomes the binding constraint. Microsoft's <span class="glossary-term" data-term="agent-365">Agent 365</span> is the first purpose-built solution, but the problem is universal.</p>
+<h3 id="the-governance-problem">The Governance Problem</h3>
+<p>Consider an enterprise with 5,000 employees, each enabled to create autonomous agents via <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span>. Within months, the organization may have tens of thousands of agents -- each with its own permissions, data access patterns, and behavioral characteristics. Without governance:</p>
+<ul>
+<li><strong>Shadow agents:</strong> Agents built by individuals that IT does not know about, accessing sensitive data without authorization.</li>
+<li><strong>Permission creep:</strong> Agents accumulate connector access over time, exceeding what their tasks require.</li>
+<li><strong>Compliance gaps:</strong> Agents that process personal data, make financial decisions, or interact with customers without audit trails.</li>
+<li><strong>Behavioral drift:</strong> Agents that worked correctly at creation time but produce incorrect or harmful outputs as their underlying models or data sources change.</li>
+</ul>
+<h3 id="agent-365s-approach">Agent 365's Approach</h3>
+<p><span class="glossary-term" data-term="agent-365">Agent 365</span> addresses this with four pillars [F4]:</p>
+<ol>
+<li><strong>Registry:</strong> Centralized catalog of all agents. Every <span class="glossary-term" data-term="agent">agent</span> gets registered, categorized, and tagged with its owner, purpose, and data access scope.</li>
+<li><strong>Identity:</strong> Agents receive Entra ID identities. Standard enterprise IAM applies: conditional access policies, multi-factor authentication for sensitive operations, least-privilege access.</li>
+<li><strong>Compliance:</strong> Purview policies extend to <span class="glossary-term" data-term="agent">agent</span> actions. Data loss prevention rules prevent agents from exfiltrating sensitive data. Information barriers prevent agents from crossing organizational boundaries.</li>
+<li><strong>Monitoring:</strong> Defender watches <span class="glossary-term" data-term="agent">agent</span> behavior in real time. Anomaly detection flags agents that access unusual data, execute unexpected actions, or exhibit behavioral patterns inconsistent with their declared purpose.</li>
+</ol>
+<h3 id="cross-platform-governance-gap">Cross-Platform Governance Gap</h3>
+<p><span class="glossary-term" data-term="agent-365">Agent 365</span> governs agents within the Microsoft ecosystem. It does not govern <span class="glossary-term" data-term="claude-code">Claude Code</span> agents, OpenAI Agents SDK deployments, or ADK agents running on Vertex AI. This creates a fragmented governance landscape for enterprises that use multiple AI platforms -- which, as <a href="module-00.html">Module 00</a> documents, is the norm rather than the exception.</p>
+<p>No cross-platform <span class="glossary-term" data-term="agent">agent</span> governance standard exists as of March 2026. Organizations running multi-vendor <span class="glossary-term" data-term="agent">agent</span> deployments must build governance bridges themselves or accept inconsistent policies across platforms.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="3" data-explanation="Agent 365 governs only the Microsoft ecosystem. No cross-platform agent governance standard exists as of March 2026. Organizations using multiple AI platforms -- which Module 00 documents as the norm -- must build governance bridges themselves or accept inconsistent policies across platforms." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">As of March 2026, how many cross-platform agent governance standards exist?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-enterprise-agent-governance-quiz" value="0" />
+          <span class="quiz__choice-label">One (Agent 365)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-enterprise-agent-governance-quiz" value="1" />
+          <span class="quiz__choice-label">Two (Agent 365 + an open standard)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-enterprise-agent-governance-quiz" value="2" />
+          <span class="quiz__choice-label">Several</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-enterprise-agent-governance-quiz" value="3" />
+          <span class="quiz__choice-label">None</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li><strong><span class="glossary-term" data-term="multi-agent-orchestration">Multi-agent orchestration</span> solves four problems</strong> that single agents cannot: context saturation, parallelism, specialization, and failure isolation.</li>
+<li><strong>Five orchestration patterns recur</strong> across all frameworks: hierarchical delegation, <span class="glossary-term" data-term="handoff">handoff</span>, peer-to-peer teams, competitive exploration, and routing.</li>
+<li><strong>Anthropic offers two approaches:</strong> the <span class="glossary-term" data-term="agent-sdk">Agent SDK</span> (GA) for programmatic hierarchical delegation, and <span class="glossary-term" data-term="agent">Agent</span> Teams (Experimental) for peer-to-peer collaboration with direct inter-<span class="glossary-term" data-term="agent">agent</span> messaging.</li>
+<li><strong>OpenAI's Agents SDK differentiates</strong> through handoffs as a first-class primitive, provider-agnostic design, open-source licensing, and built-in <span class="glossary-term" data-term="guardrails">guardrails</span>.</li>
+<li><strong>Google's ADK is the most flexible</strong> but least opinionated -- it provides building blocks and infrastructure (Vertex AI <span class="glossary-term" data-term="agent">Agent</span> Engine) without prescribing patterns.</li>
+<li><strong><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> targets a different audience</strong> -- business analysts and citizen developers -- with 1,400+ connectors and low-code <span class="glossary-term" data-term="agent">agent</span> building, but its multi-<span class="glossary-term" data-term="agent">agent</span> capabilities are the least mature.</li>
+<li><strong><span class="glossary-term" data-term="agent-365">Agent 365</span> is a category-defining product</strong> -- the first enterprise <span class="glossary-term" data-term="agent">agent</span> governance platform, addressing registry, identity, compliance, and monitoring. No competitor has an equivalent.</li>
+<li><strong>Summary propagation quality determines multi-<span class="glossary-term" data-term="agent">agent</span> output quality.</strong> Structured return formats, concrete details, and explicit uncertainty flags are essential.</li>
+<li><strong>Model selection is a force multiplier.</strong> Match model tier to <span class="glossary-term" data-term="agent">agent</span> role: fast/cheap models for high-volume research, mid-tier for drafting, flagships for synthesis and orchestration. Progressive escalation and <span class="glossary-term" data-term="prompt-caching">prompt caching</span> further reduce costs.</li>
+<li><strong>The cost-benefit calculus is real:</strong> every additional <span class="glossary-term" data-term="agent">agent</span> means additional API calls and context allocations. Use multi-<span class="glossary-term" data-term="agent">agent</span> when parallelism, specialization, or isolation justifies the overhead.</li>
+<li><strong>Cross-platform <span class="glossary-term" data-term="agent">agent</span> governance is an unsolved problem</strong> as of March 2026. Enterprises using multiple AI platforms face fragmented governance.</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Research and fact-gathering agents perform high-volume, relatively simple work. Fast, cheap models -- Haiku 4.5 at $1/$5 per MTok, GPT-5.4 Nano at $0.20/$1.25 -- handle this at 10-50x lower cost than flagships. 20 parallel Haiku agents cost roughly the same as a single Opus call. This applies the model tiering from Module 01." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A researcher agent needs to run 20 parallel web searches. Which model tier should it use?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Flagship (Opus, GPT-5.4)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Balanced (Sonnet, GPT-5.4 Mini)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Fast/cheap (Haiku 4.5, GPT-5.4 Nano)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">It does not matter</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The decision criterion is economic: is it cheaper to prevent the error upstream (flagship model) or fix it downstream (reviewer + reviser)? Start cheap, measure quality failures, and escalate selectively. Most tasks succeed on the first attempt with a cheaper model." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In progressive escalation, when should you switch from a cheap model to a flagship?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Always use flagships from the start</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">When the cheap model's quality failure rate makes downstream fixing more expensive than upstream prevention</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">After a fixed number of iterations</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Only when the user requests it</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="A summary that is too terse loses information; one that is too verbose defeats the purpose of context isolation. 5-15% of the subagent's working context is the recommended budget. Structured return formats (findings, decisions, file paths, open questions) help hit this target consistently." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the recommended summary budget for a subagent return?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">1-3% of the subagent's working context</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">5-15% of the subagent's working context</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">25-50% of the subagent's working context</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">There is no recommended budget</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Agent 365 is $15/user/month standalone, or included in the M365 E7 Frontier Suite ($99/user/month). It GAs on May 1, 2026 as the first enterprise-grade agent governance platform -- no competitor has an equivalent product." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Agent 365 prices at how much per user per month?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">$5/user/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">$10/user/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">$15/user/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">$25/user/month</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Google's ADK uses the Apache 2.0 license. OpenAI's Agents SDK uses MIT. Both are permissive open-source licenses. Anthropic's Agent SDK and Copilot Studio are proprietary." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Google ADK is open-source under which license?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">MIT</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Apache 2.0</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">GPL 3.0</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">BSD 3-Clause</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="OpenAI's Agents SDK supports any Chat Completions-compatible endpoint. You can mix Claude, GPT, and open-source models in the same pipeline. Anthropic's SDK is locked to Claude. Google's ADK is Google-optimized. Copilot Studio is tied to the Microsoft ecosystem." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which multi-agent framework is provider-agnostic?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic Agent SDK</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI Agents SDK</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Copilot Studio</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">None of them</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The five primitives are Agents (entities with system prompt/tools), Tools (callable functions), Handoffs (agent-to-agent delegation), Guardrails (input/output validators), and Tracing (built-in observability). Guardrails as a first-class primitive is a key differentiator from other frameworks." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Name the five core primitives of OpenAI's Agents SDK.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Models, Prompts, Tools, Memory, Outputs</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Agents, Tools, Handoffs, Guardrails, Tracing</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Agents, Functions, Routing, Logging, Safety</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Workers, Tasks, Messages, Events, State</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Agent Teams is experimental, gated behind the CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS flag. The API surface, communication model, and task management features may change substantially before GA. The Agent SDK, by contrast, has been GA since September 2025." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Anthropic Agent Teams is at what maturity level?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">GA</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Beta</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Experimental</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Research Preview</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Handoff transfers the full conversation history to the receiving agent, which picks up seamlessly. Unlike hierarchical delegation (where only a summary returns), handoff preserves all context. OpenAI's Agents SDK implements this as a first-class primitive." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which orchestration pattern transfers full conversation state between agents?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Hierarchical Delegation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Handoff</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Peer-to-Peer</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Router</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Multi-agent orchestration addresses context saturation (task exceeds one window), parallelism (independent subtasks), specialization (different tools/models per subtask), and isolation (containing failures). These are the criteria for deciding single-agent vs. multi-agent." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Name the four problems multi-agent orchestration solves.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Speed, cost, accuracy, reliability</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Context saturation, parallelism, specialization, isolation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Research, writing, review, synthesis</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m04-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Latency, throughput, quality, governance</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- platform ecosystem context and competitive positioning</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- model selection for agents (cost vs. capability tradeoffs)</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term" data-term="context-engineering">Context Engineering</span></a> -- context windows, <span class="glossary-term" data-term="compaction">compaction</span>, and the "lost in the middle" effect that motivates context isolation</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- the gather-act-verify loop, <span class="glossary-term" data-term="tool-use">tool use</span>, and safety models that underpin every <span class="glossary-term" data-term="agent">agent</span> in a multi-<span class="glossary-term" data-term="agent">agent</span> system</li>
+<li><a href="module-05.html">Module 05: <span class="glossary-term glossary-term--first-use" data-term="openclaw">OpenClaw</span> &#x26; Open <span class="glossary-term" data-term="agent">Agent</span> Ecosystem</a> -- open-source <span class="glossary-term" data-term="agent">agent</span> orchestration patterns and governance transition</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- <span class="glossary-term glossary-term--first-use" data-term="mcp-server">MCP server</span> integration across all <span class="glossary-term" data-term="agent">agent</span> frameworks</li>
+<li><a href="module-07.html">Module 07: <span class="glossary-term glossary-term--first-use" data-term="skills">Skills</span>, Plugins &#x26; Automation</a> -- <span class="glossary-term" data-term="skills">skills</span> architecture that extends <span class="glossary-term" data-term="agent">agent</span> capabilities</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- API details for the underlying model calls that agents make</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- enterprise <span class="glossary-term" data-term="agent">agent</span> governance (<span class="glossary-term" data-term="agent-365">Agent 365</span> GA), EU AI Act impact on orchestration patterns</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Source</th><th>URL</th><th>Date</th></tr></thead><tbody><tr><td>F1</td><td>Anthropic/Claude Ecosystem Profile</td><td>reference/profiles/anthropic-claude.md</td><td>2026-03-18</td></tr><tr><td>F2</td><td>OpenAI/ChatGPT Ecosystem Profile</td><td>reference/profiles/openai-chatgpt.md</td><td>2026-03-18</td></tr><tr><td>F3</td><td>Google/Gemini Ecosystem Profile</td><td>reference/profiles/google-gemini.md</td><td>2026-03-18</td></tr><tr><td>F4</td><td>Microsoft/Copilot Ecosystem Profile</td><td>reference/profiles/microsoft-copilot.md</td><td>2026-03-18</td></tr><tr><td>1</td><td>OpenAI Agents SDK (GitHub)</td><td><a href="https://github.com/openai/openai-agents-python">https://github.com/openai/openai-agents-python</a></td><td>2026-03-20</td></tr><tr><td>2</td><td>Google <span class="glossary-term" data-term="agent">Agent</span> Development Kit Documentation</td><td><a href="https://google.github.io/adk-docs/">https://google.github.io/adk-docs/</a></td><td>2026-03-20</td></tr></tbody></table>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-06.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 06: MCP &amp; the Integration Layer</span>
+        </a>
+        <a href="module-05.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 05: OpenClaw &amp; Open Agent Ecosystem</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

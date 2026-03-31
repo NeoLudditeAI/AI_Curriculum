@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 00: Landscape Overview — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="00">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 1: The Terrain</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 00: Landscape Overview</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 00: Landscape Overview</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">25-30 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prerequisites" class="toc__link" data-toc-active>Prerequisites</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#the-four-platform-ecosystems" class="toc__link" data-toc-active>The Four Platform Ecosystems</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#anthropic-claude" class="toc__link" data-toc-active>Anthropic / Claude</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openai-chatgpt" class="toc__link" data-toc-active>OpenAI / ChatGPT</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-gemini" class="toc__link" data-toc-active>Google / Gemini</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#microsoft-copilot" class="toc__link" data-toc-active>Microsoft / Copilot</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#platform-comparison-at-a-glance" class="toc__link" data-toc-active>Platform Comparison at a Glance</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#specialized-tools" class="toc__link" data-toc-active>Specialized Tools</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#ai-native-productivity" class="toc__link" data-toc-active>AI-Native Productivity</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#automation-platforms" class="toc__link" data-toc-active>Automation Platforms</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#creative-ai" class="toc__link" data-toc-active>Creative AI</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#ai-coding-tools" class="toc__link" data-toc-active>AI Coding Tools</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#architectural-approaches" class="toc__link" data-toc-active>Architectural Approaches</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#coding-tools-comparison" class="toc__link" data-toc-active>Coding Tools Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#open-source-and-self-hosted-ai" class="toc__link" data-toc-active>Open-Source and Self-Hosted AI</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#open-weight-models" class="toc__link" data-toc-active>Open-Weight Models</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#local-inference-infrastructure" class="toc__link" data-toc-active>Local Inference Infrastructure</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openclaw-the-open-agent-framework" class="toc__link" data-toc-active>OpenClaw: The Open Agent Framework</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#open-vs-closed-the-tradeoffs" class="toc__link" data-toc-active>Open vs. Closed: The Tradeoffs</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#market-structure" class="toc__link" data-toc-active>Market Structure</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#by-the-numbers" class="toc__link" data-toc-active>By the Numbers</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#consumer-market-dynamics" class="toc__link" data-toc-active>Consumer Market Dynamics</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#enterprise-market-dynamics" class="toc__link" data-toc-active>Enterprise Market Dynamics</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-battlegrounds" class="toc__link" data-toc-active>Key Battlegrounds</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#1-agentic-autonomy" class="toc__link" data-toc-active>1. Agentic Autonomy</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#2-the-integration-standard" class="toc__link" data-toc-active>2. The Integration Standard</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#3-coding-agent-dominance" class="toc__link" data-toc-active>3. Coding Agent Dominance</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#4-open-vs-closed-ecosystems" class="toc__link" data-toc-active>4. Open vs. Closed Ecosystems</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#5-enterprise-governance" class="toc__link" data-toc-active>5. Enterprise Governance</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 4,000-5,000</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The AI industry in March 2026 is a $375-390 billion market dominated by four platform ecosystems -- Anthropic, OpenAI, Google, and Microsoft -- each backed by hundreds of billions in capital and pursuing distinct strategic visions. Beneath these giants, a layer of specialized tools (Perplexity, Midjourney, ElevenLabs), AI coding assistants (Cursor, Windsurf/Antigravity, <span class="glossary-term glossary-term--first-use" data-term="claude-code">Claude Code</span>, Codex), and open-source frameworks (<span class="glossary-term glossary-term--first-use" data-term="openclaw">OpenClaw</span>, Ollama, Llama, Gemma) create a rich and competitive landscape. This module maps the terrain: who the players are, what they build, how the market is structured, and where the critical battles are being fought.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">You have $500/month in AI budget and a team of five...</summary>
+  <div class="accordion__content">
+    <p>You need a coding agent, a research assistant, a document automation system, and a way to connect them all. You could go all-in on one platform -- or split across three. You could use a $20/month subscription -- or self-host everything for the cost of electricity. By the end of this module, you will have the map you need to make this decision: who the players are, what they actually build, where the money flows, and which battles will determine the landscape you are building on.</p>
+  </div>
+</details>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>None -- this is the recommended starting point for the curriculum.</p>
+<hr>
+<h2 id="the-four-platform-ecosystems">The Four Platform Ecosystems</h2>
+<p>The AI industry has consolidated around four vertically integrated platform ecosystems. Each combines foundational models, consumer products, developer APIs, enterprise offerings, and agentic capabilities -- but with markedly different strategic centers of gravity.</p>
+<h3 id="anthropic-claude">Anthropic / Claude</h3>
+<p>Anthropic is the youngest of the four but has established itself as the quality and safety leader, particularly in enterprise and developer markets. Founded in 2021 by former OpenAI researchers, the company closed a $30B Series G in February 2026 (led by GIC and Coatue), reaching a $380B valuation [F1]. Annualized revenue has surged to approximately $19B as of March 2026, with approximately 80% derived from enterprise customers [F1][12].</p>
+<p>Anthropic's product strategy is converging on autonomous agency. Claude <span class="glossary-term glossary-term--first-use" data-term="cowork">Cowork</span> (Research Preview) operates directly on the user's desktop, browsing the web, reading and writing local files, and executing multi-step tasks. <span class="glossary-term" data-term="claude-code">Claude Code</span>, the terminal-based agentic coding tool, reached $1B ARR within six months of launch and has accelerated to over $2.5B ARR by March 2026 [12][13], commanding an estimated 54% of the enterprise coding <span class="glossary-term glossary-term--first-use" data-term="agent">agent</span> market [1]. The Claude <span class="glossary-term glossary-term--first-use" data-term="agent-sdk">Agent SDK</span> (Python/TypeScript) and experimental <span class="glossary-term" data-term="agent">Agent</span> Teams feature extend this into <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">multi-agent orchestration</span>. MCP (Model Context Protocol), which Anthropic originated, is now the de facto standard for connecting AI systems to external tools and data sources.</p>
+<p><strong>Strategic center of gravity:</strong> Enterprise autonomy -- Claude as a trusted digital worker that acts, not just answers.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Claude Code commands an estimated 54% of the enterprise coding agent market. This outsized market share -- despite Claude's roughly 2% consumer web share -- illustrates Anthropic's enterprise-first strategy. Consumer visibility and enterprise dominance are measured in completely different markets." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Anthropic's Claude Code has reached over $2.5B ARR. What percentage of the enterprise coding agent market does it command?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-anthropic-claude-quiz" value="0" />
+          <span class="quiz__choice-label">25%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-anthropic-claude-quiz" value="1" />
+          <span class="quiz__choice-label">40%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-anthropic-claude-quiz" value="2" />
+          <span class="quiz__choice-label">54%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-anthropic-claude-quiz" value="3" />
+          <span class="quiz__choice-label">72%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="openai-chatgpt">OpenAI / ChatGPT</h3>
+<p>OpenAI remains the largest player by every financial metric. Its February 2026 funding round raised $110B (from Amazon, NVIDIA, and SoftBank), valuing the company at $730B [F2]. ChatGPT has over 900 million weekly active users and 50 million paying consumer subscribers [F2]. Annualized revenue is approximately $25B [F2].</p>
+<p>OpenAI's product breadth is unmatched: ChatGPT spans chat, vision, voice, agents, and creative generation. GPT-5.4, launched March 5, 2026, pushed the <span class="glossary-term glossary-term--first-use" data-term="context-window">context window</span> to 1M tokens, with Mini and Nano variants following on March 17 [F2]. The product portfolio includes ChatGPT <span class="glossary-term" data-term="agent">Agent</span> (autonomous web browsing, formerly Operator), Codex (cloud-based coding <span class="glossary-term" data-term="agent">agent</span> with desktop apps), Sora 2 (video generation with Disney character licensing), and <span class="glossary-term glossary-term--first-use" data-term="deep-research">Deep Research</span> with MCP integration [F2].</p>
+<p>However, OpenAI's shipping velocity has created friction. Rapid model churn from GPT-5 through GPT-5.4 within roughly 12 months has caused upgrade fatigue, with reports of 1.5 million subscription cancellations in March 2026 alone [F2]. Consumer web traffic share (per Similarweb) has declined from 87.2% to 68% even as absolute user counts grew [1]. Mobile app market share tells a different story -- ChatGPT holds under 45% on mobile (per Apptopia), meaning the market is considerably less concentrated outside desktop web [F2].</p>
+<p><strong>Strategic center of gravity:</strong> Consumer scale and creative breadth -- be the default AI for everyone, for everything.</p>
+<h3 id="google-gemini">Google / Gemini</h3>
+<p>Google is the only provider with models running at every layer of the computing stack: cloud (Gemini 3.1 Pro, currently in Preview), browser (Gemini in Chrome), on-device (<span class="glossary-term glossary-term--first-use" data-term="gemini-nano">Gemini Nano</span> on Android/Pixel), and embedded inside the world's most-used productivity suite (Workspace) [F3]. Alphabet's market cap exceeds $3.71 trillion, and the company plans $175-185B in AI-related capital expenditure for 2026 [5]. The Gemini API handles 85 billion monthly requests [5].</p>
+<p>Google's product sprawl is both its strength and its challenge. The portfolio includes the Gemini App (consumer chat), Flow (unified creative studio merging Whisk, ImageFX, and video generation), Antigravity (agentic IDE built on the $2.4B Windsurf acquisition), Jules (coding <span class="glossary-term" data-term="agent">agent</span>), NotebookLM, Chrome Auto Browse, and a deep enterprise stack through Vertex AI [F3]. The <span class="glossary-term" data-term="agent">Agent</span> Development Kit (ADK) is Google's answer to Anthropic's <span class="glossary-term" data-term="agent-sdk">Agent SDK</span> and OpenAI's Agents SDK.</p>
+<p>Google's unique asset is distribution. Android, Chrome, Gmail, Google Docs, Google Search -- Gemini can reach billions of users through surfaces they already use daily, without requiring them to adopt a new product.</p>
+<p><strong>Strategic center of gravity:</strong> Ubiquitous integration -- AI woven into every Google surface and device.</p>
+<h3 id="microsoft-copilot">Microsoft / Copilot</h3>
+<p>Microsoft takes a fundamentally different approach: rather than building a standalone AI platform, it embeds AI into the enterprise software stack that already runs most of the world's businesses. With a market cap around $3 trillion, Microsoft generates over $13B in AI annual revenue run rate [F4].</p>
+<p>The March 9, 2026 "Wave 3" announcement marked a strategic inflection. Microsoft introduced Copilot <span class="glossary-term" data-term="cowork">Cowork</span> (built with Anthropic, Research Preview), which executes long-running autonomous tasks across Outlook, Word, Excel, PowerPoint, and Teams. <span class="glossary-term glossary-term--first-use" data-term="agent-365">Agent 365</span>, the governance control plane for enterprise agents, reaches GA on May 1, 2026, priced at $15/user/month. The new E7 Frontier Suite bundles everything at $99/user/month [F4].</p>
+<p>Microsoft's AI ecosystem is uniquely layered. At the model level, Azure OpenAI Service provides enterprise access to OpenAI's models. At the developer level, <span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span> offers low-code <span class="glossary-term" data-term="agent">agent</span> building with 1,400+ connectors. At the infrastructure level, Microsoft Foundry (formerly Azure AI Studio) catalogs 11,000+ models [F4]. MCP support is now GA in both <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> and Azure Functions.</p>
+<p><strong>Strategic center of gravity:</strong> Enterprise workflow -- AI that meets workers inside the tools they already use.</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Before looking at the comparison table below, write one sentence describing each platform's unique strategic advantage -- what they have that no competitor can easily replicate.</p>
+  <label for="se-m00-microsoft-copilot" class="sr-only">Your explanation</label>
+  <textarea id="se-m00-microsoft-copilot" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m00-microsoft-copilot">Compare with Expert Answer</button>
+  <div id="se-answer-m00-microsoft-copilot" class="self-explain__expert" hidden>
+    <p>Anthropic: safety reputation and MCP origin, making them the trusted choice for enterprise autonomy. OpenAI: consumer scale (900M+ WAU) and creative tool breadth (Sora, Advanced Voice Mode). Google: distribution surface area -- Android, Chrome, Workspace, and Search reach billions without requiring new product adoption. Microsoft: enterprise workflow integration through the M365 installed base that already runs most businesses.</p>
+  </div>
+</div>
+<h3 id="platform-comparison-at-a-glance">Platform Comparison at a Glance</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Anthropic/Claude</th><th>OpenAI/ChatGPT</th><th>Google/Gemini</th><th>Microsoft/Copilot</th></tr></thead><tbody><tr><td><strong>Valuation / Market Cap</strong></td><td>$380B</td><td>$730B</td><td>$3.71T (Alphabet)</td><td>~$3T</td></tr><tr><td><strong>Annualized AI Revenue</strong></td><td>~$19B</td><td>~$25B</td><td>Not broken out</td><td>$13B+ run rate</td></tr><tr><td><strong>Consumer Users</strong></td><td>~2% web share</td><td>900M+ WAU, 68% web share</td><td>18.2% web share (fastest growing)</td><td>Embedded in M365 base</td></tr><tr><td><strong>Enterprise Position</strong></td><td>~40% enterprise LLM spend</td><td>9M+ business users</td><td>#3 cloud (Vertex AI)</td><td>Dominant enterprise suite</td></tr><tr><td><strong>Flagship Model</strong></td><td>Claude Opus 4.6</td><td>GPT-5.4</td><td>Gemini 3.1 Pro (Preview)</td><td>Azure OpenAI (GPT-5.4)</td></tr><tr><td><strong>Max <span class="glossary-term" data-term="context-window">Context Window</span></strong></td><td>1M tokens</td><td>1M tokens</td><td>1M tokens (Flash)</td><td>Via Azure OpenAI</td></tr><tr><td><strong>Agentic Product</strong></td><td><span class="glossary-term" data-term="cowork">Cowork</span> (Preview)</td><td>ChatGPT <span class="glossary-term" data-term="agent">Agent</span> (GA)</td><td>Chrome Auto Browse</td><td>Copilot <span class="glossary-term" data-term="cowork">Cowork</span> (Preview)</td></tr><tr><td><strong>Coding Tool</strong></td><td><span class="glossary-term" data-term="claude-code">Claude Code</span></td><td>Codex</td><td>Antigravity / Jules</td><td>GitHub Copilot</td></tr><tr><td><strong><span class="glossary-term" data-term="agent">Agent</span> Framework</strong></td><td><span class="glossary-term" data-term="agent-sdk">Agent SDK</span> + <span class="glossary-term" data-term="agent">Agent</span> Teams</td><td>Agents SDK</td><td>ADK + <span class="glossary-term" data-term="agent">Agent</span> Engine</td><td><span class="glossary-term" data-term="copilot-studio">Copilot Studio</span></td></tr><tr><td><strong>Unique Asset</strong></td><td>Safety reputation, MCP origin</td><td>Scale, creative tools (Sora)</td><td>Distribution (Android/Chrome/Workspace)</td><td>Enterprise footprint (M365)</td></tr></tbody></table>
+
+<figure class="diagram diagram--mermaid" id="m00-1" role="img" aria-label="Diagram showing four major AI platform ecosystems arranged by strategic focus. Anthropic ($380B valuation, ~$19B revenue) centers on enterprise autonomy with Claude Code and Cowork. OpenAI ($730B, ~$25B revenue) centers on consumer scale with ChatGPT and Sora. Google ($3.71T Alphabet, 85B monthly API requests) centers on ubiquitous distribution through Android, Chrome, and Workspace. Microsoft (~$3T, $13B+ AI revenue) centers on enterprise workflow via M365 Copilot. Three satellite clusters orbit the platforms: specialized tools (Perplexity, Zapier, Midjourney), AI coding tools ($12.8B market including Cursor and GitHub Copilot), and open-source/self-hosted (OpenClaw with 250K+ stars, Ollama, Llama). Cross-ecosystem bridges connect Microsoft to OpenAI via Azure OpenAI Service and Google to Microsoft via Copilot Studio connectors.">
+  <pre class="mermaid">graph TD
+  subgraph Anthropic[&quot;Anthropic / Claude — Enterprise Autonomy&quot;]
+    A1[&quot;$380B valuation&lt;br/&gt;~$19B revenue&quot;]
+    A2[&quot;Claude Code&lt;br/&gt;54% enterprise share&quot;]
+    A3[&quot;Cowork · Agent SDK&quot;]
+    A4[&quot;MCP originator&quot;]
+  end
+
+  subgraph OpenAI[&quot;OpenAI / ChatGPT — Consumer Scale&quot;]
+    O1[&quot;$730B valuation&lt;br/&gt;~$25B revenue&quot;]
+    O2[&quot;900M+ WAU&lt;br/&gt;68% web share&quot;]
+    O3[&quot;Codex · ChatGPT Agent&quot;]
+    O4[&quot;Sora 2 · Deep Research&quot;]
+  end
+
+  subgraph Google[&quot;Google / Gemini — Ubiquitous Distribution&quot;]
+    G1[&quot;$3.71T Alphabet&lt;br/&gt;85B monthly API requests&quot;]
+    G2[&quot;Android · Chrome&lt;br/&gt;Workspace · Search&quot;]
+    G3[&quot;Antigravity · Jules&quot;]
+    G4[&quot;ADK · Flow&quot;]
+  end
+
+  subgraph Microsoft[&quot;Microsoft / Copilot — Enterprise Workflow&quot;]
+    M1[&quot;~$3T market cap&lt;br/&gt;$13B+ AI revenue&quot;]
+    M2[&quot;M365 Copilot&lt;br/&gt;Copilot Cowork&quot;]
+    M3[&quot;Copilot Studio&lt;br/&gt;1,400+ connectors&quot;]
+    M4[&quot;Agent 365&lt;br/&gt;GA May 2026&quot;]
+  end
+
+  subgraph Specialized[&quot;Specialized Tools&quot;]
+    S1[&quot;Perplexity — Research&quot;]
+    S2[&quot;Zapier — 8,000+ apps MCP bridge&quot;]
+    S3[&quot;Midjourney · ElevenLabs&quot;]
+  end
+
+  subgraph Coding[&quot;AI Coding Tools — $12.8B Market&quot;]
+    C1[&quot;GitHub Copilot — 20M+ users&quot;]
+    C2[&quot;Cursor — 360K+ paying&quot;]
+  end
+
+  subgraph OpenSource[&quot;Open-Source / Self-Hosted&quot;]
+    OS1[&quot;OpenClaw — 250K+ stars&quot;]
+    OS2[&quot;Ollama · LM Studio&quot;]
+    OS3[&quot;Llama · Gemma · Mistral&quot;]
+  end
+
+  Microsoft --&gt;|&quot;Azure OpenAI Service&quot;| OpenAI
+  Microsoft --&gt;|&quot;Foundry: 11K+ models&quot;| OpenSource
+  Coding --&gt;|&quot;IDE integrations&quot;| Microsoft
+  Specialized --&gt;|&quot;MCP servers&quot;| Anthropic
+  OpenSource --&gt;|&quot;NemoClaw&quot;| Google
+</pre>
+  <figcaption>AI Ecosystem Map (March 2026)</figcaption>
+</figure>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="OpenAI leads with approximately $25B in annualized revenue, driven by 900M+ weekly active ChatGPT users and 50 million paying subscribers. Anthropic is second at approximately $19B, with roughly 80% from enterprise customers." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which company has the highest annualized AI revenue as of March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-platform-comparison-at-a-glance-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic (~$19B)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-platform-comparison-at-a-glance-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI (~$25B)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-platform-comparison-at-a-glance-quiz" value="2" />
+          <span class="quiz__choice-label">Google (not broken out)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-platform-comparison-at-a-glance-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft ($13B+ run rate)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="specialized-tools">Specialized Tools</h2>
+<p>Beyond the four platforms, a constellation of focused tools occupies niches that the platforms either cannot or choose not to fill.</p>
+<h3 id="ai-native-productivity">AI-Native Productivity</h3>
+<p><strong>Perplexity</strong> has carved out the AI-powered research space, combining web search with LLM synthesis to deliver sourced, cited answers. Unlike ChatGPT or Gemini's chat interfaces, Perplexity is purpose-built for information retrieval with transparency about where claims come from.</p>
+<p><strong>Notion AI</strong> integrates directly into Notion's workspace, offering AI-powered writing, summarization, and Q&#x26;A grounded in the user's own documents and databases. Its value is contextual: it knows your workspace.</p>
+<p><strong>Otter.ai</strong> dominates AI meeting intelligence with OtterPilot, an autonomous <span class="glossary-term" data-term="agent">agent</span> that joins virtual meetings, transcribes, identifies speakers, and distributes summaries. Its <span class="glossary-term glossary-term--first-use" data-term="mcp-server">MCP server</span> integration means Claude can now directly search and analyze meeting transcripts [F5].</p>
+<h3 id="automation-platforms">Automation Platforms</h3>
+<p><strong>Zapier</strong> connects 8,000+ apps through automated workflows (Zaps) and has become strategically significant as a universal MCP bridge -- its <span class="glossary-term" data-term="mcp-server">MCP server</span> lets Claude trigger workflows across thousands of services that lack native MCP support [F5]. <strong>Make</strong> (formerly Integromat) offers a similar capability with a more visual, developer-friendly interface and its own <span class="glossary-term" data-term="mcp-server">MCP server</span> [F5].</p>
+<h3 id="creative-ai">Creative AI</h3>
+<p><strong>Midjourney</strong> remains the quality leader in AI image generation, valued for its distinctive aesthetic and community-driven development on Discord. <strong>ElevenLabs</strong> leads in voice synthesis and cloning, with both consumer and API offerings. Both now offer MCP servers, enabling integration into agentic workflows [F5].</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> The specialized tools space moves fast. MCP adoption is expanding weekly, and the boundary between "specialized tool" and "platform feature" blurs as the big four absorb capabilities that were once only available from independents.</p>
+</blockquote>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Zapier's MCP server is strategically significant because it extends Claude's reach to thousands of services that lack native MCP support. Make offers a similar capability, but Zapier's 8,000+ app integrations make it the largest bridge between the MCP ecosystem and legacy integrations." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which specialized tool serves as a 'universal MCP bridge,' connecting Claude to 8,000+ apps?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-creative-ai-quiz" value="0" />
+          <span class="quiz__choice-label">Perplexity</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-creative-ai-quiz" value="1" />
+          <span class="quiz__choice-label">Notion AI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-creative-ai-quiz" value="2" />
+          <span class="quiz__choice-label">Zapier</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-creative-ai-quiz" value="3" />
+          <span class="quiz__choice-label">Make</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="ai-coding-tools">AI Coding Tools</h2>
+<p>AI-assisted coding has become one of the most commercially significant AI application categories, with the market reaching an estimated $12.8B in 2026 [6]. Seventy-three percent of engineering teams now use AI coding tools daily, up from 41% in 2025 [7].</p>
+<h3 id="architectural-approaches">Architectural Approaches</h3>
+<p>The coding tools landscape has fragmented into four distinct architectural types:</p>
+<p><strong>IDE-integrated assistants</strong> add AI capabilities to existing editors. GitHub Copilot is the market leader here with 20 million+ users (4.7 million paid), offering code completion, chat, and <span class="glossary-term" data-term="agent">agent</span> capabilities across VS Code, JetBrains, and other editors [6][F4].</p>
+<p><strong>IDE forks</strong> take an existing editor (typically VS Code) and rebuild it around AI. <strong>Cursor</strong> leads this category with 360,000+ paying users and a reputation for the best AI-native editing experience [6]. <strong>Windsurf</strong> was acquired by Google for $2.4B in July 2025 and relaunched as <strong>Antigravity</strong>, though the transition has been rocky -- the Antigravity IDE remains in Preview with reported stability issues [6][F3].</p>
+<p><strong>Terminal agents</strong> operate entirely in the command line, executing multi-step coding tasks autonomously. <strong><span class="glossary-term" data-term="claude-code">Claude Code</span></strong> defines this category, leveraging Claude's 1M-<span class="glossary-term glossary-term--first-use" data-term="token">token</span> <span class="glossary-term" data-term="context-window">context window</span> to reason about entire codebases. Its trajectory from $1B ARR within six months to over $2.5B ARR by March 2026 [12][13] demonstrates the commercial demand for autonomous coding agents [1][F1].</p>
+<p><strong>Cloud agents</strong> run coding tasks asynchronously in cloud sandboxes. OpenAI's <strong>Codex</strong> (1.6 million+ weekly users, with macOS and Windows desktop apps) and Google's <strong>Jules</strong> both operate this way, accepting tasks and returning completed code without requiring the developer to watch in real time [6][F2][F3].</p>
+
+<div class="worked-example" data-variant="full" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Choosing a Coding Tool for a Large Refactoring Project</h4>
+  <div class="worked-example__problem">
+    <p>A solo developer working on a large React codebase needs to refactor authentication across 40 files. They have a Claude Max subscription and a GitHub Copilot license. Which tool architecture is best suited?</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Assess codebase requirements</h5>
+      <div class="worked-example__step-content">
+        <p>40-file refactoring requires understanding cross-file dependencies, shared authentication state, and import chains. This demands large context -- the tool must see many files simultaneously to maintain consistency.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Match to architecture strengths</h5>
+      <div class="worked-example__step-content">
+        <p>IDE-integrated (Copilot): strong for single-file completions, weaker at cross-file reasoning. IDE fork (Cursor): good context but limited to what's open in the editor. Terminal agent (Claude Code): 1M-token context can load the entire auth module. Cloud agent (Codex/Jules): capable but async -- developer cannot interactively guide the refactoring.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Evaluate existing subscriptions</h5>
+      <div class="worked-example__step-content">
+        <p>Claude Max includes Claude Code usage. GitHub Copilot costs $10/month. The developer already has both. No additional cost for either path.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Decision</h5>
+      <div class="worked-example__step-content">
+        <p>Claude Code's terminal agent architecture is the best fit: 1M-token context handles 40-file cross-codebase reasoning, the developer can interactively guide decisions, and the Max subscription covers usage. GitHub Copilot remains useful for day-to-day inline completions within individual files.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>For complex multi-file refactoring, terminal agent architecture (Claude Code) excels because it can load an entire module into context and reason about cross-file dependencies. IDE-integrated tools are better suited for single-file work. Cloud agents are better for async batch tasks. The right answer depends on the task shape, not the tool's popularity.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="coding-tools-comparison">Coding Tools Comparison</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Architecture</th><th>Users / Adoption</th><th>Best For</th><th>Price (Individual)</th></tr></thead><tbody><tr><td><strong>GitHub Copilot</strong></td><td>IDE-integrated</td><td>20M+ users, 4.7M paid</td><td>Budget-conscious teams, broad IDE support</td><td>$10/mo (Individual)</td></tr><tr><td><strong>Cursor</strong></td><td>IDE fork (VS Code)</td><td>360K+ paying</td><td>Best AI-native IDE experience</td><td>$20/mo (Pro)</td></tr><tr><td><strong>Antigravity</strong></td><td>IDE fork (Windsurf)</td><td>In Preview</td><td>Google ecosystem integration</td><td>TBD (Preview)</td></tr><tr><td><strong><span class="glossary-term" data-term="claude-code">Claude Code</span></strong></td><td>Terminal <span class="glossary-term" data-term="agent">agent</span></td><td>>$2.5B ARR [12]</td><td>Complex architecture, large codebases</td><td>Usage-based (via API)</td></tr><tr><td><strong>Codex</strong></td><td>Cloud <span class="glossary-term" data-term="agent">agent</span></td><td>1.6M+ weekly</td><td>Async workflows, batch tasks</td><td>Included in ChatGPT Pro ($200/mo)</td></tr><tr><td><strong>Jules</strong></td><td>Cloud <span class="glossary-term" data-term="agent">agent</span></td><td>Preview</td><td>Google ecosystem, async tasks</td><td>Preview (pricing TBD)</td></tr></tbody></table>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="Cloud agents like OpenAI's Codex and Google's Jules accept tasks and return completed code without requiring real-time developer interaction. Codex has 1.6 million+ weekly users and offers macOS and Windows desktop apps for submitting and reviewing async coding tasks." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">If you need async batch coding with no developer watching, which architecture is best suited?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="0" />
+          <span class="quiz__choice-label">IDE-integrated</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="1" />
+          <span class="quiz__choice-label">IDE fork</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="2" />
+          <span class="quiz__choice-label">Terminal agent</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="3" />
+          <span class="quiz__choice-label">Cloud agent</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Antigravity remains in Preview as of March 2026, with reported stability issues. Google acquired Windsurf for $2.4B in July 2025 and relaunched it as Antigravity, but the transition has been rocky. Always distinguish between GA and Preview status when evaluating tools." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: Google's Antigravity IDE is generally available as of March 2026.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Claude Code defines the terminal agent category, operating entirely in the command line. IDE-integrated tools add AI to existing editors. IDE forks rebuild editors around AI. Cloud agents run asynchronously in sandboxes." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which coding tool architecture operates entirely in the command line?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="0" />
+          <span class="quiz__choice-label">IDE-integrated (GitHub Copilot)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="1" />
+          <span class="quiz__choice-label">IDE fork (Cursor)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="2" />
+          <span class="quiz__choice-label">Terminal agent (Claude Code)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-coding-tools-comparison-quiz" value="3" />
+          <span class="quiz__choice-label">Cloud agent (Codex)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<details class="accordion">
+  <summary class="accordion__title">Claude Code commands 54% of the enterprise coding agent market despite having just 2% of consumer web traffic. How?</summary>
+  <div class="accordion__content">
+    <p>Enterprise buyers and consumers evaluate AI tools on entirely different criteria. Consumers choose based on brand recognition and free-tier experience; enterprises choose based on code quality, reliability, and integration depth. Claude Code's 1M-token context window lets it reason about entire codebases -- a capability that matters enormously for professional work but is invisible in a casual chat comparison.</p>
+  </div>
+</details>
+<hr>
+<h2 id="open-source-and-self-hosted-ai">Open-Source and Self-Hosted AI</h2>
+<p>The open-source AI ecosystem has matured from a curiosity into a production-ready alternative to closed platforms, driven by competitive open-weight models, efficient local inference tools, and the <span class="glossary-term" data-term="openclaw">OpenClaw</span> <span class="glossary-term" data-term="agent">agent</span> framework.</p>
+<h3 id="open-weight-models">Open-Weight Models</h3>
+<p>The term "open-weight" distinguishes models that release trained weights (allowing local inference and <span class="glossary-term glossary-term--first-use" data-term="fine-tuning">fine-tuning</span>) from models that also release training data and methodology (truly open-source). The major families:</p>
+<p><strong>Llama 3.3</strong> (Meta, 70B parameters) remains the most widely deployed open-weight model, balancing capability with reasonable hardware requirements [8].</p>
+<p><strong>Gemma 3</strong> (Google, 270M-27B parameters, Apache 2.0 license) is notable for running the full range from mobile to single-GPU deployment, supporting 140+ languages and multimodal input at the 4B+ parameter sizes [F3].</p>
+<p><strong>Mistral 3</strong> spans 3B to 675B parameters (the latter a Mixture-of-Experts architecture). Mistral occupies a distinctive position as a European AI lab with strong multilingual capabilities [8].</p>
+<p><strong>Qwen 3.5</strong> (Alibaba) pushes context windows to 800K tokens in the open-weight space, though adoption outside China remains limited [8].</p>
+<p><strong>DeepSeek-R1</strong> (671B parameters, Mixture-of-Experts, MIT license) is notable for both its reasoning capabilities and its pricing transparency at $2.19 per million tokens -- substantially cheaper than comparable closed models [8].</p>
+<h3 id="local-inference-infrastructure">Local Inference Infrastructure</h3>
+<p>Running models locally requires an inference stack. The ecosystem has settled around several tools:</p>
+<p><strong>Ollama</strong> (95,000+ GitHub stars) is the dominant CLI-first tool for running open-weight models locally. It abstracts away model management, quantization, and hardware optimization behind simple commands [8]. <strong>LM Studio</strong> provides a GUI alternative for users who prefer a visual interface.</p>
+<p>At the engine level, <strong>llama.cpp</strong> (C/C++) provides the foundational inference engine that Ollama and many other tools build upon. For production serving, <strong>vLLM</strong> (~12,500 tokens/second on H100) and <strong>SGLang</strong> (~16,200 tokens/second on H100, currently the fastest) handle high-throughput deployments [8].</p>
+<h3 id="openclaw-the-open-agent-framework">OpenClaw: The Open Agent Framework</h3>
+<p><span class="glossary-term" data-term="openclaw">OpenClaw</span> is an MIT-licensed <span class="glossary-term" data-term="agent">agent</span> framework with 250,000+ GitHub stars that provides a Gateway, channel-based communication, and the <span class="glossary-term glossary-term--first-use" data-term="pi-agent-runtime">Pi Agent Runtime</span> for building and running AI agents locally or self-hosted [9][F5]. <span class="glossary-term glossary-term--first-use" data-term="clawhub">ClawHub</span>, its <span class="glossary-term glossary-term--first-use" data-term="skills">skills</span> registry, hosts 13,700+ <span class="glossary-term" data-term="skills">skills</span> (as of February 2026) -- but a January-February 2026 malware campaign (ClawHavoc) exposed serious security concerns, with estimates of 12-20% malicious <span class="glossary-term" data-term="skills">skills</span> on the registry [10]. See <a href="module-05.html">Module 05</a> for the full security analysis. Microsoft now recommends running <span class="glossary-term" data-term="openclaw">OpenClaw</span> in isolated environments [10].</p>
+<p>Two significant governance developments occurred in early 2026: <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s founder joined OpenAI on February 14, 2026, and the project is transitioning to an open-source foundation to ensure community stewardship [9]. Separately, NVIDIA launched <span class="glossary-term glossary-term--first-use" data-term="nemoclaw">NemoClaw</span> (early preview, March 16, 2026), an enterprise-hardened distribution with the OpenShell sandbox for secure execution [11].</p>
+<p>For a deep dive into <span class="glossary-term" data-term="openclaw">OpenClaw</span> architecture and the open <span class="glossary-term" data-term="agent">agent</span> ecosystem, see <a href="module-05.html">Module 05</a>.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">OpenClaw Security Context</summary>
+  <div class="accordion__content">
+    <p>OpenClaw's ClawHub skills registry has experienced serious security incidents, with 12-20% of skills estimated malicious (the ClawHavoc campaign of January-February 2026). Microsoft now recommends running OpenClaw in isolated environments. This is covered in depth in Module 05. For now, note the Docker deployment recommendation and the distinction between the framework (well-regarded, 250K+ GitHub stars) and the registry (significant supply-chain risk).</p>
+  </div>
+</details>
+<h3 id="open-vs-closed-the-tradeoffs">Open vs. Closed: The Tradeoffs</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Open-Weight / Self-Hosted</th><th>Closed Platform APIs</th></tr></thead><tbody><tr><td><strong>Cost</strong></td><td>70-90% savings at scale after hardware investment</td><td>Pay-per-<span class="glossary-term" data-term="token">token</span>, predictable but ongoing</td></tr><tr><td><strong>Performance</strong></td><td>Near parity on knowledge/coding tasks; gap on frontier reasoning</td><td>Frontier capability (Opus 4.6, GPT-5.4)</td></tr><tr><td><strong>Privacy</strong></td><td>Data never leaves your infrastructure</td><td>Data sent to provider (with enterprise controls)</td></tr><tr><td><strong>Customization</strong></td><td>Full <span class="glossary-term" data-term="fine-tuning">fine-tuning</span>, quantization, architecture modification</td><td>Limited to API parameters + <span class="glossary-term" data-term="fine-tuning">fine-tuning</span> where offered</td></tr><tr><td><strong>Maintenance</strong></td><td>You own the stack: updates, security, hardware</td><td>Provider handles everything</td></tr><tr><td><strong>Latency</strong></td><td>Can be lower (no network round-trip)</td><td>Network-dependent; varies by provider and tier</td></tr><tr><td><strong>Ecosystem</strong></td><td>Growing but fragmented tooling</td><td>Polished, integrated, well-documented</td></tr></tbody></table>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Before reading the Market Structure section, explain in your own words why an organization might choose open-weight models despite the closed platforms having frontier capabilities.</p>
+  <label for="se-m00-open-vs-closed-the-tradeoffs" class="sr-only">Your explanation</label>
+  <textarea id="se-m00-open-vs-closed-the-tradeoffs" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m00-open-vs-closed-the-tradeoffs">Compare with Expert Answer</button>
+  <div id="se-answer-m00-open-vs-closed-the-tradeoffs" class="self-explain__expert" hidden>
+    <p>Open-weight models offer 70-90% cost savings at scale, full data privacy (data never leaves your infrastructure), and deep customization through fine-tuning and architecture modification. These advantages matter most for cost-sensitive, privacy-critical, or highly customized use cases -- even though closed platforms retain an edge on frontier reasoning tasks.</p>
+  </div>
+</div>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Even with enterprise data processing agreements, closed platforms send data to provider infrastructure. Only self-hosted deployment with open-weight models guarantees data never leaves the organization's network. This is a fundamental architectural constraint, not a configuration option." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">An organization has strict data residency requirements -- no data can leave their infrastructure. Which approach must they use?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-open-vs-closed-the-tradeoffs-quiz" value="0" />
+          <span class="quiz__choice-label">Closed Platform API with enterprise controls</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-open-vs-closed-the-tradeoffs-quiz" value="1" />
+          <span class="quiz__choice-label">Open-weight self-hosted</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-open-vs-closed-the-tradeoffs-quiz" value="2" />
+          <span class="quiz__choice-label">Either with proper configuration</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-open-vs-closed-the-tradeoffs-quiz" value="3" />
+          <span class="quiz__choice-label">Neither meets this requirement</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="market-structure">Market Structure</h2>
+<h3 id="by-the-numbers">By the Numbers</h3>
+<p>The AI industry in 2026 is defined by extraordinary capital concentration:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Total AI market size (2026)</td><td>$375-390B</td><td>[3]</td></tr><tr><td>Projected market size (2033)</td><td>$2.5-3.5T</td><td>[3]</td></tr><tr><td>Combined infrastructure capex (Microsoft, Meta, Alphabet, Amazon)</td><td>~$610B in 2026</td><td>[4]</td></tr><tr><td>OpenAI valuation</td><td>$730B</td><td>[F2]</td></tr><tr><td>Anthropic valuation</td><td>$380B</td><td>[F1]</td></tr><tr><td>Google AI-related capex planned</td><td>$175-185B</td><td>[5]</td></tr><tr><td>AI coding tools market</td><td>$12.8B</td><td>[6]</td></tr></tbody></table>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="The approximately $610B in combined 2026 AI infrastructure spending represents extraordinary capital concentration -- more than the GDP of most countries. This creates barriers to entry that no startup can match on hardware alone, reinforcing the four-platform oligopoly structure." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The combined AI infrastructure capital expenditure of Microsoft, Meta, Alphabet, and Amazon in 2026 is approximately:</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-by-the-numbers-quiz" value="0" />
+          <span class="quiz__choice-label">$100B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-by-the-numbers-quiz" value="1" />
+          <span class="quiz__choice-label">$300B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-by-the-numbers-quiz" value="2" />
+          <span class="quiz__choice-label">$610B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-by-the-numbers-quiz" value="3" />
+          <span class="quiz__choice-label">$1T</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="consumer-market-dynamics">Consumer Market Dynamics</h3>
+<p>The consumer AI market is an oligopoly trending toward duopoly -- at least on the web. By web traffic share (Similarweb data), ChatGPT and Gemini together command 86.2% [1]. ChatGPT's web share has fallen from 87.2% to 68%, while Gemini has surged from 5.4% to 18.2% [1]. However, mobile app market share (Apptopia data) paints a less concentrated picture: ChatGPT holds under 45% on mobile, with competitors capturing a larger share of the growing mobile AI user base [F2]. Claude holds roughly 2% of the consumer web market but captures approximately 40% of enterprise LLM spend -- a deliberate strategic choice to prioritize enterprise reliability and safety over consumer viral growth [1][F1].</p>
+<p>Consumer pricing has converged. Claude Pro, ChatGPT Plus, and Copilot Pro all price at $19.99-$20/month. Google matches with Gemini Pro at similar price points. The premium tier shows more variation: OpenAI's ChatGPT Pro costs $200/month; Anthropic, Google, and Microsoft have no direct equivalent at that price point (though Microsoft's E7 Frontier Suite at $99/user/month targets enterprise buyers).</p>
+<h3 id="enterprise-market-dynamics">Enterprise Market Dynamics</h3>
+<p>Enterprise pricing is more differentiated:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Product</th><th>Price</th><th>Includes</th></tr></thead><tbody><tr><td>Claude Team</td><td>$25/seat/month</td><td>Claude.ai team features, higher usage limits</td></tr><tr><td>ChatGPT Business</td><td>$30/user/month</td><td>Renamed from Team; admin controls, no training on data</td></tr><tr><td>Microsoft 365 Copilot</td><td>$30/user/month</td><td>AI across M365 apps (requires base M365 license)</td></tr><tr><td><span class="glossary-term" data-term="agent-365">Agent 365</span></td><td>$15/user/month add-on</td><td><span class="glossary-term" data-term="agent">Agent</span> governance, registry, monitoring (GA May 1, 2026)</td></tr><tr><td>Microsoft E7 Frontier Suite</td><td>$99/user/month</td><td>Full Copilot + <span class="glossary-term" data-term="agent-365">Agent 365</span> + frontier model access</td></tr></tbody></table>
+<p>The enterprise market is where Anthropic punches above its consumer weight. <span class="glossary-term" data-term="claude-code">Claude Code</span>'s 54% share of enterprise coding <span class="glossary-term" data-term="agent">agent</span> spend [1] and Claude's estimated 40% of enterprise LLM spend [1] demonstrate that enterprises are making different choices than consumers -- prioritizing reliability, safety posture, and code quality over brand recognition and feature breadth.</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Claude holds only roughly 2% of consumer web traffic but captures approximately 40% of enterprise LLM spend. Explain why these numbers are not contradictory.</p>
+  <label for="se-m00-enterprise-market-dynamics" class="sr-only">Your explanation</label>
+  <textarea id="se-m00-enterprise-market-dynamics" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m00-enterprise-market-dynamics">Compare with Expert Answer</button>
+  <div id="se-answer-m00-enterprise-market-dynamics" class="self-explain__expert" hidden>
+    <p>Consumer web traffic share measures free and low-cost usage where ChatGPT's brand recognition and Gemini's Google distribution dominate. Enterprise LLM spend measures where organizations invest for production work, where Claude's reliability, safety posture, and code quality are valued more than brand. Different markets, different buying criteria, different metrics. This is why market share data must always specify which market it measures.</p>
+  </div>
+</div>
+<hr>
+<h2 id="key-battlegrounds">Key Battlegrounds</h2>
+<p>Five competitive fronts will define the AI landscape through 2026 and into 2027.</p>
+<h3 id="1-agentic-autonomy">1. Agentic Autonomy</h3>
+<p>Every major platform has shipped or announced an autonomous <span class="glossary-term" data-term="agent">agent</span> product: Claude <span class="glossary-term" data-term="cowork">Cowork</span>, ChatGPT <span class="glossary-term" data-term="agent">Agent</span>, Chrome Auto Browse, and Microsoft Copilot <span class="glossary-term" data-term="cowork">Cowork</span>. The question is no longer whether AI will act autonomously but how much autonomy users and enterprises will trust it with. The differences are in scope (desktop vs. browser vs. enterprise apps), supervision model (always-on vs. checkpoint-based), and safety architecture. See <a href="module-03.html">Module 03</a> for deep analysis.</p>
+<h3 id="2-the-integration-standard">2. The Integration Standard</h3>
+<p>MCP (Model Context Protocol) has emerged as the leading standard for connecting AI systems to external tools, with adoption across all four major platforms plus dozens of specialized tools [F1, F3, F4, F5]. But MCP's dominance is not assured -- platform-native integrations (OpenAI's Apps/Connectors directory, Microsoft's 1,400+ <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> connectors) compete as alternatives, and the tension between open protocol and proprietary lock-in remains unresolved. See <a href="module-06.html">Module 06</a>.</p>
+<h3 id="3-coding-agent-dominance">3. Coding Agent Dominance</h3>
+<p>The $12.8B coding tools market is the highest-revenue AI application category outside of general chat. The architectural battle between IDE-integrated (GitHub Copilot), IDE-fork (Cursor, Antigravity), terminal-<span class="glossary-term" data-term="agent">agent</span> (<span class="glossary-term" data-term="claude-code">Claude Code</span>), and cloud-<span class="glossary-term" data-term="agent">agent</span> (Codex, Jules) approaches is unresolved. <span class="glossary-term" data-term="claude-code">Claude Code</span>'s rapid revenue growth suggests terminal agents may be the future for complex work, but GitHub Copilot's 20M-user base provides enormous inertia. Google's $2.4B Windsurf acquisition signals that the big platforms see coding as a must-win category.</p>
+<h3 id="4-open-vs-closed-ecosystems">4. Open vs. Closed Ecosystems</h3>
+<p>Open-weight models have closed the performance gap on many tasks, and the local inference stack (Ollama, vLLM, SGLang) is production-ready. <span class="glossary-term" data-term="openclaw">OpenClaw</span>'s 250K+ GitHub stars demonstrate demand for open <span class="glossary-term" data-term="agent">agent</span> infrastructure. But security concerns (<span class="glossary-term" data-term="clawhub">ClawHub</span>'s malicious skill problem), governance uncertainty (<span class="glossary-term" data-term="openclaw">OpenClaw</span>'s founder joining OpenAI), and the sheer engineering velocity of closed platforms create real obstacles. The outcome will likely be coexistence: open for cost-sensitive, privacy-critical, and customization-heavy use cases; closed for frontier capabilities and managed simplicity. See <a href="module-05.html">Module 05</a>.</p>
+<h3 id="5-enterprise-governance">5. Enterprise Governance</h3>
+<p>As agents gain autonomy, enterprises need controls: who can deploy agents, what data they can access, what actions they can take, and how to audit their behavior. Microsoft is furthest ahead with <span class="glossary-term" data-term="agent-365">Agent 365</span> (GA May 1, 2026), providing a centralized governance plane for <span class="glossary-term" data-term="agent">agent</span> deployment across M365 [F4]. Anthropic and OpenAI have enterprise admin consoles but lack equivalent dedicated governance products. This will become a critical differentiator as <span class="glossary-term" data-term="agent">agent</span> deployment scales. See <a href="module-04.html">Module 04</a>.</p>
+
+<figure class="diagram diagram--mermaid" id="m00-4" role="img" aria-label="Concept map showing five competitive battlegrounds in the AI landscape and the tensions between them. Agentic Autonomy (covered in Module 03) connects bidirectionally to Enterprise Governance (Module 04) through the tension of autonomy versus control. The Integration Standard centered on MCP (Module 06) connects to both the Developer Ecosystem (Module 09) through protocol adoption and to Agentic Autonomy through tool access requirements. Enterprise Governance connects to the Open vs Closed ecosystem debate (Module 05) through compliance and security requirements. The Coding Agent battle (Module 03) connects to the Developer Ecosystem through market competition. All five nodes form an interconnected web of competitive pressures that will determine platform winners.">
+  <pre class="mermaid">graph LR
+  AA[&quot;Agentic Autonomy&lt;br/&gt;Cowork · ChatGPT Agent&lt;br/&gt;Auto Browse · Copilot Cowork&lt;br/&gt;&lt;i&gt;Module 03&lt;/i&gt;&quot;]
+  EG[&quot;Enterprise Governance&lt;br/&gt;Agent 365 GA May 2026&lt;br/&gt;Permissions · Monitoring&lt;br/&gt;&lt;i&gt;Module 04&lt;/i&gt;&quot;]
+  IS[&quot;Integration Standard&lt;br/&gt;MCP — de facto standard&lt;br/&gt;19,700+ servers&lt;br/&gt;&lt;i&gt;Module 06&lt;/i&gt;&quot;]
+  CA[&quot;Coding Agent Dominance&lt;br/&gt;$12.8B market&lt;br/&gt;4 architectures competing&lt;br/&gt;&lt;i&gt;Module 03&lt;/i&gt;&quot;]
+  OC[&quot;Open vs Closed&lt;br/&gt;250K+ OpenClaw stars&lt;br/&gt;70-90% cost savings&lt;br/&gt;&lt;i&gt;Module 05&lt;/i&gt;&quot;]
+
+  AA &lt;--&gt;|&quot;Autonomy vs. control&quot;| EG
+  AA &lt;--&gt;|&quot;Agents need tool access&quot;| IS
+  EG &lt;--&gt;|&quot;Compliance and security&quot;| OC
+  IS &lt;--&gt;|&quot;Protocol adoption&quot;| CA
+  CA &lt;--&gt;|&quot;Build vs. buy&quot;| OC
+  EG &lt;--&gt;|&quot;API governance&quot;| IS
+</pre>
+  <figcaption>Five Key Battlegrounds Shaping AI Through 2027</figcaption>
+</figure>
+
+<details class="accordion">
+  <summary class="accordion__title">Why enterprise governance is emerging as a competitive differentiator</summary>
+  <div class="accordion__content">
+    <p>As agents gain autonomy -- browsing the web, executing code, accessing enterprise data -- organizations need controls over who can deploy agents, what data they access, and how to audit their behavior. Microsoft is furthest ahead with Agent 365 (GA May 1, 2026), providing centralized agent governance across M365. Anthropic and OpenAI have enterprise admin consoles but lack dedicated governance products. This gap will become critical as enterprises scale from pilot agent deployments to organization-wide rollouts. See Module 04 for the full multi-agent governance comparison.</p>
+  </div>
+</details>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="The $12.8B coding tools market is the highest-revenue AI application category outside of general chat. 73% of engineering teams now use AI coding tools daily, up from 41% in 2025." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">The AI coding tools market is estimated at what size in 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="0" />
+          <span class="quiz__choice-label">$3.2B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="1" />
+          <span class="quiz__choice-label">$7.5B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="2" />
+          <span class="quiz__choice-label">$12.8B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="3" />
+          <span class="quiz__choice-label">$25B</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="Microsoft's Agent 365 reaches GA on May 1, 2026, priced at $15/user/month. It provides centralized governance for agent deployment across M365. Anthropic and OpenAI have enterprise admin consoles but lack equivalent dedicated governance products. Module 04 covers this in depth." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which company's Agent 365 product is the first dedicated enterprise agent governance platform?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="MCP has been adopted across all four major platforms plus dozens of specialized tools. Anthropic originated the protocol, and its adoption by OpenAI, Google, and Microsoft gives it de facto standard status. See Module 06 for the full protocol deep dive." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which protocol has emerged as the leading integration standard for connecting AI systems to external tools?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="0" />
+          <span class="quiz__choice-label">REST API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="1" />
+          <span class="quiz__choice-label">GraphQL</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="2" />
+          <span class="quiz__choice-label">MCP (Model Context Protocol)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-5-enterprise-governance-quiz" value="3" />
+          <span class="quiz__choice-label">gRPC</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<details class="accordion">
+  <summary class="accordion__title">Five battlefronts will determine which platforms survive the next two years. Which ones matter for what you build?</summary>
+  <div class="accordion__content">
+    <p>The five battlegrounds -- agentic autonomy, integration standards, coding agent dominance, open vs. closed ecosystems, and enterprise governance -- affect different practitioners differently. A solo developer building with APIs cares most about coding agents and integration standards. An enterprise CTO cares about governance and the open/closed tradeoff. Identifying which battles matter for your context is the first step toward making informed platform decisions.</p>
+  </div>
+</details>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>Four ecosystems, four strategies.</strong> Anthropic leads in enterprise trust and developer tools. OpenAI leads in consumer scale and creative breadth. Google leads in distribution surface area. Microsoft leads in enterprise workflow integration.</p>
+</li>
+<li>
+<p><strong>The consumer market is an oligopoly.</strong> ChatGPT + Gemini = 86.2% of consumer web traffic share (mobile is less concentrated, with ChatGPT under 45%). Claude's 2% consumer share belies its 40% enterprise LLM spend -- different markets, different dynamics.</p>
+</li>
+<li>
+<p><strong>Pricing has converged at the consumer tier</strong> ($20/month) but remains highly differentiated in enterprise, where bundling, add-ons, and per-seat pricing create complex total-cost-of-ownership calculations.</p>
+</li>
+<li>
+<p><strong>Agents are the new battleground.</strong> Every platform has shipped autonomous <span class="glossary-term" data-term="agent">agent</span> capabilities in some form. The competition is now about scope, trust, and governance.</p>
+</li>
+<li>
+<p><strong>MCP is winning the integration standards war</strong> but faces ongoing competition from proprietary connector ecosystems.</p>
+</li>
+<li>
+<p><strong>AI coding tools are a $12.8B market</strong> with four competing architectural approaches and no clear winner. <span class="glossary-term" data-term="claude-code">Claude Code</span>'s explosive growth and GitHub Copilot's installed base are the two forces to watch.</p>
+</li>
+<li>
+<p><strong>Open-weight models have reached production quality</strong> for many use cases, with 70-90% cost savings over API-based approaches. But security and governance challenges in the open ecosystem remain unsolved.</p>
+</li>
+<li>
+<p><strong>Capital concentration is extreme.</strong> The four platforms plus Meta are collectively spending over $610B on AI infrastructure in 2026. This creates barriers to entry that no startup can match on hardware alone.</p>
+</li>
+<li>
+<p><strong>The market is $375-390B today and projected to reach $2.5-3.5T by 2033.</strong> Growth this fast means the landscape will look materially different in 12 months.</p>
+</li>
+<li>
+<p><strong>Enterprise governance is an emerging differentiator.</strong> Microsoft's <span class="glossary-term" data-term="agent-365">Agent 365</span> is the first dedicated governance product; others will follow as <span class="glossary-term" data-term="agent">agent</span> autonomy increases.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Only open-weight self-hosted deployment guarantees data never leaves the organization's network. Even HIPAA-compliant cloud platforms send data to provider infrastructure. For absolute data residency, self-hosted is the only option. This connects to the open vs. closed tradeoffs analyzed earlier in the module." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A hospital needs AI that processes patient data without any data leaving their network. Which approach is required?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Closed platform API with enterprise agreement</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Open-weight/self-hosted deployment</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Any platform with HIPAA compliance</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Cloud platform with data encryption</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="The AI market is $375-390B in 2026, projected to reach $2.5-3.5T by 2033. Growth this fast means the landscape will look materially different in 12 months." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the approximate total AI market size in 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">$100-150B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">$225-250B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">$375-390B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">$500-600B</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Gemini's web traffic share surged from 5.4% to 18.2%, making it the fastest-growing consumer AI product by web traffic. Google's distribution advantage through Android, Chrome, and Workspace drives this growth. Meanwhile, ChatGPT's share has declined from 87.2% to 68% even as absolute user counts grew." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which company's consumer AI product has the fastest-growing web traffic share?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic/Claude</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI/ChatGPT</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Google/Gemini</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft/Copilot</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="The ClawHavoc malware campaign of January-February 2026 exposed serious supply-chain vulnerabilities, with estimates of 12-20% malicious skills on ClawHub. Microsoft now recommends running OpenClaw in isolated environments. Module 05 provides the full security analysis." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the primary risk cited for OpenClaw's ClawHub registry?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">High cost</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Limited model support</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">12-20% malicious skill rate</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Lack of documentation</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Microsoft operates a marketplace (Microsoft Foundry, formerly Azure AI Studio) with 11,000+ models from 11+ publishers. Microsoft's own models are the Phi family, targeting edge and mobile deployment -- not frontier capabilities. This marketplace approach is covered in Module 01." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: Microsoft trains its own frontier LLMs.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="73% of engineering teams now use AI coding tools daily, up from 41% in 2025. This rapid adoption is driving the $12.8B coding tools market and making the coding agent architecture battle one of the five key competitive battlegrounds." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What percentage of engineering teams use AI coding tools daily in 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">41%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">54%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">73%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">89%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="0" data-explanation="Anthropic offers prompt caching (90% discount on cache hits with three duration tiers) and Batch API (50% discount for asynchronous processing). These cost optimization techniques are explored in depth in Module 02." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Name two cost reduction mechanisms available through Anthropic's API.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Prompt caching and Batch API</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Fine-tuning and distillation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Free tier and rate limiting</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Model compression and quantization</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Claude Code operates entirely in the command line as a terminal agent, leveraging Claude's 1M-token context window to reason about entire codebases. This distinguishes it from IDE-integrated tools (GitHub Copilot), IDE forks (Cursor), and cloud agents (Codex, Jules)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which coding tool architecture does Claude Code use?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">IDE-integrated</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">IDE fork</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Terminal agent</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Cloud agent</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="OpenAI's February 2026 funding round raised $110B from Amazon, NVIDIA, and SoftBank, valuing the company at $730B. This makes it the most valuable AI company by a significant margin, ahead of Anthropic at $380B." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is OpenAI's approximate valuation as of March 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">$380B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">$500B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">$730B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">$1T</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Anthropic's strategic center of gravity is enterprise autonomy -- Claude as a trusted digital worker that acts, not just answers. OpenAI focuses on consumer scale, Google on ubiquitous integration, and Microsoft on enterprise workflow embedding." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Match each platform to its strategic center of gravity: Anthropic builds around ___.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Consumer scale and creative breadth</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Enterprise autonomy and trusted digital workers</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Ubiquitous integration across surfaces and devices</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m00-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Enterprise workflow embedding in existing tools</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- Detailed model comparisons, context windows, <span class="glossary-term glossary-term--first-use" data-term="reasoning-modes">reasoning modes</span>, pricing</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context Engineering</span></a> -- How context windows, memory, and caching work in practice</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- Deep dive into <span class="glossary-term" data-term="agent">agent</span> architecture across all platforms</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- <span class="glossary-term" data-term="agent">Agent</span> SDKs, <span class="glossary-term" data-term="agent">Agent</span> Teams, enterprise governance</li>
+<li><a href="module-05.html">Module 05: <span class="glossary-term" data-term="openclaw">OpenClaw</span> &#x26; Open <span class="glossary-term" data-term="agent">Agent</span> Ecosystem</a> -- <span class="glossary-term" data-term="openclaw">OpenClaw</span> architecture, <span class="glossary-term" data-term="clawhub">ClawHub</span>, <span class="glossary-term" data-term="nemoclaw">NemoClaw</span>, open vs. closed</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- MCP protocol deep dive, adoption, building servers</li>
+<li><a href="module-07.html">Module 07: <span class="glossary-term" data-term="skills">Skills</span>, Plugins &#x26; Automation</a> -- <span class="glossary-term" data-term="skills">Skills</span> architecture, plugin ecosystems, automation platforms</li>
+<li><a href="module-08.html">Module 08: Consumer AI Comparison</a> -- Feature-by-feature comparison of the big four</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- API architectures, pricing economics, SDKs</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- On-device AI, multimodal generation, enterprise governance, open vs. closed</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+<ol>
+<li>AI Chatbot Market Share 2026 (Vertu/Similarweb). Web traffic share data. — 1a in SOURCES.md</li>
+<li>ChatGPT Market Share Decline (Fortune). — 1b in SOURCES.md</li>
+<li>AI Market Size Analysis (Grand View Research). $375-390B market, $2.5-3.5T projection. — 1c in SOURCES.md</li>
+<li>Big Tech Cloud &#x26; AI Infrastructure (Computer Weekly). Combined capex ~$610B. — 1d in SOURCES.md</li>
+<li>Alphabet Q4 2025 Earnings / CEO Letter. Google $175-185B capex, 85B monthly API requests. — 1e in SOURCES.md</li>
+<li>AI Coding Assistant Statistics (Panto.ai). $12.8B market, tool adoption, user counts. — 2a in SOURCES.md</li>
+<li>Developer Survey 2026: 73% Daily AI Usage (Claude5.ai). — 2b in SOURCES.md</li>
+<li>Open-Source &#x26; Self-Hosted AI Research (R00-D). Open-weight model data. — 3 in SOURCES.md</li>
+<li><span class="glossary-term" data-term="openclaw">OpenClaw</span> GitHub Repository. Architecture, star count, governance. — 3a/W20 in SOURCES.md</li>
+<li>Running <span class="glossary-term" data-term="openclaw">OpenClaw</span> Safely (Microsoft Security Blog). Security concerns, isolation. — 3b/W22 in SOURCES.md</li>
+<li>NVIDIA <span class="glossary-term" data-term="nemoclaw">NemoClaw</span>. Enterprise-hardened <span class="glossary-term" data-term="openclaw">OpenClaw</span> distribution. — 3c/W23 in SOURCES.md</li>
+<li>Anthropic ARR Surges to $19 Billion (Yahoo Finance / Investing.com). — W67 in SOURCES.md</li>
+<li>2026 Agentic Coding Trends: <span class="glossary-term" data-term="claude-code">Claude Code</span> $2.5B ARR (heyuan110.com). — W68 in SOURCES.md</li>
+</ol>
+<p><strong>Foundation profiles cited as [F1]-[F5]:</strong></p>
+<ul>
+<li>[F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026</li>
+<li>[F2] OpenAI/ChatGPT Ecosystem Profile (reference/profiles/openai-chatgpt.md), March 18, 2026</li>
+<li>[F3] Google/Gemini Ecosystem Profile (reference/profiles/google-gemini.md), March 18, 2026</li>
+<li>[F4] Microsoft/Copilot Ecosystem Profile (reference/profiles/microsoft-copilot.md), March 18, 2026</li>
+<li>[F5] Specialized Tools Profile (reference/profiles/specialized-tools.md), March 18, 2026</li>
+</ul>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <span class="module-nav__link module-nav__link--prev module-nav__link--disabled"></span>
+        <a href="module-01.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 01: Models &amp; Intelligence Tiers</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

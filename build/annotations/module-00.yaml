@@ -1,0 +1,380 @@
+# build/annotations/module-00.yaml
+# Annotations for Module 00: Landscape Overview
+# Section IDs derived from generated HTML (authoritative)
+
+module: "00"
+annotations:
+
+  # === OPENING HOOK ===
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "You have $500/month in AI budget and a team of five..."
+      content: "You need a coding agent, a research assistant, a document automation system, and a way to connect them all. You could go all-in on one platform -- or split across three. You could use a $20/month subscription -- or self-host everything for the cost of electricity. By the end of this module, you will have the map you need to make this decision: who the players are, what they actually build, where the money flows, and which battles will determine the landscape you are building on."
+
+  # === THE FOUR PLATFORM ECOSYSTEMS ===
+
+  # Concept check after Anthropic subsection
+  - after: "anthropic-claude"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Anthropic's Claude Code has reached over $2.5B ARR. What percentage of the enterprise coding agent market does it command?"
+      choices: ["25%", "40%", "54%", "72%"]
+      correct: 2
+      explanation: "Claude Code commands an estimated 54% of the enterprise coding agent market. This outsized market share -- despite Claude's roughly 2% consumer web share -- illustrates Anthropic's enterprise-first strategy. Consumer visibility and enterprise dominance are measured in completely different markets."
+
+  # Self-explanation before comparison table
+  - after: "microsoft-copilot"
+    component: self-explanation-prompt
+    data:
+      prompt: "Before looking at the comparison table below, write one sentence describing each platform's unique strategic advantage -- what they have that no competitor can easily replicate."
+      expert_answer: "Anthropic: safety reputation and MCP origin, making them the trusted choice for enterprise autonomy. OpenAI: consumer scale (900M+ WAU) and creative tool breadth (Sora, Advanced Voice Mode). Google: distribution surface area -- Android, Chrome, Workspace, and Search reach billions without requiring new product adoption. Microsoft: enterprise workflow integration through the M365 installed base that already runs most businesses."
+
+  # Concept check after Platform Comparison table (KEEP from existing)
+  - after: "platform-comparison-at-a-glance"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which company has the highest annualized AI revenue as of March 2026?"
+      choices: ["Anthropic (~$19B)", "OpenAI (~$25B)", "Google (not broken out)", "Microsoft ($13B+ run rate)"]
+      correct: 1
+      explanation: "OpenAI leads with approximately $25B in annualized revenue, driven by 900M+ weekly active ChatGPT users and 50 million paying subscribers. Anthropic is second at approximately $19B, with roughly 80% from enterprise customers."
+
+  # === SPECIALIZED TOOLS ===
+
+  - after: "creative-ai"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which specialized tool serves as a 'universal MCP bridge,' connecting Claude to 8,000+ apps?"
+      choices: ["Perplexity", "Notion AI", "Zapier", "Make"]
+      correct: 2
+      explanation: "Zapier's MCP server is strategically significant because it extends Claude's reach to thousands of services that lack native MCP support. Make offers a similar capability, but Zapier's 8,000+ app integrations make it the largest bridge between the MCP ecosystem and legacy integrations."
+
+  # === AI CODING TOOLS ===
+
+  # Curiosity prompt
+  - after: "ai-coding-tools"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Claude Code commands 54% of the enterprise coding agent market despite having just 2% of consumer web traffic. How?"
+      content: "Enterprise buyers and consumers evaluate AI tools on entirely different criteria. Consumers choose based on brand recognition and free-tier experience; enterprises choose based on code quality, reliability, and integration depth. Claude Code's 1M-token context window lets it reason about entire codebases -- a capability that matters enormously for professional work but is invisible in a casual chat comparison."
+
+  # Worked example: choosing a coding tool (WS2a spec)
+  - after: "architectural-approaches"
+    component: worked-example
+    variant: full
+    data:
+      title: "Choosing a Coding Tool for a Large Refactoring Project"
+      problem: "A solo developer working on a large React codebase needs to refactor authentication across 40 files. They have a Claude Max subscription and a GitHub Copilot license. Which tool architecture is best suited?"
+      steps:
+        - label: "Assess codebase requirements"
+          content: "40-file refactoring requires understanding cross-file dependencies, shared authentication state, and import chains. This demands large context -- the tool must see many files simultaneously to maintain consistency."
+        - label: "Match to architecture strengths"
+          content: "IDE-integrated (Copilot): strong for single-file completions, weaker at cross-file reasoning. IDE fork (Cursor): good context but limited to what's open in the editor. Terminal agent (Claude Code): 1M-token context can load the entire auth module. Cloud agent (Codex/Jules): capable but async -- developer cannot interactively guide the refactoring."
+        - label: "Evaluate existing subscriptions"
+          content: "Claude Max includes Claude Code usage. GitHub Copilot costs $10/month. The developer already has both. No additional cost for either path."
+        - label: "Decision"
+          content: "Claude Code's terminal agent architecture is the best fit: 1M-token context handles 40-file cross-codebase reasoning, the developer can interactively guide decisions, and the Max subscription covers usage. GitHub Copilot remains useful for day-to-day inline completions within individual files."
+      solution: "For complex multi-file refactoring, terminal agent architecture (Claude Code) excels because it can load an entire module into context and reason about cross-file dependencies. IDE-integrated tools are better suited for single-file work. Cloud agents are better for async batch tasks. The right answer depends on the task shape, not the tool's popularity."
+
+  # Section review after coding tools comparison
+  - after: "coding-tools-comparison"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which coding tool architecture operates entirely in the command line?"
+      choices: ["IDE-integrated (GitHub Copilot)", "IDE fork (Cursor)", "Terminal agent (Claude Code)", "Cloud agent (Codex)"]
+      correct: 2
+      explanation: "Claude Code defines the terminal agent category, operating entirely in the command line. IDE-integrated tools add AI to existing editors. IDE forks rebuild editors around AI. Cloud agents run asynchronously in sandboxes."
+
+  - after: "coding-tools-comparison"
+    component: quiz
+    variant: section-review
+    data:
+      question: "True or False: Google's Antigravity IDE is generally available as of March 2026."
+      choices: ["True", "False"]
+      correct: 1
+      explanation: "Antigravity remains in Preview as of March 2026, with reported stability issues. Google acquired Windsurf for $2.4B in July 2025 and relaunched it as Antigravity, but the transition has been rocky. Always distinguish between GA and Preview status when evaluating tools."
+
+  - after: "coding-tools-comparison"
+    component: quiz
+    variant: section-review
+    data:
+      question: "If you need async batch coding with no developer watching, which architecture is best suited?"
+      choices: ["IDE-integrated", "IDE fork", "Terminal agent", "Cloud agent"]
+      correct: 3
+      explanation: "Cloud agents like OpenAI's Codex and Google's Jules accept tasks and return completed code without requiring real-time developer interaction. Codex has 1.6 million+ weekly users and offers macOS and Windows desktop apps for submitting and reviewing async coding tasks."
+
+  # === OPEN-SOURCE AND SELF-HOSTED AI ===
+
+  # Concept check after Open vs. Closed table
+  - after: "open-vs-closed-the-tradeoffs"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "An organization has strict data residency requirements -- no data can leave their infrastructure. Which approach must they use?"
+      choices: ["Closed Platform API with enterprise controls", "Open-weight self-hosted", "Either with proper configuration", "Neither meets this requirement"]
+      correct: 1
+      explanation: "Even with enterprise data processing agreements, closed platforms send data to provider infrastructure. Only self-hosted deployment with open-weight models guarantees data never leaves the organization's network. This is a fundamental architectural constraint, not a configuration option."
+
+  # Self-explanation (KEEP from existing, moved to correct position per WS2a)
+  - after: "open-vs-closed-the-tradeoffs"
+    component: self-explanation-prompt
+    data:
+      prompt: "Before reading the Market Structure section, explain in your own words why an organization might choose open-weight models despite the closed platforms having frontier capabilities."
+      expert_answer: "Open-weight models offer 70-90% cost savings at scale, full data privacy (data never leaves your infrastructure), and deep customization through fine-tuning and architecture modification. These advantages matter most for cost-sensitive, privacy-critical, or highly customized use cases -- even though closed platforms retain an edge on frontier reasoning tasks."
+
+  # Accordion: OpenClaw security context
+  - after: "openclaw-the-open-agent-framework"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "OpenClaw Security Context"
+      content: "OpenClaw's ClawHub skills registry has experienced serious security incidents, with 12-20% of skills estimated malicious (the ClawHavoc campaign of January-February 2026). Microsoft now recommends running OpenClaw in isolated environments. This is covered in depth in Module 05. For now, note the Docker deployment recommendation and the distinction between the framework (well-regarded, 250K+ GitHub stars) and the registry (significant supply-chain risk)."
+
+  # === MARKET STRUCTURE ===
+
+  # Concept check after By the Numbers table
+  - after: "by-the-numbers"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "The combined AI infrastructure capital expenditure of Microsoft, Meta, Alphabet, and Amazon in 2026 is approximately:"
+      choices: ["$100B", "$300B", "$610B", "$1T"]
+      correct: 2
+      explanation: "The approximately $610B in combined 2026 AI infrastructure spending represents extraordinary capital concentration -- more than the GDP of most countries. This creates barriers to entry that no startup can match on hardware alone, reinforcing the four-platform oligopoly structure."
+
+  # Self-explanation after enterprise dynamics
+  - after: "enterprise-market-dynamics"
+    component: self-explanation-prompt
+    data:
+      prompt: "Claude holds only roughly 2% of consumer web traffic but captures approximately 40% of enterprise LLM spend. Explain why these numbers are not contradictory."
+      expert_answer: "Consumer web traffic share measures free and low-cost usage where ChatGPT's brand recognition and Gemini's Google distribution dominate. Enterprise LLM spend measures where organizations invest for production work, where Claude's reliability, safety posture, and code quality are valued more than brand. Different markets, different buying criteria, different metrics. This is why market share data must always specify which market it measures."
+
+  # === KEY BATTLEGROUNDS ===
+
+  # Curiosity prompt
+  - after: "key-battlegrounds"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Five battlefronts will determine which platforms survive the next two years. Which ones matter for what you build?"
+      content: "The five battlegrounds -- agentic autonomy, integration standards, coding agent dominance, open vs. closed ecosystems, and enterprise governance -- affect different practitioners differently. A solo developer building with APIs cares most about coding agents and integration standards. An enterprise CTO cares about governance and the open/closed tradeoff. Identifying which battles matter for your context is the first step toward making informed platform decisions."
+
+  # Section review: Key Battlegrounds
+  - after: "5-enterprise-governance"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which protocol has emerged as the leading integration standard for connecting AI systems to external tools?"
+      choices: ["REST API", "GraphQL", "MCP (Model Context Protocol)", "gRPC"]
+      correct: 2
+      explanation: "MCP has been adopted across all four major platforms plus dozens of specialized tools. Anthropic originated the protocol, and its adoption by OpenAI, Google, and Microsoft gives it de facto standard status. See Module 06 for the full protocol deep dive."
+
+  - after: "5-enterprise-governance"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which company's Agent 365 product is the first dedicated enterprise agent governance platform?"
+      choices: ["Anthropic", "OpenAI", "Google", "Microsoft"]
+      correct: 3
+      explanation: "Microsoft's Agent 365 reaches GA on May 1, 2026, priced at $15/user/month. It provides centralized governance for agent deployment across M365. Anthropic and OpenAI have enterprise admin consoles but lack equivalent dedicated governance products. Module 04 covers this in depth."
+
+  - after: "5-enterprise-governance"
+    component: quiz
+    variant: section-review
+    data:
+      question: "The AI coding tools market is estimated at what size in 2026?"
+      choices: ["$3.2B", "$7.5B", "$12.8B", "$25B"]
+      correct: 2
+      explanation: "The $12.8B coding tools market is the highest-revenue AI application category outside of general chat. 73% of engineering teams now use AI coding tools daily, up from 41% in 2025."
+
+  # Enterprise governance accordion (KEEP from existing, correct position)
+  - after: "5-enterprise-governance"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Why enterprise governance is emerging as a competitive differentiator"
+      content: "As agents gain autonomy -- browsing the web, executing code, accessing enterprise data -- organizations need controls over who can deploy agents, what data they access, and how to audit their behavior. Microsoft is furthest ahead with Agent 365 (GA May 1, 2026), providing centralized agent governance across M365. Anthropic and OpenAI have enterprise admin consoles but lack dedicated governance products. This gap will become critical as enterprises scale from pilot agent deployments to organization-wide rollouts. See Module 04 for the full multi-agent governance comparison."
+
+  # === MODULE ASSESSMENT (after Key Takeaways) ===
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Match each platform to its strategic center of gravity: Anthropic builds around ___."
+      choices: ["Consumer scale and creative breadth", "Enterprise autonomy and trusted digital workers", "Ubiquitous integration across surfaces and devices", "Enterprise workflow embedding in existing tools"]
+      correct: 1
+      explanation: "Anthropic's strategic center of gravity is enterprise autonomy -- Claude as a trusted digital worker that acts, not just answers. OpenAI focuses on consumer scale, Google on ubiquitous integration, and Microsoft on enterprise workflow embedding."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is OpenAI's approximate valuation as of March 2026?"
+      choices: ["$380B", "$500B", "$730B", "$1T"]
+      correct: 2
+      explanation: "OpenAI's February 2026 funding round raised $110B from Amazon, NVIDIA, and SoftBank, valuing the company at $730B. This makes it the most valuable AI company by a significant margin, ahead of Anthropic at $380B."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which coding tool architecture does Claude Code use?"
+      choices: ["IDE-integrated", "IDE fork", "Terminal agent", "Cloud agent"]
+      correct: 2
+      explanation: "Claude Code operates entirely in the command line as a terminal agent, leveraging Claude's 1M-token context window to reason about entire codebases. This distinguishes it from IDE-integrated tools (GitHub Copilot), IDE forks (Cursor), and cloud agents (Codex, Jules)."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Name two cost reduction mechanisms available through Anthropic's API."
+      choices: ["Prompt caching and Batch API", "Fine-tuning and distillation", "Free tier and rate limiting", "Model compression and quantization"]
+      correct: 0
+      explanation: "Anthropic offers prompt caching (90% discount on cache hits with three duration tiers) and Batch API (50% discount for asynchronous processing). These cost optimization techniques are explored in depth in Module 02."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What percentage of engineering teams use AI coding tools daily in 2026?"
+      choices: ["41%", "54%", "73%", "89%"]
+      correct: 2
+      explanation: "73% of engineering teams now use AI coding tools daily, up from 41% in 2025. This rapid adoption is driving the $12.8B coding tools market and making the coding agent architecture battle one of the five key competitive battlegrounds."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "True or False: Microsoft trains its own frontier LLMs."
+      choices: ["True", "False"]
+      correct: 1
+      explanation: "Microsoft operates a marketplace (Microsoft Foundry, formerly Azure AI Studio) with 11,000+ models from 11+ publishers. Microsoft's own models are the Phi family, targeting edge and mobile deployment -- not frontier capabilities. This marketplace approach is covered in Module 01."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the primary risk cited for OpenClaw's ClawHub registry?"
+      choices: ["High cost", "Limited model support", "12-20% malicious skill rate", "Lack of documentation"]
+      correct: 2
+      explanation: "The ClawHavoc malware campaign of January-February 2026 exposed serious supply-chain vulnerabilities, with estimates of 12-20% malicious skills on ClawHub. Microsoft now recommends running OpenClaw in isolated environments. Module 05 provides the full security analysis."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which company's consumer AI product has the fastest-growing web traffic share?"
+      choices: ["Anthropic/Claude", "OpenAI/ChatGPT", "Google/Gemini", "Microsoft/Copilot"]
+      correct: 2
+      explanation: "Gemini's web traffic share surged from 5.4% to 18.2%, making it the fastest-growing consumer AI product by web traffic. Google's distribution advantage through Android, Chrome, and Workspace drives this growth. Meanwhile, ChatGPT's share has declined from 87.2% to 68% even as absolute user counts grew."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the approximate total AI market size in 2026?"
+      choices: ["$100-150B", "$225-250B", "$375-390B", "$500-600B"]
+      correct: 2
+      explanation: "The AI market is $375-390B in 2026, projected to reach $2.5-3.5T by 2033. Growth this fast means the landscape will look materially different in 12 months."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "A hospital needs AI that processes patient data without any data leaving their network. Which approach is required?"
+      choices: ["Closed platform API with enterprise agreement", "Open-weight/self-hosted deployment", "Any platform with HIPAA compliance", "Cloud platform with data encryption"]
+      correct: 1
+      explanation: "Only open-weight self-hosted deployment guarantees data never leaves the organization's network. Even HIPAA-compliant cloud platforms send data to provider infrastructure. For absolute data residency, self-hosted is the only option. This connects to the open vs. closed tradeoffs analyzed earlier in the module."
+
+  # === ROUND 7 DIAGRAMS ===
+
+  # Figure M00-1: AI Ecosystem Map
+  - after: "the-four-platform-ecosystems"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m00-1"
+      title: "AI Ecosystem Map (March 2026)"
+      alt: "Diagram showing four major AI platform ecosystems arranged by strategic focus. Anthropic ($380B valuation, ~$19B revenue) centers on enterprise autonomy with Claude Code and Cowork. OpenAI ($730B, ~$25B revenue) centers on consumer scale with ChatGPT and Sora. Google ($3.71T Alphabet, 85B monthly API requests) centers on ubiquitous distribution through Android, Chrome, and Workspace. Microsoft (~$3T, $13B+ AI revenue) centers on enterprise workflow via M365 Copilot. Three satellite clusters orbit the platforms: specialized tools (Perplexity, Zapier, Midjourney), AI coding tools ($12.8B market including Cursor and GitHub Copilot), and open-source/self-hosted (OpenClaw with 250K+ stars, Ollama, Llama). Cross-ecosystem bridges connect Microsoft to OpenAI via Azure OpenAI Service and Google to Microsoft via Copilot Studio connectors."
+      source: |
+        graph TD
+          subgraph Anthropic["Anthropic / Claude — Enterprise Autonomy"]
+            A1["$380B valuation<br/>~$19B revenue"]
+            A2["Claude Code<br/>54% enterprise share"]
+            A3["Cowork · Agent SDK"]
+            A4["MCP originator"]
+          end
+
+          subgraph OpenAI["OpenAI / ChatGPT — Consumer Scale"]
+            O1["$730B valuation<br/>~$25B revenue"]
+            O2["900M+ WAU<br/>68% web share"]
+            O3["Codex · ChatGPT Agent"]
+            O4["Sora 2 · Deep Research"]
+          end
+
+          subgraph Google["Google / Gemini — Ubiquitous Distribution"]
+            G1["$3.71T Alphabet<br/>85B monthly API requests"]
+            G2["Android · Chrome<br/>Workspace · Search"]
+            G3["Antigravity · Jules"]
+            G4["ADK · Flow"]
+          end
+
+          subgraph Microsoft["Microsoft / Copilot — Enterprise Workflow"]
+            M1["~$3T market cap<br/>$13B+ AI revenue"]
+            M2["M365 Copilot<br/>Copilot Cowork"]
+            M3["Copilot Studio<br/>1,400+ connectors"]
+            M4["Agent 365<br/>GA May 2026"]
+          end
+
+          subgraph Specialized["Specialized Tools"]
+            S1["Perplexity — Research"]
+            S2["Zapier — 8,000+ apps MCP bridge"]
+            S3["Midjourney · ElevenLabs"]
+          end
+
+          subgraph Coding["AI Coding Tools — $12.8B Market"]
+            C1["GitHub Copilot — 20M+ users"]
+            C2["Cursor — 360K+ paying"]
+          end
+
+          subgraph OpenSource["Open-Source / Self-Hosted"]
+            OS1["OpenClaw — 250K+ stars"]
+            OS2["Ollama · LM Studio"]
+            OS3["Llama · Gemma · Mistral"]
+          end
+
+          Microsoft -->|"Azure OpenAI Service"| OpenAI
+          Microsoft -->|"Foundry: 11K+ models"| OpenSource
+          Coding -->|"IDE integrations"| Microsoft
+          Specialized -->|"MCP servers"| Anthropic
+          OpenSource -->|"NemoClaw"| Google
+
+  # Figure M00-4: Key Battlegrounds Concept Map
+  - after: "key-battlegrounds"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m00-4"
+      title: "Five Key Battlegrounds Shaping AI Through 2027"
+      alt: "Concept map showing five competitive battlegrounds in the AI landscape and the tensions between them. Agentic Autonomy (covered in Module 03) connects bidirectionally to Enterprise Governance (Module 04) through the tension of autonomy versus control. The Integration Standard centered on MCP (Module 06) connects to both the Developer Ecosystem (Module 09) through protocol adoption and to Agentic Autonomy through tool access requirements. Enterprise Governance connects to the Open vs Closed ecosystem debate (Module 05) through compliance and security requirements. The Coding Agent battle (Module 03) connects to the Developer Ecosystem through market competition. All five nodes form an interconnected web of competitive pressures that will determine platform winners."
+      source: |
+        graph LR
+          AA["Agentic Autonomy<br/>Cowork · ChatGPT Agent<br/>Auto Browse · Copilot Cowork<br/><i>Module 03</i>"]
+          EG["Enterprise Governance<br/>Agent 365 GA May 2026<br/>Permissions · Monitoring<br/><i>Module 04</i>"]
+          IS["Integration Standard<br/>MCP — de facto standard<br/>19,700+ servers<br/><i>Module 06</i>"]
+          CA["Coding Agent Dominance<br/>$12.8B market<br/>4 architectures competing<br/><i>Module 03</i>"]
+          OC["Open vs Closed<br/>250K+ OpenClaw stars<br/>70-90% cost savings<br/><i>Module 05</i>"]
+
+          AA <-->|"Autonomy vs. control"| EG
+          AA <-->|"Agents need tool access"| IS
+          EG <-->|"Compliance and security"| OC
+          IS <-->|"Protocol adoption"| CA
+          CA <-->|"Build vs. buy"| OC
+          EG <-->|"API governance"| IS

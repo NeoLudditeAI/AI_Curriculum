@@ -10,5 +10,8 @@ Thumbs.db
 .vscode/
 *.code-workspace
 
+# Dependencies
+node_modules/
+
 # Claude Code
 .claude/plans/

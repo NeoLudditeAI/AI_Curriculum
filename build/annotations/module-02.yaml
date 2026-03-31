@@ -1,0 +1,573 @@
+# build/annotations/module-02.yaml
+# Annotations for Module 02: Context Engineering
+# Section IDs derived from generated HTML (authoritative)
+
+module: "02"
+annotations:
+
+  # === OPENING HOOK ===
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "A developer loads 800,000 tokens into Claude's context window and asks it to find a bug. The model misses it."
+      content: "They load the same codebase but strategically select only the 50,000 most relevant tokens using a RAG pipeline. The model finds the bug instantly -- at 1/16th the cost. The difference is not the model. The model is the same. The difference is context engineering: the discipline of curating what enters the context window. It is the single highest-leverage skill in AI today."
+
+  # === CONTEXT WINDOWS: SIZES, PRICING, AND PRACTICAL LIMITS ===
+
+  # Concept check after 1M-Token Convergence table
+  - after: "the-1m-token-convergence"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which provider was the first to remove long-context surcharges on their flagship models?"
+      choices: ["Anthropic (March 14, 2026)", "OpenAI", "Google", "Microsoft"]
+      correct: 0
+      explanation: "Anthropic removed long-context surcharges on March 14, 2026, making 1M-token context available at standard per-token rates for Opus 4.6 and Sonnet 4.6. This competitive move established that million-token context is no longer a premium feature -- it is table stakes."
+
+  # Self-explanation after What a Million Tokens Actually Buys
+  - after: "what-a-million-tokens-actually-buys"
+    component: self-explanation-prompt
+    data:
+      prompt: "Before reading about performance degradation, explain why a 1M-token window does NOT mean you should always use 1M tokens. Consider both cost and quality."
+      expert_answer: "Two reasons: (1) Cost scales linearly with input tokens. Sending 500K tokens of context at Opus 4.6 pricing ($5/MTok input) costs $2.50 per request before any output. At 100 requests per day, that is $250/day in input costs alone. (2) Performance degrades non-linearly. Models attend more weakly to content in the middle of large contexts (the lost-in-the-middle effect), and accuracy drops once context is 40-60% full. The effective window is smaller than the advertised window. This is why Module 01's model pricing data matters at the context level: every token has both a dollar cost and an attention cost."
+
+  # Concept check after Performance Degradation
+  - after: "performance-degradation-the-effective-window-is-smaller-than-the-advertised-window"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "At what percentage of context window capacity do most models begin showing measurable accuracy loss for precision tasks?"
+      choices: ["20-30%", "40-60%", "70-80%", "90-95%"]
+      correct: 1
+      explanation: "Most models begin showing measurable accuracy loss once context is 40-60% full. The degradation is task-dependent: factual retrieval suffers earliest, while summarization remains more robust. This is why the practical guidance recommends treating 60-70% as the reliable operating range for precision-critical work."
+
+  # Section review after Token Economics
+  - after: "token-economics"
+    component: quiz
+    variant: section-review
+    data:
+      question: "How many English words does 1M tokens approximately represent?"
+      choices: ["~250,000", "~500,000", "~750,000", "~1,000,000"]
+      correct: 2
+      explanation: "1M tokens is roughly 750,000 English words -- the equivalent of ten full-length novels or an entire medium-sized codebase. Non-English text consumes 2-3x more tokens due to tokenizer design."
+
+  - after: "token-economics"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Non-English text (Chinese, Japanese, Korean, Arabic) consumes how many times more tokens than English?"
+      choices: ["Same number", "1.5x", "2-3x", "5-10x"]
+      correct: 2
+      explanation: "Non-English text consumes 2-3x more tokens due to tokenizer design. A document that fits comfortably in English may overflow the window when translated. This is a critical consideration for multilingual applications."
+
+  - after: "token-economics"
+    component: quiz
+    variant: section-review
+    data:
+      question: "At Opus 4.6 pricing ($5/MTok input), what is the input cost per request for 500K tokens of context?"
+      choices: ["$0.25", "$1.00", "$2.50", "$5.00"]
+      correct: 2
+      explanation: "500,000 tokens x $5.00 per million tokens = $2.50 per request in input costs alone, before any output tokens. At 100 requests/day, that is $250/day. This economic pressure drives the three optimization strategies covered next: prompt caching, RAG, and compaction."
+
+  - after: "token-economics"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What are the three optimization strategies driven by token economics?"
+      choices: ["Fine-tuning, distillation, quantization", "Prompt caching, RAG, compaction", "Model selection, batching, streaming", "Compression, deduplication, summarization"]
+      correct: 1
+      explanation: "The three strategies are prompt caching (reduce per-token cost of repeated context), RAG (send only relevant context instead of everything), and compaction (automatically condense history to stay within limits). These are the core tools of context engineering economics."
+
+  # === PROMPT CACHING ===
+
+  # Worked example after Cost Impact Example
+  - after: "cost-impact-example"
+    component: worked-example
+    variant: full
+    data:
+      title: "Calculating Cache ROI for a Production Application"
+      problem: "An application sends a 50,000-token system prompt with every request using Claude Sonnet 4.6 ($3/MTok input). It handles 500 requests per day. Calculate the cost with and without caching, including the cache write premium."
+      steps:
+        - label: "Calculate no-cache daily cost"
+          content: "Each request: (50K system prompt + 2K user message) x $3/MTok = $0.156 per request. Daily: $0.156 x 500 = $78.00."
+        - label: "Calculate with caching at 90% hit rate"
+          content: "Cache hits (450 requests): 50K tokens at 10% of base ($0.30/MTok) + 2K at full price = $0.0195 per request. Cache misses (50 requests): full price = $0.156. Daily: (450 x $0.0195) + (50 x $0.156) = $8.78 + $7.80 = $16.58."
+        - label: "Account for cache write cost"
+          content: "First cache write: 25% premium on the 50K token system prompt = $0.0375 one-time. Negligible at daily scale. Cache is maintained by ongoing requests."
+        - label: "Add batch API for background jobs"
+          content: "If 200 of the 500 daily requests are non-real-time (reports, analysis), route them through Batch API at 50% discount. This saves an additional approximately $5-8/day on those requests."
+        - label: "Calculate total savings"
+          content: "No caching: $78/day. With caching: approximately $16.58/day. With caching + batching for background work: approximately $10-12/day. Combined savings: 85-87%."
+      solution: "Prompt caching is the single largest cost lever for applications with repeated system prompts. A 90% cache hit rate reduces the 50K-token system prompt cost from $78/day to approximately $16.58/day -- an 87% reduction. Adding batch processing for non-real-time workloads compounds further. The cache write premium (25%) is a one-time cost that is negligible at scale."
+
+  # Concept check after Batch API
+  - after: "batch-api-the-other-cost-lever"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Combining prompt caching (90% hit rate) with batch processing for background jobs, approximately what total cost reduction is achievable compared to naive real-time usage?"
+      choices: ["50%", "75%", "90-95%", "99%"]
+      correct: 2
+      explanation: "Caching alone saves approximately 86% on the system prompt. Adding batch processing for non-real-time workloads (50% discount on all tokens) compounds the savings. Together they reduce costs by 90-95% compared to naive real-time usage -- often the difference between a viable product and an economically unsustainable one."
+
+  # === MEMORY SYSTEMS ===
+
+  # Concept gate before memory systems
+  - after: "memory-systems-how-platforms-remember-you"
+    component: concept-gate
+    data:
+      title: "Before You Continue: Memory Architectures"
+      prerequisites:
+        - "I understand the difference between conversation context (ephemeral) and persistent memory (cross-session)"
+        - "I know that each platform has different privacy models for stored data"
+        - "I recall from Module 01 that Google's free tier data may be used for model training"
+      continue_section: "claude-memory-anthropic"
+
+  # Curiosity prompt
+  - after: "memory-systems-how-platforms-remember-you"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Claude, ChatGPT, Gemini, and Copilot all claim 'memory.' They mean four completely different things."
+      content: "Claude extracts facts from conversations asynchronously. ChatGPT combines explicit memories with full chat history recall. Gemini draws from your entire Google ecosystem. Microsoft Recall captures screen snapshots. These are not variations on a theme -- they are fundamentally different architectures with different privacy implications, different latencies, and different failure modes. The comparison table ahead makes the differences concrete."
+
+  # Concept check after Claude Memory
+  - after: "claude-memory-anthropic"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "How often does Claude Memory process conversations to extract facts?"
+      choices: ["Real-time during conversation", "Every hour", "Approximately every 24 hours", "Weekly"]
+      correct: 2
+      explanation: "Claude Memory processes conversations approximately every 24 hours to extract relevant facts. This asynchronous processing means corrections or new context may not appear in memory until the next processing cycle -- a practical limitation that affects workflow design. ChatGPT, by contrast, infers and saves memories in real-time."
+
+  # Section review after Comparison Table
+  - after: "comparison-table"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which memory system can draw context from Gmail, Calendar, and Drive in addition to chat history?"
+      choices: ["Claude Memory", "ChatGPT Saved Memories", "Gemini Personal Intelligence", "Microsoft Recall"]
+      correct: 2
+      explanation: "Gemini Personal Intelligence integrates with Gmail, Calendar, Drive, and other Google services, giving it the richest data substrate of any memory system. Its effectiveness depends on how deeply the user is embedded in the Google ecosystem."
+
+  - after: "comparison-table"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Microsoft Recall captures what type of data?"
+      choices: ["Conversation transcripts", "Explicit user-saved facts", "Screen snapshots every few seconds", "Email and calendar metadata"]
+      correct: 2
+      explanation: "Recall captures screen snapshots every few seconds and indexes them locally using on-device AI. It is fundamentally different from the other memory systems -- not a conversation memory but a screen memory. All processing is local, but privacy backlash has been severe."
+
+  - after: "comparison-table"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which platform's memory system is the most controversial from a privacy perspective?"
+      choices: ["Claude Memory", "ChatGPT Saved Memories", "Gemini Personal Intelligence", "Microsoft Recall"]
+      correct: 3
+      explanation: "Microsoft Recall captures screenshots of everything visible on screen, making it the most ambitious but also most controversial memory system. Privacy backlash has been severe -- Microsoft explored dropping the Recall name entirely. The Privacy-First rebuild (Windows 12, January 2026) added hardware requirements and encryption, but trust concerns persist."
+
+  - after: "comparison-table"
+    component: quiz
+    variant: section-review
+    data:
+      question: "True or False: ChatGPT's memory system only remembers explicitly saved items."
+      choices: ["True", "False"]
+      correct: 1
+      explanation: "False. ChatGPT uses a dual-layer system. Saved Memories are explicit facts, but Chat History Reference (GA since April 2025) allows ChatGPT to draw on all past conversations for contextual recall -- even things not explicitly memorized can influence future responses."
+
+  # === RAG: RETRIEVAL-AUGMENTED GENERATION ===
+
+  # Curiosity prompt
+  - after: "rag-retrieval-augmented-generation"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "RAG fails silently in at least four distinct ways. Most builders discover them in production."
+      content: "Retrieval misses, irrelevant retrieval, chunk boundary splits, and hallucination over retrieved content are the four primary failure modes. Each has specific mitigations, and knowing them before you build saves painful debugging later. The RAG Failure Modes section covers each one in detail."
+
+  # Concept check after How RAG Works
+  - after: "how-rag-works"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "In the RAG pipeline, which stage converts the user's runtime query into a vector embedding for comparison against indexed chunks?"
+      choices: ["Indexing", "Retrieval", "Generation"]
+      correct: 1
+      explanation: "Indexing creates chunk embeddings offline during setup. Retrieval converts the runtime user query to an embedding and finds the most similar chunks using cosine similarity. Generation uses the retrieved chunks as context for the model's response. The three stages happen at different times: indexing is offline, retrieval and generation are real-time."
+
+  # Accordion after Architectural Patterns
+  - after: "architectural-patterns"
+    component: accordion
+    variant: advanced-detail
+    data:
+      title: "Deep Dive: Advanced RAG Techniques"
+      content: "Advanced RAG adds pre-retrieval and post-retrieval processing. Pre-retrieval: query rewriting (rephrase to better match indexed content), query expansion (generate multiple query variants), and HyDE (generate a hypothetical answer, use its embedding to find real matches). Post-retrieval: re-ranking (score chunks with a cross-encoder), chunk filtering (remove low-confidence results), and iterative retrieval (use initial results to generate follow-up queries). These techniques are the current production standard where retrieval quality directly affects user trust."
+
+  # Self-explanation after RAG vs. Large Context Windows table
+  - after: "rag-vs-large-context-windows"
+    component: self-explanation-prompt
+    data:
+      prompt: "Your knowledge base is 300,000 tokens and receives 50 queries per day. Should you use RAG or direct context injection with caching? Explain your reasoning."
+      expert_answer: "At 300K tokens, the knowledge base fits within 30-40% of the 1M-token context window -- the practical guidance's recommended zone for reliable performance. With only 50 queries/day, the volume does not justify RAG infrastructure complexity. Use direct context injection with prompt caching: the 300K-token knowledge base is cached at 90% discount (Anthropic), reducing the per-query input cost from approximately $0.90 to approximately $0.12 (Sonnet 4.6). RAG setup cost (vector DB hosting, embedding pipeline, retrieval tuning) is not justified at this scale. The decision boundary is roughly 500K tokens of source material or high query volume."
+
+  # Accordion after Vector Database Options
+  - after: "vector-database-options"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Emerging Vector Database Landscape"
+      content: "The vector database market is consolidating rapidly. New entrants (Turbopuffer, LanceDB) and major cloud provider offerings (AlloyDB AI on Google Cloud, Azure AI Search) are reshaping pricing and feature expectations quarterly. For teams already running PostgreSQL, pgvector avoids adding another database to the stack. For production scale, Milvus and Qdrant offer the highest performance. The right choice depends on your existing infrastructure, scale requirements, and whether you need hybrid search (BM25 + vector)."
+
+  # Concept check after Chunking Strategies table
+  - after: "chunking-strategies"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "A production RAG system indexes technical documentation with code blocks, tables, and headers. Which chunking strategy best preserves structural context?"
+      choices: ["Fixed-size", "Semantic", "Recursive", "Document-aware"]
+      correct: 3
+      explanation: "Document-aware chunking respects structural elements -- code blocks, tables, and headers stay intact rather than being split mid-structure. Fixed-size chunking would split a code block in the middle. Semantic chunking may produce variable-sized chunks. Recursive is a good general-purpose choice but does not specifically detect document structure elements like code blocks and tables."
+
+  # Section review after When to Use RAG Decision Framework
+  - after: "when-to-use-rag-decision-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "At approximately what knowledge base size does RAG become the recommended approach over direct context injection?"
+      choices: ["50K+ tokens", "200K+ tokens", "500K+ tokens", "1M+ tokens"]
+      correct: 2
+      explanation: "The decision boundary is roughly 500K tokens of source material. Below that, direct context injection with prompt caching is simpler and often cheaper. Above that, RAG's per-query savings compound -- and the knowledge base may not fit within the reliable 60-70% operating range of a 1M-token window."
+
+  - after: "when-to-use-rag-decision-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What is the standard token overlap between adjacent chunks to prevent answers from being split across chunk boundaries?"
+      choices: ["0% (no overlap)", "5-10%", "10-20%", "30-50%"]
+      correct: 2
+      explanation: "A 10-20% token overlap between adjacent chunks is standard practice. This prevents answers that span two chunks from being lost at the boundary. With 1M-token context windows, erring toward larger retrieved chunks is increasingly viable."
+
+  - after: "when-to-use-rag-decision-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "True or False: Anthropic offers a native embeddings API for RAG implementations."
+      choices: ["True", "False"]
+      correct: 1
+      explanation: "Anthropic does NOT offer a native embeddings API. For Anthropic-centric RAG architectures, third-party embedding providers (OpenAI's text-embedding-3 models, Cohere, Voyage AI) are the standard choice. Google offers text, image, audio, and video embedding via the Gemini API."
+
+  - after: "when-to-use-rag-decision-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What is 'agentic RAG'?"
+      choices: ["RAG that runs on an agent framework", "The model decides what to search, evaluates results, and may issue refined follow-up queries", "A RAG system that automatically updates its index", "RAG with a human-in-the-loop verification step"]
+      correct: 1
+      explanation: "Agentic RAG gives the model agency over the retrieval process. Rather than a fixed query-retrieve-generate loop, the agent decides what to search, evaluates whether results are sufficient, and may issue refined follow-up queries. This powers Deep Research features in ChatGPT and Gemini, and mirrors Claude Code's progressive disclosure approach."
+
+  - after: "when-to-use-rag-decision-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which of the following is NOT a RAG failure mode discussed in this module?"
+      choices: ["Retrieval misses", "Chunk boundary splits", "Hallucination over retrieved content", "Excessive API latency"]
+      correct: 3
+      explanation: "The four RAG failure modes are: retrieval misses (relevant content not returned), irrelevant retrieval (wrong chunks pollute context), chunk boundary splits (answer spans two chunks), and hallucination over retrieved content (model ignores or contradicts retrieved text). Excessive API latency is a general concern, not a RAG-specific failure mode."
+
+  # === COMPACTION ===
+
+  - after: "what-survives-compaction"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "System prompts and instructions survive compaction. Specific numbers, dates, and URLs from early conversation turns typically:"
+      choices: ["Always survive", "Sometimes survive in summaries", "Are reliably preserved", "Are often lost"]
+      correct: 3
+      explanation: "Compaction summaries rarely preserve exact values like specific numbers, dates, and URLs from early conversation turns. This is why the module advises: 'If a fact, decision, or intermediate result matters beyond the current exchange, persist it to an external store.' Design for compaction from the start."
+
+  # === CONTEXT ENGINEERING AS A DISCIPLINE ===
+
+  # Self-explanation after Core Principles
+  - after: "the-core-principles"
+    component: self-explanation-prompt
+    data:
+      prompt: "Context has five layers: Identity, Knowledge, Memory, Task, Conversation. For a customer support chatbot, give one concrete example of content that belongs in each layer."
+      expert_answer: "Identity: 'You are a support agent for Acme Corp. Use these guidelines: always greet by name, never promise refunds over $500 without escalation.' Knowledge: Product documentation loaded via RAG or prompt caching (feature specs, troubleshooting guides). Memory: 'This customer prefers detailed technical explanations; has a Pro plan; had a billing issue last month.' Task: 'Resolve the customer's question about their API rate limit increase request.' Conversation: The last 10 messages exchanged with the customer, including their error logs."
+
+  # Concept check after Claude Code case study
+  - after: "context-engineering-in-practice-claude-code-as-case-study"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which Claude Code feature implements the 'Identity layer' of context engineering -- persistent project instructions that survive compaction?"
+      choices: ["Session Memory", "CLAUDE.md files", "Progressive disclosure", "Auto-compaction"]
+      correct: 1
+      explanation: "CLAUDE.md files are loaded from disk into every session, forming the identity layer of context engineering. They survive compaction because they are read from disk, not from conversation history. Session Memory provides cross-session context (the memory layer). Progressive disclosure manages what enters the working set. Auto-compaction handles overflow."
+
+  # Section review after Cost Optimization Stack
+  - after: "the-cost-optimization-stack"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Rank the cost optimization stack from highest to lowest impact."
+      choices: ["Prompt caching > Model selection > RAG > Batching > Prompt optimization", "Model selection > Prompt caching > RAG/selective retrieval > Batch processing > Prompt optimization", "RAG > Prompt caching > Model selection > Prompt optimization > Batching", "Batch processing > Model selection > Prompt caching > RAG > Prompt optimization"]
+      correct: 1
+      explanation: "The correct order is: Model selection (60-80% savings) > Prompt caching (up to 90% on cached content) > RAG/selective retrieval (50-80%) > Batch processing (50%) > Prompt optimization (20-50%). Model selection has the highest impact because the difference between Opus 4.6 ($5/$25) and GPT-5.4 Nano ($0.20/$1.25) is a 25x cost gap."
+
+  - after: "the-cost-optimization-stack"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Context engineering and cost optimization are described as what relationship in this module?"
+      choices: ["Complementary but separate disciplines", "The same discipline", "Cost optimization is a subset of context engineering", "Context engineering is a subset of cost optimization"]
+      correct: 1
+      explanation: "The module states that context engineering and cost optimization are the same discipline. Every token in the window costs money and model attention. The minimum sufficient context is both the cheapest and the highest-quality approach. Reducing cost and improving quality are not tradeoffs -- they align."
+
+  - after: "the-cost-optimization-stack"
+    component: quiz
+    variant: section-review
+    data:
+      question: "The full cost optimization stack applied together can reduce API costs by approximately what percentage compared to naive implementation?"
+      choices: ["50%", "75%", "85%", "95% or more"]
+      correct: 3
+      explanation: "Applied together -- model selection, prompt caching, RAG, batch processing, and prompt optimization -- these techniques can reduce API costs by 95% or more compared to naive implementations. This is often the difference between a viable product and an economically unsustainable one."
+
+  # === MODULE ASSESSMENT (after Key Takeaways) ===
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the practical reliable operating range for precision tasks in a 1M-token context window?"
+      choices: ["20-30%", "40-50%", "60-70%", "90-95%"]
+      correct: 2
+      explanation: "Treat 60-70% of the advertised window as the reliable operating range for precision-critical tasks. Models begin showing measurable accuracy loss at 40-60% capacity. For summarization or broad analysis you can push higher, but for factual retrieval from specific passages, keep context leaner."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Anthropic's prompt cache hit discount is 90%. OpenAI's prompt cache hit discount is:"
+      choices: ["25%", "50%", "75%", "90%"]
+      correct: 1
+      explanation: "OpenAI offers a 50% discount on cache hits -- compared to 90% for both Anthropic and Google. OpenAI's caching is also more automatic and opaque, giving developers less direct control over cache behavior. For cost-sensitive applications, Anthropic's 90% discount with three configurable duration tiers provides the most developer control."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which memory system processes conversations asynchronously with approximately a 24-hour delay?"
+      choices: ["Claude Memory", "ChatGPT Saved Memories", "Gemini Personal Intelligence", "Microsoft Recall"]
+      correct: 0
+      explanation: "Claude Memory reviews conversations approximately every 24 hours and extracts relevant facts. This passive, cumulative approach means corrections or new context may not appear in memory until the next processing cycle. ChatGPT's memory is more aggressive -- it actively infers and saves memories during conversation in real-time."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "A 200K-token knowledge base queried 500 times daily with Sonnet 4.6. Which approach has the lower ongoing daily cost: context injection with caching, or RAG?"
+      choices: ["Context injection with caching (~$33/day)", "RAG (~$8.50/day)", "Both cost the same", "Context injection without caching"]
+      correct: 1
+      explanation: "RAG costs approximately $8.50/day vs. $33/day for cached context injection at this scale. However, RAG has significant setup costs (vector DB hosting, embedding pipeline, retrieval tuning). At 500 queries/day against a 200K-token knowledge base, RAG's per-query savings compound enough to justify the infrastructure investment."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What chunking strategy is the most common production choice for general-purpose RAG?"
+      choices: ["Fixed-size", "Semantic", "Recursive", "Document-aware"]
+      correct: 2
+      explanation: "Recursive chunking is the most common general-purpose production choice. It tries paragraph boundaries first, falls back to sentence boundaries, then token boundaries. This provides a good balance of coherence and consistent chunk sizes. Document-aware is better for structured content (code, legal), but recursive works well across content types."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the 'lost-in-the-middle' effect?"
+      choices: ["Models lose context when conversations are too long", "Models attend more strongly to the beginning and end of context, with weaker recall for content in the middle third", "Context is lost during compaction", "Middle-tier models underperform compared to flagship and budget models"]
+      correct: 1
+      explanation: "First documented in 2023 and persisting in current models (though diminished), the lost-in-the-middle effect means models attend more strongly to information at the beginning and end of the context window. For precision-critical tasks, place critical information at the beginning or end rather than burying it in the middle."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Name two content types that reliably survive compaction."
+      choices: ["System prompts and recent web search results", "System prompts/instructions and user preferences stored in external memory", "Detailed early conversation and tool call results", "Specific numbers and URLs from early turns"]
+      correct: 1
+      explanation: "System prompts and instructions always survive compaction (reloaded fresh). User preferences in external memory systems survive because they are stored outside the context window. Detailed early conversation, specific numbers and URLs, web search results, and verbose tool call details are all lost or aggressively summarized during compaction."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "In context engineering, what is the 'Identity' layer?"
+      choices: ["The user's name and role", "System prompt, persona, and rules -- permanent content that survives compaction", "The model's version identifier", "Authentication credentials for API access"]
+      correct: 1
+      explanation: "The Identity layer contains the system prompt, persona, and rules. It is the most durable layer -- permanent content that survives compaction because it is loaded fresh each session. Claude Code implements this through CLAUDE.md files. The five layers are: Identity, Knowledge, Memory, Task, and Conversation, ordered from most to least durable."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is agentic RAG?"
+      choices: ["RAG running inside an agent framework", "The model has agency over the retrieval process -- deciding what to search, evaluating results, and issuing follow-up queries", "Automated RAG index maintenance", "RAG with human approval for each retrieval"]
+      correct: 1
+      explanation: "Agentic RAG gives the model agency over retrieval: it decides what to search, evaluates whether results are sufficient, and may issue refined follow-up queries before generating a response. This powers Deep Research features in ChatGPT and Gemini. It is more expensive per query (multiple retrieval rounds) but produces substantially higher recall for complex questions."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "The full cost optimization stack applied together can reduce API costs by approximately what percentage compared to naive implementation?"
+      choices: ["50%", "75%", "85%", "95% or more"]
+      correct: 3
+      explanation: "Model selection (60-80%), prompt caching (up to 90% on cached content), RAG (50-80%), batch processing (50%), and prompt optimization (20-50%) compound to 95% or more in savings. This is often the difference between a viable product and an economically unsustainable one. Module 09 covers the API-level implementation details."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "A developer needs to decide between four approaches to ground a model in domain knowledge. For a 2M-token knowledge base updated weekly with 800 daily queries, which approach is most appropriate?"
+      choices: ["Prompt engineering alone", "Long context injection with caching", "RAG pipeline", "Fine-tuning"]
+      correct: 2
+      explanation: "At 2M tokens, the knowledge base exceeds any current context window (max 1M tokens), ruling out direct injection. Weekly updates and high query volume (800/day) make RAG the clear choice -- the index can be updated independently, and RAG's per-query cost savings compound at this volume. Fine-tuning would require retraining weekly, which is impractical. This is the RAG decision framework applied directly."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which model selection strategy has the highest single impact on cost reduction?"
+      choices: ["Prompt caching (up to 90% savings)", "Model selection -- using the cheapest model that meets quality requirements (60-80% savings)", "Batch processing (50% savings)", "RAG/selective retrieval (50-80% savings)"]
+      correct: 1
+      explanation: "Model selection is the highest-impact cost lever. The difference between Opus 4.6 ($5/$25 per MTok) and GPT-5.4 Nano ($0.20/$1.25 per MTok) is a 25x gap. Prompt caching has the second-highest impact. The full stack -- model selection, caching, RAG, batching, and prompt optimization -- compounds to 95%+ savings."
+
+  # === ROUND 7 DIAGRAMS ===
+
+  # Figure M02-1: Context Window Layers
+  - after: "context-windows-sizes-pricing-and-practical-limits"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m02-1"
+      title: "Context Window Layers: From Persistent to Ephemeral"
+      alt: "Layered diagram showing the five conceptual layers of a context window, arranged from innermost (most persistent) to outermost (most ephemeral). Layer 1 at the center is Identity — the system prompt and custom instructions, which are permanent and always survive compaction. Layer 2 is Knowledge — RAG-injected documents, uploaded files, and reference data, persistent per-session or cached. Layer 3 is Memory — cross-session facts from Claude Memory, ChatGPT Saved Memories, or Gemini Personal Intelligence, updated asynchronously. Layer 4 is Task — the current goal, tool results, and intermediate work products, ephemeral within the current task. Layer 5 at the outermost ring is Conversation — the most recent user and assistant turns, highly ephemeral and first to be compacted. Token budgets range from 1-5K for identity to 200-500K for conversation history."
+      source: |
+        graph TD
+          L5["Layer 5: Conversation<br/>Recent user + assistant turns<br/>Ephemeral — first to compact<br/>~200-500K tokens"]
+          L4["Layer 4: Task<br/>Current goal · Tool results<br/>Ephemeral within task<br/>~50-200K tokens"]
+          L3["Layer 3: Memory<br/>Cross-session facts<br/>Claude Memory · ChatGPT Saved · Gemini PI<br/>Updated async · ~5-20K tokens"]
+          L2["Layer 2: Knowledge<br/>RAG chunks · Uploaded files<br/>Per-session or cached<br/>~50-300K tokens"]
+          L1["Layer 1: Identity<br/>System prompt · Custom instructions<br/>Permanent — always survives compaction<br/>~1-5K tokens"]
+
+          L5 --> L4
+          L4 --> L3
+          L3 --> L2
+          L2 --> L1
+
+  # Figure M02-2: RAG Pipeline Architecture
+  - after: "rag-retrieval-augmented-generation"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m02-2"
+      title: "RAG Pipeline Architecture: Naive and Advanced Patterns"
+      alt: "Process flow diagram showing the three-stage RAG pipeline. Stage 1 (Indexing): documents are split into chunks of 256-1024 tokens, each chunk is converted to a vector embedding, and embeddings are stored in a vector database such as Pinecone, Weaviate, Chroma, or pgvector. Stage 2 (Retrieval): a user query is embedded, compared against indexed chunks using cosine similarity, and the top-k most relevant chunks (typically 3-10) are retrieved. Stage 3 (Generation): retrieved chunks plus the original query are injected into the LLM context window, and the model generates a grounded response. An Advanced RAG extension adds pre-retrieval processing (query rewriting, query expansion, HyDE hypothetical document embeddings) before the retrieval stage, and post-retrieval processing (cross-encoder re-ranking, chunk filtering, iterative retrieval) after retrieval and before generation."
+      source: |
+        graph LR
+          subgraph Indexing["Stage 1: Indexing"]
+            I1["Documents"] --> I2["Split into chunks<br/>256-1,024 tokens"]
+            I2 --> I3["Generate embeddings"]
+            I3 --> I4["Store in Vector DB<br/>Pinecone · Weaviate<br/>Chroma · pgvector"]
+          end
+
+          subgraph Retrieval["Stage 2: Retrieval"]
+            R1["User Query"] --> R2["Embed query"]
+            R2 --> R3["Cosine similarity<br/>search"]
+            R3 --> R4["Top-k chunks<br/>typically 3-10"]
+          end
+
+          subgraph Generation["Stage 3: Generation"]
+            G1["Retrieved chunks<br/>+ original query"] --> G2["LLM context<br/>window"]
+            G2 --> G3["Grounded<br/>response"]
+          end
+
+          I4 -.->|"indexed"| R3
+          R4 --> G1
+
+          subgraph Advanced["Advanced RAG Extensions"]
+            Pre["Pre-retrieval<br/>Query rewriting<br/>Query expansion<br/>HyDE embeddings"]
+            Post["Post-retrieval<br/>Cross-encoder re-ranking<br/>Chunk filtering<br/>Iterative retrieval"]
+          end
+
+          Pre -.->|"before"| R1
+          R4 -.->|"then"| Post
+          Post -.->|"refined chunks"| G1
+
+  # Figure M02-5: RAG Decision Framework (Decision Tree)
+  - after: "when-to-use-rag-decision-framework"
+    component: diagram
+    variant: decision-tree
+    data:
+      id: "m02-5"
+      title: "RAG Decision Framework"
+      alt: "Decision tree for choosing between context injection, RAG variants, and fine-tuning based on knowledge base size, update frequency, and query volume."
+      config:
+        root:
+          question: "How large is your knowledge base?"
+          branches:
+            - label: "< 10K tokens"
+              terminal:
+                recommendation: "Prompt Engineering"
+                rationale: "Instructions, formatting rules, and behavioral constraints fit directly in the prompt with minimal setup cost."
+            - label: "10K - 500K tokens"
+              question: "How often does the knowledge change?"
+              branches:
+                - label: "Rarely (monthly+)"
+                  question: "What is your query volume?"
+                  branches:
+                    - label: "Low-medium (< 200/day)"
+                      terminal:
+                        recommendation: "Long Context + Caching"
+                        rationale: "Fits within context window. Prompt caching amortizes input cost at low-medium volume. Minimal setup."
+                    - label: "High (200+/day)"
+                      terminal:
+                        recommendation: "RAG (Naive)"
+                        rationale: "At high volume, RAG's per-query savings outweigh setup cost even for sub-500K knowledge bases."
+                - label: "Frequently (weekly or more)"
+                  terminal:
+                    recommendation: "RAG (Naive)"
+                    rationale: "Frequent updates make context injection impractical — you'd need to rebuild cached prompts constantly. RAG indexes update independently."
+            - label: "500K+ tokens"
+              question: "Do queries need multi-hop reasoning or cross-document synthesis?"
+              branches:
+                - label: "No — single-fact lookups"
+                  terminal:
+                    recommendation: "RAG (Naive)"
+                    rationale: "Simple top-k retrieval handles single-fact queries efficiently. Exceeds context window limits, ruling out direct injection."
+                - label: "Yes — complex queries"
+                  question: "Is sub-second latency required?"
+                  branches:
+                    - label: "Yes"
+                      terminal:
+                        recommendation: "RAG (Advanced) + Caching"
+                        rationale: "Pre-computed re-ranking and cached frequent queries balance quality with latency. Use query expansion and hybrid search."
+                    - label: "No"
+                      terminal:
+                        recommendation: "RAG (Advanced / Agentic)"
+                        rationale: "Agentic RAG with iterative retrieval, re-ranking, and follow-up queries maximizes recall for complex questions."
+            - label: "Need behavior encoded in weights"
+              question: "Is your query volume very high (1000+/day)?"
+              branches:
+                - label: "Yes"
+                  terminal:
+                    recommendation: "Fine-tuning"
+                    rationale: "Specialized terminology, output formats, or behavioral patterns that must hold across all queries without prompt space. Retraining cost justified at very high volume."
+                - label: "No"
+                  terminal:
+                    recommendation: "RAG + Few-shot Prompting"
+                    rationale: "At lower volumes, RAG with few-shot examples in the prompt achieves similar behavioral consistency without retraining cost."

@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 01: Models &amp; Intelligence Tiers — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="01">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 1: The Terrain</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 01: Models &amp; Intelligence Tiers</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 01: Models &amp; Intelligence Tiers</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">30-35 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#the-model-landscape-in-march-2026" class="toc__link" data-toc-active>The Model Landscape in March 2026</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#anthropic-the-claude-model-family" class="toc__link" data-toc-active>Anthropic: The Claude Model Family</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#current-production-models" class="toc__link" data-toc-active>Current Production Models</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#anthropic-cost-optimization" class="toc__link" data-toc-active>Anthropic Cost Optimization</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#key-technical-notes" class="toc__link" data-toc-active>Key Technical Notes</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#benchmark-highlights" class="toc__link" data-toc-active>Benchmark Highlights</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#openai-the-gpt-and-o-series-families" class="toc__link" data-toc-active>OpenAI: The GPT and o-Series Families</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#current-gpt-models" class="toc__link" data-toc-active>Current GPT Models</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#reasoning-models-o-series" class="toc__link" data-toc-active>Reasoning Models (o-Series)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#additional-model-categories" class="toc__link" data-toc-active>Additional Model Categories</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cost-optimization" class="toc__link" data-toc-active>Cost Optimization</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#retired-models" class="toc__link" data-toc-active>Retired Models</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#google-the-gemini-and-gemma-families" class="toc__link" data-toc-active>Google: The Gemini and Gemma Families</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#current-gemini-models" class="toc__link" data-toc-active>Current Gemini Models</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#context-caching" class="toc__link" data-toc-active>Context Caching</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#gemma-3-open-source" class="toc__link" data-toc-active>Gemma 3 (Open-Source)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#gemini-nano-on-device" class="toc__link" data-toc-active>Gemini Nano (On-Device)</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#microsoft-the-model-marketplace" class="toc__link" data-toc-active>Microsoft: The Model Marketplace</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#notable-models-available-through-foundry" class="toc__link" data-toc-active>Notable Models Available Through Foundry</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#microsofts-own-models-phi-family" class="toc__link" data-toc-active>Microsoft&#x27;s Own Models: Phi Family</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#work-iq-intelligence-layer" class="toc__link" data-toc-active>Work IQ Intelligence Layer</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#reasoning-modes-compared" class="toc__link" data-toc-active>Reasoning Modes Compared</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#anthropic-extended-thinking" class="toc__link" data-toc-active>Anthropic: Extended Thinking</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#openai-o-series-reasoning" class="toc__link" data-toc-active>OpenAI: o-Series Reasoning</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-gemini-3-deep-think" class="toc__link" data-toc-active>Google: Gemini 3 Deep Think</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-cot-anti-pattern" class="toc__link" data-toc-active>The CoT Anti-Pattern</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#reasoning-modes-summary" class="toc__link" data-toc-active>Reasoning Modes Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#multimodal-capabilities" class="toc__link" data-toc-active>Multimodal Capabilities</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#input-modalities" class="toc__link" data-toc-active>Input Modalities</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#output-modalities" class="toc__link" data-toc-active>Output Modalities</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#multimodal-gap-analysis" class="toc__link" data-toc-active>Multimodal Gap Analysis</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#head-to-head-model-comparison" class="toc__link" data-toc-active>Head-to-Head Model Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#flagship-model-comparison-march-2026" class="toc__link" data-toc-active>Flagship Model Comparison (March 2026)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#budget-model-comparison-march-2026" class="toc__link" data-toc-active>Budget Model Comparison (March 2026)</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#model-selection-framework" class="toc__link" data-toc-active>Model Selection Framework</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#by-task-type" class="toc__link" data-toc-active>By Task Type</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#by-cost-sensitivity" class="toc__link" data-toc-active>By Cost Sensitivity</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 5,000-6,000
+<strong>Prerequisites:</strong> <a href="module-00.html">Module 00: Landscape Overview</a></p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>Every AI platform covered in this curriculum is ultimately powered by large language models, and the choice of which model to use -- for what task, at what cost, with what tradeoffs -- is the single most consequential decision a practitioner makes daily. This module catalogs every production model across the four major platforms (Anthropic, OpenAI, Google, Microsoft) as of March 2026, compares them on context windows, pricing, and capabilities, examines the three major reasoning paradigms (<span class="glossary-term glossary-term--first-use" data-term="extended-thinking">extended thinking</span>, o-series reasoning, Deep Think), surveys multimodal input and output capabilities, and provides a concrete model selection framework for common task categories.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">Your company runs 10,000 AI API calls per day. Last month's bill was $45,000. Can you cut it by 80%?</summary>
+  <div class="accordion__content">
+    <p>The answer is almost certainly yes -- but it requires understanding which of the 30+ models across four providers is right for which task, how reasoning modes actually work (and when they waste money), and where caching and batching can slash costs by an order of magnitude. This module gives you the data to answer that question.</p>
+  </div>
+</details>
+<hr>
+<h2 id="the-model-landscape-in-march-2026">The Model Landscape in March 2026</h2>
+<p>The frontier model market has undergone a year of unprecedented velocity. OpenAI shipped five model generations (GPT-5 through GPT-5.4) in roughly twelve months. Anthropic released Opus 4.6 and Sonnet 4.6 within two weeks of each other in February 2026. Google launched the Gemini 3 family with Flash and 3.1 Pro variants. The result is a market where last quarter's flagship is this quarter's legacy model, and pricing has dropped dramatically -- in some cases by 80% or more within months of launch.</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> Model lineups, pricing, and availability change frequently. All data in this module reflects the state as of March 20, 2026. Verify pricing against official documentation before making procurement decisions.</p>
+</blockquote>
+<p>Three structural trends define the current landscape:</p>
+<ol>
+<li>
+<p><strong>Context windows have converged at 1M tokens.</strong> Anthropic (Opus 4.6, Sonnet 4.6), OpenAI (GPT-5.4), and Google (Gemini 2.5 Pro, 2.5 Flash, 3 Flash) all offer million-<span class="glossary-term glossary-term--first-use" data-term="token">token</span> context at GA pricing. This was a premium feature six months ago; it is now table stakes.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term glossary-term--first-use" data-term="reasoning-modes">Reasoning modes</span> have become standard.</strong> Every major provider now offers some form of extended reasoning: Anthropic's <span class="glossary-term" data-term="extended-thinking">extended thinking</span>, OpenAI's o-series models, and Google's Deep Think. These trade latency and cost for substantially improved performance on complex tasks.</p>
+</li>
+<li>
+<p><strong>The cost floor keeps dropping.</strong> Budget models like GPT-5.4 Nano ($0.20/$1.25 per MTok), Gemini 3.1 Flash-Lite ($0.25/$1.50 per MTok), and Haiku 4.5 ($1/$5 per MTok) make sophisticated AI accessible at production scale for cents per thousand queries.</p>
+</li>
+</ol>
+
+<figure class="diagram diagram--mermaid" id="m01-2" role="img" aria-label="Four horizontal tracks showing model tiers from budget to flagship for each provider. Anthropic track: Haiku 4.5 ($1/$5, 200K context) to Sonnet 4.6 ($3/$15, 1M context) to Opus 4.6 ($5/$25, 1M context, 128K output). OpenAI track: GPT-4o Mini ($0.15/$0.60, 128K, legacy) to GPT-5.4 Nano ($0.20/$1.25, 400K) to GPT-5.4 Mini ($0.75/$4.50, 400K) to GPT-5.4 ($2.50/$10+, 1M) plus separate o-series reasoning models (o3 at $2/$8, o3-pro at $20/$80). Google track: Flash-Lite 2.5 ($0.10/$0.40, cheapest overall) to Flash 3 ($0.50/$3, 1M) to Gemini 2.5 Pro ($1.25-$2.50/$10-$15, 1M) to Gemini 3.1 Pro ($2-$4/$12-$18, Preview). Microsoft track: Phi-4 family for edge deployment, plus Foundry marketplace with 11,000+ models from all other providers.">
+  <pre class="mermaid">graph LR
+  subgraph Anthropic[&quot;Anthropic — Claude Family&quot;]
+    direction LR
+    AH[&quot;Haiku 4.5&lt;br/&gt;$1 / $5 MTok&lt;br/&gt;200K context&quot;] --&gt; AS[&quot;Sonnet 4.6&lt;br/&gt;$3 / $15 MTok&lt;br/&gt;1M context&quot;]
+    AS --&gt; AO[&quot;Opus 4.6&lt;br/&gt;$5 / $25 MTok&lt;br/&gt;1M context · 128K output&quot;]
+  end
+
+  subgraph OpenAI[&quot;OpenAI — GPT + o-Series&quot;]
+    direction LR
+    O4M[&quot;GPT-4o Mini&lt;br/&gt;$0.15 / $0.60&lt;br/&gt;128K · Legacy&quot;] --&gt; ON[&quot;GPT-5.4 Nano&lt;br/&gt;$0.20 / $1.25&lt;br/&gt;400K context&quot;]
+    ON --&gt; OMi[&quot;GPT-5.4 Mini&lt;br/&gt;$0.75 / $4.50&lt;br/&gt;400K context&quot;]
+    OMi --&gt; OG[&quot;GPT-5.4&lt;br/&gt;~$2.50 / ~$10+&lt;br/&gt;1M context&quot;]
+    OR[&quot;o3: $2/$8&lt;br/&gt;o3-pro: $20/$80&lt;br/&gt;Separate RL reasoning&quot;]
+  end
+
+  subgraph Google[&quot;Google — Gemini + Gemma&quot;]
+    direction LR
+    GFL[&quot;Flash-Lite 2.5&lt;br/&gt;$0.10 / $0.40&lt;br/&gt;Cheapest overall&quot;] --&gt; GF[&quot;Flash 3&lt;br/&gt;$0.50 / $3&lt;br/&gt;1M context&quot;]
+    GF --&gt; GP[&quot;Gemini 2.5 Pro&lt;br/&gt;$1.25-$2.50 / $10-$15&lt;br/&gt;1M context&quot;]
+    GP --&gt; G31[&quot;Gemini 3.1 Pro&lt;br/&gt;$2-$4 / $12-$18&lt;br/&gt;Preview&quot;]
+  end
+
+  subgraph Microsoft[&quot;Microsoft — Marketplace + Phi&quot;]
+    direction LR
+    MPH[&quot;Phi-4 Family&lt;br/&gt;Edge / mobile&lt;br/&gt;5.6B-14B params&quot;] --&gt; MF[&quot;Foundry Marketplace&lt;br/&gt;11,000+ models&lt;br/&gt;11+ publishers&quot;]
+  end
+</pre>
+  <figcaption>Model Tier Spectrum Across Providers (March 2026)</figcaption>
+</figure>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="While open-weight models have reached production quality (as covered in Module 00), the three defining structural trends are context window convergence at 1M tokens, reasoning modes becoming standard across all providers, and the cost floor continuing to drop. Enterprise deployment remains dominated by closed platform APIs." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which of the following is NOT one of the three structural trends defining the current model landscape?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-model-landscape-in-march-2026-quiz" value="0" />
+          <span class="quiz__choice-label">Context windows converged at 1M tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-model-landscape-in-march-2026-quiz" value="1" />
+          <span class="quiz__choice-label">Reasoning modes are standard</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-model-landscape-in-march-2026-quiz" value="2" />
+          <span class="quiz__choice-label">Open-source models dominate enterprise deployment</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-model-landscape-in-march-2026-quiz" value="3" />
+          <span class="quiz__choice-label">The cost floor keeps dropping</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="anthropic-the-claude-model-family">Anthropic: The Claude Model Family</h2>
+<p>Anthropic maintains a three-tier model lineup -- Opus (flagship), Sonnet (balanced), and Haiku (fast/cheap) -- with version numbers that track a shared generation. The current generation is 4.6 for the top two tiers.</p>
+<h3 id="current-production-models">Current Production Models</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th>Released</th><th>Context Window</th><th>Max Output</th><th>Input $/MTok</th><th>Output $/MTok</th><th>Key Strengths</th></tr></thead><tbody><tr><td><strong>Opus 4.6</strong></td><td>Feb 5, 2026</td><td>1M tokens</td><td>128K tokens</td><td>$5.00</td><td>$25.00</td><td>Deep reasoning, long-horizon coding, multi-step agentic work</td></tr><tr><td><strong>Sonnet 4.6</strong></td><td>Feb 17, 2026</td><td>1M tokens</td><td>128K tokens</td><td>$3.00</td><td>$15.00</td><td>Near-Opus performance, dramatically improved <span class="glossary-term glossary-term--first-use" data-term="computer-use">computer use</span>, strong instruction following</td></tr><tr><td><strong>Haiku 4.5</strong></td><td>Oct 15, 2025</td><td>200K tokens</td><td>64K tokens</td><td>$1.00</td><td>$5.00</td><td>Fastest model, near-Sonnet-4 performance, 73.3% SWE-bench Verified</td></tr></tbody></table>
+<p><strong>Legacy models</strong> still available but not recommended for new work: Sonnet 4.5 ($3/$15, 200K context), Opus 4.5 ($5/$25, 200K context), and Opus 4.1 ($15/$75, 200K context -- deprecated pricing tier) [F1].</p>
+<h3 id="anthropic-cost-optimization">Anthropic Cost Optimization</h3>
+<p>Anthropic offers two major cost reduction mechanisms:</p>
+<ul>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="prompt-caching">Prompt caching</span>:</strong> Cache hits cost 10% of the standard input price. Three cache durations are available: 5-minute, 1-hour, and persistent. For applications with repeated system prompts or reference documents, this can reduce effective input costs by 90% [F1].</li>
+<li><strong><span class="glossary-term glossary-term--first-use" data-term="batch-api">Batch API</span>:</strong> 50% discount on both input and output tokens for asynchronous processing. Suitable for bulk analysis, content generation, and evaluation pipelines [F1].</li>
+</ul>
+<p><strong>Fast mode</strong> (beta) is available for Opus 4.6 only at $30/$150 per MTok -- a 6x premium over standard pricing for faster output. For prompts exceeding 200K input tokens, fast mode pricing increases to $60/$225 per MTok. This is the same model, not a separate model; it trades cost for reduced latency [W5].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="The three tiers -- 5-minute, 1-hour, and persistent -- let developers match caching strategy to usage patterns. 5-minute suits rapid interactive exchanges, 1-hour suits batch jobs, and persistent suits rarely-changing system prompts. This becomes critical in Module 02's cost optimization discussion." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Anthropic offers three prompt cache durations. What are they?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-anthropic-cost-optimization-quiz" value="0" />
+          <span class="quiz__choice-label">1-minute, 5-minute, 10-minute</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-anthropic-cost-optimization-quiz" value="1" />
+          <span class="quiz__choice-label">5-minute, 1-hour, persistent</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-anthropic-cost-optimization-quiz" value="2" />
+          <span class="quiz__choice-label">1-hour, 24-hour, permanent</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-anthropic-cost-optimization-quiz" value="3" />
+          <span class="quiz__choice-label">Automatic only -- no developer control</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="key-technical-notes">Key Technical Notes</h3>
+<ul>
+<li><strong>1M context at standard pricing:</strong> As of March 14, 2026, both Opus 4.6 and Sonnet 4.6 offer 1M-<span class="glossary-term" data-term="token">token</span> context windows at standard per-<span class="glossary-term" data-term="token">token</span> rates with no long-context surcharge [F1].</li>
+<li><strong><span class="glossary-term" data-term="extended-thinking">Extended thinking</span>:</strong> Available on all current models (Opus 4.6, Sonnet 4.6, Haiku 4.5) at GA. Thinking tokens are billed as output tokens [F1].</li>
+<li><strong>Multimodal input:</strong> Text and image input on all models; native PDF processing. No native audio or video input via API [F1].</li>
+<li><strong><span class="glossary-term" data-term="computer-use">Computer use</span>:</strong> Supported on all current models. Sonnet 4.6 has "dramatically improved" <span class="glossary-term" data-term="computer-use">computer use</span> capabilities [F1].</li>
+<li><strong>Context awareness:</strong> Haiku 4.5 and above can track remaining <span class="glossary-term glossary-term--first-use" data-term="context-window">context window</span> mid-conversation [F1].</li>
+</ul>
+<h3 id="benchmark-highlights">Benchmark Highlights</h3>
+<ul>
+<li>Opus 4.6: Top-tier on complex reasoning and coding benchmarks</li>
+<li>Sonnet 4.6: Closes the gap with Opus significantly; near-Opus on coding, document comprehension, and office tasks</li>
+<li>Haiku 4.5: 73.3% SWE-bench Verified (surpasses Sonnet 4); 50.7% on computer-use benchmarks (best in Anthropic's lineup) [F1]</li>
+</ul>
+<hr>
+<h2 id="openai-the-gpt-and-o-series-families">OpenAI: The GPT and o-Series Families</h2>
+<p>OpenAI maintains two distinct model families: GPT (general-purpose foundation models) and o-series (dedicated reasoning models). The current flagship is GPT-5.4, released March 5, 2026. OpenAI's model churn is the highest in the industry -- GPT-4o was retired February 13, 2026, and GPT-5.1 was retired March 11, 2026 [F2].</p>
+<blockquote>
+<p><strong>Volatility warning:</strong> OpenAI deprecates models aggressively. GPT-4o, once the flagship, is no longer available. Plan for model migration as part of any OpenAI integration.</p>
+</blockquote>
+<h3 id="current-gpt-models">Current GPT Models</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th>Released</th><th>Context</th><th>Input $/MTok</th><th>Output $/MTok</th><th>Key Strengths</th></tr></thead><tbody><tr><td><strong>GPT-5.4</strong></td><td>Mar 5, 2026</td><td>1M tokens</td><td>~$2.50</td><td>~$10+</td><td>Native <span class="glossary-term" data-term="computer-use">computer use</span>, strongest coding/reasoning</td></tr><tr><td><strong>GPT-5.4 Mini</strong></td><td>Mar 17, 2026</td><td>400K tokens</td><td>$0.75</td><td>$4.50</td><td>2x faster than 5.4, strong coding</td></tr><tr><td><strong>GPT-5.4 Nano</strong></td><td>Mar 17, 2026</td><td>400K tokens</td><td>$0.20</td><td>$1.25</td><td>Cheapest current-gen model</td></tr><tr><td><strong>GPT-5.3 Codex</strong></td><td>—</td><td>—</td><td>$3.00</td><td>$15.00</td><td>Optimized for software engineering</td></tr><tr><td><strong>GPT-5.2</strong></td><td>—</td><td>400K (128K out)</td><td>$1.75</td><td>$14.00</td><td>Prior flagship, mature</td></tr><tr><td><strong>GPT-4o Mini</strong></td><td>Legacy</td><td>128K tokens</td><td>$0.15</td><td>$0.60</td><td>Cheapest available model</td></tr></tbody></table>
+<h3 id="reasoning-models-o-series">Reasoning Models (o-Series)</h3>
+<p>The o-series is a separate model family trained with reinforcement learning specifically for multi-step reasoning. These are not GPT variants -- they have different architectures and training methodologies.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th>Input $/MTok</th><th>Output $/MTok</th><th>Key Strengths</th></tr></thead><tbody><tr><td><strong>o3</strong></td><td>$2.00</td><td>$8.00</td><td>General reasoning (80% cheaper than launch price)</td></tr><tr><td><strong>o3-pro</strong></td><td>$20.00</td><td>$80.00</td><td>Maximum reasoning compute, hardest problems</td></tr><tr><td><strong>o4-mini</strong></td><td>—</td><td>—</td><td>Efficient reasoning; AIME 2025 99.5% pass@1 [W8]</td></tr></tbody></table>
+<p><strong>GPT-5.4 Thinking</strong> is a reasoning variant of GPT-5.4 (not an o-series model) that brings chain-of-thought reasoning to the GPT architecture. It is available as a model selector option in ChatGPT and via the API [F2].</p>
+
+<details class="accordion">
+  <summary class="accordion__title">Understanding o-series vs. GPT Architecture</summary>
+  <div class="accordion__content">
+    <p>The o-series models are NOT GPT variants. They are architecturally distinct, trained with reinforcement learning specifically for multi-step reasoning. GPT-5.4 Thinking is a hybrid -- a GPT-family model with reasoning capabilities grafted on, not an o-series model. This distinction matters for pricing (o3-pro at $20/$80 per MTok vs. GPT-5.4 at roughly $2.50/$10), capability expectations (o-series excels at systematic problem decomposition), and API endpoint selection (different model IDs and parameters).</p>
+  </div>
+</details>
+<h3 id="additional-model-categories">Additional Model Categories</h3>
+<p><strong>Image generation:</strong> GPT Image 1.5 (GA, December 2025) replaces DALL-E 3 (deprecated, support ends May 12, 2026). 4x faster generation with superior text rendering in images [F2].</p>
+<p><strong>Audio and speech:</strong></p>
+<ul>
+<li><strong>gpt-4o-transcribe</strong> / <strong>gpt-4o-mini-transcribe</strong>: Speech-to-text with lower error rates than Whisper</li>
+<li><strong>gpt-4o-transcribe-diarize</strong>: Speech-to-text with speaker identification</li>
+<li><strong>gpt-realtime</strong>: Speech-to-speech streaming via WebSocket, sub-3-second latency</li>
+<li><strong>gpt-4o-mini-tts</strong>: Prompt-controllable text-to-speech</li>
+<li><strong>tts-1</strong> / <strong>tts-1-hd</strong>: Standard and HD quality TTS with 13 voice options</li>
+<li><strong>Whisper-1</strong>: $0.006/minute, 99+ language support [F2]</li>
+</ul>
+<h3 id="cost-optimization">Cost Optimization</h3>
+<ul>
+<li><strong><span class="glossary-term" data-term="batch-api">Batch API</span>:</strong> 50% cost reduction with 24-hour asynchronous processing [F2].</li>
+<li><strong>Response <span class="glossary-term glossary-term--first-use" data-term="compaction">compaction</span>:</strong> An endpoint for long-running workflows that exceed context, reducing <span class="glossary-term" data-term="token">token</span> usage [F2].</li>
+<li><span class="glossary-term glossary-term--first-use" data-term="fine-tuning">Fine-tuning</span> available for select models with LoRA adapter support [F2].</li>
+</ul>
+<h3 id="retired-models">Retired Models</h3>
+<p>GPT-5.1 (all variants): retired March 11, 2026. GPT-4o: retired February 13, 2026. DALL-E 2 and DALL-E 3: deprecated, support ends May 12, 2026 [F2].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="OpenAI retired GPT-4o on February 13, 2026. This aggressive deprecation -- a once-flagship model retired in under a year -- means integrations built on specific OpenAI models may require migration within 3-6 months. This is a real operational risk, not just trivia. Plan for model portability." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">GPT-4o was retired on what date?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-retired-models-quiz" value="0" />
+          <span class="quiz__choice-label">January 2026</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-retired-models-quiz" value="1" />
+          <span class="quiz__choice-label">February 13, 2026</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-retired-models-quiz" value="2" />
+          <span class="quiz__choice-label">March 5, 2026</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-retired-models-quiz" value="3" />
+          <span class="quiz__choice-label">Still available</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="google-the-gemini-and-gemma-families">Google: The Gemini and Gemma Families</h2>
+<p>Google's model lineup is the broadest, spanning cloud models (Gemini), open-source models (Gemma), and on-device models (<span class="glossary-term glossary-term--first-use" data-term="gemini-nano">Gemini Nano</span>). Google is also the only provider with a native reasoning mode (Deep Think) built into its standard model family rather than offered as a separate model or feature.</p>
+<h3 id="current-gemini-models">Current Gemini Models</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th>Status</th><th>Context Window</th><th>Input $/MTok</th><th>Output $/MTok</th><th>Key Strengths</th></tr></thead><tbody><tr><td><strong>Gemini 3.1 Pro</strong></td><td>Preview</td><td>200K+ tokens</td><td>$2.00-$4.00</td><td>$12.00-$18.00</td><td>Flagship reasoning, 2x reasoning improvement over prior gen</td></tr><tr><td><strong>Gemini 3 Flash</strong></td><td>GA</td><td>1M tokens</td><td>$0.50</td><td>$3.00</td><td>3x faster than 2.5 Pro, frontier intelligence</td></tr><tr><td><strong>Gemini 3.1 Flash-Lite</strong></td><td>Preview</td><td>1M tokens</td><td>$0.25</td><td>$1.50</td><td>Most cost-efficient model in Google's lineup</td></tr><tr><td><strong>Gemini 2.5 Pro</strong></td><td>GA</td><td>1M tokens</td><td>$1.25-$2.50</td><td>$10.00-$15.00</td><td>Complex reasoning, advanced code generation</td></tr><tr><td><strong>Gemini 2.5 Flash</strong></td><td>GA</td><td>1M tokens</td><td>$0.30</td><td>$2.50</td><td>Speed/cost optimized, 20-30% fewer tokens</td></tr><tr><td><strong>Gemini 2.5 Flash-Lite</strong></td><td>GA</td><td>Standard</td><td>$0.10</td><td>$0.40</td><td>Budget tier, high throughput</td></tr><tr><td><strong>Gemini 3 Deep Think</strong> (reasoning mode)</td><td>Preview</td><td>192K tokens</td><td>—</td><td>—</td><td>ARC-AGI-2 84.6%, Humanity's Last Exam 48.4%, Codeforces Elo 3455</td></tr></tbody></table>
+<blockquote>
+<p><strong>Volatility warning:</strong> Google's pricing uses a two-tier structure where rates differ based on whether input exceeds a threshold (typically 200K tokens). The prices above show the range.</p>
+</blockquote>
+<h3 id="context-caching">Context Caching</h3>
+<p>Google's context caching offers the same 90% discount on cached reads as Anthropic (both charge 10% of standard input price for cache hits). The key difference is the cache eviction model: Anthropic uses time-based expiration (5-minute, 1-hour, or persistent durations) with no ongoing storage fee, while Google charges $1-$4.50 per million tokens per hour for cache storage. For short-lived caches, Anthropic's model is simpler; for long-lived reference documents, Google's explicit storage pricing may be more predictable [F3].</p>
+<p><strong>Batch processing:</strong> 50% discount, matching Anthropic and OpenAI [F3].</p>
+<h3 id="gemma-3-open-source">Gemma 3 (Open-Source)</h3>
+<p>Gemma 3 is Google's open-source model family released under the Apache 2.0 license:</p>
+<ul>
+<li><strong>Sizes:</strong> 270M, 1B, 4B, 12B, 27B parameters</li>
+<li><strong>Multimodal:</strong> Image input supported on 4B+ models</li>
+<li><strong>Context:</strong> 128K tokens on 4B+ models</li>
+<li><strong>Languages:</strong> 140+ languages</li>
+<li><strong>Deployment:</strong> Runs on a single GPU; suitable for on-device, edge, and self-hosted deployment [F3]</li>
+</ul>
+<h3 id="gemini-nano-on-device">Gemini Nano (On-Device)</h3>
+<p><span class="glossary-term" data-term="gemini-nano">Gemini Nano</span> is the only major provider's model designed for on-device inference with no server connection required. It powers Android features including Smart Reply, Call Notes, Pixel Screenshots, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device [F3].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Google's Gemini Nano powers Android features entirely locally -- Smart Reply, Call Notes, Pixel Screenshots -- with no data leaving the device. This is a unique strategic asset with privacy and latency implications. Module 10 explores on-device AI as a frontier topic in depth." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which major provider is the only one with models designed for on-device inference with no server connection?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-gemini-nano-on-device-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-gemini-nano-on-device-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-gemini-nano-on-device-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-gemini-nano-on-device-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="microsoft-the-model-marketplace">Microsoft: The Model Marketplace</h2>
+<p>Microsoft does not train frontier LLMs. Instead, it operates <strong>Microsoft Foundry</strong> (formerly Azure AI Studio), a marketplace of 11,000+ models from 11+ publishers including OpenAI, Anthropic, Meta, Mistral, DeepSeek, and Microsoft's own Phi family [F4].</p>
+<h3 id="notable-models-available-through-foundry">Notable Models Available Through Foundry</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th>Provider</th><th>Key Specs</th></tr></thead><tbody><tr><td>GPT-5.2, GPT-4o, o1/o3</td><td>OpenAI</td><td>Full OpenAI lineup via Azure</td></tr><tr><td>Claude Opus 4.6, Sonnet 4.6</td><td>Anthropic</td><td>Added March 2026 (Wave 3)</td></tr><tr><td>Llama models</td><td>Meta</td><td>Open-weight, commercially indemnified (Jan 2026)</td></tr><tr><td>Mistral models</td><td>Mistral AI</td><td>European alternative</td></tr><tr><td>DeepSeek models</td><td>DeepSeek</td><td>Cost-efficient reasoning, commercially indemnified (Jan 2026)</td></tr></tbody></table>
+<h3 id="microsofts-own-models-phi-family">Microsoft's Own Models: Phi Family</h3>
+<p>Microsoft's Phi models target edge and mobile deployment where full-scale frontier models are impractical:</p>
+<ul>
+<li><strong>Phi-4:</strong> 14B parameters, strong complex reasoning</li>
+<li><strong>Phi-4-multimodal:</strong> 5.6B parameters, handles speech, vision, and text</li>
+<li><strong>Phi-4-Reasoning-Vision-15B:</strong> Released March 4, 2026, combining visual reasoning with language [F4]</li>
+</ul>
+<h3 id="work-iq-intelligence-layer">Work IQ Intelligence Layer</h3>
+<p>Announced at Wave 3 (March 9, 2026), <span class="glossary-term glossary-term--first-use" data-term="work-iq">Work IQ</span> is an organizational intelligence layer that uses Microsoft Graph data -- emails, files, meetings, messages, and company structure -- to contextualize Copilot responses. This is not a model per se, but it represents Microsoft's approach to enterprise-specific intelligence: the model itself is generic, but the context surrounding it is deeply organizational [F4].</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Microsoft does not train frontier LLMs but operates a marketplace of 11,000+ models. Explain the strategic advantage and disadvantage of this approach compared to training your own models.</p>
+  <label for="se-m01-work-iq-intelligence-layer" class="sr-only">Your explanation</label>
+  <textarea id="se-m01-work-iq-intelligence-layer" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m01-work-iq-intelligence-layer">Compare with Expert Answer</button>
+  <div id="se-answer-m01-work-iq-intelligence-layer" class="self-explain__expert" hidden>
+    <p>Advantage: Model-agnostic flexibility -- enterprises can switch between providers (OpenAI, Anthropic, Meta, Mistral) without platform migration, and Microsoft bears no model training cost or research risk. Disadvantage: Dependency on external providers for frontier capability -- if OpenAI or Anthropic restricts access or raises prices, Microsoft's offering degrades. Microsoft mitigates this partially with its own Phi models for edge use cases, but these are not frontier-competitive. The marketplace approach bets on integration and distribution over model ownership.</p>
+  </div>
+</div>
+<hr>
+<h2 id="reasoning-modes-compared">Reasoning Modes Compared</h2>
+<p>The most significant capability development of 2025-2026 is the emergence of explicit <span class="glossary-term" data-term="reasoning-modes">reasoning modes</span> -- mechanisms that trade latency and cost for substantially improved performance on complex problems. The three major implementations take fundamentally different architectural approaches.</p>
+<h3 id="anthropic-extended-thinking">Anthropic: Extended Thinking</h3>
+<p><span class="glossary-term" data-term="extended-thinking">Extended thinking</span> is not a separate model. It is a mode available on all current Claude models (Opus 4.6, Sonnet 4.6, Haiku 4.5) where the model allocates additional serial compute to reason through problems before generating a response [F1].</p>
+<p><strong>How it works:</strong> The model produces a "thinking" block of internal reasoning (visible to the user) before the final response. This uses serial test-time compute -- the model reasons step by step through a single chain of thought.</p>
+<p><strong>Configuration:</strong></p>
+<ul>
+<li>Effort levels: Low, Medium, High (default), Max</li>
+<li>Thinking tokens are billed as output tokens ($5-$25/MTok for Opus, $3-$15/MTok for Sonnet)</li>
+<li>No separate model endpoint; enabled via API parameter [F1]</li>
+</ul>
+<p><strong>Experimental:</strong> Parallel thinking, where multiple independent thought processes run concurrently, is available as an experimental feature [F1].</p>
+<p><strong>Performance characteristic:</strong> Logarithmic improvement -- doubling compute produces diminishing but measurable gains. Best for problems that benefit from systematic exploration of solution space (coding, math, analysis) rather than problems requiring creative leaps.</p>
+<h3 id="openai-o-series-reasoning">OpenAI: o-Series Reasoning</h3>
+<p>The o-series (o3, o3-pro, o4-mini) are dedicated reasoning models -- architecturally distinct from the GPT family, trained with reinforcement learning specifically for multi-step reasoning [F2].</p>
+<p><strong>How it works:</strong> Unlike <span class="glossary-term" data-term="extended-thinking">extended thinking</span> (which is the same model thinking longer), o-series models are purpose-built reasoners. They decompose problems, explore solution paths, and self-verify. The reasoning process is not fully visible to the user.</p>
+<p><strong>Configuration:</strong></p>
+<ul>
+<li>Reasoning effort: Low, Medium, High</li>
+<li>o3: $2/$8 per MTok (after an 80% price drop from launch)</li>
+<li>o3-pro: $20/$80 per MTok -- maximum reasoning compute</li>
+<li>o4-mini: Optimized for math, coding, and visual tasks [F2]</li>
+</ul>
+<p><strong>Key benchmarks:</strong></p>
+<ul>
+<li>o4-mini: AIME 2025 99.5% pass@1 [W8]</li>
+<li>o3-pro: Highest scores on hardest reasoning benchmarks across providers [F2]</li>
+</ul>
+<p><strong>GPT-5.4 Thinking</strong> is a hybrid: a GPT-family model with reasoning capabilities grafted on, available as a model selector option. It is not an o-series model but offers some of the same benefits at GPT-5.4 pricing [F2].</p>
+<h3 id="google-gemini-3-deep-think">Google: Gemini 3 Deep Think</h3>
+<p>Gemini 3 Deep Think is a reasoning mode within the Gemini 3 family -- not a separate model. Like Anthropic's <span class="glossary-term" data-term="extended-thinking">extended thinking</span>, it activates additional compute on the base Gemini 3 model [F3].</p>
+<p><strong>How it works:</strong> Deep Think uses parallel hypothesis evaluation -- it constructs multiple candidate approaches simultaneously, evaluates them, and verifies the best one. This is architecturally distinct from both Anthropic's serial chain-of-thought and OpenAI's RL-trained reasoning [F3].</p>
+<p><strong>Current implementation:</strong></p>
+<ul>
+<li>Gemini 3 Deep Think (Preview): Available only on the AI Ultra tier ($249.99/month consumer subscription)</li>
+<li>192K <span class="glossary-term" data-term="context-window">context window</span> (smaller than standard Gemini context)</li>
+<li>Not yet available via API for general developers [F3]</li>
+</ul>
+<p><strong>Benchmark highlights:</strong></p>
+<ul>
+<li>ARC-AGI-2: 84.6% (the highest published score on this benchmark)</li>
+<li>Humanity's Last Exam: 48.4%</li>
+<li>Codeforces Elo: 3455</li>
+<li>IMO gold-medal level mathematical reasoning [W7]</li>
+</ul>
+<h3 id="the-cot-anti-pattern">The CoT Anti-Pattern</h3>
+<p>Research from Wharton's GAIL lab found that adding chain-of-thought prompts ("think step by step") to models that already reason internally adds 20-80% latency for only 2.9-3.1% improvement [W6]. When using <span class="glossary-term" data-term="extended-thinking">extended thinking</span>, o-series models, or Deep Think, do not layer additional CoT prompting on top -- the model is already reasoning; prompting it to reason again is redundant and wasteful.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="The Wharton GAIL lab found that layering chain-of-thought prompting on models that already reason internally is redundant and wasteful. The model is already reasoning; prompting it to reason again adds 20-80% latency for only a 2.9-3.1% improvement. This is a common and expensive anti-pattern." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A developer adds 'think step by step' to a prompt sent to an o3 model. What is the likely result?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-cot-anti-pattern-quiz" value="0" />
+          <span class="quiz__choice-label">Significant quality improvement</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-cot-anti-pattern-quiz" value="1" />
+          <span class="quiz__choice-label">20-80% more latency for roughly 3% improvement</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-cot-anti-pattern-quiz" value="2" />
+          <span class="quiz__choice-label">An error -- o-series does not accept text prompts</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-the-cot-anti-pattern-quiz" value="3" />
+          <span class="quiz__choice-label">No effect</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="reasoning-modes-summary">Reasoning Modes Summary</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Anthropic Extended Thinking</th><th>OpenAI o-Series</th><th>Google Deep Think</th></tr></thead><tbody><tr><td>Architecture</td><td>Same model, serial CoT</td><td>Separate RL-trained models</td><td>Same model, parallel hypothesis</td></tr><tr><td>Visibility</td><td>Thinking block visible</td><td>Partially visible</td><td>Thought summaries</td></tr><tr><td>Effort control</td><td>Low/Medium/High/Max</td><td>Low/Medium/High</td><td>Not configurable</td></tr><tr><td>Pricing</td><td>Thinking tokens as output</td><td>Dedicated model pricing</td><td>AI Ultra subscription only</td></tr><tr><td>Availability</td><td>All current Claude models (GA)</td><td>Dedicated models (GA)</td><td>Gemini 3 Deep Think (Preview)</td></tr><tr><td>Best benchmark</td><td>Top-tier coding, reasoning</td><td>o4-mini: AIME 99.5%</td><td>ARC-AGI-2: 84.6%</td></tr><tr><td>Consumer access</td><td>Pro plan ($20/mo)</td><td>Plus plan ($20/mo)</td><td>Ultra plan ($249.99/mo)</td></tr></tbody></table>
+
+<figure class="diagram diagram--mermaid" id="m01-1" role="img" aria-label="Three-panel comparison of reasoning architectures across providers. Anthropic uses serial chain-of-thought with extended thinking: the same model (Opus 4.6, Sonnet 4.6, or Haiku 4.5) produces a visible thinking block of step-by-step reasoning before generating the final response, with configurable effort levels from Low to Max. OpenAI trains architecturally separate RL-optimized reasoning models (o3, o3-pro, o4-mini) distinct from the GPT family, plus a GPT-5.4 Thinking hybrid variant. Google's Gemini 3 Deep Think evaluates multiple hypotheses in parallel, branching into candidate approaches and converging on the best verified answer, currently in Preview at 192K context on the AI Ultra tier.">
+  <pre class="mermaid">graph TD
+  subgraph Anthropic[&quot;Anthropic: Serial Extended Thinking&quot;]
+    A1[&quot;User Prompt&quot;] --&gt; A2[&quot;Claude Model&lt;br/&gt;Opus 4.6 / Sonnet 4.6 / Haiku 4.5&quot;]
+    A2 --&gt; A3[&quot;Thinking Block&lt;br/&gt;Serial chain-of-thought&lt;br/&gt;Visible to user&quot;]
+    A3 --&gt; A4[&quot;Step 1 → Step 2 → Step 3 → ...&quot;]
+    A4 --&gt; A5[&quot;Final Response&quot;]
+    A6[&quot;Effort: Low / Medium / High / Max&quot;]
+    A7[&quot;Same model, more compute&quot;]
+  end
+
+  subgraph OpenAI[&quot;OpenAI: Separate RL-Trained Reasoning Models&quot;]
+    O1[&quot;User Prompt&quot;] --&gt; O2{&quot;Task Type?&quot;}
+    O2 --&gt;|&quot;General&quot;| O3[&quot;GPT-5.4&lt;br/&gt;Standard model&quot;]
+    O2 --&gt;|&quot;Complex reasoning&quot;| O4[&quot;o3 / o3-pro / o4-mini&lt;br/&gt;RL-trained reasoners&quot;]
+    O2 --&gt;|&quot;Hybrid&quot;| O5[&quot;GPT-5.4 Thinking&lt;br/&gt;GPT + reasoning mode&quot;]
+    O3 --&gt; O6[&quot;Response&quot;]
+    O4 --&gt; O7[&quot;Decompose → Explore → Verify&quot;]
+    O7 --&gt; O6
+    O5 --&gt; O6
+  end
+
+  subgraph Google[&quot;Google: Parallel Hypothesis Evaluation&quot;]
+    G1[&quot;User Prompt&quot;] --&gt; G2[&quot;Gemini 3 Deep Think&quot;]
+    G2 --&gt; G3[&quot;Hypothesis A&quot;]
+    G2 --&gt; G4[&quot;Hypothesis B&quot;]
+    G2 --&gt; G5[&quot;Hypothesis C&quot;]
+    G3 --&gt; G6[&quot;Evaluate &amp; Score&quot;]
+    G4 --&gt; G6
+    G5 --&gt; G6
+    G6 --&gt; G7[&quot;Best Verified Answer&quot;]
+    G8[&quot;Preview only · 192K context&lt;br/&gt;AI Ultra tier&quot;]
+  end
+</pre>
+  <figcaption>Reasoning Modes Architecture Comparison</figcaption>
+</figure>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="False. This is the CoT anti-pattern. Models with built-in reasoning modes are already thinking step by step internally. Adding explicit CoT prompting is redundant, adding 20-80% latency for minimal quality gain. Let the model's native reasoning mode handle problem decomposition." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: You should add 'think step by step' to prompts sent to models with built-in reasoning modes.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Deep Think is available only on the AI Ultra tier at $249.99/month -- over 12x the price of Anthropic's Pro plan or OpenAI's Plus plan, which include their respective reasoning modes. This extreme pricing reflects Google's positioning of Deep Think as a premium capability, not a general feature." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Gemini 3 Deep Think is currently available to which consumer subscription tier?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="0" />
+          <span class="quiz__choice-label">Free tier</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="1" />
+          <span class="quiz__choice-label">AI Pro ($19.99/month)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="2" />
+          <span class="quiz__choice-label">AI Ultra ($249.99/month)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="3" />
+          <span class="quiz__choice-label">Not available to consumers</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="0" data-explanation="Anthropic's extended thinking produces a visible 'thinking block' of internal reasoning before the final response. OpenAI's o-series reasoning is only partially visible. Google's Deep Think shows thought summaries. Full visibility is an Anthropic differentiator that aids debugging and trust." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which provider makes the model's thinking process visible to the user as a 'thinking block'?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="3" />
+          <span class="quiz__choice-label">All three</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="The o-series (o3, o3-pro, o4-mini) are dedicated reasoning models trained with reinforcement learning -- architecturally distinct from GPT. Both Anthropic's extended thinking and Google's Deep Think are modes on their respective base models, not separate model families." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which reasoning approach uses architecturally separate, RL-trained models rather than a mode on the base model?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic Extended Thinking</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI o-Series</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="2" />
+          <span class="quiz__choice-label">Google Deep Think</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-reasoning-modes-summary-quiz" value="3" />
+          <span class="quiz__choice-label">All three use the same approach</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<details class="accordion">
+  <summary class="accordion__title">Extended thinking does not always improve results. In fact, for simple tasks, it can actively degrade quality. When should you turn it off?</summary>
+  <div class="accordion__content">
+    <p>Research from Wharton's GAIL lab found that adding chain-of-thought prompts to models that already reason internally adds 20-80% latency for only 2.9-3.1% improvement. The CoT anti-pattern section ahead explains why reasoning modes should be matched to task complexity -- and why more compute does not always mean better output.</p>
+  </div>
+</details>
+
+<aside class="concept-gate" role="note" aria-label="Prerequisite check">
+  <h4 class="concept-gate__title">Before You Continue: Reasoning Paradigms</h4>
+  <ul class="concept-gate__list">
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand what 'extended thinking' means at a high level (Anthropic subsection above)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I know that o-series models are architecturally separate from GPT models (OpenAI subsection above)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand what Gemini Deep Think is (Google subsection above)</label>
+    </li>
+  </ul>
+  <a class="concept-gate__continue" href="#anthropic-extended-thinking">Continue to next section →</a>
+</aside>
+<hr>
+<h2 id="multimodal-capabilities">Multimodal Capabilities</h2>
+<p>Multimodal support -- the ability to process and generate content across text, image, audio, and video -- varies significantly across providers.</p>
+<h3 id="input-modalities">Input Modalities</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Modality</th><th>Anthropic (Claude)</th><th>OpenAI (GPT)</th><th>Google (Gemini)</th><th>Notes</th></tr></thead><tbody><tr><td>Text</td><td>All models</td><td>All models</td><td>All models</td><td>Universal</td></tr><tr><td>Images</td><td>All models</td><td>All models</td><td>All models</td><td>Universal</td></tr><tr><td>PDF</td><td>Native processing</td><td>Via Code Interpreter</td><td>Native</td><td>Claude and Gemini handle PDFs natively</td></tr><tr><td>Audio</td><td>No native API audio</td><td>gpt-4o-transcribe, Realtime API, Whisper</td><td>Native audio input</td><td>Claude lacks audio input via API</td></tr><tr><td>Video</td><td>No</td><td>GPT-5.4, GPT-5.2</td><td>Gemini 3 Flash, 2.5 Pro</td><td>Google has broadest video support</td></tr></tbody></table>
+<h3 id="output-modalities">Output Modalities</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Modality</th><th>Anthropic (Claude)</th><th>OpenAI (GPT)</th><th>Google (Gemini)</th><th>Specialized Tools</th></tr></thead><tbody><tr><td>Text</td><td>All models</td><td>All models</td><td>All models</td><td>—</td></tr><tr><td>Images</td><td>None</td><td>GPT Image 1.5</td><td>Imagen 4, Nano Banana Pro</td><td>Midjourney v7 (highest artistic quality)</td></tr><tr><td>Video</td><td>None</td><td>Sora 2 (25 sec, Disney licensing)</td><td>Veo 3.1 (8 sec, native audio)</td><td>—</td></tr><tr><td>Voice/TTS</td><td>5 voice options in consumer app</td><td>Advanced Voice Mode (&#x3C;3s latency), 13 API voices</td><td>Gemini Live (24+ languages), native multi-speaker TTS</td><td>ElevenLabs (most realistic cloning)</td></tr><tr><td>Music</td><td>None</td><td>None</td><td>MusicFX / MusicFX DJ</td><td>—</td></tr></tbody></table>
+<h3 id="multimodal-gap-analysis">Multimodal Gap Analysis</h3>
+<p><strong>Anthropic's gap is notable:</strong> Claude has no native image generation, no video generation, no audio generation, and no audio input via API. In the consumer app, Claude offers basic TTS with 5 voice options, but this is far behind OpenAI's Advanced Voice Mode and Google's Gemini Live. For multimodal output, Claude users must integrate with third-party tools: Midjourney or Canva for images, ElevenLabs for voice synthesis [F1].</p>
+<p><strong>OpenAI leads on voice:</strong> Advanced Voice Mode delivers sub-3-second response times with emotional expression across 9+ voices. The Realtime API enables developers to build voice-first applications with tool calling during voice conversations [F2].</p>
+<p><strong>Google leads on breadth:</strong> Gemini is the only platform with native support for image generation, video generation, music generation, and multi-speaker TTS all in a single ecosystem. The Flow creative studio (merging Whisk, ImageFX, and Veo) provides a unified interface for all creative modalities [F3].</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Google is the only platform with native image generation (Imagen 4), video generation (Veo 3.1), music generation (MusicFX), and multi-speaker TTS all in one ecosystem via the Flow creative studio. Anthropic notably lacks native generation for images, video, and audio. OpenAI leads on voice (Advanced Voice Mode) and has Sora 2 for video, but lacks music generation." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform has the broadest multimodal OUTPUT capabilities -- image, video, music, and voice generation in one ecosystem?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-multimodal-gap-analysis-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic/Claude</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-multimodal-gap-analysis-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI/ChatGPT</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-multimodal-gap-analysis-quiz" value="2" />
+          <span class="quiz__choice-label">Google/Gemini</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-multimodal-gap-analysis-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft/Copilot</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="head-to-head-model-comparison">Head-to-Head Model Comparison</h2>
+<h3 id="flagship-model-comparison-march-2026">Flagship Model Comparison (March 2026)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Claude Opus 4.6</th><th>GPT-5.4</th><th>Gemini 3.1 Pro</th><th>Notes</th></tr></thead><tbody><tr><td><span class="glossary-term" data-term="context-window">Context window</span></td><td>1M tokens</td><td>1M tokens</td><td>200K+ tokens</td><td>Opus and GPT-5.4 lead on context</td></tr><tr><td>Max output</td><td>128K tokens</td><td>—</td><td>—</td><td>Opus has the highest confirmed max output</td></tr><tr><td>Input cost</td><td>$5.00/MTok</td><td>~$2.50/MTok</td><td>$2.00-$4.00/MTok</td><td>GPT-5.4 cheapest flagship</td></tr><tr><td>Output cost</td><td>$25.00/MTok</td><td>~$10+/MTok</td><td>$12.00-$18.00/MTok</td><td>GPT-5.4 cheapest flagship</td></tr><tr><td>Reasoning mode</td><td><span class="glossary-term" data-term="extended-thinking">Extended thinking</span> (GA)</td><td>Thinking variant (GA)</td><td>Gemini 3 Deep Think (Preview)</td><td>All available</td></tr><tr><td><span class="glossary-term" data-term="computer-use">Computer use</span></td><td>All models (GA)</td><td>GPT-5.4 native (GA)</td><td><span class="glossary-term glossary-term--first-use" data-term="project-mariner">Project Mariner</span> (Preview)</td><td>Claude most mature</td></tr><tr><td>Image input</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Universal</td></tr><tr><td>Audio input</td><td>No (API)</td><td>Yes</td><td>Yes</td><td>Claude lacks</td></tr><tr><td>Image generation</td><td>No</td><td>GPT Image 1.5</td><td>Imagen 4</td><td>Claude lacks</td></tr></tbody></table>
+<h3 id="budget-model-comparison-march-2026">Budget Model Comparison (March 2026)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Haiku 4.5</th><th>GPT-5.4 Nano</th><th>Gemini 3.1 Flash-Lite</th><th>GPT-4o Mini</th></tr></thead><tbody><tr><td>Input cost</td><td>$1.00/MTok</td><td>$0.20/MTok</td><td>$0.25/MTok</td><td>$0.15/MTok</td></tr><tr><td>Output cost</td><td>$5.00/MTok</td><td>$1.25/MTok</td><td>$1.50/MTok</td><td>$0.60/MTok</td></tr><tr><td>Context</td><td>200K</td><td>400K</td><td>1M</td><td>128K</td></tr><tr><td>Best for</td><td>Fast coding, triage</td><td>Production scale</td><td>Classification, routing</td><td>Legacy budget</td></tr><tr><td>SWE-bench</td><td>73.3%</td><td>—</td><td>—</td><td>—</td></tr></tbody></table>
+<blockquote>
+<p><strong>Volatility warning:</strong> GPT-4o Mini is a legacy model. Given OpenAI's aggressive deprecation history (GPT-4o itself was retired February 2026), GPT-4o Mini could be deprecated with limited notice. Do not build new integrations against it.</p>
+</blockquote>
+<p>At the budget tier, <strong>GPT-4o Mini ($0.15/$0.60)</strong> remains the cheapest option for simple tasks, but it is a legacy model on borrowed time. For current-generation budget work, <strong>GPT-5.4 Nano ($0.20/$1.25)</strong> and <strong>Gemini 3.1 Flash-Lite ($0.25/$1.50)</strong> offer dramatically better capabilities at similar price points.</p>
+
+<section class="quiz" data-variant="section-review" data-correct="2" data-explanation="Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok is the absolute cheapest current-generation model. Google also offers the only free API tier (rate-limited, data may be used for training). GPT-4o Mini is slightly cheaper but is a legacy model at risk of deprecation." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">At the budget tier, which model is the absolute cheapest current-generation option across all providers?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="0" />
+          <span class="quiz__choice-label">Haiku 4.5 ($1/$5 per MTok)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="1" />
+          <span class="quiz__choice-label">GPT-5.4 Nano ($0.20/$1.25 per MTok)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini 2.5 Flash-Lite ($0.10/$0.40 per MTok)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="3" />
+          <span class="quiz__choice-label">GPT-4o Mini ($0.15/$0.60 per MTok)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="3" data-explanation="GPT-4o Mini is a legacy model. Given OpenAI's aggressive deprecation history (GPT-4o itself was retired February 2026), GPT-4o Mini could be deprecated with limited notice. Do not build new integrations against it. GPT-5.4 Nano ($0.20/$1.25) offers dramatically better capabilities at a similar price point." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which budget model is a legacy model at risk of deprecation?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="0" />
+          <span class="quiz__choice-label">Haiku 4.5</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="1" />
+          <span class="quiz__choice-label">GPT-5.4 Nano</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini 3.1 Flash-Lite</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="3" />
+          <span class="quiz__choice-label">GPT-4o Mini</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="GPT-5.4 at approximately $2.50/MTok input is the cheapest flagship model. Gemini 3.1 Pro ranges from $2.00-$4.00 (tier-dependent). Opus 4.6 at $5.00/MTok is the most expensive. However, cheaper input pricing does not mean cheaper total cost -- output pricing, caching availability, and task-specific quality all factor into real-world cost." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which flagship model has the cheapest input pricing?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Opus 4.6 ($5.00/MTok)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="1" />
+          <span class="quiz__choice-label">GPT-5.4 (~$2.50/MTok)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini 3.1 Pro ($2.00-$4.00/MTok)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-budget-model-comparison-march-2026-quiz" value="3" />
+          <span class="quiz__choice-label">All are similarly priced</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="model-selection-framework">Model Selection Framework</h2>
+<p>Choosing the right model is a function of four variables: task complexity, required modalities, latency requirements, and cost constraints. The following framework maps common task categories to recommended models.</p>
+<h3 id="by-task-type">By Task Type</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Task Category</th><th>Recommended Model(s)</th><th>Rationale</th></tr></thead><tbody><tr><td>Complex reasoning + coding</td><td>Claude Opus 4.6</td><td>Top-tier reasoning, 1M context, 128K output, best code quality</td></tr><tr><td>Vision-heavy + reasoning</td><td>GPT-5.4 Thinking or Gemini 2.5 Pro</td><td>Both support native image + video input with reasoning</td></tr><tr><td>Fast classification / routing</td><td>GPT-5.4 Nano ($0.20/MTok) or Gemini 3.1 Flash-Lite ($0.25/MTok)</td><td>Cheapest current-gen models</td></tr><tr><td>Long document analysis</td><td>Claude Opus 4.6 or Gemini 3 Flash</td><td>Both offer 1M context; Gemini is cheaper</td></tr><tr><td>Video understanding</td><td>Gemini 3 Flash</td><td>Broadest video input support at 1M context</td></tr><tr><td>Audio/voice applications</td><td>GPT-5.4 + Realtime API, or Gemini + ElevenLabs</td><td>OpenAI has best native voice; ElevenLabs for highest quality synthesis</td></tr><tr><td>Image generation</td><td>GPT Image 1.5 (best instruction adherence) or Midjourney v7 (best artistic quality)</td><td>Claude and Google differ; Midjourney leads artistically</td></tr><tr><td>Video generation</td><td>Sora 2 (longest clips, Disney content) or Veo 3.1 (native audio)</td><td>Depends on use case</td></tr><tr><td>Budget bulk processing</td><td>GPT-5.4 Nano + <span class="glossary-term" data-term="batch-api">Batch API</span> or Gemini 3.1 Flash-Lite + Batch</td><td>50% batch discount on already-cheap models</td></tr><tr><td>Enterprise multi-model</td><td>Microsoft Foundry</td><td>Access to 11,000+ models with commercial indemnification</td></tr><tr><td>On-device / offline</td><td><span class="glossary-term" data-term="gemini-nano">Gemini Nano</span> (Android) or Gemma 3 (self-hosted)</td><td>Only options for fully local inference</td></tr><tr><td>Maximum reasoning (hardest problems)</td><td>o3-pro ($20/$80/MTok) or Gemini 3 Deep Think</td><td>Highest compute allocation for reasoning</td></tr></tbody></table>
+
+<div class="worked-example" data-variant="full" role="region" aria-label="Worked example">
+  <h4 class="worked-example__heading">Model Selection for a Customer Support Pipeline</h4>
+  <div class="worked-example__problem">
+    <p>A SaaS company handles 5,000 customer queries per day. Each query needs: (1) intent classification, (2) knowledge base retrieval, (3) response generation, (4) quality check. Current setup: all calls use Opus 4.6. Daily bill: approximately $1,500. The CTO wants 80% cost reduction without quality degradation on customer-facing responses.</p>
+  </div>
+  <div class="worked-example__stages">
+      <span class="worked-example__dot" data-step="1" aria-label="Step 1"></span>
+      <span class="worked-example__dot" data-step="2" aria-label="Step 2"></span>
+      <span class="worked-example__dot" data-step="3" aria-label="Step 3"></span>
+      <span class="worked-example__dot" data-step="4" aria-label="Step 4"></span>
+  </div>
+  <div class="worked-example__steps">
+    <div class="worked-example__step" data-step="1">
+      <h5 class="worked-example__step-label">Map each stage to complexity requirements</h5>
+      <div class="worked-example__step-content">
+        <p>Classification: low complexity, pattern matching. Retrieval: not an LLM task (vector search). Generation: moderate-high complexity, customer-facing quality. Quality check: moderate complexity, internal use only.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="2">
+      <h5 class="worked-example__step-label">Select models per stage</h5>
+      <div class="worked-example__step-content">
+        <p>Classification: GPT-5.4 Nano ($0.20/$1.25 per MTok) -- cheapest current-gen model, sufficient for routing. Retrieval: N/A (vector database, not LLM). Generation: Sonnet 4.6 ($3/$15 per MTok) -- strong quality at 40% of Opus pricing. Quality check: Haiku 4.5 ($1/$5 per MTok) -- fast, cheap, sufficient for pattern-based review.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="3">
+      <h5 class="worked-example__step-label">Calculate new daily cost</h5>
+      <div class="worked-example__step-content">
+        <p>Classification (5K calls, ~1K tokens each): ~$6. Generation (5K calls, ~3K tokens each): ~$270. Quality check (5K calls, ~2K tokens each): ~$30. New daily total: approximately $306.</p>
+      </div>
+    </div>
+    <div class="worked-example__step" data-step="4">
+      <h5 class="worked-example__step-label">Apply caching optimization</h5>
+      <div class="worked-example__step-content">
+        <p>The system prompt (20K tokens) is identical across all generation calls. With Anthropic's prompt caching at 90% cache hit rate, the 20K-token system prompt costs nearly nothing after the first call. This saves an additional ~$15/day on the generation stage.</p>
+      </div>
+    </div>
+  </div>
+  <div class="worked-example__solution" hidden>
+    <h5>Complete Solution</h5>
+    <p>By routing each pipeline stage to an appropriately-tiered model, daily costs drop from approximately $1,500 to approximately $290 -- an 81% reduction. Classification and quality check use the cheapest models; only the customer-facing generation stage uses a mid-tier model. No single call uses the flagship. This is the model selection framework in practice: match model capability to task requirements, not the other way around.</p>
+  </div>
+  <button class="worked-example__reveal" disabled>Reveal Complete Solution</button>
+</div>
+<h3 id="by-cost-sensitivity">By Cost Sensitivity</h3>
+<p>For cost-sensitive applications, the effective cost depends heavily on caching and batching strategies:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Optimization</th><th>Anthropic</th><th>OpenAI</th><th>Google</th></tr></thead><tbody><tr><td>Cache hit discount</td><td>90% off input</td><td>—</td><td>90% off input</td></tr><tr><td>Batch discount</td><td>50% off all tokens</td><td>50% off all tokens</td><td>50% off all tokens</td></tr><tr><td>Cheapest model</td><td>Haiku 4.5: $1/$5</td><td>GPT-4o Mini: $0.15/$0.60</td><td>Flash-Lite 2.5: $0.10/$0.40</td></tr><tr><td>Best value flagship</td><td>Sonnet 4.6: $3/$15</td><td>GPT-5.4: <del>$2.50/</del>$10</td><td>Gemini 3 Flash: $0.50/$3</td></tr><tr><td>Free tier</td><td>No</td><td>No</td><td>Yes (rate-limited, data used for training)</td></tr></tbody></table>
+<p>Google's <strong>Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok</strong> is the absolute cheapest current-generation model across all providers. Google also offers the only free API tier, though with the caveat that data may be used for model improvement [F3].</p>
+
+<figure class="diagram diagram--decision-tree" id="m01-4" role="img" aria-label="Interactive decision tree for choosing an AI model based on your primary task. Starts by identifying your task type (coding, reasoning, multimodal, creative generation, or budget-constrained bulk), then branches through specifics like scale, modality needs, latency requirements, and cost sensitivity to recommend specific models with pricing from Anthropic, OpenAI, and Google lineups as of March 2026.">
+  <div class="decision-tree" data-tree-config='{"root":{"question":"What is your primary task?","branches":[{"label":"Coding and software engineering","question":"What scale of coding work?","branches":[{"label":"Complex multi-file, agentic","terminal":{"model":"Claude Opus 4.6","price":"$5/$25 per MTok","rationale":"Top SWE-bench (80.8%), 1M context for full-repo comprehension, 128K max output."}},{"label":"Moderate single-file tasks","terminal":{"model":"Claude Sonnet 4.6","price":"$3/$15 per MTok","rationale":"Near-Opus coding quality at 40% lower cost. Strong instruction following."}},{"label":"Fast triage and classification","terminal":{"model":"Haiku 4.5","price":"$1/$5 per MTok","rationale":"73.3% SWE-bench Verified. Fastest Claude model for routing and simple code tasks."}}]},{"label":"Complex reasoning (math, analysis)","question":"How hard is the problem?","branches":[{"label":"Hardest problems (competition-level)","question":"Which reasoning approach?","branches":[{"label":"Maximum compute budget","terminal":{"model":"o3-pro","price":"$20/$80 per MTok","rationale":"Highest reasoning compute available. Best for problems where no other model succeeds."}},{"label":"Efficient math and code reasoning","terminal":{"model":"o4-mini","price":"Varies by effort level","rationale":"AIME 2025 99.5% pass@1. Efficient RL-trained reasoning for math and coding."}},{"label":"Parallel hypothesis evaluation","terminal":{"model":"Gemini 3 Deep Think","price":"$249.99/mo Ultra subscription","rationale":"ARC-AGI-2 84.6%. Parallel hypothesis approach. Preview, not yet API-available."}}]},{"label":"Standard complex tasks","terminal":{"model":"Claude Opus 4.6 (Extended Thinking)","price":"$5/$25 per MTok (thinking tokens as output)","rationale":"Serial chain-of-thought with visible thinking block. GA on all Claude models. Do not add extra CoT prompting."}}]},{"label":"Multimodal (vision, audio, video)","question":"Which modalities do you need?","branches":[{"label":"Video understanding","terminal":{"model":"Gemini 3 Flash","price":"$0.50/$3 per MTok","rationale":"Broadest video input support at 1M context. Natively multimodal (text + image + audio + video)."}},{"label":"Audio/voice applications","question":"Real-time voice or batch processing?","branches":[{"label":"Real-time voice interaction","terminal":{"model":"GPT-5.4 + Realtime API","price":"~$2.50/$10+ per MTok + Realtime pricing","rationale":"Sub-3-second latency. Advanced Voice Mode with emotional expression. Best native voice."}},{"label":"Batch speech processing","terminal":{"model":"Gemini + Live API or ElevenLabs","price":"Gemini $0.50/$3 + ElevenLabs for highest quality","rationale":"24+ language support. Multi-speaker TTS. ElevenLabs for most realistic voice cloning."}}]},{"label":"Vision + reasoning (images, PDFs)","terminal":{"model":"GPT-5.4 Thinking or Gemini 2.5 Pro","price":"GPT: ~$2.50/$10+ | Gemini: $1.25-$2.50/$10-$15","rationale":"Both support native image input with reasoning. Gemini cheaper; GPT broader capability."}}]},{"label":"Creative generation (images, video)","question":"What type of generation?","branches":[{"label":"Image generation","question":"Priority: instruction adherence or artistic quality?","branches":[{"label":"Best instruction adherence","terminal":{"model":"GPT Image 1.5","price":"Included in ChatGPT Plus/API pricing","rationale":"4x faster than DALL-E 3. Superior text rendering in images. Best prompt following."}},{"label":"Highest artistic quality","terminal":{"model":"Midjourney v7","price":"$10-$120/mo subscription","rationale":"Industry-leading artistic quality. Not API-native; requires separate subscription."}}]},{"label":"Video generation","question":"Longer clips or native audio?","branches":[{"label":"Longer clips (25 sec), narrative","terminal":{"model":"Sora 2","price":"Included in ChatGPT Pro ($200/mo)","rationale":"25-second clips. Disney licensing for premium content. Consumer-only access."}},{"label":"Native audio in video","terminal":{"model":"Veo 3.1","price":"Preview via Vertex AI API","rationale":"8-second clips with native audio generation. Available via Google&#39;s API."}}]}]},{"label":"Budget-constrained bulk processing","question":"How cost-sensitive?","branches":[{"label":"Absolute cheapest (cents per 1K queries)","terminal":{"model":"Gemini 2.5 Flash-Lite + Batch API","price":"$0.10/$0.40 per MTok (halved with batch)","rationale":"Cheapest current-gen model across all providers. 50% batch discount for offline work."}},{"label":"Cheap with strong capabilities","terminal":{"model":"GPT-5.4 Nano + Batch API","price":"$0.20/$1.25 per MTok (halved with batch)","rationale":"Current-gen model at near-budget pricing. Handles tasks that required flagships a year ago."}},{"label":"On-device / offline (no API cost)","terminal":{"model":"Gemini Nano or Gemma 3","price":"Free (runs locally)","rationale":"Only options for fully local inference. Nano for Android; Gemma 3 (1B-27B) for self-hosted."}}]}]}}' data-tree-id="m01-4"></div>
+  <figcaption>Model Selection Decision Tree</figcaption>
+</figure>
+
+<details class="accordion">
+  <summary class="accordion__title">Choosing the wrong model tier for a batch job can cost 10x more than necessary -- or produce unusable results.</summary>
+  <div class="accordion__content">
+    <p>A 5,000 query/day pipeline running on Opus 4.6 ($5/$25 per MTok) instead of GPT-5.4 Nano ($0.20/$1.25 per MTok) for simple classification costs $750/day vs $30/day -- a 25x difference. But running complex code review on the cheap model produces errors that take developer time to fix. The worked example below walks through matching the right model to each stage of a real pipeline.</p>
+  </div>
+</details>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>Context windows have converged at 1M tokens</strong> across Anthropic, OpenAI, and Google. This removes context length as a differentiator for most workloads and shifts the competitive axis to reasoning quality and multimodal capabilities.</p>
+</li>
+<li>
+<p><strong>Three reasoning paradigms exist</strong>, each architecturally distinct: Anthropic's serial <span class="glossary-term" data-term="extended-thinking">extended thinking</span> (same model, more compute), OpenAI's RL-trained o-series (separate specialized models), and Google's parallel Deep Think (same model, multiple hypothesis paths). All improve performance on complex tasks; none should be combined with additional CoT prompting.</p>
+</li>
+<li>
+<p><strong>Claude Opus 4.6 leads on code and reasoning quality</strong> but lacks multimodal output. GPT-5.4 offers the broadest single-model capability (text + vision + audio + <span class="glossary-term" data-term="computer-use">computer use</span>). Gemini leads on multimodal breadth and cost efficiency.</p>
+</li>
+<li>
+<p><strong>Budget models are now remarkably capable.</strong> GPT-5.4 Nano at $0.20/MTok input and Gemini 3.1 Flash-Lite at $0.25/MTok input can handle tasks that required flagship models a year ago.</p>
+</li>
+<li>
+<p><strong>OpenAI's deprecation velocity is a real risk.</strong> Five model generations in twelve months means any integration built on a specific model may need migration within 3-6 months. Plan for model portability.</p>
+</li>
+<li>
+<p><strong>Microsoft is a marketplace, not a model maker.</strong> Foundry's 11,000+ model catalog with commercial indemnification makes it the enterprise procurement layer, but Microsoft itself builds only small Phi models for edge deployment.</p>
+</li>
+<li>
+<p><strong>Google is the only provider with models at every layer</strong> -- cloud (Gemini), browser (Chrome), on-device (Nano), and open-source (Gemma) -- giving it unmatched surface area for integration.</p>
+</li>
+<li>
+<p><strong><span class="glossary-term" data-term="prompt-caching">Prompt caching</span> is a must-use optimization.</strong> Both Anthropic and Google offer 90% discounts on cached reads. For applications with stable system prompts or reference documents, this alone can reduce costs by an order of magnitude.</p>
+</li>
+<li>
+<p><strong>The multimodal gap matters.</strong> Claude's lack of native audio input, image generation, and video generation means practitioners need a multi-tool strategy for full coverage. See <a href="module-08.html">Module 08</a> for feature-by-feature comparison.</p>
+</li>
+<li>
+<p><strong>Model selection is situational, not tribal.</strong> No single provider dominates across all dimensions. The optimal strategy for most practitioners is to use 2-3 providers, routing tasks to the model best suited for each specific need.</p>
+</li>
+</ol>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The marketplace approach gives enterprises model-agnostic flexibility -- they can switch between OpenAI, Anthropic, Meta, and Mistral without platform migration. The disadvantage is dependency: if key providers restrict access or raise prices, Microsoft's offering degrades. Microsoft mitigates this with its own Phi models for edge use cases." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Microsoft operates Foundry with 11,000+ models. What is the strategic implication of being a 'marketplace, not a model maker'?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Microsoft has no AI capability</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Model-agnostic flexibility but dependency on external providers</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Microsoft saves money by not training models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Enterprise customers prefer marketplace models</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="GPT-5.4 and Gemini 3 Flash both support video input with reasoning capabilities. Claude Opus 4.6 does not support video input -- Anthropic's multimodal gap includes no native video or audio input via API. Gemini 3 Flash additionally offers 1M-token context for longer video analysis." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">A task requires processing live video input with reasoning capabilities. Which model(s) best fit?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Claude Opus 4.6</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">GPT-5.4 and Gemini 3 Flash</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Any flagship model</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Only specialized video models</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="OpenAI's deprecation velocity is a real operational risk. GPT-4o was retired February 13, 2026, and GPT-5.1 was retired March 11, 2026. Any integration built on a specific model may need migration within 3-6 months. Plan for model portability in any OpenAI integration." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">OpenAI has shipped five model generations in roughly twelve months. What operational risk does this create?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Higher API costs</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Model portability -- integrations may need migration within 3-6 months</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Reduced model quality</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Incompatible API formats</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="GPT-5.4 Thinking is a GPT-family model with reasoning capabilities -- not an o-series model. The o-series (o3, o3-pro, o4-mini) are architecturally distinct, trained with reinforcement learning specifically for multi-step reasoning. This distinction affects pricing, capability expectations, and API endpoint selection." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">True or False: GPT-5.4 Thinking is an o-series model.</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">True</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">False</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="0" data-explanation="Anthropic does not offer a native embeddings API. For Anthropic-centric architectures, third-party embedding providers (OpenAI, Cohere, Voyage AI) are the standard choice. OpenAI's text-embedding-3 models remain the most widely used embedding models in production." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which provider does NOT offer a native embeddings API?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Without caching: 52K tokens x $3/MTok x 500 = $78/day. With caching at 90% hit rate on the 50K system prompt: approximately $10.50/day. Savings: approximately $67.50/day or 86%. This calculation is explored in full depth in Module 02." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">An application sends a 50K-token system prompt 500 times per day with Sonnet 4.6. Approximately how much does prompt caching save daily?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">About $10/day</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">About $35/day</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">About $67.50/day</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">About $100/day</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok is the absolute cheapest current-generation model across all providers. GPT-4o Mini is technically cheaper but is a legacy model at risk of deprecation." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the cheapest current-generation model across all providers?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Haiku 4.5 at $1/$5 per MTok</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">GPT-5.4 Nano at $0.20/$1.25 per MTok</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">GPT-4o Mini at $0.15/$0.60 per MTok</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Google offers the only free API tier for Gemini models. The tradeoff: rate limits apply and free-tier data may be used for model improvement. Anthropic and OpenAI have no free API tiers. Microsoft provides access through Azure, which requires a paid subscription." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which provider offers the only free API tier (rate-limited, data may be used for training)?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Anthropic</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">OpenAI</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Google</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Google's Deep Think constructs multiple candidate approaches simultaneously and evaluates them in parallel. Anthropic's extended thinking reasons through a single serial chain of thought. OpenAI's o-series takes a third path: separate RL-trained models. These are three architecturally distinct approaches to the same goal." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">How does Google's Deep Think architecturally differ from Anthropic's extended thinking?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Deep Think uses serial chain-of-thought; extended thinking uses parallel evaluation</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Deep Think uses parallel hypothesis evaluation; extended thinking uses serial chain-of-thought</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Both use the same serial reasoning approach</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Deep Think is a separate model family; extended thinking is a mode</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Claude Opus 4.6 offers a 1M-token context window at standard per-token rates with no long-context surcharge (removed March 14, 2026). This matches OpenAI's GPT-5.4 and several Google Gemini models at the 1M-token level." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the maximum context window for Claude Opus 4.6?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">200K tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">400K tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">1M tokens</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m01-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">2M tokens</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- Platform ecosystem context and market structure</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term glossary-term--first-use" data-term="context-engineering">Context Engineering</span></a> -- Deep dive into context windows, caching, and memory systems</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term glossary-term--first-use" data-term="agent">Agent</span> Systems</a> -- How these models power agentic applications</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- Model selection for <span class="glossary-term" data-term="agent">agent</span> teams and orchestration cost tradeoffs</li>
+<li><a href="module-08.html">Module 08: Consumer AI Comparison</a> -- Feature-by-feature platform comparison including pricing tiers</li>
+<li><a href="module-10.html">Module 10: Frontier Topics</a> -- On-device models, multimodal generation, and where models are headed</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- API architectures, SDKs, and developer economics</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Source</th><th>Location/URL</th><th>Date</th></tr></thead><tbody><tr><td>F1</td><td>Anthropic/Claude Ecosystem Profile</td><td>reference/profiles/anthropic-claude.md</td><td>2026-03-18</td></tr><tr><td>F2</td><td>OpenAI/ChatGPT Ecosystem Profile</td><td>reference/profiles/openai-chatgpt.md</td><td>2026-03-18</td></tr><tr><td>F3</td><td>Google/Gemini Ecosystem Profile</td><td>reference/profiles/google-gemini.md</td><td>2026-03-18</td></tr><tr><td>F4</td><td>Microsoft/Copilot Ecosystem Profile</td><td>reference/profiles/microsoft-copilot.md</td><td>2026-03-18</td></tr><tr><td>F5</td><td>Specialized Tools Profile</td><td>reference/profiles/specialized-tools.md</td><td>2026-03-18</td></tr><tr><td>W5</td><td>Anthropic Fast Mode Documentation</td><td><a href="https://platform.claude.com/docs/en/build-with-claude/fast-mode">https://platform.claude.com/docs/en/build-with-claude/fast-mode</a></td><td>2026-03-20</td></tr><tr><td>W6</td><td>Chain-of-Thought Prompting on Reasoning Models (Wharton GAIL)</td><td><a href="https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/">https://gail.wharton.upenn.edu/research-and-insights/tech-report-chain-of-thought/</a></td><td>2026-03-20</td></tr><tr><td>W7</td><td>Gemini 3 Deep Think Announcement (Google Blog)</td><td><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/">https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/</a></td><td>2026-03-20</td></tr><tr><td>W8</td><td>Introducing o3 and o4-mini (OpenAI)</td><td><a href="https://openai.com/index/introducing-o3-and-o4-mini/">https://openai.com/index/introducing-o3-and-o4-mini/</a></td><td>2026-03-20</td></tr></tbody></table>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-00.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 00: Landscape Overview</span>
+        </a>
+        <a href="module-02.html" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module 02: Context Engineering</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

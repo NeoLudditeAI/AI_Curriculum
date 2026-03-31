@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{site.title}} — Course Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="{{site.cssPath}}">
+</head>
+<body class="page-index">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <h1 class="site-header__title">{{site.title}}</h1>
+    <p class="site-header__subtitle">Course Map</p>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- Resume banner placeholder (Round 5 JS activates when returning learner detected) -->
+  <div class="resume-banner" data-resume-banner style="display:none" role="status">
+    <p>Welcome back! <a href="#" data-resume-link>Resume where you left off</a></p>
+  </div>
+
+  <main id="main-content" role="main" class="course-map">
+    <p class="course-map__sequence-note">Recommended learning sequence: follow the numbered order within each part.</p>
+
+    {{#each courseMap.parts}}
+    <section class="course-map__part" data-part="{{number}}" id="part-{{number}}">
+      <h2 class="course-map__part-title">Part {{number}}: {{title}}</h2>
+      <div class="course-map__modules">
+        {{#each modules}}
+        <a href="modules/module-{{id}}.html" class="module-card" data-status="{{status}}">
+          <span class="module-card__sequence" aria-label="Sequence position {{sequencePosition}}">{{sequencePosition}}</span>
+          <h3 class="module-card__title">Module {{id}}: {{title}}</h3>
+          <div class="module-card__meta">
+            <span class="module-card__status">{{status}}</span>
+            <span class="module-card__time">{{estimatedTime}}</span>
+          </div>
+          {{#if prerequisites.length}}
+          <p class="module-card__prereqs">
+            Requires: {{#each prerequisites}}M{{this}}{{#unless @last}}, {{/unless}}{{/each}}
+          </p>
+          {{/if}}
+        </a>
+        {{/each}}
+      </div>
+    </section>
+    {{/each}}
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <nav aria-label="Site navigation">
+      <a href="glossary.html">Glossary</a>
+    </nav>
+    <p class="site-footer__title">{{site.title}}</p>
+  </footer>
+  <script id="course-map-data" type="application/json">{{{site.courseMapData}}}</script>
+  <script src="{{site.jsPath}}/storage.js"></script>
+  <script src="{{site.jsPath}}/dark-mode.js"></script>
+  <script src="{{site.jsPath}}/progress-tracker.js"></script>
+  <script src="{{site.jsPath}}/navigation.js"></script>
+</body>
+</html>

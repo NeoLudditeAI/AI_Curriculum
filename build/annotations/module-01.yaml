@@ -1,0 +1,513 @@
+# build/annotations/module-01.yaml
+# Annotations for Module 01: Models & Intelligence Tiers
+# Section IDs derived from generated HTML (authoritative)
+
+module: "01"
+annotations:
+
+  # === OPENING HOOK ===
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Your company runs 10,000 AI API calls per day. Last month's bill was $45,000. Can you cut it by 80%?"
+      content: "The answer is almost certainly yes -- but it requires understanding which of the 30+ models across four providers is right for which task, how reasoning modes actually work (and when they waste money), and where caching and batching can slash costs by an order of magnitude. This module gives you the data to answer that question."
+
+  # === THE MODEL LANDSCAPE IN MARCH 2026 ===
+
+  - after: "the-model-landscape-in-march-2026"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which of the following is NOT one of the three structural trends defining the current model landscape?"
+      choices: ["Context windows converged at 1M tokens", "Reasoning modes are standard", "Open-source models dominate enterprise deployment", "The cost floor keeps dropping"]
+      correct: 2
+      explanation: "While open-weight models have reached production quality (as covered in Module 00), the three defining structural trends are context window convergence at 1M tokens, reasoning modes becoming standard across all providers, and the cost floor continuing to drop. Enterprise deployment remains dominated by closed platform APIs."
+
+  # === ANTHROPIC: THE CLAUDE MODEL FAMILY ===
+
+  - after: "anthropic-cost-optimization"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Anthropic offers three prompt cache durations. What are they?"
+      choices: ["1-minute, 5-minute, 10-minute", "5-minute, 1-hour, persistent", "1-hour, 24-hour, permanent", "Automatic only -- no developer control"]
+      correct: 1
+      explanation: "The three tiers -- 5-minute, 1-hour, and persistent -- let developers match caching strategy to usage patterns. 5-minute suits rapid interactive exchanges, 1-hour suits batch jobs, and persistent suits rarely-changing system prompts. This becomes critical in Module 02's cost optimization discussion."
+
+  # === OPENAI: THE GPT AND o-SERIES FAMILIES ===
+
+  # Accordion: o-series vs GPT architecture
+  - after: "reasoning-models-o-series"
+    component: accordion
+    variant: advanced-detail
+    data:
+      title: "Understanding o-series vs. GPT Architecture"
+      content: "The o-series models are NOT GPT variants. They are architecturally distinct, trained with reinforcement learning specifically for multi-step reasoning. GPT-5.4 Thinking is a hybrid -- a GPT-family model with reasoning capabilities grafted on, not an o-series model. This distinction matters for pricing (o3-pro at $20/$80 per MTok vs. GPT-5.4 at roughly $2.50/$10), capability expectations (o-series excels at systematic problem decomposition), and API endpoint selection (different model IDs and parameters)."
+
+  - after: "retired-models"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "GPT-4o was retired on what date?"
+      choices: ["January 2026", "February 13, 2026", "March 5, 2026", "Still available"]
+      correct: 1
+      explanation: "OpenAI retired GPT-4o on February 13, 2026. This aggressive deprecation -- a once-flagship model retired in under a year -- means integrations built on specific OpenAI models may require migration within 3-6 months. This is a real operational risk, not just trivia. Plan for model portability."
+
+  # === GOOGLE: THE GEMINI AND GEMMA FAMILIES ===
+
+  - after: "gemini-nano-on-device"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which major provider is the only one with models designed for on-device inference with no server connection?"
+      choices: ["Anthropic", "OpenAI", "Google", "Microsoft"]
+      correct: 2
+      explanation: "Google's Gemini Nano powers Android features entirely locally -- Smart Reply, Call Notes, Pixel Screenshots -- with no data leaving the device. This is a unique strategic asset with privacy and latency implications. Module 10 explores on-device AI as a frontier topic in depth."
+
+  # === MICROSOFT: THE MODEL MARKETPLACE ===
+
+  - after: "work-iq-intelligence-layer"
+    component: self-explanation-prompt
+    data:
+      prompt: "Microsoft does not train frontier LLMs but operates a marketplace of 11,000+ models. Explain the strategic advantage and disadvantage of this approach compared to training your own models."
+      expert_answer: "Advantage: Model-agnostic flexibility -- enterprises can switch between providers (OpenAI, Anthropic, Meta, Mistral) without platform migration, and Microsoft bears no model training cost or research risk. Disadvantage: Dependency on external providers for frontier capability -- if OpenAI or Anthropic restricts access or raises prices, Microsoft's offering degrades. Microsoft mitigates this partially with its own Phi models for edge use cases, but these are not frontier-competitive. The marketplace approach bets on integration and distribution over model ownership."
+
+  # === REASONING MODES COMPARED ===
+
+  # Concept gate before reasoning modes
+  - after: "reasoning-modes-compared"
+    component: concept-gate
+    data:
+      title: "Before You Continue: Reasoning Paradigms"
+      prerequisites:
+        - "I understand what 'extended thinking' means at a high level (Anthropic subsection above)"
+        - "I know that o-series models are architecturally separate from GPT models (OpenAI subsection above)"
+        - "I understand what Gemini Deep Think is (Google subsection above)"
+      continue_section: "anthropic-extended-thinking"
+
+  # Curiosity prompt
+  - after: "reasoning-modes-compared"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Extended thinking does not always improve results. In fact, for simple tasks, it can actively degrade quality. When should you turn it off?"
+      content: "Research from Wharton's GAIL lab found that adding chain-of-thought prompts to models that already reason internally adds 20-80% latency for only 2.9-3.1% improvement. The CoT anti-pattern section ahead explains why reasoning modes should be matched to task complexity -- and why more compute does not always mean better output."
+
+  # Concept check after CoT Anti-Pattern
+  - after: "the-cot-anti-pattern"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "A developer adds 'think step by step' to a prompt sent to an o3 model. What is the likely result?"
+      choices: ["Significant quality improvement", "20-80% more latency for roughly 3% improvement", "An error -- o-series does not accept text prompts", "No effect"]
+      correct: 1
+      explanation: "The Wharton GAIL lab found that layering chain-of-thought prompting on models that already reason internally is redundant and wasteful. The model is already reasoning; prompting it to reason again adds 20-80% latency for only a 2.9-3.1% improvement. This is a common and expensive anti-pattern."
+
+  # Section review after Reasoning Modes Summary table
+  - after: "reasoning-modes-summary"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which reasoning approach uses architecturally separate, RL-trained models rather than a mode on the base model?"
+      choices: ["Anthropic Extended Thinking", "OpenAI o-Series", "Google Deep Think", "All three use the same approach"]
+      correct: 1
+      explanation: "The o-series (o3, o3-pro, o4-mini) are dedicated reasoning models trained with reinforcement learning -- architecturally distinct from GPT. Both Anthropic's extended thinking and Google's Deep Think are modes on their respective base models, not separate model families."
+
+  - after: "reasoning-modes-summary"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which provider makes the model's thinking process visible to the user as a 'thinking block'?"
+      choices: ["Anthropic", "OpenAI", "Google", "All three"]
+      correct: 0
+      explanation: "Anthropic's extended thinking produces a visible 'thinking block' of internal reasoning before the final response. OpenAI's o-series reasoning is only partially visible. Google's Deep Think shows thought summaries. Full visibility is an Anthropic differentiator that aids debugging and trust."
+
+  - after: "reasoning-modes-summary"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Gemini 3 Deep Think is currently available to which consumer subscription tier?"
+      choices: ["Free tier", "AI Pro ($19.99/month)", "AI Ultra ($249.99/month)", "Not available to consumers"]
+      correct: 2
+      explanation: "Deep Think is available only on the AI Ultra tier at $249.99/month -- over 12x the price of Anthropic's Pro plan or OpenAI's Plus plan, which include their respective reasoning modes. This extreme pricing reflects Google's positioning of Deep Think as a premium capability, not a general feature."
+
+  - after: "reasoning-modes-summary"
+    component: quiz
+    variant: section-review
+    data:
+      question: "True or False: You should add 'think step by step' to prompts sent to models with built-in reasoning modes."
+      choices: ["True", "False"]
+      correct: 1
+      explanation: "False. This is the CoT anti-pattern. Models with built-in reasoning modes are already thinking step by step internally. Adding explicit CoT prompting is redundant, adding 20-80% latency for minimal quality gain. Let the model's native reasoning mode handle problem decomposition."
+
+  # === MULTIMODAL CAPABILITIES ===
+
+  - after: "multimodal-gap-analysis"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which platform has the broadest multimodal OUTPUT capabilities -- image, video, music, and voice generation in one ecosystem?"
+      choices: ["Anthropic/Claude", "OpenAI/ChatGPT", "Google/Gemini", "Microsoft/Copilot"]
+      correct: 2
+      explanation: "Google is the only platform with native image generation (Imagen 4), video generation (Veo 3.1), music generation (MusicFX), and multi-speaker TTS all in one ecosystem via the Flow creative studio. Anthropic notably lacks native generation for images, video, and audio. OpenAI leads on voice (Advanced Voice Mode) and has Sora 2 for video, but lacks music generation."
+
+  # === HEAD-TO-HEAD MODEL COMPARISON ===
+
+  # Section review after both comparison tables
+  - after: "budget-model-comparison-march-2026"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which flagship model has the cheapest input pricing?"
+      choices: ["Claude Opus 4.6 ($5.00/MTok)", "GPT-5.4 (~$2.50/MTok)", "Gemini 3.1 Pro ($2.00-$4.00/MTok)", "All are similarly priced"]
+      correct: 1
+      explanation: "GPT-5.4 at approximately $2.50/MTok input is the cheapest flagship model. Gemini 3.1 Pro ranges from $2.00-$4.00 (tier-dependent). Opus 4.6 at $5.00/MTok is the most expensive. However, cheaper input pricing does not mean cheaper total cost -- output pricing, caching availability, and task-specific quality all factor into real-world cost."
+
+  - after: "budget-model-comparison-march-2026"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which budget model is a legacy model at risk of deprecation?"
+      choices: ["Haiku 4.5", "GPT-5.4 Nano", "Gemini 3.1 Flash-Lite", "GPT-4o Mini"]
+      correct: 3
+      explanation: "GPT-4o Mini is a legacy model. Given OpenAI's aggressive deprecation history (GPT-4o itself was retired February 2026), GPT-4o Mini could be deprecated with limited notice. Do not build new integrations against it. GPT-5.4 Nano ($0.20/$1.25) offers dramatically better capabilities at a similar price point."
+
+  - after: "budget-model-comparison-march-2026"
+    component: quiz
+    variant: section-review
+    data:
+      question: "At the budget tier, which model is the absolute cheapest current-generation option across all providers?"
+      choices: ["Haiku 4.5 ($1/$5 per MTok)", "GPT-5.4 Nano ($0.20/$1.25 per MTok)", "Gemini 2.5 Flash-Lite ($0.10/$0.40 per MTok)", "GPT-4o Mini ($0.15/$0.60 per MTok)"]
+      correct: 2
+      explanation: "Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok is the absolute cheapest current-generation model. Google also offers the only free API tier (rate-limited, data may be used for training). GPT-4o Mini is slightly cheaper but is a legacy model at risk of deprecation."
+
+  # === MODEL SELECTION FRAMEWORK ===
+
+  # Curiosity prompt
+  - after: "model-selection-framework"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Choosing the wrong model tier for a batch job can cost 10x more than necessary -- or produce unusable results."
+      content: "A 5,000 query/day pipeline running on Opus 4.6 ($5/$25 per MTok) instead of GPT-5.4 Nano ($0.20/$1.25 per MTok) for simple classification costs $750/day vs $30/day -- a 25x difference. But running complex code review on the cheap model produces errors that take developer time to fix. The worked example below walks through matching the right model to each stage of a real pipeline."
+
+  # Worked example: model selection for pipeline
+  - after: "by-task-type"
+    component: worked-example
+    variant: full
+    data:
+      title: "Model Selection for a Customer Support Pipeline"
+      problem: "A SaaS company handles 5,000 customer queries per day. Each query needs: (1) intent classification, (2) knowledge base retrieval, (3) response generation, (4) quality check. Current setup: all calls use Opus 4.6. Daily bill: approximately $1,500. The CTO wants 80% cost reduction without quality degradation on customer-facing responses."
+      steps:
+        - label: "Map each stage to complexity requirements"
+          content: "Classification: low complexity, pattern matching. Retrieval: not an LLM task (vector search). Generation: moderate-high complexity, customer-facing quality. Quality check: moderate complexity, internal use only."
+        - label: "Select models per stage"
+          content: "Classification: GPT-5.4 Nano ($0.20/$1.25 per MTok) -- cheapest current-gen model, sufficient for routing. Retrieval: N/A (vector database, not LLM). Generation: Sonnet 4.6 ($3/$15 per MTok) -- strong quality at 40% of Opus pricing. Quality check: Haiku 4.5 ($1/$5 per MTok) -- fast, cheap, sufficient for pattern-based review."
+        - label: "Calculate new daily cost"
+          content: "Classification (5K calls, ~1K tokens each): ~$6. Generation (5K calls, ~3K tokens each): ~$270. Quality check (5K calls, ~2K tokens each): ~$30. New daily total: approximately $306."
+        - label: "Apply caching optimization"
+          content: "The system prompt (20K tokens) is identical across all generation calls. With Anthropic's prompt caching at 90% cache hit rate, the 20K-token system prompt costs nearly nothing after the first call. This saves an additional ~$15/day on the generation stage."
+      solution: "By routing each pipeline stage to an appropriately-tiered model, daily costs drop from approximately $1,500 to approximately $290 -- an 81% reduction. Classification and quality check use the cheapest models; only the customer-facing generation stage uses a mid-tier model. No single call uses the flagship. This is the model selection framework in practice: match model capability to task requirements, not the other way around."
+
+  # === MODULE ASSESSMENT (after Key Takeaways) ===
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the maximum context window for Claude Opus 4.6?"
+      choices: ["200K tokens", "400K tokens", "1M tokens", "2M tokens"]
+      correct: 2
+      explanation: "Claude Opus 4.6 offers a 1M-token context window at standard per-token rates with no long-context surcharge (removed March 14, 2026). This matches OpenAI's GPT-5.4 and several Google Gemini models at the 1M-token level."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "How does Google's Deep Think architecturally differ from Anthropic's extended thinking?"
+      choices: ["Deep Think uses serial chain-of-thought; extended thinking uses parallel evaluation", "Deep Think uses parallel hypothesis evaluation; extended thinking uses serial chain-of-thought", "Both use the same serial reasoning approach", "Deep Think is a separate model family; extended thinking is a mode"]
+      correct: 1
+      explanation: "Google's Deep Think constructs multiple candidate approaches simultaneously and evaluates them in parallel. Anthropic's extended thinking reasons through a single serial chain of thought. OpenAI's o-series takes a third path: separate RL-trained models. These are three architecturally distinct approaches to the same goal."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which provider offers the only free API tier (rate-limited, data may be used for training)?"
+      choices: ["Anthropic", "OpenAI", "Google", "Microsoft"]
+      correct: 2
+      explanation: "Google offers the only free API tier for Gemini models. The tradeoff: rate limits apply and free-tier data may be used for model improvement. Anthropic and OpenAI have no free API tiers. Microsoft provides access through Azure, which requires a paid subscription."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the cheapest current-generation model across all providers?"
+      choices: ["Haiku 4.5 at $1/$5 per MTok", "GPT-5.4 Nano at $0.20/$1.25 per MTok", "Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok", "GPT-4o Mini at $0.15/$0.60 per MTok"]
+      correct: 2
+      explanation: "Gemini 2.5 Flash-Lite at $0.10/$0.40 per MTok is the absolute cheapest current-generation model across all providers. GPT-4o Mini is technically cheaper but is a legacy model at risk of deprecation."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "An application sends a 50K-token system prompt 500 times per day with Sonnet 4.6. Approximately how much does prompt caching save daily?"
+      choices: ["About $10/day", "About $35/day", "About $67.50/day", "About $100/day"]
+      correct: 2
+      explanation: "Without caching: 52K tokens x $3/MTok x 500 = $78/day. With caching at 90% hit rate on the 50K system prompt: approximately $10.50/day. Savings: approximately $67.50/day or 86%. This calculation is explored in full depth in Module 02."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which provider does NOT offer a native embeddings API?"
+      choices: ["Anthropic", "OpenAI", "Google", "Microsoft"]
+      correct: 0
+      explanation: "Anthropic does not offer a native embeddings API. For Anthropic-centric architectures, third-party embedding providers (OpenAI, Cohere, Voyage AI) are the standard choice. OpenAI's text-embedding-3 models remain the most widely used embedding models in production."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "True or False: GPT-5.4 Thinking is an o-series model."
+      choices: ["True", "False"]
+      correct: 1
+      explanation: "GPT-5.4 Thinking is a GPT-family model with reasoning capabilities -- not an o-series model. The o-series (o3, o3-pro, o4-mini) are architecturally distinct, trained with reinforcement learning specifically for multi-step reasoning. This distinction affects pricing, capability expectations, and API endpoint selection."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "OpenAI has shipped five model generations in roughly twelve months. What operational risk does this create?"
+      choices: ["Higher API costs", "Model portability -- integrations may need migration within 3-6 months", "Reduced model quality", "Incompatible API formats"]
+      correct: 1
+      explanation: "OpenAI's deprecation velocity is a real operational risk. GPT-4o was retired February 13, 2026, and GPT-5.1 was retired March 11, 2026. Any integration built on a specific model may need migration within 3-6 months. Plan for model portability in any OpenAI integration."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "A task requires processing live video input with reasoning capabilities. Which model(s) best fit?"
+      choices: ["Claude Opus 4.6", "GPT-5.4 and Gemini 3 Flash", "Any flagship model", "Only specialized video models"]
+      correct: 1
+      explanation: "GPT-5.4 and Gemini 3 Flash both support video input with reasoning capabilities. Claude Opus 4.6 does not support video input -- Anthropic's multimodal gap includes no native video or audio input via API. Gemini 3 Flash additionally offers 1M-token context for longer video analysis."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Microsoft operates Foundry with 11,000+ models. What is the strategic implication of being a 'marketplace, not a model maker'?"
+      choices: ["Microsoft has no AI capability", "Model-agnostic flexibility but dependency on external providers", "Microsoft saves money by not training models", "Enterprise customers prefer marketplace models"]
+      correct: 1
+      explanation: "The marketplace approach gives enterprises model-agnostic flexibility -- they can switch between OpenAI, Anthropic, Meta, and Mistral without platform migration. The disadvantage is dependency: if key providers restrict access or raise prices, Microsoft's offering degrades. Microsoft mitigates this with its own Phi models for edge use cases."
+
+  # === ROUND 7 DIAGRAMS ===
+
+  # Figure M01-1: Reasoning Modes Architecture Comparison
+  - after: "reasoning-modes-compared"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m01-1"
+      title: "Reasoning Modes Architecture Comparison"
+      alt: "Three-panel comparison of reasoning architectures across providers. Anthropic uses serial chain-of-thought with extended thinking: the same model (Opus 4.6, Sonnet 4.6, or Haiku 4.5) produces a visible thinking block of step-by-step reasoning before generating the final response, with configurable effort levels from Low to Max. OpenAI trains architecturally separate RL-optimized reasoning models (o3, o3-pro, o4-mini) distinct from the GPT family, plus a GPT-5.4 Thinking hybrid variant. Google's Gemini 3 Deep Think evaluates multiple hypotheses in parallel, branching into candidate approaches and converging on the best verified answer, currently in Preview at 192K context on the AI Ultra tier."
+      source: |
+        graph TD
+          subgraph Anthropic["Anthropic: Serial Extended Thinking"]
+            A1["User Prompt"] --> A2["Claude Model<br/>Opus 4.6 / Sonnet 4.6 / Haiku 4.5"]
+            A2 --> A3["Thinking Block<br/>Serial chain-of-thought<br/>Visible to user"]
+            A3 --> A4["Step 1 → Step 2 → Step 3 → ..."]
+            A4 --> A5["Final Response"]
+            A6["Effort: Low / Medium / High / Max"]
+            A7["Same model, more compute"]
+          end
+
+          subgraph OpenAI["OpenAI: Separate RL-Trained Reasoning Models"]
+            O1["User Prompt"] --> O2{"Task Type?"}
+            O2 -->|"General"| O3["GPT-5.4<br/>Standard model"]
+            O2 -->|"Complex reasoning"| O4["o3 / o3-pro / o4-mini<br/>RL-trained reasoners"]
+            O2 -->|"Hybrid"| O5["GPT-5.4 Thinking<br/>GPT + reasoning mode"]
+            O3 --> O6["Response"]
+            O4 --> O7["Decompose → Explore → Verify"]
+            O7 --> O6
+            O5 --> O6
+          end
+
+          subgraph Google["Google: Parallel Hypothesis Evaluation"]
+            G1["User Prompt"] --> G2["Gemini 3 Deep Think"]
+            G2 --> G3["Hypothesis A"]
+            G2 --> G4["Hypothesis B"]
+            G2 --> G5["Hypothesis C"]
+            G3 --> G6["Evaluate & Score"]
+            G4 --> G6
+            G5 --> G6
+            G6 --> G7["Best Verified Answer"]
+            G8["Preview only · 192K context<br/>AI Ultra tier"]
+          end
+
+  # Figure M01-2: Model Tier Spectrum
+  - after: "the-model-landscape-in-march-2026"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m01-2"
+      title: "Model Tier Spectrum Across Providers (March 2026)"
+      alt: "Four horizontal tracks showing model tiers from budget to flagship for each provider. Anthropic track: Haiku 4.5 ($1/$5, 200K context) to Sonnet 4.6 ($3/$15, 1M context) to Opus 4.6 ($5/$25, 1M context, 128K output). OpenAI track: GPT-4o Mini ($0.15/$0.60, 128K, legacy) to GPT-5.4 Nano ($0.20/$1.25, 400K) to GPT-5.4 Mini ($0.75/$4.50, 400K) to GPT-5.4 ($2.50/$10+, 1M) plus separate o-series reasoning models (o3 at $2/$8, o3-pro at $20/$80). Google track: Flash-Lite 2.5 ($0.10/$0.40, cheapest overall) to Flash 3 ($0.50/$3, 1M) to Gemini 2.5 Pro ($1.25-$2.50/$10-$15, 1M) to Gemini 3.1 Pro ($2-$4/$12-$18, Preview). Microsoft track: Phi-4 family for edge deployment, plus Foundry marketplace with 11,000+ models from all other providers."
+      source: |
+        graph LR
+          subgraph Anthropic["Anthropic — Claude Family"]
+            direction LR
+            AH["Haiku 4.5<br/>$1 / $5 MTok<br/>200K context"] --> AS["Sonnet 4.6<br/>$3 / $15 MTok<br/>1M context"]
+            AS --> AO["Opus 4.6<br/>$5 / $25 MTok<br/>1M context · 128K output"]
+          end
+
+          subgraph OpenAI["OpenAI — GPT + o-Series"]
+            direction LR
+            O4M["GPT-4o Mini<br/>$0.15 / $0.60<br/>128K · Legacy"] --> ON["GPT-5.4 Nano<br/>$0.20 / $1.25<br/>400K context"]
+            ON --> OMi["GPT-5.4 Mini<br/>$0.75 / $4.50<br/>400K context"]
+            OMi --> OG["GPT-5.4<br/>~$2.50 / ~$10+<br/>1M context"]
+            OR["o3: $2/$8<br/>o3-pro: $20/$80<br/>Separate RL reasoning"]
+          end
+
+          subgraph Google["Google — Gemini + Gemma"]
+            direction LR
+            GFL["Flash-Lite 2.5<br/>$0.10 / $0.40<br/>Cheapest overall"] --> GF["Flash 3<br/>$0.50 / $3<br/>1M context"]
+            GF --> GP["Gemini 2.5 Pro<br/>$1.25-$2.50 / $10-$15<br/>1M context"]
+            GP --> G31["Gemini 3.1 Pro<br/>$2-$4 / $12-$18<br/>Preview"]
+          end
+
+          subgraph Microsoft["Microsoft — Marketplace + Phi"]
+            direction LR
+            MPH["Phi-4 Family<br/>Edge / mobile<br/>5.6B-14B params"] --> MF["Foundry Marketplace<br/>11,000+ models<br/>11+ publishers"]
+          end
+
+  # ── Figure M01-4: Model Selection Decision Tree (Interactive) ────────
+  - after: "model-selection-framework"
+    component: diagram
+    variant: decision-tree
+    data:
+      id: "m01-4"
+      title: "Model Selection Decision Tree"
+      alt: "Interactive decision tree for choosing an AI model based on your primary task. Starts by identifying your task type (coding, reasoning, multimodal, creative generation, or budget-constrained bulk), then branches through specifics like scale, modality needs, latency requirements, and cost sensitivity to recommend specific models with pricing from Anthropic, OpenAI, and Google lineups as of March 2026."
+      config:
+        root:
+          question: "What is your primary task?"
+          branches:
+            - label: "Coding and software engineering"
+              question: "What scale of coding work?"
+              branches:
+                - label: "Complex multi-file, agentic"
+                  terminal:
+                    model: "Claude Opus 4.6"
+                    price: "$5/$25 per MTok"
+                    rationale: "Top SWE-bench (80.8%), 1M context for full-repo comprehension, 128K max output."
+                - label: "Moderate single-file tasks"
+                  terminal:
+                    model: "Claude Sonnet 4.6"
+                    price: "$3/$15 per MTok"
+                    rationale: "Near-Opus coding quality at 40% lower cost. Strong instruction following."
+                - label: "Fast triage and classification"
+                  terminal:
+                    model: "Haiku 4.5"
+                    price: "$1/$5 per MTok"
+                    rationale: "73.3% SWE-bench Verified. Fastest Claude model for routing and simple code tasks."
+            - label: "Complex reasoning (math, analysis)"
+              question: "How hard is the problem?"
+              branches:
+                - label: "Hardest problems (competition-level)"
+                  question: "Which reasoning approach?"
+                  branches:
+                    - label: "Maximum compute budget"
+                      terminal:
+                        model: "o3-pro"
+                        price: "$20/$80 per MTok"
+                        rationale: "Highest reasoning compute available. Best for problems where no other model succeeds."
+                    - label: "Efficient math and code reasoning"
+                      terminal:
+                        model: "o4-mini"
+                        price: "Varies by effort level"
+                        rationale: "AIME 2025 99.5% pass@1. Efficient RL-trained reasoning for math and coding."
+                    - label: "Parallel hypothesis evaluation"
+                      terminal:
+                        model: "Gemini 3 Deep Think"
+                        price: "$249.99/mo Ultra subscription"
+                        rationale: "ARC-AGI-2 84.6%. Parallel hypothesis approach. Preview, not yet API-available."
+                - label: "Standard complex tasks"
+                  terminal:
+                    model: "Claude Opus 4.6 (Extended Thinking)"
+                    price: "$5/$25 per MTok (thinking tokens as output)"
+                    rationale: "Serial chain-of-thought with visible thinking block. GA on all Claude models. Do not add extra CoT prompting."
+            - label: "Multimodal (vision, audio, video)"
+              question: "Which modalities do you need?"
+              branches:
+                - label: "Video understanding"
+                  terminal:
+                    model: "Gemini 3 Flash"
+                    price: "$0.50/$3 per MTok"
+                    rationale: "Broadest video input support at 1M context. Natively multimodal (text + image + audio + video)."
+                - label: "Audio/voice applications"
+                  question: "Real-time voice or batch processing?"
+                  branches:
+                    - label: "Real-time voice interaction"
+                      terminal:
+                        model: "GPT-5.4 + Realtime API"
+                        price: "~$2.50/$10+ per MTok + Realtime pricing"
+                        rationale: "Sub-3-second latency. Advanced Voice Mode with emotional expression. Best native voice."
+                    - label: "Batch speech processing"
+                      terminal:
+                        model: "Gemini + Live API or ElevenLabs"
+                        price: "Gemini $0.50/$3 + ElevenLabs for highest quality"
+                        rationale: "24+ language support. Multi-speaker TTS. ElevenLabs for most realistic voice cloning."
+                - label: "Vision + reasoning (images, PDFs)"
+                  terminal:
+                    model: "GPT-5.4 Thinking or Gemini 2.5 Pro"
+                    price: "GPT: ~$2.50/$10+ | Gemini: $1.25-$2.50/$10-$15"
+                    rationale: "Both support native image input with reasoning. Gemini cheaper; GPT broader capability."
+            - label: "Creative generation (images, video)"
+              question: "What type of generation?"
+              branches:
+                - label: "Image generation"
+                  question: "Priority: instruction adherence or artistic quality?"
+                  branches:
+                    - label: "Best instruction adherence"
+                      terminal:
+                        model: "GPT Image 1.5"
+                        price: "Included in ChatGPT Plus/API pricing"
+                        rationale: "4x faster than DALL-E 3. Superior text rendering in images. Best prompt following."
+                    - label: "Highest artistic quality"
+                      terminal:
+                        model: "Midjourney v7"
+                        price: "$10-$120/mo subscription"
+                        rationale: "Industry-leading artistic quality. Not API-native; requires separate subscription."
+                - label: "Video generation"
+                  question: "Longer clips or native audio?"
+                  branches:
+                    - label: "Longer clips (25 sec), narrative"
+                      terminal:
+                        model: "Sora 2"
+                        price: "Included in ChatGPT Pro ($200/mo)"
+                        rationale: "25-second clips. Disney licensing for premium content. Consumer-only access."
+                    - label: "Native audio in video"
+                      terminal:
+                        model: "Veo 3.1"
+                        price: "Preview via Vertex AI API"
+                        rationale: "8-second clips with native audio generation. Available via Google's API."
+            - label: "Budget-constrained bulk processing"
+              question: "How cost-sensitive?"
+              branches:
+                - label: "Absolute cheapest (cents per 1K queries)"
+                  terminal:
+                    model: "Gemini 2.5 Flash-Lite + Batch API"
+                    price: "$0.10/$0.40 per MTok (halved with batch)"
+                    rationale: "Cheapest current-gen model across all providers. 50% batch discount for offline work."
+                - label: "Cheap with strong capabilities"
+                  terminal:
+                    model: "GPT-5.4 Nano + Batch API"
+                    price: "$0.20/$1.25 per MTok (halved with batch)"
+                    rationale: "Current-gen model at near-budget pricing. Handles tasks that required flagships a year ago."
+                - label: "On-device / offline (no API cost)"
+                  terminal:
+                    model: "Gemini Nano or Gemma 3"
+                    price: "Free (runs locally)"
+                    rationale: "Only options for fully local inference. Nano for Android; Gemma 3 (1B-27B) for self-hosted."

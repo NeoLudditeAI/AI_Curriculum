@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module {{module.id}}: {{module.title}} — {{site.title}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="{{site.cssPath}}">
+</head>
+<body class="page-module" data-module-id="{{module.id}}">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        {{#each navigation.breadcrumbs}}
+        <li class="breadcrumbs__item">
+          {{#if url}}<a href="{{url}}" class="breadcrumbs__link">{{label}}</a>{{else}}<span{{#if @last}} aria-current="page"{{/if}} class="breadcrumbs__current">{{label}}</span>{{/if}}
+        </li>
+        {{/each}}
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module {{module.id}}: {{module.title}}</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="{{module.status}}">{{module.status}}</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">{{module.estimatedTime}}</span>
+        <span class="module-meta__updated" aria-label="Last updated">{{module.lastUpdated}}</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          {{#each module.headings}}
+          <li class="toc__item toc__item--level-{{level}}">
+            <a href="#{{id}}" class="toc__link" data-toc-active>{{text}}</a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          {{{module.content}}}
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        {{#if navigation.prev}}
+        <a href="{{navigation.prev.url}}" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module {{navigation.prev.id}}: {{navigation.prev.title}}</span>
+        </a>
+        {{else}}
+        <span class="module-nav__link module-nav__link--prev module-nav__link--disabled"></span>
+        {{/if}}
+        {{#if navigation.next}}
+        <a href="{{navigation.next.url}}" class="module-nav__link module-nav__link--next">
+          <span class="module-nav__arrow" aria-hidden="true">&rarr;</span>
+          <span class="module-nav__direction">Next</span>
+          <span class="module-nav__title">Module {{navigation.next.id}}: {{navigation.next.title}}</span>
+        </a>
+        {{/if}}
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">{{site.title}}</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">{{{site.glossaryData}}}</script>
+  <script src="{{site.jsPath}}/storage.js"></script>
+  <script src="{{site.jsPath}}/dark-mode.js"></script>
+  <script src="{{site.jsPath}}/quiz.js"></script>
+  <script src="{{site.jsPath}}/accordion.js"></script>
+  <script src="{{site.jsPath}}/table-enhancer.js"></script>
+  <script src="{{site.jsPath}}/glossary-tooltip.js"></script>
+  <script src="{{site.jsPath}}/concept-gate.js"></script>
+  <script src="{{site.jsPath}}/self-explain.js"></script>
+  <script src="{{site.jsPath}}/worked-example.js"></script>
+  <script src="{{site.jsPath}}/progress-tracker.js"></script>
+  <script src="{{site.jsPath}}/navigation.js"></script>
+  {{#if hasMermaid}}
+  <script src="{{site.jsPath}}/mermaid.min.js"></script>
+  <script src="{{site.jsPath}}/mermaid-init.js"></script>
+  {{/if}}
+  {{#if hasChart}}
+  <script src="{{site.jsPath}}/chart.umd.min.js"></script>
+  <script src="{{site.jsPath}}/chart-renderer.js"></script>
+  {{/if}}
+  <script src="{{site.jsPath}}/decision-tree.js"></script>
+  <script src="{{site.jsPath}}/recommendation-quiz.js"></script>
+</body>
+</html>

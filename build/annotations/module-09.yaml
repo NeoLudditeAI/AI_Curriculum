@@ -1,0 +1,358 @@
+# build/annotations/module-09.yaml
+# Annotations for Module 09: Developer Platforms & APIs
+# Section IDs derived from deliverables/html/modules/module-09.html
+
+module: "09"
+annotations:
+
+  # ── Opening Hook (accordion, supplementary-reference) ──────────────────
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Why API architecture is an architectural decision, not a brand choice"
+      content: "Consider a simple task: you want your AI to search the web, analyze the results, and call an external API with structured output. On Anthropic's Messages API, you build the loop yourself -- send a request, receive a tool_use block, execute the tool, send back the result, repeat. On OpenAI's Responses API, the API itself executes built-in tools and returns the final answer with no developer loop needed. Same task, same quality of result, fundamentally different developer experience. This module explains why those architectures differ, what it costs at scale, and how to choose."
+
+  # ── Concept Gate (prior knowledge activation) ──────────────────────────
+  - after: "executive-summary"
+    component: concept-gate
+    data:
+      title: "Before diving into developer APIs"
+      prerequisites:
+        - "I understand function calling in AI agents and how it differs from MCP (Module 03)"
+        - "I know the three model tiers (budget/mid/flagship) and their approximate pricing on Anthropic (Module 01)"
+        - "I understand that MCP uses JSON-RPC 2.0 as its wire protocol and why that matters for integration (Module 06)"
+      continue_section: "api-architectures"
+
+  # ── Curiosity Prompt: API Architectures ────────────────────────────────
+  - after: "api-architectures"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "A tale of two design philosophies"
+      content: "Anthropic makes you manage the tool-use loop yourself. OpenAI automates it. Neither approach is wrong -- they reflect fundamentally different design philosophies."
+
+  # ── Worked Example: Anthropic Messages API tool-use trace ──────────────
+  - after: "anthropic-messages-api"
+    component: worked-example
+    variant: full
+    data:
+      title: "Tracing a multi-turn tool-use conversation on the Messages API"
+      problem: "Your application needs Claude to look up today's weather for a user and respond with a natural-language summary. Walk through the full request/response cycle on the Anthropic Messages API, identifying each content block type."
+      steps:
+        - label: "Turn 1 -- User request"
+          content: "You send a messages request with role: 'user' and a text content block: 'What is the weather in San Francisco today?' The tools array includes your get_weather function definition with a city parameter."
+        - label: "Turn 2 -- Claude returns tool_use"
+          content: "Claude's response contains a content array with a single tool_use block: {type: 'tool_use', id: 'toolu_01...', name: 'get_weather', input: {city: 'San Francisco'}}. No text block yet -- Claude needs the tool result first."
+        - label: "Turn 3 -- Developer executes tool, sends tool_result"
+          content: "Your application calls the weather API, gets the result, and sends a new message with role: 'user' containing a tool_result block: {type: 'tool_result', tool_use_id: 'toolu_01...', content: '72F, sunny, light breeze'}."
+        - label: "Turn 4 -- Claude returns final text"
+          content: "Claude's response now contains a text content block: 'It is 72 degrees and sunny in San Francisco today with a light breeze.' The conversation is complete. Key insight: the developer controlled every step of the loop -- you chose when to execute the tool, could add error handling, logging, or intermediate processing between turns."
+      solution: "The Anthropic Messages API requires exactly 4 turns (2 API calls from the developer) for a single tool-use interaction. Each turn uses explicitly typed content blocks (text, tool_use, tool_result). The developer manages the loop, which means more code but complete control over execution flow, error handling, and observability."
+
+  # ── Worked Example: OpenAI Responses API comparison ────────────────────
+  - after: "openai-responses-api"
+    component: worked-example
+    variant: partial
+    data:
+      title: "Same task, different API: tool execution on the Responses API"
+      problem: "The same weather lookup task, but on OpenAI's Responses API. The request includes web_search (built-in) and a custom get_calendar function. How many API calls does the developer make, and which tools does the API execute vs. the developer?"
+      steps:
+        - label: "Identify built-in vs. custom tools"
+          content: "web_search is a built-in tool -- the API executes it server-side automatically. get_calendar is a custom function -- the developer must execute it."
+        - label: "Count developer API calls"
+          content: "[Fill in: How many API calls does the developer make for this interaction?]"
+        - label: "Compare with Anthropic"
+          content: "[Fill in: What is the key architectural difference in how each API handles the tool execution loop?]"
+      solution: "For built-in tools like web_search, the developer makes 1 API call -- the API executes the search and returns the final result. For the custom get_calendar function, the developer must still execute it and make an additional call (2 total). The key difference: OpenAI automates the loop for built-in tools, reducing developer orchestration. Anthropic requires the developer to manage every tool call explicitly. Tradeoff: OpenAI is simpler but opaque; Anthropic is more work but fully transparent."
+
+  # ── Accordion: Gemini caching economics ────────────────────────────────
+  - after: "google-gemini-api"
+    component: accordion
+    variant: advanced-detail
+    data:
+      title: "Gemini Context Caching: storage cost economics"
+      content: "Google matches Anthropic's 90% cache read discount but charges per-hour storage fees ($1.00-$4.50 per million tokens per hour depending on model). This changes the break-even calculation significantly. For a 100K-token cached context accessed 100 times per hour, the storage cost is negligible (~$0.10-$0.45/hr). But for the same context accessed only once per hour, the storage fee may exceed the cache savings entirely. The break-even formula: storage fee per hour < (uncached token cost - cached token cost) x tokens x calls per hour. For high-frequency, stable-context workloads, Google's caching is competitive. For variable or infrequent access patterns, the storage cost erodes the discount."
+
+  # ── Quiz: API architecture concepts (after Azure OpenAI) ───────────────
+  - after: "azure-openai-service"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which API provides a built-in agentic loop for its native tools, reducing the developer's orchestration burden?"
+      choices: ["Anthropic Messages API", "OpenAI Responses API", "Google Gemini API", "Azure OpenAI Service"]
+      correct: 1
+      explanation: "OpenAI's Responses API automatically executes built-in tools (web search, code interpreter, computer use) server-side and returns the final result. The developer does not need to manage the tool-execution loop for these tools. Anthropic requires the developer to manage every tool call explicitly."
+
+  - after: "azure-openai-service"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Why does Azure OpenAI cost an estimated 15-40% more than direct OpenAI API access despite identical per-token pricing?"
+      choices: ["Azure charges higher per-token rates", "Azure support plans, VNet, data transfer, storage, and resource management overhead", "Azure uses different models", "Azure requires annual contracts"]
+      correct: 1
+      explanation: "Azure OpenAI's token-level pricing is identical to OpenAI direct. The premium comes from Azure infrastructure costs: support plans, virtual network configuration, data transfer fees, storage, and the general overhead of Azure resource management. This premium is justified only when you need enterprise compliance (HIPAA, FedRAMP), private networking, or Azure ecosystem integration."
+
+  # ── Self-explanation: Anthropic vs. OpenAI tool execution ──────────────
+  - after: "azure-openai-service"
+    component: self-explanation-prompt
+    data:
+      prompt: "Compare the Anthropic and OpenAI approaches to tool execution. Why might a developer prefer the explicit loop (Anthropic) over the automatic loop (OpenAI), even though it requires more code?"
+      expert_answer: "The explicit loop gives developers complete control over error handling, intermediate state, retry logic, and tool execution environment. In production systems, this matters: you can log every tool call, implement circuit breakers, validate tool outputs before sending them back to the model, and maintain full observability of the interaction. The automatic loop is simpler but opaque -- if a built-in tool fails or returns unexpected results, you have limited ability to intervene. For prototyping and simple applications, OpenAI's approach reduces boilerplate. For production systems where failure handling and auditability are critical, Anthropic's explicit control is often preferable."
+
+  # ── Quiz: SDK ecosystem ────────────────────────────────────────────────
+  - after: "sdk-ecosystem"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Your team builds primarily in Go and needs official SDK support. Which providers offer official Go SDKs?"
+      choices: ["Anthropic and OpenAI", "OpenAI and Google", "Google and Azure OpenAI", "All four providers"]
+      correct: 1
+      explanation: "OpenAI offers openai-go (GA) and Google offers google-genai for Go (GA). Anthropic's SDK strategy is deliberately narrow -- official support for Python and TypeScript only. Go, Java, and .NET teams must use community packages or raw HTTP for Anthropic integration."
+
+  # ── Curiosity Prompt: Cost Optimization ────────────────────────────────
+  - after: "pricing-economics"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "The $10,000-to-$1,500 optimization"
+      content: "A pipeline spending $10,000/month on API calls can often be reduced to $1,500 with four optimization techniques applied in sequence: model selection (route simple tasks to budget models), prompt caching (eliminate redundant input processing), batch processing (accept latency for offline workloads), and retrieval scope reduction (retrieve fewer, more relevant chunks). Each lever compounds with the others."
+
+  # ── Worked Example: Prompt caching cost calculation ────────────────────
+  - after: "cost-optimization-levers"
+    component: worked-example
+    variant: full
+    data:
+      title: "Calculating prompt caching savings across providers"
+      problem: "Your application sends 10,000 API calls per day, each with a 4,000-token system prompt (identical across all calls) and 2,000 tokens of variable user input. Calculate the monthly input token cost with and without prompt caching on Anthropic, Google, and OpenAI. Assume Sonnet 4.6 ($3/MTok input), Gemini 2.5 Pro ($1.25/MTok input), and GPT-5.4 ($2.50/MTok input)."
+      steps:
+        - label: "Calculate baseline monthly input cost (no caching)"
+          content: "Total input tokens per call: 6,000 (4K system + 2K user). Monthly calls: 300,000. Monthly input tokens: 1.8B tokens = 1,800 MTok. Anthropic: 1,800 x $3 = $5,400. Google: 1,800 x $1.25 = $2,250. OpenAI: 1,800 x $2.50 = $4,500."
+        - label: "Calculate Anthropic cached cost"
+          content: "Cacheable tokens: 4,000 per call (system prompt). First call: 25% write premium on 4K tokens. Subsequent calls: 90% discount on 4K tokens (pay 10%). Variable 2K tokens at full price. Monthly: cache hits cost 0.1 x $3 x 1,200 MTok = $360 for cached portion + $3 x 600 MTok = $1,800 for variable. Total: ~$2,160. Savings: $3,240 (60%)."
+        - label: "Calculate Google cached cost"
+          content: "Same 90% read discount: $0.125/MTok for cached tokens. But add storage: ~$1.00/MTok/hour for the 4K-token cache. At 4K tokens, storage cost is negligible (~$0.004/hr). Monthly cached input: $0.125 x 1,200 = $150 + full-price variable: $1.25 x 600 = $750 + storage: ~$3. Total: ~$903. Savings: $1,347 (60%)."
+        - label: "Calculate OpenAI cached cost"
+          content: "Automatic 50% discount on cached prefix tokens. No developer effort. Cached portion: 0.5 x $2.50 x 1,200 = $1,500 + variable: $2.50 x 600 = $1,500. Total: $3,000. Savings: $1,500 (33%)."
+      solution: "Monthly input cost comparison: Anthropic $2,160 (60% savings), Google $903 (60% savings, lowest absolute), OpenAI $3,000 (33% savings, but zero effort). Anthropic and Google deliver the steepest discounts. Google is cheapest in absolute terms due to lower base pricing. OpenAI's automatic caching requires no code changes but delivers a smaller discount. For this high-frequency, stable-prompt pattern, Anthropic's explicit caching + no storage fees provides the best economics-to-effort ratio."
+
+  # ── Worked Example: RAG cost optimization (guided) ─────────────────────
+  - after: "provider-cost-comparison-representative-workloads"
+    component: worked-example
+    variant: guided
+    data:
+      title: "Optimizing a RAG application's API costs"
+      problem: "Your RAG application retrieves 20 document chunks (500 tokens each) per query, processes them with Opus 4.6, and returns a classification result. You handle 50,000 queries per month. Current monthly cost is high. Optimize by considering model tier, retrieval scope, caching, and batch eligibility."
+      steps:
+        - label: "Hint 1 -- Model selection is the biggest lever"
+          content: "Classification does not require Opus 4.6's reasoning capabilities. Which model tier is appropriate for this task?"
+        - label: "Hint 2 -- Do you need all 20 chunks?"
+          content: "Reducing retrieval from 20 chunks to 5 chunks saves 75% on input tokens. Would 5 highly relevant chunks suffice for classification?"
+        - label: "Hint 3 -- Is this latency-sensitive?"
+          content: "If classification results do not need to be real-time, batch processing offers a 50% discount on all tokens."
+        - label: "Full optimization"
+          content: "Apply all three: switch to Haiku 4.5 (80% cheaper than Opus), reduce retrieval to 5 chunks (75% fewer input tokens), and batch the workload (50% discount). Combined savings: roughly 95% reduction from the original cost."
+      solution: "Original: 50K queries x (10K retrieved tokens + 100 output tokens) x Opus 4.6 pricing. After optimization: (1) Switch to Haiku 4.5 -- input drops from $5/MTok to $1/MTok, output from $25/MTok to $5/MTok. (2) Reduce retrieval to 5 chunks -- input per query drops from 10K to 2.5K tokens. (3) Batch processing -- 50% discount on remaining costs. Result: ~95% cost reduction while maintaining classification accuracy that Haiku handles well."
+
+  # ── Worked Example: Function calling schema (partial) ──────────────────
+  - after: "function-calling"
+    component: worked-example
+    variant: partial
+    data:
+      title: "Defining parallel function calls on the OpenAI Responses API"
+      problem: "You need an API call that invokes two functions in parallel: get_weather(city: string) and get_calendar(date: string). Write the tools array definition for these two functions using JSON Schema on the OpenAI Responses API."
+      steps:
+        - label: "Define the first function"
+          content: "{type: 'function', function: {name: 'get_weather', description: 'Get current weather for a city', parameters: {type: 'object', properties: {city: {type: 'string', description: 'City name'}}, required: ['city']}}}"
+        - label: "Define the second function"
+          content: "[Fill in: Define get_calendar following the same pattern, with a date parameter of type string]"
+        - label: "Combine into tools array"
+          content: "[Fill in: How does the complete tools array look with both functions?]"
+      solution: "tools: [{type: 'function', function: {name: 'get_weather', description: 'Get current weather for a city', parameters: {type: 'object', properties: {city: {type: 'string'}}, required: ['city']}}}, {type: 'function', function: {name: 'get_calendar', description: 'Get calendar events for a date', parameters: {type: 'object', properties: {date: {type: 'string', description: 'Date in YYYY-MM-DD format'}}, required: ['date']}}}]. When the model decides to call both functions, it returns two function_call items in a single response. The developer executes both (in parallel or sequentially) and returns both results."
+
+  # ── Quiz: Structured outputs ───────────────────────────────────────────
+  - after: "structured-outputs"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Anthropic achieves structured output primarily through tool use -- you define a 'tool' whose input schema matches your desired output format. What advantage does this approach provide?"
+      choices: ["It is faster than direct JSON mode", "It unifies the mechanism for tool calling and structured output, providing schema enforcement, reusability, and backward compatibility", "It avoids JSON entirely", "It works without defining a schema"]
+      correct: 1
+      explanation: "By routing structured output through the tool-use mechanism, Anthropic provides schema enforcement (via strict: true in Public Beta), reusability across calls, and consistency with existing tool-use code. The tradeoff is that it is conceptually different from OpenAI's direct response_format approach, but functionally equivalent."
+
+  # ── Accordion: When fine-tuning is necessary ───────────────────────────
+  - after: "fine-tuning-and-customization"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "When fine-tuning is (and is not) necessary"
+      content: "Fine-tune when you need domain-specific terminology that prompt engineering cannot teach (e.g., medical coding systems, legal citation formats), specialized output formats that resist prompt-based formatting, or behavioral alignment that system prompts cannot reliably enforce. For most use cases, RAG plus prompt engineering covers 90%+ of customization needs at lower cost, faster iteration, and no training pipeline to maintain. Fine-tuning locks you into a model version -- when the base model updates, your fine-tune may need retraining. Consider fine-tuning only after exhausting prompt engineering, few-shot examples, and RAG."
+
+  # ── Section Review Quiz: Platform Selection ────────────────────────────
+  - after: "platform-selection-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which API has the built-in agentic loop that automatically executes native tools like web search and code interpreter?"
+      choices: ["Anthropic Messages API", "OpenAI Responses API", "Google Gemini API", "Azure OpenAI Service"]
+      correct: 1
+      explanation: "OpenAI's Responses API executes built-in tools server-side automatically. Anthropic requires developer-managed loops. Google offers selective server-side execution (Search grounding, code execution). Azure mirrors OpenAI's capabilities."
+
+  - after: "platform-selection-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Your application uses a stable 4,000-token system prompt with 10,000 calls per day. Which provider's caching strategy delivers the best economics for this pattern?"
+      choices: ["OpenAI (50% automatic discount)", "Google (90% discount + per-hour storage fees)", "Anthropic (90% discount, no storage fees, explicit cache control)", "All three are equivalent"]
+      correct: 2
+      explanation: "For a high-frequency, stable-prompt pattern, Anthropic's 90% discount with no storage fees and explicit cache lifetime control provides the best economics. Google matches the 90% discount but adds storage fees. OpenAI's automatic caching is simplest but only 50%."
+
+  - after: "platform-selection-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which platform offers the smoothest developer experience for structured outputs with native Pydantic (Python) and Zod (TypeScript) integration?"
+      choices: ["Anthropic", "OpenAI", "Google", "Azure OpenAI"]
+      correct: 1
+      explanation: "OpenAI's structured outputs integrate natively with Pydantic and Zod for type-safe schema definition, eliminating post-hoc parsing. Anthropic achieves structured output through tool use (functionally equivalent but conceptually different). Google uses response_schema directly."
+
+  - after: "platform-selection-framework"
+    component: quiz
+    variant: section-review
+    data:
+      question: "A startup needs speech-to-text, image generation, fine-tuning, and structured outputs -- all from a single provider's API. Which provider can deliver all four?"
+      choices: ["Anthropic", "OpenAI", "Google", "None -- you must use multiple providers"]
+      correct: 1
+      explanation: "OpenAI is the only provider offering all four: speech-to-text (gpt-4o-transcribe, whisper-1), image generation (GPT Image 1.5), fine-tuning (GPT-4o, GPT-4o-mini), and structured outputs (GA with strict mode). Anthropic lacks speech, image generation, and fine-tuning. Google lacks mature fine-tuning for flagship models."
+
+  # ── Module Assessment Quiz ─────────────────────────────────────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the primary architectural difference between Anthropic's Messages API and OpenAI's Responses API?"
+      choices: ["Anthropic supports streaming and OpenAI does not", "Anthropic uses content blocks with developer-managed tool loops; OpenAI's Responses API has a built-in agentic loop for native tools", "OpenAI supports JSON output and Anthropic does not", "Anthropic requires OAuth and OpenAI uses API keys"]
+      correct: 1
+      explanation: "Anthropic's Messages API returns typed content blocks (text, tool_use, tool_result) and the developer controls the tool execution loop. OpenAI's Responses API automatically executes built-in tools server-side, reducing orchestration burden. Both support streaming, structured output, and API key authentication."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Google's Gemini API charges per-hour storage fees for cached context. In what scenario does this make caching uneconomical?"
+      choices: ["High-frequency access with large contexts", "Low-frequency access where storage fees exceed token savings", "Caching system prompts under 1,000 tokens", "Using Gemini Flash-Lite models"]
+      correct: 1
+      explanation: "Google's per-hour storage fees ($1.00-$4.50/MTok/hour) erode cache savings when the cached context is accessed infrequently. If the storage fee per hour exceeds the savings from cached reads, caching costs more than not caching. High-frequency access amortizes the storage cost across many reads, making it economical."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the single largest cost lever for production API workloads?"
+      choices: ["Prompt caching (90% discount)", "Batch processing (50% discount)", "Model selection (60-90% savings by choosing the right tier)", "Retrieval scope reduction"]
+      correct: 2
+      explanation: "Model selection delivers 60-90% savings. Choosing Haiku 4.5 over Opus 4.6 for a classification task reduces costs by 80%. Caching and batching provide additional savings but are additive to the model selection decision. Every API call using a flagship model should be justified by task complexity."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which provider does NOT offer fine-tuning of any kind as of March 2026?"
+      choices: ["OpenAI", "Google", "Anthropic", "Azure OpenAI"]
+      correct: 2
+      explanation: "Anthropic has no publicly available fine-tuning. Their position is that prompt engineering, system prompts, and RAG cover most customization needs. OpenAI has the most mature fine-tuning platform (supervised, LoRA, reinforcement). Google offers SFT for Gemini 2.5 Flash via Vertex AI. Azure mirrors OpenAI's capabilities."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which provider offers the broadest official SDK language coverage?"
+      choices: ["Anthropic (Python, TypeScript)", "OpenAI (Python, TypeScript, Go, Java, .NET)", "Google (Python, Node.js, Go, Swift, Kotlin, Dart)", "Azure OpenAI (via OpenAI SDK)"]
+      correct: 2
+      explanation: "Google covers 7 languages officially (Python, Node.js, Go, Swift, Kotlin, Dart, plus Java via Firebase Genkit), reflecting their need to support Android, iOS, and Flutter development. OpenAI covers 5 languages. Anthropic is deliberately narrow with only Python and TypeScript."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Azure OpenAI's content filtering is described as the most granular. What specifically can enterprise customers configure?"
+      choices: ["Only on/off toggle for all content", "Category-level severity thresholds (hate, violence, sexual, self-harm)", "Per-user content policies", "Regional content restrictions only"]
+      correct: 1
+      explanation: "Azure AI Content Safety allows configuring severity thresholds by category (hate, violence, sexual, self-harm). This granularity is relevant for healthcare, legal, and creative applications where default filters may be too restrictive. Other platforms offer less configurable safety controls."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which of the following is NOT available from Anthropic's API?"
+      choices: ["Prompt caching with 90% discount", "Speech-to-text and text-to-speech", "Extended thinking with inspectable reasoning", "Batch processing at 50% discount"]
+      correct: 1
+      explanation: "Anthropic's API is text-and-image-input only. It does not offer speech-to-text, text-to-speech, image generation, video generation, or embeddings. Voice applications built on Claude require third-party speech services like ElevenLabs."
+
+  # ── Integration question: Gather-act-verify and API architecture ───────
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "How does the explicit tool-use cycle in Anthropic's Messages API relate to the gather-act-verify loop from Module 03?"
+      choices: ["They are unrelated concepts", "The tool-use cycle IS the gather-act-verify loop at the API level: the model gathers context, acts via tool_use blocks, and the developer verifies tool results before continuing", "The gather-act-verify loop only applies to multi-agent systems", "Anthropic's API skips the verify step"]
+      correct: 1
+      explanation: "Anthropic's explicit tool-use cycle maps directly to the gather-act-verify loop from Module 03. The model gathers context (user message + system prompt), acts (returns tool_use blocks), and the developer verifies (executes the tool, validates the result, sends tool_result back). The developer's control over this loop is why Anthropic's architecture is favored in production agent systems where verification and observability are critical."
+
+  # ── Integration question: Multi-agent API cost estimation ──────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "A multi-agent system (Module 04) assigns Opus 4.6 to a lead agent, Sonnet 4.6 to 3 worker agents, and Haiku 4.5 to a triage agent. The system processes 100,000 messages/month with an average of 2,000 input tokens and 500 output tokens per message. The lead handles 10%, workers handle 60%, and triage handles 30%. Using Anthropic's pricing, which estimate is closest to the monthly API cost?"
+      choices: ["$200-$400", "$500-$800", "$1,200-$1,800", "$3,000-$5,000"]
+      correct: 2
+      explanation: "Lead (Opus, 10K msgs): input 20M tokens x $5/MTok = $100, output 5M x $25/MTok = $125. Workers (Sonnet, 60K msgs): input 120M x $3/MTok = $360, output 30M x $15/MTok = $450. Triage (Haiku, 30K msgs): input 60M x $1/MTok = $60, output 15M x $5/MTok = $75. Total: ~$1,170. With caching on repeated system prompts, this could drop to $800-$1,000. The ~$1,200-$1,800 range accounts for overhead and variable output lengths."
+
+  # ── Closing Decision Scenario ──────────────────────────────────────────
+  - after: "key-takeaways"
+    component: self-explanation-prompt
+    data:
+      prompt: "You are reviewing AI costs for a SaaS product using the Anthropic Messages API. Current monthly bill: $12,000. Architecture: 500,000 calls/month, all using Opus 4.6, 8,000-token stable system prompt, 2,000-token average user input, 1,500-token average output, no caching, all synchronous. 60% are classification, 30% summarization, 10% complex reasoning. Design an optimization strategy and estimate the new monthly cost."
+      expert_answer: "Step 1 -- Model selection: Route 60% (300K calls) to Haiku 4.5 for classification, 30% (150K) to Sonnet 4.6 for summarization, keep 10% (50K) on Opus 4.6 for complex reasoning. Step 2 -- Enable prompt caching: The 8K system prompt is identical across all calls. Anthropic's 90% cache discount applies to 8K tokens per call. Step 3 -- Batch the classification calls: Classification results are not latency-sensitive, qualifying for the 50% batch discount. Step 4 -- Combined estimated cost: Haiku classification (batched + cached): ~$150/mo. Sonnet summarization (cached): ~$900/mo. Opus reasoning (cached): ~$750/mo. Total: ~$1,800/mo -- an 85% reduction from $12,000. The largest savings came from model selection (moving 60% off Opus), followed by caching (8K stable prompt), then batching (offline classification)."
+
+  # ── Figure M09-2: Cost Optimization Waterfall (Chart.js stacked bar) ─
+  - after: "cost-optimization-levers"
+    component: diagram
+    variant: chart
+    data:
+      id: "m09-2"
+      title: "API Cost Optimization Waterfall"
+      alt: "Waterfall chart showing cumulative API cost optimization for a hypothetical 1M-token-per-day workload starting at $100 baseline. Model selection reduces cost by 60-80% (largest lever), bringing the bar down to approximately $30. Prompt caching adds a further 10-90% reduction on remaining cost. Batch processing saves an additional 50% on eligible offline workloads. Retrieval scope optimization provides variable additional savings. The final optimized cost is approximately $5-15, representing a 85-95% total reduction from baseline."
+      chartType: "bar"
+      config:
+        labels: ["Baseline", "Model Selection", "Prompt Caching", "Batch Processing", "Retrieval Scope", "Optimized Cost"]
+        datasets:
+          - label: "Base"
+            data: [0, 30, 18, 12, 8, 0]
+            backgroundColor: "transparent"
+            borderWidth: 0
+            stack: "waterfall"
+          - label: "Savings"
+            data: [0, -70, -12, -6, -4, 0]
+            backgroundColor: ["transparent", "#ef4444", "#f97316", "#eab308", "#84cc16", "transparent"]
+            borderWidth: 0
+            stack: "waterfall"
+          - label: "Cost"
+            data: [100, 0, 0, 0, 0, 8]
+            backgroundColor: ["#6B7280", "transparent", "transparent", "transparent", "transparent", "#1B4D8E"]
+            borderWidth: 0
+            stack: "waterfall"
+        annotations:
+          - label: "$100"
+            position: "Baseline"
+          - label: "-70% ($70)"
+            position: "Model Selection"
+          - label: "-40% ($12)"
+            position: "Prompt Caching"
+          - label: "-50% ($6)"
+            position: "Batch Processing"
+          - label: "-variable ($4)"
+            position: "Retrieval Scope"
+          - label: "$8 final"
+            position: "Optimized Cost"

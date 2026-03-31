@@ -1,7 +1,7 @@
 # Module 04: Multi-Agent Orchestration
 
 **Last updated:** 2026-03-21
-**Status:** DRAFTING
+**Status:** COMPLETE
 **Word count target:** 4,000-5,000
 **Prerequisites:** [Module 00: Landscape Overview](MODULE-00-landscape-overview.md), [Module 01: Models & Intelligence Tiers](MODULE-01-models-and-intelligence.md), [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md)
 
@@ -148,7 +148,7 @@ The Agents SDK does not natively support peer-to-peer communication between agen
 
 ### Google: Agent Development Kit (ADK)
 
-Google's ADK is a Python-first framework (Java support announced) for building multi-agent systems, tightly integrated with the Vertex AI Agent Engine for deployment and monitoring [F3] [2].
+Google's ADK is an open-source framework (Apache 2.0) available in Python, TypeScript, Go, and Java for building multi-agent systems, tightly integrated with the Vertex AI Agent Engine for deployment and monitoring [F3] [2].
 
 - **Multi-agent patterns:** ADK supports hierarchical delegation, sequential pipelines, and parallel fan-out natively.
 - **Vertex AI Agent Engine:** Managed infrastructure for deploying, monitoring, and scaling agent systems in production. Includes threat detection (Preview) and a visual trace dashboard [F3].
@@ -197,8 +197,8 @@ Agent 365 reflects Microsoft's bet that enterprise multi-agent adoption will cre
 | Dimension | Anthropic Agent SDK | Anthropic Agent Teams | OpenAI Agents SDK | Google ADK | Copilot Studio |
 |-----------|--------------------|-----------------------|-------------------|------------|----------------|
 | **Status** | GA (Sep 2025) | Experimental | GA | GA | GA (multi-agent: Private Preview) |
-| **Languages** | Python, TypeScript | N/A (Claude Code) | Python, Node.js | Python (Java coming) | Low-code/no-code |
-| **Open source** | No | No | Yes (MIT) | Yes | No |
+| **Languages** | Python, TypeScript | N/A (Claude Code) | Python, Node.js | Python, TypeScript, Go, Java | Low-code/no-code |
+| **Open source** | No | No | Yes (MIT) | Yes (Apache 2.0) | No |
 | **Primary pattern** | Hierarchical (parent-child) | Peer-to-peer (team) | Handoff (sequential) | Flexible (all patterns) | Router (generative orchestration) |
 | **Agent-to-agent communication** | Parent-child only | Any-to-any | Sequential handoff | Developer-defined | LLM-routed |
 | **Built-in tools** | Read, Write, Edit, Bash, Glob, Grep, WebSearch | Same (Claude Code tools) | Developer-defined | Developer-defined | 1,400+ connectors |
@@ -237,6 +237,69 @@ A lightweight dispatcher examines each request and routes it to the appropriate 
 **When to use:** Customer support (route billing questions to billing agent, technical questions to tech agent). Any system with a diverse input space and specialized handlers.
 
 **Implementation:** Copilot Studio's generative orchestration does this automatically. In OpenAI Agents SDK, define a triage agent with handoffs to specialists. In Agent SDK, the parent agent acts as router, spawning the appropriate subagent per request.
+
+---
+
+## Strategic Model Selection in Multi-Agent Systems
+
+One of the most consequential -- and most overlooked -- decisions in multi-agent design is which model powers each agent. Not every agent needs the flagship model. The principle is simple: match model capability to task requirements, and allocate your budget where quality matters most.
+
+### Role-Based Model Allocation
+
+Different agent roles have fundamentally different compute profiles:
+
+**Research and fact-gathering agents** perform high-volume, relatively simple work: web searches, document retrieval, data extraction. These tasks require breadth (many parallel queries) more than depth (complex reasoning). Fast, cheap models -- Haiku 4.5 ($1/$5 per MTok), GPT-4o Mini ($0.15/$0.60), Gemini 2.5 Flash-Lite ($0.10/$0.40) -- handle this work well at 10-50x lower cost than flagships [F1] [F2] [F3]. A research task that spawns 20 parallel agents at Haiku pricing costs roughly the same as a single Opus call.
+
+**Writing and drafting agents** require stronger instruction following, coherent long-form output, and nuanced tone control. Mid-tier models -- Sonnet 4.6 ($3/$15 per MTok), GPT-5.4 Mini ($0.75/$4.50), Gemini 3 Flash ($0.50/$3.00) -- provide the best quality-to-cost ratio for this work [F1] [F2] [F3]. They produce output that is good enough for a first draft, which a reviewer can then refine.
+
+**Review, synthesis, and orchestration agents** do the highest-stakes work: identifying errors, resolving contradictions across sources, making architectural decisions, and planning task decomposition. Flagships -- Opus 4.6 ($5/$25 per MTok), GPT-5.4 (~$2.50/$10+), Gemini 3.1 Pro ($2-4/$12-18) -- justify their premium here because errors at this level cascade through the entire system [F1] [F2] [F3]. The orchestrator's mistakes are the most expensive to fix.
+
+Two additional roles are often overlooked: **router/dispatcher agents** that classify and route requests need only the cheapest models (GPT-5.4 Nano at $0.20/$1.25, Gemini 2.5 Flash-Lite at $0.10/$0.40) since they perform simple classification where speed matters most. Similarly, **guardrail/safety-check agents** that validate outputs against rules are binary classifiers -- fast models suffice.
+
+### Role-to-Tier Mapping
+
+| Agent Role | Recommended Tier | Rationale |
+|-----------|-----------------|-----------|
+| Router/Dispatcher | Cheapest (Nano, Flash-Lite) | Simple classification; speed matters most |
+| Researcher/Gatherer | Fast (Haiku, GPT-5.4 Mini, Gemini Flash) | Read and extract; quality threshold lower than synthesis |
+| Writer/Generator | Balanced (Sonnet, GPT-5.4, Gemini 3 Flash) | Quality matters but flagship unnecessary for drafting |
+| Synthesizer/Decision-maker | Flagship (Opus, GPT-5.4 Thinking) | Reasoning quality drives output quality |
+| Reviewer/Validator | Balanced to Flagship | Depends on stakes; code review needs stronger model than format checking |
+| Guardrails/Safety check | Fast | Binary classification; cheap model sufficient |
+
+### Cross-Provider Model Selection
+
+Framework choice affects model flexibility. OpenAI's Agents SDK is provider-agnostic -- it supports any Chat Completions-compatible endpoint, meaning you can mix Claude for complex reasoning steps and GPT-5.4 for vision-heavy steps in the same pipeline [1]. Google's ADK similarly allows mixing model providers. Anthropic's Agent SDK is locked to Claude models [F1]. This is a practical architectural consideration: if your multi-agent system needs capabilities that span provider strengths (e.g., Claude's extended thinking visibility with GPT's native computer use), the framework you choose determines whether you can combine them in one pipeline or must build a bridge.
+
+### Decision Framework
+
+| Factor | Use Flagship (Opus, GPT-5.4, Gemini Pro) | Use Mid-Tier (Sonnet, GPT-5.4 Mini, Gemini Flash) | Use Fast (Haiku, GPT-4o Mini, Flash-Lite) |
+|--------|------------------------------------------|---------------------------------------------------|------------------------------------------|
+| **Task complexity** | Multi-step reasoning, architectural decisions | Structured generation, moderate analysis | Simple retrieval, extraction, classification |
+| **Quality requirements** | Errors cascade or are costly to fix | Good enough for iteration | Acceptable with post-processing |
+| **Volume per run** | Low (1-5 calls) | Medium (5-20 calls) | High (20-100+ calls) |
+| **Cost sensitivity** | Low -- quality dominates | Moderate -- balanced | High -- budget-constrained |
+
+### Case Study: This Curriculum's Round 1 Execution
+
+This curriculum provides a concrete example. During Round 1 production, the lead agent orchestrated 56+ subagent deployments across four roles:
+
+- **38 researcher agents** (Haiku/fast tier) -- parallel web research across all 11 modules. High volume, simple retrieval tasks. At Haiku pricing, the entire research phase cost roughly what 2-3 Opus calls would have cost.
+- **12+ writer agents** (Sonnet/inherit tier) -- parallel module drafting. Quality mattered more than speed, but flagships were unnecessary for first drafts.
+- **5 reviewer agents** (Sonnet/inherit tier) -- quality checks against the verification checklist.
+- **1 synthesizer agent** (Opus-level) -- cross-module consistency audit requiring holistic reasoning across 43,000+ words.
+
+The Round 2 decision shifted all agents to Opus 4.6 because the quality gaps identified in Round 1 review were editorial (unverified sources, citation inconsistency, depth gaps) -- problems that a more capable model could prevent upstream rather than fix downstream. This illustrates the **progressive escalation** pattern: start with cheaper models, measure quality, and escalate selectively based on observed gaps.
+
+### Cost Optimization Patterns
+
+Three patterns reduce multi-agent costs without sacrificing output quality:
+
+**Progressive escalation.** Start every agent at the cheapest viable tier. If a subagent's output fails quality checks, re-run with a more capable model. Most tasks succeed on the first attempt with a cheaper model; you only pay flagship prices for the tasks that genuinely need it.
+
+**Prompt caching across agents.** When multiple agents share the same system prompt, reference documents, or context prefix, prompt caching reduces input costs by up to 90% (Anthropic) or 50-75% (Google, OpenAI). In fan-out patterns where N agents receive similar briefs, caching amortizes the prompt cost across all N agents (see [Module 02: Context Engineering](MODULE-02-context-engineering.md) and [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) for caching mechanics).
+
+**Batch processing for non-urgent work.** All major providers offer 50% token discounts for asynchronous batch processing. Review agents, synthesis passes, and quality audits rarely need real-time responses -- batching these cuts costs in half with no quality tradeoff [F1] [F2] [F3].
 
 ---
 
@@ -301,8 +364,9 @@ No cross-platform agent governance standard exists as of March 2026. Organizatio
 6. **Copilot Studio targets a different audience** -- business analysts and citizen developers -- with 1,400+ connectors and low-code agent building, but its multi-agent capabilities are the least mature.
 7. **Agent 365 is a category-defining product** -- the first enterprise agent governance platform, addressing registry, identity, compliance, and monitoring. No competitor has an equivalent.
 8. **Summary propagation quality determines multi-agent output quality.** Structured return formats, concrete details, and explicit uncertainty flags are essential.
-9. **The cost-benefit calculus is real:** every additional agent means additional API calls and context allocations. Use multi-agent when parallelism, specialization, or isolation justifies the overhead.
-10. **Cross-platform agent governance is an unsolved problem** as of March 2026. Enterprises using multiple AI platforms face fragmented governance.
+9. **Model selection is a force multiplier.** Match model tier to agent role: fast/cheap models for high-volume research, mid-tier for drafting, flagships for synthesis and orchestration. Progressive escalation and prompt caching further reduce costs.
+10. **The cost-benefit calculus is real:** every additional agent means additional API calls and context allocations. Use multi-agent when parallelism, specialization, or isolation justifies the overhead.
+11. **Cross-platform agent governance is an unsolved problem** as of March 2026. Enterprises using multiple AI platforms face fragmented governance.
 
 ---
 
@@ -312,9 +376,11 @@ No cross-platform agent governance standard exists as of March 2026. Organizatio
 - [Module 01: Models & Intelligence Tiers](MODULE-01-models-and-intelligence.md) -- model selection for agents (cost vs. capability tradeoffs)
 - [Module 02: Context Engineering](MODULE-02-context-engineering.md) -- context windows, compaction, and the "lost in the middle" effect that motivates context isolation
 - [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md) -- the gather-act-verify loop, tool use, and safety models that underpin every agent in a multi-agent system
+- [Module 05: OpenClaw & Open Agent Ecosystem](MODULE-05-openclaw-and-open-agents.md) -- open-source agent orchestration patterns and governance transition
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- MCP server integration across all agent frameworks
 - [Module 07: Skills, Plugins & Automation](MODULE-07-skills-plugins-automation.md) -- skills architecture that extends agent capabilities
 - [Module 09: Developer Platforms & APIs](MODULE-09-developer-platforms-apis.md) -- API details for the underlying model calls that agents make
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- enterprise agent governance (Agent 365 GA), EU AI Act impact on orchestration patterns
 
 ---
 

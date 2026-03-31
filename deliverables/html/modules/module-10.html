@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 10: Frontier Topics — AI Frontier Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body class="page-module" data-module-id="10">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#toc-list" class="skip-link">Skip to table of contents</a>
+
+  <!-- Progress bar placeholder (Round 5) -->
+  <div class="progress-bar" data-progress-bar role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress" style="display:none"></div>
+
+  <header class="site-header" role="banner">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+          <a href="../index.html" class="breadcrumbs__link">Course Map</a>
+        </li>
+        <li class="breadcrumbs__item">
+          <span class="breadcrumbs__current">Part 4: Synthesis &amp; Horizon</span>
+        </li>
+        <li class="breadcrumbs__item">
+          <span aria-current="page" class="breadcrumbs__current">Module 10: Frontier Topics</span>
+        </li>
+      </ol>
+    </nav>
+    <button class="dark-mode-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="dark-mode-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="module-header">
+      <h1 class="module-header__title">Module 10: Frontier Topics</h1>
+      <div class="module-meta">
+        <span class="module-meta__status" data-status="COMPLETE">COMPLETE</span>
+        <span class="module-meta__time" aria-label="Estimated reading time">30-35 min</span>
+        <span class="module-meta__updated" aria-label="Last updated">2026-03-21</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-layout">
+    <nav class="sidebar" aria-label="Module contents">
+      <div class="toc">
+        <h2 class="toc__heading">Contents</h2>
+        <ul class="toc__list" id="toc-list">
+          <li class="toc__item toc__item--level-2">
+            <a href="#executive-summary" class="toc__link" data-toc-active>Executive Summary</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#prerequisites" class="toc__link" data-toc-active>Prerequisites</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#on-device-ai-intelligence-at-the-edge" class="toc__link" data-toc-active>On-Device AI: Intelligence at the Edge</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-gemini-nano-and-aicore" class="toc__link" data-toc-active>Google: Gemini Nano and AICore</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#apple-intelligence-and-private-cloud-compute" class="toc__link" data-toc-active>Apple Intelligence and Private Cloud Compute</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#qualcomm-the-hardware-enabler" class="toc__link" data-toc-active>Qualcomm: The Hardware Enabler</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#on-device-vs-cloud-the-emerging-split" class="toc__link" data-toc-active>On-Device vs. Cloud: The Emerging Split</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#multimodal-generation-from-text-to-everything" class="toc__link" data-toc-active>Multimodal Generation: From Text to Everything</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#video-generation" class="toc__link" data-toc-active>Video Generation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#image-generation" class="toc__link" data-toc-active>Image Generation</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#audio-and-voice" class="toc__link" data-toc-active>Audio and Voice</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#multimodal-generation-comparison" class="toc__link" data-toc-active>Multimodal Generation Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#enterprise-agent-governance" class="toc__link" data-toc-active>Enterprise Agent Governance</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#microsoft-agent-365" class="toc__link" data-toc-active>Microsoft Agent 365</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-eu-ai-act" class="toc__link" data-toc-active>The EU AI Act</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#cross-platform-governance-gap" class="toc__link" data-toc-active>Cross-Platform Governance Gap</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#enterprise-governance-comparison" class="toc__link" data-toc-active>Enterprise Governance Comparison</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#safety-and-alignment" class="toc__link" data-toc-active>Safety and Alignment</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#platform-safety-approaches" class="toc__link" data-toc-active>Platform Safety Approaches</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#agent-specific-safety-challenges" class="toc__link" data-toc-active>Agent-Specific Safety Challenges</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-verification-problem" class="toc__link" data-toc-active>The Verification Problem</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#open-vs-closed-ecosystems" class="toc__link" data-toc-active>Open vs. Closed Ecosystems</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#the-performance-gap-has-closed" class="toc__link" data-toc-active>The Performance Gap Has Closed</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#market-structure-revenue-vs-usage" class="toc__link" data-toc-active>Market Structure: Revenue vs. Usage</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#mcp-as-the-bridge" class="toc__link" data-toc-active>MCP as the Bridge</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#geopolitical-dimensions" class="toc__link" data-toc-active>Geopolitical Dimensions</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#what-to-watch-upcoming-events" class="toc__link" data-toc-active>What to Watch: Upcoming Events</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#google-io-2026-may-19-20" class="toc__link" data-toc-active>Google I/O 2026 (May 19-20)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#microsoft-build-2026-june-2-3-san-francisco" class="toc__link" data-toc-active>Microsoft Build 2026 (June 2-3, San Francisco)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#wwdc-2026-june-8-12" class="toc__link" data-toc-active>WWDC 2026 (June 8-12)</a>
+          </li>
+          <li class="toc__item toc__item--level-3">
+            <a href="#event-impact-matrix" class="toc__link" data-toc-active>Event Impact Matrix</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#the-investment-thesis-and-adoption-reality" class="toc__link" data-toc-active>The Investment Thesis and Adoption Reality</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#key-takeaways" class="toc__link" data-toc-active>Key Takeaways</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#cross-references" class="toc__link" data-toc-active>Cross-References</a>
+          </li>
+          <li class="toc__item toc__item--level-2">
+            <a href="#sources" class="toc__link" data-toc-active>Sources</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main id="main-content" role="main" class="module-content">
+      <!-- Session resume placeholder (Round 5) -->
+      <div data-session-resume style="display:none"></div>
+
+      <article>
+        <div class="module-body">
+          <p><strong>Last updated:</strong> 2026-03-21
+<strong>Status:</strong> COMPLETE
+<strong>Word count target:</strong> 4,500-5,500</p>
+<hr>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>The AI landscape mapped in Modules 00-09 is not a stable equilibrium -- it is a fast-moving frontier where on-device inference, multimodal generation, enterprise governance frameworks, and the open-vs-closed ecosystem tension are all reshaping the field simultaneously. This capstone module synthesizes the trajectory lines running through the entire curriculum and projects them forward: where the technology is headed in the next 6-18 months, what the key inflection points are, and which upcoming events (Google I/O 2026, WWDC 2026, Microsoft Build 2026) are most likely to shift the competitive map. Every section here connects back to foundations laid in prior modules.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">The frontier does not hold still</summary>
+  <div class="accordion__content">
+    <p>Every module in this curriculum has described the state of the field as of March 2026. But by the time you finish reading this sentence, something has changed. Google I/O is 60 days away. WWDC is 80 days away. The EU AI Act becomes enforceable in five months. Goldman Sachs says $527 billion in AI capital expenditure is committed for this year. This module does not tell you what will happen -- it gives you the analytical framework to evaluate what does happen, using every concept you have learned in Modules 00 through 09.</p>
+  </div>
+</details>
+<hr>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>All prior modules (00-09) are recommended. This module synthesizes themes and vocabulary introduced throughout the curriculum.</p>
+
+<aside class="concept-gate" role="note" aria-label="Prerequisite check">
+  <h4 class="concept-gate__title">Capstone readiness check</h4>
+  <ul class="concept-gate__list">
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand the tiered inference architecture and how context windows (Module 02) relate to on-device model constraints</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I can explain what governance capabilities Microsoft's Agent 365 provides that no other platform matches (Module 04)</label>
+    </li>
+    <li class="concept-gate__item">
+      <label><input type="checkbox" /> I understand how MCP bridges the open and closed ecosystem divide (Modules 05 and 06)</label>
+    </li>
+  </ul>
+  <a class="concept-gate__continue" href="#on-device-ai-intelligence-at-the-edge">Continue to next section →</a>
+</aside>
+<hr>
+<h2 id="on-device-ai-intelligence-at-the-edge">On-Device AI: Intelligence at the Edge</h2>
+<blockquote>
+<p><strong>Volatility warning:</strong> On-device AI capabilities are shipping with OS updates on quarterly or faster cadences. Specific feature availability depends on hardware generation, OS version, and regional rollout.</p>
+</blockquote>
+<p>The models covered in <a href="module-01.html">Module 01</a> run in data centers, but a parallel track is pushing inference onto phones, laptops, and wearables. The motivation is straightforward: latency under 20ms (vs. 200-500ms for cloud round-trips), offline availability, and privacy guarantees that no server-side architecture can match. User surveys consistently show strong preference for on-device processing -- a 2026 Malwarebytes survey found 90% of respondents do not trust AI with their data, and multiple studies report that users frequently decline cloud AI features they would otherwise use when on-device alternatives are unavailable [1].</p>
+<h3 id="google-gemini-nano-and-aicore">Google: Gemini Nano and AICore</h3>
+<p>Google's approach embeds <span class="glossary-term glossary-term--first-use" data-term="gemini-nano">Gemini Nano</span> directly into Android via the <span class="glossary-term glossary-term--first-use" data-term="aicore">AICore</span> system service, available on Pixel 8 and later devices. Developers access it through ML Kit GenAI APIs, which expose capabilities including summarization, proofreading, Smart Reply, and Call Notes [2]. This is not a toy demo -- Call Notes, which transcribes and summarizes phone calls entirely on-device, shipped as a default feature on Pixel 9 and newer.</p>
+<p>The strategic significance is that Google controls the OS, the chipset (Tensor), and the model. This vertical integration mirrors the platform-ecosystem pattern described in <a href="module-00.html">Module 00</a>, but pushes it all the way down to silicon. No other player has this depth in mobile.</p>
+<h3 id="apple-intelligence-and-private-cloud-compute">Apple Intelligence and Private Cloud Compute</h3>
+<p>Apple's on-device model is a ~3 billion parameter transformer optimized for Apple Silicon, running natively on iPhone 15 Pro and later, all M-series Macs, and recent iPads [3]. For tasks exceeding on-device capacity, Apple routes to Private Cloud Compute (PCC) -- custom Apple Silicon servers where data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data [3].</p>
+<p>The gap in Apple's strategy is conversational AI. Siri's current implementation remains intent-based, not LLM-powered. The widely reported "LLM Siri" initiative aims to ship a true LLM-powered Siri, expected to debut at WWDC 2026 [3]. A notable January 2026 partnership with Google will integrate Gemini into Apple's foundation models for specific tasks, with Apple reportedly paying ~$1B/year for access to a custom 1.2T parameter Gemini model — an acknowledgment that Apple's in-house models lag behind in general-purpose reasoning [3].</p>
+<h3 id="qualcomm-the-hardware-enabler">Qualcomm: The Hardware Enabler</h3>
+<p>Qualcomm's role is less visible to consumers but structurally important. The Snapdragon Wear Elite platform, announced at MWC 2026, supports models up to 2 billion parameters on a wearable form factor — the first wearable chip with a dedicated Hexagon NPU [4]. The Snapdragon X2 Plus, shown at CES 2026, delivers 80 TOPS of NPU performance for laptops [4]. These chips define the ceiling for what on-device models can do -- and that ceiling is rising fast enough that models in the <span class="glossary-term" data-term="gemini-nano">Gemini Nano</span> and Apple Intelligence class will have significantly more headroom by late 2026.</p>
+<h3 id="on-device-vs-cloud-the-emerging-split">On-Device vs. Cloud: The Emerging Split</h3>
+<p>The practical implication, building on the <span class="glossary-term glossary-term--first-use" data-term="context-engineering">context engineering</span> principles in <a href="module-02.html">Module 02</a>, is a tiered inference architecture: on-device for latency-sensitive, privacy-critical, or offline tasks; cloud for complex reasoning, large context windows, and tasks requiring the frontier models discussed in <a href="module-01.html">Module 01</a>. The engineering challenge is making this split invisible to users. Apple's PCC is the most ambitious attempt at this seamless <span class="glossary-term glossary-term--first-use" data-term="handoff">handoff</span>; Google's <span class="glossary-term" data-term="aicore">AICore</span> is the most developer-accessible.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>On-Device Model</th><th>Parameters</th><th>Key Hardware</th><th>Latency</th><th>Developer Access</th></tr></thead><tbody><tr><td>Google</td><td><span class="glossary-term" data-term="gemini-nano">Gemini Nano</span></td><td>Not disclosed</td><td>Tensor G3+ (Pixel 8+)</td><td>&#x3C;20ms</td><td>ML Kit GenAI APIs</td></tr><tr><td>Apple</td><td>Apple Foundation Model</td><td>~3B</td><td>A17 Pro+, M-series</td><td>&#x3C;20ms</td><td>On-device only (no public API)</td></tr><tr><td>Qualcomm</td><td>OEM-dependent</td><td>Up to 2B</td><td>Snapdragon Wear Elite, X2 Plus</td><td>Varies by model</td><td>Qualcomm AI Engine SDK</td></tr></tbody></table>
+<p>Early data suggests on-device AI features see significantly higher adoption than equivalent cloud features when users are given the choice [1], suggesting that privacy and latency are not niche concerns but primary drivers of AI product adoption.</p>
+
+<figure class="diagram diagram--mermaid" id="m10-1" role="img" aria-label="Two-tier inference architecture diagram. The top tier shows on-device models running locally: Gemini Nano on Pixel 8 plus devices via Tensor G3 chip, Apple Intelligence on iPhone 15 Pro plus via A17 Pro chip, and Qualcomm-powered models on laptops via Snapdragon X2 Plus with 80 TOPS NPU. The bottom tier shows cloud frontier models: Opus 4.6, GPT-5.4, and Gemini 2.5 Ultra running in data centers. A decision router in the middle directs queries based on complexity: simple, latency-sensitive, and privacy-critical queries stay on-device with under 20ms latency, while complex reasoning and large context queries route to cloud with 200 to 500ms latency.">
+  <pre class="mermaid">graph TD
+  subgraph OnDevice[&quot;On-Device Tier&quot;]
+    OD_Nano[&quot;Gemini Nano&lt;br/&gt;(Tensor G3+, Pixel 8+)&quot;]
+    OD_Apple[&quot;Apple Intelligence&lt;br/&gt;(A17 Pro+, ~3B params)&quot;]
+    OD_QC[&quot;Qualcomm Models&lt;br/&gt;(Snapdragon X2+, 80 TOPS)&quot;]
+  end
+
+  Router{&quot;Decision Router&quot;}
+
+  subgraph Cloud[&quot;Cloud Frontier Tier&quot;]
+    CL_Opus[&quot;Opus 4.6&lt;br/&gt;($5/$25 per MTok)&quot;]
+    CL_GPT[&quot;GPT-5.4&lt;br/&gt;(~$2.50/$10+)&quot;]
+    CL_Gemini[&quot;Gemini 2.5 Ultra&lt;br/&gt;($2-4/$12-18)&quot;]
+  end
+
+  Query[&quot;User Query&quot;] --&gt; Router
+
+  Router --&gt;|&quot;simple, private,&lt;br/&gt;latency-sensitive&lt;br/&gt;(&lt;20ms)&quot;| OnDevice
+  Router --&gt;|&quot;complex reasoning,&lt;br/&gt;large context&lt;br/&gt;(200-500ms)&quot;| Cloud
+
+  OD_Nano --&gt; Result[&quot;Response&quot;]
+  OD_Apple --&gt; Result
+  OD_QC --&gt; Result
+  CL_Opus --&gt; Result
+  CL_GPT --&gt; Result
+  CL_Gemini --&gt; Result
+</pre>
+  <figcaption>Tiered Inference Architecture</figcaption>
+</figure>
+
+<details class="accordion">
+  <summary class="accordion__title">On-device AI adoption research sources</summary>
+  <div class="accordion__content">
+    <p>The 90% data trust figure comes from a Malwarebytes pulse survey (January-February 2026, 1,235 respondents). The survey found that 90% of respondents do not trust AI with their data, making privacy a primary adoption driver. Secondary aggregation suggests on-device AI features see significantly higher adoption than equivalent cloud features when users are given the choice. These findings are consistent across multiple studies but should be interpreted with caution -- survey populations skew toward privacy-conscious users, and 'trust' is measured differently across studies.</p>
+  </div>
+</details>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Module 02 described context engineering as managing what information the model can access. How does on-device AI change the context engineering problem? Consider model parameters, context windows, and privacy constraints.</p>
+  <label for="se-m10-on-device-vs-cloud-the-emerging-split" class="sr-only">Your explanation</label>
+  <textarea id="se-m10-on-device-vs-cloud-the-emerging-split" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m10-on-device-vs-cloud-the-emerging-split">Compare with Expert Answer</button>
+  <div id="se-answer-m10-on-device-vs-cloud-the-emerging-split" class="self-explain__expert" hidden>
+    <p>On-device models invert the context engineering problem. Instead of managing a 1M-token window (Module 02), you work with models that have 2-3B parameters on constrained hardware. The 'context window' is effectively the model's built-in knowledge plus a small input buffer. Privacy becomes a feature, not a constraint -- data never leaves the device. The engineering challenge shifts from 'what to put in context' to 'what can this small model handle, and when must we escalate to cloud?' This creates a tiered inference architecture: on-device for latency-sensitive, privacy-critical, or offline tasks; cloud for complex reasoning, large context windows, and frontier capabilities.</p>
+  </div>
+</div>
+<hr>
+<h2 id="multimodal-generation-from-text-to-everything">Multimodal Generation: From Text to Everything</h2>
+<blockquote>
+<p><strong>Volatility warning:</strong> Multimodal generation capabilities, pricing, and content policies are changing monthly. Licensing deals (e.g., Disney-Sora) are creating new categories that did not exist six months ago.</p>
+</blockquote>
+<p><a href="module-01.html">Module 01</a> covered multimodal <em>understanding</em> -- models that can see images, hear audio, and process video. This section covers the other direction: models that <em>generate</em> rich media. The AI video generator market alone is estimated at $850M-$1.8B in 2026 (depending on scope definition), with the broader AI video market reaching approximately $3.4B [5]. Growth rates exceed 35% year-over-year across all segments.</p>
+<h3 id="video-generation">Video Generation</h3>
+<p><strong>OpenAI Sora 2</strong> reached general availability and generates videos up to 25 seconds in length. The headline development is commercial licensing: Disney made a $1 billion equity investment in OpenAI alongside a three-year licensing agreement granting Sora access to 200+ animated, masked, and creature characters from Disney, Marvel, Pixar, and Star Wars — though talent likenesses remain excluded [6]. This is the first major instance of AI video generation operating within traditional IP frameworks rather than around them, and it sets a template that other studios are likely to follow.</p>
+<p><strong>Google Veo 3.1</strong> (GA since January 13, 2026) generates video at 720p, 1080p, and 4K resolution in clips up to 8 seconds [7]. Its unique differentiator is native 3D spatial audio generation — producing three distinct audio layers (dialogue with lip-sync, contextual effects, ambient background) — a capability no other video model matches as of March 2026. Veo sits within the broader Google Flow creative studio (launched February 2026), which merges the previously separate Whisk, ImageFX, and Veo tools into the first unified image-to-video-to-audio pipeline [7].</p>
+<p>The quality threshold has been crossed: studies show 95%+ of viewers cannot reliably distinguish AI-generated video from traditionally produced footage in controlled settings [5]. This has obvious implications for content creation, advertising, and media -- but also for trust and verification, a theme that intersects with the safety discussion below.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="Veo 3.1 generates dialogue with lip-sync, contextual effects, and ambient background as three separate audio layers -- a capability no other video model matches as of March 2026. Sora 2 leads on duration (25 seconds) and commercial licensing (Disney partnership). Veo leads on quality (up to 4K) and audio." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is Google Veo 3.1's unique differentiator compared to OpenAI's Sora 2?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-video-generation-quiz" value="0" />
+          <span class="quiz__choice-label">Longer video duration</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-video-generation-quiz" value="1" />
+          <span class="quiz__choice-label">Higher resolution output</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-video-generation-quiz" value="2" />
+          <span class="quiz__choice-label">Native 3D spatial audio generation with three distinct audio layers</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-video-generation-quiz" value="3" />
+          <span class="quiz__choice-label">Lower pricing</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="image-generation">Image Generation</h3>
+<p><strong>Midjourney V7</strong> shipped with significantly improved prompt fidelity and fewer anatomical errors compared to V6 [8]. The V8 Alpha, released March 17, 2026, is 4-5x faster at generation with dramatically improved text rendering, and complex multi-element compositions that were partially ignored in V7 now render with noticeably higher fidelity [8]. Midjourney remains the quality leader for still image generation, though Google's ImageFX (within Flow) and OpenAI's GPT Image 1.5 are competitive for many use cases.</p>
+<h3 id="audio-and-voice">Audio and Voice</h3>
+<p><strong>ElevenLabs v3</strong> supports 70+ languages with emotionally intelligent conversational voice synthesis [9]. Key capabilities include Speech-to-Speech (real-time voice transformation) and Eleven Music (text-to-music generation) [9]. The voice synthesis market is particularly relevant to the <span class="glossary-term glossary-term--first-use" data-term="agent">agent</span> systems discussed in <a href="module-03.html">Module 03</a> and <a href="module-04.html">Module 04</a> -- agents that can speak naturally open up phone-based and real-time interaction patterns that text-only agents cannot address.</p>
+<h3 id="multimodal-generation-comparison">Multimodal Generation Comparison</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>Leading Platform</th><th>Status (Mar 2026)</th><th>Key Differentiator</th></tr></thead><tbody><tr><td>Video (long-form)</td><td>Sora 2 (OpenAI)</td><td>GA</td><td>25-sec max, Disney $1B investment + licensing</td></tr><tr><td>Video (quality/audio)</td><td>Veo 3.1 (Google)</td><td>GA</td><td>4K, native 3D spatial audio</td></tr><tr><td>Video (unified pipeline)</td><td>Flow (Google)</td><td>GA</td><td>Image + video + audio in one tool</td></tr><tr><td>Image</td><td>Midjourney V7/V8a</td><td>GA / Alpha</td><td>Best prompt fidelity and anatomy</td></tr><tr><td>Voice synthesis</td><td>ElevenLabs v3</td><td>GA</td><td>70+ languages, emotional intelligence</td></tr><tr><td>Music</td><td>ElevenLabs (Eleven Music)</td><td>GA</td><td>Text-to-music</td></tr></tbody></table>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">If AI-generated video is indistinguishable from traditional footage in controlled settings (95%+ of viewers), what implications does this have for content trust and verification? Connect this to the safety discussions in Modules 03 and 04.</p>
+  <label for="se-m10-multimodal-generation-comparison" class="sr-only">Your explanation</label>
+  <textarea id="se-m10-multimodal-generation-comparison" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m10-multimodal-generation-comparison">Compare with Expert Answer</button>
+  <div id="se-answer-m10-multimodal-generation-comparison" class="self-explain__expert" hidden>
+    <p>The indistinguishability threshold transforms content verification from a nice-to-have into a critical infrastructure need. In Modules 03-04, safety was framed as controlling agent actions (sandboxing, delegation constraints). Here, safety becomes a content authenticity problem: agents that generate media need provenance tracking just as agents that take actions need audit trails. The C2PA standard for content credentials exists but no major AI generation platform embeds it by default. This gap between generation capability and verification infrastructure means that trust in digital content is degrading faster than the tools to verify it -- a dynamic that intersects with the EU AI Act's transparency requirements and the enterprise governance frameworks discussed in this module.</p>
+  </div>
+</div>
+<hr>
+<h2 id="enterprise-agent-governance">Enterprise Agent Governance</h2>
+<blockquote>
+<p><strong>Volatility warning:</strong> Enterprise governance tooling is pre-mature. Most products discussed here are newly GA or still in preview. Regulatory requirements (EU AI Act) will force rapid iteration through 2026-2027.</p>
+</blockquote>
+<p>The <span class="glossary-term" data-term="agent">agent</span> systems covered in <a href="module-03.html">Module 03</a> and the orchestration patterns in <a href="module-04.html">Module 04</a> create a governance challenge: when autonomous AI systems act on behalf of employees -- sending emails, modifying databases, executing transactions -- enterprises need visibility, control, and audit trails.</p>
+<h3 id="microsoft-agent-365">Microsoft Agent 365</h3>
+<p>Microsoft's answer is <span class="glossary-term glossary-term--first-use" data-term="agent-365">Agent 365</span>, reaching general availability on May 1, 2026 at $15/user/month [10]. It provides:</p>
+<ul>
+<li><strong><span class="glossary-term" data-term="agent">Agent</span> registry:</strong> Central catalog of all agents deployed in the organization, whether built in <span class="glossary-term glossary-term--first-use" data-term="copilot-studio">Copilot Studio</span> (<a href="module-04.html">Module 04</a>) or third-party.</li>
+<li><strong>Monitoring:</strong> Real-time dashboards showing <span class="glossary-term" data-term="agent">agent</span> actions, resource consumption, and error rates.</li>
+<li><strong>Security:</strong> Integration with Entra ID for identity, Purview for data governance, and Defender for threat detection.</li>
+<li><strong>Compliance:</strong> Audit logs meeting SOC 2 and ISO 27001 requirements, with EU AI Act readiness tooling.</li>
+</ul>
+<p>Microsoft's advantage here is its existing enterprise footprint. <span class="glossary-term" data-term="agent-365">Agent 365</span> integrates directly with the Microsoft 365 ecosystem, Azure AD, and the compliance infrastructure that enterprises already operate. No other vendor has an equivalent first-party governance product at this scope.</p>
+<h3 id="the-eu-ai-act">The EU AI Act</h3>
+<p>The EU AI Act becomes fully applicable in August 2026, establishing the world's first comprehensive regulatory framework for AI systems [11]. High-risk AI systems -- which include many enterprise <span class="glossary-term" data-term="agent">agent</span> applications -- must meet requirements for:</p>
+<ul>
+<li>Risk management and documentation</li>
+<li>Data governance and bias testing</li>
+<li>Human oversight mechanisms</li>
+<li>Transparency (users must know they are interacting with AI)</li>
+<li>Accuracy, robustness, and cybersecurity standards</li>
+</ul>
+<p>For the agentic systems discussed throughout this curriculum, the most impactful requirement is human oversight: fully autonomous agents operating without human-in-the-loop approval may not be deployable in EU-regulated contexts without significant architectural changes. This directly affects the <span class="glossary-term glossary-term--first-use" data-term="multi-agent-orchestration">multi-agent orchestration</span> patterns in <a href="module-04.html">Module 04</a>, where autonomous delegation chains will need interruption points for human review.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="The human oversight requirement is the most architecturally impactful for agentic systems. In Module 04, autonomous delegation chains pass tasks from parent to subagents without human intervention. Under the EU AI Act, high-risk systems must include human-in-the-loop approval points -- requiring architectural changes to insert interruption gates in multi-agent orchestration flows." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which requirement of the EU AI Act most directly impacts the multi-agent delegation patterns described in Module 04?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="0" />
+          <span class="quiz__choice-label">Data governance and bias testing</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="1" />
+          <span class="quiz__choice-label">Human oversight -- autonomous delegation chains need interruption points for human review</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="2" />
+          <span class="quiz__choice-label">Transparency requirements</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="3" />
+          <span class="quiz__choice-label">Cybersecurity standards</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="The EU AI Act becomes fully applicable on August 2, 2026 for high-risk AI systems. This is the first comprehensive regulatory framework for AI systems globally, requiring risk management, data governance, human oversight, transparency, and accuracy standards." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">When does the EU AI Act become fully applicable for high-risk AI systems?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="0" />
+          <span class="quiz__choice-label">March 2026</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="1" />
+          <span class="quiz__choice-label">August 2026</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="2" />
+          <span class="quiz__choice-label">January 2027</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-eu-ai-act-quiz" value="3" />
+          <span class="quiz__choice-label">August 2027</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="cross-platform-governance-gap">Cross-Platform Governance Gap</h3>
+<p>Outside of Microsoft, governance tooling is fragmented. Anthropic provides usage dashboards and audit logs via the API but no dedicated governance product. OpenAI's enterprise tier includes admin controls and SSO but lacks the <span class="glossary-term" data-term="agent">agent</span>-specific monitoring that <span class="glossary-term" data-term="agent-365">Agent 365</span> offers. Google's Vertex AI platform has model monitoring but limited <span class="glossary-term" data-term="agent">agent</span>-level governance. The open-source ecosystem (<a href="module-05.html">Module 05</a>) has essentially no governance tooling -- a significant barrier to enterprise <span class="glossary-term glossary-term--first-use" data-term="openclaw">OpenClaw</span> adoption.</p>
+<h3 id="enterprise-governance-comparison">Enterprise Governance Comparison</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Capability</th><th>Microsoft (Agent 365)</th><th>Anthropic</th><th>OpenAI</th><th>Google</th><th>OpenClaw</th></tr></thead><tbody><tr><td><strong><span class="glossary-term" data-term="agent">Agent</span> registry</strong></td><td>Centralized catalog (GA May 2026) [10]</td><td>None</td><td>None</td><td>None</td><td>None</td></tr><tr><td><strong>Real-time monitoring</strong></td><td>Defender integration [10]</td><td>API usage dashboards</td><td>Admin dashboard</td><td>Vertex AI monitoring</td><td>None</td></tr><tr><td><strong>Identity management</strong></td><td>Entra ID (full IAM) [10]</td><td>API keys only</td><td>Project-scoped keys, SSO</td><td>IAM / service accounts</td><td>OS-level permissions</td></tr><tr><td><strong>Compliance / audit</strong></td><td>Purview (DLP, retention, barriers) [10]</td><td>Audit logs (API)</td><td>Enterprise audit logs</td><td>Cloud Audit Logs</td><td>None</td></tr><tr><td><strong>Data governance</strong></td><td>Information barriers, DLP policies [10]</td><td>None</td><td>None</td><td>Vertex AI data governance</td><td>None</td></tr><tr><td><strong>Content filtering</strong></td><td>Azure AI Content Safety</td><td>Constitutional AI <span class="glossary-term glossary-term--first-use" data-term="guardrails">guardrails</span> [F1]</td><td>Moderation API, <span class="glossary-term" data-term="guardrails">guardrails</span> [F2]</td><td>Safety filters [F3]</td><td>None (user-managed)</td></tr><tr><td><strong>Human oversight controls</strong></td><td>Plan approval gates [F4]</td><td><span class="glossary-term glossary-term--first-use" data-term="agent-sdk">Agent SDK</span> hooks [F1]</td><td><span class="glossary-term" data-term="guardrails">Guardrails</span> primitive [F2]</td><td>Vertex AI threat detection [F3]</td><td>None</td></tr><tr><td><strong>EU AI Act readiness</strong></td><td>Readiness tooling included [10]</td><td>Not announced</td><td>Not announced</td><td>Not announced</td><td>N/A</td></tr><tr><td><strong>Pricing</strong></td><td>$15/user/month (standalone) [10]</td><td>Included in API pricing</td><td>Enterprise tier</td><td>Vertex AI pricing</td><td>Free (no governance)</td></tr></tbody></table>
+<p>The table makes concrete what the prose above describes: Microsoft is the only platform with a purpose-built, comprehensive governance product. Other platforms offer individual capabilities (content filtering, audit logs) but lack the integrated registry-identity-compliance-monitoring stack that enterprise deployments require.</p>
+<p>Gartner projects that 40% of enterprise applications will incorporate agentic AI capabilities by end of 2026 [12]. At the same time, they predict that 40%+ of agentic AI projects will be canceled by 2027, largely due to governance, reliability, and integration failures [12]. The governance gap is a primary reason the technology's adoption curve may be slower than the hype suggests.</p>
+
+<figure class="diagram diagram--mermaid" id="m10-2" role="img" aria-label="Four-pillar Agent 365 governance architecture with cross-platform comparison. Four pillars shown as columns: Registry provides a centralized agent catalog with versioning, GA May 2026. Identity provides Entra ID integration with full IAM, conditional access, and least-privilege enforcement. Compliance provides Purview integration with DLP, retention policies, information barriers, and EU AI Act readiness tooling. Monitoring provides Defender integration with real-time dashboards, anomaly detection, and threat monitoring. Below each pillar, dotted outlines show the governance gaps for other platforms: Anthropic offers only API usage dashboards and audit logs. OpenAI offers admin dashboards and SSO. Google offers Vertex AI monitoring. OpenClaw has no governance tooling.">
+  <pre class="mermaid">graph TD
+  subgraph A365[&quot;Agent 365 ($15/user/month, GA May 2026)&quot;]
+    subgraph Pillar1[&quot;Registry&quot;]
+      R1[&quot;Agent Catalog&quot;]
+      R2[&quot;Versioning&quot;]
+      R3[&quot;Owner Tracking&quot;]
+    end
+    subgraph Pillar2[&quot;Identity&quot;]
+      I1[&quot;Entra ID&quot;]
+      I2[&quot;Conditional Access&quot;]
+      I3[&quot;Least Privilege&quot;]
+    end
+    subgraph Pillar3[&quot;Compliance&quot;]
+      CO1[&quot;Purview DLP&quot;]
+      CO2[&quot;Retention Policies&quot;]
+      CO3[&quot;Information Barriers&quot;]
+      CO4[&quot;EU AI Act Readiness&quot;]
+    end
+    subgraph Pillar4[&quot;Monitoring&quot;]
+      MO1[&quot;Defender Integration&quot;]
+      MO2[&quot;Anomaly Detection&quot;]
+      MO3[&quot;Action Auditing&quot;]
+    end
+  end
+
+  subgraph Gaps[&quot;Other Platforms: Governance Gaps&quot;]
+    G_Anthropic[&quot;Anthropic&lt;br/&gt;API dashboards + audit logs&lt;br/&gt;No registry, no agent identity&quot;]
+    G_OpenAI[&quot;OpenAI&lt;br/&gt;Admin dashboard + SSO&lt;br/&gt;No agent-specific monitoring&quot;]
+    G_Google[&quot;Google&lt;br/&gt;Vertex AI monitoring&lt;br/&gt;Limited agent governance&quot;]
+    G_OpenClaw[&quot;OpenClaw&lt;br/&gt;No governance tooling&lt;br/&gt;OS-level permissions only&quot;]
+  end
+
+  A365 -.-&gt;|&quot;no cross-platform&lt;br/&gt;standard exists&quot;| Gaps
+</pre>
+  <figcaption>Enterprise Agent Governance Stack</figcaption>
+</figure>
+
+<details class="accordion">
+  <summary class="accordion__title">Gartner agentic AI predictions: methodology and context</summary>
+  <div class="accordion__content">
+    <p>Gartner predicts both 40% enterprise adoption and 40%+ project cancellation for agentic AI. These are not contradictory -- they describe different phases. The adoption prediction (40% of enterprise apps by end of 2026) reflects committed projects and integration plans already in motion. The cancellation prediction (40%+ by 2027) reflects the historical pattern where ambitious technology deployments fail on governance, reliability, and integration rather than technical capability. The specific failure modes Gartner identifies -- governance gaps, agent reliability issues, and integration complexity -- map directly to challenges discussed in Module 03 (agent reliability), Module 04 (orchestration complexity), and Module 05 (open ecosystem security). The gap between these two predictions represents the maturation work required between pilot deployment and production scale.</p>
+  </div>
+</details>
+
+<details class="accordion">
+  <summary class="accordion__title">The governance gap that could stall enterprise agent adoption</summary>
+  <div class="accordion__content">
+    <p>Only one platform has comprehensive agent governance as of March 2026. The others are building it. The gap matters for anyone deploying agents in regulated industries.</p>
+  </div>
+</details>
+<hr>
+<h2 id="safety-and-alignment">Safety and Alignment</h2>
+<p>The safety landscape extends well beyond regulatory compliance into fundamental questions about how AI systems behave, particularly as they gain agency.</p>
+<h3 id="platform-safety-approaches">Platform Safety Approaches</h3>
+<p>Each major platform approaches safety differently, reflecting their organizational philosophies as described in <a href="module-00.html">Module 00</a>:</p>
+<p><strong>Anthropic</strong> positions safety as its founding mission and competitive differentiator. Constitutional AI (CAI) embeds behavioral principles into the model training process itself. Claude's <span class="glossary-term glossary-term--first-use" data-term="extended-thinking">extended thinking</span> (<a href="module-01.html">Module 01</a>) provides inspectable reasoning traces, giving users and auditors visibility into the model's decision process. Anthropic publishes detailed model cards and maintains the most transparent safety evaluation process among the major providers [F1].</p>
+<p><strong>OpenAI</strong> takes a more iterative, deployment-driven approach. Safety boundaries are adjusted based on real-world usage data. The o-series reasoning models (<a href="module-01.html">Module 01</a>) include internal safety reasoning but the chain-of-thought is summarized rather than fully exposed. OpenAI's preparedness framework defines risk levels and mitigation protocols for each capability tier [F2].</p>
+<p><strong>Google</strong> leverages scale and breadth. DeepMind's safety research focuses on formal verification, interpretability, and adversarial robustness. In practice, Gemini's safety filters tend toward conservative content restriction, which shows up as higher false-positive refusal rates compared to Claude or ChatGPT [F3].</p>
+<h3 id="agent-specific-safety-challenges">Agent-Specific Safety Challenges</h3>
+<p>The transition from chatbots to agents (the central arc from <a href="module-03.html">Module 03</a> through <a href="module-04.html">Module 04</a>) introduces safety challenges that static model evaluation does not capture:</p>
+<ul>
+<li><strong>Action irreversibility:</strong> A chatbot can generate incorrect text; an <span class="glossary-term" data-term="agent">agent</span> can delete files, send emails, or execute transactions. The sandboxing patterns discussed in <a href="module-03.html">Module 03</a> are a first line of defense but not sufficient for high-stakes actions.</li>
+<li><strong>Delegation chains:</strong> In multi-<span class="glossary-term" data-term="agent">agent</span> systems (<a href="module-04.html">Module 04</a>), the parent <span class="glossary-term" data-term="agent">agent</span>'s safety constraints must propagate to subagents. Context isolation helps contain scope but also reduces the <span class="glossary-term glossary-term--first-use" data-term="subagent">subagent</span>'s ability to recognize when it is being asked to do something the parent should not have authorized.</li>
+<li><strong>Tool supply chain:</strong> MCP servers (<a href="module-06.html">Module 06</a>) and <span class="glossary-term glossary-term--first-use" data-term="clawhub">ClawHub</span> <span class="glossary-term glossary-term--first-use" data-term="skills">skills</span> (<a href="module-05.html">Module 05</a>) introduce third-party code into <span class="glossary-term" data-term="agent">agent</span> execution paths. The 12-20% malicious skill rate on <span class="glossary-term" data-term="clawhub">ClawHub</span> [20] demonstrates that tool ecosystems are already active attack surfaces.</li>
+</ul>
+
+<details class="accordion">
+  <summary class="accordion__title">Delegation chain safety: propagating constraints through multi-agent systems</summary>
+  <div class="accordion__content">
+    <p>In multi-agent systems (Module 04), the parent agent's safety constraints must propagate to subagents. But context isolation -- which protects against information leakage -- also reduces the subagent's ability to recognize when it is being asked to do something the parent should not have authorized. This creates a fundamental tension: tighter isolation improves security but reduces safety awareness. The practical solution involves explicit constraint propagation (safety rules passed as system prompt content to subagents), not reliance on the subagent independently recognizing unsafe requests. Enterprise governance (Agent 365) adds an external layer: logging, permission gates, and audit trails that operate independently of the agents' own safety mechanisms.</p>
+  </div>
+</details>
+
+<section class="quiz" data-variant="concept-check" data-correct="2" data-explanation="A chatbot can generate incorrect text, which is easily discarded. An agent can take irreversible actions in the real world -- deleting files, sending emails, executing financial transactions. This is why Module 03's sandboxing patterns and Module 04's context isolation are safety mechanisms, not just architectural conveniences. Static model evaluation (benchmarks, red-teaming) does not capture the risk of autonomous action in production environments." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the fundamental safety challenge that agents introduce beyond what static model evaluation captures?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-agent-specific-safety-challenges-quiz" value="0" />
+          <span class="quiz__choice-label">Agents produce lower quality text</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-agent-specific-safety-challenges-quiz" value="1" />
+          <span class="quiz__choice-label">Agents cost more to run</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-agent-specific-safety-challenges-quiz" value="2" />
+          <span class="quiz__choice-label">Action irreversibility -- agents can delete files, send emails, and execute transactions</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-agent-specific-safety-challenges-quiz" value="3" />
+          <span class="quiz__choice-label">Agents require more training data</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="the-verification-problem">The Verification Problem</h3>
+<p>As multimodal generation quality crosses the indistinguishability threshold (see above), verifying the provenance and authenticity of content becomes critical. The <span class="glossary-term glossary-term--first-use" data-term="c2pa">C2PA</span> (Coalition for Content Provenance and Authenticity) standard for content credentials is supported by Adobe, Microsoft, Google, and others, but adoption is fragmented. No major AI generation platform embeds <span class="glossary-term" data-term="c2pa">C2PA</span> credentials by default as of March 2026. This is a gap that will need to close before AI-generated media becomes fully mainstream.</p>
+<hr>
+<h2 id="open-vs-closed-ecosystems">Open vs. Closed Ecosystems</h2>
+<blockquote>
+<p><strong>Volatility warning:</strong> The open-vs-closed dynamic is the single most volatile axis in the AI industry. Market share, model quality, and regulatory treatment can shift dramatically within a quarter.</p>
+</blockquote>
+<p>This tension runs through the entire curriculum -- from the ecosystem map in <a href="module-00.html">Module 00</a> to the <span class="glossary-term" data-term="openclaw">OpenClaw</span> deep-dive in <a href="module-05.html">Module 05</a> to the API economics in <a href="module-09.html">Module 09</a>. The capstone view reveals a market in structural transition.</p>
+<h3 id="the-performance-gap-has-closed">The Performance Gap Has Closed</h3>
+<p>In 2023, closed models held a 17.5 percentage point lead over open models on standard knowledge benchmarks. By March 2026, that gap has effectively closed to near zero [13]. On any given benchmark, the best open model typically reaches ~90% of the best closed model's score at the time of release, and narrows further as the open community fine-tunes and iterates [13].</p>
+<p>This does not mean open and closed models are interchangeable. Closed models still lead in:</p>
+<ul>
+<li>Maximum <span class="glossary-term glossary-term--first-use" data-term="context-window">context window</span> size (Gemini's 2M tokens has no open equivalent)</li>
+<li>Integrated <span class="glossary-term glossary-term--first-use" data-term="tool-use">tool use</span> and agentic capabilities</li>
+<li>Safety alignment and content filtering consistency</li>
+<li>Enterprise support, SLAs, and compliance certifications</li>
+</ul>
+<p>Open models lead in:</p>
+<ul>
+<li>Cost: 87% cheaper inference on average [13]</li>
+<li>Customization: full <span class="glossary-term glossary-term--first-use" data-term="fine-tuning">fine-tuning</span>, merging, quantization</li>
+<li>Deployment flexibility: on-premise, air-gapped, edge</li>
+<li>Transparency: weights and (sometimes) training data are inspectable</li>
+</ul>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="Benchmark parity does not mean functional parity. Closed models lead in maximum context window size (Gemini's 2M tokens has no open equivalent) and integrated tool use / agentic capabilities. Open models lead in cost (87% cheaper), customization, deployment flexibility, and transparency. The gap is in production infrastructure, not raw model quality." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Open models have closed the benchmark gap to near zero against closed models. In which two dimensions do closed models still hold a clear advantage?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-performance-gap-has-closed-quiz" value="0" />
+          <span class="quiz__choice-label">Cost and customization</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-performance-gap-has-closed-quiz" value="1" />
+          <span class="quiz__choice-label">Maximum context window size and integrated agentic capabilities</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-performance-gap-has-closed-quiz" value="2" />
+          <span class="quiz__choice-label">Training data transparency and deployment flexibility</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-performance-gap-has-closed-quiz" value="3" />
+          <span class="quiz__choice-label">Community support and fine-tuning options</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<h3 id="market-structure-revenue-vs-usage">Market Structure: Revenue vs. Usage</h3>
+<p>The economic picture is paradoxical. Closed models capture approximately 96% of AI industry revenue and handle roughly 80% of all <span class="glossary-term glossary-term--first-use" data-term="token">token</span> usage [13]. Yet open model downloads are growing faster, with Chinese models (Qwen dominant among them) now accounting for 41% of global model downloads [13]. The projected trajectory is a 50-50 open/closed split in usage (not revenue) by end of 2026 [13].</p>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Open models capture only ~4% of AI revenue but are growing faster in downloads and usage. How might this dynamic resolve by 2027? Consider Module 05's analysis of OpenClaw's ecosystem and Module 09's API pricing economics.</p>
+  <label for="se-m10-market-structure-revenue-vs-usage" class="sr-only">Your explanation</label>
+  <textarea id="se-m10-market-structure-revenue-vs-usage" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m10-market-structure-revenue-vs-usage">Compare with Expert Answer</button>
+  <div id="se-answer-m10-market-structure-revenue-vs-usage" class="self-explain__expert" hidden>
+    <p>Two plausible scenarios. Scenario A: Open models capture more revenue as enterprise self-hosted inference improves, enterprise governance tooling for open ecosystems matures (currently near-zero per Module 05), and the cost advantage compounds at scale. Scenario B: Revenue concentration in closed platforms persists because enterprises pay for support, compliance certifications, managed infrastructure, and SLAs -- not just model quality. Module 05's governance gap (OpenClaw has essentially no enterprise governance) and Module 09's Azure premium (15-40% for compliance infrastructure) are evidence for Scenario B. The most likely outcome is a hybrid: open models dominate cost-sensitive, customization-heavy, and privacy-critical workloads, while closed platforms retain enterprise revenue through managed services and compliance.</p>
+  </div>
+</div>
+<h3 id="mcp-as-the-bridge">MCP as the Bridge</h3>
+<p>The Model Context Protocol (<a href="module-06.html">Module 06</a>) is emerging as the connective tissue between open and closed ecosystems. With 19,700+ servers in the registry and 97 million+ monthly SDK downloads [14], MCP provides a universal integration layer that works regardless of which model -- open or closed -- is behind the client. Anthropic's donation of MCP to the Linux Foundation's Agentic AI Foundation [21] was a deliberate move to cement this neutrality. For builders, this means that investments in MCP servers and tooling are hedge-compatible: they work with Claude, ChatGPT, Gemini, and open-source models alike.</p>
+<h3 id="geopolitical-dimensions">Geopolitical Dimensions</h3>
+<p>The open-vs-closed question is acquiring geopolitical weight. An estimated 35% of countries are expected to be locked into regional AI platform dependencies by 2027 [16]. China's open-source strategy (particularly through Alibaba's Qwen family and DeepSeek) is both a competitive weapon and a soft-power tool, providing AI capabilities to regions and organizations that cannot or will not depend on US-based closed platforms. The EU AI Act's transparency requirements also tilt toward open models, which can more easily demonstrate compliance through inspectable weights and training procedures.</p>
+
+<details class="accordion">
+  <summary class="accordion__title">A widening gap where it matters most</summary>
+  <div class="accordion__content">
+    <p>The open-source model quality gap is narrowing. The ecosystem gap is widening. This tension defines the next two years.</p>
+  </div>
+</details>
+<hr>
+<h2 id="what-to-watch-upcoming-events">What to Watch: Upcoming Events</h2>
+<p>Three events in the next 90 days are likely to reshape significant parts of this curriculum. The predictions below are based on pre-event reporting, developer previews, analyst expectations, and credible leaks as of March 2026. Actual announcements may differ significantly -- treat these as informed speculation, not confirmed information.</p>
+<h3 id="google-io-2026-may-19-20">Google I/O 2026 (May 19-20)</h3>
+<p>Expected announcements (based on public reporting and Google previews) [17]:</p>
+<ul>
+<li><strong>Next-generation Gemini models</strong> -- likely Gemini 3.5 or a new architecture, potentially extending the <span class="glossary-term" data-term="context-window">context window</span> beyond 2M tokens</li>
+<li><strong>Android 17</strong> -- deeper on-device AI integration, expanded <span class="glossary-term" data-term="aicore">AICore</span> capabilities</li>
+<li><strong>Project Astra AR glasses</strong> -- consumer hardware with real-time multimodal AI, bridging the on-device and cloud split</li>
+<li><strong>Agentic Chrome</strong> -- browser-native <span class="glossary-term" data-term="agent">agent</span> capabilities, directly competing with Anthropic's <span class="glossary-term glossary-term--first-use" data-term="computer-use">computer use</span> and OpenAI's Operator</li>
+</ul>
+<p>Curriculum impact: Likely updates to <a href="module-01.html">Module 01</a> (models), <a href="module-03.html">Module 03</a> (agents), and <a href="module-08.html">Module 08</a> (comparison tables).</p>
+<h3 id="microsoft-build-2026-june-2-3-san-francisco">Microsoft Build 2026 (June 2-3, San Francisco)</h3>
+<p>Expected announcements (based on public reporting and Microsoft previews) [18]:</p>
+<ul>
+<li><strong>Copilot stack evolution</strong> -- deeper <span class="glossary-term" data-term="copilot-studio">Copilot Studio</span> integration with <span class="glossary-term" data-term="agent-365">Agent 365</span> governance</li>
+<li><strong>Azure OpenAI updates</strong> -- new model deployments, potentially GPT-5 Azure availability</li>
+<li><strong>Enterprise governance tooling</strong> -- expanded <span class="glossary-term" data-term="agent-365">Agent 365</span> capabilities post-GA</li>
+</ul>
+<p>Curriculum impact: Likely updates to <a href="module-04.html">Module 04</a> (orchestration) and <a href="module-09.html">Module 09</a> (APIs).</p>
+<h3 id="wwdc-2026-june-8-12">WWDC 2026 (June 8-12)</h3>
+<p>Expected announcements (based on public reporting and Apple previews) [19]:</p>
+<ul>
+<li><strong>iOS 27</strong> -- LLM-powered Siri ("Campo"), the most significant Siri overhaul since its launch</li>
+<li><strong>Core AI framework</strong> -- replacing Core ML as the primary on-device AI framework, signaling Apple's intent to make AI a first-class development platform</li>
+<li><strong>Apple Intelligence expansion</strong> -- broader device support, new on-device capabilities, potentially expanded PCC services</li>
+</ul>
+<p>Curriculum impact: Likely updates to <a href="module-01.html">Module 01</a> (models), this module (on-device AI), and <a href="module-08.html">Module 08</a> (comparison).</p>
+<h3 id="event-impact-matrix">Event Impact Matrix</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Event</th><th>Date</th><th>Modules Most Affected</th><th>Key Watch Items</th></tr></thead><tbody><tr><td>Google I/O</td><td>May 19-20</td><td>01, 03, 08, 10</td><td>Gemini 3.5, Astra glasses, Agentic Chrome</td></tr><tr><td>MS Build</td><td>June 2-3</td><td>04, 09, 10</td><td><span class="glossary-term" data-term="agent-365">Agent 365</span> post-GA, Azure OpenAI updates</td></tr><tr><td>WWDC</td><td>June 8-12</td><td>01, 08, 10</td><td>LLM Siri, Core AI framework, PCC expansion</td></tr></tbody></table>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">Pick one upcoming event (Google I/O, MS Build, or WWDC). Based on what you have learned in this curriculum, predict the single most impactful announcement for the AI landscape and explain why it matters.</p>
+  <label for="se-m10-event-impact-matrix" class="sr-only">Your explanation</label>
+  <textarea id="se-m10-event-impact-matrix" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m10-event-impact-matrix">Compare with Expert Answer</button>
+  <div id="se-answer-m10-event-impact-matrix" class="self-explain__expert" hidden>
+    <p>Google I/O -- Agentic Chrome. Browser-native agent capabilities would directly compete with Anthropic's computer use (Module 03) and OpenAI's Operator, but with Google's distribution advantage (Chrome has ~65% browser market share). This matters because it moves agent capabilities from specialized tools to the default computing environment. MS Build -- Expanded Agent 365 governance post-GA. This addresses the governance gap identified throughout this module and could accelerate enterprise agent adoption if the tooling delivers on its promise. WWDC -- LLM Siri. A true LLM-powered Siri would add a fifth major consumer AI platform to Module 08's comparison, fundamentally reshaping the consumer AI landscape by reaching Apple's installed base of 1.5B+ active devices. Each prediction is grounded in curriculum analysis, not speculation.</p>
+  </div>
+</div>
+<hr>
+<h2 id="the-investment-thesis-and-adoption-reality">The Investment Thesis and Adoption Reality</h2>
+<p>Goldman Sachs estimates $527 billion in global AI capital expenditure for 2026 [15]. This is not speculative -- it is committed infrastructure spending by hyperscalers, enterprises, and sovereign funds. The question is not whether AI is being adopted, but where the returns will materialize.</p>
+<p>Gartner's dual prediction captures the tension: 40% of enterprise applications will incorporate agentic AI by end of 2026, but 40%+ of agentic AI projects will be canceled by 2027 [12]. The gap between those two numbers represents the governance, reliability, and integration challenges discussed throughout this curriculum -- particularly in <a href="module-03.html">Module 03</a> (<span class="glossary-term" data-term="agent">agent</span> reliability), <a href="module-04.html">Module 04</a> (orchestration complexity), and <a href="module-05.html">Module 05</a> (open ecosystem security).</p>
+<p>The pattern is familiar from previous technology waves: infrastructure investment leads, applications follow with high failure rates, and the survivors define the next paradigm. What is different this time is the speed -- the entire cycle from "interesting research result" to "$527B in capex" has compressed into roughly three years.</p>
+
+<section class="quiz" data-variant="concept-check" data-correct="1" data-explanation="The gap represents the governance, reliability, and integration challenges discussed throughout this curriculum: Module 03 (agent reliability), Module 04 (orchestration complexity), Module 05 (open ecosystem security), and this module (enterprise governance gaps). The technology works; the infrastructure to deploy it reliably at enterprise scale does not yet exist comprehensively." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Gartner predicts both 40% enterprise adoption and 40%+ project cancellation for agentic AI. What does the gap between these two numbers primarily represent?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-investment-thesis-and-adoption-reality-quiz" value="0" />
+          <span class="quiz__choice-label">Insufficient funding for AI projects</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-investment-thesis-and-adoption-reality-quiz" value="1" />
+          <span class="quiz__choice-label">Governance, reliability, and integration challenges</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-investment-thesis-and-adoption-reality-quiz" value="2" />
+          <span class="quiz__choice-label">Lack of capable models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-the-investment-thesis-and-adoption-reality-quiz" value="3" />
+          <span class="quiz__choice-label">Regulatory barriers only</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>On-device AI is a privacy and latency play, not a performance play.</strong> Cloud models will remain more capable, but on-device features see significantly higher adoption when users have the choice, driven by privacy preferences.</p>
+</li>
+<li>
+<p><strong>Multimodal generation has crossed the quality threshold.</strong> AI-generated video is indistinguishable from traditional footage in controlled tests. The broader AI video market has reached approximately $3.4B.</p>
+</li>
+<li>
+<p><strong>Enterprise governance is the bottleneck for <span class="glossary-term" data-term="agent">agent</span> adoption.</strong> Microsoft's <span class="glossary-term" data-term="agent-365">Agent 365</span> (GA May 2026) is the first comprehensive solution; other platforms lag significantly.</p>
+</li>
+<li>
+<p><strong>The EU AI Act (August 2026) will force architectural changes</strong> to agentic systems, particularly around human oversight requirements and transparency.</p>
+</li>
+<li>
+<p><strong>The open-closed performance gap has closed.</strong> Open models match closed models on benchmarks but closed models still capture 96% of revenue and lead in agentic capabilities.</p>
+</li>
+<li>
+<p><strong>MCP is the ecosystem hedge.</strong> With 19,700+ servers and 97M+ SDK monthly downloads, MCP investments work across both open and closed platforms.</p>
+</li>
+<li>
+<p><strong>$527B in AI capex is committed for 2026,</strong> but 40%+ of agentic AI projects may be canceled by 2027 due to governance and reliability gaps.</p>
+</li>
+<li>
+<p><strong>Google I/O, MS Build, and WWDC 2026 will each require curriculum updates</strong> -- particularly for models, agents, on-device AI, and consumer comparison tables.</p>
+</li>
+<li>
+<p><strong>Geopolitical platform lock-in is emerging.</strong> 35% of countries may be dependent on regional AI platforms by 2027, with Chinese open-source models as a major vector.</p>
+</li>
+<li>
+<p><strong>The speed of this cycle is unprecedented.</strong> Three years from research to half-trillion-dollar infrastructure commitment. The curriculum itself is a living document because the frontier does not hold still.</p>
+</li>
+</ol>
+
+<figure class="diagram diagram--mermaid" id="m10-4" role="img" aria-label="Full curriculum concept map showing all 11 modules grouped into four parts following the learning sequence. Part 1 The Terrain contains M00 Landscape Overview, M01 Models and Intelligence, and M02 Context Engineering, establishing the foundational vocabulary and competitive framing. Part 2 Agent Systems contains M03 Single Agents, M06 MCP Integration, M04 Multi-Agent Orchestration, and M05 OpenClaw, building from individual agents through integration protocols to orchestration patterns. Part 3 Building and Automating contains M07 Skills and Automation and M09 Developer APIs, covering practical construction. Part 4 Synthesis and Horizon contains M08 Consumer Comparison and M10 Frontier Topics as capstone modules. Cross-cutting threads connect modules across parts: context engineering underlies all agent modules, MCP integration spans agents and skills, model selection threads from M01 through M04 and M09, governance connects M04 M05 and M10, and the open versus closed ecosystem tension connects M05 M06 and M10.">
+  <pre class="mermaid">graph TD
+  subgraph Part1[&quot;Part 1: The Terrain&quot;]
+    M00[&quot;M00&lt;br/&gt;Landscape Overview&quot;]
+    M01[&quot;M01&lt;br/&gt;Models &amp; Intelligence&quot;]
+    M02[&quot;M02&lt;br/&gt;Context Engineering&quot;]
+    M00 --&gt; M01
+    M01 --&gt; M02
+  end
+
+  subgraph Part2[&quot;Part 2: Agent Systems&quot;]
+    M03[&quot;M03&lt;br/&gt;Single Agents&quot;]
+    M06[&quot;M06&lt;br/&gt;MCP Integration&quot;]
+    M04[&quot;M04&lt;br/&gt;Multi-Agent&quot;]
+    M05[&quot;M05&lt;br/&gt;OpenClaw&quot;]
+    M03 --&gt; M04
+    M06 --&gt; M04
+    M03 --&gt; M05
+  end
+
+  subgraph Part3[&quot;Part 3: Building &amp; Automating&quot;]
+    M07[&quot;M07&lt;br/&gt;Skills &amp; Automation&quot;]
+    M09[&quot;M09&lt;br/&gt;Developer APIs&quot;]
+  end
+
+  subgraph Part4[&quot;Part 4: Synthesis &amp; Horizon&quot;]
+    M08[&quot;M08&lt;br/&gt;Consumer Comparison&quot;]
+    M10[&quot;M10&lt;br/&gt;Frontier Topics&quot;]
+  end
+
+  Part1 --&gt; Part2
+  Part2 --&gt; Part3
+  Part3 --&gt; Part4
+
+  M02 --&gt; M03
+  M02 --&gt; M06
+  M03 --&gt; M07
+  M06 --&gt; M07
+  M01 --&gt; M09
+  M04 --&gt; M08
+  M09 --&gt; M08
+
+  M01 -.-&gt;|&quot;model selection&quot;| M04
+  M01 -.-&gt;|&quot;model selection&quot;| M09
+  M02 -.-&gt;|&quot;context engineering&quot;| M04
+  M06 -.-&gt;|&quot;MCP spans agents + skills&quot;| M07
+  M04 -.-&gt;|&quot;governance&quot;| M10
+  M05 -.-&gt;|&quot;open vs closed&quot;| M10
+  M06 -.-&gt;|&quot;open vs closed&quot;| M05
+  M01 -.-&gt;|&quot;multimodal&quot;| M08
+</pre>
+  <figcaption>Curriculum Synthesis Map</figcaption>
+</figure>
+
+<div class="self-explain" role="region" aria-label="Self-explanation exercise">
+  <h4 class="self-explain__heading">Explain Your Thinking</h4>
+  <p class="self-explain__prompt">You are the AI strategy advisor for a European healthcare company (500 employees, 3 countries, GDPR + health data regulations). They need to deploy AI across clinical documentation, patient scheduling, research literature review, and internal knowledge management. Budget: $50K/year. Design the architecture using concepts from the entire curriculum: platform selection, agent architecture, integration strategy, governance, model selection per use case, cost optimization, and frontier considerations.</p>
+  <label for="se-m10-key-takeaways" class="sr-only">Your explanation</label>
+  <textarea id="se-m10-key-takeaways" class="self-explain__textarea" rows="4" placeholder="Write your explanation here..."></textarea>
+  <div class="self-explain__char-count" aria-live="polite">0 characters</div>
+  <button class="self-explain__button" disabled aria-expanded="false" aria-controls="se-answer-m10-key-takeaways">Compare with Expert Answer</button>
+  <div id="se-answer-m10-key-takeaways" class="self-explain__expert" hidden>
+    <p>This is the full curriculum capstone. A model answer is provided in reference/research/capstone-answers/full-capstone.md. Key elements: (1) Platform: Azure OpenAI for HIPAA/GDPR compliance with VNet private networking (Module 09), supplemented by Anthropic for research quality. (2) Models: On-device or PCC for patient-facing scheduling (privacy-critical, Module 10), Opus/Sonnet for research summarization (Module 01), Haiku for classification tasks. (3) Agents: Multi-agent for compliance workflows with human-in-the-loop gates for EU AI Act (Modules 03-04). (4) Integration: MCP servers for internal knowledge base and regulatory document store (Module 06). (5) Governance: Agent 365 for centralized monitoring and compliance (Module 10). (6) Cost: Model tiering + caching + batch processing to stay within $50K/year (Module 09). See the full capstone answer document for detailed architecture and budget breakdown.</p>
+  </div>
+</div>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="LLM Siri would primarily impact: Module 01 (Apple's models would enter the model comparison), Module 08 (a fifth major consumer AI platform reshapes all comparison tables), and Module 10 (on-device AI capabilities and Apple Intelligence expansion). Module 03 could also be affected if Siri gains agentic capabilities. The Event Impact Matrix in this module identifies WWDC as most affecting Modules 01, 08, and 10." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">If Apple announces LLM Siri at WWDC 2026, which curriculum modules would require the most significant updates?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Module 03 (agents) and Module 06 (MCP) only</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Module 01 (models), Module 08 (consumer comparison), and Module 10 (on-device AI)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Module 09 (APIs) and Module 07 (skills) only</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">No modules would need updates</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="The complete lifecycle integrates Module 03 (gather-act-verify), Module 04 (delegation and context isolation), and Module 10 (enterprise governance). Before acting, the agent must pass governance permission checks. During action, sandboxing constrains scope. After action, results are verified AND logged to audit trails. For high-risk actions under the EU AI Act, human review gates must interrupt the delegation chain before irreversible actions execute. Governance wraps around the technical loop, not after it." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Module 03 introduced the gather-act-verify loop. Module 04 extended it to multi-agent delegation. This module adds enterprise governance. Which description best captures the complete lifecycle of an enterprise agent action?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Gather context, act, verify results</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Request approval, gather context, act, log the result</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Gather context, check permissions (governance), act within sandbox, verify results, log to audit trail (governance), route for human review if high-risk (EU AI Act compliance)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Execute action, then check if it was allowed</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="The strongest case for switching combines Module 09's cost analysis (model selection is the biggest lever, 60-90% savings) with this module's open-closed dynamics (87% cheaper inference, full customization). However, the switch only makes sense when: (a) task complexity matches open model capabilities (classification, not frontier reasoning), (b) the organization has infrastructure expertise for self-hosted deployment, and (c) the governance gap (Module 05: OpenClaw has no enterprise governance) is acceptable. Self-hosted Llama does NOT have larger context windows or better governance than closed platforms." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Using Module 09's pricing data and this module's open-vs-closed analysis, which argument BEST supports a company switching from Claude's API to a self-hosted Llama model?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Llama models are always higher quality than Claude</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">The company processes millions of classification tasks monthly where the 87% cost savings of open models outweigh the agentic capability gap, and they have the infrastructure team to manage self-hosted deployment</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Open models have better enterprise governance</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Self-hosted models have larger context windows</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="MCP's value as a hedge comes from its model-agnosticism. A single MCP server providing database access, for example, works identically whether the client is Claude, ChatGPT, Gemini, or a local Llama instance. Anthropic's donation to the Linux Foundation's Agentic AI Foundation cemented this neutrality. With 19,700+ servers and 97M+ SDK downloads, the ecosystem has critical mass. This means integration investments are portable across the open-closed divide." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Trace MCP's role across the curriculum: Module 00 introduced it as a key battleground, Module 06 covered the protocol in depth, and this module describes it as an ecosystem bridge. What makes MCP uniquely positioned as a hedge against platform lock-in?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">It is the cheapest integration option</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">It is model-agnostic -- the same MCP server works with Claude, ChatGPT, Gemini, and open-source models, making integration investments portable</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">It only works with Anthropic products</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">It replaces the need for APIs</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="Closed models capture approximately 96% of AI industry revenue and handle roughly 80% of all token usage. Yet open model downloads are growing faster, with a projected 50-50 usage split (not revenue) by end of 2026. The revenue concentration reflects enterprise willingness to pay for managed services, compliance, and support." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What percentage of AI industry revenue do closed models currently capture?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">50%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">80%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">96%</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">100%</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Agent 365 reaches general availability on May 1, 2026 at $15/user/month. It provides a centralized agent registry, real-time monitoring via Defender, Entra ID identity management, Purview compliance, and EU AI Act readiness tooling." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Microsoft Agent 365 reaches GA on what date and at what price?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">March 2026, $10/user/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">May 1, 2026, $15/user/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">August 2026, $20/user/month</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">January 2027, $25/user/month</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="2" data-explanation="The broader AI video market has reached approximately $3.4B in 2026. The $850M-$1.8B figure represents the narrower AI video generator market specifically (varying by scope definition). Growth rates exceed 35% year-over-year across all segments." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">What is the estimated size of the broader AI video market in 2026?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">$500M</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">$850M-$1.8B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">~$3.4B</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">$10B</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="module-assessment" data-correct="1" data-explanation="Google controls Android (OS), Tensor chipsets (silicon), and Gemini Nano (model). This vertical integration mirrors the platform-ecosystem pattern from Module 00 but extends to silicon. Apple has similar integration (A-series + Apple Foundation Model) but lacks a public developer API for on-device AI. Qualcomm provides hardware but not OS or models." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which on-device AI platform benefits from vertical integration of OS, chipset, and model?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Apple (A-series + Apple Foundation Model)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Google (Android + Tensor + Gemini Nano)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Qualcomm (Snapdragon + OEM models)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Microsoft (Windows + Azure)</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="WWDC's expected LLM Siri announcement would add Apple as a fifth major consumer AI platform, fundamentally reshaping Module 08's comparison tables. Google I/O primarily affects Module 01 (models) and Module 03 (agents). Build primarily affects Module 04 (orchestration) and Module 09 (APIs)." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which upcoming event is most likely to require updates to the consumer AI comparison (Module 08)?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Microsoft Build (Agent 365 updates)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">WWDC (LLM Siri could add a fifth major consumer AI platform)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Google I/O (Agentic Chrome)</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">All three equally</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="MCP is the connective tissue between open and closed ecosystems. With 19,700+ servers and 97M+ SDK monthly downloads, MCP provides a universal integration layer that works regardless of which model (open or closed) is behind the client. Anthropic's donation of MCP to the Linux Foundation's Agentic AI Foundation cemented this neutrality." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">In the open vs. closed ecosystem dynamic, what role does MCP play?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">It locks developers into Anthropic's ecosystem</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">It serves as the ecosystem hedge -- investments work across both open and closed platforms</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">It is only relevant to open-source models</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">It replaces APIs entirely</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Microsoft's Agent 365 (GA May 2026, $15/user/month) is the only platform with an integrated registry-identity-compliance-monitoring stack. Anthropic offers API audit logs. OpenAI has enterprise admin controls. Google has Vertex AI monitoring. OpenClaw has essentially nothing. None match Agent 365's comprehensiveness." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which statement best describes the current enterprise governance landscape for agentic AI?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">All major platforms offer comprehensive governance</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Microsoft's Agent 365 is the only purpose-built comprehensive governance product; other platforms offer fragments</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">No platform offers any governance capabilities</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Google leads in agent governance through Vertex AI</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="Veo 3.1 generates three distinct audio layers (dialogue with lip-sync, contextual effects, ambient background) natively. Sora 2 leads on duration (25 seconds) and commercial licensing (Disney). Midjourney leads in still image quality. ElevenLabs leads in voice synthesis." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">Which platform leads in multimodal video generation with native 3D spatial audio?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">OpenAI Sora 2</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Google Veo 3.1</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Midjourney V8</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">ElevenLabs v3</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+
+<section class="quiz" data-variant="section-review" data-correct="1" data-explanation="On-device AI delivers sub-20ms latency (vs. 200-500ms cloud round-trips) and absolute privacy (data never leaves the device). Cloud models remain more capable for complex reasoning and large context tasks. The 90% data distrust figure and higher adoption rates for on-device features confirm privacy and latency as the primary drivers." role="region" aria-label="Concept check">
+  <h4 class="quiz__heading">
+    <span class="quiz__icon" aria-hidden="true"></span>
+    Check Your Understanding
+  </h4>
+  <form class="quiz__form" novalidate>
+    <fieldset class="quiz__question">
+      <legend class="quiz__question-text">On-device AI is primarily a play for which two user priorities?</legend>
+      <div class="quiz__choices" role="radiogroup">
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="0" />
+          <span class="quiz__choice-label">Performance and cost savings</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="1" />
+          <span class="quiz__choice-label">Privacy and latency</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="2" />
+          <span class="quiz__choice-label">Customization and fine-tuning</span>
+        </label>
+        <label class="quiz__choice">
+          <input type="radio" name="m10-key-takeaways-quiz" value="3" />
+          <span class="quiz__choice-label">Model quality and reasoning depth</span>
+        </label>
+      </div>
+    </fieldset>
+    <button type="submit" class="quiz__submit">Check Answer</button>
+  </form>
+  <div class="quiz__feedback" role="status" aria-live="polite" hidden>
+    <p class="quiz__feedback-text"></p>
+    <p class="quiz__feedback-explanation"></p>
+  </div>
+</section>
+<hr>
+<h2 id="cross-references">Cross-References</h2>
+<ul>
+<li><a href="module-00.html">Module 00: Landscape Overview</a> -- Platform ecosystem structure; competitive dynamics</li>
+<li><a href="module-01.html">Module 01: Models &#x26; Intelligence Tiers</a> -- Model lineups, <span class="glossary-term glossary-term--first-use" data-term="reasoning-modes">reasoning modes</span>, multimodal understanding</li>
+<li><a href="module-02.html">Module 02: <span class="glossary-term" data-term="context-engineering">Context Engineering</span></a> -- Context windows, memory systems, tiered inference relevance</li>
+<li><a href="module-03.html">Module 03: Single-<span class="glossary-term" data-term="agent">Agent</span> Systems</a> -- <span class="glossary-term" data-term="agent">Agent</span> architecture, sandboxing, safety models</li>
+<li><a href="module-04.html">Module 04: <span class="glossary-term" data-term="multi-agent-orchestration">Multi-Agent Orchestration</span></a> -- Delegation patterns, governance needs, <span class="glossary-term" data-term="agent-365">Agent 365</span> context</li>
+<li><a href="module-05.html">Module 05: <span class="glossary-term" data-term="openclaw">OpenClaw</span> &#x26; Open <span class="glossary-term" data-term="agent">Agent</span> Ecosystem</a> -- Open ecosystem security, <span class="glossary-term" data-term="clawhub">ClawHub</span> risks, governance gap</li>
+<li><a href="module-06.html">Module 06: MCP &#x26; the Integration Layer</a> -- MCP as ecosystem bridge, registry scale, Linux Foundation donation</li>
+<li><a href="module-07.html">Module 07: <span class="glossary-term" data-term="skills">Skills</span>, Plugins &#x26; Automation</a> -- <span class="glossary-term" data-term="skills">Skills</span> ecosystems, automation platforms</li>
+<li><a href="module-08.html">Module 08: Consumer AI Comparison</a> -- Feature comparisons likely to shift after upcoming events</li>
+<li><a href="module-09.html">Module 09: Developer Platforms &#x26; APIs</a> -- API economics, platform selection, open-vs-closed cost analysis</li>
+</ul>
+<hr>
+<h2 id="sources">Sources</h2>
+<ol>
+<li>On-device AI user preference and adoption statistics. Malwarebytes pulse survey (Jan-Feb 2026, 1,235 respondents): 90% do not trust AI with their data. Specific on-device adoption multipliers from secondary aggregation. [PARTIALLY VERIFIED] — W50 in SOURCES.md</li>
+<li>Google <span class="glossary-term" data-term="aicore">AICore</span> and ML Kit GenAI APIs documentation. <a href="https://developer.android.com/ai">https://developer.android.com/ai</a> — W51 in SOURCES.md</li>
+<li>Apple Intelligence and Private Cloud Compute. Apple ML Research tech reports; Apple-Google Gemini partnership (January 12, 2026). — W52 in SOURCES.md</li>
+<li>Qualcomm Snapdragon Wear Elite (MWC 2026) and X2 Plus (CES 2026) announcements. — W53 in SOURCES.md</li>
+<li>AI video generation market statistics. Grand View Research AI Video Generator Market Report. Market size varies by scope: $850M-$1.8B for video generators specifically; ~$3.4B for broader AI video market. — W54 in SOURCES.md</li>
+<li>OpenAI Sora 2 and Disney partnership. Disney $1B equity investment confirmed. — W55 in SOURCES.md</li>
+<li>Google Veo 3.1 and Flow creative studio. GA January 13, 2026. — W56 in SOURCES.md</li>
+<li>Midjourney V7 and V8 Alpha (March 17, 2026). 4-5x speed improvement confirmed. — W57 in SOURCES.md</li>
+<li>ElevenLabs v3 capabilities. 70+ languages, emotional voice synthesis confirmed. — W58 in SOURCES.md</li>
+<li>Microsoft <span class="glossary-term" data-term="agent-365">Agent 365</span> GA announcement. May 1, 2026, $15/user/month confirmed. — W59 in SOURCES.md</li>
+<li>EU AI Act timeline and requirements. Fully applicable August 2, 2026 for high-risk AI systems. — W60 in SOURCES.md</li>
+<li>Gartner predictions on agentic AI. (a) 40% of enterprise apps will feature AI agents by 2026. (b) 40%+ of agentic AI projects canceled by 2027. — W61 in SOURCES.md</li>
+<li>Open vs. closed model performance, cost, and market share data. 17.5pp gap to near-zero, 87% cost savings, 96%/80% revenue/usage split all confirmed. — W62 in SOURCES.md</li>
+<li>MCP registry and SDK download statistics. — W73 in SOURCES.md</li>
+<li>Goldman Sachs AI capex estimate ($527B). — W63 in SOURCES.md</li>
+<li>Gartner prediction: 35% of countries locked into regional AI platforms by 2027. — W63b in SOURCES.md</li>
+<li>Google I/O 2026 confirmed: May 19-20, Mountain View. — W64 in SOURCES.md</li>
+<li>Microsoft Build 2026 confirmed: June 2-3, San Francisco. — W65 in SOURCES.md</li>
+<li>WWDC 2026 expected: June 8-12. Not officially announced by Apple as of March 21, 2026; dates based on 9to5Mac, MacRumors, Macworld reporting. — W66 in SOURCES.md</li>
+<li><span class="glossary-term" data-term="openclaw">OpenClaw</span>/<span class="glossary-term" data-term="clawhub">ClawHub</span> Malicious <span class="glossary-term" data-term="skills">Skills</span> Audit (Snyk). 12-20% malicious skill rate. — W25 in SOURCES.md</li>
+<li>Anthropic donates MCP to Linux Foundation Agentic AI Foundation. — W30 in SOURCES.md</li>
+</ol>
+<p><strong>Foundation profiles cited as [F1]-[F4]:</strong></p>
+<ul>
+<li>[F1] Anthropic/Claude Ecosystem Profile (reference/profiles/anthropic-claude.md), March 18, 2026</li>
+<li>[F2] OpenAI/ChatGPT Ecosystem Profile (reference/profiles/openai-chatgpt.md), March 18, 2026</li>
+<li>[F3] Google/Gemini Ecosystem Profile (reference/profiles/google-gemini.md), March 18, 2026</li>
+<li>[F4] Microsoft/Copilot Ecosystem Profile (reference/profiles/microsoft-copilot.md), March 18, 2026</li>
+</ul>
+        </div>
+      </article>
+
+      <nav class="module-nav" aria-label="Module navigation">
+        <a href="module-08.html" class="module-nav__link module-nav__link--prev">
+          <span class="module-nav__arrow" aria-hidden="true">&larr;</span>
+          <span class="module-nav__direction">Previous</span>
+          <span class="module-nav__title">Module 08: Consumer AI Comparison</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__title">AI Frontier Curriculum</p>
+    <p class="site-footer__shortcuts">Press <kbd>?</kbd> for keyboard shortcuts</p>
+    <a href="../index.html" class="site-footer__back">Back to Course Map</a>
+  </footer>
+
+  <script id="glossary-data" type="application/json">[{"term":"Context window","slug":"context-window","definition":"The maximum amount of text (measured in tokens) that a model can process in a single interaction. As of March 2026, ranges from 128K to 1M+ tokens depending on model.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Compaction"],"relatedTermSlugs":["token","compaction"],"relatedTermExists":[true,true]},{"term":"Embedding","slug":"embedding","definition":"A dense vector representation of text (or other content) produced by a model, used for similarity search in RAG pipelines. Major providers: OpenAI (text-embedding-3), Google (multimodal, Preview). Anthropic does not offer an embeddings API.","category":"Models & Intelligence","firstModule":"02","relatedTerms":["RAG","Vector database"],"relatedTermSlugs":["rag-retrieval-augmented-generation","vector-database"],"relatedTermExists":[true,true]},{"term":"Extended thinking","slug":"extended-thinking","definition":"Anthropic's reasoning mode where Claude models allocate additional compute to multi-step reasoning before generating a response. Visible as a \"thinking\" block in the output.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Reasoning modes","Chain-of-thought"],"relatedTermSlugs":["reasoning-modes","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Fine-tuning","slug":"fine-tuning","definition":"The process of further training a pre-trained model on task-specific data to improve performance on a narrow domain. Available from OpenAI (GPT-4o, LoRA adapters), Google (Gemini 2.5 Flash SFT), and Azure. Not offered by Anthropic. LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique.","category":"Models & Intelligence","firstModule":"09","relatedTerms":["Token","Batch API"],"relatedTermSlugs":["token","batch-api"],"relatedTermExists":[true,true]},{"term":"Mixture-of-Experts (MoE)","slug":"mixture-of-experts-moe","definition":"A model architecture where multiple specialized sub-networks (\"experts\") are trained, and a gating mechanism routes each input to the most relevant experts. Used by Mistral 3 (675B) and DeepSeek-R1 (671B). Enables larger total parameter counts with lower per-inference compute.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Token","Context window"],"relatedTermSlugs":["token","context-window"],"relatedTermExists":[true,true]},{"term":"Reasoning modes","slug":"reasoning-modes","definition":"Model configurations that trade speed for depth of analysis. Includes Anthropic's extended thinking, OpenAI's o-series reasoning, and Google's Deep Think.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Extended thinking","Chain-of-thought"],"relatedTermSlugs":["extended-thinking","chain-of-thought"],"relatedTermExists":[true,false]},{"term":"Token","slug":"token","definition":"The fundamental unit of text processing for LLMs. Roughly 3/4 of a word in English. Pricing, context windows, and rate limits are all measured in tokens.","category":"Models & Intelligence","firstModule":"01","relatedTerms":["Context window"],"relatedTermSlugs":["context-window"],"relatedTermExists":[true]},{"term":"Claude Memory","slug":"claude-memory","definition":"Anthropic's cross-session memory system (GA, all plans, March 2026). Processes conversations asynchronously (~24-hour cycle) to extract facts -- profession, preferences, project context -- into a structured profile loaded into future conversations. Also referred to as \"Chat Memory\" in some Anthropic documentation.","category":"Context Engineering","firstModule":"02","relatedTerms":["Compaction","Context engineering"],"relatedTermSlugs":["compaction","context-engineering"],"relatedTermExists":[true,true]},{"term":"Compaction","slug":"compaction","definition":"The process of summarizing or truncating conversation history when context window limits are approached. What survives compaction varies by platform.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Claude Memory"],"relatedTermSlugs":["context-window","claude-memory"],"relatedTermExists":[true,true]},{"term":"Context engineering","slug":"context-engineering","definition":"The emerging discipline of deliberately designing and managing what information is available in an AI system's context window to maximize output quality. Encompasses prompt design, memory management, RAG, and compaction strategies.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context window","Prompt caching","RAG"],"relatedTermSlugs":["context-window","prompt-caching","rag-retrieval-augmented-generation"],"relatedTermExists":[true,true,true]},{"term":"Prompt caching","slug":"prompt-caching","definition":"A cost-optimization technique where frequently reused prompt prefixes are cached server-side, reducing token processing costs on subsequent requests. Anthropic offers 90% discount with three cache durations (5-minute, 1-hour, persistent). Google offers 90% discount with per-hour storage fees. OpenAI offers 50% automatic caching.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Token","Batch API"],"relatedTermSlugs":["context-engineering","token","batch-api"],"relatedTermExists":[true,true,true]},{"term":"RAG (Retrieval-Augmented Generation)","slug":"rag-retrieval-augmented-generation","definition":"A pattern where relevant documents are retrieved from an external knowledge base and injected into the model's context to ground its responses in specific data.","category":"Context Engineering","firstModule":"02","relatedTerms":["Context engineering","Vector database","Embedding"],"relatedTermSlugs":["context-engineering","vector-database","embedding"],"relatedTermExists":[true,true,true]},{"term":"Vector database","slug":"vector-database","definition":"A specialized database optimized for storing and querying high-dimensional vector embeddings. Used in RAG pipelines for similarity search. Common implementations: Pinecone, Weaviate, Chroma, pgvector.","category":"Context Engineering","firstModule":"02","relatedTerms":["RAG","Embedding"],"relatedTermSlugs":["rag-retrieval-augmented-generation","embedding"],"relatedTermExists":[true,true]},{"term":"Agent","slug":"agent","definition":"An AI system that can autonomously plan, execute multi-step tasks, use tools, and act on behalf of a user with varying degrees of supervision.","category":"Agents","firstModule":"03","relatedTerms":["Subagent","Multi-agent orchestration","Tool use"],"relatedTermSlugs":["subagent","multi-agent-orchestration","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Agent SDK","slug":"agent-sdk","definition":"A software development kit for building custom agent systems. Major implementations: Anthropic Agent SDK, OpenAI Agents SDK, Google Agent Development Kit (ADK).","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration"],"relatedTermSlugs":["agent","multi-agent-orchestration"],"relatedTermExists":[true,true]},{"term":"Claude Code","slug":"claude-code","definition":"Anthropic's terminal-based agentic coding assistant (GA). Uses Opus 4.6 with a 1M-token context window, a three-phase agentic loop (Gather Context, Take Action, Verify Work), and MCP integration. Included with Pro, Max, Team, and Enterprise plans.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Cowork","MCP"],"relatedTermSlugs":["agent","cowork","mcp-model-context-protocol"],"relatedTermExists":[true,true,true]},{"term":"Codex (OpenAI)","slug":"codex-openai","definition":"OpenAI's cloud-based software engineering agent, powered by codex-1 (an o3 variant). Runs tasks in air-gapped cloud sandboxes without internet access. Supports parallel task execution, Skills, and Automations (event-driven triggers).","category":"Agents","firstModule":"03","relatedTerms":["Agent","Skills"],"relatedTermSlugs":["agent","skills"],"relatedTermExists":[true,true]},{"term":"Computer use","slug":"computer-use","definition":"The ability of an AI model to interact with a computer's GUI via screenshots, mouse clicks, and keyboard input. Supported by Claude (all current models, GA), GPT-5.4 (native), and Google Project Mariner (Preview). Distinct from tool use / function calling.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use","Cowork"],"relatedTermSlugs":["agent","tool-use","cowork"],"relatedTermExists":[true,true,true]},{"term":"Cowork","slug":"cowork","definition":"Anthropic's desktop automation agent (Research Preview). Operates the user's computer via screenshot-based computer use in an isolated VM. Supports MCP connectors, scheduled tasks, and sub-agent coordination.","category":"Agents","firstModule":"03","relatedTerms":["Claude Code","Agent","Computer use"],"relatedTermSlugs":["claude-code","agent","computer-use"],"relatedTermExists":[true,true,true]},{"term":"Deep Research","slug":"deep-research","definition":"A multi-step autonomous research capability offered by ChatGPT and Gemini that searches, reads, and synthesizes information from multiple web sources to produce analyst-grade reports.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Tool use"],"relatedTermSlugs":["agent","tool-use"],"relatedTermExists":[true,true]},{"term":"Firecracker MicroVM","slug":"firecracker-microvm","definition":"A lightweight virtual machine technology (developed by AWS) that boots in ~125ms with <5 MiB overhead, providing hardware-level isolation for agent sandboxing.","category":"Agents","firstModule":"03","relatedTerms":["Agent","gVisor"],"relatedTermSlugs":["agent","gvisor"],"relatedTermExists":[true,true]},{"term":"Guardrails","slug":"guardrails","definition":"Input and output validators that run on agent interactions, checking that inputs are well-formed and outputs do not contain prohibited content before they are acted upon. First-class primitive in OpenAI's Agents SDK; implemented via hooks/lifecycle callbacks in Anthropic's Agent SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Agent SDK","Tracing"],"relatedTermSlugs":["agent","agent-sdk","tracing"],"relatedTermExists":[true,true,true]},{"term":"gVisor","slug":"gvisor","definition":"Google's application-level kernel that intercepts system calls and re-implements them in a user-space sandbox, providing defense-in-depth beyond standard container isolation. Used in Google Cloud's container infrastructure.","category":"Agents","firstModule":"03","relatedTerms":["Firecracker MicroVM","Agent"],"relatedTermSlugs":["firecracker-microvm","agent"],"relatedTermExists":[true,true]},{"term":"Handoff","slug":"handoff","definition":"A multi-agent orchestration pattern where one agent transfers its full conversation state to another agent. First-class primitive in OpenAI's Agents SDK.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Subagent"],"relatedTermSlugs":["agent","multi-agent-orchestration","subagent"],"relatedTermExists":[true,true,true]},{"term":"LATS (Language Agent Tree Search)","slug":"lats-language-agent-tree-search","definition":"An advanced agent planning strategy that combines tree search with Monte Carlo evaluation. The agent explores multiple solution paths, backtracks from dead ends, and selects the most promising branches. Improves task completion by 22.1 percentage points over basic ReAct on HumanEval.","category":"Agents","firstModule":"03","relatedTerms":["ReAct","Agent"],"relatedTermSlugs":["react","agent"],"relatedTermExists":[true,true]},{"term":"Multi-agent orchestration","slug":"multi-agent-orchestration","definition":"Architectural pattern where multiple specialized agents coordinate to complete complex tasks. Includes patterns like delegation, parallel execution, and summary propagation.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Subagent","Agent SDK"],"relatedTermSlugs":["agent","subagent","agent-sdk"],"relatedTermExists":[true,true,true]},{"term":"Project Mariner","slug":"project-mariner","definition":"Google's desktop-focused browser automation agent (Preview) targeting complex professional workflows in Chrome and Google Workspace. 83.5% on WebVoyager, supports up to 10 parallel browser streams and \"Teach & Repeat\" workflow learning.","category":"Agents","firstModule":"03","relatedTerms":["Agent","Computer use"],"relatedTermSlugs":["agent","computer-use"],"relatedTermExists":[true,true]},{"term":"ReAct","slug":"react","definition":"Reasoning + Acting pattern for agent systems, where the agent interleaves reasoning about the current state with taking actions and observing results. The foundational architecture used by Claude Code, OpenClaw, and most production agent systems. First formalized by Yao et al. (ICLR 2023).","category":"Agents","firstModule":"03","relatedTerms":["Agent","LATS","Tool use"],"relatedTermSlugs":["agent","lats-language-agent-tree-search","tool-use"],"relatedTermExists":[true,true,true]},{"term":"Router pattern","slug":"router-pattern","definition":"A multi-agent orchestration pattern where a lightweight agent or classifier examines each incoming request and dispatches it to the appropriate specialist agent. Used by Copilot Studio's generative orchestration.","category":"Agents","firstModule":"04","relatedTerms":["Multi-agent orchestration","Agent"],"relatedTermSlugs":["multi-agent-orchestration","agent"],"relatedTermExists":[true,true]},{"term":"Subagent","slug":"subagent","definition":"An agent spawned by a parent agent to handle a specific subtask. Runs in its own context window; only a structured summary returns to the parent.","category":"Agents","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Context isolation"],"relatedTermSlugs":["agent","multi-agent-orchestration","context-isolation"],"relatedTermExists":[true,true,false]},{"term":"Tool use","slug":"tool-use","definition":"The ability of an AI model to invoke external functions or APIs during response generation, extending its capabilities beyond text generation. Also called \"function calling.\"","category":"Agents","firstModule":"03","relatedTerms":["Agent","MCP","Structured outputs"],"relatedTermSlugs":["agent","mcp-model-context-protocol","structured-outputs"],"relatedTermExists":[true,true,false]},{"term":"Tracing","slug":"tracing","definition":"Built-in observability for agent execution that logs every agent call, tool invocation, and handoff with timing and token usage, creating a full execution trace. First-class primitive in OpenAI's Agents SDK; available via hooks in Anthropic's Agent SDK and dashboards in Google's Vertex AI.","category":"Agents","firstModule":"04","relatedTerms":["Agent SDK","Guardrails"],"relatedTermSlugs":["agent-sdk","guardrails"],"relatedTermExists":[true,true]},{"term":"MCP (Model Context Protocol)","slug":"mcp-model-context-protocol","definition":"An open protocol (originated by Anthropic, now under Linux Foundation's Agentic AI Foundation) that standardizes how AI applications connect to external data sources and tools. Uses JSON-RPC 2.0 over STDIO (local) or Streamable HTTP (remote) with OAuth 2.1 authorization.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP server","MCP client","Tool use"],"relatedTermSlugs":["mcp-server","mcp-client","tool-use"],"relatedTermExists":[true,false,true]},{"term":"MCP server","slug":"mcp-server","definition":"A lightweight program that exposes specific capabilities (data access, tool execution) to AI applications via the Model Context Protocol. As of March 2026, 19,700+ servers in the registry.","category":"Protocols & Integration","firstModule":"06","relatedTerms":["MCP","MCP client"],"relatedTermSlugs":["mcp-model-context-protocol","mcp-client"],"relatedTermExists":[true,false]},{"term":"Agent 365","slug":"agent-365","definition":"Microsoft's enterprise agent governance platform providing agent registry, identity management (via Entra ID), compliance (via Purview), and security monitoring (via Defender). GA May 1, 2026, at $15/user/month or bundled in M365 E7 ($99/user/month).","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent","Multi-agent orchestration","Copilot Studio"],"relatedTermSlugs":["agent","multi-agent-orchestration","copilot-studio"],"relatedTermExists":[true,true,true]},{"term":"AI Builder","slug":"ai-builder","definition":"Microsoft's AI capabilities module within Power Automate, providing document processing, sentiment analysis, and entity extraction. Credits transitioning from bundled to consumption-based pricing (bundled credits ending November 2026).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Copilot Studio","Power Automate"],"relatedTermSlugs":["copilot-studio","power-automate"],"relatedTermExists":[true,false]},{"term":"AI Chips","slug":"ai-chips","definition":"Google's pre-built tool integrations for Google services (Calendar, Maps, Gmail, Drive) within Gemini. First-party only -- no third-party authoring.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Gemini Nano","Skills"],"relatedTermSlugs":["gemini-nano","skills"],"relatedTermExists":[true,true]},{"term":"AICore","slug":"aicore","definition":"Google's Android system service providing on-device AI capabilities via Gemini Nano. Available on Pixel 8+ devices. Developers access it through ML Kit GenAI APIs for summarization, proofreading, Smart Reply, and Call Notes.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Gemini Nano","Private Cloud Compute"],"relatedTermSlugs":["gemini-nano","private-cloud-compute-pcc"],"relatedTermExists":[true,true]},{"term":"Batch API","slug":"batch-api","definition":"An asynchronous API endpoint offered by major providers (Anthropic, OpenAI, Google) that processes requests within 24 hours at a 50% discount on token costs. Ideal for non-real-time workloads.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Token","Prompt caching"],"relatedTermSlugs":["token","prompt-caching"],"relatedTermExists":[true,true]},{"term":"C2PA","slug":"c2pa","definition":"Coalition for Content Provenance and Authenticity -- an open standard for content credentials that embeds provenance metadata into media files. Supported by Adobe, Microsoft, Google, and others. No major AI generation platform embeds C2PA credentials by default as of March 2026.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Constitutional AI"],"relatedTermSlugs":["constitutional-ai-cai"],"relatedTermExists":[true]},{"term":"ClawHub","slug":"clawhub","definition":"The skills registry for the OpenClaw open agent platform. Analogous to an app store for agent capabilities. Hosts 13,700+ skills as of February 2026. Known security concerns (12-20% malicious skill rate).","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Skills"],"relatedTermSlugs":["openclaw","skills"],"relatedTermExists":[true,true]},{"term":"Constitutional AI (CAI)","slug":"constitutional-ai-cai","definition":"Anthropic's approach to AI safety where behavioral principles are embedded into model training, enabling the model to self-correct against a defined constitution of rules.","category":"Platforms & Products","firstModule":"10","relatedTerms":["Extended thinking"],"relatedTermSlugs":["extended-thinking"],"relatedTermExists":[true]},{"term":"Copilot Studio","slug":"copilot-studio","definition":"Microsoft's low-code/no-code platform for building custom AI agents targeting business analysts and citizen developers. Features 1,400+ connectors, generative orchestration, MCP client support (GA), and computer-using agents (GA February 2026). Governed by Agent 365.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Work IQ"],"relatedTermSlugs":["agent-365","work-iq"],"relatedTermExists":[true,true]},{"term":"Firebase Genkit","slug":"firebase-genkit","definition":"Google's full-stack AI application framework for JavaScript/TypeScript and Go (Python in alpha). Provides abstractions for model interaction, retrieval, indexing, and agent orchestration.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Agent SDK"],"relatedTermSlugs":["agent-sdk"],"relatedTermExists":[true]},{"term":"Gemini Nano","slug":"gemini-nano","definition":"Google's on-device AI model designed for inference with no server connection required. Powers Android features including Smart Reply, Call Notes, and TalkBack image descriptions. Processing is entirely local -- no data leaves the device. Available on Pixel 8+ via the AICore system service.","category":"Platforms & Products","firstModule":"01","relatedTerms":["AICore","Embedding"],"relatedTermSlugs":["aicore","embedding"],"relatedTermExists":[true,true]},{"term":"GPT Store","slug":"gpt-store","definition":"OpenAI's marketplace for Custom GPTs, hosting 3M+ created GPTs (~159K publicly active) as of March 2026. Includes creator revenue sharing (introduced mid-2025). Enterprise customers can curate private stores.","category":"Platforms & Products","firstModule":"07","relatedTerms":["Skills","Codex"],"relatedTermSlugs":["skills","codex-openai"],"relatedTermExists":[true,true]},{"term":"NemoClaw","slug":"nemoclaw","definition":"NVIDIA's enterprise-hardened distribution of OpenClaw, adding the OpenShell sandbox for skill isolation and a privacy router for policy-based LLM inference routing. Early preview as of March 2026.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","ClawHub"],"relatedTermSlugs":["openclaw","clawhub"],"relatedTermExists":[true,true]},{"term":"OpenClaw","slug":"openclaw","definition":"An open-source agent platform (MIT license, 163K+ GitHub stars) providing a Gateway, channel-based communication, and the Pi Agent Runtime for building and running AI agents locally or self-hosted. Supports any LLM provider.","category":"Platforms & Products","firstModule":"05","relatedTerms":["ClawHub","NemoClaw","Gateway (OpenClaw)"],"relatedTermSlugs":["clawhub","nemoclaw","gateway-openclaw"],"relatedTermExists":[true,true,true]},{"term":"Gateway (OpenClaw)","slug":"gateway-openclaw","definition":"OpenClaw's central message router -- a Node.js process on port 18789 that multiplexes WebSocket and HTTP connections between user-facing channels and the Pi Agent Runtime. Single entry point for all agent interactions.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Pi Agent Runtime"],"relatedTermSlugs":["openclaw","pi-agent-runtime"],"relatedTermExists":[true,true]},{"term":"Pi Agent Runtime","slug":"pi-agent-runtime","definition":"OpenClaw's cognitive core, embedded via the `pi-coding-agent` SDK. Manages the full agent lifecycle through the `AgentSession` abstraction with 30+ specialized modules. Implements a ReAct pattern with two-phase verification.","category":"Platforms & Products","firstModule":"05","relatedTerms":["OpenClaw","Gateway (OpenClaw)","ReAct"],"relatedTermSlugs":["openclaw","gateway-openclaw","react"],"relatedTermExists":[true,true,true]},{"term":"Private Cloud Compute (PCC)","slug":"private-cloud-compute-pcc","definition":"Apple's privacy-preserving cloud inference infrastructure using custom Apple Silicon servers. Data is processed but never retained, with cryptographic guarantees that Apple itself cannot access user data. Used when on-device Apple Intelligence tasks exceed local model capacity.","category":"Platforms & Products","firstModule":"10","relatedTerms":["AICore","Gemini Nano"],"relatedTermSlugs":["aicore","gemini-nano"],"relatedTermExists":[true,true]},{"term":"Provisioned Throughput Units (PTUs)","slug":"provisioned-throughput-units-ptus","definition":"Azure OpenAI's reserved compute capacity with hourly billing, providing guaranteed throughput for latency-sensitive production workloads. An alternative to pay-per-token pricing for high-volume applications.","category":"Platforms & Products","firstModule":"09","relatedTerms":["Batch API","Token"],"relatedTermSlugs":["batch-api","token"],"relatedTermExists":[true,true]},{"term":"Skills","slug":"skills","definition":"Reusable, packaged capabilities that extend an agent's functionality. Implementations vary: Claude Skills (prompt-based markdown), OpenClaw/ClawHub Skills (code-based JS/TS), Codex Skills (instruction + script bundles).","category":"Platforms & Products","firstModule":"07","relatedTerms":["Agent","ClawHub","Plugins"],"relatedTermSlugs":["agent","clawhub","plugins"],"relatedTermExists":[true,true,false]},{"term":"Work IQ","slug":"work-iq","definition":"Microsoft's organizational intelligence layer that contextualizes Copilot responses using Microsoft Graph data (emails, files, meetings, org structure). Announced at Wave 3, March 9, 2026.","category":"Platforms & Products","firstModule":"04","relatedTerms":["Agent 365","Copilot Studio"],"relatedTermSlugs":["agent-365","copilot-studio"],"relatedTermExists":[true,true]},{"term":"Zapier Central","slug":"zapier-central","definition":"Zapier's AI-powered automation builder that lets users describe workflows in natural language and generates Zaps automatically. Part of Zapier's broader AI evolution alongside Zapier Agents and Canvas.","category":"Platforms & Products","firstModule":"07","relatedTerms":["MCP","Skills"],"relatedTermSlugs":["mcp-model-context-protocol","skills"],"relatedTermExists":[true,true]}]</script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/dark-mode.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script src="../js/accordion.js"></script>
+  <script src="../js/table-enhancer.js"></script>
+  <script src="../js/glossary-tooltip.js"></script>
+  <script src="../js/concept-gate.js"></script>
+  <script src="../js/self-explain.js"></script>
+  <script src="../js/worked-example.js"></script>
+  <script src="../js/progress-tracker.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/mermaid.min.js"></script>
+  <script src="../js/mermaid-init.js"></script>
+  <script src="../js/decision-tree.js"></script>
+  <script src="../js/recommendation-quiz.js"></script>
+</body>
+</html>

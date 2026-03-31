@@ -1,0 +1,59 @@
+/* ==========================================================================
+   AI Frontier Curriculum — Main Stylesheet
+   ========================================================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Design tokens and partials */
+@import '_variables.css';
+@import '_colors.css';
+@import '_typography.css';
+@import '_layout.css';
+@import '_forms.css';
+@import '_components.css';
+@import '_diagrams.css';
+@import '_print.css';
+
+/* ==========================================================================
+   Global: Focus management (WS6 Section 6.8)
+   ========================================================================== */
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Fallback for browsers without :focus-visible support */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ==========================================================================
+   Global: Reduced motion (WS6 Section 6.8)
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ==========================================================================
+   Global: Smooth scrolling (when allowed)
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}

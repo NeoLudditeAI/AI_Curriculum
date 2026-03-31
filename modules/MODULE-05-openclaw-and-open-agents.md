@@ -1,18 +1,15 @@
 # Module 05: OpenClaw & Open Agent Ecosystem
 
-| Field | Value |
-|-------|-------|
-| **Module** | 05 |
-| **Title** | OpenClaw & Open Agent Ecosystem |
-| **Last Updated** | 2026-03-20 |
-| **Status** | DRAFTING |
-| **Word Count Target** | 3,500-4,500 |
+**Last updated:** 2026-03-21
+**Status:** COMPLETE
+**Word count target:** 3,500-4,500
+**Prerequisites:** [Module 00: Landscape Overview](MODULE-00-landscape-overview.md), [Module 03: Single-Agent Systems](MODULE-03-single-agent-systems.md)
 
 ---
 
 ## Executive Summary
 
-OpenClaw is the most widely adopted open-source agent framework, with 163,000+ GitHub stars and an MIT license that permits unrestricted modification and deployment. It provides a complete agent stack -- Gateway, channels, Pi Agent Runtime -- that can run locally, in Docker, or in the cloud, using any major LLM provider. But OpenClaw's rapid adoption has outpaced its security infrastructure: the ClawHub skills registry has been a vector for malware at alarming rates, and the project faces a governance inflection point as its founder departed to OpenAI in February 2026. This module examines OpenClaw's architecture, its security landscape, the emerging enterprise play via NVIDIA's NemoClaw, and how the open agent ecosystem relates to the closed platforms covered in [Module 03](MODULE-03-single-agent-systems.md) and [Module 04](MODULE-04-multi-agent-orchestration.md).
+OpenClaw is the most widely adopted open-source agent framework, with 250,000+ GitHub stars (surpassing React as GitHub's most-starred software project on March 3, 2026) and an MIT license that permits unrestricted modification and deployment. It provides a complete agent stack -- Gateway, channels, Pi Agent Runtime -- that can run locally, in Docker, or in the cloud, using any major LLM provider. But OpenClaw's rapid adoption has outpaced its security infrastructure: the ClawHub skills registry has been a vector for malware at alarming rates, and the project faces a governance inflection point as its founder departed to OpenAI in February 2026. This module examines OpenClaw's architecture, its security landscape, the emerging enterprise play via NVIDIA's NemoClaw, and how the open agent ecosystem relates to the closed platforms covered in [Module 03](MODULE-03-single-agent-systems.md) and [Module 04](MODULE-04-multi-agent-orchestration.md).
 
 ---
 
@@ -95,7 +92,7 @@ This is a fundamentally different model from Claude Skills (which are prompt-bas
 
 ### The Security Crisis
 
-> **Volatility Warning:** OpenClaw security is an area of active, rapid change. The statistics and mitigations described here reflect the state as of March 2026. Check primary sources for current status.
+> **Volatility warning:** OpenClaw security is an area of active, rapid change. The statistics and mitigations described here reflect the state as of March 2026. Check primary sources for current status.
 
 ClawHub operated with **no vetting process** for published skills until February 7, 2026 [2]. Any developer could publish any skill, and the only barrier was creating a ClawHub account. This open-publishing model, combined with OpenClaw's rapid adoption, created a target-rich environment for malware distribution.
 
@@ -237,7 +234,7 @@ This is a pragmatic architectural decision. Rather than building a proprietary i
 
 ### Governance Transition
 
-OpenClaw's governance is in flux. Its founder joined OpenAI on February 14, 2026, and the project is transitioning to an open-source foundation model [6]. This transition is consequential for several reasons:
+OpenClaw's governance is in flux. Its founder, Peter Steinberger, joined OpenAI on February 15, 2026 [9], and the project is transitioning to an independent open-source foundation [6]. This transition is consequential for several reasons:
 
 - **Sustainability** -- Foundation governance reduces single-point-of-failure risk from any one maintainer or company.
 - **Neutrality** -- With the founder at OpenAI, foundation governance ensures OpenClaw does not become an OpenAI-aligned project.
@@ -278,6 +275,7 @@ The transition is underway but not complete as of March 2026. The project's long
 - [Module 04: Multi-Agent Orchestration](MODULE-04-multi-agent-orchestration.md) -- How multi-agent patterns compare between open and closed platforms
 - [Module 06: MCP & the Integration Layer](MODULE-06-mcp-integration-layer.md) -- MCP protocol that OpenClaw supports for tool integration
 - [Module 07: Skills, Plugins & Automation](MODULE-07-skills-plugins-automation.md) -- ClawHub skills compared to Claude Skills, GPT Store, and other skill systems
+- [Module 10: Frontier Topics](MODULE-10-frontier-topics.md) -- Open vs. closed ecosystem dynamics, governance gap, geopolitical dimensions
 
 ---
 
@@ -286,10 +284,12 @@ The transition is underway but not complete as of March 2026. The project's long
 | # | Source | URL | Date Accessed | Notes |
 |---|--------|-----|---------------|-------|
 | [1] | OpenClaw GitHub Repository | https://github.com/openclaw/openclaw | 2026-03-20 | Architecture, Gateway, Pi Agent Runtime, memory, heartbeat, deployment, LLM providers |
-| [2] | ClawHavoc: Analyzing the Supply Chain Attack on ClawHub (Koi Security) | https://koi.security/blog/clawhavoc-analyzing-supply-chain-attack-clawhub | 2026-02-15 | 13,729 skills; 1,184 ClawHavoc malicious skills; Koi 11.9%, Bitdefender ~20%, Snyk 36.82%; VirusTotal mitigation |
+| [2] | ClawHavoc: Analyzing the Supply Chain Attack on ClawHub (Koi Security) | https://www.koi.ai/blog/clawhavoc-341-malicious-clawedbot-skills-found-by-the-bot-they-were-targeting | 2026-02-15 | 13,729 skills; 1,184 ClawHavoc malicious skills; Koi 11.9%, Bitdefender ~20%, Snyk 36.82%; VirusTotal mitigation |
 | [3] | Running OpenClaw Safely (Microsoft Security Blog) | https://www.microsoft.com/en-us/security/blog/2026/02/19/running-openclaw-safely-identity-isolation-runtime-risk/ | 2026-02-19 | "Unsuitable for standard workstations"; isolated VM recommendation |
 | [4] | NVIDIA NemoClaw | https://www.nvidia.com/en-us/ai/nemoclaw/ | 2026-03-16 | OpenShell sandbox, privacy router, enterprise distribution |
 | [5] | ClawJacked: WebSocket Vulnerability and Ecosystem Security Advisories | https://www.bleepingcomputer.com/news/security/clawjacked-openclaw-websocket-hijacking-flaw/ | 2026-02-25 | Gateway WebSocket hijacking, 92 advisories, ~300K users affected, 1Password warning |
 | [6] | OpenClaw vs Cloud Platforms: TCO Analysis (Community) | https://www.reddit.com/r/OpenClaw/comments/cost_comparison_openclaw_vs_claude_chatgpt/ | 2026-03-10 | 70-90% cost savings, MCP support, governance transition |
 | [7] | OpenClaw Security Audit: Malicious Skills Prevalence (Multi-vendor) | https://snyk.io/blog/openclaw-clawhub-security-malicious-skills/ | 2026-02-20 | Cross-vendor malicious rate estimates, cross-platform 46.8% figure |
 | [8] | ClawHub Skills Registry | https://clawhub.dev | 2026-03-20 | Skills count, skill structure, registry interface |
+| [9] | OpenClaw creator Peter Steinberger joins OpenAI (TechCrunch) | https://techcrunch.com/2026/02/15/openclaw-creator-peter-steinberger-joins-openai/ | 2026-03-21 | Founder departure date, foundation transition |
+| [10] | 250,000 Stars: OpenClaw Surpasses React (OpenClaw Blog) | https://openclaws.io/blog/openclaw-250k-stars-milestone | 2026-03-21 | GitHub stars milestone, 1,075 contributors |

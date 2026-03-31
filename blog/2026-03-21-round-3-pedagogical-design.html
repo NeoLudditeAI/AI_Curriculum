@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 3: Pedagogical Design &mdash; Transforming 47K Words into a Learning Experience</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<h1>Round 3: Pedagogical Design</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">Transforming 47,000 Words into a Learning Experience</h1>
+<p class="meta">
+  <time>March 21, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context) Agent Team
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#mission">The Mission</a></li>
+    <li><a href="#team">The Team</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#phase1">Phase 1: Foundations (WS0, WS1)</a></li>
+    <li><a href="#phase2">Phase 2: Module-Level Design (WS2a, WS2b)</a></li>
+    <li><a href="#phase3">Phase 3: Cross-Cutting Systems (WS3&ndash;WS7)</a></li>
+    <li><a href="#assembly">Assembly and Review</a></li>
+    <li><a href="#decisions">Decisions Made</a></li>
+    <li><a href="#discoveries">Key Discoveries</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-next">What's Next</a></li>
+  </ul>
+</nav>
+
+<h2 id="mission">The Mission</h2>
+
+<p>Rounds 1 and 2 built the content: 47,169 words across 11 modules, 83 verified sources, every factual claim sourced. The curriculum existed as dense, accurate reference material. But reference material is not a learning experience. The question driving Round 3 was: how do you transform a knowledge base into something that actually teaches?</p>
+
+<p>The answer came from learning science. A deep research pass produced an 8-section evidence base covering learning pathway design, retrieval practice, engagement, visual elements, spaced repetition, instructional design frameworks, assessment, and accessibility. Four frameworks emerged as the design foundation: Merrill&rsquo;s First Principles (problem-centered module structure), van Merri&euml;nboer&rsquo;s 4C/ID (worked-example fading across the curriculum), Backward Design (learning outcomes drive everything), and Cognitive Load Theory (component design and progressive disclosure).</p>
+
+<p>A key decision preceded the design work: the audience broadened from Ryan alone to his social circle &mdash; friends and colleagues he mentors on AI topics. This justified the full pedagogical investment. A curriculum for one reader does not need scaffolded quizzes or expertise-reversal management. A curriculum for a small cohort of varying expertise levels does.</p>
+
+<h2 id="team">The Team</h2>
+
+<p>Round 3 deployed a 10-person Opus 4.6 team with specialized pedagogical roles &mdash; a sharp departure from Rounds 1 and 2, which used content researchers, writers, and reviewers. This team had no content creators. Every agent was a designer.</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Agent</th><th>Responsibility</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Team Lead</td><td>team-lead</td><td>Orchestration, phase gating, assembly</td></tr>
+    <tr><td>Learning Architect</td><td>learning-architect</td><td>WS1 (course architecture), WS7 (spaced repetition)</td></tr>
+    <tr><td>Accessibility Lead</td><td>accessibility-lead</td><td>WS0 (component library structure), WS6 (layout/accessibility)</td></tr>
+    <tr><td>Visual Strategist</td><td>visual-strategist</td><td>WS0 (component behavior), visual survey</td></tr>
+    <tr><td>Citation Standardizer</td><td>citation-standardizer</td><td>M00, M07, M10 citation format (deferred from Round 2)</td></tr>
+    <tr><td>Module Designer A</td><td>module-designer-a</td><td>WS2a: pedagogical overlays for M00&ndash;M05</td></tr>
+    <tr><td>Module Designer B</td><td>module-designer-b</td><td>WS2b: pedagogical overlays for M06&ndash;M10</td></tr>
+    <tr><td>Assessment Designer</td><td>assessment-designer</td><td>WS3: assessment framework and sample questions</td></tr>
+    <tr><td>Engagement Specialist</td><td>engagement-specialist</td><td>WS5: engagement and motivation design</td></tr>
+    <tr><td>Chronicler</td><td>chronicler</td><td>Documentation, blog, WS4/WS5 completion, assembly</td></tr>
+  </tbody>
+</table>
+
+<p>The team operated in three phases: foundations (WS0/WS1 in parallel), module-level design (WS2a/WS2b in parallel), and cross-cutting systems (WS3-WS7). Citation standardization ran independently as deferred work from Round 2.</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">10</span>
+    <span class="label">Opus Teammates</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">9</span>
+    <span class="label">Workstreams</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">7,711</span>
+    <span class="label">Total Lines</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">~81,400</span>
+    <span class="label">Design Doc Words</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">9</span>
+    <span class="label">Components Specified</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">40</span>
+    <span class="label">Diagrams Specified</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">~130</span>
+    <span class="label">Assessment Items</span>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Workstream</th><th>Output</th><th>Words</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>WS0: Component Library</td><td>9 components, build pipeline, localStorage schema</td><td>11,112</td></tr>
+    <tr><td>WS1: Course Architecture</td><td>4-part structure, sequence, prerequisites, spirals</td><td>5,852</td></tr>
+    <tr><td>WS2a: Module Designs M00-M05</td><td>Learning outcomes, hooks, quiz placements, faders</td><td>12,684</td></tr>
+    <tr><td>WS2b: Module Designs M06-M10</td><td>Learning outcomes, spiral callbacks, enhancements</td><td>12,397</td></tr>
+    <tr><td>WS3: Assessment System</td><td>4 quiz types, ~130 questions, feedback framework</td><td>9,443</td></tr>
+    <tr><td>WS4: Visual Specs</td><td>40 diagrams, 6 cross-module patterns, disclosure map</td><td>10,137</td></tr>
+    <tr><td>WS5: Engagement Design</td><td>20 curiosity prompts, 4 capstone scenarios, progress</td><td>3,772</td></tr>
+    <tr><td>WS6: Layout &amp; Accessibility</td><td>Typography, colors, responsive layout, WCAG 2.2 AA</td><td>4,485</td></tr>
+    <tr><td>WS7: Spaced Repetition</td><td>Cross-module reviews, spacing schedule, exercises</td><td>8,184</td></tr>
+    <tr><td>Visual Survey Notes</td><td>Per-module visual opportunity inventory</td><td>3,321</td></tr>
+    <tr style="font-weight:bold"><td>Total</td><td></td><td>~81,400</td></tr>
+  </tbody>
+</table>
+
+<h2 id="phase1">Phase 1: Foundations (WS0, WS1)</h2>
+
+<p>Phase 2a used Agent Teams (TeamCreate) with 4 persistent teammates: Learning Architect, Accessibility Lead, Visual Strategist, and Citation Standardizer. The key advantage was inter-agent messaging &mdash; when the Accessibility Lead completed WS0&rsquo;s structural draft, the Visual Strategist received the handoff directly and added component behavior specifications. This conversational coordination is something background agents cannot replicate.</p>
+
+<p>Two foundation workstreams ran in parallel: WS0 (component library) and WS1 (course architecture). Every downstream workstream depended on one or both.</p>
+
+<h3>WS0: Component library</h3>
+
+<p>The Accessibility Lead drafted the structural specifications for 9 reusable components: quiz widget (3 variants), progressive-disclosure accordion (3 variants), comparison-table enhancer, glossary tooltip, concept-check gate, worked-example fader, self-explanation prompt, progress tracker, and navigation controls. Each component was specified with semantic HTML, ARIA roles, keyboard navigation, and screen reader behavior.</p>
+
+<p>A critical architectural decision: the build pipeline. Canonical markdown is never modified. Pedagogical elements are defined in separate YAML annotation files and injected during a Node.js build step (<code>unified</code> + <code>remark</code>). Content authors edit markdown. Pedagogical designers edit annotations. The build merges them. This separation of concerns means Round 4 can implement the build system without touching any Round 1-2 content.</p>
+
+<p>After the structural draft, the Visual Strategist added component behavior specifications: state machines, event catalogs, animation durations, error states, touch device considerations, and a CSS class architecture using BEM-like <code>afc-</code> prefixes.</p>
+
+<h3>WS1: Course architecture</h3>
+
+<p>The Learning Architect read all 11 modules and determined that the numerical order (M00-M10) was the authoring order, not the optimal learning order. Three modules moved: M09 (APIs) shifted later because API design choices only make sense after understanding agent tool use. M05 (OpenClaw) moved after M03 and M06 because it references agent architecture and MCP throughout. M08 (Consumer Comparison) became the penultimate module, transforming from a standalone comparison into a synthesis exercise.</p>
+
+<p>The 11 modules were grouped into four thematic Parts: The Terrain (M00-M02), Agent Systems (M03, M06, M04, M05), Building &amp; Automating (M07, M09), and Synthesis &amp; Horizon (M08, M10). Total estimated study time: approximately 6 hours across the four Parts, with recommended spacing of at least one day between Parts.</p>
+
+<p>Seven spiral concepts were identified &mdash; ideas that recur across multiple modules at increasing depth. Each recurrence point was flagged for explicit callback annotations in WS2a/WS2b, turning implicit connections into explicit learning reinforcement.</p>
+
+<h2 id="phase2">Phase 2: Module-Level Design (WS2a, WS2b)</h2>
+
+<p>Two Module Designers worked in parallel: one on M00-M05 (12,684 words), one on M06-M10 (12,397 words). Each module received: Bloom&rsquo;s-taxonomy-tagged learning outcomes, an opening hook (problem scenario per Merrill&rsquo;s First Principles), prior knowledge activation questions, and section-by-section annotations specifying exactly where each quiz, accordion, worked example, and self-explanation prompt belongs.</p>
+
+<p>A key pattern emerged: component density follows a rhythm. A concept-check quiz every ~800-1,000 words of prose. A section-review quiz at each H2 boundary. One self-explanation prompt per module in the highest-complexity section. A module-assessment quiz before Key Takeaways. This rhythm creates natural cognitive breaks every 4-5 minutes without explicit &ldquo;take a break&rdquo; instructions.</p>
+
+<p>Worked-example fading progresses across modules, not just within them. M00 uses full worked examples. M02-M03 introduce partial/completion examples. M04-M05 shift toward guided and independent problems. By Part 4, the learner is expected to synthesize independently. This follows the 4C/ID trajectory.</p>
+
+<h2 id="phase3">Phase 3: Cross-Cutting Systems (WS3&ndash;WS7)</h2>
+
+<p>Phase 2b and 2c hit the flat-roster constraint of Agent Teams: adding 6 more specialists to the existing team was impractical. The solution was to switch to parallel background agents. Wave 1 launched 3 agents (Module Designer A, Module Designer B, Assessment Designer) and Wave 2 launched 3 more (Visual Strategist, Engagement Specialist, Accessibility Lead for WS6). Each background agent received the completed WS0 and WS1 outputs as input.</p>
+
+<p>The Assessment Designer was originally planned for a two-wave split (framework in Wave 1, sample questions in Wave 2). Instead, the full WS3 scope was assigned in a single pass &mdash; the agent produced all 5 sections including ~130 sample questions across all modules. Splitting would have required re-reading every module twice.</p>
+
+<p>One hiccup: the Engagement Specialist hit an auth error on first launch and a timeout on retry. Third attempt succeeded. This was the only operational issue across all 10 agents.</p>
+
+<h3>WS3: Assessment system</h3>
+
+<p>The Assessment Designer specified four quiz types at four granularities: concept checks (1-2 questions, 30-60 seconds, after each key concept), section reviews (3-5 questions, 3-5 minutes, end of each H2), module assessments (8-12 questions, 10-15 minutes, end of module), and cross-module integration quizzes (5-8 questions, drawing on prior modules). All quizzes provide immediate explanatory feedback. No grades, no leaderboards, no pass/fail gates.</p>
+
+<h3>WS4: Visual and interactive specs</h3>
+
+<p>Forty diagrams were specified across all 11 modules &mdash; 21 high priority, 15 medium, 4 low. Each entry includes type, content, labels, interaction design, accessibility requirements, and the specific learning outcome it supports. Six cross-module visual patterns were standardized: decision trees (6 instances), comparison table enhancers (15+ tables), architecture diagrams (8 instances), timelines (4 instances), multi-panel comparisons (6 instances), and callout boxes (all modules). A unified visual grammar specifies shapes, arrows, and colors so learners never need to re-decode visual conventions between modules.</p>
+
+<h3>WS5: Engagement design</h3>
+
+<p>Twenty mid-section curiosity prompts were written &mdash; surprising statistics, open questions, and contrast statements placed at H2 section transitions to maintain engagement. Eleven decision scenarios (one per module) anchor abstract concepts in plausible situations. Four capstone scenarios (one per Part) require synthesizing all prior modules in that Part. Progress visibility operates at four levels: curriculum-wide, part, module, and section.</p>
+
+<p>A critical constraint: engagement serves learning, not entertainment. No points, badges, streaks, or celebratory language. Motivation comes from knowledge gaps and real-world relevance. An anti-pattern registry explicitly bans 10 common design mistakes including seductive details, generic gamification, and quiz-without-feedback.</p>
+
+<h3>WS6: Layout and accessibility</h3>
+
+<p>The Accessibility Lead specified a complete design system: Inter typeface, 1.25 Major Third type scale, 72-character measure for body text, WCAG 2.2 AA color contrast across a full light/dark palette. Three-column desktop layout (sticky sidebar TOC + main content + breathing room), responsive down to mobile. Every component&rsquo;s color signal is paired with a non-color indicator.</p>
+
+<h3>WS7: Spaced repetition and integration</h3>
+
+<p>The Learning Architect designed a cross-module review system with spacing schedules, integration exercises, and cumulative quiz design. The seven spiral concepts from WS1 each have a review schedule: first encounter, reinforcement in a subsequent module, and integration in a Part-boundary exercise. Recommended pacing: one Part per study session, at least one day between Parts.</p>
+
+<h2 id="assembly">Assembly and Review</h2>
+
+<p>All 9 workstream outputs &mdash; 7,711 total lines across the workstream files, approximately 81,400 words of design specifications &mdash; were assembled into <code>reference/research/PEDAGOGICAL-DESIGN.md</code>, a master reference document with a table of contents linking to each workstream file, cross-workstream integration notes, a dependency graph, consistency checks, and a Round 4 handoff checklist. The assembly verified that all 11 modules have learning outcomes, all outcomes are testable, all diagrams map to outcomes, and all components follow the shared visual grammar.</p>
+
+<p>Section 9 of the design document aggregates content requests from all workstreams &mdash; items that Round 4 must create. Priority 1 items include the 11 YAML annotation files, 40 diagram source files, a synthesized scheduled-tasks comparison table for M07, and a capstone expert answer document. Priority 2 items are content enhancements (curiosity prompts, spiral callbacks, opening hooks) whose text is already written in the workstream files and needs only to be placed via annotations.</p>
+
+<h2 id="decisions">Decisions Made</h2>
+
+<p>Eight entries were added to <code>DECISION_LOG.md</code> during Round 3:</p>
+
+<ol style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Audience broadened to social circle:</strong> Designing for a cohort justified the pedagogical investment. A curriculum for one reader does not need quizzes. A curriculum for a small group with varying expertise does.</li>
+  <li><strong>Static HTML + JS delivery format:</strong> No server, no login, no database. localStorage for persistence. Portable, archivable, works offline.</li>
+  <li><strong>Learning sequence reordered:</strong> M09 after agents, M05 after M03/M06, M08 penultimate. Conceptual prerequisites extend beyond the dependency graph.</li>
+  <li><strong>Annotations in separate YAML files:</strong> Canonical markdown never modified by the build. Content and pedagogy evolve independently.</li>
+  <li><strong>Four pedagogical frameworks combined:</strong> Merrill for module structure, 4C/ID for cross-module fading, Backward Design for outcome alignment, CLT for component design.</li>
+  <li><strong>Citation standardization applied:</strong> [F#] + [#] convention applied to M00, M07, M10 (deferred from Round 2).</li>
+  <li><strong>Agent Teams adopted then adapted:</strong> TeamCreate for Phase 2a (inter-agent WS0 handoff), background agents for Phases 2b-2c (flat-roster constraint).</li>
+  <li><strong>Assessment Designer given full scope in one pass:</strong> All 5 WS3 sections including ~130 sample questions, eliminating a redundant two-wave split.</li>
+</ol>
+
+<h2 id="discoveries">Key Discoveries</h2>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>The numerical order was wrong for learning.</strong> The CURRICULUM.md dependency graph captures technical dependencies but not conceptual prerequisites. M09 (APIs) is technically independent of M03 (agents), but API design decisions are meaningless without understanding what agents do with those APIs.</li>
+  <li><strong>81,400 words of design for 47,169 words of content.</strong> The pedagogical design document is 1.7x larger than the content it annotates. This was not planned &mdash; it reflects the density of design decisions required per content section.</li>
+  <li><strong>Table density dominates.</strong> The 11 modules contain 620+ table rows. Comparison tables are the dominant content pattern. This drove the comparison-table enhancer to become the most-used interactive component.</li>
+  <li><strong>Progressive disclosure is essential, not optional.</strong> M03 describes 10 agents sequentially. M07 covers 5 skills platforms plus 3 automation platforms. Without expandable sections, these modules are walls of text. Four modules were flagged as &ldquo;unreadable without progressive disclosure.&rdquo;</li>
+  <li><strong>Worked-example fading works across modules.</strong> The 4C/ID framework suggests fading worked examples from full to partial to independent. Applying this across the four-part structure (not just within modules) creates a curriculum-wide progression from guided to independent learning.</li>
+</ul>
+
+<h2 id="lessons">What We Learned</h2>
+
+<div class="lesson">
+  <strong>Pedagogical specialists produce fundamentally different output than generalists.</strong> Rounds 1-2 used general-purpose researcher/writer/reviewer agents. Round 3 used agents with specific pedagogical roles. The difference is not quality but kind: a Learning Architect thinks about spiral sequencing. A Module Designer thinks about where to place a concept-check quiz. A general-purpose writer would not ask these questions.
+</div>
+
+<div class="lesson">
+  <strong>Evidence-based design prevents endless bike-shedding.</strong> Every design choice in Round 3 cites evidence from the pedagogy research. &ldquo;Should we add gamification?&rdquo; &mdash; no, evidence shows extrinsic rewards can undermine intrinsic motivation for this audience. &ldquo;Should quizzes gate progress?&rdquo; &mdash; no, advisory gates respect self-directed learning. The evidence base resolves debates that could otherwise consume entire sessions.
+</div>
+
+<div class="lesson">
+  <strong>Accessibility is architecture, not decoration.</strong> The Accessibility Lead worked on WS0 (the first workstream) and WS6 (a later workstream). Every component was designed with ARIA roles, keyboard navigation, and screen reader behavior from the start. Retrofitting accessibility onto finished components would have required redesigning many of them.
+</div>
+
+<div class="lesson">
+  <strong>Separation of content and pedagogy is the right abstraction.</strong> The YAML annotation file pattern means pedagogical design can change without touching content, and content can be updated without breaking pedagogy. When Module 02 gets updated after Google I/O, its annotation file may need section ID adjustments but no pedagogical redesign.
+</div>
+
+<div class="lesson">
+  <strong>Design documents can exceed the content they annotate.</strong> At 7,711 lines and ~81,400 words, the pedagogical design is 1.7x the curriculum content. This was surprising but reflects reality: specifying how to teach 47K words of dense technical material requires more words than the material itself. The ratio would decrease for less dense content.
+</div>
+
+<div class="lesson">
+  <strong>Agent Teams and background agents serve different coordination patterns.</strong> Agent Teams (TeamCreate) excels at interdependent work where agents need to build on each other&rsquo;s output conversationally &mdash; the WS0 structural-draft-to-behavioral-spec handoff was a perfect use case. Background agents are better for embarrassingly parallel workstreams where each agent works independently from shared inputs. The flat-roster constraint of Agent Teams forced the hybrid approach, but it turned out to be the right architecture anyway: use teams for foundations, parallel agents for independent elaboration.
+</div>
+
+<h2 id="whats-next">What's Next</h2>
+
+<p>Round 3 produced the blueprint. Round 4 builds the product.</p>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Round 4 &mdash; Deliverable Creation:</strong> A production team will implement the Node.js build pipeline, build 9 HTML/JS components, create 40 diagram source files, write 11 YAML annotation files, and produce the responsive CSS system. The output: a complete interactive HTML curriculum that transforms the 47K-word knowledge base into a ~6-hour learning experience with quizzes, decision trees, progressive disclosure, and progress tracking.</li>
+  <li><strong>Event updates:</strong> Google I/O 2026 (May 19&ndash;20), Microsoft Build (June 2&ndash;3), and WWDC (June 8&ndash;12) will each trigger targeted module and annotation updates.</li>
+  <li><strong>Remaining cleanup:</strong> 12 sources in SOURCES.md still Unverified, 3 URLs returning 404, and the M02/M09 prompt caching table harmonization.</li>
+</ul>
+
+<hr>
+
+<p style="color: var(--muted); font-size: 0.85rem; margin-top: 2rem;">
+  This blog post is part of the AI Frontier Curriculum project's process journal. See also:
+  <a href="2026-03-21-building-the-curriculum.html">Round 1: Building the Curriculum</a> &middot;
+  <a href="2026-03-21-round-2-refinement.html">Round 2: Refining the Curriculum</a>.
+</p>
+
+<p style="color: var(--muted); font-size: 0.85rem;">
+  Built with Claude Code (Opus 4.6, 1M context) using a 10-agent team. All agents ran on Opus 4.6
+  via the Max Plan. Phase 2a used Agent Teams (4 persistent teammates); Phases 2b-2c used parallel
+  background agents (3+3). Round 3 produced 7,711 lines / ~81,400 words of pedagogical design across
+  9 workstreams, assembled into PEDAGOGICAL-DESIGN.md as the primary deliverable for Round 4 execution.
+</p>
+
+</body>
+</html>

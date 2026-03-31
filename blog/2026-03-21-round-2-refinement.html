@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Round 2: Refining the AI Frontier Curriculum with a 9-Agent Opus Team</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --fg: #1c1917;
+    --muted: #78716c;
+    --accent: #c2410c;
+    --border: #e7e5e4;
+    --code-bg: #f5f5f4;
+    --card-bg: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --fg: #fafaf9;
+      --muted: #a8a29e;
+      --accent: #fb923c;
+      --border: #44403c;
+      --code-bg: #292524;
+      --card-bg: #292524;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--accent); }
+  p { margin-bottom: 1rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .meta time { font-weight: bold; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.88em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1.2rem 0;
+    background: var(--code-bg);
+    font-style: italic;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  th { font-weight: bold; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .stat-card .number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-card .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .lesson {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+  .lesson strong { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .toc { background: var(--code-bg); padding: 1.2rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 0.3rem 0; }
+  .toc li::before { content: '\2192\00a0'; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<h1>Round 2: Refining the Curriculum</h1>
+<h1 style="font-size:1.2rem; font-weight:normal; color:var(--muted);">A 9-Agent Opus Team Verifies, Harmonizes, and Deepens 47,000 Words</h1>
+<p class="meta">
+  <time>March 21, 2026</time> &middot; Session journal &middot; Ryan + Claude Opus 4.6 (1M context) Agent Team
+</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ul>
+    <li><a href="#why">Why Round 2</a></li>
+    <li><a href="#team">The Team</a></li>
+    <li><a href="#numbers">By the Numbers</a></li>
+    <li><a href="#phase1">Phase 1: Audit</a></li>
+    <li><a href="#phase2">Phase 2: Corrections and Expansion</a></li>
+    <li><a href="#phase3">Phase 3: Final Checks</a></li>
+    <li><a href="#findings">Key Findings</a></li>
+    <li><a href="#decisions">Decisions Made</a></li>
+    <li><a href="#lessons">What We Learned</a></li>
+    <li><a href="#whats-next">What's Next</a></li>
+  </ul>
+</nav>
+
+<h2 id="why">Why Round 2</h2>
+
+<p>Round 1 produced 43,079 words across 11 modules in a single session &mdash; an impressive feat of multi-agent orchestration, but speed came at a cost. A post-round review identified specific quality gaps: Module 10 had 10 of 18 sources tagged [UNVERIFIED]. Module 03 claimed an agent could cost "$9,000 per hour" without verification. Claude Code's $2.5B ARR was cited in two modules without attribution. Citation formats varied across modules. Two sections were flagged as too shallow for the target audience.</p>
+
+<p>The question was whether to rewrite or refine. Ryan raised the option of a full Opus rewrite &mdash; using the Max Plan's near-unlimited Opus access to regenerate every module from scratch. We rejected this. The gaps were research and editorial problems, not model-intelligence problems. A rewrite would discard 38 researcher agents' worth of verified research and introduce new unverified claims requiring another full verification cycle. Surgical refinement was more efficient and lower-risk.</p>
+
+<h2 id="team">The Team</h2>
+
+<p>Round 2 deployed 9 Opus 4.6 teammates in specialized roles, coordinated by a team lead:</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Agent(s)</th><th>Responsibility</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Source Verifier</td><td>sv-alpha</td><td>M00, M01, M02, M10 &mdash; verify sources, find URLs for UNVERIFIED claims</td></tr>
+    <tr><td>Source Verifier</td><td>sv-bravo</td><td>M03, M04, M05 &mdash; verify sources, correct factual errors</td></tr>
+    <tr><td>Source Verifier</td><td>sv-charlie</td><td>M06, M07, M08, M09 &mdash; verify sources, apply corrections</td></tr>
+    <tr><td>Harmonizer</td><td>harmonizer</td><td>Citation format standardization, cross-module consistency, glossary enrichment</td></tr>
+    <tr><td>Depth Reviewer</td><td>depth-alpha</td><td>M00&ndash;M05 depth audit: identify thin sections, suggest expansions</td></tr>
+    <tr><td>Depth Reviewer</td><td>depth-bravo</td><td>M06&ndash;M10 depth audit: identify thin sections, suggest expansions</td></tr>
+    <tr><td>Writer</td><td>writer-alpha</td><td>M02 RAG section expansion</td></tr>
+    <tr><td>Writer</td><td>writer-bravo</td><td>M04 model selection section, M07 scheduled tasks, M10 governance table</td></tr>
+    <tr><td>Chronicler</td><td>chronicler</td><td>SOURCES.md maintenance, DECISION_LOG, blog post, CURRENT_CYCLE</td></tr>
+  </tbody>
+</table>
+
+<p>A key difference from Round 1: every agent ran on Opus 4.6. Round 1 used tiered models (Haiku for researchers, Sonnet for writers). With the Max Plan providing effectively unlimited Opus access, we invested the budget in analysis quality rather than throughput.</p>
+
+<h2 id="numbers">By the Numbers</h2>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="number">47,169</span>
+    <span class="label">Total Words</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">+4,090</span>
+    <span class="label">Words Added</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">83</span>
+    <span class="label">Sources in Registry</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">12</span>
+    <span class="label">Sources Added</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">9/10</span>
+    <span class="label">M10 Sources Verified</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">0</span>
+    <span class="label">[UNVERIFIED] in Modules</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">9</span>
+    <span class="label">Opus Teammates</span>
+  </div>
+  <div class="stat-card">
+    <span class="number">19</span>
+    <span class="label">Tasks Completed</span>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Module</th><th>Round 1</th><th>Round 2</th><th>Change</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>00</td><td>Landscape Overview</td><td>3,907</td><td>4,001</td><td>+94</td></tr>
+    <tr><td>01</td><td>Models &amp; Intelligence</td><td>4,425</td><td>4,455</td><td>+30</td></tr>
+    <tr><td>02</td><td>Context Engineering</td><td>4,315</td><td>5,760</td><td>+1,445</td></tr>
+    <tr><td>03</td><td>Single-Agent Systems</td><td>3,789</td><td>3,824</td><td>+35</td></tr>
+    <tr><td>04</td><td>Multi-Agent Orchestration</td><td>3,841</td><td>4,881</td><td>+1,040</td></tr>
+    <tr><td>05</td><td>OpenClaw &amp; Open Agents</td><td>3,572</td><td>3,623</td><td>+51</td></tr>
+    <tr><td>06</td><td>MCP &amp; Integration Layer</td><td>4,291</td><td>4,323</td><td>+32</td></tr>
+    <tr><td>07</td><td>Skills, Plugins &amp; Automation</td><td>3,202</td><td>3,781</td><td>+579</td></tr>
+    <tr><td>08</td><td>Consumer AI Comparison</td><td>3,848</td><td>3,938</td><td>+90</td></tr>
+    <tr><td>09</td><td>Developer Platforms &amp; APIs</td><td>4,100</td><td>4,145</td><td>+45</td></tr>
+    <tr><td>10</td><td>Frontier Topics</td><td>3,789</td><td>4,438</td><td>+649</td></tr>
+    <tr style="font-weight:bold"><td></td><td>Total</td><td>43,079</td><td>47,169</td><td>+4,090</td></tr>
+  </tbody>
+</table>
+
+<h2 id="phase1">Phase 1: Audit</h2>
+
+<p>Phase 1 deployed all 9 teammates in parallel across four workstreams: source verification (3 agents, split by module groups), cross-module harmonization audit (1 agent), depth audit (2 agents, split M00&ndash;M05 and M06&ndash;M10), and SOURCES.md audit (1 agent).</p>
+
+<h3>Source verification</h3>
+
+<p>The three source verifiers examined every inline citation across all 11 modules. sv-alpha tackled the highest-priority target &mdash; Module 10, which had 10 of 18 sources tagged [UNVERIFIED]. The results were striking: 9 of those 10 were verifiable with specific primary URLs once properly researched. Gartner predictions traced to specific press releases. The Goldman Sachs $527B AI capex estimate had a direct research page. Apple Intelligence details came from published ML research reports. Only WWDC 2026 dates remained truly unverifiable (Apple hasn't announced them yet).</p>
+
+<p>sv-bravo caught the most impactful single error: Module 03's claim that a runaway agent "could cost approximately $9,000 per hour." The corrected calculation from actual Opus 4.6 pricing ($25/MTok output at Tier 4 rate limits of ~800K OTPM) yields $1,200/hour &mdash; still a striking number, but 7.5x lower than the original claim.</p>
+
+<h3>SOURCES.md audit</h3>
+
+<p>The chronicler's cross-reference audit found systemic issues:</p>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>7 missing sources</strong> &mdash; cited in module bodies but absent from SOURCES.md. The most notable: [W67] and [W68], cited 5 times across Module 00 for Anthropic's $19B revenue and Claude Code's $2.5B ARR, with no SOURCES.md entries at all.</li>
+  <li><strong>3 duplicate entries</strong> &mdash; the same URLs existed under both old M00 numbering (3a, 3b, 3c) and newer W-prefixed numbering (W20, W22, W23), a legacy of Round 1's research phase using one naming scheme while module writing used another.</li>
+  <li><strong>1 orphaned source</strong> &mdash; W4 (an internal research brief) was listed but never cited in any module body.</li>
+  <li><strong>3 broken URLs</strong> &mdash; returning 404: W42 (Anthropic claude-plugins page), W21 (Koi Security clawhavoc blog), W56 (Google Flow blog post).</li>
+</ul>
+
+<h3>Depth audit</h3>
+
+<p>The depth reviewers identified two sections needing expansion: Module 02's RAG coverage (surface-level for the target audience) and Module 04's lack of practical model selection guidance for multi-agent systems. They also flagged Module 07's scheduled tasks section and Module 10's enterprise governance coverage as thin.</p>
+
+<h2 id="phase2">Phase 2: Corrections and Expansion</h2>
+
+<p>Phase 2 applied the findings from Phase 1. Source verifiers pushed corrections into modules. Writers expanded the thin sections. The harmonizer standardized citations and metadata. The chronicler collected all new source entries into SOURCES.md.</p>
+
+<h3>Content expansions</h3>
+
+<p>Four modules received meaningful content additions:</p>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Module 02</strong> (+1,445 words): RAG section expanded with Naive/Advanced/Modular architecture taxonomy, vector database comparison (Pinecone, Weaviate, Chroma, pgvector), chunking strategies (fixed-size, semantic, recursive), and a when-to-use-RAG decision framework.</li>
+  <li><strong>Module 04</strong> (+1,040 words): New "Strategic Model Selection in Multi-Agent Systems" section using this curriculum's own Round 1 as a case study &mdash; Haiku for researchers, Sonnet for writers, Opus for synthesis.</li>
+  <li><strong>Module 07</strong> (+579 words): Expanded scheduled tasks and event-driven patterns coverage.</li>
+  <li><strong>Module 10</strong> (+649 words): Added enterprise governance comparison table and event prediction caveats.</li>
+</ul>
+
+<p>All expansions stayed within a 20% word-increase guardrail to prevent scope creep.</p>
+
+<h3>Source registry growth</h3>
+
+<p>SOURCES.md grew from ~66 entries to 83:</p>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li>W67&ndash;W68: Anthropic revenue / Claude Code ARR sources</li>
+  <li>W69&ndash;W70: OpenClaw TechCrunch and blog sources for Module 05</li>
+  <li>W71: RAG survey paper (Gao et al.) for Module 02</li>
+  <li>W72: Opus 4.6 pricing/rate limits for Module 03 cost correction</li>
+  <li>W73: MCP registry statistics for Module 10</li>
+  <li>W74&ndash;W76: Security sources (OWASP, Fortune, SiliconANGLE) for Module 07</li>
+  <li>W77&ndash;W78: Developer survey and Constellation Research for Module 08</li>
+</ul>
+
+<p>15 Module 10 entries (W50&ndash;W66) were upgraded from vague "Research data" or "Public reporting" descriptions to specific URLs with Verified status.</p>
+
+<h2 id="phase3">Phase 3: Final Checks</h2>
+
+<p>The harmonizer ran a final cross-module consistency check after all edits landed. Citation formats were verified as standardized. No new contradictions were introduced by the expansions. Module metadata blocks were updated from "DRAFTING" to "COMPLETE" with accurate word counts and dates.</p>
+
+<h2 id="findings">Key Findings from Source Verification</h2>
+
+<h3>What was confirmed</h3>
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li>Claude Code $2.5B ARR &mdash; three independent sources converge (Yahoo Finance, heyuan110.com, Constellation Research)</li>
+  <li>Anthropic $19B annualized revenue &mdash; sourced to financial reporting</li>
+  <li>Goldman Sachs $527B AI capex estimate &mdash; traced to specific Goldman Sachs Research page</li>
+  <li>Gartner "40% of enterprise apps will feature AI agents by 2026" &mdash; traced to August 2025 press release</li>
+  <li>EU AI Act fully applicable August 2, 2026 &mdash; confirmed via European Commission and implementation timeline</li>
+  <li>Agent 365 GA May 1, 2026 at $15/user/month &mdash; confirmed via Microsoft Tech Community</li>
+</ul>
+
+<h3>What was corrected</h3>
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li>Agent cost estimate: $9,000/hr &rarr; $1,200/hr (7.5x overstatement)</li>
+  <li>OpenClaw GitHub stars: 163K (stale) &rarr; 250K+ (sourced to OpenClaw blog)</li>
+  <li>Anthropic annualized revenue: $14B (stale) &rarr; ~$19B (sourced to Yahoo Finance)</li>
+  <li>M08 pricing errors: multiple corrected against current provider pricing pages</li>
+  <li>Veo version and GA date: corrected to January 13, 2026</li>
+  <li>GPT Store framing: nuanced "3M+ GPTs" to distinguish created vs. actively maintained</li>
+  <li>M10 source attributions: vague "Research data" &rarr; specific URLs for 9 of 10 sources</li>
+  <li>Apple-Google Gemini partnership date: confirmed January 12, 2026 via CNBC</li>
+  <li>Midjourney V7/V8: linked to specific documentation page with version details</li>
+</ul>
+
+<h3>What remained unverifiable</h3>
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li>WWDC 2026 dates (Apple has not officially announced)</li>
+  <li>Several M07 marketplace statistics (Claude Plugins ~500, GPT Store ~3M+)</li>
+  <li>M08 community sentiment data (Reddit/HN aggregation, enterprise reports)</li>
+  <li>Andrej Karpathy "context engineering" attribution (public talks, no single canonical source)</li>
+</ul>
+
+<h2 id="decisions">Decisions Made</h2>
+
+<p>Seven entries were added to <code>DECISION_LOG.md</code> during Round 2:</p>
+
+<ol style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Citation format standardization DEFERRED:</strong> Target convention defined ([F#] + [#]), but full standardization deferred to Round 3 &mdash; too risky to rush when the inconsistency is cosmetic, not factual. Round 3's pedagogical design phase will touch every module anyway.</li>
+  <li><strong>Agent cost correction:</strong> $9,000 &rarr; $1,200/hr based on actual Opus 4.6 pricing math.</li>
+  <li><strong>ARR verification:</strong> Three independent sources sufficient for private company revenue claims.</li>
+  <li><strong>Module 02 RAG expansion:</strong> RAG is a core pattern for the target audience; the original section was below depth standards.</li>
+  <li><strong>Module 04 model selection:</strong> Practical orchestration guidance using this project as a case study.</li>
+  <li><strong>Module 10 source verification:</strong> 9 of 10 previously unverified sources traced to primary URLs; only WWDC dates truly unverifiable.</li>
+  <li><strong>Additional factual corrections:</strong> OpenClaw stars (163K&rarr;250K+), Anthropic revenue ($14B&rarr;$19B), M08 pricing errors, Veo date, GPT Store nuance &mdash; all sourced to primary references.</li>
+</ol>
+
+<h2 id="lessons">What We Learned</h2>
+
+<div class="lesson">
+  <strong>Refine, don't rewrite.</strong> Round 2 validated the decision to surgically fix identified issues rather than regenerating all content. The 9.5% word increase (4,090 words) was precisely targeted at the gaps that mattered. A full rewrite would have introduced new errors while discarding verified research.
+</div>
+
+<div class="lesson">
+  <strong>Opus for verification is worth it.</strong> Round 1 used Haiku for research, which was fast but missed nuances &mdash; like the distinction between web traffic share and mobile app share, or the difference between a $9,000 and $1,200 cost estimate. Opus source verifiers caught errors that faster models likely would not have questioned.
+</div>
+
+<div class="lesson">
+  <strong>SOURCES.md needs a dedicated owner.</strong> Without the chronicler role, source entries from 6+ concurrent agents would have been inconsistent, duplicated, or missing. The cross-reference audit caught 7 missing sources and 3 duplicates that accumulated during Round 1's rapid production.
+</div>
+
+<div class="lesson">
+  <strong>Most "unverifiable" claims are just under-researched.</strong> Module 10's 10 unverified sources looked like a fundamental quality problem. In practice, 9 of 10 were verified within a single research pass. The sources existed &mdash; the Round 1 researchers (running on Haiku) simply hadn't been given enough time or model capability to find the primary URLs.
+</div>
+
+<div class="lesson">
+  <strong>Word count guardrails prevent scope creep.</strong> The 20% expansion limit on writer tasks kept the additions focused. Without it, the Module 02 RAG expansion could easily have ballooned into a standalone module. The constraint forced prioritization: what does the audience need most, not what could we write about.
+</div>
+
+<h2 id="whats-next">What's Next</h2>
+
+<p>The curriculum content is now verified, harmonized, and expanded. The next phases shift from content creation to content packaging:</p>
+
+<ul style="margin: 0.5rem 0 1rem 1.5rem;">
+  <li><strong>Round 3 &mdash; Pedagogical Design:</strong> A learning sciences team will design diagrams, interactive elements, self-assessment tools, and a structured study progression. The goal is to transform 47,000 words of dense reference material into an effective learning experience.</li>
+  <li><strong>Round 4 &mdash; Deliverable Creation:</strong> A production team will build HTML interactive guides, slide decks, ecosystem diagrams (SVG/Mermaid), comparison table extracts, and a full curriculum export.</li>
+  <li><strong>Event updates:</strong> Google I/O 2026 (May 19&ndash;20), Microsoft Build (June 2&ndash;3), and WWDC (June 8&ndash;12) will each trigger targeted module updates.</li>
+</ul>
+
+<p>Remaining cleanup for future sessions: 12 sources in SOURCES.md still Unverified (mostly community sources), 3 URLs returning 404, and the M02/M09 prompt caching table harmonization could be tightened further.</p>
+
+<hr>
+
+<p style="color: var(--muted); font-size: 0.85rem; margin-top: 2rem;">
+  This blog post is part of the AI Frontier Curriculum project's process journal. See also: <a href="2026-03-21-building-the-curriculum.html">Round 1: Building the Curriculum</a> for the initial 43,000-word construction narrative.
+</p>
+
+<p style="color: var(--muted); font-size: 0.85rem;">
+  Built with Claude Code (Opus 4.6, 1M context) using a 9-agent team: 3 source verifiers, 1 harmonizer, 2 depth reviewers, 2 writers, and 1 chronicler. All agents ran on Opus 4.6 via the Max Plan. Round 2 completed 19 tasks across 3 phases, adding 4,090 words and 12 new source entries.
+</p>
+
+</body>
+</html>

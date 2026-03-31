@@ -1,0 +1,414 @@
+# build/annotations/module-06.yaml
+# Annotations for Module 06: MCP & the Integration Layer
+# Section IDs derived from deliverables/html/modules/module-06.html
+
+module: "06"
+annotations:
+  # ── Opening Hook ──────────────────────────────────────────────────────
+  - after: "executive-summary"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "Why does this module matter to you?"
+      content: "You are building a coding assistant that needs to read GitHub issues, query a Postgres database, and check a Google Calendar -- all within the same conversation. Without MCP, each connection demands bespoke code: different authentication, different data formats, different error handling. Three integrations, three custom implementations. Now imagine scaling that to thirty integrations across five AI clients. MCP collapses this 150-connector nightmare to 35 implementations. This module explains how."
+
+  # ── Section 1: What MCP Is and Why It Exists ──────────────────────────
+  - after: "executive-summary"
+    component: concept-gate
+    data:
+      title: "Before diving into MCP"
+      prerequisites:
+        - "I understand the gather-act-verify loop from Module 03 and how agents use tools"
+        - "I know what function calling is and why agents need external connections"
+        - "I understand the M x N integration problem (many clients, many services)"
+      continue_section: "the-problem-mcp-solves"
+
+  # Curiosity prompt: M x N to M + N
+  - after: "2-protocol-architecture"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "MCP reduces integration complexity from M x N to M + N. The math is simple. The implications are not."
+      content: "When Anthropic published MCP in November 2024, the AI ecosystem had dozens of AI clients and hundreds of services, each requiring custom integrations. MCP's standardization means a new AI client gets instant access to 19,729+ servers, and a new service gets instant access to every MCP client. The network effects compound: every new server makes every existing client more useful, and vice versa. This is the same dynamic that made HTTP the universal web protocol and LSP the universal IDE protocol."
+
+  - after: "the-problem-mcp-solves"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "If 8 AI clients each need to connect to 12 services, how many integrations are needed without MCP vs. with MCP?"
+      choices: ["96 vs. 20", "96 vs. 12", "20 vs. 96", "12 vs. 20"]
+      correct: 0
+      explanation: "Without MCP: 8 x 12 = 96 custom integrations. With MCP: 8 clients + 12 servers = 20 implementations. This is the M + N insight that makes MCP transformative -- the same principle behind HTTP standardizing web communication and LSP standardizing IDE-to-language-tool communication."
+
+  # ── Section 2: Protocol Architecture ──────────────────────────────────
+  - after: "transport-layers"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "Which transport would you choose for an MCP server that only your local machine needs to access?"
+      choices: ["Streamable HTTP with OAuth 2.1", "STDIO (stdin/stdout)", "SSE (Server-Sent Events)", "WebSocket"]
+      correct: 1
+      explanation: "STDIO is the recommended transport for local servers. The MCP client spawns the server as a child process and communicates over stdin/stdout -- no networking, no ports, no TLS configuration needed. The isolation boundary is the OS process itself."
+
+  - after: "persistent-connections-and-capability-discovery"
+    component: worked-example
+    variant: full
+    data:
+      title: "Tracing an MCP connection lifecycle"
+      problem: "Walk through the complete sequence of events when Claude Desktop connects to a new MCP server for the first time."
+      steps:
+        - label: "Step 1: Initialize"
+          content: "Client sends an `initialize` request with its supported protocol version and capability set (e.g., which features it supports like sampling or roots)."
+        - label: "Step 2: Server responds"
+          content: "Server replies with its own protocol version, its capabilities (tools, resources, prompts), and server metadata (name, version)."
+        - label: "Step 3: Initialized notification"
+          content: "Client sends `notifications/initialized` -- a fire-and-forget notification confirming the session is active. No response expected."
+        - label: "Step 4: Capability discovery"
+          content: "Client calls `tools/list` to discover available tools, `resources/list` for resources, and `prompts/list` for prompt templates. Each returns the full metadata needed for the model to use them."
+      solution: "After these four steps, the client knows everything the server can do. If the server's capabilities change mid-session (e.g., a new tool becomes available), the server sends a notification and the client re-fetches the relevant list. This auto-discovery model means a client never needs hardcoded knowledge of what a server offers."
+
+  - after: "persistent-connections-and-capability-discovery"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "What happens during an active MCP session when a server adds a new tool?"
+      choices: ["The client must disconnect and reconnect", "The server sends a notification and the client re-fetches the tools list", "The new tool is unavailable until the session ends", "The client polls for changes every 30 seconds"]
+      correct: 1
+      explanation: "MCP supports dynamic capability updates. When the server's tools change mid-session, it sends a notification to the client, which can then call `tools/list` again to discover the updated capabilities. No reconnection needed."
+
+  - after: "security-oauth-21-authorization"
+    component: accordion
+    variant: advanced-detail
+    data:
+      title: "OAuth 2.1 token exchange: complete flow"
+      content: "For remote MCP servers, the full OAuth 2.1 authorization flow works as follows: (1) Client discovers the server's authorization metadata via a well-known endpoint (/.well-known/oauth-authorization-server). (2) Client obtains an access token through standard OAuth 2.1 flows -- authorization code with PKCE for interactive clients, client credentials for machine-to-machine. (3) Client includes the access token in subsequent HTTP requests via the Authorization header. (4) Server validates the token and applies scope-based permissions. The specification also defines Protected Resource Metadata -- a mechanism for servers to advertise their authorization requirements so clients can automatically determine how to authenticate. Most learners will use STDIO locally where this is unnecessary, but any server exposed over a network should implement OAuth 2.1."
+
+  # ── Section 3: Core Primitives ────────────────────────────────────────
+  - after: "prompts-reusable-templates"
+    component: self-explanation-prompt
+    data:
+      prompt: "In your own words, explain why Tools are 'model-controlled' while Resources are 'application-controlled.' What practical difference does this make for an MCP server designer?"
+      expert_answer: "Tools let the AI model decide when and how to invoke them based on conversation context -- the developer sets up the server, but the model autonomously selects tools. Resources are fetched by the client application's own logic (e.g., pre-loading project files when a user opens a workspace). The practical difference: tool descriptions must be written for the model to interpret, so clarity and specificity in descriptions directly affects tool selection quality. Resource URIs must be designed for the application's retrieval logic instead. A third category, Prompts, is user-selected via slash commands or menus -- none of the autonomous selection that tools have."
+
+  - after: "how-the-primitives-work-together"
+    component: worked-example
+    variant: partial
+    data:
+      title: "MCP workflow: project management integration"
+      problem: "Complete the missing steps in this MCP workflow where Claude connects to a project management server."
+      steps:
+        - label: "Step 1"
+          content: "User connects Claude to a project management MCP server."
+        - label: "Step 2 (fill in)"
+          content: "______ discovers ______ tools via ______."
+        - label: "Step 3"
+          content: "User asks 'What is blocking the release?'"
+        - label: "Step 4"
+          content: "Claude autonomously calls `query_backlog` with a filter for blocked items, reads the results, and synthesizes an answer."
+        - label: "Step 5 (fill in)"
+          content: "User says 'Move all the P1 bugs to In Progress.' Claude calls ______ for each matching item."
+        - label: "Step 6"
+          content: "The model handles tool selection and invocation; the human handles which servers are connected and can set permission boundaries."
+      solution: "Step 2: Claude discovers 12 tools via `tools/list`. Step 5: Claude calls `update_status` for each matching item. The key insight is that the model autonomously selects which tools to invoke based on the user's natural language request -- the human controls which servers are connected, not which specific tool calls are made."
+
+  # ── Section 4: Platform Adoption ──────────────────────────────────────
+  - after: "microsoft-copilot-enterprise-mcp"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which platform treats MCP as its foundational connectivity architecture, rather than an adopted standard?"
+      choices: ["OpenAI ChatGPT", "Google Gemini", "Anthropic Claude", "Microsoft Copilot"]
+      correct: 2
+      explanation: "Anthropic created MCP and built Claude's entire connectivity architecture around it. Claude Desktop, Cowork, and Claude Code all function as MCP clients. For other platforms, MCP was adopted after the fact -- functional but not foundational to their architecture."
+
+  - after: "microsoft-copilot-enterprise-mcp"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which platform has committed to hosting managed MCP servers for its own services (Maps, Workspace, Cloud)?"
+      choices: ["Anthropic", "OpenAI", "Google", "Microsoft"]
+      correct: 2
+      explanation: "Google is rolling out managed MCP servers for Google Maps (GA), Google Workspace (GA), and Cloud Services (announced, rolling out). Google is the largest cloud provider to commit to managed, remote MCP servers -- a significant interoperability win since any MCP client (including Claude) can connect to them."
+
+  - after: "microsoft-copilot-enterprise-mcp"
+    component: quiz
+    variant: section-review
+    data:
+      question: "What is MCP Apps, and which platform introduced it?"
+      choices: ["OpenAI -- MCP tools that return interactive UI components in ChatGPT", "Anthropic -- a marketplace for MCP server bundles", "Google -- managed MCP endpoints for Google services", "Microsoft -- MCP servers hosted on Azure Functions"]
+      correct: 0
+      explanation: "MCP Apps is an OpenAI-specific extension where MCP tools can return interactive UI components (dashboards, forms, visualizations) that render directly in the ChatGPT interface. It has been GA since January 2026. This extends MCP beyond data exchange into interactive experiences."
+
+  # ── Section 5: Registry Ecosystem ─────────────────────────────────────
+  - after: "official-vs-community-servers"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "You need to connect Claude to your company's internal HR system. No official MCP server exists. What should you evaluate before using a community server?"
+      choices: ["Only the star count on GitHub", "Only whether it supports STDIO transport", "Maintenance activity, community trust signals, and authentication handling", "Nothing -- all MCP servers in the registry are verified"]
+      correct: 2
+      explanation: "Community servers vary in quality and security posture. Before using one for sensitive data, check maintenance activity (recent commits, responsive issues), community trust signals (star count, forks, users), and especially how authentication is handled. The registry provides metadata but does not vet server quality or security."
+
+  # ── Section 6: Building MCP Servers ───────────────────────────────────
+  # Curiosity prompt: building servers
+  - after: "6-building-mcp-servers"
+    component: accordion
+    variant: supplementary-reference
+    data:
+      title: "You can build a production MCP server in under 100 lines of TypeScript. The protocol does the heavy lifting."
+      content: "The official TypeScript and Python SDKs handle all protocol-level concerns: JSON-RPC serialization, transport management, capability negotiation, and the initialize/initialized handshake. As a developer, you focus only on defining tools (name, description, schema, handler) and choosing a transport. The minimal weather server example in this section is 15 lines of actual logic. The rest is imports and transport setup. This low barrier to entry is why the MCP registry grew from ~1,200 servers in mid-2025 to 19,729+ by March 2026."
+
+  - after: "anatomy-of-a-simple-mcp-server-typescript"
+    component: worked-example
+    variant: full
+    data:
+      title: "Anatomy of the weather MCP server"
+      problem: "Understand each component of the minimal TypeScript MCP server shown in this section."
+      steps:
+        - label: "McpServer constructor"
+          content: "Creates the server instance with metadata (name: 'weather', version: '1.0.0'). This metadata is sent to clients during the initialize handshake so they know what server they have connected to."
+        - label: "server.tool() registration"
+          content: "Registers a tool named 'get_forecast' with a human-readable description (used by the model for tool selection), a JSON Schema for input parameters ({ city: string }), and an async handler function."
+        - label: "Handler function"
+          content: "The async handler receives validated input ({ city }) and returns structured content. The return format uses a content array with typed items -- here, a text item containing JSON-serialized weather data."
+        - label: "Transport setup"
+          content: "Creates a StdioServerTransport and connects the server to it. This means the server communicates over stdin/stdout -- suitable for local use where the MCP client spawns the server as a child process."
+      solution: "The entire server is under 20 lines. The SDK handles all protocol concerns (JSON-RPC, capability negotiation, message routing). The developer's job is to define what the server can do (tools) and how it does it (handlers). For remote deployment, replace StdioServerTransport with an HTTP transport and add OAuth 2.1."
+
+  - after: "common-pitfalls"
+    component: worked-example
+    variant: guided
+    data:
+      title: "Designing tool descriptions for a project management MCP server"
+      problem: "Design the tool name, description, and input schema for three tools: creating tasks, querying the backlog, and updating task status. Good descriptions are critical -- the model uses them to decide which tool to invoke."
+      steps:
+        - label: "Hint 1: Description specificity"
+          content: "Vague descriptions like 'manage tasks' give the model no basis for selection. Be specific about what each tool does, what inputs it needs, and what it returns."
+        - label: "Hint 2: Avoid overly broad tools"
+          content: "A single 'manage_project' tool that handles creation, querying, and updates forces the model to pack complex instructions into a single call. Separate tools with clear boundaries are easier for the model to select correctly."
+        - label: "Hint 3: Schema design"
+          content: "Use descriptive field names and include field descriptions in the JSON Schema. The model reads these too."
+      solution: "Tool 1: `create_task` -- 'Create a new task in the project backlog with a title, description, priority (P0-P3), and optional assignee email.' Schema: { title: string (required), description: string, priority: enum [P0,P1,P2,P3] (required), assignee: string (email) }. Tool 2: `query_backlog` -- 'Search the project backlog with optional filters for status, priority, and assignee. Returns matching tasks with their IDs, titles, and current status.' Schema: { status: enum, priority: enum, assignee: string, limit: number }. Tool 3: `update_status` -- 'Update the status of a specific task by ID. Valid transitions: To Do -> In Progress -> In Review -> Done.' Schema: { task_id: string (required), new_status: enum (required) }."
+
+  # ── Section 7: Zapier MCP ─────────────────────────────────────────────
+  - after: "make-as-alternative-bridge"
+    component: quiz
+    variant: concept-check
+    data:
+      question: "One MCP tool call to Zapier consumes how many Zapier tasks from your plan quota?"
+      choices: ["1 task", "2 tasks", "3 tasks", "It depends on the action"]
+      correct: 1
+      explanation: "Each MCP call to Zapier consumes 2 tasks from your plan quota. On the Professional plan ($19.99/month, 750 tasks), that means 375 MCP calls per month. For high-volume integrations, this 2x multiplier makes building a direct MCP server more cost-effective than routing through Zapier."
+
+  # ── Section 9: MCP vs. Native Integrations ────────────────────────────
+  - after: "9-mcp-vs-native-integrations"
+    component: self-explanation-prompt
+    data:
+      prompt: "You are advising a mid-size company that uses Slack, GitHub, Salesforce, and three internal tools. Which integration approach (MCP server, native connectors, Zapier MCP bridge) would you recommend for each, and why?"
+      expert_answer: "Slack: native connector (high-frequency, tight UX integration, official connectors exist on all platforms). GitHub: direct MCP server (official Anthropic reference server exists, developer tools benefit from full MCP capability including code search and PR management). Salesforce: Zapier MCP bridge (no official MCP server exists, Zapier has a mature Salesforce connector, moderate call volume). Internal tools: custom MCP servers over STDIO (you control the implementation, no external dependency, data stays local). The general principle: use native connectors for core high-frequency integrations, MCP servers for developer tools and services with official servers, and Zapier/Make as the bridge for everything else."
+
+  # ── Key Takeaways: Section Review ─────────────────────────────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "You need to choose a transport for an MCP server that will be accessed by multiple AI clients across the internet. Which transport is recommended?"
+      choices: ["STDIO", "Streamable HTTP", "SSE (deprecated)", "Raw TCP"]
+      correct: 1
+      explanation: "Streamable HTTP is the recommended transport for remote servers. It uses standard HTTP POST requests with the option to upgrade to SSE streams for long-running operations. STDIO is for local-only servers. SSE is deprecated in favor of Streamable HTTP."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "A user asks Claude to 'check my calendar for tomorrow.' Claude connects to a Google Calendar MCP server and calls the appropriate tool. Which MCP primitive is being used?"
+      choices: ["Resource (application-controlled)", "Prompt (user-selected template)", "Tool (model-controlled)", "Notification (fire-and-forget)"]
+      correct: 2
+      explanation: "Tools are model-controlled -- the AI model decides when and how to invoke them based on conversation context. The user asked a natural language question; Claude autonomously selected the calendar tool. Resources are application-controlled (the app decides when to fetch), and Prompts are user-selected via slash commands or menus."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "Which statement best describes the current state of MCP adoption across the four major platforms?"
+      choices: ["Only Anthropic supports MCP; others have announced but not shipped", "All four support MCP, but Anthropic is MCP-native while others adopted it after the fact", "All four support MCP at equal depth", "Google and Microsoft support MCP; OpenAI has declined to adopt it"]
+      correct: 1
+      explanation: "All four major platforms support MCP as of March 2026, but depth varies significantly. Anthropic is MCP-native (created the protocol, built its architecture around it). Google is investing heavily in managed servers. Microsoft focuses on enterprise hosting. OpenAI's adoption is functional but not foundational -- MCP was retrofitted rather than built in."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: section-review
+    data:
+      question: "A startup uses 15 different SaaS tools. They want Claude to interact with all of them. Only 3 have official MCP servers. What is the most practical integration strategy?"
+      choices: ["Wait for all 15 to build MCP servers", "Build custom MCP servers for all 12 missing ones", "Use official MCP servers for the 3 that have them, Zapier MCP for the rest", "Abandon MCP and use native connectors only"]
+      correct: 2
+      explanation: "The practical strategy combines approaches: official MCP servers for the 3 services that have them (best quality, maintained by the service provider), and Zapier MCP as the bridge for the remaining 12 (Zapier connects to 8,000+ apps). This avoids the cost of building 12 custom servers while still leveraging MCP's universal protocol. Monitor Zapier task consumption and build direct servers for any high-volume integrations."
+
+  # ── Module Assessment ─────────────────────────────────────────────────
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What wire protocol does MCP use for communication between clients and servers?"
+      choices: ["REST over HTTP", "GraphQL", "JSON-RPC 2.0", "gRPC with Protocol Buffers"]
+      correct: 2
+      explanation: "MCP uses JSON-RPC 2.0, a lightweight remote procedure call protocol where every message is a JSON object. It supports three message types: requests (with unique IDs, expecting responses), responses (matching request IDs), and notifications (fire-and-forget, no response expected)."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which organization now governs the MCP specification, after Anthropic donated it in December 2025?"
+      choices: ["The OpenAI Foundation", "The Linux Foundation's Agentic AI Foundation", "The W3C", "The IETF"]
+      correct: 1
+      explanation: "Anthropic donated MCP to the Linux Foundation's newly created Agentic AI Foundation in December 2025. This placed governance under a vendor-neutral body, addressing concerns that a protocol owned by one AI company would be shaped to favor that company's products."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "The MCP registry indexes approximately how many servers as of March 2026?"
+      choices: ["~1,200", "~5,000", "~19,700", "~50,000"]
+      correct: 2
+      explanation: "The MCP Registry indexes 19,729+ production-ready servers as of March 2026. This represents roughly 16x growth from the ~1,200 servers cataloged in community directories in mid-2025, reflecting explosive ecosystem growth."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Make's MCP implementation has a unique capability that Zapier's does not. What is it?"
+      choices: ["More app integrations (8,000+ vs. 3,000+)", "Lower per-operation cost", "Bidirectional MCP support (acts as both server and client)", "Enterprise governance and DLP"]
+      correct: 2
+      explanation: "Make supports bidirectional MCP -- it acts as both an MCP server (controllable by Claude and other AI clients) and an MCP client (can connect to other MCP servers within its workflows). Zapier only acts as an MCP server. Make is also cheaper per operation, but the bidirectional capability is the unique architectural distinction."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "What is the primary security concern with MCP servers that perform write operations?"
+      choices: ["They consume more Zapier tasks", "They are vulnerable to prompt injection attacks", "They require Streamable HTTP transport", "They cannot use OAuth 2.1"]
+      correct: 1
+      explanation: "Any MCP server that performs write operations (create records, send emails, delete data) is a potential vector for prompt injection attacks. A malicious prompt could trick the model into invoking destructive tools. Mitigations include input validation, confirmation flows for destructive operations, action logging, and OAuth 2.1 scope-based permissions."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "How does MCP relate to the function calling mechanism discussed in Module 03's agent architecture?"
+      choices: ["MCP replaces function calling entirely", "MCP is the transport and discovery layer that delivers tools for function calling", "Function calling and MCP are unrelated systems", "MCP only works with Resources, not with function calling"]
+      correct: 1
+      explanation: "MCP is the protocol layer that standardizes how tools are discovered, described, and invoked. The function calling mechanism in Module 03 -- where a model selects a tool, constructs parameters, and interprets results -- operates over MCP's transport. MCP provides the plumbing (discovery via tools/list, invocation via JSON-RPC, transport via STDIO or HTTP); the model provides the reasoning about when and how to call tools."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "In a multi-agent system (Module 04) where each agent needs access to different external services, how does MCP simplify the tool access architecture?"
+      choices: ["Each agent must implement its own connectors regardless of MCP", "MCP lets all agents share a single tool through one server connection", "Each agent connects to the MCP servers it needs; the M + N scaling means adding a new service requires one server, not one integration per agent", "MCP is not relevant to multi-agent systems"]
+      correct: 2
+      explanation: "In a multi-agent system, each agent is an MCP client that can connect to any MCP server. Adding a new service (e.g., a Jira MCP server) requires building one server -- every agent in the system can then discover and use it. Without MCP, each agent-service pair would need its own custom integration. This extends the M + N benefit from Module 06 to the multi-agent context from Module 04."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Which two official MCP SDK languages does the MCP project maintain?"
+      choices: ["Python and Go", "TypeScript and Python", "JavaScript and Rust", "Java and C#"]
+      correct: 1
+      explanation: "MCP provides official SDKs in TypeScript (@modelcontextprotocol/sdk on npm) and Python (mcp on PyPI). Both handle the protocol layer -- JSON-RPC serialization, transport management, capability negotiation -- so developers can focus on implementing tools, resources, and prompts."
+
+  - after: "key-takeaways"
+    component: quiz
+    variant: module-assessment
+    data:
+      question: "Notion's MCP server implementation is notable because it provides:"
+      choices: ["Read-only access to page titles", "Full read/write access to pages, databases, blocks, properties, and comments", "Only search functionality", "Integration through Zapier only"]
+      correct: 1
+      explanation: "Notion's hosted MCP server at mcp.notion.com/sse provides full CRUD access to your workspace -- pages, databases, blocks, properties, and comments. This makes Notion one of the most deeply MCP-integrated productivity tools, serving as a model for how SaaS applications can expose rich functionality via MCP."
+
+  # --- Diagram: M06-1 MCP Client-Server Architecture ---
+  - after: "the-problem-mcp-solves"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m06-1"
+      title: "MCP Client-Server Architecture"
+      alt: "MCP network architecture diagram showing the M plus N advantage. On the left, five AI client platforms are listed: Claude, ChatGPT, Gemini, Copilot, and OpenClaw. On the right, six example MCP servers are listed: GitHub, Slack, Notion, databases, file systems, and Zapier. In the center, a hexagonal MCP Protocol layer connects all clients to all servers through a shared standard. An annotation shows that this requires M plus N implementations (5 clients plus 6 servers equals 11) instead of M times N custom integrations (5 times 6 equals 30)."
+      source: |
+        graph LR
+          subgraph Clients["AI Clients (M)"]
+            C1["Claude<br/>(Desktop, Cowork, Code)"]
+            C2["ChatGPT<br/>(Developer Mode)"]
+            C3["Gemini<br/>(Managed Servers)"]
+            C4["Copilot<br/>(Studio, GA)"]
+            C5["OpenClaw<br/>(Native)"]
+          end
+
+          MCP{{"MCP Protocol<br/>(JSON-RPC 2.0)"}}
+
+          subgraph Servers["MCP Servers (N)"]
+            S1["GitHub"]
+            S2["Slack"]
+            S3["Notion"]
+            S4["Databases"]
+            S5["File Systems"]
+            S6["Zapier<br/>(7,000+ apps)"]
+          end
+
+          C1 --> MCP
+          C2 --> MCP
+          C3 --> MCP
+          C4 --> MCP
+          C5 --> MCP
+          MCP --> S1
+          MCP --> S2
+          MCP --> S3
+          MCP --> S4
+          MCP --> S5
+          MCP --> S6
+
+  # --- Diagram: M06-4 Three Primitives ---
+  - after: "3-core-primitives"
+    component: diagram
+    variant: mermaid
+    data:
+      id: "m06-4"
+      title: "MCP Three Primitives: Control Models"
+      alt: "Three-column diagram showing MCP's three primitive types and who controls each. Left column: Tools are model-controlled, meaning the AI model decides when to invoke them based on conversation context. Examples include create_issue and search_code. Middle column: Resources are application-controlled, meaning the host application decides when to access data via URI-based addressing. Examples include database schemas and file contents. Right column: Prompts are user-selected, meaning the human chooses reusable templates via slash commands or menus. Examples include code_review and summarize templates."
+      source: |
+        graph TD
+          subgraph Tools["Tools"]
+            T_Control["Model-Controlled"]
+            T_Desc["AI decides when to invoke"]
+            T_Ex1["create_issue"]
+            T_Ex2["search_code"]
+            T_Ex3["list_pull_requests"]
+            T_Control --> T_Desc
+            T_Desc --> T_Ex1
+            T_Desc --> T_Ex2
+            T_Desc --> T_Ex3
+          end
+
+          subgraph Resources["Resources"]
+            R_Control["Application-Controlled"]
+            R_Desc["Host app exposes data"]
+            R_Ex1["database://users/schema"]
+            R_Ex2["file:///path/to/doc.md"]
+            R_Ex3["resource://config"]
+            R_Control --> R_Desc
+            R_Desc --> R_Ex1
+            R_Desc --> R_Ex2
+            R_Desc --> R_Ex3
+          end
+
+          subgraph Prompts["Prompts"]
+            P_Control["User-Selected"]
+            P_Desc["Human chooses templates"]
+            P_Ex1["code_review"]
+            P_Ex2["summarize"]
+            P_Ex3["debug_error"]
+            P_Control --> P_Desc
+            P_Desc --> P_Ex1
+            P_Desc --> P_Ex2
+            P_Desc --> P_Ex3
+          end
