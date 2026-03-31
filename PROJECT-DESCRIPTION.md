@@ -99,7 +99,7 @@ The curriculum covers these domains, roughly in this order:
 - Crypto/blockchain AI projects
 - Robotics and embodied AI
 - Historical AI (pre-2024) except as brief context for how we got here
-- Ann Cox Design (ACD) — all business-specific application content from uploaded profiles is stripped
+- Original business-specific application content from uploaded profiles is stripped
 
 ---
 
@@ -115,7 +115,7 @@ Five comprehensive ecosystem research profiles were gathered on March 18, 2026. 
 | microsoft-copilot        | Microsoft, Copilot across M365, Copilot Studio, Agent 365, GitHub Copilot, Azure AI, pricing | ~8,500          |
 | specialized-tools        | Otter.ai, Notion, Perplexity, Zapier, Make, Midjourney, ElevenLabs, AI coding tools          | ~7,500          |
 
-These profiles were originally written with ACD-specific application sections. Those sections must be **stripped** when creating the cleaned reference versions in `reference/profiles/`. The raw intelligence (features, pricing, capabilities, competitive analysis) is retained.
+These profiles were originally written with business-specific application sections. Those sections have been **stripped** in the cleaned reference versions in `reference/profiles/`. The raw intelligence (features, pricing, capabilities, competitive analysis) is retained.
 
 ---
 

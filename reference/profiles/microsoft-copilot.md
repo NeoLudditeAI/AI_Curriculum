@@ -586,4 +586,4 @@ Batch API and Provisioned Throughput (PTU) options available for cost optimizati
 
 ---
 
-_Cleaned for AI Frontier Curriculum project. ACD-specific application content removed. All platform intelligence retained._
+_Cleaned for AI Frontier Curriculum project. Business-specific application content removed. All platform intelligence retained._

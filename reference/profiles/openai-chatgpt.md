@@ -534,4 +534,4 @@ Rebranded from "Connectors" to "Apps" in December 2025. Includes both interactiv
 
 ---
 
-**Cleaned for AI Frontier Curriculum project. ACD-specific application content removed. All platform intelligence retained.**
+**Cleaned for AI Frontier Curriculum project. Business-specific application content removed. All platform intelligence retained.**

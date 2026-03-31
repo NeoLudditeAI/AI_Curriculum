@@ -562,4 +562,4 @@ As of February 2026, Claude's Connectors Directory includes 50+ integrations:
 
 ---
 
-_Cleaned for AI Frontier Curriculum project. ACD-specific application content removed. All platform intelligence retained._
+_Cleaned for AI Frontier Curriculum project. Business-specific application content removed. All platform intelligence retained._

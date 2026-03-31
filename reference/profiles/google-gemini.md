@@ -375,7 +375,7 @@ See Section 6 for complete per-token pricing table. Notable: free tier available
 
 *Report produced March 18, 2026. All features verified via web research. Availability labels reflect status as of publication date.*
 
-*Cleaned for AI Frontier Curriculum project. ACD-specific application content removed. All platform intelligence retained.*
+*Cleaned for AI Frontier Curriculum project. Business-specific application content removed. All platform intelligence retained.*
 
 Sources:
 - [Google Gemini API Models](https://ai.google.dev/gemini-api/docs/models)

@@ -429,4 +429,4 @@ For tools without native MCP servers, Zapier MCP fills the gap. Any MCP-capable 
 
 ---
 
-_Cleaned for AI Frontier Curriculum project. ACD-specific application content removed. All platform intelligence retained. Source: Ecosystem research, March 18, 2026._
+_Cleaned for AI Frontier Curriculum project. Business-specific application content removed. All platform intelligence retained. Source: Ecosystem research, March 18, 2026._

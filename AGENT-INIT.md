@@ -166,7 +166,7 @@ Target ≤200 lines. Only "compaction-survivor" content goes here.
 ## Architecture invariants
 
 - modules/ contains one file per module, numbered 00-10+
-- reference/profiles/ contains cleaned versions of ecosystem research (no ACD content)
+- reference/profiles/ contains cleaned versions of ecosystem research (no business-specific content)
 - CURRICULUM.md is the single source of truth for module status
 - GLOSSARY.md is the single source of truth for term definitions
 - Cross-references between modules use relative links
